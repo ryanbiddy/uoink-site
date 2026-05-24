@@ -368,12 +368,13 @@ uoink-mark[data-size="small"] .u-tip-s { display: block; }
   border-top: 3px solid var(--vermillion);
   border-bottom: 3px solid var(--vermillion);
 }
-.big-strip h2 { color: var(--cream); }
-.big-strip h2 em { color: var(--vermillion); font-style: italic; }
-.big-strip p { color: var(--parchment); }
-.big-strip code { background: rgba(255,61,0,0.18); color: var(--vermillion); }
+.big-strip .eyebrow { color: var(--vermillion) !important; }
+.big-strip h2 { color: var(--cream) !important; }
+.big-strip h2 em { color: var(--vermillion) !important; font-style: italic; }
+.big-strip p { color: var(--parchment) !important; }
+.big-strip code { background: rgba(255,61,0,0.18) !important; color: var(--vermillion) !important; }
 .big-strip .btn.ink { background: var(--vermillion); color: var(--ink); }
-.big-strip .btn.ghost { color: var(--cream); border-color: rgba(255,244,236,0.4); }
+.big-strip .btn.ghost { color: var(--cream) !important; border-color: rgba(255,244,236,0.4) !important; }
 
 /* FOOTER */
 .site-footer {
