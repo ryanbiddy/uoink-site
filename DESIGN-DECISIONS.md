@@ -1,0 +1,23 @@
+# Design decisions
+
+- Removed the homepage React/Babel Tweaks panel from production per Ryan's approval; preserved source under `prototype/tweaks/` for v3.2 reference only.
+- Kept the loud homepage headline: `Uoink that shit.`
+- Added `/installed` for the installer first-run flow.
+- Added `/llms.txt` and `/llms-full.txt` for agent-readable product context.
+- Added the approved `/agents` MCP config snippet generator for Claude Desktop, Cursor, Continue, Cline, and generic stdio.
+- Replaced static duplicated nav/footer with shared React components.
+- Replaced inline data-URI favicons with production favicon, apple icon, PNG fallbacks, manifest, and social metadata.
+- Changed manifest theme color from vermillion to rust `#C2410C`.
+- Generated a new 1200x630 OG image and separate 1280x640 GitHub social preview.
+- Updated every public installer filename reference to `Uoink-Setup-2.1.0.exe`.
+- Used canonical domain `https://uoink.video` throughout site metadata and agent-readable files.
+- Removed public privacy copy about possible future install telemetry to keep the page aligned with the current no-telemetry promise.
+- Softened the agent demo line from `Two seconds.` to `I'll pull the corpus, then search the local index.` because real extraction speed depends on video length and YouTube response time.
+- Added a real H1 to `/agent-docs`: `Uoink agent docs.`
+- Normalized visible acid-as-type instances into rust/parchment/cream treatments; acid remains for magnet tips and solid shape accents.
+- Added mobile overflow fixes: raised nav breakpoint, `min-width:0`, safer code wrapping, H1 clamps, and 44px touch targets.
+- Added accessible mobile menu behavior: `aria-expanded`, `aria-controls`, Escape close, focus trap, and focus return.
+- Added branded `:focus-visible` ring globally.
+- Added `prefers-reduced-motion` support for animations and hover transitions.
+- Used Next font loading for Inter, Bungee, and JetBrains Mono so fonts are self-hosted at build time with `font-display: swap`.
+- Converted the nav and MCP config generator to tiny vanilla scripts and strip unused Next hydration scripts after static export so public pages stay static-first and Lighthouse-friendly.

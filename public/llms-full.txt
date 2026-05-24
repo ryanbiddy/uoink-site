@@ -1,0 +1,36 @@
+# Uoink
+
+Uoink is the YouTube layer for any AI: a local-first Chrome extension and helper that turns YouTube videos into structured markdown corpora for Claude, ChatGPT, Cursor, and MCP-capable agents. It writes transcript, screenshots, comments, metadata, and JSON sidecars to disk; optional BYO Anthropic features add Comment Intelligence, Hook Type classification, and Entity Extraction.
+
+Canonical URLs:
+- https://uoink.video/
+- https://uoink.video/creators
+- https://uoink.video/research
+- https://uoink.video/agents
+- https://uoink.video/agent-docs
+- https://uoink.video/install
+- https://uoink.video/hooks
+- https://uoink.video/privacy
+- https://uoink.video/installed
+
+Source: https://github.com/ryanbiddy/uoink
+Contact: hi@uoink.video
+
+Product notes:
+- Local-first: Uoink does not upload a user's video corpus to Uoink servers.
+- Current platform: Windows helper live; Mac v2.1 is in queue.
+- Chrome Web Store listing is pending; sideload is available through GitHub Releases.
+- MCP: stdio is the officially supported transport; local HTTP JSON-RPC is experimental.
+- Optional AI calls: Comment Intelligence, Hook Type, and Entity Extraction use the user's own Anthropic API key and stay off by default.
+- Skill: Uoink ships an Operator Skill using the agentskills.io open standard.
+
+Page map:
+/ explains the product and install state.
+/creators explains creator/operator workflows.
+/research explains the local corpus, topic routing, citations, and entity graph.
+/agents explains MCP tools, transports, and agent integrations.
+/agent-docs is the reference page for setup and tool signatures.
+/install explains the helper, Chrome extension, file locations, and from-source path.
+/hooks documents the nine Hook Type categories.
+/privacy documents the local-first data posture.
+/installed is the first-run page opened after successful helper installation.

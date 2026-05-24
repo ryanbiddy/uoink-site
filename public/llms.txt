@@ -1,0 +1,17 @@
+# Uoink
+
+Uoink is the YouTube layer for any AI: a local-first Chrome extension and helper that turns YouTube videos into structured markdown corpora for Claude, ChatGPT, Cursor, and MCP-capable agents. It writes transcript, screenshots, comments, metadata, and JSON sidecars to disk; optional BYO Anthropic features add Comment Intelligence, Hook Type classification, and Entity Extraction.
+
+Canonical URLs:
+- https://uoink.video/
+- https://uoink.video/creators
+- https://uoink.video/research
+- https://uoink.video/agents
+- https://uoink.video/agent-docs
+- https://uoink.video/install
+- https://uoink.video/hooks
+- https://uoink.video/privacy
+- https://uoink.video/installed
+
+Source: https://github.com/ryanbiddy/uoink
+Contact: hi@uoink.video
