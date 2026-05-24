@@ -191,16 +191,16 @@ uoink-mark[data-size="small"] .u-tip-s { display: block; }
 
 .nav-cta {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--vermillion); color: var(--ink);
+  background: var(--vermillion); color: var(--cream);
   padding: 10px 18px;
   font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
-  text-transform: uppercase; font-weight: 700;
+  text-transform: uppercase; font-weight: 800;
   border-radius: var(--r-pill);
   border: 2px solid var(--ink);
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 .nav-cta:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--ink); }
-.site-root.mode-loud .nav-cta { background: var(--ink); color: var(--vermillion); }
+.site-root.mode-loud .nav-cta { background: var(--ink); color: var(--cream); }
 
 .nav-burger {
   display: none;
