@@ -1,18 +1,23 @@
 import Link from "next/link";
 
 const links = [
+  ["/how", "How"],
+  ["/memory", "Memory"],
   ["/creators", "Creators"],
-  ["/research", "Research"],
   ["/agents", "Agents"],
-  ["/hooks", "Hooks"],
   ["/install", "Install"],
 ];
 
 function tickerFor(active: string) {
   if (active === "/agent-docs") return ["UOINK v2.1 · agent docs", "uoink.video · stdio + experimental HTTP"];
   if (active === "/install") return ["UOINK v2.1 · windows is live", "uoink.video · grab the .exe · Mac v2.1 in queue · CWS pending"];
+  if (active === "/how") return ["UOINK v2.1 · how it works", "helper · extension · one click · paste"];
+  if (active === "/memory") return ["UOINK v2.1 · memory", "local corpus · fast search · no cloud"];
+  if (active === "/tweaks") return ["UOINK v2.1 · tweaks", "shortcuts · topics · clipboard budget"];
   if (active === "/hooks") return ["UOINK v2.1 · the YouTube layer for any AI", "uoink.video · the nine hook types · field manual"];
   if (active === "/privacy") return ["UOINK v2.1 · local-first", "privacy · no telemetry · BYO key only"];
+  if (active === "/terms") return ["UOINK v2.1 · terms", "MIT · local software · hi@uoink.video"];
+  if (active === "/changelog") return ["UOINK v2.1 · changelog", "latest release notes · GitHub canonical"];
   return ["UOINK v2.1 · the YouTube layer for any AI", "uoink.video · Windows live · Mac v2.1 in queue · CWS pending"];
 }
 

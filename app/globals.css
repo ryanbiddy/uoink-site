@@ -256,6 +256,7 @@ uoink-mark[data-size="small"] .u-tip-s { display: block; }
 .btn.small { font-size: 11px; padding: 10px 16px; }
 .btn.large { font-size: 14px; padding: 17px 28px; }
 .btn:disabled, .btn.disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.arr-link.disabled { opacity: 0.58; cursor: not-allowed; pointer-events: none; }
 
 /* STAMPS — circular, acid */
 .stamp {
