@@ -8,16 +8,17 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", displ
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://uoink.video"),
-  title: { default: "Uoink — the YouTube layer for any AI", template: "%s" },
+  title: { default: "Uoink — the YouTube layer for any AI", template: "%s | Uoink" },
   description: "Uoink turns any YouTube video into structured input for Claude, ChatGPT, or your MCP agent. Local-first, open source, no cloud.",
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [
       { url: "/assets/favicon.svg", type: "image/svg+xml" },
-      { url: "/assets/favicon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/assets/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
-    apple: [{ url: "/assets/apple-touch-icon-180.png", sizes: "180x180", type: "image/png" }],
+    apple: [{ url: "/icon-180.png", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
     type: "website",
@@ -25,13 +26,13 @@ export const metadata: Metadata = {
     title: "Uoink — the YouTube layer for any AI",
     description: "One click on any YouTube video into Claude, ChatGPT, or your MCP agent. Local-first. Open source.",
     url: "https://uoink.video",
-    images: [{ url: "/assets/og-image.png", width: 1200, height: 630, alt: "Uoink — Uoink any video. Read it like a doc." }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Uoink — Uoink any video. Read it like a doc." }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Uoink — the YouTube layer for any AI",
     description: "One click on any YouTube video into Claude, ChatGPT, or your MCP agent. Local-first. Open source.",
-    images: ["/assets/og-image.png"],
+    images: ["/og-image.png"],
   },
 };
 

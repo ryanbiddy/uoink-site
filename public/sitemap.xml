@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://uoink.video/</loc></url>
+  <url><loc>https://uoink.video/how</loc></url>
+  <url><loc>https://uoink.video/memory</loc></url>
+  <url><loc>https://uoink.video/tweaks</loc></url>
   <url><loc>https://uoink.video/creators</loc></url>
   <url><loc>https://uoink.video/research</loc></url>
   <url><loc>https://uoink.video/agents</loc></url>
@@ -8,5 +11,7 @@
   <url><loc>https://uoink.video/install</loc></url>
   <url><loc>https://uoink.video/hooks</loc></url>
   <url><loc>https://uoink.video/privacy</loc></url>
+  <url><loc>https://uoink.video/terms</loc></url>
+  <url><loc>https://uoink.video/changelog</loc></url>
   <url><loc>https://uoink.video/installed</loc></url>
 </urlset>
