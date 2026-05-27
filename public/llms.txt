@@ -5,6 +5,7 @@ Uoink is the YouTube layer for any AI: a local-first Chrome extension and helper
 Canonical URLs:
 - https://uoink.video/
 - https://uoink.video/creators
+- https://uoink.video/dashboard
 - https://uoink.video/research
 - https://uoink.video/agents
 - https://uoink.video/agent-docs

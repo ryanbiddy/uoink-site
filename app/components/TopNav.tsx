@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const links = [
   ["/how", "How"],
+  ["/dashboard", "Dashboard"],
   ["/memory", "Memory"],
   ["/creators", "Creators"],
   ["/agents", "Agents"],
@@ -9,16 +10,17 @@ const links = [
 ];
 
 function tickerFor(active: string) {
-  if (active === "/agent-docs") return ["UOINK v2.1 · agent docs", "uoink.video · stdio + experimental HTTP"];
-  if (active === "/install") return ["UOINK v2.1 · windows is live", "uoink.video · grab the .exe · Mac v2.1 in queue · CWS pending"];
-  if (active === "/how") return ["UOINK v2.1 · how it works", "helper · extension · one click · paste"];
-  if (active === "/memory") return ["UOINK v2.1 · memory", "local corpus · fast search · no cloud"];
-  if (active === "/tweaks") return ["UOINK v2.1 · tweaks", "shortcuts · topics · clipboard budget"];
-  if (active === "/hooks") return ["UOINK v2.1 · the YouTube layer for any AI", "uoink.video · the nine hook types · field manual"];
-  if (active === "/privacy") return ["UOINK v2.1 · local-first", "privacy · no telemetry · BYO key only"];
-  if (active === "/terms") return ["UOINK v2.1 · terms", "MIT · local software · hi@uoink.video"];
-  if (active === "/changelog") return ["UOINK v2.1 · changelog", "latest release notes · GitHub canonical"];
-  return ["UOINK v2.1 · the YouTube layer for any AI", "uoink.video · Windows live · Mac v2.1 in queue · CWS pending"];
+  if (active === "/dashboard") return ["UOINK v2.2 · dashboard", "library · activity · settings · about"];
+  if (active === "/agent-docs") return ["UOINK v2.2 · agent docs", "uoink.video · stdio + experimental HTTP"];
+  if (active === "/install") return ["UOINK v2.2 · windows is live", "uoink.video · wizard · splash · tray · dashboard"];
+  if (active === "/how") return ["UOINK v2.2 · how it works", "helper · extension · dashboard · paste"];
+  if (active === "/memory") return ["UOINK v2.2 · memory", "dashboard Library is canonical"];
+  if (active === "/tweaks") return ["UOINK v2.2 · tweaks", "shortcuts · topics · clipboard budget"];
+  if (active === "/hooks") return ["UOINK v2.2 · the YouTube layer for any AI", "uoink.video · the nine hook types · field manual"];
+  if (active === "/privacy") return ["UOINK v2.2 · local-first", "privacy · no telemetry · BYO key only"];
+  if (active === "/terms") return ["UOINK v2.2 · terms", "MIT · local software · hi@uoink.video"];
+  if (active === "/changelog") return ["UOINK v2.2 · changelog", "latest release notes · GitHub canonical"];
+  return ["UOINK v2.2 · the YouTube layer for any AI", "uoink.video · Windows live · Mac next · CWS pending"];
 }
 
 export function TopNav({ active }: { active: string }) {

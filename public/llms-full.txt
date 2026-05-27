@@ -5,6 +5,7 @@ Uoink is the YouTube layer for any AI: a local-first Chrome extension and helper
 Canonical URLs:
 - https://uoink.video/
 - https://uoink.video/creators
+- https://uoink.video/dashboard
 - https://uoink.video/research
 - https://uoink.video/agents
 - https://uoink.video/agent-docs
@@ -18,7 +19,7 @@ Contact: hi@uoink.video
 
 Product notes:
 - Local-first: Uoink does not upload a user's video corpus to Uoink servers.
-- Current platform: Windows helper live; Mac v2.1 is in queue.
+- Current platform: Windows helper live with the v2.2 dashboard, splash, and tray flow; Mac is next.
 - Chrome Web Store listing is pending; sideload is available through GitHub Releases.
 - MCP: stdio is the officially supported transport; local HTTP JSON-RPC is experimental.
 - Optional AI calls: Comment Intelligence, Hook Type, and Entity Extraction use the user's own Anthropic API key and stay off by default.
@@ -26,6 +27,7 @@ Product notes:
 
 Page map:
 / explains the product and install state.
+/dashboard previews the v2.2 local helper dashboard.
 /creators explains creator/operator workflows.
 /research explains the local corpus, topic routing, citations, and entity graph.
 /agents explains MCP tools, transports, and agent integrations.
