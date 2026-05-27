@@ -17,7 +17,7 @@ export const pages: Record<PageId, SitePage> = {
     mode: "mode-light",
     title: "How Uoink works",
     description: "Install the helper, install the extension, click Uoink on YouTube, and paste the structured corpus into Claude or any AI.",
-    html: "\n<section class=\"hero\" data-screen-label=\"how / hero\">\n<div class=\"container\">\n<div class=\"section-head\">\n<span class=\"eyebrow\">how it works</span>\n<h1 class=\"display-xl\">One click. <em>Four moves.</em></h1>\n<p class=\"lede\">Uoink turns a YouTube video into a structured local corpus your AI can actually use. The helper does the extraction; the Chrome extension gives you the button.</p>\n</div>\n<div class=\"card-grid four\">\n<article class=\"card\"><span class=\"num\">01</span><h3>Install the <em>helper.</em></h3><p>The Windows installer puts the local helper under <code>%LOCALAPPDATA%\\Uoink\\</code>. It runs on <code>127.0.0.1</code>, not in the cloud.</p></article>\n<article class=\"card\"><span class=\"num\">02</span><h3>Install the <em>extension.</em></h3><p>The Chrome extension adds the rust Uoink button under YouTube videos and a popup for recent uoinks, settings, and send-to-AI actions.</p></article>\n<article class=\"card\"><span class=\"num\">03</span><h3>Click <em>Uoink.</em></h3><p>Open any YouTube video and hit the button. Uoink captures transcript, screenshots, comments, metadata, and channel context into one folder.</p></article>\n<article class=\"card\"><span class=\"num\">04</span><h3>Paste into <em>Claude.</em></h3><p>The clipboard gets a structured markdown corpus. Paste it into Claude, ChatGPT, Cursor, or let an MCP agent call Uoink directly.</p></article>\n</div>\n<div class=\"text-center mt-48\"><a class=\"btn primary large\" href=\"/install\">Download for Windows</a></div>\n</div>\n</section>\n",
+    html: "\n<section class=\"hero\" data-screen-label=\"how / hero\">\n<div class=\"container\">\n<div class=\"section-head\">\n<span class=\"eyebrow\">how it works</span>\n<h1 class=\"display-xl\">One click. <em>Four moves.</em></h1>\n<p class=\"lede\">Uoink turns a YouTube video into a structured local corpus your AI can actually use. The helper does the extraction; the Chrome extension gives you the button.</p>\n</div>\n<div class=\"card-grid four\">\n<article class=\"card\"><span class=\"num\">01</span><h3>Install the <em>helper.</em></h3><p>The Windows installer puts the local helper under <code>%LOCALAPPDATA%\\Uoink\\</code>. It runs on <code>127.0.0.1</code>, not in the cloud. After install, click the magnet-U in your system tray to open your dashboard.</p></article>\n<article class=\"card\"><span class=\"num\">02</span><h3>Install the <em>extension.</em></h3><p>The Chrome extension adds the rust Uoink button under YouTube videos and a popup for recent uoinks, settings, and send-to-AI actions.</p></article>\n<article class=\"card\"><span class=\"num\">03</span><h3>Click <em>Uoink.</em></h3><p>Open any YouTube video and hit the button. Uoink captures transcript, screenshots, comments, metadata, and channel context into one folder.</p></article>\n<article class=\"card\"><span class=\"num\">04</span><h3>Paste into <em>Claude.</em></h3><p>The clipboard gets a structured markdown corpus. Paste it into Claude, ChatGPT, Cursor, or let an MCP agent call Uoink directly.</p></article>\n</div>\n<div class=\"text-center mt-48\"><a class=\"btn primary large\" href=\"/install\">Download for Windows</a></div>\n</div>\n</section>\n",
   },
   memory: {
     id: "memory",
@@ -73,7 +73,188 @@ export const pages: Record<PageId, SitePage> = {
     mode: "mode-dark",
     title: "Install Uoink \u2014 Windows live, Mac in queue",
     description: "Install the Uoink helper and Chrome extension. Windows ships now. Mac v2.1 is in queue. Chrome Web Store review is pending.",
-    html: "\n<section class=\"hero\" data-screen-label=\"install / hero\" id=\"download\">\n<div class=\"container\">\n<div class=\"hero-grid\">\n<div class=\"copy\">\n<span class=\"eyebrow\">\u00a7 install \u00b7 uoink v2.1</span>\n<h1 class=\"display-xl\">Install <em>Uoink.</em><br/>Five minutes.</h1>\n<p class=\"lede\">Two pieces: the helper (a local server that does the extraction) and the Chrome extension (the button under every video). The installer gives you both. Windows is live now; the Mac build is queued for v2.1.</p>\n<div class=\"ctas\">\n<a class=\"btn primary large\" href=\"https://github.com/ryanbiddy/uoink/releases/latest\">\u2193 Uoink-Setup-2.1.0.exe</a>\n<a class=\"btn ghost large\" href=\"#extension\">Sideload the extension \u2192</a>\n</div>\n<p class=\"sub-cta\">~120 MB \u00b7 Windows 10 / 11 \u00b7 no admin required \u00b7 MIT</p>\n</div>\n<div class=\"hero-demo\">\n<div class=\"ledger-card live\">\n<div class=\"top\"><span>\u2605 WINDOWS \u00b7 LIVE</span><span>v2.1.0</span></div>\n<div class=\"body-l\">\n<h3>Uoink-Setup-<em>2.1.0.exe</em></h3>\n<p class=\"ver\">~120 MB \u00b7 signed installer \u00b7 auto-start on login</p>\n<p>Bundles Python 3.11.9, yt-dlp, ffmpeg 7.1, MCP SDK, keyring. Installs to <code>%LOCALAPPDATA%\\Uoink\\</code>. The \"Launch Uoink Server now\" checkbox on the finish page starts the helper immediately; an autostart entry runs it on every Windows login.</p>\n</div>\n<div class=\"foot\" style=\"border-top:1px solid var(--hairline-d);padding:12px 18px\">\n<a class=\"btn primary small\" href=\"https://github.com/ryanbiddy/uoink/releases/latest\">\u2193 Get the .exe</a>\n</div>\n</div>\n</div>\n</div>\n</div>\n</section>\n<hr class=\"rule\"/>\n<section class=\"section\" data-screen-label=\"install / steps\" id=\"extension\">\n<div class=\"container\">\n<div class=\"section-head\">\n<span class=\"eyebrow\">\u00a7 01 \u00b7 five-minute install</span>\n<h2 class=\"display-l\">Three steps. <em>Then go.</em></h2>\n</div>\n<div style=\"display:grid;grid-template-columns:repeat(3,1fr);gap:18px\">\n<div class=\"card\">\n<span class=\"num\">01</span>\n<h3>Download <em>the installer.</em></h3>\n<p>Grab <code>Uoink-Setup-2.1.0.exe</code> from the latest GitHub Release. Run it. Defaults install to <code>%LOCALAPPDATA%\\Uoink\\</code> \u2014 no admin required.</p>\n<a class=\"arr-link\" href=\"https://github.com/ryanbiddy/uoink/releases/latest\">Latest release \u2192</a>\n</div>\n<div class=\"card\">\n<span class=\"num\">02</span>\n<h3>Install <em>the extension.</em></h3>\n<p>Chrome Web Store listing is pending review. Until it lands, sideload the <code>.zip</code> from the release \u2014 Chrome &gt; Extensions &gt; Developer mode &gt; Load unpacked.</p>\n<a class=\"arr-link\" href=\"https://github.com/ryanbiddy/uoink#sideload\">Sideload guide \u2192</a>\n</div>\n<div class=\"card\">\n<span class=\"num\">03</span>\n<h3>Open <em>any video.</em></h3>\n<p>The Uoink button sits under every YouTube player. First yoink confirms the helper is connected \u2014 the popup indicator goes green within a couple of seconds.</p>\n<span class=\"arr-link\">Try it now \u2192</span>\n</div>\n</div>\n</div>\n</section>\n<hr class=\"rule\"/>\n<section class=\"section\" data-screen-label=\"install / ledger\" id=\"mac\">\n<div class=\"container\">\n<div class=\"section-head\">\n<span class=\"eyebrow\">\u00a7 02 \u00b7 where uoink runs</span>\n<h2 class=\"display-l\">Three platforms. <em>One product.</em></h2>\n<p class=\"lede\">Honest status. The Windows path is the proven one. Mac and the Chrome Web Store land soon \u2014 visible here, not promised in marketing copy.</p>\n</div>\n<div class=\"ledger\">\n<div class=\"ledger-card live\">\n<div class=\"top\"><span>\u2605 WINDOWS \u00b7 LIVE</span><span>v2.1.0</span></div>\n<div class=\"body-l\">\n<h3>Windows <em>v2.1</em></h3>\n<p class=\"ver\">Windows 10 / 11 \u00b7 Chromium-based browser</p>\n<p>Bundled helper with Python 3.11.9, yt-dlp, ffmpeg 7.1, MCP SDK, keyring. Installs to <code>%LOCALAPPDATA%\\Uoink\\</code>. Stops via Start Menu \"Stop Uoink Server.\"</p>\n</div>\n<div class=\"foot\"><a class=\"btn primary small\" href=\"https://github.com/ryanbiddy/uoink/releases/latest\">\u2193 Download v2.1</a></div>\n</div>\n<div class=\"ledger-card queue\">\n<div class=\"top\"><span>MAC \u00b7 IN QUEUE</span><span>v2.1</span></div>\n<div class=\"body-l\">\n<h3>macOS <em>v2.1</em></h3>\n<p class=\"ver\">Universal \u00b7 Apple Silicon &amp; Intel \u00b7 notarized</p>\n<p>Bundled .dmg with the same helper, same MCP tools, same on-disk format. The v2.1 roadmap also adds: system tray status, keyboard shortcut, auto-update check.</p>\n</div>\n<div class=\"foot\"><a class=\"btn ghost small\" href=\"https://github.com/ryanbiddy/uoink/discussions\">Follow the Mac build \u2192</a></div>\n</div>\n<div class=\"ledger-card pend\">\n<div class=\"top\"><span>CHROME WEB STORE \u00b7 PENDING</span><span>under review</span></div>\n<div class=\"body-l\">\n<h3>Chrome <em>Web Store</em></h3>\n<p class=\"ver\">Listing submitted \u00b7 awaiting approval</p>\n<p>Listing is in review. Until it's live, the extension installs via sideload from the GitHub Release. Works in Chrome, Edge, Brave, Comet, Opera GX, Vivaldi.</p>\n</div>\n<div class=\"foot\"><a class=\"btn ghost small\" href=\"https://github.com/ryanbiddy/uoink#sideload\">Sideload now \u2192</a></div>\n</div>\n</div>\n</div>\n</section>\n<hr class=\"rule\"/>\n<section class=\"section\" data-screen-label=\"install / paths\">\n<div class=\"container\">\n<div class=\"hero-grid\">\n<div class=\"copy\">\n<span class=\"eyebrow\">\u00a7 03 \u00b7 what gets installed</span>\n<h2 class=\"display-l\">No magic. <em>No hidden paths.</em></h2>\n<p class=\"lede\">Every file the installer touches is under <code>%LOCALAPPDATA%\\Uoink\\</code> and your <code>~\\Desktop\\</code> uoink folder. Uninstall removes everything, including the Windows autostart entry.</p>\n<ul class=\"fact-list\" style=\"margin-top:20px\">\n<li><div><b>HELPER BINARY</b><code>%LOCALAPPDATA%\\Uoink\\helper.exe</code> \u00b7 runs on 127.0.0.1:5179</div></li>\n<li><div><b>SKILL</b><code>%LOCALAPPDATA%\\Uoink\\skills\\uoink\\SKILL.md</code></div></li>\n<li><div><b>TOPICS</b><code>%LOCALAPPDATA%\\Uoink\\topics.json</code> \u00b7 edit to add/rename folders</div></li>\n<li><div><b>YOINKS</b><code>%USERPROFILE%\\Desktop\\Uoink\\&lt;topic&gt;\\&lt;slug&gt;\\</code></div></li>\n<li><div><b>API KEY</b>Windows Credential Manager \u00b7 never plaintext on disk</div></li>\n</ul>\n</div>\n<div class=\"hero-demo\">\n<div class=\"corpus\" id=\"api-key\">\n<div class=\"hd\"><span>setup.html \u00b7 in extension popup</span><span>\u25cf helper green</span></div>\n<span class=\"ln k\">## Anthropic API key (optional)</span>\n<span class=\"ln dim\">Comment Intelligence, Hook Type and</span>\n<span class=\"ln dim\">Entity Extraction call Anthropic with</span>\n<span class=\"ln dim\">your own key. All three are off by default.</span>\n<span class=\"ln\">\u00a0</span>\n<span class=\"ln\">  [ paste sk-ant-...                  ]</span>\n<span class=\"ln\">  [ <span class=\"hl\">\u25b8 save to Windows Credential Manager</span> ]</span>\n<span class=\"ln\">\u00a0</span>\n<span class=\"ln k\">## Smart Screenshot Picker</span>\n<span class=\"ln dim\">  [ \u2713 on ]  default 4 \u00b7 max 12</span>\n<span class=\"ln\">\u00a0</span>\n<span class=\"ln k\">## Auto-start on login</span>\n<span class=\"ln dim\">  [ \u2713 on ]</span>\n</div>\n</div>\n</div>\n</div>\n</section>\n<section class=\"big-strip\" data-screen-label=\"install / developers\">\n<div class=\"container\">\n<span class=\"eyebrow\" style=\"color:var(--ink)\">\u00a7 04 \u00b7 for developers</span>\n<h2 class=\"display-l\" style=\"margin-top:14px;color:var(--ink);max-width:24ch\">Run from source. <em>Build your own.</em></h2>\n<p class=\"body-l\" style=\"color:var(--ink);max-width:60ch;margin-top:18px\">\n        Clone <code style=\"background:rgba(0,0,0,0.12);color:var(--ink)\">github.com/ryanbiddy/uoink</code>, run <code style=\"background:rgba(0,0,0,0.12);color:var(--ink)\">pip install -r requirements.txt</code>, start the helper with <code style=\"background:rgba(0,0,0,0.12);color:var(--ink)\">python server.py</code>, sideload <code style=\"background:rgba(0,0,0,0.12);color:var(--ink)\">extension/</code> as an unpacked Chrome extension. Build your own installer with <code style=\"background:rgba(0,0,0,0.12);color:var(--ink)\">./build.ps1</code>.\n      </p>\n<div style=\"display:flex;gap:12px;margin-top:24px;flex-wrap:wrap\">\n<a class=\"btn ink\" href=\"https://github.com/ryanbiddy/uoink#from-source\">README \u2014 from source \u2192</a>\n<a class=\"btn ghost\" href=\"https://github.com/ryanbiddy/uoink/blob/main/docs/build-installer.md\" style=\"color:var(--ink);border-color:var(--ink)\">Build the installer locally</a>\n</div>\n</div>\n</section>\n<section class=\"section\" data-screen-label=\"install / requirements\">\n<div class=\"container\">\n<div class=\"section-head\">\n<span class=\"eyebrow\">\u00a7 05 \u00b7 system requirements</span>\n<h2 class=\"display-l\">What you <em>need.</em></h2>\n</div>\n<div style=\"display:grid;grid-template-columns:repeat(3,1fr);gap:18px\">\n<div class=\"card\">\n<span class=\"num\">OS</span>\n<h3>Windows <em>10 / 11</em></h3>\n<p>64-bit. Mac (Apple Silicon &amp; Intel) lands in v2.1. Linux is on the long roadmap \u2014 open an issue if you want to help test.</p>\n</div>\n<div class=\"card\">\n<span class=\"num\">BROWSER</span>\n<h3>Chromium <em>family</em></h3>\n<p>Chrome, Edge, Brave, Comet, Opera GX, Vivaldi. The extension uses MV3 standard APIs.</p>\n</div>\n<div class=\"card\">\n<span class=\"num\">SPACE</span>\n<h3>~120 <em>MB</em></h3>\n<p>Installer payload. Each yoink adds ~1\u20136 MB depending on screenshot count and transcript length.</p>\n</div>\n</div>\n</div>\n</section>\n<section class=\"section tight\" data-screen-label=\"install / final-cta\">\n<div class=\"container text-center\">\n<span class=\"wm-line\" style=\"font-size:96px;color:var(--vermillion);justify-content:center\"><uoink-mark aria-hidden=\"true\"></uoink-mark><span class=\"oink\">OINK</span></span>\n<p class=\"display-m\" style=\"margin:24px auto 32px;max-width:24ch\">Five minutes from <em>here</em> to your first uoink.</p>\n<a class=\"btn primary large\" href=\"https://github.com/ryanbiddy/uoink/releases/latest\">\u2193 Uoink-Setup-2.1.0.exe</a>\n<p class=\"sub-cta mt-24\">~120 MB \u00b7 Windows 10 / 11 \u00b7 no admin required \u00b7 MIT</p>\n</div>\n</section>\n",
+    html: `
+<section class="hero" data-screen-label="install / hero" id="download">
+<div class="container">
+<div class="hero-grid">
+<div class="copy">
+<span class="eyebrow">&sect; install &middot; uoink v2.1</span>
+<h1 class="display-xl">Install <em>Uoink.</em><br/>Five minutes.</h1>
+<p class="lede">Two pieces: the helper (a local server that does the extraction) and the Chrome extension (the button under every video). The installer gives you both. Windows is live now; the Mac build is queued for v2.1.</p>
+<div class="ctas">
+<a class="btn primary large" href="https://github.com/ryanbiddy/uoink/releases/latest">&darr; Uoink-Setup-2.1.1.exe</a>
+<a class="btn ghost large" href="#extension">Sideload the extension &rarr;</a>
+</div>
+<p class="sub-cta">~120 MB &middot; Windows 10 / 11 &middot; no admin required &middot; MIT</p>
+</div>
+<div class="hero-demo">
+<div class="ledger-card live">
+<div class="top"><span>&starf; WINDOWS &middot; LIVE</span><span>v2.1.1</span></div>
+<div class="body-l">
+<h3>Uoink-Setup-<em>2.1.1.exe</em></h3>
+<p class="ver">~120 MB &middot; signed installer &middot; auto-start on login</p>
+<p>Bundles Python 3.11.9, yt-dlp, ffmpeg 7.1, MCP SDK, keyring. Installs to <code>%LOCALAPPDATA%\\Uoink\\</code>. The "Launch Uoink Server now" checkbox on the finish page starts the helper immediately; an autostart entry runs it on every Windows login. After install, click the magnet-U in your system tray to open your dashboard.</p>
+</div>
+<div class="foot" style="border-top:1px solid var(--hairline-d);padding:12px 18px">
+<a class="btn primary small" href="https://github.com/ryanbiddy/uoink/releases/latest">&darr; Get the .exe</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<hr class="rule"/>
+<section class="section" data-screen-label="install / steps" id="extension">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow">&sect; 01 &middot; five-minute install</span>
+<h2 class="display-l">Three steps. <em>Then go.</em></h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+<div class="card">
+<span class="num">01</span>
+<h3>Download <em>the installer.</em></h3>
+<p>Grab <code>Uoink-Setup-2.1.1.exe</code> from the latest GitHub Release. Run it. Defaults install to <code>%LOCALAPPDATA%\\Uoink\\</code> - no admin required.</p>
+<a class="arr-link" href="https://github.com/ryanbiddy/uoink/releases/latest">Latest release &rarr;</a>
+</div>
+<div class="card">
+<span class="num">02</span>
+<h3>Install <em>the extension.</em></h3>
+<p>Chrome Web Store listing is pending review. Until it lands, sideload the <code>.zip</code> from the release - Chrome &gt; Extensions &gt; Developer mode &gt; Load unpacked.</p>
+<a class="arr-link" href="https://github.com/ryanbiddy/uoink#sideload">Sideload guide &rarr;</a>
+</div>
+<div class="card">
+<span class="num">03</span>
+<h3>Open <em>any video.</em></h3>
+<p>The Uoink button sits under every YouTube player. First yoink confirms the helper is connected - the popup indicator goes green within a couple of seconds.</p>
+<span class="arr-link">Try it now &rarr;</span>
+</div>
+</div>
+</div>
+</section>
+<hr class="rule"/>
+<section class="section" data-screen-label="install / ledger" id="mac">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow">&sect; 02 &middot; where uoink runs</span>
+<h2 class="display-l">Three platforms. <em>One product.</em></h2>
+<p class="lede">Honest status. The Windows path is the proven one. Mac and the Chrome Web Store land soon - visible here, not promised in marketing copy.</p>
+</div>
+<div class="ledger">
+<div class="ledger-card live">
+<div class="top"><span>&starf; WINDOWS &middot; LIVE</span><span>v2.1.1</span></div>
+<div class="body-l">
+<h3>Windows <em>v2.1</em></h3>
+<p class="ver">Windows 10 / 11 &middot; Chromium-based browser</p>
+<p>Bundled helper with Python 3.11.9, yt-dlp, ffmpeg 7.1, MCP SDK, keyring. Installs to <code>%LOCALAPPDATA%\\Uoink\\</code>. Stops via Start Menu "Stop Uoink Server."</p>
+</div>
+<div class="foot"><a class="btn primary small" href="https://github.com/ryanbiddy/uoink/releases/latest">&darr; Download v2.1</a></div>
+</div>
+<div class="ledger-card queue">
+<div class="top"><span>MAC &middot; IN QUEUE</span><span>v2.1</span></div>
+<div class="body-l">
+<h3>macOS <em>v2.1</em></h3>
+<p class="ver">Universal &middot; Apple Silicon &amp; Intel &middot; notarized</p>
+<p>Bundled .dmg with the same helper, same MCP tools, same on-disk format. The v2.1 roadmap also adds: system tray status, keyboard shortcut, auto-update check.</p>
+</div>
+<div class="foot"><a class="btn ghost small" href="https://github.com/ryanbiddy/uoink/discussions">Follow the Mac build &rarr;</a></div>
+</div>
+<div class="ledger-card pend">
+<div class="top"><span>CHROME WEB STORE &middot; PENDING</span><span>under review</span></div>
+<div class="body-l">
+<h3>Chrome <em>Web Store</em></h3>
+<p class="ver">Listing submitted &middot; awaiting approval</p>
+<p>Listing is in review. Until it's live, the extension installs via sideload from the GitHub Release. Works in Chrome, Edge, Brave, Comet, Opera GX, Vivaldi.</p>
+</div>
+<div class="foot"><a class="btn ghost small" href="https://github.com/ryanbiddy/uoink#sideload">Sideload now &rarr;</a></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="rule"/>
+<section class="section" data-screen-label="install / paths">
+<div class="container">
+<div class="hero-grid">
+<div class="copy">
+<span class="eyebrow">&sect; 03 &middot; what gets installed</span>
+<h2 class="display-l">No magic. <em>No hidden paths.</em></h2>
+<p class="lede">Every file the installer touches is under <code>%LOCALAPPDATA%\\Uoink\\</code> and your <code>~\\Desktop\\</code> uoink folder. Uninstall removes everything, including the Windows autostart entry.</p>
+<ul class="fact-list" style="margin-top:20px">
+<li><div><b>HELPER BINARY</b><code>%LOCALAPPDATA%\\Uoink\\helper.exe</code> &middot; runs on 127.0.0.1:5179</div></li>
+<li><div><b>SKILL</b><code>%LOCALAPPDATA%\\Uoink\\skills\\uoink\\SKILL.md</code></div></li>
+<li><div><b>TOPICS</b><code>%LOCALAPPDATA%\\Uoink\\topics.json</code> &middot; edit to add/rename folders</div></li>
+<li><div><b>YOINKS</b><code>%USERPROFILE%\\Desktop\\Uoink\\&lt;topic&gt;\\&lt;slug&gt;\\</code></div></li>
+<li><div><b>API KEY</b>Windows Credential Manager &middot; never plaintext on disk</div></li>
+</ul>
+</div>
+<div class="hero-demo">
+<div class="corpus" id="api-key">
+<div class="hd"><span>setup.html &middot; in extension popup</span><span>&#9679; helper green</span></div>
+<span class="ln k">## Anthropic API key (optional)</span>
+<span class="ln dim">Comment Intelligence, Hook Type and</span>
+<span class="ln dim">Entity Extraction call Anthropic with</span>
+<span class="ln dim">your own key. All three are off by default.</span>
+<span class="ln">&nbsp;</span>
+<span class="ln">  [ paste sk-ant-...                  ]</span>
+<span class="ln">  [ <span class="hl">&#9656; save to Windows Credential Manager</span> ]</span>
+<span class="ln">&nbsp;</span>
+<span class="ln k">## Smart Screenshot Picker</span>
+<span class="ln dim">  [ &#10003; on ]  default 4 &middot; max 12</span>
+<span class="ln">&nbsp;</span>
+<span class="ln k">## Auto-start on login</span>
+<span class="ln dim">  [ &#10003; on ]</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="big-strip" data-screen-label="install / developers">
+<div class="container">
+<span class="eyebrow" style="color:var(--ink)">&sect; 04 &middot; for developers</span>
+<h2 class="display-l" style="margin-top:14px;color:var(--ink);max-width:24ch">Run from source. <em>Build your own.</em></h2>
+<p class="body-l" style="color:var(--ink);max-width:60ch;margin-top:18px">
+        Clone <code style="background:rgba(0,0,0,0.12);color:var(--ink)">github.com/ryanbiddy/uoink</code>, run <code style="background:rgba(0,0,0,0.12);color:var(--ink)">pip install -r requirements.txt</code>, start the helper with <code style="background:rgba(0,0,0,0.12);color:var(--ink)">python server.py</code>, sideload <code style="background:rgba(0,0,0,0.12);color:var(--ink)">extension/</code> as an unpacked Chrome extension. Build your own installer with <code style="background:rgba(0,0,0,0.12);color:var(--ink)">./build.ps1</code>.
+      </p>
+<div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap">
+<a class="btn ink" href="https://github.com/ryanbiddy/uoink#from-source">README - from source &rarr;</a>
+<a class="btn ghost" href="https://github.com/ryanbiddy/uoink/blob/main/docs/build-installer.md" style="color:var(--ink);border-color:var(--ink)">Build the installer locally</a>
+</div>
+</div>
+</section>
+<section class="section" data-screen-label="install / requirements">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow">&sect; 05 &middot; system requirements</span>
+<h2 class="display-l">What you <em>need.</em></h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+<div class="card">
+<span class="num">OS</span>
+<h3>Windows <em>10 / 11</em></h3>
+<p>64-bit. Mac (Apple Silicon &amp; Intel) lands in v2.1. Linux is on the long roadmap - open an issue if you want to help test.</p>
+</div>
+<div class="card">
+<span class="num">BROWSER</span>
+<h3>Chromium <em>family</em></h3>
+<p>Chrome, Edge, Brave, Comet, Opera GX, Vivaldi. The extension uses MV3 standard APIs.</p>
+</div>
+<div class="card">
+<span class="num">SPACE</span>
+<h3>~120 <em>MB</em></h3>
+<p>Installer payload. Each yoink adds ~1-6 MB depending on screenshot count and transcript length.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section tight" data-screen-label="install / final-cta">
+<div class="container text-center">
+<span class="wm-line" style="font-size:96px;color:var(--vermillion);justify-content:center"><uoink-mark aria-hidden="true"></uoink-mark><span class="oink">OINK</span></span>
+<p class="display-m" style="margin:24px auto 32px;max-width:24ch">Five minutes from <em>here</em> to your first uoink.</p>
+<a class="btn primary large" href="https://github.com/ryanbiddy/uoink/releases/latest">&darr; Uoink-Setup-2.1.1.exe</a>
+<p class="sub-cta mt-24">~120 MB &middot; Windows 10 / 11 &middot; no admin required &middot; MIT</p>
+</div>
+</section>
+`,
   },
   hooks: {
     id: "hooks",
@@ -104,8 +285,8 @@ export const pages: Record<PageId, SitePage> = {
     route: "/changelog",
     mode: "mode-dark",
     title: "Uoink changelog",
-    description: "Latest Uoink release notes, including v2.1 site, extension, helper, Memory, MCP, and local-first updates.",
-    html: "\n<section class=\"section\" data-screen-label=\"changelog / main\">\n<div class=\"container\">\n<article class=\"article\">\n<div class=\"meta\"><span>changelog</span><span>latest first</span><span>source: GitHub</span></div>\n<h1>What changed in <em>Uoink.</em></h1>\n<p class=\"standfirst\">This page summarizes the shipped Uoink release notes. The canonical full changelog lives in the GitHub repository.</p>\n<h2>v2.1 <em>launch polish</em></h2>\n<ul>\n<li>Renamed the product surface from Yoink to Uoink across extension, Skill, setup, and site surfaces.</li>\n<li>Added platform-aware setup copy for Windows now and macOS next.</li>\n<li>Kept the local-first architecture: helper on <code>127.0.0.1</code>, local corpora, optional BYO Anthropic key.</li>\n</ul>\n<h2>v2.0 <em>YouTube layer for any AI</em></h2>\n<ul>\n<li>MCP server with 13 tools for agents, including video extraction, playlist jobs, corpus search, citation maps, health, taxonomy, and entity mentions.</li>\n<li>Uoink Memory: local searchable corpus gallery with filters, soft delete, restore, and fast SQLite-backed search.</li>\n<li>Comment Intelligence, Hook Type classification, self-calibration, entity extraction, Smart Screenshot Picker, and playlist mode.</li>\n<li>Key storage via Windows Credential Manager, job/index persistence, and local-only security posture documented for launch.</li>\n</ul>\n<p><a class=\"btn ghost large\" href=\"https://github.com/ryanbiddy/uoink/blob/main/CHANGELOG.md\">Read the full GitHub changelog</a></p>\n</article>\n</div>\n</section>\n",
+    description: "Latest Uoink release notes, including v2.1.1 dashboard, tray icon, extension, helper, Memory, MCP, and local-first updates.",
+    html: "\n<section class=\"section\" data-screen-label=\"changelog / main\">\n<div class=\"container\">\n<article class=\"article\">\n<div class=\"meta\"><span>changelog</span><span>latest first</span><span>source: GitHub</span></div>\n<h1>What changed in <em>Uoink.</em></h1>\n<p class=\"standfirst\">This page summarizes the shipped Uoink release notes. The canonical full changelog lives in the GitHub repository.</p>\n<h2>v2.1.1 <em>dashboard + tray polish</em></h2>\n<ul>\n<li>Added the local helper dashboard so installed users can inspect helper status, output paths, and setup health from the browser.</li>\n<li>Added the magnet-U system tray entry as the fast path back to the dashboard after install.</li>\n<li>Rolled in v2.1.1 launch fixes around installer/startup behavior, setup copy, and post-install verification.</li>\n</ul>\n<h2>v2.1 <em>launch polish</em></h2>\n<ul>\n<li>Renamed the product surface from Yoink to Uoink across extension, Skill, setup, and site surfaces.</li>\n<li>Added platform-aware setup copy for Windows now and macOS next.</li>\n<li>Kept the local-first architecture: helper on <code>127.0.0.1</code>, local corpora, optional BYO Anthropic key.</li>\n</ul>\n<h2>v2.0 <em>YouTube layer for any AI</em></h2>\n<ul>\n<li>MCP server with 13 tools for agents, including video extraction, playlist jobs, corpus search, citation maps, health, taxonomy, and entity mentions.</li>\n<li>Uoink Memory: local searchable corpus gallery with filters, soft delete, restore, and fast SQLite-backed search.</li>\n<li>Comment Intelligence, Hook Type classification, self-calibration, entity extraction, Smart Screenshot Picker, and playlist mode.</li>\n<li>Key storage via Windows Credential Manager, job/index persistence, and local-only security posture documented for launch.</li>\n</ul>\n<p><a class=\"btn ghost large\" href=\"https://github.com/ryanbiddy/uoink/blob/main/CHANGELOG.md\">Read the full GitHub changelog</a></p>\n</article>\n</div>\n</section>\n",
   },
   installed: {
     id: "installed",
