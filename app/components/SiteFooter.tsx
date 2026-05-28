@@ -12,6 +12,7 @@ export function SiteFooter() {
           <h4>Product</h4>
           <ul>
             <li><Link href="/how">How it works →</Link></li>
+            <li><Link href="/dashboard">Dashboard →</Link></li>
             <li><Link href="/memory">Memory →</Link></li>
             <li><Link href="/tweaks">Tweaks →</Link></li>
             <li><Link href="/creators">Creators →</Link></li>
@@ -38,7 +39,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="container footer-bottom">
-        <span>uoink<span className="dot">.</span>video <span className="dot">·</span> v2.1 <span className="dot">·</span> © 2026</span>
+        <span>uoink<span className="dot">.</span>video <span className="dot">·</span> v2.2 <span className="dot">·</span> © 2026</span>
         <span>Local-first. No cloud corpus. No telemetry.</span>
       </div>
     </footer>
