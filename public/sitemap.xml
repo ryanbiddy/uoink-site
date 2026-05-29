@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://uoink.video/</loc></url>
-  <url><loc>https://uoink.video/how</loc></url>
-  <url><loc>https://uoink.video/dashboard</loc></url>
-  <url><loc>https://uoink.video/memory</loc></url>
-  <url><loc>https://uoink.video/tweaks</loc></url>
-  <url><loc>https://uoink.video/creators</loc></url>
-  <url><loc>https://uoink.video/research</loc></url>
-  <url><loc>https://uoink.video/agents</loc></url>
-  <url><loc>https://uoink.video/agent-docs</loc></url>
-  <url><loc>https://uoink.video/install</loc></url>
-  <url><loc>https://uoink.video/hooks</loc></url>
-  <url><loc>https://uoink.video/privacy</loc></url>
-  <url><loc>https://uoink.video/terms</loc></url>
-  <url><loc>https://uoink.video/changelog</loc></url>
-  <url><loc>https://uoink.video/installed</loc></url>
+  <url><loc>https://uoink.video/</loc><lastmod>2026-05-29</lastmod><priority>1.0</priority></url>
+  <url><loc>https://uoink.video/install</loc><lastmod>2026-05-29</lastmod><priority>0.95</priority></url>
+  <url><loc>https://uoink.video/how</loc><lastmod>2026-05-29</lastmod><priority>0.9</priority></url>
+  <url><loc>https://uoink.video/features</loc><lastmod>2026-05-29</lastmod><priority>0.9</priority></url>
+  <url><loc>https://uoink.video/podcasts</loc><lastmod>2026-05-29</lastmod><priority>0.85</priority></url>
+  <url><loc>https://uoink.video/agents</loc><lastmod>2026-05-29</lastmod><priority>0.9</priority></url>
+  <url><loc>https://uoink.video/mcp</loc><lastmod>2026-05-29</lastmod><priority>0.85</priority></url>
+  <url><loc>https://uoink.video/privacy</loc><lastmod>2026-05-29</lastmod><priority>0.7</priority></url>
+  <url><loc>https://uoink.video/changelog</loc><lastmod>2026-05-29</lastmod><priority>0.7</priority></url>
+  <url><loc>https://uoink.video/terms</loc><lastmod>2026-05-29</lastmod><priority>0.5</priority></url>
 </urlset>

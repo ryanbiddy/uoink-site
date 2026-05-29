@@ -2,23 +2,23 @@
   const panel = document.querySelector("[data-config-generator]");
   if (!panel) return;
 
-  const commandPath = "%LOCALAPPDATA%\\Uoink\\yoink_mcp.py";
+  const commandPath = "%LOCALAPPDATA%\\Uoink\\uoink_mcp.exe";
   const snippets = {
     "Claude Desktop": {
-      mcpServers: { uoink: { command: "python", args: [commandPath] } },
+      mcpServers: { uoink: { command: commandPath, args: [] } },
     },
     Cursor: {
-      mcpServers: { uoink: { command: "python", args: [commandPath] } },
+      mcpServers: { uoink: { command: commandPath, args: [] } },
     },
     Continue: {
       experimental: {
-        modelContextProtocolServers: [{ name: "uoink", command: "python", args: [commandPath] }],
+        modelContextProtocolServers: [{ name: "uoink", command: commandPath, args: [] }],
       },
     },
     Cline: {
-      mcpServers: { uoink: { command: "python", args: [commandPath], disabled: false } },
+      mcpServers: { uoink: { command: commandPath, args: [], disabled: false } },
     },
-    "Generic stdio": `python "${commandPath}"`,
+    "Generic stdio": `"${commandPath}"`,
   };
 
   const tabs = Array.from(panel.querySelectorAll("[data-config-client]"));

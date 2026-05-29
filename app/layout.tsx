@@ -8,8 +8,9 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", displ
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://uoink.video"),
-  title: { default: "Uoink — the YouTube layer for any AI", template: "%s | Uoink" },
-  description: "Uoink turns any YouTube video into structured input for Claude, ChatGPT, or your MCP agent. Local-first, open source, no cloud.",
+  title: { default: "Uoink - local video corpus for any AI", template: "%s | Uoink" },
+  description:
+    "Uoink turns videos and podcasts into private local corpora for Claude, ChatGPT, Cursor, and MCP-capable agents.",
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [
@@ -23,15 +24,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Uoink",
-    title: "Uoink — the YouTube layer for any AI",
-    description: "One click on any YouTube video into Claude, ChatGPT, or your MCP agent. Local-first. Open source.",
+    title: "Uoink - local video corpus for any AI",
+    description: "One click turns video and podcasts into local corpora for Claude, ChatGPT, Cursor, and MCP agents.",
     url: "https://uoink.video",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Uoink — Uoink any video. Read it like a doc." }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Uoink local video corpus site preview" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Uoink — the YouTube layer for any AI",
-    description: "One click on any YouTube video into Claude, ChatGPT, or your MCP agent. Local-first. Open source.",
+    title: "Uoink - local video corpus for any AI",
+    description: "One click turns video and podcasts into local corpora for Claude, ChatGPT, Cursor, and MCP agents.",
     images: ["/og-image.png"],
   },
 };
@@ -46,11 +47,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <link href="/assets/favicon.svg" rel="mask-icon" color="#C2410C" />
+        <link rel="alternate" type="application/json" title="Uoink MCP manifest" href="/mcp/manifest.json" />
       </head>
       <body className={`${inter.variable} ${bungee.variable} ${mono.variable}`}>
         {children}
         <script src="/nav.js" defer></script>
-        <script src="/config-generator.js" defer></script>
         <script src="/uoink-mark.js" defer></script>
       </body>
     </html>

@@ -1,18 +1,27 @@
+<!-- generated: 2026-05-29 / uoink v3.1 -->
 # Uoink
 
-Uoink is the YouTube layer for any AI: a local-first Chrome extension and helper that turns YouTube videos into structured markdown corpora for Claude, ChatGPT, Cursor, and MCP-capable agents. It writes transcript, screenshots, comments, metadata, and JSON sidecars to disk; optional BYO Anthropic features add Comment Intelligence, Hook Type classification, and Entity Extraction.
+> Uoink is a local-first Chrome extension plus desktop helper that extracts a structured corpus from videos and podcasts, then hands that corpus to Claude, ChatGPT, Cursor, or a local MCP agent through clipboard, direct send, or 13 MCP tools.
 
-Canonical URLs:
-- https://uoink.video/
-- https://uoink.video/creators
-- https://uoink.video/dashboard
-- https://uoink.video/research
-- https://uoink.video/agents
-- https://uoink.video/agent-docs
-- https://uoink.video/install
-- https://uoink.video/hooks
-- https://uoink.video/privacy
-- https://uoink.video/installed
+## Install
 
-Source: https://github.com/ryanbiddy/uoink
-Contact: hi@uoink.video
+- [Install Uoink](https://uoink.video/install): Windows helper, browser extension, macOS status.
+- [How it works](https://uoink.video/how): click -> corpus -> AI workflow.
+
+## Product
+
+- [Features](https://uoink.video/features): capture, memory, search, hooks, comments, entities, privacy.
+- [Podcasts](https://uoink.video/podcasts): RSS feeds, local Whisper transcription, speaker diarization.
+- [Privacy](https://uoink.video/privacy): no account, no Uoink cloud, no telemetry.
+
+## Agents and MCP
+
+- [Agents](https://uoink.video/agents): Claude Desktop, Cursor, Cline, Continue, ChatGPT Desktop setup.
+- [MCP](https://uoink.video/mcp): server metadata, tool names, transport notes.
+- [MCP manifest JSON](https://uoink.video/mcp/manifest.json): machine-readable server manifest.
+
+## Trust
+
+- [GitHub](https://github.com/ryanbiddy/uoink): source, releases, MIT license.
+- [Changelog](https://uoink.video/changelog): shipped and in-flight work.
+- [Terms](https://uoink.video/terms): short legal notes.
