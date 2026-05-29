@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ConfigSnippetGenerator } from "../components/ConfigSnippetGenerator";
 import { PageShell } from "../components/PageShell";
 import { pages } from "../content/pages";
 
@@ -14,9 +13,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return (
-    <PageShell page={page}>
-      <ConfigSnippetGenerator />
-    </PageShell>
-  );
+  return <PageShell page={page} />;
 }

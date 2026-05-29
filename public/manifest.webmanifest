@@ -1,7 +1,7 @@
 {
   "name": "Uoink",
   "short_name": "Uoink",
-  "description": "The YouTube layer for any AI. Local-first. Open source.",
+  "description": "Local video and podcast corpus software for Claude, ChatGPT, Cursor, and MCP agents.",
   "start_url": "/",
   "display": "minimal-ui",
   "background_color": "#0A0A0A",

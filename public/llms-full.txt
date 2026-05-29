@@ -1,38 +1,46 @@
-# Uoink
+<!-- generated: 2026-05-29 / uoink v3.1 -->
+# Uoink full site context
 
-Uoink is the YouTube layer for any AI: a local-first Chrome extension and helper that turns YouTube videos into structured markdown corpora for Claude, ChatGPT, Cursor, and MCP-capable agents. It writes transcript, screenshots, comments, metadata, and JSON sidecars to disk; optional BYO Anthropic features add Comment Intelligence, Hook Type classification, and Entity Extraction.
+## URL: https://uoink.video/
 
-Canonical URLs:
-- https://uoink.video/
-- https://uoink.video/creators
-- https://uoink.video/dashboard
-- https://uoink.video/research
-- https://uoink.video/agents
-- https://uoink.video/agent-docs
-- https://uoink.video/install
-- https://uoink.video/hooks
-- https://uoink.video/privacy
-- https://uoink.video/installed
+Uoink turns videos and podcasts into private local corpora for Claude, ChatGPT, Cursor, and MCP-capable agents. One click under a video captures transcript, screenshots, comments, channel context, and metadata. The corpus lands on disk and on the clipboard. The local helper exposes 13 MCP tools for agents.
 
-Source: https://github.com/ryanbiddy/uoink
-Contact: hi@uoink.video
+Core position: Uoink that shit. Transcript-only tools flatten video into text. Uoink keeps the source shape: words, frames, comments, channel context, metadata, and optional Hook Type classification.
 
-Product notes:
-- Local-first: Uoink does not upload a user's video corpus to Uoink servers.
-- Current platform: Windows helper live with the v2.2 dashboard, splash, and tray flow; Mac is next.
-- Chrome Web Store listing is pending; sideload is available through GitHub Releases.
-- MCP: stdio is the officially supported transport; local HTTP JSON-RPC is experimental.
-- Optional AI calls: Comment Intelligence, Hook Type, and Entity Extraction use the user's own Anthropic API key and stay off by default.
-- Skill: Uoink ships an Operator Skill using the agentskills.io open standard.
+## URL: https://uoink.video/install
 
-Page map:
-/ explains the product and install state.
-/dashboard previews the v2.2 local helper dashboard.
-/creators explains creator/operator workflows.
-/research explains the local corpus, topic routing, citations, and entity graph.
-/agents explains MCP tools, transports, and agent integrations.
-/agent-docs is the reference page for setup and tool signatures.
-/install explains the helper, Chrome extension, file locations, and from-source path.
-/hooks documents the nine Hook Type categories.
-/privacy documents the local-first data posture.
-/installed is the first-run page opened after successful helper installation.
+Install the desktop helper, install the browser extension, then click the Uoink button. The Windows helper runs from %LOCALAPPDATA%\Uoink and exposes localhost 127.0.0.1:5179. Browser extension support targets Chromium browsers. Chrome Web Store approval is pending, so the release zip is the launch path. macOS is on the v3.1 track.
+
+## URL: https://uoink.video/how
+
+The workflow is click -> corpus -> AI -> result. Uoink captures timestamped transcript, screenshots, comments, metadata, channel context, and classifier blocks. Paste into Claude or ChatGPT, or let an MCP agent call Uoink directly. Captures accumulate into a local library that can be searched and cited later.
+
+## URL: https://uoink.video/features
+
+Capabilities include in-page Uoink button, right-click capture, playlist mode, universal URL mode, podcast RSS feed support, local SQLite FTS5 search, topic folders, Memory dashboard, entity mentions, Hook Type taxonomy, BYO Anthropic key, clipboard budget, Whisper model selector, local MCP server, and Operator Skill instructions. Uoink is a local asset builder, not only a transcript downloader.
+
+## URL: https://uoink.video/podcasts
+
+Podcast support adds RSS feed polling, local audio download, local Whisper transcription, and speaker diarization. Diarization labels speakers as Speaker 1, Speaker 2, and so on until the user renames them. Podcast corpora live beside video corpora and are searchable by agents.
+
+## URL: https://uoink.video/agents
+
+Uoink is an MCP server. Supported clients include Claude Desktop, Cursor, Cline, Continue, and ChatGPT Desktop where MCP stdio is supported. Stdio is the supported transport. HTTP JSON-RPC at 127.0.0.1:5179/mcp is experimental. The setup page generates the real local config path after install.
+
+MCP tools: uoink_video, uoink_playlist, get_job_status, cancel_job, list_recent_uoinks, search_uoinks, get_uoink_corpus, analyze_comments, classify_hook, get_taxonomy, get_citation_map, get_uoink_health, find_mentions.
+
+## URL: https://uoink.video/mcp
+
+The MCP page and /mcp/manifest.json expose server metadata, supported transports, install links, client config notes, and tool names in machine-readable form for agents.
+
+## URL: https://uoink.video/privacy
+
+Uoink has no account, no Uoink cloud, no telemetry, and no hosted corpus. Captures live on disk. Network calls go to the source being extracted and, only when optional AI features are enabled, Anthropic with the user's own API key. The key is stored in the operating system credential vault.
+
+## URL: https://uoink.video/changelog
+
+The changelog covers v3.1 direction, v2.2 dashboard and tray work, MCP tools, and in-flight macOS, podcast, markdown memory, and verification assistance.
+
+## URL: https://uoink.video/terms
+
+Uoink is MIT-licensed local software. Users are responsible for how they use captured materials and for following source platform and AI provider terms.

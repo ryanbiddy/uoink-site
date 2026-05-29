@@ -1,49 +1,35 @@
 import Link from "next/link";
 
 const links = [
-  ["/how", "How"],
-  ["/dashboard", "Dashboard"],
-  ["/memory", "Memory"],
-  ["/creators", "Creators"],
-  ["/agents", "Agents"],
   ["/install", "Install"],
+  ["/how", "How"],
+  ["/features", "Features"],
+  ["/podcasts", "Podcasts"],
+  ["/agents", "Agents"],
+  ["/mcp", "MCP"],
 ];
 
 function tickerFor(active: string) {
-  if (active === "/dashboard") return ["UOINK v2.2 · dashboard", "library · activity · settings · about"];
-  if (active === "/agent-docs") return ["UOINK v2.2 · agent docs", "uoink.video · stdio + experimental HTTP"];
-  if (active === "/install") return ["UOINK v2.2 · windows is live", "uoink.video · wizard · splash · tray · dashboard"];
-  if (active === "/how") return ["UOINK v2.2 · how it works", "helper · extension · dashboard · paste"];
-  if (active === "/memory") return ["UOINK v2.2 · memory", "dashboard Library is canonical"];
-  if (active === "/tweaks") return ["UOINK v2.2 · tweaks", "shortcuts · topics · clipboard budget"];
-  if (active === "/hooks") return ["UOINK v2.2 · the YouTube layer for any AI", "uoink.video · the nine hook types · field manual"];
-  if (active === "/privacy") return ["UOINK v2.2 · local-first", "privacy · no telemetry · BYO key only"];
-  if (active === "/terms") return ["UOINK v2.2 · terms", "MIT · local software · hi@uoink.video"];
-  if (active === "/changelog") return ["UOINK v2.2 · changelog", "latest release notes · GitHub canonical"];
-  return ["UOINK v2.2 · the YouTube layer for any AI", "uoink.video · Windows live · Mac next · CWS pending"];
+  if (active === "/install") return ["UOINK v3.1 / install", "helper / extension / local corpus"];
+  if (active === "/how") return ["UOINK v3.1 / workflow", "click / corpus / AI / result"];
+  if (active === "/features") return ["UOINK v3.1 / features", "corpus / memory / hooks / podcasts"];
+  if (active === "/podcasts") return ["UOINK v3.1 / podcasts", "RSS / Whisper / diarization / local"];
+  if (active === "/agents" || active === "/mcp") return ["UOINK v3.1 / MCP", "13 tools / Claude Desktop / Cursor / Cline"];
+  if (active === "/privacy") return ["UOINK v3.1 / privacy", "local-first / no cloud / no telemetry"];
+  return ["UOINK v3.1 / local video corpus", "open source / MIT / model agnostic"];
 }
 
 export function TopNav({ active }: { active: string }) {
   const [left, right] = tickerFor(active);
-  const [leftStrong, ...leftRest] = left.split(" · ");
 
   return (
     <header className="site-header">
       <div className="ticker" role="banner">
         <div className="row">
           <span>
-            <span className="star" aria-hidden="true">
-              ★
-            </span>{" "}
-            <b>{leftStrong}</b>
-            {leftRest.length ? ` · ${leftRest.join(" · ")}` : ""}
+            <b>{left}</b>
           </span>
-          <span>
-            {right}{" "}
-            <span className="star" aria-hidden="true">
-              ★
-            </span>
-          </span>
+          <span>{right}</span>
         </div>
       </div>
       <nav className="top-nav" aria-label="Primary">
@@ -62,7 +48,7 @@ export function TopNav({ active }: { active: string }) {
             ))}
           </div>
           <Link className="nav-cta" href="/install">
-            ↓ Get Uoink
+            Get Uoink
           </Link>
           <button
             className="nav-burger"
@@ -78,16 +64,9 @@ export function TopNav({ active }: { active: string }) {
           </button>
         </div>
       </nav>
-      <div
-        id="mobile-menu"
-        className="mobile-menu"
-        data-mobile-menu
-        aria-hidden="true"
-        aria-modal="true"
-        role="dialog"
-      >
+      <div id="mobile-menu" className="mobile-menu" data-mobile-menu aria-hidden="true" aria-modal="true" role="dialog">
         <button className="close" type="button" data-nav-close aria-label="Close menu">
-          ×
+          x
         </button>
         <span className="wm-line" style={{ fontSize: 48, color: "var(--vermillion)" }}>
           <uoink-mark aria-hidden="true"></uoink-mark>
@@ -99,9 +78,15 @@ export function TopNav({ active }: { active: string }) {
               {label}
             </Link>
           ))}
+          <Link href="/privacy" className={active === "/privacy" ? "active" : ""}>
+            Privacy
+          </Link>
+          <Link href="/changelog" className={active === "/changelog" ? "active" : ""}>
+            Changelog
+          </Link>
         </div>
         <Link className="nav-cta" href="/install">
-          ↓ Get Uoink for Windows
+          Get Uoink
         </Link>
       </div>
     </header>
