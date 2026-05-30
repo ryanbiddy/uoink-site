@@ -35,7 +35,7 @@ The MCP page and /mcp/manifest.json expose server metadata, supported transports
 
 ## URL: https://uoink.video/about
 
-The About page explains Uoink's open-source posture and shows public GitHub release download counts. Counts come from GitHub's public Releases API and aggregate lifetime plus per-release asset downloads. Uoink does not track who downloaded, only displays public aggregate counts.
+The About page explains Uoink's open-source posture and shows one public GitHub release download total. Counts come from GitHub's public Releases API. Uoink does not track who downloaded, only displays the public aggregate count.
 
 ## URL: https://uoink.video/privacy
 

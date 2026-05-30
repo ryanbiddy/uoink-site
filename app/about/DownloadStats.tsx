@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 type DownloadAsset = {
   name: string;
@@ -75,8 +75,6 @@ export function DownloadStats() {
     };
   }, []);
 
-  const releases = useMemo(() => stats?.byRelease ?? [], [stats]);
-
   return (
     <section className="section" data-screen-label="about / downloads" id="downloads">
       <div className="container">
@@ -84,11 +82,11 @@ export function DownloadStats() {
           <div className="download-copy">
             <span className="eyebrow">downloads</span>
             <h2 className="display-l">
-              Public releases. Public <em>counts.</em>
+              Total downloads. <em>That&apos;s it.</em>
             </h2>
             <p className="body-l">
-              These counts come from GitHub&apos;s public Releases API. We don&apos;t track who downloaded
-              Uoink, where they came from, or what they did next. Only that release assets were downloaded.
+              This number comes from GitHub&apos;s public Releases API. We don&apos;t track who downloaded
+              Uoink, where they came from, or what they did next.
             </p>
             <p className="download-note">
               Source: <a href="https://github.com/ryanbiddy/uoink/releases">github.com/ryanbiddy/uoink/releases</a> /
@@ -105,38 +103,10 @@ export function DownloadStats() {
               </div>
             )}
             {state === "ready" && stats && (
-              <>
-                <div className="download-total">
-                  <span>{formatNumber(stats.lifetime)}</span>
-                  <small>lifetime downloads</small>
-                </div>
-                <div className="download-meta">
-                  <span>auto-refreshed hourly</span>
-                  <span>last checked {formatDateTime(stats.refreshedAt)}</span>
-                </div>
-                <div className="release-list">
-                  {releases.map((release) => (
-                    <article className="release-row" key={release.tag}>
-                      <div className="release-main">
-                        <a href={release.url ?? "https://github.com/ryanbiddy/uoink/releases"}>{release.tag}</a>
-                        <span>{release.name || "GitHub release"}</span>
-                      </div>
-                      <div className="release-count">{formatNumber(release.downloads)}</div>
-                      <div className="asset-list">
-                        {release.assets.length ? (
-                          release.assets.map((asset) => (
-                            <span key={`${release.tag}-${asset.name}`}>
-                              {asset.name} ({formatNumber(asset.count)}, {formatBytes(asset.size)})
-                            </span>
-                          ))
-                        ) : (
-                          <span>No downloadable assets on this release.</span>
-                        )}
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </>
+              <div className="download-total">
+                <span>{formatNumber(stats.lifetime)}</span>
+                <small>total downloads</small>
+              </div>
             )}
           </div>
         </div>
@@ -211,19 +181,10 @@ function transformReleases(releases: GitHubRelease[]): DownloadStatsPayload {
 
 function StatsSkeleton() {
   return (
-    <>
-      <div className="download-total is-loading">
-        <span>...</span>
-        <small>asking GitHub</small>
-      </div>
-      <div className="release-row is-loading">
-        <div className="release-main">
-          <span>Loading releases</span>
-          <span>public GitHub API</span>
-        </div>
-        <div className="release-count">...</div>
-      </div>
-    </>
+    <div className="download-total is-loading">
+      <span>...</span>
+      <small>asking GitHub</small>
+    </div>
   );
 }
 
@@ -231,18 +192,3 @@ function formatNumber(value: number) {
   return new Intl.NumberFormat("en-US").format(value);
 }
 
-function formatBytes(value: number) {
-  if (!value) return "0 B";
-  const units = ["B", "KB", "MB", "GB"];
-  const power = Math.min(Math.floor(Math.log(value) / Math.log(1024)), units.length - 1);
-  return `${(value / 1024 ** power).toFixed(power === 0 ? 0 : 1)} ${units[power]}`;
-}
-
-function formatDateTime(value: string) {
-  return new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-  }).format(new Date(value));
-}
