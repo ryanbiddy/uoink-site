@@ -542,7 +542,7 @@ install:
       <div class="copy">
         <span class="eyebrow">about</span>
         <h1 class="display-xl">Built in public. Counted in <em>public.</em></h1>
-        <p class="lede">Uoink is local corpus software for people who want the source material, not another cloud inbox. The code is MIT. The releases are public. The download numbers below come straight from GitHub.</p>
+        <p class="lede">Uoink is local corpus software for people who want the source material, not another cloud inbox. The code is MIT. The releases are public. The total download count below comes straight from GitHub.</p>
         <div class="ctas">
           <a class="btn primary large" href="${RELEASE_URL}">Latest release</a>
           <a class="btn ghost large" href="${GITHUB_URL}">Browse GitHub</a>
