@@ -21,8 +21,8 @@
 ## Agents and MCP
 
 - [Agents](https://uoink.app/agents): Claude Desktop, Cursor, Cline, Continue, ChatGPT Desktop setup.
-- [MCP](https://uoink.app/mcp): server metadata, tool names, transport notes.
-- [MCP manifest JSON](https://uoink.app/mcp/manifest.json): machine-readable server manifest.
+- [MCP](https://uoink.app/mcp): server metadata, transport notes, and the 63 local tool names.
+- [MCP manifest JSON](https://uoink.app/mcp/manifest.json): machine-readable server manifest with all 63 tools.
 
 ## Trust
 

@@ -58,6 +58,14 @@ export default function TwitterPage() {
                 Open feature page
               </Link>
             </div>
+            <div
+              className="brand-strip"
+              aria-label="Twitter source logo"
+              dangerouslySetInnerHTML={{
+                __html:
+                  '<!-- X logo source: https://about.x.com/en/who-we-are/brand-toolkit; license/usage confirmation: official X brand toolkit asset, unmodified integration callout. --><span class="logo-chip logo-mark"><img src="/assets/brand-logos/x.png" alt="X" width="22" height="22" loading="lazy" decoding="async" /><span>X video</span></span>',
+              }}
+            />
           </div>
           <figure className="twitter-shot">
             <Image
