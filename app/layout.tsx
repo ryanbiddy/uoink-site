@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Analytics } from "@vercel/analytics/react";
 import { Bungee, Inter, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
+import { VercelAnalytics } from "./components/VercelAnalytics";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], style: ["normal", "italic"], variable: "--font-inter", display: "swap" });
@@ -53,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${inter.variable} ${bungee.variable} ${mono.variable}`}>
         {children}
-        <Analytics />
+        <VercelAnalytics />
         <Script src="/nav.js" strategy="afterInteractive" />
         <Script src="/uoink-mark.js" strategy="afterInteractive" />
       </body>
