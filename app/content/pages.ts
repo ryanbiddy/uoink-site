@@ -289,6 +289,7 @@ find_mentions("Karpathy")</pre>
         <p class="lede">Get the helper running, add the browser button, then click Uoink on any video. No Python install, no command line, no PATH wrangling.</p>
         <div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Download Windows installer</a><a class="btn ghost large" href="/how">See what happens after install</a></div>
         <p class="sub-cta">Windows 10/11 / local helper / extension sideload until Web Store approval</p>
+        <div class="brand-strip" aria-label="Install surfaces"><span>GitHub Releases</span><span>Chromium browsers</span><span>Web Store pending</span></div>
       </div>
       <div class="corpus">
         <div class="hd"><span>install ledger</span><span>honest path</span></div>
@@ -436,7 +437,7 @@ find_mentions("Karpathy")</pre>
     keywords: ["podcast transcription open source", "podcast to ai", "podcast diarization local", "whisper podcast workflow"],
     faq: podcastsFaq,
     html: `
-<section class="hero" data-screen-label="podcasts / hero"><div class="container"><div class="hero-grid"><div class="copy"><span class="eyebrow">podcasts</span><h1 class="display-xl">Uoink your <em>podcasts</em> too.</h1><p class="lede">The thing you do with videos also works for long audio: RSS feed in, speaker-aware transcript out, local corpus ready for your model.</p><div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Get Uoink</a><a class="btn ghost large" href="/how">See workflow</a></div></div><div class="corpus"><div class="hd"><span>podcast corpus</span><span>audio-first</span></div><span class="ln k"># Episode title</span><span class="ln dim">feed, episode URL, duration, publish date</span><span class="ln k">## Speakers</span><span class="ln hl">Speaker 1 / Speaker 2 / Speaker 3</span><span class="ln k">## Transcript</span><span class="ln dim">[14:22] Speaker 2: the claim is...</span><span class="ln k">## Entities</span><span class="ln dim">companies, tools, people, topics</span></div></div></div></section>
+<section class="hero" data-screen-label="podcasts / hero"><div class="container"><div class="hero-grid"><div class="copy"><span class="eyebrow">podcasts</span><h1 class="display-xl">Uoink your <em>podcasts</em> too.</h1><p class="lede">The thing you do with videos also works for long audio: RSS feed in, speaker-aware transcript out, local corpus ready for your model.</p><div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Get Uoink</a><a class="btn ghost large" href="/how">See workflow</a></div><div class="brand-strip" aria-label="Podcast sources"><span>Spotify</span><span>Apple Podcasts</span><span>RSS</span><span>Whisper</span></div></div><div class="corpus"><div class="hd"><span>podcast corpus</span><span>audio-first</span></div><span class="ln k"># Episode title</span><span class="ln dim">feed, episode URL, duration, publish date</span><span class="ln k">## Speakers</span><span class="ln hl">Speaker 1 / Speaker 2 / Speaker 3</span><span class="ln k">## Transcript</span><span class="ln dim">[14:22] Speaker 2: the claim is...</span><span class="ln k">## Entities</span><span class="ln dim">companies, tools, people, topics</span></div></div></div></section>
 <section class="section" data-screen-label="podcasts / rss"><div class="container"><div class="section-head"><span class="eyebrow">any RSS feed</span><h2 class="display-l">Add the feed. Let the helper <em>poll.</em></h2><p class="lede">Drop in a public podcast RSS URL. Uoink can fetch new episodes, run transcription, and file them beside your video library.</p></div><div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px"><article class="card"><span class="num">01</span><h3>Audio extraction.</h3><p>yt-dlp handles the media download path where supported.</p></article><article class="card"><span class="num">02</span><h3>Local Whisper.</h3><p>Transcription runs on your machine. Choose speed or quality based on the model size.</p></article><article class="card"><span class="num">03</span><h3>Diarization.</h3><p>WhisperX separates speakers as labels you can rename later.</p></article></div></div></section>
 <section class="section" data-screen-label="podcasts / use cases"><div class="container"><div class="section-head"><span class="eyebrow">who wins</span><h2 class="display-l">For audio people who need <em>receipts.</em></h2></div><div class="hook-grid">${featureCards([
 ["Journalists","Pull every factual claim a guest made and keep timestamp citations beside the transcript."],
@@ -455,11 +456,11 @@ find_mentions("Karpathy")</pre>
     mode: "mode-light",
     title: "MCP YouTube Server: Claude Desktop and Cursor Tools",
     description:
-      "Use Uoink as a local MCP server for Claude Desktop, Cursor, Cline, Continue, and ChatGPT Desktop with 13 video tools.",
+      "Use Uoink as a local MCP server for Claude Desktop, Cursor, Cline, Continue, and ChatGPT Desktop.",
     keywords: ["mcp youtube server", "claude desktop youtube tool", "cursor mcp server", "mcp video tool"],
     faq: agentsFaq,
     html: `
-<section class="hero" data-screen-label="agents / hero"><div class="container"><div class="section-head"><span class="eyebrow">agents and MCP</span><h1 class="display-xl">Uoink is an <em>MCP server.</em></h1><p class="lede">Give your local AI agent eyes and ears on the web. Uoink exposes capture, search, hook classification, comment analysis, and entity lookup as local tools.</p><div class="ctas"><a class="btn primary large" href="#configs">Copy config</a><a class="btn ghost large" href="/mcp">Read MCP manifest</a></div></div></div></section>
+<section class="hero" data-screen-label="agents / hero"><div class="container"><div class="section-head"><span class="eyebrow">agents and MCP</span><h1 class="display-xl">Uoink is an <em>MCP server.</em></h1><p class="lede">Give your local AI agent eyes and ears on the web. Uoink exposes capture, search, hook classification, comment analysis, and entity lookup as local tools.</p><div class="ctas"><a class="btn primary large" href="#configs">Copy config</a><a class="btn ghost large" href="/mcp">Read MCP manifest</a></div><div class="brand-strip" aria-label="Agent clients"><span>Claude</span><span>ChatGPT</span><span>Cursor</span><span>Obsidian</span><span>GitHub</span></div></div></div></section>
 <section class="section" data-screen-label="agents / configs" id="configs"><div class="container"><div class="section-head"><span class="eyebrow">install in your client</span><h2 class="display-l">Copy the config. Then let the agent <em>call tools.</em></h2><p class="lede">These snippets use placeholder paths. After install, Uoink's setup page generates the exact command for your machine.</p></div><div class="docs-main"><h3><span class="anchor">Claude Desktop</span></h3><pre>{
   "mcpServers": {
     "uoink": {
@@ -496,7 +497,7 @@ search_uoinks("pacing")</pre></div></div></div></section>
     mode: "mode-light",
     title: "Uoink MCP Manifest and Tool Schemas",
     description:
-      "Machine-readable Uoink MCP server details: local transport, client snippets, capabilities, and 13 tool names.",
+      "Machine-readable Uoink MCP server details: local transport, client snippets, capabilities, and tool names.",
     keywords: ["uoink mcp manifest", "mcp server manifest", "claude desktop mcp youtube", "cursor mcp video"],
     html: `
 <section class="section" data-screen-label="mcp / manifest">
@@ -521,7 +522,7 @@ install:
       <h2 id="tools">Tools</h2>
       ${toolRows()}
       <h2>Canonical config note</h2>
-      <p>Do not guess local paths. After install, Uoink's setup page generates the real config for the user's machine. Snippets on the website are templates for humans and crawlers.</p>
+      <p>Use the generated local paths. After install, Uoink's setup page generates the real config for the user's machine. Snippets on the website are templates for humans and crawlers.</p>
       <p><a class="btn primary" href="/agents">Human setup page</a> <a class="btn ghost" href="/mcp/manifest.json">Raw manifest JSON</a></p>
     </article>
   </div>
@@ -609,7 +610,7 @@ install:
       "Uoink is MIT-licensed local software. Review short terms for website use, open source license, warranty, and contact.",
     keywords: ["uoink terms", "uoink license", "uoink mit license"],
     html: `
-<section class="section" data-screen-label="terms / main"><div class="container"><article class="article"><div class="meta"><span>terms</span><span>short by design</span></div><h1>Terms of <em>use.</em></h1><p class="standfirst">Uoink is local, open-source software. These terms are intentionally short.</p><h2>The software is MIT-licensed.</h2><p>Uoink source is published at <a href="${GITHUB_URL}">github.com/ryanbiddy/uoink</a> under the MIT License. The license grants broad permission to use, copy, modify, merge, publish, distribute, sublicense, and sell copies, subject to the license notice.</p><h2>No warranty.</h2><p>The software is provided as-is, without warranty of any kind. Use it at your own discretion and keep backups of work you care about.</p><h2>Your responsibility.</h2><p>You are responsible for how you use video, podcast, transcript, screenshot, and comment material captured with Uoink. Follow the terms of the source platforms and any AI provider you choose to use.</p><h2>Trademark and brand.</h2><p>Uoink is Ryan Biddy's product name and mark. Do not impersonate the project or represent unofficial builds as official.</p><h2>Contact.</h2><p>Email <a href="mailto:hi@uoink.video">hi@uoink.video</a> for terms, trademark, or abuse concerns.</p><p><a class="btn primary large" href="/install">Install Uoink</a> <a class="btn ghost large" href="/privacy">Privacy policy</a></p></article></div></section>`,
+<section class="section" data-screen-label="terms / main"><div class="container"><article class="article"><div class="meta"><span>terms</span><span>short by design</span></div><h1>Terms of <em>use.</em></h1><p class="standfirst">Uoink is local, open-source software. These terms are intentionally short.</p><h2>The software is MIT-licensed.</h2><p>Uoink source is published at <a href="${GITHUB_URL}">github.com/ryanbiddy/uoink</a> under the MIT License. The license grants broad permission to use, copy, modify, merge, publish, distribute, sublicense, and sell copies, subject to the license notice.</p><h2>No warranty.</h2><p>The software is provided as-is, without warranty of any kind. Use it at your own discretion and keep backups of work you care about.</p><h2>Your responsibility.</h2><p>You are responsible for how you use video, podcast, transcript, screenshot, and comment material captured with Uoink. Follow the terms of the source platforms and any AI provider you choose to use.</p><h2>Trademark and brand.</h2><p>Uoink is Ryan Biddy's product name and mark. Avoid impersonating the project or representing unofficial builds as official.</p><h2>Contact.</h2><p>Email <a href="mailto:hi@uoink.video">hi@uoink.video</a> for terms, trademark, or abuse concerns.</p><p><a class="btn primary large" href="/install">Install Uoink</a> <a class="btn ghost large" href="/privacy">Privacy policy</a></p></article></div></section>`,
   },
   memory: aliasPage("memory", "/memory", "Uoink Memory moved into Features", "Memory is now covered in the Uoink feature inventory.", "/features"),
   tweaks: aliasPage("tweaks", "/tweaks", "Uoink settings moved into Features", "Settings and tuning are now covered in the Uoink feature inventory.", "/features"),
