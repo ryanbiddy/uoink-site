@@ -121,6 +121,9 @@ Launch article for creator research, local corpus workflows, writing, or MCP age
 ## URL: https://uoink.app/blog/voice-dna-how-uoink-writes
 Launch article for creator research, local corpus workflows, writing, or MCP agent discovery.
 
+## URL: https://uoink.app/twitter
+Landing page for X and Twitter video capture. Explains right-click capture, creator credit, Writing Studio drafting, and the MCP agent path with uoink_page and write_tweet examples.
+
 ## URL: https://uoink.app/agents
 Agent setup explains the local Model Context Protocol server, stdio transport, and config snippets for AI clients.
 

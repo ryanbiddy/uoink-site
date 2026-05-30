@@ -17,6 +17,7 @@ export type PageId =
   | "agentDocs"
   | "hooks"
   | "blog"
+  | "twitter"
   | "dashboard"
   | "installed";
 
@@ -617,6 +618,7 @@ install:
   agentDocs: aliasPage("agentDocs", "/agent-docs", "Agent docs moved to Agents and MCP", "Agent docs now live at /agents and /mcp.", "/agents"),
   hooks: aliasPage("hooks", "/hooks", "Hook taxonomy moved into Features", "Hook Type classification is covered in Features and Agents.", "/features"),
   blog: aliasPage("blog", "/blog", "Uoink Field Notes", "Launch articles about hooks, agents, local-first architecture, and corpus workflows.", "/blog"),
+  twitter: aliasPage("twitter", "/twitter", "Uoink for Twitter video", "Capture X and Twitter video context into your local corpus.", "/twitter"),
   dashboard: aliasPage("dashboard", "/dashboard", "Dashboard moved into Features", "The dashboard and memory surfaces are covered in Features.", "/features"),
   installed: aliasPage("installed", "/installed", "Uoink installed", "Start with the install and how-it-works pages.", "/how"),
 };
