@@ -96,7 +96,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Rust Uoink button next to YouTube player actions",
       "alt": "Rust Uoink button next to YouTube player actions",
-      "src": "/screenshots/in-page-button/01-action-row.png"
+      "src": "/screenshots/features/youtube-video-capture-clean.png",
     }
   },
   {
@@ -137,7 +137,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Right-click context menu showing Uoink option",
       "alt": "Right-click context menu showing Uoink option",
-      "src": "/screenshots/right-click-any-link/01-menu.png"
+      "src": "/screenshots/right-click-any-link/hero-1280x800.png",
     }
   },
   {
@@ -175,8 +175,7 @@ export const features: Feature[] = [
     "cta": "Set up your custom shortcut to extract video content instantly.",
     "screenshot": {
       "title": "Extension settings panel showing keyboard shortcut binds",
-      "alt": "Extension settings panel showing keyboard shortcut binds",
-      "src": "/screenshots/keyboard-shortcut/01-settings.png"
+      "alt": "Extension settings panel showing keyboard shortcut binds",
     }
   },
   {
@@ -215,7 +214,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Uoink settings showing mobile bridge config",
       "alt": "Uoink settings showing mobile bridge config",
-      "src": "/screenshots/mobile-playlist-bridge/01-bridge-config.png"
+      "src": "/screenshots/mobile-playlist-bridge/hero-1280x800.png",
     }
   },
   {
@@ -256,7 +255,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Right-click menu on generic webpage showing Uoink action",
       "alt": "Right-click menu on generic webpage showing Uoink action",
-      "src": "/screenshots/universal-page-uoink/01-page-click.png"
+      "src": "/screenshots/universal-page-uoink/hero-1280x800.png",
     }
   },
   {
@@ -295,7 +294,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "X post showing right-click context menu options",
       "alt": "X post showing right-click context menu options",
-      "src": "/screenshots/twitter-video/01-x-click.png"
+      "src": "/screenshots/twitter-video/hero-1280x800.png",
     }
   },
   {
@@ -335,7 +334,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Settings tab showing podcast RSS config section",
       "alt": "Settings tab showing podcast RSS config section",
-      "src": "/screenshots/podcast-feeds/01-settings-podcast.png"
+      "src": "/screenshots/podcast-feeds/hero-1280x800.png",
     }
   },
   {
@@ -374,8 +373,7 @@ export const features: Feature[] = [
     "cta": "Capture and analyze YouTube Shorts to learn how creators hook their audience.",
     "screenshot": {
       "title": "YouTube Shorts interface showing injected Uoink button",
-      "alt": "YouTube Shorts interface showing injected Uoink button",
-      "src": "/screenshots/youtube-shorts/01-shorts-button.png"
+      "alt": "YouTube Shorts interface showing injected Uoink button",
     }
   },
   {
@@ -415,7 +413,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Extension popup showing single video and playlist tabs",
       "alt": "Extension popup showing single video and playlist tabs",
-      "src": "/screenshots/playlist-mode/01-popup-tabs.png"
+      "src": "/screenshots/playlist-mode/hero-1280x800.png",
     }
   },
   {
@@ -455,7 +453,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Uoink dashboard showing the main library search bar",
       "alt": "Uoink dashboard showing the main library search bar",
-      "src": "/screenshots/memory-search/01-search-bar.png"
+      "src": "/screenshots/memory-search/hero-1280x800.png",
     }
   },
   {
@@ -494,7 +492,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Settings tab showing topic folder routing rules",
       "alt": "Settings tab showing topic folder routing rules",
-      "src": "/screenshots/faceted-classification/01-rules-config.png"
+      "src": "/screenshots/faceted-classification/hero-1280x800.png",
     }
   },
   {
@@ -534,7 +532,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Settings showing Your Channel configuration field",
       "alt": "Settings showing Your Channel configuration field",
-      "src": "/screenshots/your-channel/01-channel-config.png"
+      "src": "/screenshots/your-channel/hero-1280x800.png",
     }
   },
   {
@@ -574,7 +572,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Dashboard showing the For You tab view",
       "alt": "Dashboard showing the For You tab view",
-      "src": "/screenshots/resurface-for-you/01-for-you-tab.png"
+      "src": "/screenshots/resurface-for-you/hero-1280x800.png",
     }
   },
   {
@@ -613,7 +611,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Activity tab showing engagement history and action logs",
       "alt": "Activity tab showing engagement history and action logs",
-      "src": "/screenshots/engagement-memory/01-activity-log.png"
+      "src": "/screenshots/engagement-memory/hero-1280x800.png",
     }
   },
   {
@@ -652,8 +650,7 @@ export const features: Feature[] = [
     "cta": "Set your taste anchors to customize your local search weights.",
     "screenshot": {
       "title": "Card view showing star icon highlighted",
-      "alt": "Card view showing star icon highlighted",
-      "src": "/screenshots/taste-anchors/01-star-action.png"
+      "alt": "Card view showing star icon highlighted",
     }
   },
   {
@@ -693,7 +690,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Build Workspace tab showing source selection columns",
       "alt": "Build Workspace tab showing source selection columns",
-      "src": "/screenshots/build-workspace/01-workspace-tab.png"
+      "src": "/screenshots/build-workspace/hero-1280x800.png",
     }
   },
   {
@@ -733,7 +730,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Critique tab showing draft upload field and corpus selector",
       "alt": "Critique tab showing draft upload field and corpus selector",
-      "src": "/screenshots/critique-corpus/01-critique-tab.png"
+      "src": "/screenshots/critique-corpus/hero-1280x800.png",
     }
   },
   {
@@ -773,7 +770,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Script Studio showing script editor and source panel",
       "alt": "Script Studio showing script editor and source panel",
-      "src": "/screenshots/script-studio/01-studio-tab.png"
+      "src": "/screenshots/script-studio/hero-1280x800.png",
     }
   },
   {
@@ -813,7 +810,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Writing Studio tab showing layout and options",
       "alt": "Writing Studio tab showing layout and options",
-      "src": "/screenshots/writing-studio/01-writing-tab.png"
+      "src": "/screenshots/writing-studio/hero-1280x800.png",
     }
   },
   {
@@ -854,7 +851,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Settings panel showing style anchors management list",
       "alt": "Settings panel showing style anchors management list",
-      "src": "/screenshots/style-anchors/01-anchors-ui.png"
+      "src": "/screenshots/style-anchors/hero-1280x800.png",
     }
   },
   {
@@ -894,7 +891,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Card view showing Claims tab layout",
       "alt": "Card view showing Claims tab layout",
-      "src": "/screenshots/claim-extraction/01-claims-tab.png"
+      "src": "/screenshots/claim-extraction/hero-1280x800.png",
     }
   },
   {
@@ -934,7 +931,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Workspace view showing Evidence panel sidebar",
       "alt": "Workspace view showing Evidence panel sidebar",
-      "src": "/screenshots/evidence-panel/01-evidence-sidebar.png"
+      "src": "/screenshots/evidence-panel/hero-1280x800.png",
     }
   },
   {
@@ -976,7 +973,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Setup page displaying generated MCP command",
       "alt": "Setup page displaying generated MCP command",
-      "src": "/screenshots/mcp-server/01-mcp-path.png"
+      "src": "/screenshots/mcp-server/hero-1280x800.png",
     }
   },
   {
@@ -1018,7 +1015,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "VS Code showing claude_desktop_config.json",
       "alt": "VS Code showing claude_desktop_config.json",
-      "src": "/screenshots/claude-desktop-integration/01-config-file.png"
+      "src": "/screenshots/claude-desktop-integration/hero-1280x800.png",
     }
   },
   {
@@ -1060,7 +1057,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Cursor settings panel showing MCP server list",
       "alt": "Cursor settings panel showing MCP server list",
-      "src": "/screenshots/cursor-integration/01-cursor-mcp.png"
+      "src": "/screenshots/cursor-integration/hero-1280x800.png",
     }
   },
   {
@@ -1101,7 +1098,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Settings showing API Key configuration section",
       "alt": "Settings showing API Key configuration section",
-      "src": "/screenshots/byo-anthropic-key/01-key-config.png"
+      "src": "/screenshots/byo-anthropic-key/hero-1280x800.png",
     }
   },
   {
@@ -1141,7 +1138,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Settings panel showing default library folder path",
       "alt": "Settings panel showing default library folder path",
-      "src": "/screenshots/local-first/01-library-path.png"
+      "src": "/screenshots/local-first/hero-1280x800.png",
     }
   },
   {
@@ -1180,7 +1177,7 @@ export const features: Feature[] = [
     "screenshot": {
       "title": "Uoink dashboard Library tab showing offline cards",
       "alt": "Uoink dashboard Library tab showing offline cards",
-      "src": "/screenshots/no-cloud/01-dashboard-view.png"
+      "src": "/screenshots/no-cloud/hero-1280x800.png",
     }
   }
 ];

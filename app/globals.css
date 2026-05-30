@@ -1284,6 +1284,33 @@ button, .btn, .nav-cta, .mobile-menu a, .docs-sidebar a { min-height: 44px; }
   gap: 14px;
   padding: 18px;
 }
+.feature-visual-shot {
+  background: var(--ink);
+  border: 1px solid rgba(255, 244, 236, 0.14);
+  border-radius: var(--r-md);
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  overflow: hidden;
+  padding: 10px;
+}
+.feature-visual-shot img {
+  aspect-ratio: 16 / 10;
+  border-radius: calc(var(--r-md) - 4px);
+  height: auto;
+  object-fit: cover;
+  object-position: top center;
+  width: 100%;
+}
+.feature-visual-shot figcaption {
+  color: var(--parchment);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
 .feature-detail-grid {
   align-items: start;
   display: grid;
