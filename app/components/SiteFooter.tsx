@@ -27,6 +27,9 @@ export function SiteFooter() {
               <Link href="/blog">Field notes</Link>
             </li>
             <li>
+              <Link href="/twitter">Twitter video</Link>
+            </li>
+            <li>
               <Link href="/podcasts">Podcasts</Link>
             </li>
           </ul>
