@@ -115,9 +115,25 @@ export default async function FeaturePage({ params }: Props) {
                 ) : (
                   <p>This feature runs without a dedicated MCP tool. Agents can still use the local corpus it produces.</p>
                 )}
+                {feature.mcpExample ? (
+                  <pre className="feature-code-example">
+                    <code>{feature.mcpExample}</code>
+                  </pre>
+                ) : null}
                 <p>
                   Full server metadata lives at <Link href="/mcp">/mcp</Link> and{" "}
                   <a href="/mcp/manifest.json">/mcp/manifest.json</a>.
+                </p>
+              </section>
+
+              <section id="try-it-now" data-screen-label={`feature / ${feature.slug} / try it`}>
+                <span className="eyebrow">try it now</span>
+                <h2 className="display-m">Run it on your next source.</h2>
+                <p>{feature.cta}</p>
+                <p>
+                  <a className="btn primary large" href={RELEASE_URL}>
+                    Install Uoink
+                  </a>
                 </p>
               </section>
             </div>

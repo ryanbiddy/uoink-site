@@ -1,10 +1,10 @@
 export type FeatureCategory =
   | "Capture"
-  | "AI handoff"
   | "Library"
-  | "Analysis"
-  | "Local and private"
-  | "Dashboard";
+  | "Workspace"
+  | "Verification"
+  | "Distribution"
+  | "Identity";
 
 export type FeatureStatus = "shipped" | "in flight" | "planned";
 
@@ -25,920 +25,1164 @@ export type Feature = {
   gettingStarted: string[];
   behindScenes: string;
   mcpTools: string[];
+  mcpExample?: string;
   related: string[];
+  cta: string;
   screenshot: FeatureScreenshot;
 };
 
 export const featureCategories: { name: FeatureCategory; deck: string }[] = [
   {
-    name: "Capture",
-    deck: "Get source material out of YouTube, playlists, Shorts, thumbnails, and soon more web video surfaces.",
+    "name": "Capture",
+    "deck": "Get source material into Uoink: YouTube pages, playlists, Shorts, podcasts, Twitter video, and approved web pages."
   },
   {
-    name: "AI handoff",
-    deck: "Move the corpus into Claude, ChatGPT, Cursor, or any MCP-capable agent without rebuilding the same prompt each time.",
+    "name": "Library",
+    "deck": "Turn captures into memory: search, facets, your channel, taste anchors, and resurfacing."
   },
   {
-    name: "Library",
-    deck: "Every uoink becomes a searchable local asset with folders, citations, and cross-corpus memory.",
+    "name": "Workspace",
+    "deck": "Assemble source sets, critique ideas against evidence, write scripts, and draft posts from the corpus."
   },
   {
-    name: "Analysis",
-    deck: "Optional BYO-key passes classify hooks, cluster comments, and extract entities from the corpus.",
+    "name": "Verification",
+    "deck": "Extract claims and keep the evidence panel close so outputs stay grounded."
   },
   {
-    name: "Local and private",
-    deck: "No Uoink cloud, no account, no telemetry. The helper runs on loopback and stores secrets in the OS vault.",
+    "name": "Distribution",
+    "deck": "Give Claude Desktop, Cursor, and other clients a local MCP path into your research library."
   },
   {
-    name: "Dashboard",
-    deck: "The desktop control center makes jobs, settings, recent captures, and helper health visible.",
-  },
+    "name": "Identity",
+    "deck": "Keep the trust layer visible: BYO keys, local-first processing, and no Uoink cloud."
+  }
 ];
 
 export const features: Feature[] = [
   {
-    slug: "youtube-video-capture",
-    title: "YouTube video capture",
-    category: "Capture",
-    status: "shipped",
-    summary: "Click the rust U under a YouTube video and get the full corpus on disk and clipboard.",
-    keywords: ["youtube to claude", "youtube transcript screenshots comments", "youtube video corpus"],
-    whatItDoes:
-      "Uoink turns one YouTube watch page into a markdown file with transcript, screenshots, top comments, channel context, metadata, and source links. The output is readable by humans and useful to Claude, ChatGPT, Cursor, and MCP agents.",
-    gettingStarted: [
-      "Install the Windows helper from GitHub Releases.",
-      "Install the browser extension from the release zip while Chrome Web Store review is pending.",
-      "Open any YouTube watch page and click the Uoink button under the player.",
+    "slug": "in-page-button",
+    "title": "In-page Uoink button",
+    "category": "Capture",
+    "status": "shipped",
+    "summary": "Capture YouTube transcripts and frames directly from your browser.",
+    "keywords": [
+      "uoink feature",
+      "in page button",
+      "in-page uoink button",
+      "capture",
+      "youtube",
+      "transcripts",
+      "frames"
     ],
-    behindScenes:
-      "The extension sends the page URL to the local helper at 127.0.0.1:5179. The helper runs yt-dlp, writes the corpus atomically, updates SQLite, then copies the markdown to your clipboard.",
-    mcpTools: ["uoink_video", "get_job_status", "get_uoink_corpus"],
-    related: ["transcript-with-timestamps", "screenshot-capture", "top-comments-extraction"],
-    screenshot: {
-      title: "Uoink button under a YouTube video",
-      alt: "The Uoink button inside the YouTube action row below a video.",
-    },
-  },
-  {
-    slug: "youtube-shorts",
-    title: "YouTube Shorts",
-    category: "Capture",
-    status: "shipped",
-    summary: "Shorts URLs use the same corpus path as standard YouTube watch pages.",
-    keywords: ["youtube shorts transcript", "shorts to ai", "shorts research tool"],
-    whatItDoes:
-      "Short-form videos still carry hooks, captions, comments, and metadata. Uoink normalizes Shorts URLs into the same corpus shape so your library stays one shape across formats.",
-    gettingStarted: [
-      "Open a YouTube Shorts URL.",
-      "Use the extension button or context menu.",
-      "Search the saved corpus later from Memory or MCP.",
+    "whatItDoes": "The in-page button inserts a rust-colored U directly into the YouTube action row below the video title. When you click it, the extension pings your local helper to start the download. It pulls the transcript, audience comments, and video frames without making you copy URLs or leave the browser tab. The status updates right inside the page.",
+    "gettingStarted": [
+      "Open a YouTube video page in Chrome or Brave.",
+      "Locate the rust-colored U button next to the Save actions.",
+      "Click the button to start the capture job.",
+      "Wait for the green success checkmark to show in the action row.",
+      "The markdown corpus is now on your clipboard and stored locally."
     ],
-    behindScenes:
-      "The helper resolves Shorts URLs through the same extraction path, then stores the output with source metadata so citations point back to the original short.",
-    mcpTools: ["uoink_video", "search_uoinks"],
-    related: ["youtube-video-capture", "hook-type-classification", "memory-page"],
-    screenshot: {
-      title: "Shorts corpus card",
-      alt: "A local corpus card for a YouTube Short with transcript and comment sections.",
-    },
-  },
-  {
-    slug: "right-click-thumbnail-uoink",
-    title: "Right-click thumbnail Uoink",
-    category: "Capture",
-    status: "shipped",
-    summary: "Capture a video from a thumbnail or link before you open the watch page.",
-    keywords: ["right click youtube transcript", "thumbnail youtube capture", "youtube context menu extension"],
-    whatItDoes:
-      "When a YouTube link is visible on the web, the context menu can start a capture. It keeps research moving when you are scanning search results, channel pages, or a playlist grid.",
-    gettingStarted: [
-      "Right-click a YouTube thumbnail or link.",
-      "Choose Uoink video from the browser context menu.",
-      "Watch the extension badge or tray status for completion.",
-    ],
-    behindScenes:
-      "The extension extracts the URL from the clicked element and starts the same local job queue used by the in-page button.",
-    mcpTools: ["uoink_video", "get_job_status"],
-    related: ["playlist-mode", "system-tray-status", "rate-limit-queue"],
-    screenshot: {
-      title: "Context menu capture",
-      alt: "Browser context menu showing the Uoink video action on a YouTube thumbnail.",
-    },
-  },
-  {
-    slug: "playlist-mode",
-    title: "Playlist Mode",
-    category: "Capture",
-    status: "shipped",
-    summary: "Extract up to 10 videos from a playlist with async progress and partial-failure tolerance.",
-    keywords: ["summarize youtube playlist", "youtube playlist to claude", "playlist transcript extractor"],
-    whatItDoes:
-      "Playlist Mode builds a multi-video corpus without making you click each video by hand. It is built for channel audits, competitor sweeps, and research passes where patterns only show up across several uploads.",
-    gettingStarted: [
-      "Copy or open a YouTube playlist URL.",
-      "Start a playlist job from the extension or MCP.",
-      "Let Uoink continue when one video fails, then read the combined output.",
-    ],
-    behindScenes:
-      "Playlist jobs run async. They track per-video status, allow cancellation, keep successful captures when one item fails, and only fail the whole job when zero videos succeed.",
-    mcpTools: ["uoink_playlist", "get_job_status", "cancel_job", "get_uoink_corpus"],
-    related: ["rate-limit-queue", "live-activity-stream", "hook-type-classification"],
-    screenshot: {
-      title: "Playlist progress",
-      alt: "A playlist extraction job with multiple videos moving through fetch, transcript, screenshots, classify, and write phases.",
-    },
-  },
-  {
-    slug: "screenshot-capture",
-    title: "Timestamped screenshots",
-    category: "Capture",
-    status: "shipped",
-    summary: "Frames are saved with timestamps so the model sees visual context, not only words.",
-    keywords: ["youtube screenshots transcript", "video frames to ai", "timestamped screenshots"],
-    whatItDoes:
-      "Video is visual. Uoink captures frames across the runtime and links them to the transcript so a prompt can reference slides, demos, thumbnails, charts, UI screens, and visual proof.",
-    gettingStarted: [
-      "Capture a video with the default settings.",
-      "Open the saved folder to see image files alongside the markdown corpus.",
-      "Use the clipboard budget preview before sending images into a chat model.",
-    ],
-    behindScenes:
-      "The helper uses ffmpeg to capture frames, writes them to disk, and embeds a selected set into clipboard markdown when the model context budget allows it.",
-    mcpTools: ["uoink_video", "get_uoink_corpus"],
-    related: ["smart-screenshot-picker", "clipboard-markdown-corpus", "citation-map"],
-    screenshot: {
-      title: "Screenshots in a corpus",
-      alt: "A markdown corpus showing timestamped screenshots linked to transcript sections.",
-    },
-  },
-  {
-    slug: "smart-screenshot-picker",
-    title: "Smart Screenshot Picker",
-    category: "Capture",
-    status: "shipped",
-    summary: "Choose which frames embed in the clipboard paste, default 4 and max 12.",
-    keywords: ["select youtube screenshots for ai", "ai screenshot picker", "video screenshot prompt"],
-    whatItDoes:
-      "The picker lets you keep the AI paste tight. You can embed the frames that matter and leave the rest on disk, which keeps large videos from burning context on dull frames.",
-    gettingStarted: [
-      "Open the capture result or popup screenshot grid.",
-      "Select the frames that explain the video best.",
-      "Send or paste the corpus with only those selected images embedded.",
-    ],
-    behindScenes:
-      "Uoink tracks a screenshot budget per corpus. The full frame set stays local, while the clipboard version embeds only the selected images as base64 markdown.",
-    mcpTools: ["get_uoink_corpus"],
-    related: ["screenshot-capture", "clipboard-markdown-corpus", "send-to-claude"],
-    screenshot: {
-      title: "Screenshot picker grid",
-      alt: "A grid of captured video frames with selected screenshots marked for the clipboard paste.",
-    },
-  },
-  {
-    slug: "transcript-with-timestamps",
-    title: "Timestamped transcript",
-    category: "Capture",
-    status: "shipped",
-    summary: "Full transcript text is saved with timestamps and chapter awareness.",
-    keywords: ["youtube transcript with timestamps", "download youtube transcript markdown", "timestamp citations"],
-    whatItDoes:
-      "The transcript is the spine of the corpus. Uoink keeps timestamps attached so analysis can cite source moments instead of floating as unsupported summary.",
-    gettingStarted: [
-      "Capture a video.",
-      "Open the markdown file in the saved folder.",
-      "Ask your AI to cite timestamps when making claims about the video.",
-    ],
-    behindScenes:
-      "The helper prefers platform captions when available, normalizes timing, and preserves timestamps in the markdown output for citation discipline.",
-    mcpTools: ["uoink_video", "get_uoink_corpus", "get_citation_map"],
-    related: ["citation-map", "clipboard-markdown-corpus", "hook-type-classification"],
-    screenshot: {
-      title: "Transcript with timestamps",
-      alt: "A markdown transcript section where each paragraph begins with a timestamp.",
-    },
-  },
-  {
-    slug: "top-comments-extraction",
-    title: "Top comments extraction",
-    category: "Capture",
-    status: "shipped",
-    summary: "Uoink saves the top 50 comments with author and like count.",
-    keywords: ["extract youtube comments for ai", "youtube comments to claude", "comment analysis youtube"],
-    whatItDoes:
-      "Comments show the audience's reaction. Uoink includes the top comment set so a model can separate what the creator said from what the audience cared about.",
-    gettingStarted: [
-      "Capture a public YouTube video.",
-      "Find the Comments section in the saved markdown.",
-      "Ask for audience themes, objections, tools, products, and disagreements.",
-    ],
-    behindScenes:
-      "Comment capture runs as part of the helper job, then optional Comment Intelligence can cluster the comments with your Anthropic key.",
-    mcpTools: ["uoink_video", "analyze_comments", "get_uoink_corpus"],
-    related: ["comment-intelligence", "entity-extraction", "channel-context"],
-    screenshot: {
-      title: "Top comments in corpus",
-      alt: "A markdown comments section with top YouTube comments, authors, likes, and extracted themes.",
-    },
-  },
-  {
-    slug: "channel-context",
-    title: "Channel context",
-    category: "Capture",
-    status: "shipped",
-    summary: "Metadata about the channel and recent videos travels with each capture.",
-    keywords: ["youtube channel context ai", "youtube metadata extraction", "channel research ai"],
-    whatItDoes:
-      "A video makes more sense when the model knows who made it, how the channel frames itself, and what else the channel has been publishing. Uoink keeps that context close to the transcript.",
-    gettingStarted: [
-      "Capture any YouTube video.",
-      "Read the Channel context and Metadata sections.",
-      "Ask your model to compare the video against the channel's current direction.",
-    ],
-    behindScenes:
-      "The helper stores channel name, subscriber context when available, recent-video hints, source URL, upload date, and video metadata in the same markdown file.",
-    mcpTools: ["uoink_video", "get_uoink_corpus", "search_uoinks"],
-    related: ["youtube-video-capture", "playlist-mode", "local-corpus-library"],
-    screenshot: {
-      title: "Channel metadata section",
-      alt: "A corpus metadata section showing channel name, upload date, source URL, and recent context.",
-    },
-  },
-  {
-    slug: "clipboard-markdown-corpus",
-    title: "Clipboard markdown corpus",
-    category: "AI handoff",
-    status: "shipped",
-    summary: "The full structured markdown lands on your clipboard as soon as the job completes.",
-    keywords: ["youtube to markdown", "youtube to chatgpt markdown", "paste youtube transcript into claude"],
-    whatItDoes:
-      "Uoink is built around the paste. The corpus is formatted as markdown with clear sections so Claude, ChatGPT, local models, and editors can ingest it without a custom UI.",
-    gettingStarted: [
-      "Capture a video.",
-      "Wait for the success notification.",
-      "Paste into Claude, ChatGPT, Notion, Obsidian, or a local editor.",
-    ],
-    behindScenes:
-      "The helper writes the durable file first, then builds the clipboard version with the selected screenshot budget and source citations.",
-    mcpTools: ["get_uoink_corpus"],
-    related: ["send-to-claude", "send-to-chatgpt", "smart-screenshot-picker"],
-    screenshot: {
-      title: "Paste-ready corpus",
-      alt: "A markdown corpus copied to the clipboard with Metadata, Transcript, Screenshots, Comments, and Channel context sections.",
-    },
-  },
-  {
-    slug: "send-to-claude",
-    title: "Send to Claude",
-    category: "AI handoff",
-    status: "shipped",
-    summary: "Open Claude with the corpus already on your clipboard.",
-    keywords: ["youtube to claude", "send youtube transcript to claude", "claude youtube context"],
-    whatItDoes:
-      "The Claude send path removes the tiny bit of friction after capture. Uoink opens a new Claude conversation while the corpus sits on the clipboard, ready for your next prompt.",
-    gettingStarted: [
-      "Capture a video.",
-      "Click Send to Claude in the popup or result view.",
-      "Paste the corpus and ask for the analysis you want.",
-    ],
-    behindScenes:
-      "Uoink skips account access. The browser opens Claude, then you decide what to paste and submit.",
-    mcpTools: ["get_uoink_corpus", "classify_hook", "analyze_comments"],
-    related: ["clipboard-markdown-corpus", "hook-type-classification", "comment-intelligence"],
-    screenshot: {
-      title: "Claude handoff",
-      alt: "A Send to Claude action with a Uoink corpus ready to paste.",
-    },
-  },
-  {
-    slug: "send-to-chatgpt",
-    title: "Send to ChatGPT",
-    category: "AI handoff",
-    status: "shipped",
-    summary: "Use the same corpus with ChatGPT or any chat AI that accepts markdown.",
-    keywords: ["youtube to chatgpt", "youtube transcript for chatgpt", "chatgpt youtube context"],
-    whatItDoes:
-      "The ChatGPT path uses the same source material as Claude: transcript, screenshots, comments, channel context, and metadata in one structured paste.",
-    gettingStarted: [
-      "Capture a video.",
-      "Click Send to ChatGPT.",
-      "Paste the corpus and ask a grounded question about the source.",
-    ],
-    behindScenes:
-      "The site and extension talk about Claude and ChatGPT side by side because Uoink is model-agnostic. The corpus is plain markdown.",
-    mcpTools: ["get_uoink_corpus"],
-    related: ["clipboard-markdown-corpus", "send-to-claude", "mcp-server"],
-    screenshot: {
-      title: "ChatGPT handoff",
-      alt: "A Uoink corpus being prepared for ChatGPT in a markdown paste flow.",
-    },
-  },
-  {
-    slug: "mcp-server",
-    title: "Local MCP server",
-    category: "AI handoff",
-    status: "shipped",
-    summary: "13 local tools let Claude Desktop, Cursor, Cline, Continue, and other clients call Uoink directly.",
-    keywords: ["mcp youtube server", "claude desktop youtube mcp", "cursor youtube mcp"],
-    whatItDoes:
-      "The MCP server lets an agent capture, search, classify, and fetch corpora without the clipboard. You can ask Cursor to uoink a video, classify the hook, and compare it against your local library.",
-    gettingStarted: [
-      "Install the helper.",
-      "Open the Uoink setup page and copy the generated MCP config.",
-      "Paste the config into Claude Desktop, Cursor, Cline, Continue, or another MCP client.",
-    ],
-    behindScenes:
-      "The supported transport is stdio. Experimental HTTP JSON-RPC runs on loopback for local integrations that need it.",
-    mcpTools: [
+    "behindScenes": "The browser extension runs a content script that waits for the video player container to render. It injects a native HTML button styled to match the page theme. Clicking the button posts a payload to the loopback server running on your machine. The helper downloads the audio stream, runs the transcription process, and saves the file directly to your local library without sending your data to external servers.",
+    "mcpTools": [
       "uoink_video",
+      "get_job_status"
+    ],
+    "related": [
+      "keyboard-shortcut",
+      "right-click-any-link",
+      "playlist-mode"
+    ],
+    "cta": "Install the browser extension and start capturing video content with one click.",
+    "screenshot": {
+      "title": "Rust Uoink button next to YouTube player actions",
+      "alt": "Rust Uoink button next to YouTube player actions",
+      "src": "/screenshots/in-page-button/01-action-row.png"
+    }
+  },
+  {
+    "slug": "right-click-any-link",
+    "title": "Right-click context capture",
+    "category": "Capture",
+    "status": "shipped",
+    "summary": "Capture YouTube and X videos directly from link context menus.",
+    "keywords": [
+      "uoink feature",
+      "right click any link",
+      "right-click context capture",
+      "capture",
+      "youtube",
+      "videos",
+      "directly"
+    ],
+    "whatItDoes": "You can capture videos without opening the watch pages. Right-click any YouTube or X video link, select the capture option from your browser context menu, and the helper starts the job in the background. It extracts the transcript, comments, and frames while you continue reading your feed. Your new corpus lands in your local library as soon as the background extraction finishes.",
+    "gettingStarted": [
+      "Hover over any video link on YouTube or X.",
+      "Right-click the link to open the context menu.",
+      "Select Uoink this video from the menu list.",
+      "Look for the tray icon notification confirming the job started.",
+      "Open the library folder once the process completes."
+    ],
+    "behindScenes": "The extension registers context menu items via the background script. When triggered, it extracts the URL from the target link and relays it to the local helper. The helper runs the extraction asynchronously, checking your allowlist settings before starting. The background worker communicates status updates to the system tray so you know when the file is ready.",
+    "mcpTools": [
+      "uoink_video",
+      "uoink_page",
+      "get_job_status"
+    ],
+    "related": [
+      "in-page-button",
+      "keyboard-shortcut",
+      "twitter-video"
+    ],
+    "cta": "Right-click links to build your video library without leaving your current page.",
+    "screenshot": {
+      "title": "Right-click context menu showing Uoink option",
+      "alt": "Right-click context menu showing Uoink option",
+      "src": "/screenshots/right-click-any-link/01-menu.png"
+    }
+  },
+  {
+    "slug": "keyboard-shortcut",
+    "title": "Keyboard capture shortcut",
+    "category": "Capture",
+    "status": "shipped",
+    "summary": "Trigger instant video extraction with customizable keyboard shortcuts.",
+    "keywords": [
+      "uoink feature",
+      "keyboard shortcut",
+      "keyboard capture shortcut",
+      "trigger",
+      "instant",
+      "extraction",
+      "customizable"
+    ],
+    "whatItDoes": "Trigger video capture without reaching for your mouse. Pressing the keyboard shortcut sends the URL of the active browser tab to the local helper instantly. The helper starts the extraction, formats the markdown document, and places it onto your clipboard in the background. You can customize the keyboard combination to match your existing window management settings.",
+    "gettingStarted": [
+      "Open Chrome's extension keyboard settings.",
+      "Bind Uoink to your preferred keys.",
+      "Open any public video page.",
+      "Press your configured keyboard combination.",
+      "Check the system tray icon for progress status."
+    ],
+    "behindScenes": "The extension listens for the global commands API event registered in the manifest. When the shortcut is triggered, the background script queries the active window to retrieve the tab URL. It forwards the request to the local API endpoint on port 5179. The helper processes the URL, creates the directory structure on disk, and populates the database index.",
+    "mcpTools": [
+      "uoink_video",
+      "uoink_page"
+    ],
+    "related": [
+      "in-page-button",
+      "right-click-any-link"
+    ],
+    "cta": "Set up your custom shortcut to extract video content instantly.",
+    "screenshot": {
+      "title": "Extension settings panel showing keyboard shortcut binds",
+      "alt": "Extension settings panel showing keyboard shortcut binds",
+      "src": "/screenshots/keyboard-shortcut/01-settings.png"
+    }
+  },
+  {
+    "slug": "mobile-playlist-bridge",
+    "title": "Mobile playlist bridge",
+    "category": "Capture",
+    "status": "in flight",
+    "summary": "Save videos on mobile and let Uoink automatically capture them on desktop.",
+    "keywords": [
+      "uoink feature",
+      "mobile playlist bridge",
+      "videos",
+      "mobile",
+      "automatically",
+      "capture",
+      "desktop"
+    ],
+    "whatItDoes": "Capture videos from your phone. You save links to a designated YouTube playlist while on mobile, and the desktop helper polls the list when you return to your computer. It extracts every new video, groups them by topic, and adds them to your local index. Your mobile queue becomes a structured library automatically.",
+    "gettingStarted": [
+      "Create a public or unlisted playlist on YouTube.",
+      "Open the desktop settings panel in Uoink.",
+      "Paste the playlist URL into the mobile bridge field.",
+      "Save videos to this playlist when browsing on your phone.",
+      "The desktop helper scans the list on boot and downloads the new entries."
+    ],
+    "behindScenes": "The local helper schedules a background job that queries the YouTube playlist API at regular intervals. It compares the playlist items against the local SQLite database to identify new URLs. When it detects a new video, it queues the URL for background extraction. The helper downloads the audio streams, runs transcription, and writes the markdown files to your corpus folder.",
+    "mcpTools": [
       "uoink_playlist",
+      "get_job_status"
+    ],
+    "related": [
+      "playlist-mode",
+      "podcast-feeds"
+    ],
+    "cta": "Configure the mobile bridge to sync your mobile discoveries with your desktop library.",
+    "screenshot": {
+      "title": "Uoink settings showing mobile bridge config",
+      "alt": "Uoink settings showing mobile bridge config",
+      "src": "/screenshots/mobile-playlist-bridge/01-bridge-config.png"
+    }
+  },
+  {
+    "slug": "universal-page-uoink",
+    "title": "Universal page extraction",
+    "category": "Capture",
+    "status": "in flight",
+    "summary": "Extract clean markdown and metadata from any web page using local Crawl4AI.",
+    "keywords": [
+      "uoink feature",
+      "universal page uoink",
+      "universal page extraction",
+      "extract",
+      "markdown",
+      "metadata",
+      "crawl4ai"
+    ],
+    "whatItDoes": "Extract clean markdown from general articles and documentation pages. The universal page feature strips ads, cookie banners, and navigation menus to save the core content of any web page. It uses a local Crawl4AI integration to package text, links, and inline images. The generated files share the same layout as your video corpus and land in your local library automatically.",
+    "gettingStarted": [
+      "Open an article or documentation page in your browser.",
+      "Right-click the page background.",
+      "Click Uoink this page to run the extraction.",
+      "Approve the allowlist prompt if this is a new domain.",
+      "Check your library for the clean markdown document."
+    ],
+    "behindScenes": "The local helper integrates a Crawl4AI parser that fetches and processes the page HTML. It strips script tags, CSS styles, and cookie consent elements to extract the semantic text blocks. The helper formats this output as markdown, preserves external links, and indexes the text in the SQLite database. Everything runs on your machine without third-party cloud crawlers.",
+    "mcpTools": [
+      "uoink_page",
+      "list_allowed_sites",
+      "add_allowed_site"
+    ],
+    "related": [
+      "local-first",
+      "memory-search",
+      "mcp-server"
+    ],
+    "cta": "Add websites to your allowlist and capture articles as clean local markdown.",
+    "screenshot": {
+      "title": "Right-click menu on generic webpage showing Uoink action",
+      "alt": "Right-click menu on generic webpage showing Uoink action",
+      "src": "/screenshots/universal-page-uoink/01-page-click.png"
+    }
+  },
+  {
+    "slug": "twitter-video",
+    "title": "X video transcripts",
+    "category": "Capture",
+    "status": "in flight",
+    "summary": "Extract transcripts and creator citations from videos on X.",
+    "keywords": [
+      "uoink feature",
+      "twitter video",
+      "x video transcripts",
+      "extract",
+      "transcripts",
+      "creator",
+      "citations"
+    ],
+    "whatItDoes": "Extract text and metadata from videos posted on X. Right-click any tweet containing a video to send the media URL to your local helper. The helper downloads the audio stream, runs local transcription, and writes the structured markdown file. Every output includes a citation that links back to the original author and tweet so you can credit creators.",
+    "gettingStarted": [
+      "Find a tweet containing a video on X.",
+      "Right-click the video player or the link.",
+      "Select Uoink video from the context menu.",
+      "Wait for the notification that transcription completed.",
+      "Open the markdown file to read the transcript and the author citation."
+    ],
+    "behindScenes": "The helper uses yt-dlp to download the audio track from the X post. It sends the audio stream to the transcription module to generate the timestamped text. The helper queries the public post metadata to retrieve the creator's handle and post URL. It formats the citation into the header of the markdown file, ensuring compliance with creator credit rules.",
+    "mcpTools": [
+      "uoink_page",
+      "write_tweet"
+    ],
+    "related": [
+      "right-click-any-link",
+      "in-page-button"
+    ],
+    "cta": "Capture X video transcripts directly into your local knowledge base.",
+    "screenshot": {
+      "title": "X post showing right-click context menu options",
+      "alt": "X post showing right-click context menu options",
+      "src": "/screenshots/twitter-video/01-x-click.png"
+    }
+  },
+  {
+    "slug": "podcast-feeds",
+    "title": "Podcast RSS ingestion",
+    "category": "Capture",
+    "status": "shipped",
+    "summary": "Poll podcast RSS feeds and transcribe episodes locally using Whisper.",
+    "keywords": [
+      "uoink feature",
+      "podcast feeds",
+      "podcast rss ingestion",
+      "podcast",
+      "transcribe",
+      "episodes",
+      "locally"
+    ],
+    "whatItDoes": "Turn podcast feeds into a searchable text library. You add RSS URLs in your settings panel, and the helper polls for new episodes in the background. It downloads the audio files, runs local Whisper transcription, and applies speaker diarization. The final output is formatted as a standard markdown corpus, grouped by show and stored in your library.",
+    "gettingStarted": [
+      "Open the Uoink desktop settings.",
+      "Paste a podcast RSS feed URL into the field.",
+      "Click Add to register the feed.",
+      "Select your preferred Whisper model size.",
+      "Let the helper download and transcribe the latest episodes in the background."
+    ],
+    "behindScenes": "The helper polls registered feeds periodically using a feedparser client. It checks new episodes against the SQLite index to prevent duplicate downloads. The audio is downloaded locally, and Whisper performs the transcription. If WhisperX is configured, it runs a diarization pass to label speakers before writing the markdown file to your disk.",
+    "mcpTools": [
+      "add_podcast_feed",
+      "transcribe_podcast"
+    ],
+    "related": [
+      "local-first",
+      "memory-search",
+      "mobile-playlist-bridge"
+    ],
+    "cta": "Add your favorite podcast RSS feeds to build a local audio transcript archive.",
+    "screenshot": {
+      "title": "Settings tab showing podcast RSS config section",
+      "alt": "Settings tab showing podcast RSS config section",
+      "src": "/screenshots/podcast-feeds/01-settings-podcast.png"
+    }
+  },
+  {
+    "slug": "youtube-shorts",
+    "title": "YouTube Shorts transcription",
+    "category": "Capture",
+    "status": "shipped",
+    "summary": "Capture and classify YouTube Shorts to analyze fast-paced video hooks.",
+    "keywords": [
+      "uoink feature",
+      "youtube shorts",
+      "youtube shorts transcription",
+      "capture",
+      "classify",
+      "youtube",
+      "shorts"
+    ],
+    "whatItDoes": "Extract transcripts and analyze hooks from YouTube Shorts. The extension adds a capture button onto the Shorts player interface. When clicked, the helper downloads the short audio track, runs transcription, and classifies the opening hook. It packages the text, metadata, and classification type into a compact markdown file that you can use to study creator hooks.",
+    "gettingStarted": [
+      "Open YouTube Shorts in your browser.",
+      "Find the rust-colored U button overlaid on the right control bar.",
+      "Click the button to start the capture.",
+      "Open the Uoink dashboard to see the hook classification.",
+      "Paste the markdown file into Claude to study the script structure."
+    ],
+    "behindScenes": "The content script matches the YouTube Shorts container and overlays the button next to the native share icons. Clicking it posts the video URL to the local helper API. The helper extracts the media, transcribes the brief audio stream, and passes the first ten seconds of text to the hook classifier. The resulting markdown file is saved to your library.",
+    "mcpTools": [
+      "uoink_video",
+      "search_uoinks"
+    ],
+    "related": [
+      "in-page-button",
+      "your-channel",
+      "faceted-classification"
+    ],
+    "cta": "Capture and analyze YouTube Shorts to learn how creators hook their audience.",
+    "screenshot": {
+      "title": "YouTube Shorts interface showing injected Uoink button",
+      "alt": "YouTube Shorts interface showing injected Uoink button",
+      "src": "/screenshots/youtube-shorts/01-shorts-button.png"
+    }
+  },
+  {
+    "slug": "playlist-mode",
+    "title": "Playlist queue extraction",
+    "category": "Capture",
+    "status": "shipped",
+    "summary": "Batch extract up to 10 YouTube videos at once with partial-failure tolerance.",
+    "keywords": [
+      "uoink feature",
+      "playlist mode",
+      "playlist queue extraction",
+      "extract",
+      "youtube",
+      "videos",
+      "partial"
+    ],
+    "whatItDoes": "Batch capture video series without manual repetition. Playlist mode lets you queue up to ten video URLs at a time. The local helper processes the queue in the background, transcribing audio and extracting frames sequentially. If one video fails due to a network error, the helper skips it and continues the queue so your batch job finishes.",
+    "gettingStarted": [
+      "Open a YouTube playlist page.",
+      "Click the Uoink extension icon to open the popup.",
+      "Select the Playlist tab.",
+      "Paste the playlist URL or check the auto-detected link.",
+      "Click Uoink Playlist to start the batch download."
+    ],
+    "behindScenes": "The extension sends the playlist URL to the queue manager endpoint in the helper. The helper resolves the playlist into individual video URLs. It stores these in a SQLite queue table and processes them one by one. The helper uses isolated threads for each extraction task, ensuring that a crash in yt-dlp warns without blocking subsequent videos.",
+    "mcpTools": [
+      "uoink_playlist",
+      "cancel_job",
+      "get_job_status"
+    ],
+    "related": [
+      "mobile-playlist-bridge",
+      "in-page-button"
+    ],
+    "cta": "Queue up a playlist to capture a structured course or video sequence automatically.",
+    "screenshot": {
+      "title": "Extension popup showing single video and playlist tabs",
+      "alt": "Extension popup showing single video and playlist tabs",
+      "src": "/screenshots/playlist-mode/01-popup-tabs.png"
+    }
+  },
+  {
+    "slug": "memory-search",
+    "title": "Local SQLite FTS5 search",
+    "category": "Library",
+    "status": "shipped",
+    "summary": "Search transcripts, comments, and metadata instantly using local SQLite full-text search.",
+    "keywords": [
+      "uoink feature",
+      "memory search",
+      "local sqlite fts5 search",
+      "search",
+      "transcripts",
+      "comments",
+      "metadata"
+    ],
+    "whatItDoes": "Search your entire corpus in milliseconds. The helper indexes every transcript, comment cluster, and metadata block in a local SQLite FTS5 database. You can run keyword, speaker, channel, or hook queries from your dashboard. Your search queries and index files stay on your machine because the database runs entirely on your local drive.",
+    "gettingStarted": [
+      "Open the Uoink desktop dashboard.",
+      "Click the search bar at the top of the interface.",
+      "Type your search query, such as a topic, speaker name, or tool.",
+      "View the matching corpus cards with highlighted search snippets.",
+      "Click any card to open the markdown file."
+    ],
+    "behindScenes": "The helper uses the SQLite FTS5 extension to build a virtual table of all text content. When a new video is captured, the helper parses the markdown file and inserts the text blocks into the search index. The dashboard queries this index via a local HTTP endpoint, returning results and text match positions without internet access.",
+    "mcpTools": [
       "search_uoinks",
-      "get_uoink_corpus",
+      "get_uoink_corpus"
+    ],
+    "related": [
+      "faceted-classification",
+      "resurface-for-you",
+      "mcp-server"
+    ],
+    "cta": "Search across your entire captured library instantly without cloud latency.",
+    "screenshot": {
+      "title": "Uoink dashboard showing the main library search bar",
+      "alt": "Uoink dashboard showing the main library search bar",
+      "src": "/screenshots/memory-search/01-search-bar.png"
+    }
+  },
+  {
+    "slug": "faceted-classification",
+    "title": "Facet and tag organization",
+    "category": "Library",
+    "status": "shipped",
+    "summary": "Organize your video corpus using automatically generated topic folders, hook types, and creator tags.",
+    "keywords": [
+      "uoink feature",
+      "faceted classification",
+      "facet and tag organization",
+      "organize",
+      "corpus",
+      "automatically",
+      "generated"
+    ],
+    "whatItDoes": "Sort your captures without manual organization. The helper categorizes your markdown files using keyword rules and metadata attributes. It groups your corpus by channel name, duration, and hook type so you can filter your library in the dashboard. You can customize these sorting rules in your settings to match your folder preferences.",
+    "gettingStarted": [
+      "Open the Uoink dashboard and navigate to Settings.",
+      "Define keyword triggers for your target categories.",
+      "Capture a new video.",
+      "Check the dashboard Library tab to see the facet filters.",
+      "Select a channel or hook type facet to filter your card grid."
+    ],
+    "behindScenes": "When writing a corpus, the helper runs the metadata through a routing engine. It matches titles and descriptions against the keyword list in your settings. The helper writes the markdown file to the matching directory path. It also writes the tags and attributes to the local SQLite database to populate the sidebar filters in the dashboard UI.",
+    "mcpTools": [
+      "search_uoinks"
+    ],
+    "related": [
+      "memory-search",
+      "your-channel",
+      "taste-anchors"
+    ],
+    "cta": "Configure your topic folders to keep your research library organized.",
+    "screenshot": {
+      "title": "Settings tab showing topic folder routing rules",
+      "alt": "Settings tab showing topic folder routing rules",
+      "src": "/screenshots/faceted-classification/01-rules-config.png"
+    }
+  },
+  {
+    "slug": "your-channel",
+    "title": "Your channel mode",
+    "category": "Library",
+    "status": "in flight",
+    "summary": "Configure your own YouTube channel to analyze hook performance and audience patterns.",
+    "keywords": [
+      "uoink feature",
+      "your channel",
+      "your channel mode",
+      "configure",
+      "youtube",
+      "channel",
+      "analyze"
+    ],
+    "whatItDoes": "Analyze your own content performance. Set up Uoink with your YouTube channel handle to separate your uploads from your research library. The dashboard marks your videos and calculates hook distribution across your top performers. It helps you see which script structures and hook categories drive audience engagement on your channel.",
+    "gettingStarted": [
+      "Open settings in the Uoink dashboard.",
+      "Locate the Your Channel configuration section.",
+      "Paste your YouTube channel handle or ID.",
+      "Click Verify to connect and fetch public channel metadata.",
+      "View your channel analytics dashboard to study your hook performance."
+    ],
+    "behindScenes": "The helper queries the YouTube API using the verified channel ID to build a list of your uploads. It flags these videos in the local database. When you run a hook classification job, the helper aggregates the classification results for your channel. It renders the data in a local dashboard without transmitting metrics to external platforms.",
+    "mcpTools": [
+      "search_uoinks",
+      "find_mentions"
+    ],
+    "related": [
+      "faceted-classification",
+      "resurface-for-you",
+      "taste-anchors"
+    ],
+    "cta": "Connect your own YouTube channel to analyze your performance trends.",
+    "screenshot": {
+      "title": "Settings showing Your Channel configuration field",
+      "alt": "Settings showing Your Channel configuration field",
+      "src": "/screenshots/your-channel/01-channel-config.png"
+    }
+  },
+  {
+    "slug": "resurface-for-you",
+    "title": "Resurface for you",
+    "category": "Library",
+    "status": "planned",
+    "summary": "Discover forgotten insights in your video library with personalized local resurfacing cards.",
+    "keywords": [
+      "uoink feature",
+      "resurface for you",
+      "discover",
+      "forgotten",
+      "insights",
+      "library",
+      "personalized"
+    ],
+    "whatItDoes": "Rediscover forgotten insights in your library. The For You tab displays past captures based on your research habits. It surfaces videos that you saved but have not opened recently, helping you find links between older files and current writing projects. The selection logic runs on your computer without tracking your reading habits.",
+    "gettingStarted": [
+      "Open the Uoink dashboard and click the For You tab.",
+      "Browse the daily selection of resurfaced video cards.",
+      "Review the summary of key concepts on each card.",
+      "Click Open corpus to view the markdown file.",
+      "Tap the shuffle icon to generate a new list."
+    ],
+    "behindScenes": "The helper executes a local query that examines file modification dates, search frequencies, and open counts in the SQLite database. It selects a mix of older, highly-rated captures and recent unread files. The dashboard renders these selections locally, protecting your research logs from being sent to external analytics tools.",
+    "mcpTools": [
+      "list_recent_uoinks",
+      "search_uoinks"
+    ],
+    "related": [
+      "engagement-memory",
+      "taste-anchors",
+      "memory-search"
+    ],
+    "cta": "Open the For You tab to bring older research back into your workflow.",
+    "screenshot": {
+      "title": "Dashboard showing the For You tab view",
+      "alt": "Dashboard showing the For You tab view",
+      "src": "/screenshots/resurface-for-you/01-for-you-tab.png"
+    }
+  },
+  {
+    "slug": "engagement-memory",
+    "title": "Engagement memory",
+    "category": "Library",
+    "status": "planned",
+    "summary": "Track which videos you reference most to build a durable local knowledge base.",
+    "keywords": [
+      "uoink feature",
+      "engagement memory",
+      "videos",
+      "reference",
+      "durable",
+      "knowledge"
+    ],
+    "whatItDoes": "Keep track of the research that you use. Uoink monitors when you copy a transcript, export a citation, or search for specific video files. It updates the database to rank your captures by utility. The helper uses these engagement signals to improve your local search results and highlight your most valuable research assets.",
+    "gettingStarted": [
+      "Use Uoink to copy transcripts and cite videos.",
+      "Open the dashboard Activity tab to view your engagement log.",
+      "Sort your library by Most referenced in the dashboard.",
+      "View the videos that have driven your writing.",
+      "Configure retention rules for tracking logs in settings."
+    ],
+    "behindScenes": "The desktop helper logs actions like clipboard copy events, citation exports, and search clicks into the SQLite database. It calculates a utility score for each video using a decay algorithm. This score influences local search ranking and resurfacing recommendations. Your activity data is stored in the local index file, maintaining privacy.",
+    "mcpTools": [
+      "analyze_comments",
+      "find_mentions"
+    ],
+    "related": [
+      "resurface-for-you",
+      "memory-search",
+      "taste-anchors"
+    ],
+    "cta": "Let your research habits organize your most referenced video captures.",
+    "screenshot": {
+      "title": "Activity tab showing engagement history and action logs",
+      "alt": "Activity tab showing engagement history and action logs",
+      "src": "/screenshots/engagement-memory/01-activity-log.png"
+    }
+  },
+  {
+    "slug": "taste-anchors",
+    "title": "Taste anchors calibration",
+    "category": "Library",
+    "status": "in flight",
+    "summary": "Calibrate your local memory layer by selecting reference videos that define your research taste.",
+    "keywords": [
+      "uoink feature",
+      "taste anchors",
+      "taste anchors calibration",
+      "calibrate",
+      "memory",
+      "selecting",
+      "reference"
+    ],
+    "whatItDoes": "Calibrate your local memory layer. You select a set of reference videos that define your research interests or script style. The helper uses these taste anchors to guide search weights and highlight relevant patterns in new captures. It helps align recommendations with your creative style without sharing your personal preferences with external services.",
+    "gettingStarted": [
+      "Open a video card in the dashboard.",
+      "Click the star icon to designate it as a Taste Anchor.",
+      "Open your settings to review active Taste Anchors.",
+      "Toggle anchors on or off depending on your current project.",
+      "Observe how search highlights adapt to your selections."
+    ],
+    "behindScenes": "The helper stores Taste Anchor selections in a local configurations table. When calculating relevance for search queries and recommendations, it applies a multiplier to documents matching the topic nodes of your anchors. This calculation runs on your GPU or CPU, ensuring your taste profile stays private. No analytics tags or profiles are sent online.",
+    "mcpTools": [
+      "add_style_anchor",
+      "list_style_anchors"
+    ],
+    "related": [
+      "engagement-memory",
+      "resurface-for-you",
+      "faceted-classification"
+    ],
+    "cta": "Set your taste anchors to customize your local search weights.",
+    "screenshot": {
+      "title": "Card view showing star icon highlighted",
+      "alt": "Card view showing star icon highlighted",
+      "src": "/screenshots/taste-anchors/01-star-action.png"
+    }
+  },
+  {
+    "slug": "build-workspace",
+    "title": "Workspace assembly",
+    "category": "Workspace",
+    "status": "in flight",
+    "summary": "Assemble a local markdown corpus from multiple video sources for a project workspace.",
+    "keywords": [
+      "uoink feature",
+      "build workspace",
+      "workspace assembly",
+      "assemble",
+      "markdown",
+      "corpus",
+      "multiple"
+    ],
+    "whatItDoes": "Build a workspace for your writing projects. You select multiple captures from your library and group them into a workspace folder. The helper compiles transcripts, comments, and citation anchors into one project corpus. This organizes your source material, making it easy to paste into Claude or open in Obsidian.",
+    "gettingStarted": [
+      "Open the Build Workspace tab in the dashboard.",
+      "Select the video cards you want to include.",
+      "Click Assemble Workspace to compile the sources.",
+      "Name your workspace folder.",
+      "Open the folder to view the compiled markdown corpus."
+    ],
+    "behindScenes": "The helper reads the selected document files from your local storage. It extracts the content blocks and references, merging them into a unified project file. The helper writes the compiled file to a project directory under your Uoink path, updating the SQLite index to track the relationship between source documents and the new workspace.",
+    "mcpTools": [
+      "build_workspace",
+      "search_uoinks"
+    ],
+    "related": [
+      "critique-corpus",
+      "script-studio",
+      "writing-studio"
+    ],
+    "cta": "Assemble your references into a clean workspace to start your next project.",
+    "screenshot": {
+      "title": "Build Workspace tab showing source selection columns",
+      "alt": "Build Workspace tab showing source selection columns",
+      "src": "/screenshots/build-workspace/01-workspace-tab.png"
+    }
+  },
+  {
+    "slug": "critique-corpus",
+    "title": "Corpus analysis critique",
+    "category": "Workspace",
+    "status": "in flight",
+    "summary": "Run structured critiques on your draft against a local video and article corpus.",
+    "keywords": [
+      "uoink feature",
+      "critique corpus",
+      "corpus analysis critique",
+      "structured",
+      "critiques",
+      "against",
+      "article"
+    ],
+    "whatItDoes": "Evaluate your script drafts against your research corpus. You load a draft and compare it against your saved video transcripts. The helper checks your text for factual discrepancies and identifies where you missed key source details. This helps you maintain accuracy and strong evidence before you publish your work.",
+    "gettingStarted": [
+      "Navigate to the Critique tab in the dashboard.",
+      "Paste your draft text into the editor.",
+      "Select the reference corpus files from the list.",
+      "Click Analyze Draft to run the critique.",
+      "Review the highlighted corrections and source links."
+    ],
+    "behindScenes": "The helper uses your API key to send the draft and selected reference corpus files to the model. It directs the model to perform a factual comparison and return structured annotations. The helper parses the response, highlights discrepancies in the UI, and maps comments back to specific timestamps in the source file.",
+    "mcpTools": [
+      "critique_corpus",
+      "get_citation_map"
+    ],
+    "related": [
+      "build-workspace",
+      "evidence-panel",
+      "script-studio"
+    ],
+    "cta": "Compare your draft against your corpus to verify your facts before publishing.",
+    "screenshot": {
+      "title": "Critique tab showing draft upload field and corpus selector",
+      "alt": "Critique tab showing draft upload field and corpus selector",
+      "src": "/screenshots/critique-corpus/01-critique-tab.png"
+    }
+  },
+  {
+    "slug": "script-studio",
+    "title": "Script studio workspace",
+    "category": "Workspace",
+    "status": "in flight",
+    "summary": "Generate, revise, and outline video scripts grounded in your local markdown corpus.",
+    "keywords": [
+      "uoink feature",
+      "script studio",
+      "script studio workspace",
+      "generate",
+      "revise",
+      "outline",
+      "scripts"
+    ],
+    "whatItDoes": "Draft scripts backed by your research files. Script Studio helps you outline and write video scripts using your captured library. It pulls outlines, quotes, and formatting templates from your saved corpus files, inserting citation anchors. You write with the support of your reference database, avoiding generic scripts.",
+    "gettingStarted": [
+      "Open the Script Studio tab in the dashboard.",
+      "Select the source files from the sidebar.",
+      "Choose a template or paste an outline.",
+      "Click Generate Script Draft.",
+      "Review the script and the cited source quotes."
+    ],
+    "behindScenes": "The helper loads the selected corpus files and outline templates. It formats the prompt with the reference text and calls the model via the API. The model generates the script draft, linking quotes to specific source segments. The helper saves the draft to your workspace folder and updates the local project index.",
+    "mcpTools": [
+      "generate_script",
+      "get_uoink_corpus"
+    ],
+    "related": [
+      "build-workspace",
+      "writing-studio",
+      "style-anchors"
+    ],
+    "cta": "Open Script Studio to draft scripts directly connected to your research files.",
+    "screenshot": {
+      "title": "Script Studio showing script editor and source panel",
+      "alt": "Script Studio showing script editor and source panel",
+      "src": "/screenshots/script-studio/01-studio-tab.png"
+    }
+  },
+  {
+    "slug": "writing-studio",
+    "title": "Writing studio tool",
+    "category": "Workspace",
+    "status": "in flight",
+    "summary": "Generate tweets, threads, and blog posts grounded in your captured video corpus.",
+    "keywords": [
+      "uoink feature",
+      "writing studio",
+      "writing studio tool",
+      "generate",
+      "tweets",
+      "threads",
+      "grounded"
+    ],
+    "whatItDoes": "Turn captured videos into short-form writing. The Writing Studio generates tweets, threads, and blog articles directly from your saved files. It references the source transcript to keep your summaries factual. Every draft includes a citation referencing the creator and the source link, helping you credit authors when sharing.",
+    "gettingStarted": [
+      "Open the Writing Studio tab in your dashboard.",
+      "Select a video from your library to use as the source.",
+      "Choose your output mode: Tweet, Thread, or Blog.",
+      "Select your style mode and anchors.",
+      "Click Generate to write the draft."
+    ],
+    "behindScenes": "The helper formats a request with the source corpus text and sends it to the model. It directs the model to extract key ideas and write the draft. When Voice DNA checks are enabled, the helper runs a scan across the output, returning warnings in the UI if it spots banned slop patterns before you copy.",
+    "mcpTools": [
+      "write_tweet",
+      "write_blog"
+    ],
+    "related": [
+      "script-studio",
+      "style-anchors",
+      "byo-anthropic-key"
+    ],
+    "cta": "Use the Writing Studio to summarize videos and podcasts for your social feed.",
+    "screenshot": {
+      "title": "Writing Studio tab showing layout and options",
+      "alt": "Writing Studio tab showing layout and options",
+      "src": "/screenshots/writing-studio/01-writing-tab.png"
+    }
+  },
+  {
+    "slug": "style-anchors",
+    "title": "Style anchor management",
+    "category": "Workspace",
+    "status": "in flight",
+    "summary": "Import and manage style anchors from Substack or text to guide AI voice tone.",
+    "keywords": [
+      "uoink feature",
+      "style anchors",
+      "style anchor management",
+      "import",
+      "manage",
+      "anchors",
+      "substack"
+    ],
+    "whatItDoes": "Train the helper on your voice. You add and manage up to ten style anchors using Substack URLs or raw text files. The helper analyzes these references to guide the tone of your generated scripts and posts. This keeps your output matching your personal writing style, avoiding generic AI marketing phrasing.",
+    "gettingStarted": [
+      "Open the Writing tab and look for the Style Anchors section.",
+      "Click Add Anchor to open the form.",
+      "Paste a Substack URL or type a text sample.",
+      "View the extracted prose preview and click Save.",
+      "Toggle active status for your anchors before generating a draft."
+    ],
+    "behindScenes": "When you provide a Substack URL, the helper fetches the page content using the local crawler. It strips HTML to extract your prose style and saves it locally. When generating drafts, the helper includes these style anchors in the prompt, directing the model to analyze and match your writing patterns.",
+    "mcpTools": [
+      "add_style_anchor",
+      "list_style_anchors",
+      "remove_style_anchor"
+    ],
+    "related": [
+      "writing-studio",
+      "taste-anchors",
+      "byo-anthropic-key"
+    ],
+    "cta": "Add your style anchors to ensure your AI assistant matches your tone.",
+    "screenshot": {
+      "title": "Settings panel showing style anchors management list",
+      "alt": "Settings panel showing style anchors management list",
+      "src": "/screenshots/style-anchors/01-anchors-ui.png"
+    }
+  },
+  {
+    "slug": "claim-extraction",
+    "title": "Claim extraction tool",
+    "category": "Verification",
+    "status": "in flight",
+    "summary": "Extract factual claims from transcripts to audit evidence and source references.",
+    "keywords": [
+      "uoink feature",
+      "claim extraction",
+      "claim extraction tool",
+      "extract",
+      "factual",
+      "claims",
+      "transcripts"
+    ],
+    "whatItDoes": "Extract factual claims from transcripts automatically. The helper scans the video text to isolate assertions, figures, and research references. It lists these claims with timestamp links, making it easy to verify statement accuracy. This helps researchers audit content without reading the entire transcript manually.",
+    "gettingStarted": [
+      "Open a video in the Uoink dashboard.",
+      "Navigate to the Claims tab.",
+      "Click Extract Claims to analyze the transcript.",
+      "Review the list of isolated assertions and metrics.",
+      "Click any claim timestamp to play the video segment."
+    ],
+    "behindScenes": "The helper uses the API key to send the transcript to the model. It instructs the model to extract and categorize claims into a structured list. The helper parses this output, maps each claim back to its segment offset, and writes the results to the markdown file header, ensuring the facts remain linked.",
+    "mcpTools": [
+      "extract_claims",
+      "get_citation_map"
+    ],
+    "related": [
+      "evidence-panel",
+      "critique-corpus",
+      "faceted-classification"
+    ],
+    "cta": "Extract claims from your video library to verify source facts.",
+    "screenshot": {
+      "title": "Card view showing Claims tab layout",
+      "alt": "Card view showing Claims tab layout",
+      "src": "/screenshots/claim-extraction/01-claims-tab.png"
+    }
+  },
+  {
+    "slug": "evidence-panel",
+    "title": "Evidence and citation panel",
+    "category": "Verification",
+    "status": "in flight",
+    "summary": "View supporting evidence and source citations for claims in your corpus.",
+    "keywords": [
+      "uoink feature",
+      "evidence panel",
+      "evidence and citation panel",
+      "supporting",
+      "evidence",
+      "source",
+      "citations"
+    ],
+    "whatItDoes": "Trace claims back to their source material. The evidence panel displays the transcripts, comments, and screenshot frames that back up each claim. It helps you verify assertions by linking them to specific timestamps and media files. This keeps your research grounded, making it easy to cite original sources.",
+    "gettingStarted": [
+      "Open the Evidence panel in your workspace.",
+      "Select a claim from the project list.",
+      "View the supporting transcript segments and screenshots.",
+      "Click the link to open the source video at that moment.",
+      "Export the citation to your notes or editor."
+    ],
+    "behindScenes": "The helper uses the SQLite database to query matches between claims and source transcript segments. It maps the results to media timestamps and writes the output as citation anchors. The dashboard reads these anchors to display the source context and media frames, ensuring that references remain verifiable.",
+    "mcpTools": [
+      "get_citation_map",
+      "get_uoink_corpus"
+    ],
+    "related": [
+      "claim-extraction",
+      "critique-corpus",
+      "mcp-server"
+    ],
+    "cta": "Use the evidence panel to review the references supporting your notes.",
+    "screenshot": {
+      "title": "Workspace view showing Evidence panel sidebar",
+      "alt": "Workspace view showing Evidence panel sidebar",
+      "src": "/screenshots/evidence-panel/01-evidence-sidebar.png"
+    }
+  },
+  {
+    "slug": "mcp-server",
+    "title": "Model Context Protocol server",
+    "category": "Distribution",
+    "status": "shipped",
+    "summary": "Turn Uoink into a local MCP server to give Claude and Cursor tools for video capture.",
+    "keywords": [
+      "uoink feature",
+      "mcp server",
+      "model context protocol server",
+      "server",
+      "claude",
+      "cursor",
+      "capture"
+    ],
+    "whatItDoes": "Give your AI tools access to video data. The local helper runs an MCP server that exposes the local corpus to your AI clients. Your agent can capture videos, query your library, analyze comments, and pull citations without clipboard steps. The server runs on localhost, keeping your research database private.",
+    "gettingStarted": [
+      "Install the Uoink helper on your machine.",
+      "Open the setup page to get the command path.",
+      "Add the server to your AI client configuration.",
+      "Start the client and verify the connection.",
+      "Ask the agent to capture a video to test the setup."
+    ],
+    "behindScenes": "The helper runs a loopback server on port 5179 that implements the Model Context Protocol. It handles stdio transport for client connections. When an agent calls a tool, the helper executes the command, reads the local SQLite database, and returns the response in a structured JSON format, keeping everything on your local machine.",
+    "mcpTools": [
+      "uoink_video",
+      "search_uoinks",
+      "get_uoink_corpus"
+    ],
+    "mcpExample": "{\n  \"name\": \"uoink_video\",\n  \"arguments\": {\n    \"url\": \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\"\n  }\n}",
+    "related": [
+      "claude-desktop-integration",
+      "cursor-integration",
+      "local-first"
+    ],
+    "cta": "Connect Uoink to your AI clients to enable video and transcript tools.",
+    "screenshot": {
+      "title": "Setup page displaying generated MCP command",
+      "alt": "Setup page displaying generated MCP command",
+      "src": "/screenshots/mcp-server/01-mcp-path.png"
+    }
+  },
+  {
+    "slug": "claude-desktop-integration",
+    "title": "Claude Desktop MCP integration",
+    "category": "Distribution",
+    "status": "shipped",
+    "summary": "Connect Uoink to Claude Desktop to let Claude capture and search video files.",
+    "keywords": [
+      "uoink feature",
+      "claude desktop integration",
+      "claude desktop mcp integration",
+      "connect",
+      "claude",
+      "desktop",
+      "capture"
+    ],
+    "whatItDoes": "Connect Uoink to Claude Desktop. By adding the helper command to your configuration file, you give Claude tools to capture videos and query your local library. Claude can pull transcripts, read comment clusters, and cite timestamps directly in your chat sessions. The connection runs locally on your computer.",
+    "gettingStarted": [
+      "Open your Claude Desktop configuration file.",
+      "Add the Uoink server snippet to the configuration.",
+      "Save the file and restart Claude Desktop.",
+      "Look for the tool hammer icon in the input bar.",
+      "Prompt Claude to summarize a YouTube URL."
+    ],
+    "behindScenes": "Claude Desktop starts the helper as a background process using the command path in your configuration. It establishes communication via stdio JSON-RPC. When you prompt Claude about a video, the model calls the uoink_video tool, and the helper executes the task locally, returning the text directly to the active chat.",
+    "mcpTools": [
+      "uoink_video",
+      "classify_hook",
+      "write_blog"
+    ],
+    "mcpExample": "{\n  \"mcpServers\": {\n    \"uoink\": {\n      \"command\": \"C:\\\\Users\\\\hello\\\\AppData\\\\Local\\\\Uoink\\\\uoink_mcp.exe\",\n      \"args\": []\n    }\n  }\n}",
+    "related": [
+      "mcp-server",
+      "cursor-integration",
+      "local-first"
+    ],
+    "cta": "Connect Claude Desktop to your local helper to query transcripts directly.",
+    "screenshot": {
+      "title": "VS Code showing claude_desktop_config.json",
+      "alt": "VS Code showing claude_desktop_config.json",
+      "src": "/screenshots/claude-desktop-integration/01-config-file.png"
+    }
+  },
+  {
+    "slug": "cursor-integration",
+    "title": "Cursor MCP integration",
+    "category": "Distribution",
+    "status": "shipped",
+    "summary": "Add Uoink to Cursor to search and reference your video corpus inside your editor.",
+    "keywords": [
+      "uoink feature",
+      "cursor integration",
+      "cursor mcp integration",
+      "cursor",
+      "search",
+      "reference",
+      "corpus"
+    ],
+    "whatItDoes": "Bring your video corpus into Cursor. Register the helper as an MCP server to reference transcripts and documentation directly in your editor. You can prompt Cursor to write code matching a video walkthrough, citing sources as you write. Everything runs on your machine, protecting your workspace.",
+    "gettingStarted": [
+      "Open Settings in Cursor.",
+      "Navigate to features and select MCP.",
+      "Click Add New MCP Server.",
+      "Paste the Uoink command path.",
+      "Ask Cursor's chat panel to search your library."
+    ],
+    "behindScenes": "Cursor runs the helper binary as a subprocess and establishes stdio communication. When you prompt Cursor about your code, the editor calls uoink_tools to search your transcripts or read specific corpus files. The helper queries SQLite and returns the markdown text to the editor context, ensuring fast local search.",
+    "mcpTools": [
+      "search_uoinks",
+      "build_workspace",
+      "get_uoink_corpus"
+    ],
+    "mcpExample": "{\n  \"name\": \"search_uoinks\",\n  \"arguments\": {\n    \"query\": \"Model Context Protocol\"\n  }\n}",
+    "related": [
+      "mcp-server",
+      "claude-desktop-integration",
+      "local-first"
+    ],
+    "cta": "Configure Cursor to query your transcript corpus directly from the editor.",
+    "screenshot": {
+      "title": "Cursor settings panel showing MCP server list",
+      "alt": "Cursor settings panel showing MCP server list",
+      "src": "/screenshots/cursor-integration/01-cursor-mcp.png"
+    }
+  },
+  {
+    "slug": "byo-anthropic-key",
+    "title": "Bring your own API key",
+    "category": "Identity",
+    "status": "shipped",
+    "summary": "Use your own Anthropic API key to run Hook Type and Comment Intelligence passes.",
+    "keywords": [
+      "uoink feature",
+      "byo anthropic key",
+      "bring your own api key",
+      "anthropic",
+      "comment",
+      "intelligence",
+      "passes"
+    ],
+    "whatItDoes": "Control your AI costs and data. Uoink uses your own Anthropic API key to run Hook Type, Comment clusters, and Entity extraction passes. Your key is stored in your operating system credential vault, never on our servers. You pay Anthropic for the tokens you use, keeping the helper free of subscriptions.",
+    "gettingStarted": [
+      "Open your Anthropic developer console.",
+      "Generate a new API key.",
+      "Open the Uoink dashboard settings.",
+      "Paste your API key into the field.",
+      "Click Save to store the key in the OS vault."
+    ],
+    "behindScenes": "The helper uses the python keyring library to store your API key in the OS vault. On Windows, it calls the Credential Manager APIs. When running an AI analysis, the helper retrieves the key, calls the Anthropic endpoint directly, and writes the output. The key never touches Uoink servers.",
+    "mcpTools": [
       "classify_hook",
       "analyze_comments",
-      "find_mentions",
+      "write_blog"
     ],
-    related: ["operator-skill", "local-api-token-gate", "find-mentions"],
-    screenshot: {
-      title: "MCP tool trace",
-      alt: "An MCP client calling Uoink tools to capture a video and fetch the corpus.",
-    },
+    "related": [
+      "local-first",
+      "no-cloud",
+      "writing-studio"
+    ],
+    "cta": "Add your API key to activate local hook and comment analysis.",
+    "screenshot": {
+      "title": "Settings showing API Key configuration section",
+      "alt": "Settings showing API Key configuration section",
+      "src": "/screenshots/byo-anthropic-key/01-key-config.png"
+    }
   },
   {
-    slug: "operator-skill",
-    title: "Operator Skill",
-    category: "AI handoff",
-    status: "shipped",
-    summary: "A portable agentskills.io skill teaches compatible agents how to use Uoink with citations.",
-    keywords: ["agentskills uoink", "operator skill youtube", "claude code youtube skill"],
-    whatItDoes:
-      "The Skill is the instruction layer on top of MCP. It teaches an agent citation discipline, hook autopsy mode, and the Uoink corpus shape so tool calls turn into useful work.",
-    gettingStarted: [
-      "Install Uoink and confirm MCP works.",
-      "Add the Uoink Skill to your agent's skills folder.",
-      "Ask for a hook autopsy, channel audit, or corpus search.",
+    "slug": "local-first",
+    "title": "Local-first architecture",
+    "category": "Identity",
+    "status": "shipped",
+    "summary": "Save transcripts, comments, and databases to your local drive for private research.",
+    "keywords": [
+      "uoink feature",
+      "local first",
+      "local-first architecture",
+      "transcripts",
+      "comments",
+      "databases",
+      "private"
     ],
-    behindScenes:
-      "The Skill is plain markdown. It travels between agents that support the agentskills.io pattern and keeps the product logic outside any one model vendor.",
-    mcpTools: ["uoink_video", "classify_hook", "analyze_comments", "find_mentions"],
-    related: ["mcp-server", "hook-type-classification", "citation-map"],
-    screenshot: {
-      title: "Operator Skill prompt flow",
-      alt: "An agent using the Uoink Operator Skill to plan tool calls and cite the source video.",
-    },
+    "whatItDoes": "Your research belongs on your machine. Uoink uses a local-first architecture where transcripts, databases, and configuration files live on your computer. The helper runs on localhost, and your files write to your local drive. You can browse, edit, and back up your library without depending on external web platforms.",
+    "gettingStarted": [
+      "Install the desktop helper.",
+      "Open the dashboard and check the library path.",
+      "Open File Explorer to see your corpus folders.",
+      "Open any markdown file in your text editor.",
+      "Backup your library by copying the folder."
+    ],
+    "behindScenes": "The desktop helper runs an internal server that reads and writes files on your storage drive. It logs transactions in a local SQLite file. The browser extension speaks to this helper via a loopback port. No external tracking scripts, cloud servers, or remote databases are used, maintaining privacy.",
+    "mcpTools": [
+      "get_uoink_health",
+      "search_uoinks"
+    ],
+    "related": [
+      "no-cloud",
+      "byo-anthropic-key",
+      "memory-search"
+    ],
+    "cta": "Install the helper and start building a private local library.",
+    "screenshot": {
+      "title": "Settings panel showing default library folder path",
+      "alt": "Settings panel showing default library folder path",
+      "src": "/screenshots/local-first/01-library-path.png"
+    }
   },
   {
-    slug: "starter-prompts-library",
-    title: "Starter prompts library",
-    category: "AI handoff",
-    status: "shipped",
-    summary: "11 prompts in the popup help first-day users ask better questions of the corpus.",
-    keywords: ["youtube analysis prompts", "claude youtube prompts", "creator research prompts"],
-    whatItDoes:
-      "The prompt library gives users useful first moves: hook audit, comment signal, competitor pattern, script inspiration, source summary, and research triage.",
-    gettingStarted: [
-      "Capture a video.",
-      "Open the prompt library in the popup.",
-      "Pick a prompt, paste the corpus, and adjust the question to your work.",
+    "slug": "no-cloud",
+    "title": "No cloud database",
+    "category": "Identity",
+    "status": "shipped",
+    "summary": "Keep your video corpus and research private with no cloud databases or remote servers.",
+    "keywords": [
+      "uoink feature",
+      "no cloud",
+      "no cloud database",
+      "corpus",
+      "research",
+      "private",
+      "databases"
     ],
-    behindScenes:
-      "Prompts stay local and generic. The corpus does the grounding, so the prompt can stay simple.",
-    mcpTools: ["get_uoink_corpus", "classify_hook", "analyze_comments"],
-    related: ["clipboard-markdown-corpus", "send-to-claude", "hook-type-classification"],
-    screenshot: {
-      title: "Prompt library",
-      alt: "A Uoink popup prompt library with creator research and analysis prompts.",
-    },
-  },
-  {
-    slug: "local-corpus-library",
-    title: "Local corpus library",
-    category: "Library",
-    status: "shipped",
-    summary: "Every capture becomes a durable markdown file in your Uoink folder.",
-    keywords: ["local video corpus", "youtube corpus library", "markdown video archive"],
-    whatItDoes:
-      "Uoink treats captures as files you own. A capture writes markdown, screenshots, thumbnail, metadata, and index records so your research survives beyond one chat session.",
-    gettingStarted: [
-      "Capture a few videos.",
-      "Open the Uoink output folder from the popup or tray.",
-      "Search or move the markdown files into your own vault when needed.",
+    "whatItDoes": "No Uoink cloud database. The helper runs entirely on your local machine, keeping your captured transcripts and files offline. There is no account sign-up, no server database, and no usage tracking. If our website is breached, your research database is safe because we avoid collect your files.",
+    "gettingStarted": [
+      "Download the helper without creating an account.",
+      "Open the dashboard to see your local files.",
+      "Check your network settings to verify loopback connections.",
+      "Turn off your internet connection.",
+      "Run a search across your library to test the offline index."
     ],
-    behindScenes:
-      "The helper writes to a local library folder and updates SQLite FTS5. File writes use a tmp-then-rename pattern to avoid half-written corpora.",
-    mcpTools: ["list_recent_uoinks", "search_uoinks", "get_uoink_corpus"],
-    related: ["sqlite-fts-search", "topic-folders", "memory-page"],
-    screenshot: {
-      title: "Local corpus folder",
-      alt: "A local Uoink folder containing markdown corpora and screenshots.",
-    },
-  },
-  {
-    slug: "sqlite-fts-search",
-    title: "SQLite FTS search",
-    category: "Library",
-    status: "shipped",
-    summary: "Search titles, transcripts, and comments across the library with local FTS5.",
-    keywords: ["search youtube transcript library", "sqlite video corpus", "fts5 transcript search"],
-    whatItDoes:
-      "Search turns saved videos into a working library. You can ask where a term appeared, which creator mentioned a tool, or which past videos share a topic.",
-    gettingStarted: [
-      "Capture multiple videos.",
-      "Open Memory search or call search_uoinks from an MCP client.",
-      "Use specific terms, people, tools, products, and topic names.",
+    "behindScenes": "The helper binds to port 5179 on the loopback interface, meaning it only accepts requests from your own machine. It stores all indexed text in a local SQLite database file. Since there is no cloud database or syncing mechanism, your data remains offline and under your direct control.",
+    "mcpTools": [
+      "get_uoink_health"
     ],
-    behindScenes:
-      "The helper indexes transcripts, comments, titles, and metadata into SQLite FTS5 on every completed job.",
-    mcpTools: ["search_uoinks", "list_recent_uoinks", "get_uoink_corpus"],
-    related: ["find-mentions", "memory-page", "local-corpus-library"],
-    screenshot: {
-      title: "Search results",
-      alt: "Search results across a local Uoink library with video titles and matched text.",
-    },
-  },
-  {
-    slug: "topic-folders",
-    title: "Topic folders",
-    category: "Library",
-    status: "shipped",
-    summary: "Keyword rules route corpora into folders like AI and ML, DevTools, or Career.",
-    keywords: ["organize youtube transcripts", "topic folders corpus", "markdown folder automation"],
-    whatItDoes:
-      "Topic folders keep the disk library readable. Uoink can file a corpus under a topic based on title, metadata, transcript words, and editable rules.",
-    gettingStarted: [
-      "Capture a video and inspect the saved path.",
-      "Edit topics.json when your categories need new keywords.",
-      "Use the topic path as a lightweight research map.",
+    "related": [
+      "local-first",
+      "byo-anthropic-key",
+      "memory-search"
     ],
-    behindScenes:
-      "The classifier uses local keyword rules first. The rules live in topics.json so the folder system stays inspectable and editable.",
-    mcpTools: ["search_uoinks", "get_uoink_corpus"],
-    related: ["local-corpus-library", "settings-page", "sqlite-fts-search"],
-    screenshot: {
-      title: "Topic folder rules",
-      alt: "Uoink topic folder rules mapping keywords to local output folders.",
-    },
-  },
-  {
-    slug: "memory-page",
-    title: "Memory page",
-    category: "Library",
-    status: "shipped",
-    summary: "Browse and search every saved uoink from the extension surface.",
-    keywords: ["youtube memory page", "browse transcript library", "uoink memory"],
-    whatItDoes:
-      "Memory gives the library a face. Instead of digging through folders, you can browse recent captures, search across past work, and reopen the corpus.",
-    gettingStarted: [
-      "Open the Uoink extension popup.",
-      "Choose Memory.",
-      "Search a title, transcript phrase, comment term, or creator name.",
-    ],
-    behindScenes:
-      "The page queries the local helper and SQLite index. Results come from your machine, not a hosted Uoink database.",
-    mcpTools: ["list_recent_uoinks", "search_uoinks", "get_uoink_corpus"],
-    related: ["sqlite-fts-search", "dashboard-library", "local-corpus-library"],
-    screenshot: {
-      title: "Memory page grid",
-      alt: "A Memory page grid showing saved Uoink captures with filters and search.",
-    },
-  },
-  {
-    slug: "find-mentions",
-    title: "find_mentions entity lookup",
-    category: "Library",
-    status: "shipped",
-    summary: "Ask for every corpus that mentions a person, product, company, tool, or topic.",
-    keywords: ["find mentions across youtube videos", "entity search video corpus", "youtube competitive research"],
-    whatItDoes:
-      "find_mentions answers the cross-corpus question: where did this show up before? It is built for names like Karpathy, tools like Cursor, companies like Anthropic, and topics like RLHF.",
-    gettingStarted: [
-      "Build a library with several captures.",
-      "Connect an MCP client.",
-      "Call find_mentions with the entity you want to trace.",
-    ],
-    behindScenes:
-      "Entity Extraction pulls people, tools, products, companies, and topics out of saved corpora. find_mentions queries that local entity layer and returns source citations.",
-    mcpTools: ["find_mentions", "get_citation_map", "get_uoink_corpus"],
-    related: ["entity-extraction", "sqlite-fts-search", "citation-map"],
-    screenshot: {
-      title: "Entity lookup",
-      alt: "An MCP result showing every saved video that mentions an entity with timestamps.",
-    },
-  },
-  {
-    slug: "citation-map",
-    title: "Citation map",
-    category: "Library",
-    status: "shipped",
-    summary: "Map saved corpus slugs back to source URLs and timestamp citations.",
-    keywords: ["youtube timestamp citations", "video citation map", "mcp citation source map"],
-    whatItDoes:
-      "The citation map gives agents and humans a clean route from local markdown back to the source moment. It keeps analysis tied to video evidence.",
-    gettingStarted: [
-      "Capture a video or playlist.",
-      "Ask your MCP agent for a citation map.",
-      "Use the returned URLs and timestamps in notes, docs, or analysis.",
-    ],
-    behindScenes:
-      "Each corpus carries source URL, slug, video ID, and timestamp-aware transcript structure. get_citation_map exposes that mapping to agents.",
-    mcpTools: ["get_citation_map", "get_uoink_corpus", "search_uoinks"],
-    related: ["transcript-with-timestamps", "operator-skill", "find-mentions"],
-    screenshot: {
-      title: "Citation mapping",
-      alt: "A citation map linking local corpus sections to source video timestamps.",
-    },
-  },
-  {
-    slug: "hook-type-classification",
-    title: "Hook Type classification",
-    category: "Analysis",
-    status: "shipped",
-    summary: "Classify openings into 9 hook categories with confidence and reasoning.",
-    keywords: ["youtube hook types", "youtube hook classification", "creator hook taxonomy"],
-    whatItDoes:
-      "Hook Type classification labels the opening move: curiosity_gap, question, contrarian, story_open, promise_list, demo, authority, stakes, or other. It gives creators a shared language for why an opening works.",
-    gettingStarted: [
-      "Add your Anthropic key in Uoink settings.",
-      "Capture a video with Hook Type enabled.",
-      "Read the hook category, confidence, and reasoning in the corpus or MCP result.",
-    ],
-    behindScenes:
-      "The local helper sends the relevant opening transcript slice to Anthropic with your key when the feature is enabled. The result is written back into the corpus and index.",
-    mcpTools: ["classify_hook", "get_taxonomy", "get_uoink_corpus"],
-    related: ["hook-taxonomy", "self-calibrating-classifier", "playlist-mode"],
-    screenshot: {
-      title: "Hook Type result",
-      alt: "A Hook Type classification result showing category, confidence, and source timestamp.",
-    },
-  },
-  {
-    slug: "comment-intelligence",
-    title: "Comment Intelligence",
-    category: "Analysis",
-    status: "shipped",
-    summary: "Cluster themes, products, and disagreements from the captured comment set.",
-    keywords: ["youtube comment intelligence", "analyze youtube comments ai", "youtube audience research"],
-    whatItDoes:
-      "Comment Intelligence turns top comments into audience signal. It groups themes, pulls out tools and products, and flags where viewers push back.",
-    gettingStarted: [
-      "Add your Anthropic key in settings.",
-      "Capture a video with comments available.",
-      "Ask Claude, ChatGPT, or an MCP client what the audience cared about.",
-    ],
-    behindScenes:
-      "The helper sends comment chunks to Anthropic only when enabled. The resulting themes and mentions are stored locally with the corpus.",
-    mcpTools: ["analyze_comments", "get_uoink_corpus", "find_mentions"],
-    related: ["top-comments-extraction", "entity-extraction", "find-mentions"],
-    screenshot: {
-      title: "Comment themes",
-      alt: "A Comment Intelligence output grouping comment themes, products, and disagreements.",
-    },
-  },
-  {
-    slug: "entity-extraction",
-    title: "Entity Extraction",
-    category: "Analysis",
-    status: "shipped",
-    summary: "Pull people, tools, products, companies, and topics out of every corpus.",
-    keywords: ["entity extraction youtube", "product mentions youtube comments", "cross corpus entity graph"],
-    whatItDoes:
-      "Entity Extraction makes the local library queryable by named things. It is the substrate behind find_mentions and long-run research across many videos.",
-    gettingStarted: [
-      "Enable optional AI analysis with your Anthropic key.",
-      "Capture videos across a topic.",
-      "Ask which tools, people, or companies keep recurring.",
-    ],
-    behindScenes:
-      "Extracted entities are written to the local index with links back to the source corpus. No Uoink server receives the entity graph.",
-    mcpTools: ["find_mentions", "search_uoinks", "get_uoink_corpus"],
-    related: ["find-mentions", "comment-intelligence", "sqlite-fts-search"],
-    screenshot: {
-      title: "Entity extraction output",
-      alt: "An entity extraction result with people, tools, products, companies, and topics grouped by type.",
-    },
-  },
-  {
-    slug: "hook-taxonomy",
-    title: "Hook taxonomy",
-    category: "Analysis",
-    status: "shipped",
-    summary: "The 9-category taxonomy gives creator research a stable vocabulary.",
-    keywords: ["youtube hook taxonomy", "curiosity gap hook", "contrarian hook youtube"],
-    whatItDoes:
-      "The taxonomy names the opening structures that show up again and again in high-performing videos. It is useful on one video and sharper across a creator's last 10 uploads.",
-    gettingStarted: [
-      "Open the Hook Type feature page or docs.",
-      "Capture one or more videos with Hook Type enabled.",
-      "Compare categories across videos instead of judging each opening by vibes.",
-    ],
-    behindScenes:
-      "get_taxonomy exposes the current taxonomy to MCP clients so agents can explain the categories before using them.",
-    mcpTools: ["get_taxonomy", "classify_hook"],
-    related: ["hook-type-classification", "playlist-mode", "operator-skill"],
-    screenshot: {
-      title: "Taxonomy chip strip",
-      alt: "A strip of 9 Hook Type chips: curiosity_gap, question, contrarian, story_open, promise_list, demo, authority, stakes, other.",
-    },
-  },
-  {
-    slug: "self-calibrating-classifier",
-    title: "Self-calibrating classifier",
-    category: "Analysis",
-    status: "shipped",
-    summary: "User corrections become few-shot anchors for future hook classification.",
-    keywords: ["self calibrating hook classifier", "creator taxonomy calibration", "hook classifier corrections"],
-    whatItDoes:
-      "When your read of a hook differs from the classifier, corrections train the local judgment layer toward your taste. The taxonomy stays shared, while your calibration becomes personal.",
-    gettingStarted: [
-      "Classify hooks across your library.",
-      "Correct the category when the output misses your judgment.",
-      "Run future classifications with those corrections available as anchors.",
-    ],
-    behindScenes:
-      "Corrections are stored locally and injected into later classification prompts as few-shot examples.",
-    mcpTools: ["classify_hook", "get_taxonomy"],
-    related: ["hook-type-classification", "hook-taxonomy", "local-corpus-library"],
-    screenshot: {
-      title: "Hook correction state",
-      alt: "A hook classification correction showing the original category, corrected category, and saved local anchor.",
-    },
-  },
-  {
-    slug: "windows-helper",
-    title: "Windows helper",
-    category: "Local and private",
-    status: "shipped",
-    summary: "A local helper bundles Python, yt-dlp, ffmpeg, SQLite, keyring, and MCP pieces.",
-    keywords: ["local youtube helper", "yt-dlp chrome extension", "windows video helper"],
-    whatItDoes:
-      "The helper does the work a browser extension can't do alone. It runs locally, listens on loopback, starts with Windows, and keeps the corpus on your machine.",
-    gettingStarted: [
-      "Download the installer from GitHub Releases.",
-      "Run the setup wizard.",
-      "Confirm the tray status shows the helper running.",
-    ],
-    behindScenes:
-      "The installer places Uoink under %LOCALAPPDATA%\\Uoink, registers current-user autostart, and exposes local endpoints gated by a per-install token.",
-    mcpTools: ["get_uoink_health"],
-    related: ["system-tray-status", "local-api-token-gate", "install-wizard"],
-    screenshot: {
-      title: "Helper running",
-      alt: "A Windows tray status showing that the Uoink helper is running on localhost.",
-    },
-  },
-  {
-    slug: "credential-manager-key-storage",
-    title: "Credential Manager key storage",
-    category: "Local and private",
-    status: "shipped",
-    summary: "The optional Anthropic key is stored in Windows Credential Manager.",
-    keywords: ["anthropic api key windows credential manager", "local ai key storage", "byo key youtube ai"],
-    whatItDoes:
-      "Optional AI features use your Anthropic key. Uoink stores that key in the operating system vault and only sends it to Anthropic when you run an enabled AI pass.",
-    gettingStarted: [
-      "Open Uoink settings.",
-      "Paste your Anthropic key and click Test.",
-      "Use Clear key whenever you want to remove it from the machine.",
-    ],
-    behindScenes:
-      "Settings on disk avoid secrets. The key lives in Windows Credential Manager and is read only for Anthropic Authorization headers.",
-    mcpTools: ["get_uoink_health", "classify_hook", "analyze_comments"],
-    related: ["comment-intelligence", "hook-type-classification", "settings-page"],
-    screenshot: {
-      title: "BYO key settings",
-      alt: "A Uoink settings field showing Anthropic key status, Test, Save, and Clear actions.",
-    },
-  },
-  {
-    slug: "zero-telemetry",
-    title: "Zero telemetry",
-    category: "Local and private",
-    status: "shipped",
-    summary: "No account, no Uoink cloud, no product analytics endpoint.",
-    keywords: ["private youtube summarizer", "no telemetry ai tool", "local first video tool"],
-    whatItDoes:
-      "Uoink is built for private research. The product has no hosted corpus, no account system, and no telemetry pipeline for what you capture.",
-    gettingStarted: [
-      "Install from GitHub Releases.",
-      "Use the product without creating an account.",
-      "Audit the MIT-licensed source when you want to verify the claim.",
-    ],
-    behindScenes:
-      "Network calls go to the source you asked to capture and optional Anthropic calls with your key. Uoink has no corpus server to receive your work.",
-    mcpTools: ["get_uoink_health"],
-    related: ["open-source-mit", "credential-manager-key-storage", "local-api-token-gate"],
-    screenshot: {
-      title: "Privacy summary",
-      alt: "A privacy panel explaining that Uoink stores captures locally and uses no telemetry.",
-    },
-  },
-  {
-    slug: "local-api-token-gate",
-    title: "Local API token gate",
-    category: "Local and private",
-    status: "shipped",
-    summary: "Non-public helper endpoints require the per-install X-Uoink-Token header.",
-    keywords: ["localhost api token", "local helper security", "uoink token gate"],
-    whatItDoes:
-      "The extension and setup page talk to the helper through loopback. Token gating keeps random local pages from poking private endpoints.",
-    gettingStarted: [
-      "Install Uoink normally.",
-      "Let the setup page generate configs and tokens.",
-      "Do not hand-write local API calls unless you are developing against the helper.",
-    ],
-    behindScenes:
-      "The helper generates a random per-install token. Protected endpoints require X-Uoink-Token, while public health checks stay safe for setup diagnostics.",
-    mcpTools: ["get_uoink_health"],
-    related: ["windows-helper", "mcp-server", "zero-telemetry"],
-    screenshot: {
-      title: "Token-gated health",
-      alt: "A local health diagnostic showing helper status and token-gated endpoint notes.",
-    },
-  },
-  {
-    slug: "open-source-mit",
-    title: "Open source MIT",
-    category: "Local and private",
-    status: "shipped",
-    summary: "The helper, extension, and site point back to an auditable MIT-licensed repo.",
-    keywords: ["open source youtube tool", "mit youtube transcript tool", "uoink github"],
-    whatItDoes:
-      "Open source is part of the privacy model. If the claim matters, you can inspect the helper, extension, MCP server, and network behavior.",
-    gettingStarted: [
-      "Open the GitHub repo.",
-      "Read the source and releases.",
-      "File issues or fork the project under the MIT license.",
-    ],
-    behindScenes:
-      "The public site links to GitHub for source, releases, terms, and download counts so claims are backed by inspectable artifacts.",
-    mcpTools: [],
-    related: ["zero-telemetry", "windows-helper", "local-corpus-library"],
-    screenshot: {
-      title: "GitHub release",
-      alt: "The Uoink GitHub repository and public release assets.",
-    },
-  },
-  {
-    slug: "system-tray-status",
-    title: "System tray status",
-    category: "Dashboard",
-    status: "shipped",
-    summary: "Tray status shows Running, Yoinking, or Offline without opening the browser.",
-    keywords: ["youtube helper tray icon", "local helper status", "uoink tray"],
-    whatItDoes:
-      "The tray icon answers the first support question: is the helper running? It gives quick access to the dashboard, folder, recent captures, and stop action.",
-    gettingStarted: [
-      "Install Uoink.",
-      "Look for the tray icon after startup.",
-      "Right-click it for dashboard, folder, recent captures, stop helper, and quit.",
-    ],
-    behindScenes:
-      "The tray state mirrors helper activity. Green means running, amber means a job is active, and grey means offline.",
-    mcpTools: ["get_uoink_health", "list_recent_uoinks"],
-    related: ["windows-helper", "dashboard-library", "live-activity-stream"],
-    screenshot: {
-      title: "Tray status menu",
-      alt: "A Windows tray menu with Open Dashboard, Open Folder, Recent Uoinks, Stop helper, and Quit actions.",
-    },
-  },
-  {
-    slug: "dashboard-library",
-    title: "Dashboard Library",
-    category: "Dashboard",
-    status: "in flight",
-    summary: "A desktop grid for search, filter, sort, and browse across saved captures.",
-    keywords: ["uoink dashboard", "video corpus dashboard", "youtube transcript library dashboard"],
-    whatItDoes:
-      "The dashboard turns the local library into a cockpit: search box, filters, topic chips, hook chips, thumbnails, titles, channels, and relative time.",
-    gettingStarted: [
-      "Open Dashboard from the tray.",
-      "Use search, filters, and sort controls.",
-      "Open a card to read the saved corpus.",
-    ],
-    behindScenes:
-      "The dashboard reads the same local SQLite index and file library as Memory. It is a richer desktop surface for heavier sessions.",
-    mcpTools: ["list_recent_uoinks", "search_uoinks", "get_uoink_corpus"],
-    related: ["memory-page", "sqlite-fts-search", "topic-folders"],
-    screenshot: {
-      title: "Dashboard grid",
-      alt: "A dark Uoink dashboard grid with saved corpus cards, hook chips, search, filters, and sort controls.",
-    },
-  },
-  {
-    slug: "live-activity-stream",
-    title: "Live Activity Stream",
-    category: "Dashboard",
-    status: "in flight",
-    summary: "SSE job updates show fetch, transcribe, screenshots, classify, and write phases.",
-    keywords: ["live extraction progress", "youtube transcript job status", "server sent events dashboard"],
-    whatItDoes:
-      "Activity makes long jobs visible. Playlist runs and slower video captures show exactly which phase is active and what is queued next.",
-    gettingStarted: [
-      "Start a playlist or long video job.",
-      "Open the dashboard Activity tab.",
-      "Watch phase chips update until the job writes the corpus.",
-    ],
-    behindScenes:
-      "The dashboard, popup, and helper share the same job stream so progress vocabulary stays consistent across surfaces.",
-    mcpTools: ["get_job_status", "cancel_job"],
-    related: ["playlist-mode", "rate-limit-queue", "system-tray-status"],
-    screenshot: {
-      title: "Activity stream",
-      alt: "A dashboard activity tab showing in-flight Uoink jobs and phase chips.",
-    },
-  },
-  {
-    slug: "settings-page",
-    title: "Settings page",
-    category: "Dashboard",
-    status: "in flight",
-    summary: "Manage key status, output folder, topics, helper health, MCP config, and updates.",
-    keywords: ["uoink settings", "anthropic key settings", "mcp config generator"],
-    whatItDoes:
-      "Settings keeps setup tasks in one local place: BYO key, feature toggles, output folder, topic rules, helper status, and copy-ready MCP snippets.",
-    gettingStarted: [
-      "Open setup from the extension or dashboard.",
-      "Test and save your optional Anthropic key.",
-      "Copy the generated MCP config for your client.",
-    ],
-    behindScenes:
-      "Settings calls local helper endpoints. Secrets go to the OS credential vault, while non-secret preferences write to local settings files.",
-    mcpTools: ["get_uoink_health"],
-    related: ["credential-manager-key-storage", "mcp-server", "topic-folders"],
-    screenshot: {
-      title: "Settings screen",
-      alt: "A Uoink settings screen with Anthropic key status, output folder, topics, helper status, and MCP config.",
-    },
-  },
-  {
-    slug: "install-wizard",
-    title: "Install wizard",
-    category: "Dashboard",
-    status: "in flight",
-    summary: "The Windows installer explains the helper, migration, disk use, and running-state confirmation.",
-    keywords: ["uoink installer", "windows setup wizard", "local helper installer"],
-    whatItDoes:
-      "The wizard sets the right expectation before the extension is installed. It tells users a local helper is required, where it lives, and how to confirm it is running.",
-    gettingStarted: [
-      "Download the installer.",
-      "Run through the setup wizard.",
-      "Use the final screen to open YouTube or the setup page.",
-    ],
-    behindScenes:
-      "The installer uses user-space install paths, autostart registration, branded screens, and migration checks for legacy Yoink folders.",
-    mcpTools: ["get_uoink_health"],
-    related: ["windows-helper", "first-run-splash", "system-tray-status"],
-    screenshot: {
-      title: "Installer finished screen",
-      alt: "A Uoink installer finished screen confirming the helper is running.",
-    },
-  },
-  {
-    slug: "first-run-splash",
-    title: "First-run splash",
-    category: "Dashboard",
-    status: "in flight",
-    summary: "A small confirmation window shows Uoink is running after install or startup.",
-    keywords: ["uoink splash screen", "helper running confirmation", "local helper startup"],
-    whatItDoes:
-      "The splash closes the invisible-helper gap. It confirms the helper is listening, gives quick links, then gets out of the way.",
-    gettingStarted: [
-      "Install or restart Uoink.",
-      "Wait for the splash to confirm helper status.",
-      "Open Dashboard, open YouTube, or let it minimize to the tray.",
-    ],
-    behindScenes:
-      "The splash pings the local helper before promising that Uoink is running. Failure states point to setup and diagnostics.",
-    mcpTools: ["get_uoink_health"],
-    related: ["system-tray-status", "install-wizard", "windows-helper"],
-    screenshot: {
-      title: "Running splash",
-      alt: "A frameless Uoink splash window confirming the local helper is running.",
-    },
-  },
-  {
-    slug: "rate-limit-queue",
-    title: "Rate-limit queue",
-    category: "Dashboard",
-    status: "shipped",
-    summary: "Rate-limited jobs retry with exponential backoff instead of failing silently.",
-    keywords: ["youtube rate limit retry", "yt-dlp retry queue", "playlist extraction queue"],
-    whatItDoes:
-      "Research jobs should not die quietly because YouTube slowed a request. Uoink retries with a visible queue so playlist and batch work can recover.",
-    gettingStarted: [
-      "Start a capture or playlist job.",
-      "Leave Uoink running if YouTube rate-limits the request.",
-      "Check Activity, popup, or tray state for retry progress.",
-    ],
-    behindScenes:
-      "The queue backs off at 60 seconds, 5 minutes, and 15 minutes for up to 3 attempts, then reports a clear failure state.",
-    mcpTools: ["get_job_status", "cancel_job", "get_uoink_health"],
-    related: ["playlist-mode", "live-activity-stream", "system-tray-status"],
-    screenshot: {
-      title: "Retry queue",
-      alt: "A queued Uoink job showing retry timing and current extraction phase.",
-    },
-  },
+    "cta": "Store your transcripts and search databases offline without cloud accounts.",
+    "screenshot": {
+      "title": "Uoink dashboard Library tab showing offline cards",
+      "alt": "Uoink dashboard Library tab showing offline cards",
+      "src": "/screenshots/no-cloud/01-dashboard-view.png"
+    }
+  }
 ];
 
 export const featureBySlug = new Map(features.map((feature) => [feature.slug, feature]));

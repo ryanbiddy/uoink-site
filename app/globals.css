@@ -1344,6 +1344,22 @@ button, .btn, .nav-cta, .mobile-menu a, .docs-sidebar a { min-height: 44px; }
   color: var(--cream);
   padding: 8px 10px;
 }
+.feature-code-example {
+  background: var(--ink);
+  border-radius: var(--r-md);
+  color: var(--cream);
+  margin: 18px 0 0;
+  overflow-x: auto;
+  padding: 18px;
+}
+.feature-code-example code {
+  color: inherit;
+  display: block;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre;
+}
 .feature-side {
   display: grid;
   gap: 14px;

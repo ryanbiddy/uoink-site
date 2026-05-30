@@ -8,9 +8,9 @@ const page: SitePage = {
   ...pages.features,
   route: "/features",
   mode: "mode-light",
-  title: "Uoink Features: Local Video Corpus, MCP Tools, Hooks, Comments, Memory",
+  title: "Uoink Features: Capture, Library, Workspace, Verification, MCP, Identity",
   description:
-    "Every Uoink feature, grouped by capture, AI handoff, local library, analysis, privacy, and dashboard surfaces.",
+    "Every Uoink feature, grouped by capture, library, workspace, verification, distribution, and identity surfaces.",
   keywords: [
     "youtube transcript tool features",
     "local video corpus database",
@@ -22,8 +22,8 @@ const page: SitePage = {
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">feature inventory</span>
-      <h1 class="display-xl">Every Uoink feature, mapped.</h1>
-      <p class="lede">Capture the source, keep the corpus, search the memory, then hand it to Claude, ChatGPT, Cursor, or an MCP agent. This page is the index.</p>
+      <h1 class="display-xl">Everything Uoink does.</h1>
+      <p class="lede">Capture the source, build the library, assemble workspaces, verify claims, then hand the evidence to Claude, ChatGPT, Cursor, or an MCP agent.</p>
       <div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Install Uoink</a><a class="btn ghost large" href="/api/features-manifest">Manifest JSON</a></div>
     </div>
   </div>
@@ -64,7 +64,7 @@ export default function Page() {
               <section key={category.name} id={id} className="feature-category" data-screen-label={`features / ${id}`}>
                 <div className="feature-category-head">
                   <span className="eyebrow">{category.name}</span>
-                  <h2 className="display-l">{category.name === "AI handoff" ? "Send it where you work." : category.name}</h2>
+                  <h2 className="display-l">{category.name}</h2>
                   <p>{category.deck}</p>
                 </div>
                 <div className="feature-card-grid">
