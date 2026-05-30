@@ -124,6 +124,33 @@ Feature detail page. Also supports https://uoink.app/features/first-run-splash?e
 ## URL: https://uoink.app/features/rate-limit-queue
 Feature detail page. Also supports https://uoink.app/features/rate-limit-queue?embed=true for dashboard embeds without site chrome.
 
+## URL: https://uoink.app/blog
+Field notes index. Includes eight launch articles, tag filters, client-side search, RSS at https://uoink.app/blog/rss.xml, and TechArticle schema on each article.
+
+## URL: https://uoink.app/blog/9-hook-types-every-creator-should-recognize
+Article: The 9 Hook Types Every Creator Should Recognize. Explains Uoink's Hook Type taxonomy for YouTube openings: curiosity gap, contrarian, question, demo, authority, stakes, and related patterns.
+
+## URL: https://uoink.app/blog/how-to-find-your-channels-overperformer-pattern
+Article: How to Find Your Channel's Overperformer Pattern. Shows how to use Uoink's local corpus, playlist capture, hook classification, and metadata to find videos that beat a channel baseline.
+
+## URL: https://uoink.app/blog/why-your-ai-agent-should-have-a-corpus
+Article: Why Your AI Agent Should Have a Corpus. Explains why MCP agents need local searchable source material instead of generic memory.
+
+## URL: https://uoink.app/blog/local-first-no-uoink-cloud-what-it-costs-us
+Article: Local-First, No Uoink Cloud: What It Costs Us. Explains the privacy and business tradeoffs behind local helper architecture, BYO Anthropic keys, and zero telemetry.
+
+## URL: https://uoink.app/blog/how-to-write-a-script-grounded-in-your-corpus
+Article: How to Write a Script Grounded in Your Corpus. Walkthrough for using saved Uoinks, style anchors, and Writing Studio to draft source-grounded scripts.
+
+## URL: https://uoink.app/blog/tweet-what-you-learned-from-a-youtube-video
+Article: Tweet What You Learned from a YouTube Video. Workflow for turning a technical video into a credited thread with specific claims and source context.
+
+## URL: https://uoink.app/blog/uoink-any-page-crawl4ai-fork
+Article: Uoink Any Page: Our Crawl4AI Fork. Explains the local universal page capture path, allowlist safety, and clean markdown extraction.
+
+## URL: https://uoink.app/blog/voice-dna-how-uoink-writes
+Article: Voice DNA: How Uoink Writes. Defines the writing rules and warning system behind Uoink's creator-facing writing surfaces.
+
 ## URL: https://uoink.app/agents
 Agent setup explains the local Model Context Protocol server, stdio transport, placeholder config snippets, and 13 tools: uoink_video, uoink_playlist, get_job_status, cancel_job, list_recent_uoinks, search_uoinks, get_uoink_corpus, analyze_comments, classify_hook, get_taxonomy, get_citation_map, get_uoink_health, find_mentions.
 

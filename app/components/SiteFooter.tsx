@@ -24,6 +24,9 @@ export function SiteFooter() {
               <Link href="/features">Features</Link>
             </li>
             <li>
+              <Link href="/blog">Field notes</Link>
+            </li>
+            <li>
               <Link href="/podcasts">Podcasts</Link>
             </li>
           </ul>
@@ -42,6 +45,9 @@ export function SiteFooter() {
             </li>
             <li>
               <a href="/llms.txt">llms.txt</a>
+            </li>
+            <li>
+              <a href="/blog/rss.xml">RSS</a>
             </li>
           </ul>
         </div>
