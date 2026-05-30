@@ -1,0 +1,47 @@
+﻿[
+    {
+        "slug":  "youtube-video-capture",
+        "image":  "screenshots/features/youtube-video-capture.png",
+        "alt":  "Uoink button under a YouTube video with the helper online."
+    },
+    {
+        "slug":  "playlist-mode",
+        "image":  "screenshots/features/playlist-mode.png",
+        "alt":  "Uoink Activity tab showing playlist queue status and phase chips."
+    },
+    {
+        "slug":  "smart-screenshot-picker",
+        "image":  "screenshots/features/smart-screenshot-picker.png",
+        "alt":  "Uoink dashboard library cards with screenshot-backed video context."
+    },
+    {
+        "slug":  "mcp-server",
+        "image":  "screenshots/features/mcp-server.png",
+        "alt":  "Uoink dashboard About tab showing local helper and MCP surfaces."
+    },
+    {
+        "slug":  "memory-page",
+        "image":  "screenshots/features/memory-page.png",
+        "alt":  "Uoink Library tab populated with local corpus cards."
+    },
+    {
+        "slug":  "find-mentions",
+        "image":  "screenshots/features/find-mentions.png",
+        "alt":  "Uoink Library tab ready for search across saved local sources."
+    },
+    {
+        "slug":  "hook-type-classification",
+        "image":  "screenshots/features/hook-type-classification.png",
+        "alt":  "Uoink Library cards showing hook classification chips."
+    },
+    {
+        "slug":  "comment-intelligence",
+        "image":  "screenshots/features/comment-intelligence.png",
+        "alt":  "Uoink Evidence tab for reviewing claims and supporting context."
+    },
+    {
+        "slug":  "dashboard-library",
+        "image":  "screenshots/features/dashboard-library.png",
+        "alt":  "Uoink dashboard Library tab with filters and saved uoinks."
+    }
+]

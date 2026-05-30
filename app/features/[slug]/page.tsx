@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageShell } from "../../components/PageShell";
@@ -181,20 +182,27 @@ function FeatureVisual({ feature }: { feature: Feature }) {
       </div>
       <div className="feature-visual-body">
         <div className="mini-heading">{feature.title}</div>
-        <div className="corpus compact">
-          <div className="hd">
-            <span>{feature.slug}.md</span>
-            <span>{tool}</span>
+        {feature.screenshot.src ? (
+          <figure className="feature-visual-shot">
+            <Image src={feature.screenshot.src} alt={feature.screenshot.alt} width={1280} height={800} priority />
+            <figcaption>{feature.screenshot.title}</figcaption>
+          </figure>
+        ) : (
+          <div className="corpus compact">
+            <div className="hd">
+              <span>{feature.slug}.md</span>
+              <span>{tool}</span>
+            </div>
+            <span className="ln k"># {feature.title}</span>
+            <span className="ln dim">status: {feature.status}</span>
+            <span className="ln dim">category: {feature.category}</span>
+            <span className="ln">&nbsp;</span>
+            <span className="ln k">## What it does</span>
+            <span className="ln dim">{feature.summary}</span>
+            <span className="ln k">## Agent path</span>
+            <span className="ln hl">{tool}</span>
           </div>
-          <span className="ln k"># {feature.title}</span>
-          <span className="ln dim">status: {feature.status}</span>
-          <span className="ln dim">category: {feature.category}</span>
-          <span className="ln">&nbsp;</span>
-          <span className="ln k">## What it does</span>
-          <span className="ln dim">{feature.summary}</span>
-          <span className="ln k">## Agent path</span>
-          <span className="ln hl">{tool}</span>
-        </div>
+        )}
       </div>
     </div>
   );
