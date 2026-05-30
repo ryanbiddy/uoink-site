@@ -4,6 +4,7 @@ const links = [
   ["/install", "Install"],
   ["/how", "How"],
   ["/features", "Features"],
+  ["/blog", "Blog"],
   ["/podcasts", "Podcasts"],
   ["/agents", "Agents"],
   ["/mcp", "MCP"],
@@ -13,6 +14,7 @@ function tickerFor(active: string) {
   if (active.startsWith("/install")) return ["UOINK v3.2 / install", "helper / extension / local corpus"];
   if (active.startsWith("/how")) return ["UOINK v3.2 / workflow", "click / corpus / AI / result"];
   if (active.startsWith("/features")) return ["UOINK v3.2 / features", "corpus / memory / hooks / dashboard"];
+  if (active.startsWith("/blog")) return ["UOINK v3.2 / field notes", "hooks / agents / corpus / local-first"];
   if (active.startsWith("/podcasts")) return ["UOINK v3.2 / podcasts", "RSS / Whisper / diarization / local"];
   if (active.startsWith("/agents") || active.startsWith("/mcp")) return ["UOINK v3.2 / MCP", "13 tools / Claude Desktop / Cursor / Cline"];
   if (active.startsWith("/about")) return ["UOINK v3.2 / about", "GitHub releases / public downloads / no tracking"];

@@ -12,6 +12,8 @@
 
 - [Features](https://uoink.app/features): complete feature index with 38 feature pages.
 - [Feature manifest](https://uoink.app/api/features-manifest): dashboard and agent-readable feature URLs.
+- [Field notes](https://uoink.app/blog): launch articles for YouTube hook types, local-first architecture, MCP agents, Writing Studio, and universal page capture.
+- [RSS](https://uoink.app/blog/rss.xml): article feed for crawlers and feed readers.
 - [Podcasts](https://uoink.app/podcasts): RSS feeds, local Whisper transcription, speaker diarization.
 - [Privacy](https://uoink.app/privacy): no account, no Uoink cloud, no telemetry.
 

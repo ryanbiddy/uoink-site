@@ -16,6 +16,7 @@ export type PageId =
   | "research"
   | "agentDocs"
   | "hooks"
+  | "blog"
   | "dashboard"
   | "installed";
 
@@ -72,7 +73,7 @@ const installFaq: FaqItem[] = [
   {
     question: "Why does Uoink need a desktop helper?",
     answer:
-      "The browser extension cannot run yt-dlp, ffmpeg, Whisper, SQLite indexing, or the local MCP server by itself. The helper does that work locally so your corpus never has to pass through a Uoink cloud.",
+      "The browser extension can't run yt-dlp, ffmpeg, Whisper, SQLite indexing, or the local MCP server by itself. The helper does that work locally so your corpus never has to pass through a Uoink cloud.",
   },
 ];
 
@@ -615,6 +616,7 @@ install:
   research: aliasPage("research", "/research", "Research workflow moved into Podcasts and Features", "Research workflows now live across Podcasts and Features.", "/features"),
   agentDocs: aliasPage("agentDocs", "/agent-docs", "Agent docs moved to Agents and MCP", "Agent docs now live at /agents and /mcp.", "/agents"),
   hooks: aliasPage("hooks", "/hooks", "Hook taxonomy moved into Features", "Hook Type classification is covered in Features and Agents.", "/features"),
+  blog: aliasPage("blog", "/blog", "Uoink Field Notes", "Launch articles about hooks, agents, local-first architecture, and corpus workflows.", "/blog"),
   dashboard: aliasPage("dashboard", "/dashboard", "Dashboard moved into Features", "The dashboard and memory surfaces are covered in Features.", "/features"),
   installed: aliasPage("installed", "/installed", "Uoink installed", "Start with the install and how-it-works pages.", "/how"),
 };

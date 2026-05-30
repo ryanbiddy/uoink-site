@@ -671,7 +671,7 @@ export const features: Feature[] = [
     summary: "A local helper bundles Python, yt-dlp, ffmpeg, SQLite, keyring, and MCP pieces.",
     keywords: ["local youtube helper", "yt-dlp chrome extension", "windows video helper"],
     whatItDoes:
-      "The helper does the work a browser extension cannot do alone. It runs locally, listens on loopback, starts with Windows, and keeps the corpus on your machine.",
+      "The helper does the work a browser extension can't do alone. It runs locally, listens on loopback, starts with Windows, and keeps the corpus on your machine.",
     gettingStarted: [
       "Download the installer from GitHub Releases.",
       "Run the setup wizard.",
