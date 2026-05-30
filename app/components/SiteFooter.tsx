@@ -49,6 +49,9 @@ export function SiteFooter() {
           <h5>About</h5>
           <ul>
             <li>
+              <Link href="/about">About + downloads</Link>
+            </li>
+            <li>
               <Link href="/privacy">Privacy</Link>
             </li>
             <li>
