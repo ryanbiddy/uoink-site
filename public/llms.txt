@@ -22,6 +22,7 @@
 
 ## Trust
 
+- [About + public downloads](https://uoink.video/about): GitHub release download counts, lifetime totals, and no user tracking note.
 - [GitHub](https://github.com/ryanbiddy/uoink): source, releases, MIT license.
 - [Changelog](https://uoink.video/changelog): shipped and in-flight work.
 - [Terms](https://uoink.video/terms): short legal notes.

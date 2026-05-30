@@ -15,6 +15,7 @@ function tickerFor(active: string) {
   if (active === "/features") return ["UOINK v3.1 / features", "corpus / memory / hooks / podcasts"];
   if (active === "/podcasts") return ["UOINK v3.1 / podcasts", "RSS / Whisper / diarization / local"];
   if (active === "/agents" || active === "/mcp") return ["UOINK v3.1 / MCP", "13 tools / Claude Desktop / Cursor / Cline"];
+  if (active === "/about") return ["UOINK v3.1 / about", "GitHub releases / public downloads / no tracking"];
   if (active === "/privacy") return ["UOINK v3.1 / privacy", "local-first / no cloud / no telemetry"];
   return ["UOINK v3.1 / local video corpus", "open source / MIT / model agnostic"];
 }
@@ -83,6 +84,9 @@ export function TopNav({ active }: { active: string }) {
           </Link>
           <Link href="/changelog" className={active === "/changelog" ? "active" : ""}>
             Changelog
+          </Link>
+          <Link href="/about" className={active === "/about" ? "active" : ""}>
+            About
           </Link>
         </div>
         <Link className="nav-cta" href="/install">

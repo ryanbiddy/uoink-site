@@ -33,6 +33,10 @@ MCP tools: uoink_video, uoink_playlist, get_job_status, cancel_job, list_recent_
 
 The MCP page and /mcp/manifest.json expose server metadata, supported transports, install links, client config notes, and tool names in machine-readable form for agents.
 
+## URL: https://uoink.video/about
+
+The About page explains Uoink's open-source posture and shows public GitHub release download counts. Counts come from GitHub's public Releases API and aggregate lifetime plus per-release asset downloads. Uoink does not track who downloaded, only displays public aggregate counts.
+
 ## URL: https://uoink.video/privacy
 
 Uoink has no account, no Uoink cloud, no telemetry, and no hosted corpus. Captures live on disk. Network calls go to the source being extracted and, only when optional AI features are enabled, Anthropic with the user's own API key. The key is stored in the operating system credential vault.

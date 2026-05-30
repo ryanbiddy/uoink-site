@@ -6,6 +6,7 @@ export type PageId =
   | "podcasts"
   | "agents"
   | "mcp"
+  | "about"
   | "privacy"
   | "changelog"
   | "terms"
@@ -525,6 +526,54 @@ install:
 </section>
 <script type="application/json" id="uoink-mcp-manifest">
 {"server":{"name":"uoink","version":"3.1","homepage":"https://uoink.video","source":"https://github.com/ryanbiddy/uoink","license":"MIT","transports":["stdio","http-experimental"]},"tools":${JSON.stringify(mcpTools.map(([name, description]) => ({ name, description })))}}</script>`,
+  },
+  about: {
+    id: "about",
+    route: "/about",
+    mode: "mode-dark",
+    title: "About Uoink: Open Source Local Corpus Software",
+    description:
+      "Learn why Uoink is local-first, open source, and built around public GitHub releases instead of user tracking.",
+    keywords: ["uoink about", "uoink github downloads", "open source youtube tool", "local-first ai tool"],
+    html: `
+<section class="hero" data-screen-label="about / hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="copy">
+        <span class="eyebrow">about</span>
+        <h1 class="display-xl">Built in public. Counted in <em>public.</em></h1>
+        <p class="lede">Uoink is local corpus software for people who want the source material, not another cloud inbox. The code is MIT. The releases are public. The download numbers below come straight from GitHub.</p>
+        <div class="ctas">
+          <a class="btn primary large" href="${RELEASE_URL}">Latest release</a>
+          <a class="btn ghost large" href="${GITHUB_URL}">Browse GitHub</a>
+        </div>
+      </div>
+      <div class="corpus">
+        <div class="hd"><span>project posture</span><span>public facts</span></div>
+        <span class="ln k">license: MIT</span>
+        <span class="ln dim">source: github.com/ryanbiddy/uoink</span>
+        <span class="ln k">tracking: none from Uoink</span>
+        <span class="ln dim">Vercel Web Analytics only; cookieless pageviews</span>
+        <span class="ln k">downloads: GitHub public API</span>
+        <span class="ln dim">release assets counted, people never counted</span>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" data-screen-label="about / why">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">why this exists</span>
+      <h2 class="display-l">The corpus belongs on <em>your machine.</em></h2>
+      <p class="lede">Uoink exists because useful videos should become durable working material: timestamped words, frames, comments, metadata, and citations that your model can actually use.</p>
+    </div>
+    <div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+      <article class="card"><span class="num">01</span><h3>Local-first.</h3><p>No Uoink account, no hosted corpus, no product database full of your research.</p></article>
+      <article class="card"><span class="num">02</span><h3>Open source.</h3><p>The helper, extension, and agent surface are inspectable. If the work matters, you should be able to audit the tool.</p></article>
+      <article class="card"><span class="num">03</span><h3>Agent-readable.</h3><p>The site exposes /llms.txt and /mcp/manifest.json so agents can find the real integration surface.</p></article>
+    </div>
+  </div>
+</section>`,
   },
   privacy: {
     id: "privacy",
