@@ -1,94 +1,261 @@
 {
-  "server": {
-    "name": "uoink",
-    "version": "3.2",
-    "description": "Local Uoink helper exposing video and podcast extraction, local corpus search, hook classification, comment analysis, and entity lookup as MCP tools.",
-    "homepage": "https://uoink.app",
-    "source": "https://github.com/ryanbiddy/uoink",
-    "license": "MIT",
-    "transports": [
-      {
-        "type": "stdio",
-        "status": "supported"
-      },
-      {
-        "type": "http",
-        "status": "experimental",
-        "url": "http://127.0.0.1:5179/mcp"
-      }
-    ],
-    "install": {
-      "windows": "https://uoink.app/install#windows",
-      "mac": "https://uoink.app/install#mac"
-    }
-  },
-  "client_configs": {
-    "claude_desktop": {
-      "file": "%APPDATA%/Claude/claude_desktop_config.json",
-      "note": "Placeholder path. Use the Uoink setup page after install for the exact machine path."
-    },
-    "cursor": {
-      "note": "Add as a stdio MCP server. Use the setup page generated command."
-    },
-    "cline": {
-      "note": "Add as a stdio MCP server. Use the setup page generated command."
-    },
-    "continue": {
-      "note": "Add as a stdio MCP server. Use the setup page generated command."
-    }
-  },
+  "schema_version": "3.2",
+  "name": "Uoink MCP Tool Manifest",
+  "description": "Public, agent-readable inventory of Uoink local MCP tools exposed by the desktop helper.",
+  "source": "ryanbiddy/uoink origin/main:uoink_mcp_tools.py",
+  "tool_count": 63,
   "tools": [
     {
       "name": "uoink_video",
-      "description": "Extract a structured corpus from one video URL."
+      "description": "Extract a single YouTube video into a Uoink corpus. Returns the saved folder, markdown corpus, and screenshot paths."
     },
     {
       "name": "uoink_playlist",
-      "description": "Extract up to 10 videos from a playlist URL."
+      "description": "Start asynchronous extraction for a YouTube playlist."
     },
     {
       "name": "get_job_status",
-      "description": "Poll a running extraction job."
+      "description": "Return the full status object for an async Uoink job."
     },
     {
       "name": "cancel_job",
-      "description": "Cancel a running extraction job."
+      "description": "Cancel an async Uoink job and leave partial outputs on disk."
     },
     {
       "name": "list_recent_uoinks",
-      "description": "Return the latest captures from the local library."
+      "description": "List recent saved Uoink capture corpora."
     },
     {
       "name": "search_uoinks",
-      "description": "Run full-text search across transcripts, comments, and titles."
+      "description": "Full-text search across saved Uoink capture corpora."
     },
     {
       "name": "get_uoink_corpus",
-      "description": "Fetch one saved corpus as markdown."
+      "description": "Return the full markdown corpus for a saved Uoink capture by slug."
     },
     {
       "name": "analyze_comments",
-      "description": "Cluster comment themes, products, and disagreements."
+      "description": "Run Comment Intelligence on an existing Uoink capture and return themes, mentioned products/tools, and disagreements."
     },
     {
       "name": "classify_hook",
-      "description": "Classify an opening into the nine Hook Type categories."
+      "description": "Classify the hook type for an existing Uoink capture."
     },
     {
       "name": "get_taxonomy",
-      "description": "Return the Hook Type taxonomy."
+      "description": "Return captured Hook Type taxonomy rows, optionally filtered by channel and hook_type."
     },
     {
       "name": "get_citation_map",
-      "description": "Map corpus slugs to source URLs and timestamps."
+      "description": "Return the transcript + screenshot citation map for a saved Uoink capture, each entry with a timestamped YouTube deep link."
     },
     {
       "name": "get_uoink_health",
-      "description": "Check helper status and diagnostics."
+      "description": "Return the per-section extraction health score for a saved Uoink capture."
     },
     {
       "name": "find_mentions",
-      "description": "Find every video or podcast that mentions an entity."
+      "description": "Find every place an entity (person, tool, product, company, or topic) is mentioned across saved uoinks, newest first, each with a timestamped YouTube deep link."
+    },
+    {
+      "name": "analyze_self_channel",
+      "description": "v2.5 P3 your-channel mode: aggregate the user's own saved videos (those tagged is_self via channel-name recognition) into hook evolution, format evolution, performance trend by month, and a top-performers list. Pass `handle` to scope to one of the user's registered channels; omit for the union across every registered channel. `limit` caps the top_performers list (default 10, max 100). Pure local read."
+    },
+    {
+      "name": "get_schema_version",
+      "description": "Report the data-shape versions Uoink writes + the supported read-range. v2.5 substrate: cross-version aggregators (Channel Decoder, Niche Corpus) check this before assuming v2 fields are present in older rows/sidecars. Read-only, no arguments."
+    },
+    {
+      "name": "get_user_role",
+      "description": "v3.1 P2: report the user's persisted role (creator | researcher | marketer | mixed) + the dashboard emphasis (primary/secondary chip order + default sort) the helper computes from it. Read-only."
+    },
+    {
+      "name": "set_user_role",
+      "description": "v3.1 P2: persist the user's role choice. Drives Library default sort + filter-chip emphasis on the dashboard. Bounded enum -- one of creator | researcher | marketer | mixed."
+    },
+    {
+      "name": "check_live_status",
+      "description": "v3.1: probe a URL to find out if it is a live broadcast without extracting. Returns one of: not_live | live | upcoming | post_live | was_live. The agent uses this to decide between immediate extraction and 'wait until the broadcast ends' (the helper's live_stream_behavior setting handles the latter for /extract; this tool is the read-only probe path)."
+    },
+    {
+      "name": "add_podcast_feed",
+      "description": "v3.1 podcast: register an RSS feed URL. Idempotent -- existing URL returns the same row. poll_interval_min default 60, range 15-1440."
+    },
+    {
+      "name": "list_podcast_feeds",
+      "description": "v3.1 podcast: list registered RSS feeds newest-first."
+    },
+    {
+      "name": "remove_podcast_feed",
+      "description": "v3.1 podcast: delete a feed + cascade its episodes."
+    },
+    {
+      "name": "poll_podcast_feed",
+      "description": "v3.1 podcast: trigger one feed poll (HTTP GET + RSS/Atom parse + upsert episodes). Conditional GET via ETag/If-Modified-Since on subsequent polls so daily-news podcasts don't re-download an unchanged feed body."
+    },
+    {
+      "name": "list_podcast_episodes",
+      "description": "v3.1 podcast: list episodes. Optional feed_id + status filters (new | queued | downloaded | transcribed | ignored). Newest published first."
+    },
+    {
+      "name": "download_podcast_episode",
+      "description": "v3.1 podcast: download an episode's MP3 via yt-dlp + ffmpeg. Synchronous. Returns when the file lands at <data_root>/Podcasts/<feed-slug>/<episode-slug>.mp3 or yt-dlp errors. Idempotent -- skips re-download when the canonical path already has a non-zero file."
+    },
+    {
+      "name": "get_whisperx_status",
+      "description": "v3.1: report whether the WhisperX runtime is importable + the currently-selected model size + the diarization default. Agents call this before transcribe to decide whether to surface an install prompt to the user."
+    },
+    {
+      "name": "transcribe_podcast_episode",
+      "description": "v3.1 podcast: run WhisperX on a downloaded episode. Synchronous. Reads audio_local_path; writes the JSON transcript next to the MP3. Returns the structured transcript metadata, OR consent_required=True when the first-time model download (200 MB - 2 GB) needs the user to opt in (re-issue with consent_given=True after the dashboard prompt records the opt-in), OR a runtime-not-installed error when whisperx isn't importable."
+    },
+    {
+      "name": "add_monitored_playlist",
+      "description": "v3.1 mobile bridge: register a YouTube playlist URL to monitor for auto-uoinks. Idempotent on UNIQUE playlist_url. poll_interval_min default 5, range 1-1440."
+    },
+    {
+      "name": "list_monitored_playlists",
+      "description": "v3.1 mobile bridge: list registered playlists newest-first."
+    },
+    {
+      "name": "remove_monitored_playlist",
+      "description": "v3.1 mobile bridge: delete a playlist + cascade its discovery events."
+    },
+    {
+      "name": "poll_monitored_playlist",
+      "description": "v3.1 mobile bridge: poll one playlist (yt-dlp --flat-playlist) + diff against last_seen_video_ids + auto-queue new videos via the existing pending_uoinks retry worker. Returns the new[] discovery list so the dashboard can show it under a 'from mobile playlist' label distinct from rate-limit retries."
+    },
+    {
+      "name": "list_monitored_playlist_events",
+      "description": "v3.1 mobile bridge: list per-discovery events. Optional filters: playlist_id, status (discovered | queued | extracted | failed). Newest first."
+    },
+    {
+      "name": "get_user_taste",
+      "description": "v2.5 S4 taste memory: return the consolidated TASTE.md (preferred hooks/formats, avoid list, top performance anchors). Generated from engagement events + persisted taste anchors. Read-only, no arguments."
+    },
+    {
+      "name": "get_user_memory",
+      "description": "v2.5 S4 user memory: return the user's free-form USER.md notes (Channels I admire, My channel(s), Topics, Workflow notes). Hand-edited markdown -- the consolidator never overwrites this file. No arguments."
+    },
+    {
+      "name": "update_user_taste",
+      "description": "v2.5 S4 taste anchors: set one taste anchor section (preferred_hooks | preferred_formats | avoid) and re-consolidate TASTE.md. `content` is markdown that replaces the section body verbatim -- bullets recommended."
+    },
+    {
+      "name": "get_engagement_signal",
+      "description": "v2.5 S2 engagement memory: return the time-decayed value_score for one video plus per-event-type counts and last event timestamp. Events live entirely on the local SQLite index (zero outbound). Weights are documented in index.py (_ENGAGEMENT_WEIGHTS); decay half-life is 30 days."
+    },
+    {
+      "name": "classify_facets",
+      "description": "Persist agent-classified facets + free-form tags for a video. Model-agnostic: the calling agent does the LLM work using its own model; this tool validates against bounded enums and writes to the row. The server fills performance_tier (channel-relative) and length_bucket (from duration) if you don't pass them."
+    },
+    {
+      "name": "query_by_facets",
+      "description": "Filter saved uoinks by facet values (format / performance_tier / hook_type / topic / length_bucket / tag). All filters AND-combined; newest first."
+    },
+    {
+      "name": "get_facet_taxonomy",
+      "description": "Enum lists for the v2.5 facet axes (used for filter chips)."
+    },
+    {
+      "name": "get_transcript_reliability",
+      "description": "Return stored transcript reliability spans for a saved Uoink capture by YouTube video_id. Read-only; computation is triggered by the helper endpoint or the user's auto-check setting."
+    },
+    {
+      "name": "assemble_workspace",
+      "description": "v3 P4 build workspace: pull a corpus slice for planning a video. Ranks uoinks by S1 facets (format match), performance tier (over > average > under), and S2 engagement value_score. Returns the slice + audience questions from comments + optional self-channel snapshot (if your_channel is set) + optional taste anchors (if S4 memory layer is available). Pure local read; the calling agent does any LLM analysis downstream. If `workspace_id` is provided the slice is persisted onto that row."
+    },
+    {
+      "name": "critique_against_corpus",
+      "description": "v3 P4 critique tool. Two-phase: call WITHOUT `findings` to retrieve the assembled context (corpus slice + audience questions + taste anchors) -- the agent does the LLM analysis on that context. Call WITH `findings` (structured JSON object with hook_strength, structural_deviation, pacing_issues, missing_audience_hooks per ROADMAP P4) to persist the analysis to the workspace's critique log. Model-agnostic default; BYO-key mode accepted but not yet implemented on-server."
+    },
+    {
+      "name": "list_workspaces",
+      "description": "v3 P4: list build workspaces newest-first. Read-only."
+    },
+    {
+      "name": "get_workspace",
+      "description": "v3 P4: fetch one workspace + its full critique log (every draft + findings combination the agent has persisted)."
+    },
+    {
+      "name": "extract_claims",
+      "description": "v3 A2 (Loki-inspired): persist agent-extracted claims for a video. LOCKED FRAMING -- the calling agent does the LLM decomposition; this tool validates + writes. Each claim is {claim_text, check_worthiness? (0.0-1.0), context?}. NEVER auto-asserts truth verdicts -- surfaces checkable claims so the user can decide which to verify."
+    },
+    {
+      "name": "verify_claim",
+      "description": "v3 A2: record evidence for one extracted claim. alignment_signal MUST be one of supports / contradicts / mixed / inconclusive. NEVER 'true' / 'false' / 'lie'. The user judges the verdict from the surfaced evidence."
+    },
+    {
+      "name": "list_claims",
+      "description": "v3 A2: list extracted claims. Filter by video_id and/or status (extracted | verified | not-attempted)."
+    },
+    {
+      "name": "get_claim",
+      "description": "v3 A2: fetch one claim by id, with stored evidence."
+    },
+    {
+      "name": "generate_script",
+      "description": "v3 P5 script studio: two-phase generator. Call WITHOUT `script` payload to retrieve grounding context (workspace metadata + assembled corpus slice + audience questions + optional taste anchors + optional self-channel snapshot). The calling agent does the writing using its own model. Call WITH `script` (a structured object with hook + beats + body + cta + source_uoinks citations) to persist as a new versioned row. parent_script_id chains revisions."
+    },
+    {
+      "name": "revise_script",
+      "description": "v3 P5: revise an existing script grounded in critique findings. Two-phase like generate_script -- without `revised_script` returns previous + grounding for the agent to act on; with `revised_script` persists as a new version (parent_script_id auto-set to the prior id)."
+    },
+    {
+      "name": "get_shot_list",
+      "description": "v3 P5: derive (and persist) a default shot list from a script's beats + the parent workspace's S1 format facet. Per-beat row with format-specific cue suggestions. The calling agent can override by supplying shot_list directly in generate_script."
+    },
+    {
+      "name": "list_scripts",
+      "description": "v3 P5: list scripts newest-first. Optional workspace_id filter scopes to one workspace's history."
+    },
+    {
+      "name": "get_script",
+      "description": "v3 P5: fetch one script by id."
+    },
+    {
+      "name": "write_tweet",
+      "description": "v3.2 Writing Studio: two-phase tweet/thread generator. Phase 1 (no `body`) returns grounding (source uoink + creator credit + style anchors + Voice DNA prompt). Phase 2 (`body` present) persists + scans for Voice DNA violations + returns structured warnings (soft warn -- NEVER auto-blocks). Creator credit is required in the body."
+    },
+    {
+      "name": "write_blog",
+      "description": "v3.2 Writing Studio: two-phase blog generator. Same shape as write_tweet but Phase 2 accepts title, dek, tags, and expects markdown body with a Source section. Soft-warn Voice DNA scan; creator credit non-suppressible."
+    },
+    {
+      "name": "list_writing_pieces",
+      "description": "v3.2 Writing Studio: list generated pieces newest-first. Optional `kind` (tweet|thread|blog) + `uoink_id` filters."
+    },
+    {
+      "name": "get_writing_piece",
+      "description": "v3.2 Writing Studio: fetch one piece by id."
+    },
+    {
+      "name": "add_style_anchor",
+      "description": "v3.2 Writing Studio: add a Substack-style voice anchor (URL or raw pasted text). User names each. Cap at 10 -- returns 422-shaped error when exceeded. URL ingestion extracts prose via the helper's page extractor (Universal Site PR); falls back to NULL raw_text when the extractor isn't bound yet."
+    },
+    {
+      "name": "list_style_anchors",
+      "description": "v3.2 Writing Studio: list style anchors + their active flag + the helper's 10-anchor cap."
+    },
+    {
+      "name": "remove_style_anchor",
+      "description": "v3.2 Writing Studio: delete a style anchor."
+    },
+    {
+      "name": "uoink_page",
+      "description": "v3.2 Universal Site Uoinking: capture an allowed page as a uoink. Crawl4AI runs ON-DEVICE when available (JS render + screenshot); stdlib fallback otherwise (static HTML + markdown synthesis, no screenshot). Allowlist-gated -- add the host via add_allowed_site first if it's not in the defaults (youtube.com, youtu.be, x.com, twitter.com). Result auto-persists as a uoink with source_type='page'."
+    },
+    {
+      "name": "list_allowed_sites",
+      "description": "v3.2 Universal Site: list the user's allowed hostnames. Default seeds (youtube.com, youtu.be, x.com, twitter.com) are pre-added by migration 0015 and removable like any other entry."
+    },
+    {
+      "name": "add_allowed_site",
+      "description": "v3.2 Universal Site: add a hostname or wildcard pattern (`*.docs.example.com` matches all sub.docs.example.com subdomains). Idempotent on UNIQUE url_pattern. Plain hostnames also match their subdomains (so 'example.com' matches 'www.example.com')."
+    },
+    {
+      "name": "remove_allowed_site",
+      "description": "v3.2 Universal Site: remove a hostname or wildcard pattern from the allowlist."
     }
   ]
 }

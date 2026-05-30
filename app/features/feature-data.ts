@@ -174,8 +174,9 @@ export const features: Feature[] = [
     ],
     "cta": "Set up your custom shortcut to extract video content instantly.",
     "screenshot": {
-      "title": "Extension settings panel showing keyboard shortcut binds",
-      "alt": "Extension settings panel showing keyboard shortcut binds",
+      "title": "Settings panel showing configurable capture surfaces",
+      "alt": "Uoink settings panel showing configurable capture surfaces",
+      "src": "/screenshots/settings/settings-top-channels.png",
     }
   },
   {
@@ -372,8 +373,9 @@ export const features: Feature[] = [
     ],
     "cta": "Capture and analyze YouTube Shorts to learn how creators hook their audience.",
     "screenshot": {
-      "title": "YouTube Shorts interface showing injected Uoink button",
-      "alt": "YouTube Shorts interface showing injected Uoink button",
+      "title": "YouTube capture surface with in-page Uoink button visible",
+      "alt": "YouTube video page showing the in-page Uoink button",
+      "src": "/screenshots/features/youtube-video-capture-clean.png",
     }
   },
   {
@@ -649,8 +651,9 @@ export const features: Feature[] = [
     ],
     "cta": "Set your taste anchors to customize your local search weights.",
     "screenshot": {
-      "title": "Card view showing star icon highlighted",
-      "alt": "Card view showing star icon highlighted",
+      "title": "Writing Studio style anchor controls",
+      "alt": "Writing Studio controls used for local voice calibration",
+      "src": "/screenshots/style-anchors/hero-1280x800.png",
     }
   },
   {

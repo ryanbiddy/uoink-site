@@ -1,3 +1,5 @@
+import { MCP_TOOL_COUNT, mcpTools } from "./mcp-tools";
+
 export type PageId =
   | "home"
   | "install"
@@ -38,22 +40,6 @@ export const CANONICAL_URL = process.env.NEXT_PUBLIC_CANONICAL_URL ?? "https://u
 export const GITHUB_URL = "https://github.com/ryanbiddy/uoink";
 export const RELEASE_URL = "https://github.com/ryanbiddy/uoink/releases/latest";
 export const VERSION = "v3.2";
-
-export const mcpTools = [
-  ["uoink_video", "Extract a structured corpus from one video URL."],
-  ["uoink_playlist", "Extract up to 10 videos from a playlist URL."],
-  ["get_job_status", "Poll a running extraction job."],
-  ["cancel_job", "Cancel a running extraction job."],
-  ["list_recent_uoinks", "Return the latest captures from the local library."],
-  ["search_uoinks", "Run full-text search across transcripts, comments, and titles."],
-  ["get_uoink_corpus", "Fetch one saved corpus as markdown."],
-  ["analyze_comments", "Cluster comment themes, products, and disagreements."],
-  ["classify_hook", "Classify an opening into the nine Hook Type categories."],
-  ["get_taxonomy", "Return the Hook Type taxonomy."],
-  ["get_citation_map", "Map corpus slugs to source URLs and timestamps."],
-  ["get_uoink_health", "Check helper status and diagnostics."],
-  ["find_mentions", "Find every video or podcast that mentions an entity."],
-] as const;
 
 const installFaq: FaqItem[] = [
   {
@@ -217,7 +203,7 @@ export const pages: Record<PageId, SitePage> = {
     <div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
       <a class="card" href="/how"><span class="num">01</span><h3>Creators.</h3><p>Watch less. Read more. Audit hooks, pacing, screenshots, comments, and competitor channels without taking notes at 2x.</p><span class="arr-link">See creator workflow -></span></a>
       <a class="card" href="/podcasts"><span class="num">02</span><h3>Researchers.</h3><p>Build a local library from videos and podcasts. Pull claims, guests, tools, products, and recurring entities across everything you saved.</p><span class="arr-link">Use it for podcasts -></span></a>
-      <a class="card" href="/agents"><span class="num">03</span><h3>Agent developers.</h3><p>Give Claude Desktop, Cursor, Cline, Continue, or ChatGPT Desktop 13 local tools for video capture and corpus search.</p><span class="arr-link">Wire up MCP -></span></a>
+      <a class="card" href="/agents"><span class="num">03</span><h3>Agent developers.</h3><p>Give Claude Desktop, Cursor, Cline, Continue, or ChatGPT Desktop ${MCP_TOOL_COUNT} local tools for video capture and corpus search.</p><span class="arr-link">Wire up MCP -></span></a>
     </div>
   </div>
 </section>
@@ -289,7 +275,12 @@ find_mentions("Karpathy")</pre>
         <p class="lede">Get the helper running, add the browser button, then click Uoink on any video. No Python install, no command line, no PATH wrangling.</p>
         <div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Download Windows installer</a><a class="btn ghost large" href="/how">See what happens after install</a></div>
         <p class="sub-cta">Windows 10/11 / local helper / extension sideload until Web Store approval</p>
-        <div class="brand-strip" aria-label="Install surfaces"><span>GitHub Releases</span><span>Chromium browsers</span><span>Web Store pending</span></div>
+        <div class="brand-strip" aria-label="Install surfaces">
+          <!-- GitHub logo source: https://github.com/logos; license/usage confirmation: official GitHub mark, unmodified integration callout under GitHub logo guidelines. -->
+          <span class="logo-chip logo-mark"><img src="/assets/brand-logos/github.svg" alt="GitHub" width="22" height="22" loading="lazy" decoding="async" /><span>GitHub Releases</span></span>
+          <span>Chromium browsers</span>
+          <span class="cws-chip">Coming to Chrome Web Store</span>
+        </div>
       </div>
       <div class="corpus">
         <div class="hd"><span>install ledger</span><span>honest path</span></div>
@@ -423,7 +414,7 @@ find_mentions("Karpathy")</pre>
 ["Hook taxonomy","Classify openings across nine categories for creator research."],
 ["Taste calibration","Planned local memory layer that learns what you actually revisit."]
 ])}</div></div></section>
-<section class="section" data-screen-label="features / send"><div class="container"><div class="section-head"><span class="eyebrow">job 3 / send it to AI</span><h2 class="display-l">Use the model you already <em>pay for.</em></h2><p class="lede">Uoink skips the model bundle and chat lock-in. Paste anywhere, send directly, or let an agent call tools.</p></div><div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px"><article class="card"><span class="num">01</span><h3>Paste flow.</h3><p>Clipboard corpus for Claude, ChatGPT, Gemini, local models, or any editor that accepts markdown.</p></article><article class="card"><span class="num">02</span><h3>MCP flow.</h3><p>13 local tools for capture, search, comments, hooks, health, taxonomy, and citations.</p><a class="arr-link" href="/agents">See agents -></a></article><article class="card"><span class="num">03</span><h3>Operator Skill.</h3><p>Portable Skill instructions teach compatible agents how to use the corpus with citation discipline.</p></article></div></div></section>
+<section class="section" data-screen-label="features / send"><div class="container"><div class="section-head"><span class="eyebrow">job 3 / send it to AI</span><h2 class="display-l">Use the model you already <em>pay for.</em></h2><p class="lede">Uoink skips the model bundle and chat lock-in. Paste anywhere, send directly, or let an agent call tools.</p></div><div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px"><article class="card"><span class="num">01</span><h3>Paste flow.</h3><p>Clipboard corpus for Claude, ChatGPT, Gemini, local models, or any editor that accepts markdown.</p></article><article class="card"><span class="num">02</span><h3>MCP flow.</h3><p>${MCP_TOOL_COUNT} local tools for capture, search, comments, hooks, health, taxonomy, citations, writing, and site access.</p><a class="arr-link" href="/agents">See agents -></a></article><article class="card"><span class="num">03</span><h3>Operator Skill.</h3><p>Portable Skill instructions teach compatible agents how to use the corpus with citation discipline.</p></article></div></div></section>
 <section class="section" data-screen-label="features / tune"><div class="container"><div class="section-head"><span class="eyebrow">job 4 / tune the helper</span><h2 class="display-l">Make the defaults fit your <em>machine.</em></h2></div><ul class="fact-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px 56px;list-style:none;padding:0"><li><div><b>BYO Anthropic key</b>Enables Hook Type, Comment Intelligence, and Entity Extraction. Stored in the OS credential vault.</div></li><li><div><b>Clipboard budget</b>Set screenshot caps, compression, and comment limits before pasting into a model.</div></li><li><div><b>Whisper model selector</b>Choose tiny/base/small/medium/large for podcast transcription cost and accuracy tradeoffs.</div></li><li><div><b>Output folder picker</b>Send corpora where your work already lives, including markdown vault workflows.</div></li></ul></div></section>
 <section class="big-strip" data-screen-label="features / comparison"><div class="container"><span class="eyebrow">why not Glasp, NoteGPT, or NotebookLM?</span><h2 class="display-l">Transcript tools give you text. Uoink gives you a <em>local asset.</em></h2><p class="body-l" style="max-width:70ch">Cloud tools can summarize. Browser extensions can grab a transcript. Generic MCP servers can fetch captions. Uoink's wedge is the combination: local corpus, screenshots, comments, hook classification, entity search, and MCP access. The archive compounds because it belongs to you.</p><p class="mt-24"><a class="btn ink" href="/privacy">Check privacy -></a> <a class="btn ghost" href="/agents">Check MCP -></a></p></div></section>`,
   },
@@ -437,7 +428,12 @@ find_mentions("Karpathy")</pre>
     keywords: ["podcast transcription open source", "podcast to ai", "podcast diarization local", "whisper podcast workflow"],
     faq: podcastsFaq,
     html: `
-<section class="hero" data-screen-label="podcasts / hero"><div class="container"><div class="hero-grid"><div class="copy"><span class="eyebrow">podcasts</span><h1 class="display-xl">Uoink your <em>podcasts</em> too.</h1><p class="lede">The thing you do with videos also works for long audio: RSS feed in, speaker-aware transcript out, local corpus ready for your model.</p><div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Get Uoink</a><a class="btn ghost large" href="/how">See workflow</a></div><div class="brand-strip" aria-label="Podcast sources"><span>Spotify</span><span>Apple Podcasts</span><span>RSS</span><span>Whisper</span></div></div><div class="corpus"><div class="hd"><span>podcast corpus</span><span>audio-first</span></div><span class="ln k"># Episode title</span><span class="ln dim">feed, episode URL, duration, publish date</span><span class="ln k">## Speakers</span><span class="ln hl">Speaker 1 / Speaker 2 / Speaker 3</span><span class="ln k">## Transcript</span><span class="ln dim">[14:22] Speaker 2: the claim is...</span><span class="ln k">## Entities</span><span class="ln dim">companies, tools, people, topics</span></div></div></div></section>
+<section class="hero" data-screen-label="podcasts / hero"><div class="container"><div class="hero-grid"><div class="copy"><span class="eyebrow">podcasts</span><h1 class="display-xl">Uoink your <em>podcasts</em> too.</h1><p class="lede">The thing you do with videos also works for long audio: RSS feed in, speaker-aware transcript out, local corpus ready for your model.</p><div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Get Uoink</a><a class="btn ghost large" href="/how">See workflow</a></div><div class="brand-strip" aria-label="Podcast sources">
+<!-- Spotify logo source: https://newsroom.spotify.com/media-kit/ and https://spotifynewsroom.jp/media-kit/logo-and-icons/; license/usage confirmation: official Spotify newsroom media-kit logo, unmodified integration callout. -->
+<span class="logo-chip logo-wide"><img src="/assets/brand-logos/spotify.png" alt="Spotify" width="100" height="30" loading="lazy" decoding="async" /><span>Spotify</span></span>
+<!-- Apple Podcasts logo source: https://tools.applemediaservices.com/apple-podcasts/identity-guidelines; license/usage confirmation: official Apple Podcasts identity asset, unmodified integration callout. -->
+<span class="logo-chip logo-mark"><img src="/assets/brand-logos/apple-podcasts.png" alt="Apple Podcasts" width="22" height="22" loading="lazy" decoding="async" /><span>Apple Podcasts</span></span>
+<span>RSS</span><span>Whisper</span></div></div><div class="corpus"><div class="hd"><span>podcast corpus</span><span>audio-first</span></div><span class="ln k"># Episode title</span><span class="ln dim">feed, episode URL, duration, publish date</span><span class="ln k">## Speakers</span><span class="ln hl">Speaker 1 / Speaker 2 / Speaker 3</span><span class="ln k">## Transcript</span><span class="ln dim">[14:22] Speaker 2: the claim is...</span><span class="ln k">## Entities</span><span class="ln dim">companies, tools, people, topics</span></div></div></div></section>
 <section class="section" data-screen-label="podcasts / rss"><div class="container"><div class="section-head"><span class="eyebrow">any RSS feed</span><h2 class="display-l">Add the feed. Let the helper <em>poll.</em></h2><p class="lede">Drop in a public podcast RSS URL. Uoink can fetch new episodes, run transcription, and file them beside your video library.</p></div><div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px"><article class="card"><span class="num">01</span><h3>Audio extraction.</h3><p>yt-dlp handles the media download path where supported.</p></article><article class="card"><span class="num">02</span><h3>Local Whisper.</h3><p>Transcription runs on your machine. Choose speed or quality based on the model size.</p></article><article class="card"><span class="num">03</span><h3>Diarization.</h3><p>WhisperX separates speakers as labels you can rename later.</p></article></div></div></section>
 <section class="section" data-screen-label="podcasts / use cases"><div class="container"><div class="section-head"><span class="eyebrow">who wins</span><h2 class="display-l">For audio people who need <em>receipts.</em></h2></div><div class="hook-grid">${featureCards([
 ["Journalists","Pull every factual claim a guest made and keep timestamp citations beside the transcript."],
@@ -460,7 +456,18 @@ find_mentions("Karpathy")</pre>
     keywords: ["mcp youtube server", "claude desktop youtube tool", "cursor mcp server", "mcp video tool"],
     faq: agentsFaq,
     html: `
-<section class="hero" data-screen-label="agents / hero"><div class="container"><div class="section-head"><span class="eyebrow">agents and MCP</span><h1 class="display-xl">Uoink is an <em>MCP server.</em></h1><p class="lede">Give your local AI agent eyes and ears on the web. Uoink exposes capture, search, hook classification, comment analysis, and entity lookup as local tools.</p><div class="ctas"><a class="btn primary large" href="#configs">Copy config</a><a class="btn ghost large" href="/mcp">Read MCP manifest</a></div><div class="brand-strip" aria-label="Agent clients"><span>Claude</span><span>ChatGPT</span><span>Cursor</span><span>Obsidian</span><span>GitHub</span></div></div></div></section>
+<section class="hero" data-screen-label="agents / hero"><div class="container"><div class="section-head"><span class="eyebrow">agents and MCP</span><h1 class="display-xl">Uoink is an <em>MCP server.</em></h1><p class="lede">Give your local AI agent eyes and ears on the web. Uoink exposes capture, search, hook classification, comment analysis, and entity lookup as local tools.</p><div class="ctas"><a class="btn primary large" href="#configs">Copy config</a><a class="btn ghost large" href="/mcp">Read MCP manifest</a></div><div class="brand-strip" aria-label="Agent clients">
+<!-- Claude logo source: https://www.anthropic.com/ and https://claude.ai/favicon.svg; license/usage confirmation: official Claude site mark, unmodified integration callout. -->
+<span class="logo-chip logo-mark"><img src="/assets/brand-logos/claude.svg" alt="Claude" width="22" height="22" loading="lazy" decoding="async" /><span>Claude</span></span>
+<!-- ChatGPT logo source: https://openai.com/brand/ and https://cdn.oaistatic.com/assets/favicon-l4nq08hd.svg; license/usage confirmation: official ChatGPT/OpenAI asset, unmodified integration callout. -->
+<span class="logo-chip logo-mark logo-dark"><img src="/assets/brand-logos/chatgpt.svg" alt="ChatGPT" width="22" height="22" loading="lazy" decoding="async" /><span>ChatGPT</span></span>
+<!-- Cursor logo source: https://cursor.com/ and https://cursor.com/marketing-static/favicon.svg; license/usage confirmation: official Cursor site asset, unmodified integration callout because no separate public brand portal was found. -->
+<span class="logo-chip logo-mark"><img src="/assets/brand-logos/cursor.svg" alt="Cursor" width="22" height="22" loading="lazy" decoding="async" /><span>Cursor</span></span>
+<!-- Obsidian logo source: https://obsidian.md/brand; license/usage confirmation: official Obsidian brand asset, unmodified integration callout. -->
+<span class="logo-chip logo-mark"><img src="/assets/brand-logos/obsidian.svg" alt="Obsidian" width="22" height="22" loading="lazy" decoding="async" /><span>Obsidian</span></span>
+<!-- GitHub logo source: https://github.com/logos; license/usage confirmation: official GitHub mark, unmodified integration callout under GitHub logo guidelines. -->
+<span class="logo-chip logo-mark"><img src="/assets/brand-logos/github.svg" alt="GitHub" width="22" height="22" loading="lazy" decoding="async" /><span>GitHub</span></span>
+</div></div></div></section>
 <section class="section" data-screen-label="agents / configs" id="configs"><div class="container"><div class="section-head"><span class="eyebrow">install in your client</span><h2 class="display-l">Copy the config. Then let the agent <em>call tools.</em></h2><p class="lede">These snippets use placeholder paths. After install, Uoink's setup page generates the exact command for your machine.</p></div><div class="docs-main"><h3><span class="anchor">Claude Desktop</span></h3><pre>{
   "mcpServers": {
     "uoink": {
@@ -509,7 +516,7 @@ search_uoinks("pacing")</pre></div></div></div></section>
       <p>Agents should use this page and <a href="/mcp/manifest.json">/mcp/manifest.json</a> to discover the local server, install path, supported transports, and tool names.</p>
       <h2 id="server">Server</h2>
       <pre>name: uoink
-version: 3.1
+version: 3.2
 homepage: ${CANONICAL_URL}
 source: https://github.com/ryanbiddy/uoink
 license: MIT
@@ -599,7 +606,7 @@ install:
       "Read Uoink release notes, v3.2 direction, universal extraction, podcast support, MCP improvements, and local corpus roadmap.",
     keywords: ["uoink changelog", "uoink release notes", "uoink updates", "universal video uoink changelog"],
     html: `
-<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>latest first</span></div><h1>What's shipped, what's <em>coming.</em></h1><p class="standfirst">Engineers read changelogs to decide whether a tool is alive. Uoink is alive. This is the public summary; GitHub remains canonical.</p><h2>Latest: v3.2 track</h2><ul><li>Universal URL expansion for web video via yt-dlp backed extraction.</li><li>Podcast RSS and local transcription workstream.</li><li>Agent-readable site surfaces: /agents, /mcp, /llms.txt, /llms-full.txt.</li><li>Sharper positioning around corpus, local memory, and model-agnostic workflows.</li></ul><h2>Recent: v2.2</h2><ul><li>Dashboard, tray flow, install wizard, and local helper polish.</li><li>Memory/library surfaces for local captures.</li><li>13 MCP tools for capture, search, health, citation maps, comments, hooks, taxonomy, and entities.</li></ul><h2>In flight.</h2><ul><li>Signed macOS DMG and menu-bar helper.</li><li>Podcast corpus UI and Whisper model controls.</li><li>Markdown memory layer and richer local corpus map.</li><li>Verification assistance that presents evidence, not automatic verdicts.</li></ul><h2>Boundaries.</h2><p>Uoink stays away from hosted video warehouses, recommendation feeds, and social networks. The point is deliberate local work, not another cloud inbox.</p><p><a class="btn primary large" href="${RELEASE_URL}">Latest GitHub release</a> <a class="btn ghost large" href="/features">Feature inventory</a></p></article></div></section>`,
+<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>latest first</span></div><h1>What's shipped, what's <em>coming.</em></h1><p class="standfirst">Engineers read changelogs to decide whether a tool is alive. Uoink is alive. This is the public summary; GitHub remains canonical.</p><h2>Latest: v3.2 track</h2><ul><li>Universal URL expansion for web video via yt-dlp backed extraction.</li><li>Podcast RSS and local transcription workstream.</li><li>Agent-readable site surfaces: /agents, /mcp, /llms.txt, /llms-full.txt.</li><li>Sharper positioning around corpus, local memory, and model-agnostic workflows.</li></ul><h2>Recent: v2.2</h2><ul><li>Dashboard, tray flow, install wizard, and local helper polish.</li><li>Memory/library surfaces for local captures.</li><li>${MCP_TOOL_COUNT} MCP tools for capture, search, health, citation maps, comments, hooks, taxonomy, entities, writing, and site access.</li></ul><h2>In flight.</h2><ul><li>Signed macOS DMG and menu-bar helper.</li><li>Podcast corpus UI and Whisper model controls.</li><li>Markdown memory layer and richer local corpus map.</li><li>Verification assistance that presents evidence, not automatic verdicts.</li></ul><h2>Boundaries.</h2><p>Uoink stays away from hosted video warehouses, recommendation feeds, and social networks. The point is deliberate local work, not another cloud inbox.</p><p><a class="btn primary large" href="${RELEASE_URL}">Latest GitHub release</a> <a class="btn ghost large" href="/features">Feature inventory</a></p></article></div></section>`,
   },
   terms: {
     id: "terms",
@@ -637,9 +644,17 @@ function toolRows(): string {
   return mcpTools
     .map(
       ([name, description]) =>
-        `<div class="tool-row"><div class="name">${name}<span class="args">local MCP tool</span></div><div class="desc">${description}<span class="ex">See /mcp/manifest.json for machine-readable schema.</span></div></div>`,
+        `<div class="tool-row"><div class="name">${escapeHtml(name)}<span class="args">local MCP tool</span></div><div class="desc">${escapeHtml(description)}<span class="ex">See /mcp/manifest.json for machine-readable schema.</span></div></div>`,
     )
     .join("");
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 }
 
 function renderFaq(items: FaqItem[]): string {

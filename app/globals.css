@@ -453,19 +453,78 @@ code, .ci {
   gap: 8px;
   margin-top: 18px;
 }
-.brand-strip span {
+.brand-strip > span,
+.brand-strip > .logo-chip {
+  align-items: center;
   border: 1px solid currentColor;
   border-radius: var(--r-pill);
   color: var(--rust);
+  display: inline-flex;
   font-family: var(--mono);
   font-size: 10px;
   font-weight: 900;
+  gap: 8px;
   letter-spacing: 0.12em;
   padding: 9px 11px;
+  text-decoration: none;
   text-transform: uppercase;
 }
-.site-root.mode-dark .brand-strip span {
+
+.brand-strip .logo-chip {
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 40px;
+  padding: 8px 12px;
+}
+
+.brand-strip .logo-chip img {
+  display: block;
+  height: 22px;
+  max-width: 118px;
+  object-fit: contain;
+  width: auto;
+}
+
+.brand-strip .logo-chip.logo-mark img {
+  height: 22px;
+  max-width: 22px;
+  width: 22px;
+}
+
+.brand-strip .logo-chip.logo-wide img {
+  height: 20px;
+}
+
+.brand-strip .logo-chip.logo-dark {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--cream);
+}
+
+.brand-strip .logo-chip.logo-dark span,
+.site-root.mode-dark .brand-strip .logo-chip.logo-dark span {
+  color: var(--cream);
+}
+
+.brand-strip .cws-chip {
+  border-style: dashed;
+  color: var(--vermillion);
+}
+
+.site-root.mode-dark .brand-strip > span {
   color: var(--parchment);
+}
+
+.site-root.mode-dark .brand-strip .logo-chip {
+  border-color: rgba(255, 244, 236, 0.4);
+  color: var(--ink);
+}
+
+.brand-strip .logo-chip span,
+.site-root.mode-dark .brand-strip .logo-chip span {
+  border: 0;
+  color: var(--ink);
+  padding: 0;
 }
 
 /* AGENT DEMO */
