@@ -1,7 +1,7 @@
 <!-- generated: 2026-05-30 / uoink v3.2 -->
 # Uoink
 
-> Uoink is a local-first Chrome extension plus desktop helper that extracts a structured corpus from videos and podcasts, then hands that corpus to Claude, ChatGPT, Cursor, or a local MCP agent through clipboard, direct send, or 13 MCP tools.
+> Uoink is a local-first Chrome extension plus desktop helper that extracts a structured corpus from videos and podcasts, then hands that corpus to Claude, ChatGPT, Cursor, or a local MCP agent through clipboard, direct send, or MCP tools.
 
 ## Install
 
@@ -10,7 +10,7 @@
 
 ## Product
 
-- [Features](https://uoink.app/features): complete feature index with 38 feature pages.
+- [Features](https://uoink.app/features): complete feature index with 28 feature pages.
 - [Feature manifest](https://uoink.app/api/features-manifest): dashboard and agent-readable feature URLs.
 - [Field notes](https://uoink.app/blog): launch articles for YouTube hook types, local-first architecture, MCP agents, Writing Studio, and universal page capture.
 - [RSS](https://uoink.app/blog/rss.xml): article feed for crawlers and feed readers.

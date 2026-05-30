@@ -16,7 +16,7 @@ function tickerFor(active: string) {
   if (active.startsWith("/features")) return ["UOINK v3.2 / features", "corpus / memory / hooks / dashboard"];
   if (active.startsWith("/blog")) return ["UOINK v3.2 / field notes", "hooks / agents / corpus / local-first"];
   if (active.startsWith("/podcasts")) return ["UOINK v3.2 / podcasts", "RSS / Whisper / diarization / local"];
-  if (active.startsWith("/agents") || active.startsWith("/mcp")) return ["UOINK v3.2 / MCP", "13 tools / Claude Desktop / Cursor / Cline"];
+  if (active.startsWith("/agents") || active.startsWith("/mcp")) return ["UOINK v3.2 / MCP", "local tools / Claude Desktop / Cursor / Cline"];
   if (active.startsWith("/about")) return ["UOINK v3.2 / about", "GitHub releases / public downloads / no tracking"];
   if (active.startsWith("/privacy")) return ["UOINK v3.2 / privacy", "local-first / no cloud / no telemetry"];
   return ["UOINK v3.2 / local video corpus", "open source / MIT / model agnostic"];

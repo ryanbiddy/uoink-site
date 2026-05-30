@@ -158,7 +158,7 @@ export const pages: Record<PageId, SitePage> = {
           <a class="btn primary large" href="${RELEASE_URL}">Get Uoink</a>
           <a class="btn ghost large" href="#live-uoink">See a live uoink</a>
         </div>
-        <p class="sub-cta">Open source / MIT / zero telemetry / 13 MCP tools / Windows now / Mac track in progress</p>
+        <p class="sub-cta">Open source / MIT / zero telemetry / MCP tools / Windows now / Mac track in progress</p>
       </div>
       <div class="hero-demo" id="live-uoink">
         <div class="corpus" data-corpus-animate>
@@ -478,7 +478,7 @@ find_mentions("Karpathy")</pre>
   "transport": "stdio",
   "command": "%LOCALAPPDATA%\\\\Uoink\\\\uoink_mcp.exe"
 }</pre></div></div></section>
-<section class="section" data-screen-label="agents / tools"><div class="container"><div class="section-head"><span class="eyebrow">13 tools your agent can call</span><h2 class="display-l">Real names, real <em>tools.</em></h2><p class="lede">Use the new <code>uoink_*</code> names. Legacy <code>yoink_*</code> aliases should remain for migration, but new configs should use Uoink.</p></div><div class="docs-main">${toolRows()}</div><p class="mt-32"><a class="btn primary" href="/mcp">Open machine-readable MCP page -></a></p></div></section>
+<section class="section" data-screen-label="agents / tools"><div class="container"><div class="section-head"><span class="eyebrow">tools your agent can call</span><h2 class="display-l">Real names, real <em>tools.</em></h2><p class="lede">Use the new <code>uoink_*</code> names. Legacy <code>yoink_*</code> aliases should remain for migration, but new configs should use Uoink.</p></div><div class="docs-main">${toolRows()}</div><p class="mt-32"><a class="btn primary" href="/mcp">Open machine-readable MCP page -></a></p></div></section>
 <section class="section" data-screen-label="agents / trace"><div class="container"><div class="section-head"><span class="eyebrow">composing Uoink with other tools</span><h2 class="display-l">Ask Cursor to research the web video <em>for real.</em></h2></div><div class="agent-demo"><div class="chat"><div class="mini-heading">prompt</div><p class="chat-bubble user">Uoink these three competitor videos, classify the hooks, then write a short doc comparing pacing patterns.</p><div class="mini-heading">result</div><p class="chat-bubble assistant">The agent extracts each video, polls the jobs, fetches the corpora, runs hook classification, then writes the comparison into your repo or notes folder.</p></div><div class="log"><div class="mini-heading">tool sequence</div><pre class="mcp-log" style="margin:0;white-space:pre-wrap">uoink_video(url_1)
 uoink_video(url_2)
 uoink_video(url_3)

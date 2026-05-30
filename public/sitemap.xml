@@ -4,6 +4,7 @@
   <url><loc>https://uoink.app/install</loc><lastmod>2026-05-30</lastmod><priority>0.95</priority></url>
   <url><loc>https://uoink.app/how</loc><lastmod>2026-05-30</lastmod><priority>0.9</priority></url>
   <url><loc>https://uoink.app/features</loc><lastmod>2026-05-30</lastmod><priority>0.95</priority></url>
+  <url><loc>https://uoink.app/blog</loc><lastmod>2026-05-30</lastmod><priority>0.9</priority></url>
   <url><loc>https://uoink.app/podcasts</loc><lastmod>2026-05-30</lastmod><priority>0.85</priority></url>
   <url><loc>https://uoink.app/agents</loc><lastmod>2026-05-30</lastmod><priority>0.9</priority></url>
   <url><loc>https://uoink.app/mcp</loc><lastmod>2026-05-30</lastmod><priority>0.85</priority></url>
@@ -11,45 +12,34 @@
   <url><loc>https://uoink.app/privacy</loc><lastmod>2026-05-30</lastmod><priority>0.7</priority></url>
   <url><loc>https://uoink.app/changelog</loc><lastmod>2026-05-30</lastmod><priority>0.7</priority></url>
   <url><loc>https://uoink.app/terms</loc><lastmod>2026-05-30</lastmod><priority>0.5</priority></url>
-  <url><loc>https://uoink.app/features/youtube-video-capture</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/in-page-button</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/right-click-any-link</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/keyboard-shortcut</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/mobile-playlist-bridge</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/universal-page-uoink</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/twitter-video</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/podcast-feeds</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
   <url><loc>https://uoink.app/features/youtube-shorts</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/right-click-thumbnail-uoink</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
   <url><loc>https://uoink.app/features/playlist-mode</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/screenshot-capture</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/smart-screenshot-picker</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/transcript-with-timestamps</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/top-comments-extraction</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/channel-context</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/clipboard-markdown-corpus</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/send-to-claude</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/send-to-chatgpt</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/memory-search</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/faceted-classification</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/your-channel</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/resurface-for-you</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/engagement-memory</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/taste-anchors</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/build-workspace</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/critique-corpus</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/script-studio</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/writing-studio</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/style-anchors</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/claim-extraction</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/evidence-panel</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
   <url><loc>https://uoink.app/features/mcp-server</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/operator-skill</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/starter-prompts-library</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/local-corpus-library</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/sqlite-fts-search</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/topic-folders</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/memory-page</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/find-mentions</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/citation-map</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/hook-type-classification</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/comment-intelligence</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/entity-extraction</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/hook-taxonomy</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/self-calibrating-classifier</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/windows-helper</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/credential-manager-key-storage</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/zero-telemetry</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/local-api-token-gate</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/open-source-mit</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/system-tray-status</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/dashboard-library</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/live-activity-stream</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/settings-page</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/install-wizard</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/first-run-splash</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/features/rate-limit-queue</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
-  <url><loc>https://uoink.app/blog</loc><lastmod>2026-05-30</lastmod><priority>0.9</priority></url>
+  <url><loc>https://uoink.app/features/claude-desktop-integration</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/cursor-integration</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/byo-anthropic-key</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/local-first</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
+  <url><loc>https://uoink.app/features/no-cloud</loc><lastmod>2026-05-30</lastmod><priority>0.72</priority></url>
   <url><loc>https://uoink.app/blog/9-hook-types-every-creator-should-recognize</loc><lastmod>2026-05-30</lastmod><priority>0.82</priority></url>
   <url><loc>https://uoink.app/blog/how-to-find-your-channels-overperformer-pattern</loc><lastmod>2026-05-29</lastmod><priority>0.82</priority></url>
   <url><loc>https://uoink.app/blog/why-your-ai-agent-should-have-a-corpus</loc><lastmod>2026-05-28</lastmod><priority>0.82</priority></url>
