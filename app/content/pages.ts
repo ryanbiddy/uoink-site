@@ -32,10 +32,10 @@ export type SitePage = {
   faq?: FaqItem[];
 };
 
-export const CANONICAL_URL = "https://uoink.video";
+export const CANONICAL_URL = process.env.NEXT_PUBLIC_CANONICAL_URL ?? "https://uoink.app";
 export const GITHUB_URL = "https://github.com/ryanbiddy/uoink";
 export const RELEASE_URL = "https://github.com/ryanbiddy/uoink/releases/latest";
-export const VERSION = "v3.1";
+export const VERSION = "v3.2";
 
 export const mcpTools = [
   ["uoink_video", "Extract a structured corpus from one video URL."],
@@ -57,7 +57,7 @@ const installFaq: FaqItem[] = [
   {
     question: "What operating systems are supported by Uoink?",
     answer:
-      "Uoink supports Windows 10 and 11 today. macOS support is on the v3.1 track with a signed DMG target. A manual source path is available for developers who want to run the local helper directly.",
+      "Uoink supports Windows 10 and 11 today. macOS support is on the v2.3 track with a signed DMG target. A manual source path is available for developers who want to run the local helper directly.",
   },
   {
     question: "Does the helper require administrator permissions?",
@@ -150,7 +150,7 @@ export const pages: Record<PageId, SitePage> = {
   <div class="container">
     <div class="hero-grid">
       <div class="copy">
-        <span class="eyebrow">uoink.video / v3.1</span>
+        <span class="eyebrow">uoink.app / v3.2</span>
         <h1 class="display-xl">Uoink that <em>shit.</em></h1>
         <p class="lede">One click under any video. Your AI gets the whole thing: transcript, screenshots, comments, channel context, podcasts too. Local. Yours.</p>
         <div class="ctas">
@@ -226,7 +226,7 @@ export const pages: Record<PageId, SitePage> = {
       <div class="chat">
         <div class="mini-heading">model agnostic</div>
         <p class="chat-bubble user">Uoink this video and compare the hook against my last ten saved competitor videos.</p>
-        <p class="chat-bubble assistant">Calling <code>uoink_video</code>, then <code>classify_hook</code>, then <code>search_uoinks</code>. Your model reads the corpus. Uoink does not become the model.</p>
+        <p class="chat-bubble assistant">Calling <code>uoink_video</code>, then <code>classify_hook</code>, then <code>search_uoinks</code>. Your model reads the corpus. Uoink stays the capture layer.</p>
       </div>
       <div class="log">
         <div class="mini-heading">mcp tool trace</div>
@@ -253,7 +253,7 @@ find_mentions("Karpathy")</pre>
     <div class="ledger">
       <div class="ledger-card live"><div class="top"><span>Windows</span><span>live path</span></div><div class="body-l"><h3>Download the helper.</h3><p class="ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p></div><div class="foot"><a class="btn primary small" href="${RELEASE_URL}">Download -></a></div></div>
       <div class="ledger-card pend"><div class="top"><span>Extension</span><span>CWS pending</span></div><div class="body-l"><h3>Install the browser button.</h3><p class="ver">Chrome, Edge, Brave, Vivaldi, Opera GX</p><p>Until the Web Store listing lands, install the release zip from GitHub.</p></div><div class="foot"><a class="btn ghost small" href="/install#extension">Install notes -></a></div></div>
-      <div class="ledger-card queue"><div class="top"><span>Mac</span><span>v3.1 track</span></div><div class="body-l"><h3>Menu-bar helper next.</h3><p class="ver">DMG + Keychain + LaunchAgent</p><p>The same corpus format, MCP server, and privacy model are planned for macOS.</p></div><div class="foot"><a class="btn ghost small" href="/install#mac">Mac status -></a></div></div>
+      <div class="ledger-card queue"><div class="top"><span>Mac</span><span>v2.3 track</span></div><div class="body-l"><h3>Menu-bar helper next.</h3><p class="ver">DMG + Keychain + LaunchAgent</p><p>The same corpus format, MCP server, and privacy model are planned for macOS.</p></div><div class="foot"><a class="btn ghost small" href="/install#mac">Mac status -></a></div></div>
     </div>
   </div>
 </section>
@@ -304,8 +304,8 @@ find_mentions("Karpathy")</pre>
   <div class="container">
     <div class="ledger">
       <div class="ledger-card live" id="windows"><div class="top"><span>Windows</span><span>now</span></div><div class="body-l"><h3>Desktop helper.</h3><p class="ver">Windows 10/11 / release page</p><p>The helper bundles Python, yt-dlp, ffmpeg, keyring, SQLite, and MCP pieces. It runs locally and exposes the loopback server at <code>127.0.0.1:5179</code>.</p><p>Windows may flag early builds as an unrecognized publisher. Click More info, then Run anyway if you trust the GitHub release.</p></div><div class="foot"><a class="btn primary small" href="${RELEASE_URL}">Open release -></a></div></div>
-      <div class="ledger-card pend" id="extension"><div class="top"><span>Extension</span><span>pending review</span></div><div class="body-l"><h3>Browser button.</h3><p class="ver">Chrome / Edge / Brave / Vivaldi / Opera GX</p><p>The extension needs host permissions for supported video pages so it can render the in-page Uoink button and context menu. It does not ask for browsing history.</p><p>Until Web Store approval lands, download the extension zip from the same GitHub release and load it through your browser extension page.</p></div><div class="foot"><a class="btn ghost small" href="${RELEASE_URL}">Get release zip -></a></div></div>
-      <div class="ledger-card queue" id="mac"><div class="top"><span>Mac</span><span>v3.1 track</span></div><div class="body-l"><h3>Menu-bar app next.</h3><p class="ver">DMG, Keychain, LaunchAgent</p><p>The macOS path uses the same corpus format and MCP surface. The signed DMG and notarization work are tracked in the release queue.</p></div><div class="foot"><a class="btn ghost small" href="${GITHUB_URL}/watchers">Watch GitHub -></a></div></div>
+      <div class="ledger-card pend" id="extension"><div class="top"><span>Extension</span><span>pending review</span></div><div class="body-l"><h3>Browser button.</h3><p class="ver">Chrome / Edge / Brave / Vivaldi / Opera GX</p><p>The extension needs host permissions for supported video pages so it can render the in-page Uoink button and context menu. It skips browsing-history permission.</p><p>Until Web Store approval lands, download the extension zip from the same GitHub release and load it through your browser extension page.</p></div><div class="foot"><a class="btn ghost small" href="${RELEASE_URL}">Get release zip -></a></div></div>
+      <div class="ledger-card queue" id="mac"><div class="top"><span>Mac</span><span>v2.3 track</span></div><div class="body-l"><h3>Menu-bar app next.</h3><p class="ver">DMG, Keychain, LaunchAgent</p><p>The macOS path uses the same corpus format and MCP surface. The signed DMG and notarization work are tracked in the release queue.</p></div><div class="foot"><a class="btn ghost small" href="${GITHUB_URL}/watchers">Watch GitHub -></a></div></div>
     </div>
   </div>
 </section>
@@ -353,7 +353,7 @@ find_mentions("Karpathy")</pre>
       <h2>Resolve the video context deficit.</h2>
       <p>Most AI workflows fail at video for a simple reason: the model gets a URL or a raw transcript and has to guess the rest. A transcript alone omits the slides, the code on screen, the audience corrections in the comments, and the channel context that tells you whether a video overperformed or just existed.</p>
       <p>Uoink captures the richer shape. It turns the video into a local corpus: timestamped transcript, screenshots, comments, metadata, channel context, and optional classifier blocks. That corpus is readable by humans, pasteable into Claude and ChatGPT, and callable by MCP agents.</p>
-      <p>The workflow stays deliberately plain. Install the helper. Install the extension. Click Uoink. Paste, or let the agent skip the paste. The value is not that Uoink summarizes for you. The value is that Uoink gives the model the source material it was missing.</p>
+      <p>The workflow stays deliberately plain. Install the helper. Install the extension. Click Uoink. Paste, or let the agent skip the paste. Uoink gives the model the source material it was missing.</p>
     </article>
   </div>
 </section>
@@ -420,7 +420,7 @@ find_mentions("Karpathy")</pre>
 ["Hook taxonomy","Classify openings across nine categories for creator research."],
 ["Taste calibration","Planned local memory layer that learns what you actually revisit."]
 ])}</div></div></section>
-<section class="section" data-screen-label="features / send"><div class="container"><div class="section-head"><span class="eyebrow">job 3 / send it to AI</span><h2 class="display-l">Use the model you already <em>pay for.</em></h2><p class="lede">Uoink does not bundle a model or force a chat UI. Paste anywhere, send directly, or let an agent call tools.</p></div><div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px"><article class="card"><span class="num">01</span><h3>Paste flow.</h3><p>Clipboard corpus for Claude, ChatGPT, Gemini, local models, or any editor that accepts markdown.</p></article><article class="card"><span class="num">02</span><h3>MCP flow.</h3><p>13 local tools for capture, search, comments, hooks, health, taxonomy, and citations.</p><a class="arr-link" href="/agents">See agents -></a></article><article class="card"><span class="num">03</span><h3>Operator Skill.</h3><p>Portable Skill instructions teach compatible agents how to use the corpus with citation discipline.</p></article></div></div></section>
+<section class="section" data-screen-label="features / send"><div class="container"><div class="section-head"><span class="eyebrow">job 3 / send it to AI</span><h2 class="display-l">Use the model you already <em>pay for.</em></h2><p class="lede">Uoink skips the model bundle and chat lock-in. Paste anywhere, send directly, or let an agent call tools.</p></div><div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px"><article class="card"><span class="num">01</span><h3>Paste flow.</h3><p>Clipboard corpus for Claude, ChatGPT, Gemini, local models, or any editor that accepts markdown.</p></article><article class="card"><span class="num">02</span><h3>MCP flow.</h3><p>13 local tools for capture, search, comments, hooks, health, taxonomy, and citations.</p><a class="arr-link" href="/agents">See agents -></a></article><article class="card"><span class="num">03</span><h3>Operator Skill.</h3><p>Portable Skill instructions teach compatible agents how to use the corpus with citation discipline.</p></article></div></div></section>
 <section class="section" data-screen-label="features / tune"><div class="container"><div class="section-head"><span class="eyebrow">job 4 / tune the helper</span><h2 class="display-l">Make the defaults fit your <em>machine.</em></h2></div><ul class="fact-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px 56px;list-style:none;padding:0"><li><div><b>BYO Anthropic key</b>Enables Hook Type, Comment Intelligence, and Entity Extraction. Stored in the OS credential vault.</div></li><li><div><b>Clipboard budget</b>Set screenshot caps, compression, and comment limits before pasting into a model.</div></li><li><div><b>Whisper model selector</b>Choose tiny/base/small/medium/large for podcast transcription cost and accuracy tradeoffs.</div></li><li><div><b>Output folder picker</b>Send corpora where your work already lives, including markdown vault workflows.</div></li></ul></div></section>
 <section class="big-strip" data-screen-label="features / comparison"><div class="container"><span class="eyebrow">why not Glasp, NoteGPT, or NotebookLM?</span><h2 class="display-l">Transcript tools give you text. Uoink gives you a <em>local asset.</em></h2><p class="body-l" style="max-width:70ch">Cloud tools can summarize. Browser extensions can grab a transcript. Generic MCP servers can fetch captions. Uoink's wedge is the combination: local corpus, screenshots, comments, hook classification, entity search, and MCP access. The archive compounds because it belongs to you.</p><p class="mt-24"><a class="btn ink" href="/privacy">Check privacy -></a> <a class="btn ghost" href="/agents">Check MCP -></a></p></div></section>`,
   },
@@ -477,7 +477,7 @@ find_mentions("Karpathy")</pre>
   "transport": "stdio",
   "command": "%LOCALAPPDATA%\\\\Uoink\\\\uoink_mcp.exe"
 }</pre></div></div></section>
-<section class="section" data-screen-label="agents / tools"><div class="container"><div class="section-head"><span class="eyebrow">13 tools your agent can call</span><h2 class="display-l">Not a screenshot. Real names, real <em>tools.</em></h2><p class="lede">Use the new <code>uoink_*</code> names. Legacy <code>yoink_*</code> aliases should remain for migration, but new configs should use Uoink.</p></div><div class="docs-main">${toolRows()}</div><p class="mt-32"><a class="btn primary" href="/mcp">Open machine-readable MCP page -></a></p></div></section>
+<section class="section" data-screen-label="agents / tools"><div class="container"><div class="section-head"><span class="eyebrow">13 tools your agent can call</span><h2 class="display-l">Real names, real <em>tools.</em></h2><p class="lede">Use the new <code>uoink_*</code> names. Legacy <code>yoink_*</code> aliases should remain for migration, but new configs should use Uoink.</p></div><div class="docs-main">${toolRows()}</div><p class="mt-32"><a class="btn primary" href="/mcp">Open machine-readable MCP page -></a></p></div></section>
 <section class="section" data-screen-label="agents / trace"><div class="container"><div class="section-head"><span class="eyebrow">composing Uoink with other tools</span><h2 class="display-l">Ask Cursor to research the web video <em>for real.</em></h2></div><div class="agent-demo"><div class="chat"><div class="mini-heading">prompt</div><p class="chat-bubble user">Uoink these three competitor videos, classify the hooks, then write a short doc comparing pacing patterns.</p><div class="mini-heading">result</div><p class="chat-bubble assistant">The agent extracts each video, polls the jobs, fetches the corpora, runs hook classification, then writes the comparison into your repo or notes folder.</p></div><div class="log"><div class="mini-heading">tool sequence</div><pre class="mcp-log" style="margin:0;white-space:pre-wrap">uoink_video(url_1)
 uoink_video(url_2)
 uoink_video(url_3)
@@ -507,15 +507,15 @@ search_uoinks("pacing")</pre></div></div></div></section>
       <h2 id="server">Server</h2>
       <pre>name: uoink
 version: 3.1
-homepage: https://uoink.video
+homepage: ${CANONICAL_URL}
 source: https://github.com/ryanbiddy/uoink
 license: MIT
 transport:
   - stdio: supported
   - http: experimental at 127.0.0.1:5179/mcp
 install:
-  windows: https://uoink.video/install#windows
-  mac: https://uoink.video/install#mac</pre>
+  windows: ${CANONICAL_URL}/install#windows
+  mac: ${CANONICAL_URL}/install#mac</pre>
       <h2 id="tools">Tools</h2>
       ${toolRows()}
       <h2>Canonical config note</h2>
@@ -525,7 +525,7 @@ install:
   </div>
 </section>
 <script type="application/json" id="uoink-mcp-manifest">
-{"server":{"name":"uoink","version":"3.1","homepage":"https://uoink.video","source":"https://github.com/ryanbiddy/uoink","license":"MIT","transports":["stdio","http-experimental"]},"tools":${JSON.stringify(mcpTools.map(([name, description]) => ({ name, description })))}}</script>`,
+{"server":{"name":"uoink","version":"3.2","homepage":"${CANONICAL_URL}","source":"https://github.com/ryanbiddy/uoink","license":"MIT","transports":["stdio","http-experimental"]},"tools":${JSON.stringify(mcpTools.map(([name, description]) => ({ name, description })))}}</script>`,
   },
   about: {
     id: "about",
@@ -585,7 +585,7 @@ install:
     keywords: ["uoink privacy", "local-first youtube extractor", "no telemetry youtube tool", "byo key youtube ai"],
     faq: privacyFaq,
     html: `
-<section class="section" data-screen-label="privacy / main"><div class="container"><article class="article"><div class="meta"><span>privacy</span><span>local-first</span></div><h1>Your corpus never leaves your <em>machine.</em></h1><p class="standfirst">Uoink extracts video and podcast content, stores it on your disk, and hands it to the AI you chose. There is no Uoink cloud because we never built one.</p><h2>What Uoink does.</h2><p>Uoink captures transcripts, screenshots, comments, channel context, podcast transcripts, metadata, and local indexes. It writes those artifacts into normal local files and a local SQLite index. You can paste the corpus into Claude or ChatGPT, or let an MCP agent read it directly.</p><h2>What Uoink does not do.</h2><p>No telemetry. No analytics SDK. No account. No phone-home. No hosted corpus. No newsletter capture. No tracking pixel. No remote logging.</p><h2>Where your data lives.</h2><p>On Windows, the helper lives under <code>%LOCALAPPDATA%\\Uoink</code>. Captures write into your Uoink library folder. The optional Anthropic key is stored in Windows Credential Manager. On macOS, the planned path uses <code>~/Library/Application Support/Uoink/</code> and Keychain.</p><h2>Network calls Uoink makes.</h2><p>Extraction calls go to the source you asked for: YouTube, X, RSS hosts, or another supported URL. Optional Comment Intelligence, Hook Type, and Entity Extraction calls go to Anthropic with your key only when enabled. Nothing is proxied through Uoink.</p><h2>Open source: audit it yourself.</h2><p>The source is MIT-licensed at <a href="${GITHUB_URL}">github.com/ryanbiddy/uoink</a>. The privacy model is not a promise hidden behind a dashboard. You can inspect the helper, loopback server, and network code.</p><p><a class="btn primary large" href="/install">Install Uoink</a> <a class="btn ghost large" href="/terms">Read terms</a></p></article></div></section><section class="section" data-screen-label="privacy / faq"><div class="container">${renderFaq(privacyFaq)}</div></section>`,
+<section class="section" data-screen-label="privacy / main"><div class="container"><article class="article"><div class="meta"><span>privacy</span><span>local-first</span></div><h1>Your corpus never leaves your <em>machine.</em></h1><p class="standfirst">Uoink extracts video and podcast content, stores it on your disk, and hands it to the AI you chose. There is no Uoink cloud because we never built one.</p><h2>What Uoink does.</h2><p>Uoink captures transcripts, screenshots, comments, channel context, podcast transcripts, metadata, and local indexes. It writes those artifacts into normal local files and a local SQLite index. You can paste the corpus into Claude or ChatGPT, or let an MCP agent read it directly.</p><h2>What Uoink skips.</h2><p>No telemetry. No analytics SDK. No account. No phone-home. No hosted corpus. No newsletter capture. No tracking pixel. No remote logging.</p><h2>Where your data lives.</h2><p>On Windows, the helper lives under <code>%LOCALAPPDATA%\\Uoink</code>. Captures write into your Uoink library folder. The optional Anthropic key is stored in Windows Credential Manager. On macOS, the planned path uses <code>~/Library/Application Support/Uoink/</code> and Keychain.</p><h2>Network calls Uoink makes.</h2><p>Extraction calls go to the source you asked for: YouTube, X, RSS hosts, or another supported URL. Optional Comment Intelligence, Hook Type, and Entity Extraction calls go to Anthropic with your key only when enabled. Nothing is proxied through Uoink.</p><h2>Open source: audit it yourself.</h2><p>The source is MIT-licensed at <a href="${GITHUB_URL}">github.com/ryanbiddy/uoink</a>. You can inspect the helper, loopback server, and network code.</p><p><a class="btn primary large" href="/install">Install Uoink</a> <a class="btn ghost large" href="/terms">Read terms</a></p></article></div></section><section class="section" data-screen-label="privacy / faq"><div class="container">${renderFaq(privacyFaq)}</div></section>`,
   },
   changelog: {
     id: "changelog",
@@ -593,10 +593,10 @@ install:
     mode: "mode-dark",
     title: "Changelog: Version Updates and Universal Extraction",
     description:
-      "Read Uoink release notes, v3.1 direction, universal extraction, podcast support, MCP improvements, and local corpus roadmap.",
+      "Read Uoink release notes, v3.2 direction, universal extraction, podcast support, MCP improvements, and local corpus roadmap.",
     keywords: ["uoink changelog", "uoink release notes", "uoink updates", "universal video uoink changelog"],
     html: `
-<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>latest first</span></div><h1>What's shipped, what's <em>coming.</em></h1><p class="standfirst">Engineers read changelogs to decide whether a tool is alive. Uoink is alive. This is the public summary; GitHub remains canonical.</p><h2>Latest: v3.1 track</h2><ul><li>Universal URL expansion for web video via yt-dlp backed extraction.</li><li>Podcast RSS and local transcription workstream.</li><li>Agent-readable site surfaces: /agents, /mcp, /llms.txt, /llms-full.txt.</li><li>Sharper positioning around corpus, local memory, and model-agnostic workflows.</li></ul><h2>Recent: v2.2</h2><ul><li>Dashboard, tray flow, install wizard, and local helper polish.</li><li>Memory/library surfaces for local captures.</li><li>13 MCP tools for capture, search, health, citation maps, comments, hooks, taxonomy, and entities.</li></ul><h2>In flight.</h2><ul><li>Signed macOS DMG and menu-bar helper.</li><li>Podcast corpus UI and Whisper model controls.</li><li>Markdown memory layer and richer local corpus map.</li><li>Verification assistance that presents evidence, not automatic verdicts.</li></ul><h2>Deliberately not building.</h2><p>Uoink is not becoming a hosted video warehouse, a recommendation feed, or a social network. The point is deliberate local work, not another cloud inbox.</p><p><a class="btn primary large" href="${RELEASE_URL}">Latest GitHub release</a> <a class="btn ghost large" href="/features">Feature inventory</a></p></article></div></section>`,
+<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>latest first</span></div><h1>What's shipped, what's <em>coming.</em></h1><p class="standfirst">Engineers read changelogs to decide whether a tool is alive. Uoink is alive. This is the public summary; GitHub remains canonical.</p><h2>Latest: v3.2 track</h2><ul><li>Universal URL expansion for web video via yt-dlp backed extraction.</li><li>Podcast RSS and local transcription workstream.</li><li>Agent-readable site surfaces: /agents, /mcp, /llms.txt, /llms-full.txt.</li><li>Sharper positioning around corpus, local memory, and model-agnostic workflows.</li></ul><h2>Recent: v2.2</h2><ul><li>Dashboard, tray flow, install wizard, and local helper polish.</li><li>Memory/library surfaces for local captures.</li><li>13 MCP tools for capture, search, health, citation maps, comments, hooks, taxonomy, and entities.</li></ul><h2>In flight.</h2><ul><li>Signed macOS DMG and menu-bar helper.</li><li>Podcast corpus UI and Whisper model controls.</li><li>Markdown memory layer and richer local corpus map.</li><li>Verification assistance that presents evidence, not automatic verdicts.</li></ul><h2>Boundaries.</h2><p>Uoink stays away from hosted video warehouses, recommendation feeds, and social networks. The point is deliberate local work, not another cloud inbox.</p><p><a class="btn primary large" href="${RELEASE_URL}">Latest GitHub release</a> <a class="btn ghost large" href="/features">Feature inventory</a></p></article></div></section>`,
   },
   terms: {
     id: "terms",

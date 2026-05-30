@@ -1,9 +1,9 @@
 {
   "server": {
     "name": "uoink",
-    "version": "3.1",
+    "version": "3.2",
     "description": "Local Uoink helper exposing video and podcast extraction, local corpus search, hook classification, comment analysis, and entity lookup as MCP tools.",
-    "homepage": "https://uoink.video",
+    "homepage": "https://uoink.app",
     "source": "https://github.com/ryanbiddy/uoink",
     "license": "MIT",
     "transports": [
@@ -18,8 +18,8 @@
       }
     ],
     "install": {
-      "windows": "https://uoink.video/install#windows",
-      "mac": "https://uoink.video/install#mac"
+      "windows": "https://uoink.app/install#windows",
+      "mac": "https://uoink.app/install#mac"
     }
   },
   "client_configs": {
@@ -38,18 +38,57 @@
     }
   },
   "tools": [
-    { "name": "uoink_video", "description": "Extract a structured corpus from one video URL." },
-    { "name": "uoink_playlist", "description": "Extract up to 10 videos from a playlist URL." },
-    { "name": "get_job_status", "description": "Poll a running extraction job." },
-    { "name": "cancel_job", "description": "Cancel a running extraction job." },
-    { "name": "list_recent_uoinks", "description": "Return the latest captures from the local library." },
-    { "name": "search_uoinks", "description": "Run full-text search across transcripts, comments, and titles." },
-    { "name": "get_uoink_corpus", "description": "Fetch one saved corpus as markdown." },
-    { "name": "analyze_comments", "description": "Cluster comment themes, products, and disagreements." },
-    { "name": "classify_hook", "description": "Classify an opening into the nine Hook Type categories." },
-    { "name": "get_taxonomy", "description": "Return the Hook Type taxonomy." },
-    { "name": "get_citation_map", "description": "Map corpus slugs to source URLs and timestamps." },
-    { "name": "get_uoink_health", "description": "Check helper status and diagnostics." },
-    { "name": "find_mentions", "description": "Find every video or podcast that mentions an entity." }
+    {
+      "name": "uoink_video",
+      "description": "Extract a structured corpus from one video URL."
+    },
+    {
+      "name": "uoink_playlist",
+      "description": "Extract up to 10 videos from a playlist URL."
+    },
+    {
+      "name": "get_job_status",
+      "description": "Poll a running extraction job."
+    },
+    {
+      "name": "cancel_job",
+      "description": "Cancel a running extraction job."
+    },
+    {
+      "name": "list_recent_uoinks",
+      "description": "Return the latest captures from the local library."
+    },
+    {
+      "name": "search_uoinks",
+      "description": "Run full-text search across transcripts, comments, and titles."
+    },
+    {
+      "name": "get_uoink_corpus",
+      "description": "Fetch one saved corpus as markdown."
+    },
+    {
+      "name": "analyze_comments",
+      "description": "Cluster comment themes, products, and disagreements."
+    },
+    {
+      "name": "classify_hook",
+      "description": "Classify an opening into the nine Hook Type categories."
+    },
+    {
+      "name": "get_taxonomy",
+      "description": "Return the Hook Type taxonomy."
+    },
+    {
+      "name": "get_citation_map",
+      "description": "Map corpus slugs to source URLs and timestamps."
+    },
+    {
+      "name": "get_uoink_health",
+      "description": "Check helper status and diagnostics."
+    },
+    {
+      "name": "find_mentions",
+      "description": "Find every video or podcast that mentions an entity."
+    }
   ]
 }

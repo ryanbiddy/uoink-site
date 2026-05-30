@@ -10,14 +10,14 @@ const links = [
 ];
 
 function tickerFor(active: string) {
-  if (active === "/install") return ["UOINK v3.1 / install", "helper / extension / local corpus"];
-  if (active === "/how") return ["UOINK v3.1 / workflow", "click / corpus / AI / result"];
-  if (active === "/features") return ["UOINK v3.1 / features", "corpus / memory / hooks / podcasts"];
-  if (active === "/podcasts") return ["UOINK v3.1 / podcasts", "RSS / Whisper / diarization / local"];
-  if (active === "/agents" || active === "/mcp") return ["UOINK v3.1 / MCP", "13 tools / Claude Desktop / Cursor / Cline"];
-  if (active === "/about") return ["UOINK v3.1 / about", "GitHub releases / public downloads / no tracking"];
-  if (active === "/privacy") return ["UOINK v3.1 / privacy", "local-first / no cloud / no telemetry"];
-  return ["UOINK v3.1 / local video corpus", "open source / MIT / model agnostic"];
+  if (active.startsWith("/install")) return ["UOINK v3.2 / install", "helper / extension / local corpus"];
+  if (active.startsWith("/how")) return ["UOINK v3.2 / workflow", "click / corpus / AI / result"];
+  if (active.startsWith("/features")) return ["UOINK v3.2 / features", "corpus / memory / hooks / dashboard"];
+  if (active.startsWith("/podcasts")) return ["UOINK v3.2 / podcasts", "RSS / Whisper / diarization / local"];
+  if (active.startsWith("/agents") || active.startsWith("/mcp")) return ["UOINK v3.2 / MCP", "13 tools / Claude Desktop / Cursor / Cline"];
+  if (active.startsWith("/about")) return ["UOINK v3.2 / about", "GitHub releases / public downloads / no tracking"];
+  if (active.startsWith("/privacy")) return ["UOINK v3.2 / privacy", "local-first / no cloud / no telemetry"];
+  return ["UOINK v3.2 / local video corpus", "open source / MIT / model agnostic"];
 }
 
 export function TopNav({ active }: { active: string }) {
@@ -43,7 +43,7 @@ export function TopNav({ active }: { active: string }) {
           </Link>
           <div className="nav-links">
             {links.map(([href, label]) => (
-              <Link key={href} href={href} className={active === href ? "active" : ""}>
+              <Link key={href} href={href} className={active === href || active.startsWith(`${href}/`) ? "active" : ""}>
                 {label}
               </Link>
             ))}
@@ -75,7 +75,7 @@ export function TopNav({ active }: { active: string }) {
         </span>
         <div className="links">
           {links.map(([href, label]) => (
-            <Link key={href} href={href} className={active === href ? "active" : ""}>
+            <Link key={href} href={href} className={active === href || active.startsWith(`${href}/`) ? "active" : ""}>
               {label}
             </Link>
           ))}

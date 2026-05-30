@@ -1,50 +1,137 @@
-<!-- generated: 2026-05-29 / uoink v3.1 -->
+<!-- generated: 2026-05-30 / uoink v3.2 -->
 # Uoink full site context
 
-## URL: https://uoink.video/
+## URL: https://uoink.app/
+Uoink turns videos and podcasts into private local corpora for Claude, ChatGPT, Cursor, and MCP-capable agents. The core loop is click, corpus, AI. The corpus includes transcript, screenshots, comments, channel context, metadata, and citations.
 
-Uoink turns videos and podcasts into private local corpora for Claude, ChatGPT, Cursor, and MCP-capable agents. One click under a video captures transcript, screenshots, comments, channel context, and metadata. The corpus lands on disk and on the clipboard. The local helper exposes 13 MCP tools for agents.
+## URL: https://uoink.app/install
+Install the desktop helper, install the browser extension, then click the Uoink button. The Windows helper runs from %LOCALAPPDATA%\Uoink and exposes localhost 127.0.0.1:5179. Browser extension support targets Chromium browsers. Chrome Web Store approval is pending, so the release zip is the launch path. macOS is on the v2.3 track.
 
-Core position: Uoink that shit. Transcript-only tools flatten video into text. Uoink keeps the source shape: words, frames, comments, channel context, metadata, and optional Hook Type classification.
+## URL: https://uoink.app/features
+The feature index groups Uoink into Capture, AI handoff, Library, Analysis, Local and private, and Dashboard. Dashboard and agents can fetch https://uoink.app/api/features-manifest for slug, name, URL, embed URL, status, category, summary, and MCP tools.
 
-## URL: https://uoink.video/install
+## URL: https://uoink.app/features/youtube-video-capture
+Feature detail page. Also supports https://uoink.app/features/youtube-video-capture?embed=true for dashboard embeds without site chrome.
 
-Install the desktop helper, install the browser extension, then click the Uoink button. The Windows helper runs from %LOCALAPPDATA%\Uoink and exposes localhost 127.0.0.1:5179. Browser extension support targets Chromium browsers. Chrome Web Store approval is pending, so the release zip is the launch path. macOS is on the v3.1 track.
+## URL: https://uoink.app/features/youtube-shorts
+Feature detail page. Also supports https://uoink.app/features/youtube-shorts?embed=true for dashboard embeds without site chrome.
 
-## URL: https://uoink.video/how
+## URL: https://uoink.app/features/right-click-thumbnail-uoink
+Feature detail page. Also supports https://uoink.app/features/right-click-thumbnail-uoink?embed=true for dashboard embeds without site chrome.
 
-The workflow is click -> corpus -> AI -> result. Uoink captures timestamped transcript, screenshots, comments, metadata, channel context, and classifier blocks. Paste into Claude or ChatGPT, or let an MCP agent call Uoink directly. Captures accumulate into a local library that can be searched and cited later.
+## URL: https://uoink.app/features/playlist-mode
+Feature detail page. Also supports https://uoink.app/features/playlist-mode?embed=true for dashboard embeds without site chrome.
 
-## URL: https://uoink.video/features
+## URL: https://uoink.app/features/screenshot-capture
+Feature detail page. Also supports https://uoink.app/features/screenshot-capture?embed=true for dashboard embeds without site chrome.
 
-Capabilities include in-page Uoink button, right-click capture, playlist mode, universal URL mode, podcast RSS feed support, local SQLite FTS5 search, topic folders, Memory dashboard, entity mentions, Hook Type taxonomy, BYO Anthropic key, clipboard budget, Whisper model selector, local MCP server, and Operator Skill instructions. Uoink is a local asset builder, not only a transcript downloader.
+## URL: https://uoink.app/features/smart-screenshot-picker
+Feature detail page. Also supports https://uoink.app/features/smart-screenshot-picker?embed=true for dashboard embeds without site chrome.
 
-## URL: https://uoink.video/podcasts
+## URL: https://uoink.app/features/transcript-with-timestamps
+Feature detail page. Also supports https://uoink.app/features/transcript-with-timestamps?embed=true for dashboard embeds without site chrome.
 
-Podcast support adds RSS feed polling, local audio download, local Whisper transcription, and speaker diarization. Diarization labels speakers as Speaker 1, Speaker 2, and so on until the user renames them. Podcast corpora live beside video corpora and are searchable by agents.
+## URL: https://uoink.app/features/top-comments-extraction
+Feature detail page. Also supports https://uoink.app/features/top-comments-extraction?embed=true for dashboard embeds without site chrome.
 
-## URL: https://uoink.video/agents
+## URL: https://uoink.app/features/channel-context
+Feature detail page. Also supports https://uoink.app/features/channel-context?embed=true for dashboard embeds without site chrome.
 
-Uoink is an MCP server. Supported clients include Claude Desktop, Cursor, Cline, Continue, and ChatGPT Desktop where MCP stdio is supported. Stdio is the supported transport. HTTP JSON-RPC at 127.0.0.1:5179/mcp is experimental. The setup page generates the real local config path after install.
+## URL: https://uoink.app/features/clipboard-markdown-corpus
+Feature detail page. Also supports https://uoink.app/features/clipboard-markdown-corpus?embed=true for dashboard embeds without site chrome.
 
-MCP tools: uoink_video, uoink_playlist, get_job_status, cancel_job, list_recent_uoinks, search_uoinks, get_uoink_corpus, analyze_comments, classify_hook, get_taxonomy, get_citation_map, get_uoink_health, find_mentions.
+## URL: https://uoink.app/features/send-to-claude
+Feature detail page. Also supports https://uoink.app/features/send-to-claude?embed=true for dashboard embeds without site chrome.
 
-## URL: https://uoink.video/mcp
+## URL: https://uoink.app/features/send-to-chatgpt
+Feature detail page. Also supports https://uoink.app/features/send-to-chatgpt?embed=true for dashboard embeds without site chrome.
 
-The MCP page and /mcp/manifest.json expose server metadata, supported transports, install links, client config notes, and tool names in machine-readable form for agents.
+## URL: https://uoink.app/features/mcp-server
+Feature detail page. Also supports https://uoink.app/features/mcp-server?embed=true for dashboard embeds without site chrome.
 
-## URL: https://uoink.video/about
+## URL: https://uoink.app/features/operator-skill
+Feature detail page. Also supports https://uoink.app/features/operator-skill?embed=true for dashboard embeds without site chrome.
 
-The About page explains Uoink's open-source posture and shows one public GitHub release download total. Counts come from GitHub's public Releases API. Uoink does not track who downloaded, only displays the public aggregate count.
+## URL: https://uoink.app/features/starter-prompts-library
+Feature detail page. Also supports https://uoink.app/features/starter-prompts-library?embed=true for dashboard embeds without site chrome.
 
-## URL: https://uoink.video/privacy
+## URL: https://uoink.app/features/local-corpus-library
+Feature detail page. Also supports https://uoink.app/features/local-corpus-library?embed=true for dashboard embeds without site chrome.
 
-Uoink has no account, no Uoink cloud, no telemetry, and no hosted corpus. Captures live on disk. Network calls go to the source being extracted and, only when optional AI features are enabled, Anthropic with the user's own API key. The key is stored in the operating system credential vault.
+## URL: https://uoink.app/features/sqlite-fts-search
+Feature detail page. Also supports https://uoink.app/features/sqlite-fts-search?embed=true for dashboard embeds without site chrome.
 
-## URL: https://uoink.video/changelog
+## URL: https://uoink.app/features/topic-folders
+Feature detail page. Also supports https://uoink.app/features/topic-folders?embed=true for dashboard embeds without site chrome.
 
-The changelog covers v3.1 direction, v2.2 dashboard and tray work, MCP tools, and in-flight macOS, podcast, markdown memory, and verification assistance.
+## URL: https://uoink.app/features/memory-page
+Feature detail page. Also supports https://uoink.app/features/memory-page?embed=true for dashboard embeds without site chrome.
 
-## URL: https://uoink.video/terms
+## URL: https://uoink.app/features/find-mentions
+Feature detail page. Also supports https://uoink.app/features/find-mentions?embed=true for dashboard embeds without site chrome.
 
-Uoink is MIT-licensed local software. Users are responsible for how they use captured materials and for following source platform and AI provider terms.
+## URL: https://uoink.app/features/citation-map
+Feature detail page. Also supports https://uoink.app/features/citation-map?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/hook-type-classification
+Feature detail page. Also supports https://uoink.app/features/hook-type-classification?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/comment-intelligence
+Feature detail page. Also supports https://uoink.app/features/comment-intelligence?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/entity-extraction
+Feature detail page. Also supports https://uoink.app/features/entity-extraction?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/hook-taxonomy
+Feature detail page. Also supports https://uoink.app/features/hook-taxonomy?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/self-calibrating-classifier
+Feature detail page. Also supports https://uoink.app/features/self-calibrating-classifier?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/windows-helper
+Feature detail page. Also supports https://uoink.app/features/windows-helper?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/credential-manager-key-storage
+Feature detail page. Also supports https://uoink.app/features/credential-manager-key-storage?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/zero-telemetry
+Feature detail page. Also supports https://uoink.app/features/zero-telemetry?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/local-api-token-gate
+Feature detail page. Also supports https://uoink.app/features/local-api-token-gate?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/open-source-mit
+Feature detail page. Also supports https://uoink.app/features/open-source-mit?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/system-tray-status
+Feature detail page. Also supports https://uoink.app/features/system-tray-status?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/dashboard-library
+Feature detail page. Also supports https://uoink.app/features/dashboard-library?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/live-activity-stream
+Feature detail page. Also supports https://uoink.app/features/live-activity-stream?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/settings-page
+Feature detail page. Also supports https://uoink.app/features/settings-page?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/install-wizard
+Feature detail page. Also supports https://uoink.app/features/install-wizard?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/first-run-splash
+Feature detail page. Also supports https://uoink.app/features/first-run-splash?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/rate-limit-queue
+Feature detail page. Also supports https://uoink.app/features/rate-limit-queue?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/agents
+Agent setup explains the local Model Context Protocol server, stdio transport, placeholder config snippets, and 13 tools: uoink_video, uoink_playlist, get_job_status, cancel_job, list_recent_uoinks, search_uoinks, get_uoink_corpus, analyze_comments, classify_hook, get_taxonomy, get_citation_map, get_uoink_health, find_mentions.
+
+## URL: https://uoink.app/mcp
+Machine-readable MCP discovery surface with manifest JSON at https://uoink.app/mcp/manifest.json.
+
+## URL: https://uoink.app/privacy
+Privacy policy: no Uoink cloud, no account, no telemetry, optional Anthropic calls use the user's own key.
+
+## URL: https://uoink.app/about
+About page explains the open-source posture and shows one public GitHub release download total. Counts come from GitHub's public Releases API. Uoink tracks no download identities.
