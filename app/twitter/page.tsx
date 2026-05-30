@@ -113,7 +113,7 @@ export default function TwitterPage() {
             </pre>
             <pre>
               <code>{`write_tweet({
-  source_yoink_id: "x-video-2026-05-30",
+  source_uoink_id: "x-video-2026-05-30",
   angle: "what technical creators should steal"
 })`}</code>
             </pre>
