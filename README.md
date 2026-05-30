@@ -1,6 +1,6 @@
 # Uoink site
 
-Production marketing site for [Uoink](https://uoink.video), the local-first YouTube layer for any AI.
+Production marketing site for [Uoink](https://uoink.app), the local-first YouTube layer for any AI.
 
 Built with Next.js App Router and deployed to Vercel. The product repo lives at [github.com/ryanbiddy/uoink](https://github.com/ryanbiddy/uoink); this repo is only the marketing site.
 
@@ -23,7 +23,7 @@ The site uses `output: "export"` for static deployment.
 
 ## Deploy
 
-Connect this repo to Vercel and let it auto-detect Next.js. Preview first, then point `uoink.video` only after Ryan approves the preview.
+Connect this repo to Vercel and let it auto-detect Next.js. Production canonical is `uoink.app`; `uoink.video` redirects there.
 
 ## Brand
 

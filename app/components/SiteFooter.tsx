@@ -70,7 +70,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="container footer-bottom">
-        <span>uoink.video / v3.1 / 2026</span>
+        <span>uoink.app / v3.2 / 2026</span>
         <span>Local-first. Model-agnostic. MIT.</span>
       </div>
     </footer>

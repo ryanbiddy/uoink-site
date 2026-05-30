@@ -42,7 +42,7 @@ function JsonLd({ page }: { page: SitePage }) {
       "@type": "SoftwareApplication",
       name: "Uoink",
       applicationCategory: "UtilityApplication",
-      operatingSystem: "Windows 10, Windows 11, macOS",
+      operatingSystem: "Windows 10, Windows 11",
       softwareVersion: VERSION.replace("v", ""),
       downloadUrl: RELEASE_URL,
       url: CANONICAL_URL,
@@ -97,22 +97,6 @@ function JsonLd({ page }: { page: SitePage }) {
         { "@type": "HowToStep", name: "Install the extension", text: "Install the browser extension from the release zip until Web Store approval lands." },
         { "@type": "HowToStep", name: "Click Uoink", text: "Open a supported video page and click the Uoink button." },
       ],
-    });
-  }
-
-  if (page.id === "features") {
-    schemas.push({
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      name: "Uoink feature list",
-      itemListElement: [
-        "Video capture",
-        "Podcast RSS transcription",
-        "Local SQLite memory",
-        "MCP tools",
-        "Hook taxonomy",
-        "Comment Intelligence",
-      ].map((name, index) => ({ "@type": "ListItem", position: index + 1, name })),
     });
   }
 

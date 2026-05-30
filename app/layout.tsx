@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bungee, Inter, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import { VercelAnalytics } from "./components/VercelAnalytics";
+import { CANONICAL_URL } from "./content/pages";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], style: ["normal", "italic"], variable: "--font-inter", display: "swap" });
@@ -9,7 +10,7 @@ const bungee = Bungee({ subsets: ["latin"], weight: "400", variable: "--font-bun
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://uoink.video"),
+  metadataBase: new URL(CANONICAL_URL),
   title: { default: "Uoink - local video corpus for any AI", template: "%s | Uoink" },
   description:
     "Uoink turns videos and podcasts into private local corpora for Claude, ChatGPT, Cursor, and MCP-capable agents.",
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     siteName: "Uoink",
     title: "Uoink - local video corpus for any AI",
     description: "One click turns video and podcasts into local corpora for Claude, ChatGPT, Cursor, and MCP agents.",
-    url: "https://uoink.video",
+    url: CANONICAL_URL,
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Uoink local video corpus site preview" }],
   },
   twitter: {
