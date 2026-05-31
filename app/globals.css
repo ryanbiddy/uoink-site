@@ -821,11 +821,11 @@ code, .ci {
 .tool-group summary {
   align-items: center;
   cursor: pointer;
-  display: flex;
-  gap: 18px;
-  justify-content: space-between;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
   list-style: none;
-  padding: 20px 22px;
+  padding: 17px 22px;
   position: relative;
 }
 .tool-group summary::-webkit-details-marker {
@@ -849,24 +849,28 @@ code, .ci {
 .tool-group[open] summary::before {
   content: "-";
 }
-.tool-group summary span:first-child {
+.tool-group summary > span:first-of-type {
   display: grid;
   gap: 5px;
+  justify-self: start;
+  max-width: 760px;
+  min-width: 0;
 }
 .tool-group summary strong {
   font-family: var(--display);
-  font-size: clamp(22px, 2.4vw, 30px);
+  font-size: clamp(21px, 2vw, 27px);
   font-weight: 850;
   letter-spacing: -0.026em;
-  line-height: 1;
+  line-height: 1.05;
 }
 .tool-group summary em {
   color: var(--rust-deep);
-  font-size: 14.5px;
+  font-size: 14px;
   font-style: normal;
   line-height: 1.45;
 }
 .tool-count {
+  align-self: center;
   border: 1.5px solid var(--hairline-l);
   border-radius: var(--r-pill);
   color: var(--rust);
@@ -876,6 +880,7 @@ code, .ci {
   font-weight: 900;
   letter-spacing: 0.12em;
   padding: 9px 12px;
+  justify-self: end;
   text-transform: uppercase;
 }
 .tool-group-body {
@@ -1009,10 +1014,27 @@ code, .ci {
   .prompt-grid { grid-template-columns: 1fr; }
   .tool-row { grid-template-columns: 1fr; gap: 8px; }
   .tool-accordion { box-shadow: 6px 6px 0 var(--ink); }
-  .tool-group summary { align-items: flex-start; flex-direction: column; padding: 18px; }
-  .tool-group summary::before { position: absolute; right: 18px; top: 18px; }
-  .tool-group summary span:first-child { padding-right: 44px; }
-  .tool-count { align-self: flex-start; }
+  .tool-group summary {
+    align-items: start;
+    gap: 10px 12px;
+    grid-template-columns: 32px minmax(0, 1fr);
+    padding: 16px;
+  }
+  .tool-group summary::before {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    position: static;
+  }
+  .tool-group summary > span:first-of-type {
+    grid-column: 2;
+    padding-right: 0;
+  }
+  .tool-count {
+    align-self: start;
+    grid-column: 2;
+    justify-self: start;
+    padding: 7px 10px;
+  }
   .tool-group-body { padding: 0 18px; }
   .hero .corner-stamp { display: none; }
   .article p.standfirst + p::first-letter { font-size: 48px; }
