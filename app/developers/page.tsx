@@ -54,6 +54,97 @@ const configs = [
   },
 ];
 
+const toolGroups = [
+  {
+    title: "Core stdio tools",
+    dek: "The 13-tool daily path for capture, search, comments, hooks, citations, and health.",
+    names: [
+      "uoink_video",
+      "uoink_playlist",
+      "get_job_status",
+      "cancel_job",
+      "list_recent_uoinks",
+      "search_uoinks",
+      "get_uoink_corpus",
+      "analyze_comments",
+      "classify_hook",
+      "get_taxonomy",
+      "get_citation_map",
+      "get_uoink_health",
+      "find_mentions",
+    ],
+  },
+  {
+    title: "Library, role, and live status",
+    dek: "Local reads and setup helpers that shape the library around the user's workflow.",
+    names: ["analyze_self_channel", "get_schema_version", "get_user_role", "set_user_role", "check_live_status"],
+  },
+  {
+    title: "Podcast and mobile bridge",
+    dek: "RSS feeds, WhisperX checks, monitored playlists, and mobile save-to-playlist workflows.",
+    names: [
+      "add_podcast_feed",
+      "list_podcast_feeds",
+      "remove_podcast_feed",
+      "poll_podcast_feed",
+      "list_podcast_episodes",
+      "download_podcast_episode",
+      "get_whisperx_status",
+      "transcribe_podcast_episode",
+      "add_monitored_playlist",
+      "list_monitored_playlists",
+      "remove_monitored_playlist",
+      "poll_monitored_playlist",
+      "list_monitored_playlist_events",
+    ],
+  },
+  {
+    title: "Memory, facets, and workspace assembly",
+    dek: "Taste memory, engagement signals, facet filters, workspace planning, and corpus critique.",
+    names: [
+      "get_user_taste",
+      "get_user_memory",
+      "update_user_taste",
+      "get_engagement_signal",
+      "classify_facets",
+      "query_by_facets",
+      "get_facet_taxonomy",
+      "get_transcript_reliability",
+      "assemble_workspace",
+      "critique_against_corpus",
+      "list_workspaces",
+      "get_workspace",
+    ],
+  },
+  {
+    title: "Claims, scripts, and Writing Studio",
+    dek: "Evidence capture, script versions, shot lists, tweets, blogs, and voice anchors.",
+    names: [
+      "extract_claims",
+      "verify_claim",
+      "list_claims",
+      "get_claim",
+      "generate_script",
+      "revise_script",
+      "get_shot_list",
+      "list_scripts",
+      "get_script",
+      "write_tweet",
+      "write_blog",
+      "list_writing_pieces",
+      "get_writing_piece",
+      "add_style_anchor",
+      "list_style_anchors",
+      "remove_style_anchor",
+    ],
+  },
+  {
+    title: "Universal page capture",
+    dek: "Allowed-site controls for capturing pages with the local helper.",
+    names: ["uoink_page", "list_allowed_sites", "add_allowed_site", "remove_allowed_site"],
+  },
+];
+
 export const metadata: Metadata = {
   title: page.title,
   description: page.description,
@@ -166,34 +257,6 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="section" data-screen-label="developers / tool catalog">
-        <div className="container">
-          <div className="section-head">
-            <span className="eyebrow">tool catalog</span>
-            <h2 className="display-l">
-              The public tool names agents should <em>read.</em>
-            </h2>
-            <p className="lede">
-              The manifest remains canonical for schemas. This page keeps the names visible for humans, crawlers, and agents evaluating the integration.
-            </p>
-          </div>
-          <div className="docs-main">
-            {mcpTools.map(([name, description]) => (
-              <div className="tool-row" key={name}>
-                <div className="name">
-                  {name}
-                  <span className="args">local MCP tool</span>
-                </div>
-                <div className="desc">
-                  {description}
-                  <span className="ex">Schema lives in /mcp/manifest.json.</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="big-strip" data-screen-label="developers / sample run">
         <div className="container">
           <span className="eyebrow">sample agent run</span>
@@ -230,6 +293,28 @@ write_blog(corpus_set)`}</pre>
         </div>
       </section>
 
+      <section className="section" data-screen-label="developers / tool catalog">
+        <div className="container">
+          <div className="section-head compact-head">
+            <span className="eyebrow">tool catalog</span>
+            <h2 className="display-l">
+              Names stay visible. Details stay <em>folded.</em>
+            </h2>
+            <p className="lede">
+              The manifest remains canonical for schemas. This page keeps the public tool names readable for humans, crawlers, and agents without turning the page into one endless list.
+            </p>
+            <p className="body-l">
+              Start with <code>uoink_video</code>, <code>search_uoinks</code>, <code>get_uoink_corpus</code>, <code>classify_hook</code>, and <code>find_mentions</code>. Open a bucket when you need the rest.
+            </p>
+          </div>
+          <div className="tool-accordion" aria-label="Uoink MCP tool groups">
+            {toolGroups.map((group) => (
+              <ToolGroup key={group.title} group={group} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section" data-screen-label="developers / docs split">
         <div className="container">
           <div className="section-head">
@@ -263,5 +348,39 @@ write_blog(corpus_set)`}</pre>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }} />
     </PageShell>
+  );
+}
+
+function ToolGroup({ group }: { group: (typeof toolGroups)[number] }) {
+  const tools = group.names.map((name) => {
+    const tool = mcpTools.find(([toolName]) => toolName === name);
+    if (!tool) throw new Error(`Missing MCP tool ${name}`);
+    return tool;
+  });
+
+  return (
+    <details className="tool-group">
+      <summary>
+        <span>
+          <strong>{group.title}</strong>
+          <em>{group.dek}</em>
+        </span>
+        <span className="tool-count">{tools.length} tools</span>
+      </summary>
+      <div className="tool-group-body">
+        {tools.map(([name, description]) => (
+          <div className="tool-row compact" key={name}>
+            <div className="name">
+              {name}
+              <span className="args">local MCP tool</span>
+            </div>
+            <div className="desc">
+              {description}
+              <span className="ex">Schema lives in /mcp/manifest.json.</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </details>
   );
 }
