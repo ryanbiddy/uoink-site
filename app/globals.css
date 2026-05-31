@@ -265,6 +265,31 @@ uoink-mark[data-size="small"] .u-tip-s { display: block; }
 .btn.large { font-size: 14px; padding: 17px 28px; }
 .btn:disabled, .btn.disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
 .arr-link.disabled { opacity: 0.58; cursor: not-allowed; pointer-events: none; }
+.os-logo {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 1.1em;
+  justify-content: center;
+  width: 1.1em;
+}
+.os-logo svg {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.btn.with-logo {
+  gap: 9px;
+}
+.btn.with-logo .os-logo {
+  height: 1.25em;
+  width: 1.25em;
+}
+.platform-label {
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+}
 
 /* STAMPS — circular, acid */
 .stamp {
