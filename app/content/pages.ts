@@ -47,6 +47,11 @@ export const X_HANDLE = "@uoink.app";
 export const CONTACT_EMAIL = "hi@uoink.app";
 export const VERSION = "v3.3";
 
+const WINDOWS_MARK =
+  '<span class="os-logo windows-logo" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M5 8l17-2.4v17.2H5V8zm20.5-2.8L43 2.7v20.1H25.5V5.2zM5 25.2h17v17.2L5 40V25.2zm20.5 0H43v20.1l-17.5-2.5V25.2z" fill="currentColor"/></svg></span>';
+const MAC_MARK =
+  '<span class="os-logo mac-logo" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M32.4 4.4c.2 3.1-1.1 6.1-3 8.2-2.1 2.3-5.1 4-8 3.8-.4-3 .9-6 2.8-8.1 2-2.3 5.4-4 8.2-3.9zM42 34.3c-1.1 2.5-1.7 3.6-3.1 5.9-2 3-4.8 6.9-8.3 7-3.1.1-3.9-2-8.1-2s-5.1 1.9-8 2c-3.5.1-6.2-3.6-8.2-6.7-5.6-8.5-6.2-18.5-2.7-23.8 2.5-3.8 6.4-6 10-6.1 3.7-.1 7.1 2 9 2s5.6-2.4 9.5-2c1.6.1 6.2.7 9.1 4.9-.2.1-5.5 3.2-5.4 9.6.1 7.6 6.6 10.1 6.2 9.2z" fill="currentColor"/></svg></span>';
+
 const installFaq: FaqItem[] = [
   {
     question: "What operating systems are supported by Uoink?",
@@ -261,7 +266,7 @@ find_mentions("Karpathy")</pre>
         <span class="eyebrow">install</span>
         <h1 class="display-xl">Install <em>Uoink.</em></h1>
         <p class="lede">Get the helper running, add the browser button, then click Uoink on any video. No Python install, no command line, no PATH wrangling.</p>
-        <div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Download Windows installer</a><a class="btn ghost large" href="/how-it-works">See what happens after install</a></div>
+        <div class="ctas"><a class="btn primary large with-logo" href="${RELEASE_URL}">${WINDOWS_MARK}Download Windows installer</a><a class="btn ghost large" href="/how-it-works">See what happens after install</a></div>
         <p class="sub-cta">Windows 10/11 / local helper / extension sideload until Web Store approval</p>
         <div class="brand-strip" aria-label="Install surfaces">
           <!-- GitHub logo source: https://github.com/logos; license/usage confirmation: official GitHub mark, unmodified integration callout under GitHub logo guidelines. -->
@@ -285,9 +290,9 @@ find_mentions("Karpathy")</pre>
 <section class="section" data-screen-label="install / platforms">
   <div class="container">
     <div class="ledger">
-      <div class="ledger-card live" id="windows"><div class="top"><span>Windows</span><span>now</span></div><div class="body-l"><h3>Desktop helper.</h3><p class="ver">Windows 10/11 / release page</p><p>The helper bundles Python, yt-dlp, ffmpeg, keyring, SQLite, and MCP pieces. It runs locally and exposes the loopback server at <code>127.0.0.1:5179</code>.</p><p>Windows may flag early builds as an unrecognized publisher. Click More info, then Run anyway if you trust the GitHub release.</p></div><div class="foot"><a class="btn primary small" href="${RELEASE_URL}">Open release -></a></div></div>
+      <div class="ledger-card live" id="windows"><div class="top"><span class="platform-label">${WINDOWS_MARK}Windows</span><span>now</span></div><div class="body-l"><h3>Desktop helper.</h3><p class="ver">Windows 10/11 / release page</p><p>The helper bundles Python, yt-dlp, ffmpeg, keyring, SQLite, and MCP pieces. It runs locally and exposes the loopback server at <code>127.0.0.1:5179</code>.</p><p>Windows may flag early builds as an unrecognized publisher. Click More info, then Run anyway if you trust the GitHub release.</p></div><div class="foot"><a class="btn primary small with-logo" href="${RELEASE_URL}">${WINDOWS_MARK}Open release -></a></div></div>
       <div class="ledger-card pend" id="extension"><div class="top"><span>Extension</span><span>pending review</span></div><div class="body-l"><h3>Browser button.</h3><p class="ver">Chrome / Edge / Brave / Vivaldi / Opera GX</p><p>The extension needs host permissions for supported video pages so it can render the in-page Uoink button and context menu. It skips browsing-history permission.</p><p>Until Web Store approval lands, download the extension zip from the same GitHub release and load it through your browser extension page.</p></div><div class="foot"><a class="btn ghost small" href="${RELEASE_URL}">Get release zip -></a></div></div>
-      <div class="ledger-card queue" id="mac"><div class="top"><span>Mac</span><span>${PRODUCT_STATUS.mac.label}</span></div><div class="body-l"><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p></div><div class="foot"><a class="btn ghost small" href="${GITHUB_URL}/watchers">Watch GitHub -></a></div></div>
+      <div class="ledger-card queue" id="mac"><div class="top"><span class="platform-label">${MAC_MARK}Mac</span><span>${PRODUCT_STATUS.mac.label}</span></div><div class="body-l"><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p></div><div class="foot"><a class="btn ghost small with-logo" href="${GITHUB_URL}/watchers">${MAC_MARK}Watch GitHub -></a></div></div>
     </div>
   </div>
 </section>
