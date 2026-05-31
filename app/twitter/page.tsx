@@ -67,15 +67,15 @@ export default function TwitterPage() {
               }}
             />
           </div>
-          <figure className="twitter-shot">
+          <figure className="twitter-shot tweet-creative">
             <Image
-              src="/screenshots/twitter-video/hero-1280x800.png"
-              alt="Uoink dashboard surface for Twitter video capture and writing"
-              width={1280}
-              height={800}
+              src="/screenshots/twitter-video/micky-personal-agents-tweet.png"
+              alt="X post with a video about personal agents"
+              width={596}
+              height={471}
               priority
             />
-            <figcaption>Captured from the local Windows dashboard.</figcaption>
+            <figcaption>X video source with creator credit intact.</figcaption>
           </figure>
         </div>
       </section>
