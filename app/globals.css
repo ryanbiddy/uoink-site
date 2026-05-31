@@ -477,6 +477,13 @@ code, .ci {
   padding: 8px 12px;
 }
 
+.brand-strip .brand-mark-pill {
+  justify-content: center;
+  min-height: 46px;
+  min-width: 58px;
+  padding: 7px 14px;
+}
+
 .brand-strip .logo-chip img {
   display: block;
   height: 22px;
@@ -486,29 +493,25 @@ code, .ci {
 }
 
 .brand-strip .logo-chip.logo-mark img {
-  height: 22px;
-  max-width: 22px;
-  width: 22px;
+  height: 30px;
+  max-width: 30px;
+  width: 30px;
 }
 
 .brand-strip .logo-chip.logo-wide img {
-  height: 20px;
+  height: 24px;
+  max-width: 132px;
+}
+
+.brand-strip .cws-chip {
+  border-style: dashed;
+  color: var(--vermillion);
 }
 
 .brand-strip .logo-chip.logo-dark {
   background: var(--ink);
   border-color: var(--ink);
   color: var(--cream);
-}
-
-.brand-strip .logo-chip.logo-dark span,
-.site-root.mode-dark .brand-strip .logo-chip.logo-dark span {
-  color: var(--cream);
-}
-
-.brand-strip .cws-chip {
-  border-style: dashed;
-  color: var(--vermillion);
 }
 
 .site-root.mode-dark .brand-strip > span {

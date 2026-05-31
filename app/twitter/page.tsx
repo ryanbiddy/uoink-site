@@ -63,7 +63,7 @@ export default function TwitterPage() {
               aria-label="Twitter source logo"
               dangerouslySetInnerHTML={{
                 __html:
-                  '<!-- X logo source: https://about.x.com/en/who-we-are/brand-toolkit; license/usage confirmation: official X brand toolkit asset, unmodified integration callout. --><span class="logo-chip logo-mark"><img src="/assets/brand-logos/x.png" alt="X" width="22" height="22" loading="lazy" decoding="async" /><span>X video</span></span>',
+                  '<!-- X logo source: https://about.x.com/en/who-we-are/brand-toolkit; license/usage confirmation: official X brand toolkit asset, unmodified integration callout. --><span class="logo-chip brand-mark-pill logo-mark" aria-label="X video"><img src="/assets/brand-logos/x.png" alt="X video" width="30" height="30" loading="lazy" decoding="async" /></span>',
               }}
             />
           </div>
