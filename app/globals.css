@@ -1350,6 +1350,12 @@ button, .btn, .nav-cta, .mobile-menu a, .docs-sidebar a { min-height: 44px; }
   position: relative;
   transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
 }
+.feature-card-head {
+  align-items: flex-start;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
 .feature-card:hover {
   border-color: var(--rust);
   box-shadow: 8px 8px 0 var(--ink);
@@ -1394,6 +1400,78 @@ button, .btn, .nav-cta, .mobile-menu a, .docs-sidebar a { min-height: 44px; }
 .feature-status.planned {
   border-color: var(--hairline-l);
   color: var(--muted-warm);
+}
+.platform-logo-strip {
+  align-items: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.platform-logo-chip {
+  align-items: center;
+  background: var(--cream);
+  border: 1px solid rgba(10, 10, 10, 0.2);
+  border-radius: var(--r-pill);
+  color: var(--ink);
+  display: inline-flex;
+  height: 40px;
+  justify-content: center;
+  min-width: 46px;
+  overflow: hidden;
+  padding: 7px 10px;
+}
+.platform-logo-strip.compact .platform-logo-chip {
+  height: 34px;
+  min-width: 40px;
+  padding: 6px 8px;
+}
+.platform-logo-chip.dark {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--cream);
+}
+.platform-logo-chip.wide {
+  min-width: 82px;
+}
+.platform-logo-chip img,
+.platform-logo-chip svg {
+  display: block;
+  height: 25px;
+  max-width: 92px;
+  object-fit: contain;
+  width: auto;
+}
+.platform-logo-strip.compact .platform-logo-chip img,
+.platform-logo-strip.compact .platform-logo-chip svg {
+  height: 22px;
+  max-width: 76px;
+}
+.platform-logo-chip svg {
+  width: 28px;
+}
+.platform-logo-youtube svg,
+.platform-logo-mcp svg {
+  width: 38px;
+}
+.platform-logo-chip.wide img {
+  height: 20px;
+  max-width: 110px;
+}
+.platform-logo-strip.compact .platform-logo-chip.wide img {
+  height: 17px;
+  max-width: 86px;
+}
+.feature-visual-logos {
+  justify-content: center;
+  margin-inline: auto;
+}
+.feature-visual-top .platform-logo-chip {
+  background: var(--cream);
+  border-color: rgba(255, 244, 236, 0.55);
+}
+.feature-visual-top .platform-logo-chip.dark {
+  background: var(--cream);
+  color: var(--ink);
 }
 .feature-card .arr-link,
 .feature-side .arr-link {

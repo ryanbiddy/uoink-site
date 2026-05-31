@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageShell } from "../../components/PageShell";
+import { getFeatureLogoKeys, PlatformLogoStrip } from "../../components/PlatformLogoStrip";
 import { CANONICAL_URL, GITHUB_URL, RELEASE_URL, SitePage } from "../../content/pages";
 import { Feature, featureBySlug, features, getRelatedFeatures } from "../feature-data";
 import { EmbedMode } from "./EmbedMode";
@@ -173,11 +174,13 @@ export default async function FeaturePage({ params }: Props) {
 
 function FeatureVisual({ feature }: { feature: Feature }) {
   const tool = feature.mcpTools[0] ?? "local corpus";
+  const logos = getFeatureLogoKeys(feature);
 
   return (
     <div className="feature-visual" aria-label={feature.screenshot.alt}>
       <div className="feature-visual-top">
         <span>{feature.category}</span>
+        <PlatformLogoStrip logos={logos} compact className="feature-visual-logos" />
         <span>{feature.status}</span>
       </div>
       <div className="feature-visual-body">

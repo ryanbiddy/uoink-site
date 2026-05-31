@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "../components/PageShell";
+import { getFeatureLogoKeys, PlatformLogoStrip } from "../components/PlatformLogoStrip";
 import { CANONICAL_URL, RELEASE_URL, SitePage, pages } from "../content/pages";
 import { featureCategories, features, featuresByCategory } from "./feature-data";
 
@@ -70,7 +71,10 @@ export default function Page() {
                 <div className="feature-card-grid">
                   {categoryFeatures.map((feature) => (
                     <Link key={feature.slug} href={`/features/${feature.slug}`} className="feature-card">
-                      <span className={`feature-status ${feature.status.replaceAll(" ", "-")}`}>{feature.status}</span>
+                      <div className="feature-card-head">
+                        <PlatformLogoStrip logos={getFeatureLogoKeys(feature)} compact />
+                        <span className={`feature-status ${feature.status.replaceAll(" ", "-")}`}>{feature.status}</span>
+                      </div>
                       <h3>{feature.title}</h3>
                       <p>{feature.summary}</p>
                       <span className="arr-link">Open feature -&gt;</span>
