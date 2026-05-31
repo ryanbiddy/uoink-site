@@ -1,4 +1,26 @@
 {
+  "redirects": [
+    {
+      "source": "/podcasts",
+      "destination": "/sources/podcasts",
+      "permanent": true
+    },
+    {
+      "source": "/how",
+      "destination": "/how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/agents",
+      "destination": "/developers",
+      "permanent": true
+    },
+    {
+      "source": "/agent-docs",
+      "destination": "/developers",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/api/features-manifest",

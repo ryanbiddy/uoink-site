@@ -23,7 +23,7 @@ The site uses `output: "export"` for static deployment.
 
 ## Deploy
 
-Connect this repo to Vercel and let it auto-detect Next.js. Production canonical is `uoink.app`; `uoink.video` redirects there.
+Connect this repo to Vercel and let it auto-detect Next.js. Production canonical is `uoink.app`; the legacy video domain redirects there.
 
 ## Brand
 

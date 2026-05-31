@@ -1,26 +1,30 @@
-<!-- generated: 2026-05-30 / uoink v3.2 -->
+<!-- generated: 2026-05-30 / uoink v3.3 -->
 # Uoink
 
-> Uoink is a local-first Chrome extension plus desktop helper that extracts a structured corpus from videos and podcasts, then hands that corpus to Claude, ChatGPT, Cursor, or a local MCP agent through clipboard, direct send, or MCP tools.
+> Uoink keeps the videos, podcasts, and articles creators and AI developers study on their own disk, then hands them to Claude, ChatGPT, Cursor, or a local MCP agent as a cited corpus.
 
 ## Install
 
 - [Install Uoink](https://uoink.app/install): Windows helper, browser extension, macOS status.
-- [How it works](https://uoink.app/how): click -> corpus -> AI workflow.
+- [How it works](https://uoink.app/how-it-works): capture -> library -> workspace -> iterate -> distribute.
 
 ## Product
 
 - [Features](https://uoink.app/features): complete feature index with 28 feature pages.
+- [Sources](https://uoink.app/sources): YouTube, X video, podcasts, articles, Reddit, and newsletter source cards.
+- [Creators](https://uoink.app/creators): creator workflow from source capture to Writing Studio to attribution.
+- [Developers](https://uoink.app/developers): local MCP setup, config snippets, and tool catalog.
 - [Feature manifest](https://uoink.app/api/features-manifest): dashboard and agent-readable feature URLs.
 - [Field notes](https://uoink.app/blog): launch articles for YouTube hook types, local-first architecture, MCP agents, Writing Studio, and universal page capture.
 - [RSS](https://uoink.app/blog/rss.xml): article feed for crawlers and feed readers.
 - [Twitter video](https://uoink.app/twitter): X/Twitter video capture, creator credit, and Writing Studio handoff.
-- [Podcasts](https://uoink.app/podcasts): RSS feeds, local Whisper transcription, speaker diarization.
+- [Podcast source page](https://uoink.app/sources/podcasts): RSS feeds, local Whisper transcription, speaker diarization.
 - [Privacy](https://uoink.app/privacy): no account, no Uoink cloud, no telemetry.
 
 ## Agents and MCP
 
-- [Agents](https://uoink.app/agents): Claude Desktop, Cursor, Cline, Continue, ChatGPT Desktop setup.
+- [Developers](https://uoink.app/developers): Claude Desktop, Cursor, Cline, Continue, ChatGPT Desktop setup.
+- [Agents](https://uoink.app/agents): legacy agent setup page.
 - [MCP](https://uoink.app/mcp): server metadata, transport notes, and the 63 local tool names.
 - [MCP manifest JSON](https://uoink.app/mcp/manifest.json): machine-readable server manifest with all 63 tools.
 
