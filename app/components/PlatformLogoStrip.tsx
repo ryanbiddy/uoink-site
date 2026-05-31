@@ -34,7 +34,7 @@ type LogoMeta = {
 const logoMeta: Record<PlatformLogoKey, LogoMeta> = {
   uoink: { label: "Uoink", src: "/assets/favicon.svg" },
   youtube: { label: "YouTube" },
-  x: { label: "X", src: "/assets/brand-logos/x.png", dark: true },
+  x: { label: "X", src: "/assets/brand-logos/x.png" },
   "apple-podcasts": { label: "Apple Podcasts", src: "/assets/brand-logos/apple-podcasts.png" },
   spotify: { label: "Spotify", src: "/assets/brand-logos/spotify.png", wide: true },
   substack: { label: "Substack" },
