@@ -164,6 +164,6 @@ Privacy policy: no Uoink cloud, no account, no telemetry, optional Anthropic cal
 About page explains the open-source posture and shows one public GitHub release download total. Counts come from GitHub's public Releases API. Uoink tracks no download identities.
 
 ## Official contact
-X: https://x.com/uoink.app
-Handle: @uoink.app
+X: https://www.twitter.com/uoinkapp
+Handle: @uoinkapp
 Email: hi@uoink.app
