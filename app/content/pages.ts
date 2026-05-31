@@ -201,7 +201,7 @@ export const pages: Record<PageId, SitePage> = {
       <p class="lede">The on-ramp stays simple. The depth shows up after the corpus exists.</p>
     </div>
     <div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
-      <a class="card" href="/how"><span class="num">01</span><h3>Creators.</h3><p>Watch less. Read more. Audit hooks, pacing, screenshots, comments, and competitor channels without taking notes at 2x.</p><span class="arr-link">See creator workflow -></span></a>
+      <a class="card" href="/how"><span class="num">01</span><h3>Creators.</h3><p>Skip the rewatch. Read the source. Audit hooks, pacing, screenshots, comments, and competitor channels without taking notes at 2x.</p><span class="arr-link">See creator workflow -></span></a>
       <a class="card" href="/podcasts"><span class="num">02</span><h3>Researchers.</h3><p>Build a local library from videos and podcasts. Pull claims, guests, tools, products, and recurring entities across everything you saved.</p><span class="arr-link">Use it for podcasts -></span></a>
       <a class="card" href="/agents"><span class="num">03</span><h3>Agent developers.</h3><p>Give Claude Desktop, Cursor, Cline, Continue, or ChatGPT Desktop ${MCP_TOOL_COUNT} local tools for video capture and corpus search.</p><span class="arr-link">Wire up MCP -></span></a>
     </div>

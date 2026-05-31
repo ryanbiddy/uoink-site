@@ -47,7 +47,7 @@ export const blogArticles: BlogArticleMeta[] = [
   {
     slug: "local-first-no-uoink-cloud-what-it-costs-us",
     title: "Local-First, No Uoink Cloud: What It Costs Us",
-    dek: "A plain accounting of the privacy choice: less SaaS leverage, more ownership for the user.",
+    dek: "A plain accounting of the privacy choice: Own the disk. Skip the subscription.",
     publishedAt: "2026-05-27",
     readingMinutes: 7,
     tags: ["privacy", "architecture", "launch"],
