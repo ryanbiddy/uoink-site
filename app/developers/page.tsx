@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "../components/PageShell";
 import { GITHUB_URL, SitePage } from "../content/pages";
-import { MCP_TOOL_COUNT, mcpTools } from "../content/mcp-tools";
+import { mcpTools } from "../content/mcp-tools";
 
 const page: SitePage = {
   id: "agents",
@@ -90,7 +90,7 @@ export default function Page() {
                 Give your agent a local <em>source layer.</em>
               </h1>
               <p className="lede">
-                Uoink runs a local MCP server with {MCP_TOOL_COUNT} tools for capture, search, writing, citations, hooks, comments, and source health.
+                Uoink runs a local MCP server on your machine. The stdio path gives Claude Desktop, Cursor, and Cline 13 core tools for capture, search, citations, hooks, and source health.
               </p>
               <div className="ctas">
                 <a className="btn primary large" href="#configs">
@@ -148,6 +148,9 @@ export default function Page() {
             </h2>
             <p className="lede">
               These snippets use placeholder paths. Uoink setup page generates the real command for your machine after install.
+            </p>
+            <p className="body-l">
+              Uoink has two local tool surfaces. Stdio is the curated 13-tool path for daily agent use in Claude Desktop, Cursor, Cline, and Continue. The HTTP registry and OpenAPI bridge expose the full 64-tool programmatic surface for local integrations that need lower-level capture, memory, writing, and admin controls.
             </p>
           </div>
           <div className="docs-main">

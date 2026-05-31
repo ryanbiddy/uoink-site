@@ -19,20 +19,41 @@
       "source": "/agent-docs",
       "destination": "/developers",
       "permanent": true
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/features",
+      "permanent": true
+    },
+    {
+      "source": "/memory",
+      "destination": "/features/memory-search",
+      "permanent": true
+    },
+    {
+      "source": "/tweaks",
+      "destination": "/features",
+      "permanent": true
+    },
+    {
+      "source": "/installed",
+      "destination": "/how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/research",
+      "destination": "/creators",
+      "permanent": true
+    },
+    {
+      "source": "/hooks",
+      "destination": "/blog/9-hook-types-every-creator-should-recognize",
+      "permanent": true
     }
   ],
   "headers": [
     {
       "source": "/api/features-manifest",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/json; charset=utf-8"
-        }
-      ]
-    },
-    {
-      "source": "/api/stats/downloads",
       "headers": [
         {
           "key": "Content-Type",

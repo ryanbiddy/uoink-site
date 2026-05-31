@@ -1,4 +1,5 @@
 import { MCP_TOOL_COUNT, mcpTools } from "./mcp-tools";
+import { PRODUCT_STATUS } from "./product-status";
 
 export type PageId =
   | "home"
@@ -50,7 +51,7 @@ const installFaq: FaqItem[] = [
   {
     question: "What operating systems are supported by Uoink?",
     answer:
-      "Uoink supports Windows 10 and 11 today. macOS support is on the v2.3 track with a signed DMG target. A manual source path is available for developers who want to run the local helper directly.",
+      `${PRODUCT_STATUS.mac.visible}. Uoink supports Windows 10 and 11 today. A manual source path is available for developers who want to run the local helper directly.`,
   },
   {
     question: "Does the helper require administrator permissions?",
@@ -132,7 +133,7 @@ export const pages: Record<PageId, SitePage> = {
           <a class="btn primary large" href="${RELEASE_URL}">Get Uoink</a>
           <a class="btn ghost large" href="#live-uoink">See a live uoink</a>
         </div>
-        <p class="sub-cta">Open source / MIT / zero telemetry / MCP tools / Windows now / Mac track in progress</p>
+        <p class="sub-cta">Open source / MIT / zero telemetry / MCP tools / Windows now / ${PRODUCT_STATUS.mac.visible}</p>
       </div>
       <div class="hero-demo" id="live-uoink">
         <div class="corpus" data-corpus-animate>
@@ -228,7 +229,7 @@ find_mentions("Karpathy")</pre>
     <div class="ledger">
       <div class="ledger-card live"><div class="top"><span>Windows</span><span>live path</span></div><div class="body-l"><h3>Download the helper.</h3><p class="ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p></div><div class="foot"><a class="btn primary small" href="${RELEASE_URL}">Download -></a></div></div>
       <div class="ledger-card pend"><div class="top"><span>Extension</span><span>CWS pending</span></div><div class="body-l"><h3>Install the browser button.</h3><p class="ver">Chrome, Edge, Brave, Vivaldi, Opera GX</p><p>Until the Web Store listing lands, install the release zip from GitHub.</p></div><div class="foot"><a class="btn ghost small" href="/install#extension">Install notes -></a></div></div>
-      <div class="ledger-card queue"><div class="top"><span>Mac</span><span>v2.3 track</span></div><div class="body-l"><h3>Menu-bar helper next.</h3><p class="ver">DMG + Keychain + LaunchAgent</p><p>The same corpus format, MCP server, and privacy model are planned for macOS.</p></div><div class="foot"><a class="btn ghost small" href="/install#mac">Mac status -></a></div></div>
+      <div class="ledger-card queue"><div class="top"><span>Mac</span><span>${PRODUCT_STATUS.mac.label}</span></div><div class="body-l"><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p></div><div class="foot"><a class="btn ghost small" href="/install#mac">Mac status -></a></div></div>
     </div>
   </div>
 </section>
@@ -286,7 +287,7 @@ find_mentions("Karpathy")</pre>
     <div class="ledger">
       <div class="ledger-card live" id="windows"><div class="top"><span>Windows</span><span>now</span></div><div class="body-l"><h3>Desktop helper.</h3><p class="ver">Windows 10/11 / release page</p><p>The helper bundles Python, yt-dlp, ffmpeg, keyring, SQLite, and MCP pieces. It runs locally and exposes the loopback server at <code>127.0.0.1:5179</code>.</p><p>Windows may flag early builds as an unrecognized publisher. Click More info, then Run anyway if you trust the GitHub release.</p></div><div class="foot"><a class="btn primary small" href="${RELEASE_URL}">Open release -></a></div></div>
       <div class="ledger-card pend" id="extension"><div class="top"><span>Extension</span><span>pending review</span></div><div class="body-l"><h3>Browser button.</h3><p class="ver">Chrome / Edge / Brave / Vivaldi / Opera GX</p><p>The extension needs host permissions for supported video pages so it can render the in-page Uoink button and context menu. It skips browsing-history permission.</p><p>Until Web Store approval lands, download the extension zip from the same GitHub release and load it through your browser extension page.</p></div><div class="foot"><a class="btn ghost small" href="${RELEASE_URL}">Get release zip -></a></div></div>
-      <div class="ledger-card queue" id="mac"><div class="top"><span>Mac</span><span>v2.3 track</span></div><div class="body-l"><h3>Menu-bar app next.</h3><p class="ver">DMG, Keychain, LaunchAgent</p><p>The macOS path uses the same corpus format and MCP surface. The signed DMG and notarization work are tracked in the release queue.</p></div><div class="foot"><a class="btn ghost small" href="${GITHUB_URL}/watchers">Watch GitHub -></a></div></div>
+      <div class="ledger-card queue" id="mac"><div class="top"><span>Mac</span><span>${PRODUCT_STATUS.mac.label}</span></div><div class="body-l"><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p></div><div class="foot"><a class="btn ghost small" href="${GITHUB_URL}/watchers">Watch GitHub -></a></div></div>
     </div>
   </div>
 </section>
@@ -581,7 +582,7 @@ install:
       "Read Uoink release notes, v3.2 direction, universal extraction, podcast support, MCP improvements, and local corpus roadmap.",
     keywords: ["uoink changelog", "uoink release notes", "uoink updates", "universal video uoink changelog"],
     html: `
-<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>latest first</span></div><h1>What's shipped, what's <em>coming.</em></h1><p class="standfirst">Engineers read changelogs to decide whether a tool is alive. Uoink is alive. This is the public summary; GitHub remains canonical.</p><h2>Latest: v3.2 track</h2><ul><li>Universal URL expansion for web video via yt-dlp backed extraction.</li><li>Podcast RSS and local transcription workstream.</li><li>Agent-readable site surfaces: /agents, /mcp, /llms.txt, /llms-full.txt.</li><li>Sharper positioning around corpus, local memory, and model-agnostic workflows.</li></ul><h2>Recent: v2.2</h2><ul><li>Dashboard, tray flow, install wizard, and local helper polish.</li><li>Memory/library surfaces for local captures.</li><li>${MCP_TOOL_COUNT} MCP tools for capture, search, health, citation maps, comments, hooks, taxonomy, entities, writing, and site access.</li></ul><h2>In flight.</h2><ul><li>Signed macOS DMG and menu-bar helper.</li><li>Podcast corpus UI and Whisper model controls.</li><li>Markdown memory layer and richer local corpus map.</li><li>Verification assistance that presents evidence, not automatic verdicts.</li></ul><h2>Boundaries.</h2><p>Uoink stays away from hosted video warehouses, recommendation feeds, and social networks. The point is deliberate local work, not another cloud inbox.</p><p><a class="btn primary large" href="${RELEASE_URL}">Latest GitHub release</a> <a class="btn ghost large" href="/features">Feature inventory</a></p></article></div></section>`,
+<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>latest first</span></div><h1>What's shipped, what's <em>coming.</em></h1><p class="standfirst">Engineers read changelogs to decide whether a tool is alive. Uoink is alive. This is the public summary; GitHub remains canonical.</p><h2>Latest: v3.2 track</h2><ul><li>Universal URL expansion for web video via yt-dlp backed extraction.</li><li>Podcast RSS and local transcription workstream.</li><li>Agent-readable site surfaces: /agents, /mcp, /llms.txt, /llms-full.txt.</li><li>Sharper positioning around corpus, local memory, and model-agnostic workflows.</li></ul><h2>Recent: v2.2</h2><ul><li>Dashboard, tray flow, install wizard, and local helper polish.</li><li>Memory/library surfaces for local captures.</li><li>${MCP_TOOL_COUNT} MCP tools for capture, search, health, citation maps, comments, hooks, taxonomy, entities, writing, and site access.</li></ul><h2>In flight.</h2><ul><li>${PRODUCT_STATUS.mac.visible}.</li><li>Podcast corpus UI and Whisper model controls.</li><li>Markdown memory layer and richer local corpus map.</li><li>Verification assistance that presents evidence, not automatic verdicts.</li></ul><h2>Boundaries.</h2><p>Uoink stays away from hosted video warehouses, recommendation feeds, and social networks. The point is deliberate local work, not another cloud inbox.</p><p><a class="btn primary large" href="${RELEASE_URL}">Latest GitHub release</a> <a class="btn ghost large" href="/features">Feature inventory</a></p></article></div></section>`,
   },
   terms: {
     id: "terms",
