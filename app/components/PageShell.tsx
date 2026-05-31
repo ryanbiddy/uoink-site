@@ -1,4 +1,4 @@
-import { CANONICAL_URL, GITHUB_URL, RELEASE_URL, SitePage, VERSION } from "../content/pages";
+import { CANONICAL_URL, GITHUB_URL, RELEASE_URL, SitePage, VERSION, X_URL } from "../content/pages";
 import { applySiteLinks } from "../lib/links";
 import { SiteFooter } from "./SiteFooter";
 import { TopNav } from "./TopNav";
@@ -26,7 +26,7 @@ function JsonLd({ page }: { page: SitePage }) {
       name: "Uoink",
       url: CANONICAL_URL,
       logo: `${CANONICAL_URL}/og-image.png`,
-      sameAs: [GITHUB_URL, "https://twitter.com/ryanbiddy"],
+      sameAs: [GITHUB_URL, X_URL],
     },
     {
       "@context": "https://schema.org",

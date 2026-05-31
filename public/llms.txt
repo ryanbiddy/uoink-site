@@ -32,5 +32,7 @@
 
 - [About + public downloads](https://uoink.app/about): total GitHub release downloads and no user tracking note.
 - [GitHub](https://github.com/ryanbiddy/uoink): source, releases, MIT license.
+- [X @uoink.app](https://x.com/uoink.app): official Uoink account.
+- [Email hi@uoink.app](mailto:hi@uoink.app): product contact.
 - [Changelog](https://uoink.app/changelog): shipped and in-flight work.
 - [Terms](https://uoink.app/terms): short legal notes.

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CONTACT_EMAIL, X_HANDLE, X_URL } from "../content/pages";
 
 export function SiteFooter() {
   return (
@@ -70,7 +71,10 @@ export function SiteFooter() {
               <a href="https://github.com/ryanbiddy/uoink">GitHub</a>
             </li>
             <li>
-              <a href="mailto:hi@uoink.app">hi@uoink.app</a>
+              <a href={X_URL}>X {X_HANDLE}</a>
+            </li>
+            <li>
+              <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
             </li>
           </ul>
         </div>
