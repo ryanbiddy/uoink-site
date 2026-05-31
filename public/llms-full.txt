@@ -20,7 +20,7 @@ Feature detail page: Right-click context capture. Capture YouTube and X videos d
 Feature detail page: Keyboard capture shortcut. Trigger instant video extraction with customizable keyboard shortcuts. Also supports https://uoink.app/features/keyboard-shortcut?embed=true for dashboard embeds without site chrome.
 
 ## URL: https://uoink.app/features/mobile-playlist-bridge
-Feature detail page: Mobile playlist bridge. Save videos on mobile and let Uoink automatically capture them on desktop. Also supports https://uoink.app/features/mobile-playlist-bridge?embed=true for dashboard embeds without site chrome.
+Feature detail page: Mobile playlist bridge. Save videos to a YouTube playlist named "uoink me" and let the desktop helper capture them. Also supports https://uoink.app/features/mobile-playlist-bridge?embed=true for dashboard embeds without site chrome.
 
 ## URL: https://uoink.app/features/universal-page-uoink
 Feature detail page: Universal page extraction. Extract clean markdown and metadata from any web page using local Crawl4AI. Also supports https://uoink.app/features/universal-page-uoink?embed=true for dashboard embeds without site chrome.
