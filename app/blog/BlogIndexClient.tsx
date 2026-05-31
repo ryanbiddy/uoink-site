@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type { BlogArticleMeta } from "./blog-data";
+import { BlogPoster } from "./BlogPoster";
 
 export function BlogIndexClient({ articles, tags }: { articles: BlogArticleMeta[]; tags: string[] }) {
   const [query, setQuery] = useState("");
@@ -73,20 +74,6 @@ export function BlogIndexClient({ articles, tags }: { articles: BlogArticleMeta[
         ) : null}
       </div>
     </section>
-  );
-}
-
-function BlogPoster({ tone }: { tone: string }) {
-  return (
-    <div className={`blog-poster ${tone}`} aria-hidden="true">
-      <span className="poster-grid-line one" />
-      <span className="poster-grid-line two" />
-      <span className="poster-stamp">UOINK</span>
-      <span className="poster-node a" />
-      <span className="poster-node b" />
-      <span className="poster-node c" />
-      <span className="poster-path" />
-    </div>
   );
 }
 

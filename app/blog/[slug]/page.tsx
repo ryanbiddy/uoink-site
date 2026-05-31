@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageShell } from "../../components/PageShell";
 import { CANONICAL_URL, RELEASE_URL, SitePage } from "../../content/pages";
+import { BlogPoster } from "../BlogPoster";
 import { BlogArticle, blogArticles, getAdjacentArticles, getArticleBySlug, getArticleUrl } from "../blog-data";
 import { markdownToHtml } from "../markdown";
 
@@ -76,7 +77,13 @@ export default async function ArticlePage({ params }: Props) {
                 ))}
               </div>
             </div>
-            <ArticlePoster article={article} />
+            <BlogPoster
+              tone={article.heroTone}
+              size="large"
+              label={`${article.title} custom visual`}
+              captionLeft={article.tags[0]}
+              captionRight={`${article.readingMinutes} min`}
+            />
           </div>
         </section>
 
@@ -132,24 +139,6 @@ export default async function ArticlePage({ params }: Props) {
       </article>
       <ArticleJsonLd article={article} />
     </PageShell>
-  );
-}
-
-function ArticlePoster({ article }: { article: BlogArticle }) {
-  return (
-    <div className={`blog-poster large ${article.heroTone}`} aria-label={`${article.title} visual marker`}>
-      <span className="poster-grid-line one" />
-      <span className="poster-grid-line two" />
-      <span className="poster-stamp">FIELD NOTES</span>
-      <span className="poster-node a" />
-      <span className="poster-node b" />
-      <span className="poster-node c" />
-      <span className="poster-path" />
-      <div className="poster-caption">
-        <span>{article.tags[0]}</span>
-        <strong>{article.readingMinutes} min</strong>
-      </div>
-    </div>
   );
 }
 
