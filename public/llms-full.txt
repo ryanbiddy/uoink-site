@@ -5,7 +5,7 @@
 Uoink keeps the videos, podcasts, and articles creators and AI developers study on their own disk, then hands them to Claude, ChatGPT, Cursor, or a local MCP agent as a cited corpus.
 
 ## URL: https://uoink.app/install
-Install the desktop helper, install the browser extension, then click the Uoink button. The Windows helper runs from %LOCALAPPDATA%\Uoink and exposes localhost 127.0.0.1:5179. Browser extension support targets Chromium browsers. Chrome Web Store approval is pending, so the release zip is the launch path. macOS is on the v2.3 track.
+Install the desktop helper, install the browser extension, then click the Uoink button. The Windows helper runs from %LOCALAPPDATA%\Uoink and exposes localhost 127.0.0.1:5179. Browser extension support targets Chromium browsers. Chrome Web Store approval is pending, so the release zip is the launch path. Mac build is queued after Windows stabilizes.
 
 ## URL: https://uoink.app/how-it-works
 How Uoink works. Five-step loop: capture sources, build a local library, assemble a workspace, iterate from evidence, and distribute with creator credit intact.

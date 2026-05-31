@@ -6,14 +6,10 @@ type DownloadAsset = {
   name: string;
   count: number;
   size: number;
-  url?: string;
 };
 
 type ReleaseDownload = {
   tag: string;
-  name?: string;
-  url?: string;
-  publishedAt?: string;
   downloads: number;
   assets: DownloadAsset[];
 };
@@ -29,14 +25,10 @@ type GitHubAsset = {
   name: string;
   download_count: number;
   size: number;
-  browser_download_url?: string;
 };
 
 type GitHubRelease = {
   tag_name: string;
-  name?: string;
-  html_url?: string;
-  published_at?: string;
   assets?: GitHubAsset[];
 };
 
@@ -52,9 +44,9 @@ export function DownloadStats() {
   useEffect(() => {
     let cancelled = false;
 
-    async function refresh(preferStaticSnapshot = true) {
+    async function refresh() {
       try {
-        const data = await loadStats(preferStaticSnapshot);
+        const data = await loadStats();
         if (!cancelled) {
           setStats(data);
           setState("ready");
@@ -67,7 +59,7 @@ export function DownloadStats() {
     }
 
     refresh();
-    const timer = window.setInterval(() => refresh(false), ONE_HOUR);
+    const timer = window.setInterval(refresh, ONE_HOUR);
 
     return () => {
       cancelled = true;
@@ -90,7 +82,7 @@ export function DownloadStats() {
             </p>
             <p className="download-note">
               Source: <a href="https://github.com/ryanbiddy/uoink/releases">github.com/ryanbiddy/uoink/releases</a> /
-              refreshed hourly in this tab / no user tracking
+              refreshed in this browser tab / no user tracking
             </p>
           </div>
 
@@ -115,21 +107,9 @@ export function DownloadStats() {
   );
 }
 
-async function loadStats(preferStaticSnapshot: boolean): Promise<DownloadStatsPayload> {
+async function loadStats(): Promise<DownloadStatsPayload> {
   if (inTabCache && Date.now() - inTabCache.fetchedAt < ONE_HOUR) {
     return inTabCache.data;
-  }
-
-  if (preferStaticSnapshot) {
-    try {
-      const snapshot = await fetchJson<DownloadStatsPayload>("/api/stats/downloads");
-      if (Date.now() - Date.parse(snapshot.refreshedAt) < ONE_HOUR) {
-        inTabCache = { fetchedAt: Date.now(), data: snapshot };
-        return snapshot;
-      }
-    } catch {
-      // Static-export builds may not have a live route. Fall through to GitHub's public API.
-    }
   }
 
   const releases = await fetchJson<GitHubRelease[]>(GITHUB_RELEASES_API);
@@ -157,15 +137,11 @@ function transformReleases(releases: GitHubRelease[]): DownloadStatsPayload {
         name: asset.name,
         count: asset.download_count,
         size: asset.size,
-        url: asset.browser_download_url,
       })) ?? [];
     const downloads = assets.reduce((sum, asset) => sum + asset.count, 0);
 
     return {
       tag: release.tag_name,
-      name: release.name,
-      url: release.html_url,
-      publishedAt: release.published_at,
       downloads,
       assets,
     };
