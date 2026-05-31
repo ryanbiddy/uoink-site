@@ -183,8 +183,14 @@ function FeatureVisual({ feature }: { feature: Feature }) {
       <div className="feature-visual-body">
         <div className="mini-heading">{feature.title}</div>
         {feature.screenshot.src ? (
-          <figure className="feature-visual-shot">
-            <Image src={feature.screenshot.src} alt={feature.screenshot.alt} width={1280} height={800} priority />
+          <figure className={`feature-visual-shot ${feature.slug === "twitter-video" ? "tweet-creative" : ""}`}>
+            <Image
+              src={feature.screenshot.src}
+              alt={feature.screenshot.alt}
+              width={feature.screenshot.width ?? 1280}
+              height={feature.screenshot.height ?? 800}
+              priority
+            />
             <figcaption>{feature.screenshot.title}</figcaption>
           </figure>
         ) : (
