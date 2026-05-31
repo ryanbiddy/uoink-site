@@ -12,6 +12,8 @@ export type FeatureScreenshot = {
   title: string;
   alt: string;
   src?: string;
+  width?: number;
+  height?: number;
 };
 
 export type Feature = {
@@ -293,9 +295,11 @@ export const features: Feature[] = [
     ],
     "cta": "Capture X video transcripts directly into your local knowledge base.",
     "screenshot": {
-      "title": "X post showing right-click context menu options",
-      "alt": "X post showing right-click context menu options",
-      "src": "/screenshots/twitter-video/hero-1280x800.png",
+      "title": "X video source with creator credit intact",
+      "alt": "X post with a video about personal agents",
+      "src": "/screenshots/twitter-video/micky-personal-agents-tweet.png",
+      "width": 596,
+      "height": 471,
     }
   },
   {

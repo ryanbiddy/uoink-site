@@ -1384,6 +1384,10 @@ button, .btn, .nav-cta, .mobile-menu a, .docs-sidebar a { min-height: 44px; }
   object-position: top center;
   width: 100%;
 }
+.feature-visual-shot.tweet-creative img {
+  aspect-ratio: auto;
+  object-fit: contain;
+}
 .feature-visual-shot figcaption {
   color: var(--parchment);
   font-family: var(--mono);
