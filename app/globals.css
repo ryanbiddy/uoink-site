@@ -2022,6 +2022,19 @@ button, .btn, .nav-cta, .mobile-menu a, .docs-sidebar a { min-height: 44px; }
   object-position: top center;
   width: 100%;
 }
+.twitter-shot.tweet-creative {
+  align-self: center;
+  justify-self: center;
+  max-width: 596px;
+  min-width: 0;
+  width: min(100%, 596px);
+}
+.twitter-shot.tweet-creative img {
+  aspect-ratio: auto;
+  display: block;
+  height: auto;
+  object-fit: contain;
+}
 .twitter-shot figcaption {
   color: var(--parchment);
   font-family: var(--mono);
@@ -2215,6 +2228,16 @@ button, .btn, .nav-cta, .mobile-menu a, .docs-sidebar a { min-height: 44px; }
     text-align: center;
     white-space: normal;
     width: calc(100vw - 44px) !important;
+  }
+  .twitter-hero .ctas,
+  .twitter-hero .ctas .btn {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .twitter-shot.tweet-creative {
+    justify-self: start;
+    max-width: calc(100% - 10px) !important;
+    width: calc(100% - 10px) !important;
   }
   .hero .lede,
   .hero-demo,
