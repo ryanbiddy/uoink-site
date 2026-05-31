@@ -42,8 +42,8 @@ export type SitePage = {
 export const CANONICAL_URL = process.env.NEXT_PUBLIC_CANONICAL_URL ?? "https://uoink.app";
 export const GITHUB_URL = "https://github.com/ryanbiddy/uoink";
 export const RELEASE_URL = "https://github.com/ryanbiddy/uoink/releases/latest";
-export const X_URL = "https://x.com/uoink.app";
-export const X_HANDLE = "@uoink.app";
+export const X_URL = "https://www.twitter.com/uoinkapp";
+export const X_HANDLE = "@uoinkapp";
 export const CONTACT_EMAIL = "hi@uoink.app";
 export const VERSION = "v3.3";
 
