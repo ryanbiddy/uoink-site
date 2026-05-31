@@ -186,7 +186,7 @@ export const features: Feature[] = [
     "title": "Mobile playlist bridge",
     "category": "Capture",
     "status": "in flight",
-    "summary": "Save videos on mobile and let Uoink automatically capture them on desktop.",
+    "summary": "Save videos to a playlist named \"uoink me\" and let the desktop helper capture them.",
     "keywords": [
       "uoink feature",
       "mobile playlist bridge",
@@ -196,12 +196,12 @@ export const features: Feature[] = [
       "capture",
       "desktop"
     ],
-    "whatItDoes": "Capture videos from your phone. You save links to a designated YouTube playlist while on mobile, and the desktop helper polls the list when you return to your computer. It extracts every new video, groups them by topic, and adds them to your local index. Your mobile queue becomes a structured library automatically.",
+    "whatItDoes": "Capture videos from your phone. Create a YouTube playlist named \"uoink me\", save videos there while you browse on mobile, and the desktop helper polls the list when you return to your computer. It extracts every new video, groups them by topic, and adds them to your local index. Your mobile queue becomes a structured library automatically.",
     "gettingStarted": [
-      "Create a public or unlisted playlist on YouTube.",
+      "Create a public or unlisted YouTube playlist named \"uoink me\".",
       "Open the desktop settings panel in Uoink.",
       "Paste the playlist URL into the mobile bridge field.",
-      "Save videos to this playlist when browsing on your phone.",
+      "Save videos to \"uoink me\" when browsing on your phone.",
       "The desktop helper scans the list on boot and downloads the new entries."
     ],
     "behindScenes": "The local helper schedules a background job that queries the YouTube playlist API at regular intervals. It compares the playlist items against the local SQLite database to identify new URLs. When it detects a new video, it queues the URL for background extraction. The helper downloads the audio streams, runs transcription, and writes the markdown files to your corpus folder.",
@@ -213,7 +213,7 @@ export const features: Feature[] = [
       "playlist-mode",
       "podcast-feeds"
     ],
-    "cta": "Configure the mobile bridge to sync your mobile discoveries with your desktop library.",
+    "cta": "Create the \"uoink me\" playlist, connect it once, and let your desktop library catch up.",
     "screenshot": {
       "title": "Uoink settings showing mobile bridge config",
       "alt": "Uoink settings showing mobile bridge config",
