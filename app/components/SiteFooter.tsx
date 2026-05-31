@@ -18,7 +18,10 @@ export function SiteFooter() {
               <Link href="/install">Install</Link>
             </li>
             <li>
-              <Link href="/how">How it works</Link>
+              <Link href="/how-it-works">How it works</Link>
+            </li>
+            <li>
+              <Link href="/sources">Sources</Link>
             </li>
             <li>
               <Link href="/features">Features</Link>
@@ -26,19 +29,16 @@ export function SiteFooter() {
             <li>
               <Link href="/blog">Field notes</Link>
             </li>
-            <li>
-              <Link href="/twitter">Twitter video</Link>
-            </li>
-            <li>
-              <Link href="/podcasts">Podcasts</Link>
-            </li>
           </ul>
         </div>
         <div>
-          <h5>Agents</h5>
+          <h5>Developers</h5>
           <ul>
             <li>
-              <Link href="/agents">MCP setup</Link>
+              <Link href="/developers">Developer door</Link>
+            </li>
+            <li>
+              <Link href="/creators">Creator door</Link>
             </li>
             <li>
               <Link href="/mcp">MCP manifest</Link>
@@ -48,9 +48,6 @@ export function SiteFooter() {
             </li>
             <li>
               <a href="/llms.txt">llms.txt</a>
-            </li>
-            <li>
-              <a href="/blog/rss.xml">RSS</a>
             </li>
           </ul>
         </div>
@@ -73,13 +70,13 @@ export function SiteFooter() {
               <a href="https://github.com/ryanbiddy/uoink">GitHub</a>
             </li>
             <li>
-              <a href="mailto:hi@uoink.video">hi@uoink.video</a>
+              <a href="mailto:hi@uoink.app">hi@uoink.app</a>
             </li>
           </ul>
         </div>
       </div>
       <div className="container footer-bottom">
-        <span>uoink.app / v3.2 / 2026</span>
+        <span>uoink.app / v3.3 / 2026</span>
         <span>Local-first. Model-agnostic. MIT.</span>
       </div>
     </footer>

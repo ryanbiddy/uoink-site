@@ -2,25 +2,28 @@ import Link from "next/link";
 
 const links = [
   ["/install", "Install"],
-  ["/how", "How"],
+  ["/how-it-works", "How It Works"],
+  ["/sources", "Sources"],
+  ["/creators", "Creators"],
+  ["/developers", "Developers"],
   ["/features", "Features"],
-  ["/blog", "Blog"],
-  ["/podcasts", "Podcasts"],
-  ["/agents", "Agents"],
-  ["/mcp", "MCP"],
+  ["/blog", "Field Notes"],
 ];
 
 function tickerFor(active: string) {
-  if (active.startsWith("/install")) return ["UOINK v3.2 / install", "helper / extension / local corpus"];
-  if (active.startsWith("/how")) return ["UOINK v3.2 / workflow", "click / corpus / AI / result"];
-  if (active.startsWith("/features")) return ["UOINK v3.2 / features", "corpus / memory / hooks / dashboard"];
-  if (active.startsWith("/blog")) return ["UOINK v3.2 / field notes", "hooks / agents / corpus / local-first"];
-  if (active.startsWith("/twitter")) return ["UOINK v3.2 / twitter video", "X capture / creator credit / Writing Studio"];
-  if (active.startsWith("/podcasts")) return ["UOINK v3.2 / podcasts", "RSS / Whisper / diarization / local"];
-  if (active.startsWith("/agents") || active.startsWith("/mcp")) return ["UOINK v3.2 / MCP", "local tools / Claude Desktop / Cursor / Cline"];
-  if (active.startsWith("/about")) return ["UOINK v3.2 / about", "GitHub releases / public downloads / no tracking"];
-  if (active.startsWith("/privacy")) return ["UOINK v3.2 / privacy", "local-first / no cloud / no telemetry"];
-  return ["UOINK v3.2 / local video corpus", "open source / MIT / model agnostic"];
+  if (active.startsWith("/install")) return ["UOINK v3.3 / install", "helper / extension / local corpus"];
+  if (active.startsWith("/how-it-works")) return ["UOINK v3.3 / workflow", "capture / library / workspace / iterate / distribute"];
+  if (active.startsWith("/sources")) return ["UOINK v3.3 / sources", "youtube / podcasts / substack / articles / dev-hubs"];
+  if (active.startsWith("/creators")) return ["UOINK v3.3 / creators", "source capture / writing studio / Voice DNA / attribution"];
+  if (active.startsWith("/developers")) return ["UOINK v3.3 / developers", "local helper / sqlite / mcp server / agent tools"];
+  if (active.startsWith("/features")) return ["UOINK v3.3 / features", "corpus / memory / hooks / dashboard"];
+  if (active.startsWith("/blog")) return ["UOINK v3.3 / field notes", "hooks / agents / corpus / local-first"];
+  if (active.startsWith("/twitter")) return ["UOINK v3.3 / twitter video", "X capture / creator credit / Writing Studio"];
+  if (active.startsWith("/podcasts")) return ["UOINK v3.3 / podcasts", "RSS / Whisper / diarization / local"];
+  if (active.startsWith("/agents") || active.startsWith("/mcp")) return ["UOINK v3.3 / MCP", "local tools / Claude Desktop / Cursor / Cline"];
+  if (active.startsWith("/about")) return ["UOINK v3.3 / about", "GitHub releases / public downloads / no tracking"];
+  if (active.startsWith("/privacy")) return ["UOINK v3.3 / privacy", "local-first / no cloud / no telemetry"];
+  return ["UOINK v3.3 / local video corpus", "open source / MIT / model agnostic"];
 }
 
 export function TopNav({ active }: { active: string }) {

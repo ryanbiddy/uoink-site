@@ -34,7 +34,7 @@ function JsonLd({ page }: { page: SitePage }) {
       name: "Uoink",
       url: CANONICAL_URL,
       description:
-        "Local-first video and podcast corpus software for Claude, ChatGPT, Cursor, and MCP-capable agents.",
+        "Local-first corpus software for creators and AI developers working from videos, podcasts, articles, and threads.",
       publisher: { "@type": "Organization", name: "Uoink" },
     },
     {
@@ -49,13 +49,15 @@ function JsonLd({ page }: { page: SitePage }) {
       license: "https://github.com/ryanbiddy/uoink/blob/main/LICENSE",
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
       description:
-        "Uoink extracts structured local corpora from videos and podcasts, then hands them to Claude, ChatGPT, Cursor, or a local MCP agent.",
+        "Uoink extracts structured local corpora from videos, podcasts, articles, and threads, then hands them to Claude, ChatGPT, Cursor, or a local MCP agent.",
       featureList: [
         "Timestamped transcripts",
         "Screenshots",
         "Comments",
         "Channel context",
         "Podcast transcription",
+        "Article capture",
+        "Thread capture",
         "Local SQLite search",
         "Model Context Protocol server",
         "Hook Type classification",

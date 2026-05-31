@@ -21,7 +21,9 @@ export type PageId =
   | "blog"
   | "twitter"
   | "dashboard"
-  | "installed";
+  | "installed"
+  | "sources"
+  | "developers";
 
 export type FaqItem = { question: string; answer: string };
 
@@ -39,7 +41,7 @@ export type SitePage = {
 export const CANONICAL_URL = process.env.NEXT_PUBLIC_CANONICAL_URL ?? "https://uoink.app";
 export const GITHUB_URL = "https://github.com/ryanbiddy/uoink";
 export const RELEASE_URL = "https://github.com/ryanbiddy/uoink/releases/latest";
-export const VERSION = "v3.2";
+export const VERSION = "v3.3";
 
 const installFaq: FaqItem[] = [
   {
@@ -100,47 +102,29 @@ const agentsFaq: FaqItem[] = [
   },
 ];
 
-const podcastsFaq: FaqItem[] = [
-  {
-    question: "Does Uoink identify speakers by real name?",
-    answer:
-      "Diarization separates speakers as Speaker 1, Speaker 2, and so on. You can rename them later when you know who is speaking.",
-  },
-  {
-    question: "Does local Whisper need a GPU?",
-    answer:
-      "No. CPU transcription works, but larger models take longer. Apple Silicon and dedicated GPUs can speed it up when available.",
-  },
-  {
-    question: "Are podcast feeds uploaded to Uoink?",
-    answer:
-      "No. Feed polling, audio download, transcription, and corpus writing run from your machine.",
-  },
-];
-
 export const pages: Record<PageId, SitePage> = {
   home: {
     id: "home",
     route: "/",
     mode: "mode-dark",
-    title: "YouTube to Claude: Local AI Video Summarizer",
+    title: "Uoink: Local video, podcast, and text corpus for your AI",
     description:
-      "Uoink turns any video or podcast into a private local corpus for Claude, ChatGPT, Cursor, or your MCP agent.",
+      "Uoink keeps the videos, podcasts, and articles you study on your own disk, then hands them to your AI as a cited corpus.",
     keywords: [
-      "youtube to claude",
-      "youtube transcript download",
-      "youtube ai workflow",
-      "local youtube extractor",
+      "youtube to AI",
+      "local video corpus",
       "mcp youtube server",
+      "local knowledge base",
+      "writing studio",
     ],
     html: `
 <section class="hero" data-screen-label="home / hero">
   <div class="container">
     <div class="hero-grid">
       <div class="copy">
-        <span class="eyebrow">uoink.app / v3.2</span>
+        <span class="eyebrow">uoink.app / v3.3</span>
         <h1 class="display-xl">Uoink that <em>shit.</em></h1>
-        <p class="lede">One click under any video. Your AI gets the whole thing: transcript, screenshots, comments, channel context, podcasts too. Local. Yours.</p>
+        <p class="lede">Local corpus for creators and AI developers. Uoink keeps the videos, podcasts, and articles you study on your disk, then hands them to your AI as a cited corpus you can write from in your voice.</p>
         <div class="ctas">
           <a class="btn primary large" href="${RELEASE_URL}">Get Uoink</a>
           <a class="btn ghost large" href="#live-uoink">See a live uoink</a>
@@ -177,9 +161,9 @@ export const pages: Record<PageId, SitePage> = {
       <p class="lede">Transcript-only tools flatten video into text. Uoink keeps the parts that make video useful: the words, the frames, the audience reaction, the channel context, and the source metadata.</p>
     </div>
     <div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
-      <article class="card"><span class="num">01</span><h3>Capture the <em>source.</em></h3><p>Transcript with timestamps, screenshots, description, title, thumbnail, channel context, and comments in one markdown file.</p><a class="arr-link" href="/how">See the workflow -></a></article>
+      <article class="card"><span class="num">01</span><h3>Capture the <em>source.</em></h3><p>Transcript with timestamps, screenshots, description, title, thumbnail, channel context, and comments in one markdown file.</p><a class="arr-link" href="/how-it-works">See the workflow -></a></article>
       <article class="card"><span class="num">02</span><h3>Keep the <em>asset.</em></h3><p>Every capture writes to disk and into a local SQLite index. Search it later, cite it later, move it into your own vault.</p><a class="arr-link" href="/features">Browse features -></a></article>
-      <article class="card"><span class="num">03</span><h3>Hand it to <em>AI.</em></h3><p>Paste into Claude or ChatGPT, send directly, or let an MCP agent call Uoink without touching the clipboard.</p><a class="arr-link" href="/agents">Open agent docs -></a></article>
+      <article class="card"><span class="num">03</span><h3>Hand it to <em>AI.</em></h3><p>Paste into Claude or ChatGPT, send directly, or let an MCP agent call Uoink without touching the clipboard.</p><a class="arr-link" href="/developers">Open developer docs -></a></article>
     </div>
   </div>
 </section>
@@ -196,14 +180,14 @@ export const pages: Record<PageId, SitePage> = {
 <section class="section" data-screen-label="home / three audiences">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">three audiences, one tool</span>
-      <h2 class="display-l">Creators, researchers, and agent builders all hit the same <em>button.</em></h2>
-      <p class="lede">The on-ramp stays simple. The depth shows up after the corpus exists.</p>
+      <span class="eyebrow">three doors, one corpus</span>
+      <h2 class="display-l">Creators and developers use the same <em>source card.</em></h2>
+      <p class="lede">The card stays the shared object. The next move changes by job.</p>
     </div>
     <div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
-      <a class="card" href="/how"><span class="num">01</span><h3>Creators.</h3><p>Skip the rewatch. Read the source. Audit hooks, pacing, screenshots, comments, and competitor channels without taking notes at 2x.</p><span class="arr-link">See creator workflow -></span></a>
-      <a class="card" href="/podcasts"><span class="num">02</span><h3>Researchers.</h3><p>Build a local library from videos and podcasts. Pull claims, guests, tools, products, and recurring entities across everything you saved.</p><span class="arr-link">Use it for podcasts -></span></a>
-      <a class="card" href="/agents"><span class="num">03</span><h3>Agent developers.</h3><p>Give Claude Desktop, Cursor, Cline, Continue, or ChatGPT Desktop ${MCP_TOOL_COUNT} local tools for video capture and corpus search.</p><span class="arr-link">Wire up MCP -></span></a>
+      <a class="card" href="/creators"><span class="num">01</span><h3>Creators.</h3><p>Skip the rewatch. Audit hooks, pacing, screenshots, and comments. Write threads and posts from your sources in Writing Studio with creator credit baked in.</p><span class="arr-link">See creator workflow -></span></a>
+      <a class="card" href="/developers"><span class="num">02</span><h3>Developers.</h3><p>Treat your distribution loop like a local dev tool. Get an offline SQLite database, an MCP server, and copyable Claude/Cursor configs to query your library.</p><span class="arr-link">Open developer docs -></span></a>
+      <a class="card" href="/sources"><span class="num">03</span><h3>Sources.</h3><p>Uoink captures video, audio, and text. Index YouTube, podcasts, newsletters, and social thread discussions directly on your workstation.</p><span class="arr-link">Browse supported sources -></span></a>
     </div>
   </div>
 </section>
@@ -226,7 +210,7 @@ find_mentions("Karpathy")</pre>
       </div>
     </div>
     <div class="text-center mt-32">
-      <a class="btn ghost" href="/agents">Read MCP setup -></a>
+      <a class="btn ghost" href="/developers">Read MCP setup -></a>
       <a class="btn ghost" href="/mcp">Machine-readable MCP manifest -></a>
     </div>
   </div>
@@ -273,7 +257,7 @@ find_mentions("Karpathy")</pre>
         <span class="eyebrow">install</span>
         <h1 class="display-xl">Install <em>Uoink.</em></h1>
         <p class="lede">Get the helper running, add the browser button, then click Uoink on any video. No Python install, no command line, no PATH wrangling.</p>
-        <div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Download Windows installer</a><a class="btn ghost large" href="/how">See what happens after install</a></div>
+        <div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Download Windows installer</a><a class="btn ghost large" href="/how-it-works">See what happens after install</a></div>
         <p class="sub-cta">Windows 10/11 / local helper / extension sideload until Web Store approval</p>
         <div class="brand-strip" aria-label="Install surfaces">
           <!-- GitHub logo source: https://github.com/logos; license/usage confirmation: official GitHub mark, unmodified integration callout under GitHub logo guidelines. -->
@@ -319,74 +303,89 @@ find_mentions("Karpathy")</pre>
   },
   how: {
     id: "how",
-    route: "/how",
+    route: "/how-it-works",
     mode: "mode-light",
-    title: "How to Feed YouTube Videos to ChatGPT and Claude",
+    title: "How Uoink Works: Local Video and Podcast Corpus Workflow",
     description:
-      "Step-by-step Uoink workflow: click, capture transcript screenshots and comments, then paste the corpus into Claude or ChatGPT.",
-    keywords: ["youtube ai workflow", "decode youtube hooks", "analyze youtube comments ai", "youtube research workflow"],
+      "Learn how Uoink captures videos and podcasts, writes them to your disk as a local corpus, and exposes them to Claude and Cursor.",
+    keywords: [
+      "how uoink works",
+      "local video corpus workflow",
+      "transcribe video offline",
+      "mcp video workflow",
+    ],
     html: `
 <section class="hero" data-screen-label="how / hero">
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">how it works</span>
       <h1 class="display-xl">How Uoink <em>works.</em></h1>
-      <p class="lede">Click, corpus, AI, result. That loop is the product. The helper does the boring extraction work so your model gets context it can actually reason over.</p>
+      <p class="lede">One click turns video and audio into a structured text database on your machine.</p>
+      <p class="body-l" style="max-width:70ch;margin-top:16px">Uoink runs as a local helper that captures, transcribes, and indexes your research media. It connects directly to your browser extension and your AI agents, keeping your data private and offline.</p>
     </div>
-    <div class="card-grid four">
-      <article class="card"><span class="num">01</span><h3>Find a video.</h3><p>Open a YouTube video, an X video, or a supported web video. Podcast feeds run through the audio path.</p></article>
-      <article class="card"><span class="num">02</span><h3>Click Uoink.</h3><p>The extension sends the URL to the local helper. The helper extracts transcript, frames, comments, metadata, and channel context.</p></article>
-      <article class="card"><span class="num">03</span><h3>Read the corpus.</h3><p>A markdown file lands on disk and on your clipboard with timestamps, screenshot references, comments, and source links.</p></article>
-      <article class="card"><span class="num">04</span><h3>Ask your model.</h3><p>Paste into Claude or ChatGPT, or ask your MCP agent to call Uoink directly.</p></article>
+    
+    <div class="hero-image-container" style="margin:48px 0;border:1px solid var(--ink-dim);border-radius:8px;overflow:hidden">
+      <img src="/screenshots/how-it-works/01-dashboard-hero.png" alt="Dashboard Main Screen showing library grid and active tasks" style="width:100%;height:auto;display:block" />
+      <div style="background:var(--ink-bg);padding:12px 18px;font-size:12px;color:var(--parchment);border-top:1px solid var(--ink-dim)">
+        <span><b>Dashboard Main Screen:</b> Browsing the local library grid and active transcription tasks. Your files stay on your disk.</span>
+      </div>
     </div>
   </div>
 </section>
-<section class="section" data-screen-label="how / context deficit">
+
+<section class="section" data-screen-label="how / five step loop">
   <div class="container">
-    <article class="article">
-      <h2>Resolve the video context deficit.</h2>
-      <p>Most AI workflows fail at video for a simple reason: the model gets a URL or a raw transcript and has to guess the rest. A transcript alone omits the slides, the code on screen, the audience corrections in the comments, and the channel context that tells you whether a video overperformed or just existed.</p>
-      <p>Uoink captures the richer shape. It turns the video into a local corpus: timestamped transcript, screenshots, comments, metadata, channel context, and optional classifier blocks. That corpus is readable by humans, pasteable into Claude and ChatGPT, and callable by MCP agents.</p>
-      <p>The workflow stays deliberately plain. Install the helper. Install the extension. Click Uoink. Paste, or let the agent skip the paste. Uoink gives the model the source material it was missing.</p>
-    </article>
-  </div>
-</section>
-<section class="section" data-screen-label="how / anatomy">
-  <div class="container">
-    <div class="section-head"><span class="eyebrow">what lands in your clipboard</span><h2 class="display-l">Anatomy of one <em>uoink.</em></h2><p class="lede">Same structure every time. Easy to read, easy to cite, easy for an agent to parse.</p></div>
-    <div class="agent-demo">
-      <div class="corpus"><div class="hd"><span>corpus markdown</span><span>human readable</span></div><span class="ln k"># Title and source</span><span class="ln dim">URL, channel, upload date, duration, views</span><span class="ln k">## Transcript</span><span class="ln dim">timestamped segments with source anchors</span><span class="ln k">## Screenshots</span><span class="ln dim">inline budget + full folder on disk</span><span class="ln k">## Comments</span><span class="ln dim">top 50, likes, timestamps, disagreement signals</span><span class="ln k">## Classification</span><span class="ln dim">hook type, format, topic, performance tier</span></div>
-      <div class="log"><div class="mini-heading">why this beats a raw transcript</div><p class="body-l">The model can connect what was said with what was shown and how the audience reacted. That matters for code walkthroughs, product teardowns, lectures, creator analysis, and podcast interviews.</p><p class="body-l">Large payloads still need discipline, so the extension includes clipboard budgeting: screenshot caps, compression settings, and comment limits. Rich enough to reason over, small enough to paste.</p></div>
+    <div class="section-head">
+      <span class="eyebrow">the five step loop</span>
+      <h2 class="display-l">How Uoink turns raw media into active <em>context.</em></h2>
+      <p class="lede">From web sources to final drafts, the local helper automates the extraction so you can focus on writing.</p>
+    </div>
+    
+    <div class="card-grid" style="display:grid;grid-template-columns:1fr;gap:32px;max-width:80ch;margin:0 auto">
+      <article class="step-card" style="border-left:4px solid var(--vermillion);padding-left:24px">
+        <span class="num" style="font-size:24px;font-weight:bold;color:var(--vermillion)">01</span>
+        <h3 style="margin:8px 0;font-size:22px">Capture the source.</h3>
+        <p>We extract transcripts, screenshots, comments, and metadata with a single click. You can click the Uoink button on YouTube watch pages, right-click any link, or paste feed URLs into your settings. The helper handles rate-limiting and queues downloads in the background.</p>
+      </article>
+      
+      <article class="step-card" style="border-left:4px solid var(--vermillion);padding-left:24px">
+        <span class="num" style="font-size:24px;font-weight:bold;color:var(--vermillion)">02</span>
+        <h3 style="margin:8px 0;font-size:22px">Build the library.</h3>
+        <p>All extracted assets save directly to your local workstation. The helper structures the files as standard markdown and indexes them in a local SQLite database. You can search transcripts and comments instantly, even when you are offline.</p>
+      </article>
+      
+      <article class="step-card" style="border-left:4px solid var(--vermillion);padding-left:24px">
+        <span class="num" style="font-size:24px;font-weight:bold;color:var(--vermillion)">03</span>
+        <h3 style="margin:8px 0;font-size:22px">Assemble workspaces.</h3>
+        <p>We organize research documents around specific topics. You can build custom workspaces to group transcripts, self-channel performance metrics, and research themes. This prepares your files to feed clean grounding data to your models.</p>
+      </article>
+      
+      <article class="step-card" style="border-left:4px solid var(--vermillion);padding-left:24px">
+        <span class="num" style="font-size:24px;font-weight:bold;color:var(--vermillion)">04</span>
+        <h3 style="margin:8px 0;font-size:22px">Iterate on drafts.</h3>
+        <p>We write grounded drafts using the local Writing Studio. The helper provides grounding context to your AI clients, checks the draft against your style anchors, and audits output for formatting rules. You get clean drafts with auto-generated creator credits.</p>
+      </article>
+      
+      <article class="step-card" style="border-left:4px solid var(--vermillion);padding-left:24px">
+        <span class="num" style="font-size:24px;font-weight:bold;color:var(--vermillion)">05</span>
+        <h3 style="margin:8px 0;font-size:22px">Distribute with agents.</h3>
+        <p>Uoink runs an MCP server that connects directly to Cursor, Claude Desktop, and ChatGPT. Your agents can search your library and write drafts without any clipboard copy-paste steps.</p>
+      </article>
     </div>
   </div>
 </section>
-<section class="section" data-screen-label="how / examples">
-  <div class="container">
-    <div class="section-head"><span class="eyebrow">three example workflows</span><h2 class="display-l">Use it the way you already <em>work.</em></h2></div>
-    <div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
-      <article class="card"><span class="num">01</span><h3>Decode a hook.</h3><p>Uoink a competitor video. Ask Claude or ChatGPT why the first 15 seconds work, where the promise is made, and what comments prove the audience noticed.</p></article>
-      <article class="card"><span class="num">02</span><h3>Audit a channel.</h3><p>Run playlist mode on the last ten uploads. Compare hook type, format, comments, and performance patterns across the channel.</p></article>
-      <article class="card"><span class="num">03</span><h3>Pull a claim trail.</h3><p>Uoink a long interview or podcast. Ask for every claim a guest made, then cite timestamps back to the original source.</p></article>
-    </div>
-  </div>
-</section>
-<section class="big-strip" data-screen-label="how / agents">
+
+<section class="big-strip" data-screen-label="how / install-cta">
   <div class="container" style="display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center">
-    <div><span class="eyebrow">send to your model, or skip the paste</span><h2 class="display-l">Clipboard is the on-ramp. <em>MCP is the upgrade.</em></h2><p class="body-l">Claude Desktop, Cursor, Cline, Continue, and ChatGPT Desktop can call Uoink directly through the local MCP server.</p></div>
-    <a class="btn ink" href="/agents">Configure agents -></a>
+    <div>
+      <span class="eyebrow">get started</span>
+      <h2 class="display-l" style="margin:8px 0 0">Ready to build your local corpus?</h2>
+      <p class="body-l" style="margin-top:18px">Download the helper and extension to start capturing research materials.</p>
+    </div>
+    <a class="btn ink" href="/install">Install Uoink -></a>
   </div>
 </section>
-<section class="section" data-screen-label="how / storage">
-  <div class="container">
-    <article class="article">
-      <h2>Where the corpus lives.</h2>
-      <p>Uoink writes captures to a local folder you control and indexes the useful parts in SQLite FTS5. The exact path depends on platform, but the principle is stable: your corpus is ordinary files and a local index, not a proprietary cloud workspace.</p>
-      <p>On Windows, the helper lives under <code>%LOCALAPPDATA%\\Uoink</code> and your captures land in your Uoink library folder. On macOS, the helper path is planned around <code>~/Library/Application Support/Uoink/</code>. Topic folders and markdown sidecars make the archive portable.</p>
-      <p>That is the compounding asset. First capture solves a single problem. Fifty captures become a library. Five hundred captures become something your agent can search, cite, compare, and build from.</p>
-      <p><a class="btn primary large" href="/install">Install Uoink</a> <a class="btn ghost large" href="/privacy">Read privacy</a></p>
-    </article>
-  </div>
-</section>`,
+    `,
   },
   features: {
     id: "features",
@@ -418,34 +417,7 @@ find_mentions("Karpathy")</pre>
 <section class="section" data-screen-label="features / tune"><div class="container"><div class="section-head"><span class="eyebrow">job 4 / tune the helper</span><h2 class="display-l">Make the defaults fit your <em>machine.</em></h2></div><ul class="fact-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px 56px;list-style:none;padding:0"><li><div><b>BYO Anthropic key</b>Enables Hook Type, Comment Intelligence, and Entity Extraction. Stored in the OS credential vault.</div></li><li><div><b>Clipboard budget</b>Set screenshot caps, compression, and comment limits before pasting into a model.</div></li><li><div><b>Whisper model selector</b>Choose tiny/base/small/medium/large for podcast transcription cost and accuracy tradeoffs.</div></li><li><div><b>Output folder picker</b>Send corpora where your work already lives, including markdown vault workflows.</div></li></ul></div></section>
 <section class="big-strip" data-screen-label="features / comparison"><div class="container"><span class="eyebrow">why not Glasp, NoteGPT, or NotebookLM?</span><h2 class="display-l">Transcript tools give you text. Uoink gives you a <em>local asset.</em></h2><p class="body-l" style="max-width:70ch">Cloud tools can summarize. Browser extensions can grab a transcript. Generic MCP servers can fetch captions. Uoink's wedge is the combination: local corpus, screenshots, comments, hook classification, entity search, and MCP access. The archive compounds because it belongs to you.</p><p class="mt-24"><a class="btn ink" href="/privacy">Check privacy -></a> <a class="btn ghost" href="/agents">Check MCP -></a></p></div></section>`,
   },
-  podcasts: {
-    id: "podcasts",
-    route: "/podcasts",
-    mode: "mode-dark",
-    title: "Local Podcast Transcription and Speaker Diarization",
-    description:
-      "Use Uoink to turn podcast RSS feeds and episodes into private local corpora with Whisper transcription and speaker diarization.",
-    keywords: ["podcast transcription open source", "podcast to ai", "podcast diarization local", "whisper podcast workflow"],
-    faq: podcastsFaq,
-    html: `
-<section class="hero" data-screen-label="podcasts / hero"><div class="container"><div class="hero-grid"><div class="copy"><span class="eyebrow">podcasts</span><h1 class="display-xl">Uoink your <em>podcasts</em> too.</h1><p class="lede">The thing you do with videos also works for long audio: RSS feed in, speaker-aware transcript out, local corpus ready for your model.</p><div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Get Uoink</a><a class="btn ghost large" href="/how">See workflow</a></div><div class="brand-strip" aria-label="Podcast sources">
-<!-- Spotify logo source: https://newsroom.spotify.com/media-kit/ and https://spotifynewsroom.jp/media-kit/logo-and-icons/; license/usage confirmation: official Spotify newsroom media-kit logo, unmodified integration callout. -->
-<span class="logo-chip brand-mark-pill logo-wide" aria-label="Spotify"><img src="/assets/brand-logos/spotify.png" alt="Spotify" width="130" height="39" loading="lazy" decoding="async" /></span>
-<!-- Apple Podcasts logo source: https://tools.applemediaservices.com/apple-podcasts/identity-guidelines; license/usage confirmation: official Apple Podcasts identity asset, unmodified integration callout. -->
-<span class="logo-chip brand-mark-pill logo-mark" aria-label="Apple Podcasts"><img src="/assets/brand-logos/apple-podcasts.png" alt="Apple Podcasts" width="30" height="30" loading="lazy" decoding="async" /></span>
-<span>RSS</span><span>Whisper</span></div></div><div class="corpus"><div class="hd"><span>podcast corpus</span><span>audio-first</span></div><span class="ln k"># Episode title</span><span class="ln dim">feed, episode URL, duration, publish date</span><span class="ln k">## Speakers</span><span class="ln hl">Speaker 1 / Speaker 2 / Speaker 3</span><span class="ln k">## Transcript</span><span class="ln dim">[14:22] Speaker 2: the claim is...</span><span class="ln k">## Entities</span><span class="ln dim">companies, tools, people, topics</span></div></div></div></section>
-<section class="section" data-screen-label="podcasts / rss"><div class="container"><div class="section-head"><span class="eyebrow">any RSS feed</span><h2 class="display-l">Add the feed. Let the helper <em>poll.</em></h2><p class="lede">Drop in a public podcast RSS URL. Uoink can fetch new episodes, run transcription, and file them beside your video library.</p></div><div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px"><article class="card"><span class="num">01</span><h3>Audio extraction.</h3><p>yt-dlp handles the media download path where supported.</p></article><article class="card"><span class="num">02</span><h3>Local Whisper.</h3><p>Transcription runs on your machine. Choose speed or quality based on the model size.</p></article><article class="card"><span class="num">03</span><h3>Diarization.</h3><p>WhisperX separates speakers as labels you can rename later.</p></article></div></div></section>
-<section class="section" data-screen-label="podcasts / use cases"><div class="container"><div class="section-head"><span class="eyebrow">who wins</span><h2 class="display-l">For audio people who need <em>receipts.</em></h2></div><div class="hook-grid">${featureCards([
-["Journalists","Pull every factual claim a guest made and keep timestamp citations beside the transcript."],
-["Founders","Map a competitor's interview circuit and search every mention of a product, market, or investor."],
-["Researchers","Build a private guest-claim corpus across a niche, then ask your model to compare positions."],
-["Creators","Study how long-form interviewers frame questions, interrupts, topic shifts, and sponsor reads."],
-["Analysts","Search multiple shows for every mention of a company, product category, or technical term."],
-["Students","Turn lectures and seminar feeds into searchable notes you can cite later."]
-])}</div></div></section>
-<section class="big-strip" data-screen-label="podcasts / tradeoff"><div class="container"><span class="eyebrow">the local Whisper trade</span><h2 class="display-l">Private transcription costs <em>time</em>, not trust.</h2><p class="body-l" style="max-width:70ch">Expect roughly 10 to 15 minutes of compute per hour of audio on CPU, depending on model size and machine. That is the cost of keeping raw audio and transcripts local. Uoink runs the job in the background and files the corpus when it finishes.</p><p class="mt-24"><a class="btn ink" href="/privacy">Privacy details -></a> <a class="btn ghost" href="/agents">Agent search -></a></p></div></section>
-<section class="section" data-screen-label="podcasts / faq"><div class="container"><div class="section-head"><span class="eyebrow">podcast FAQ</span><h2 class="display-l">Useful caveats, not <em>fine print.</em></h2></div>${renderFaq(podcastsFaq)}</div></section>`,
-  },
+  podcasts: aliasPage("podcasts", "/podcasts", "Podcast details moved to Sources", "Podcasts are now listed on the Uoink sources page.", "/sources/podcasts"),
   agents: {
     id: "agents",
     route: "/agents",
@@ -617,18 +589,310 @@ install:
       "Uoink is MIT-licensed local software. Review short terms for website use, open source license, warranty, and contact.",
     keywords: ["uoink terms", "uoink license", "uoink mit license"],
     html: `
-<section class="section" data-screen-label="terms / main"><div class="container"><article class="article"><div class="meta"><span>terms</span><span>short by design</span></div><h1>Terms of <em>use.</em></h1><p class="standfirst">Uoink is local, open-source software. These terms are intentionally short.</p><h2>The software is MIT-licensed.</h2><p>Uoink source is published at <a href="${GITHUB_URL}">github.com/ryanbiddy/uoink</a> under the MIT License. The license grants broad permission to use, copy, modify, merge, publish, distribute, sublicense, and sell copies, subject to the license notice.</p><h2>No warranty.</h2><p>The software is provided as-is, without warranty of any kind. Use it at your own discretion and keep backups of work you care about.</p><h2>Your responsibility.</h2><p>You are responsible for how you use video, podcast, transcript, screenshot, and comment material captured with Uoink. Follow the terms of the source platforms and any AI provider you choose to use.</p><h2>Trademark and brand.</h2><p>Uoink is Ryan Biddy's product name and mark. Avoid impersonating the project or representing unofficial builds as official.</p><h2>Contact.</h2><p>Email <a href="mailto:hi@uoink.video">hi@uoink.video</a> for terms, trademark, or abuse concerns.</p><p><a class="btn primary large" href="/install">Install Uoink</a> <a class="btn ghost large" href="/privacy">Privacy policy</a></p></article></div></section>`,
+<section class="section" data-screen-label="terms / main"><div class="container"><article class="article"><div class="meta"><span>terms</span><span>short by design</span></div><h1>Terms of <em>use.</em></h1><p class="standfirst">Uoink is local, open-source software. These terms are intentionally short.</p><h2>The software is MIT-licensed.</h2><p>Uoink source is published at <a href="${GITHUB_URL}">github.com/ryanbiddy/uoink</a> under the MIT License. The license grants broad permission to use, copy, modify, merge, publish, distribute, sublicense, and sell copies, subject to the license notice.</p><h2>No warranty.</h2><p>The software is provided as-is, without warranty of any kind. Use it at your own discretion and keep backups of work you care about.</p><h2>Your responsibility.</h2><p>You are responsible for how you use video, podcast, transcript, screenshot, and comment material captured with Uoink. Follow the terms of the source platforms and any AI provider you choose to use.</p><h2>Trademark and brand.</h2><p>Uoink is Ryan Biddy's product name and mark. Avoid impersonating the project or representing unofficial builds as official.</p><h2>Contact.</h2><p>Email <a href="mailto:hi@uoink.app">hi@uoink.app</a> for terms, trademark, or abuse concerns.</p><p><a class="btn primary large" href="/install">Install Uoink</a> <a class="btn ghost large" href="/privacy">Privacy policy</a></p></article></div></section>`,
   },
   memory: aliasPage("memory", "/memory", "Uoink Memory moved into Features", "Memory is now covered in the Uoink feature inventory.", "/features"),
   tweaks: aliasPage("tweaks", "/tweaks", "Uoink settings moved into Features", "Settings and tuning are now covered in the Uoink feature inventory.", "/features"),
-  creators: aliasPage("creators", "/creators", "Creator workflow moved into How Uoink Works", "Creator workflows now live on the main workflow page.", "/how"),
+  creators: {
+    id: "creators",
+    route: "/creators",
+    mode: "mode-light",
+    title: "Uoink for Creators: Ground your drafts in your local corpus",
+    description:
+      "Turn your videos, podcasts, and articles into clean local markdown files. Draft posts in your voice with attribution intact.",
+    keywords: [
+      "uoink for creators",
+      "ai writing tool creators",
+      "local video corpus creator",
+      "grounded script writing",
+    ],
+    html: `
+<section class="hero" data-screen-label="creators / hero">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">uoink for creators</span>
+      <h1 class="display-xl">Turn your research into <em>original drafts.</em></h1>
+      <p class="lede">Stop copying transcripts and guessing the context. Uoink keeps the videos, podcasts, and articles you study on your own disk, then helps you write drafts that match your voice.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" data-screen-label="creators / workflow">
+  <div class="container" style="max-width:80ch">
+    <h2 class="display-l" style="margin-bottom:32px">Write from a cited <em>corpus.</em></h2>
+    
+    <div style="display:flex;flex-direction:column;gap:32px">
+      <div>
+        <h3>1. Capture any source</h3>
+        <p>Save YouTube videos, podcasts, Substack posts, Reddit threads, and LinkedIn clips with one click. Uoink structures the transcript, frames, comments, and metadata into a clean markdown document on your disk.</p>
+      </div>
+
+      <div>
+        <h3>2. Calibrate your voice</h3>
+        <p>Import your own articles or newsletters as style anchors. Uoink studies your writing patterns, vocabulary, and paragraph lengths to guide draft outputs. You avoid generic, salesy AI phrasing by grounding the model in your tone.</p>
+      </div>
+
+      <div>
+        <h3>3. Draft in Writing Studio</h3>
+        <p>Select any source from your library and load it into the local editor. Draft threads, posts, or articles directly from the transcript facts. Uoink checks the drafts for style guidelines, character counts, and formatting rules.</p>
+      </div>
+
+      <div>
+        <h3>4. Protect creator credit</h3>
+        <p>We believe in creator credit. Every draft you write in Writing Studio automatically appends a citation linking back to the original source. You share insights while keeping the citation trail visible for your audience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="big-strip" data-screen-label="creators / install-cta">
+  <div class="container" style="display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center">
+    <div>
+      <span class="eyebrow">get started</span>
+      <h2 class="display-l" style="margin:8px 0 0">Ready to write in your voice?</h2>
+      <p class="body-l" style="margin-top:18px">Download Uoink to build your local research library.</p>
+    </div>
+    <a class="btn ink" href="/install">Install Uoink -></a>
+  </div>
+</section>
+    `,
+  },
   research: aliasPage("research", "/research", "Research workflow moved into Podcasts and Features", "Research workflows now live across Podcasts and Features.", "/features"),
-  agentDocs: aliasPage("agentDocs", "/agent-docs", "Agent docs moved to Agents and MCP", "Agent docs now live at /agents and /mcp.", "/agents"),
+  agentDocs: aliasPage("agentDocs", "/agent-docs", "Agent docs moved to Developers and MCP", "Agent docs now live at /developers and /mcp.", "/developers"),
   hooks: aliasPage("hooks", "/hooks", "Hook taxonomy moved into Features", "Hook Type classification is covered in Features and Agents.", "/features"),
   blog: aliasPage("blog", "/blog", "Uoink Field Notes", "Launch articles about hooks, agents, local-first architecture, and corpus workflows.", "/blog"),
   twitter: aliasPage("twitter", "/twitter", "Uoink for Twitter video", "Capture X and Twitter video context into your local corpus.", "/twitter"),
   dashboard: aliasPage("dashboard", "/dashboard", "Dashboard moved into Features", "The dashboard and memory surfaces are covered in Features.", "/features"),
-  installed: aliasPage("installed", "/installed", "Uoink installed", "Start with the install and how-it-works pages.", "/how"),
+  installed: aliasPage("installed", "/installed", "Uoink installed", "Start with the install and how-it-works pages.", "/how-it-works"),
+  sources: {
+    id: "sources",
+    route: "/sources",
+    mode: "mode-dark",
+    title: "Supported Sources: Capture YouTube, Podcasts, Substack, and social threads",
+    description:
+      "Browse supported sources in Uoink, including video platforms, podcast feeds, newsletters, and social thread discussions.",
+    keywords: [
+      "uoink sources",
+      "youtube to ai",
+      "substack to markdown",
+      "reddit thread to ai",
+      "podcast whisper transcription",
+    ],
+    html: `
+<section class="hero" data-screen-label="sources / hero">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">supported sources</span>
+      <h1 class="display-xl">Home for any <em>source.</em></h1>
+      <p class="lede">Uoink captures video, audio, and text discussions, saving them directly to your disk. We document what works and specify the platforms we support.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" data-screen-label="sources / grid">
+  <div class="container">
+    <div class="sources-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
+      
+      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-weight:bold;font-size:18px">YouTube</span>
+          <span class="feature-status shipped" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">shipped</span>
+        </div>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Browser button, right-click, playlist link, or mobile queue.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Timestamps, transcripts, screenshots, comments, and channel context.</p>
+        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Scripts, pacing teardowns, and code walkthroughs.</p>
+      </article>
+
+      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-weight:bold;font-size:18px">Podcasts</span>
+          <span class="feature-status shipped" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">shipped</span>
+        </div>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> RSS feed links or direct audio file extraction.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Multi-speaker transcripts (diarization) and show metadata.</p>
+        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Guest claim audits, research quotes, and interview outlines.</p>
+      </article>
+
+      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-weight:bold;font-size:18px">Substack</span>
+          <span class="feature-status in-flight" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">in flight</span>
+        </div>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Context menu click on any article page.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Clean article markdown text, author details, and outbound links.</p>
+        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Voice tone calibration, draft critiques, and cross-posts.</p>
+      </article>
+
+      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-weight:bold;font-size:18px">X Video</span>
+          <span class="feature-status shipped" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">shipped</span>
+        </div>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Right-click context capture on tweets containing video.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Local Whisper transcript, author handle, and post URL.</p>
+        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Highlight threads, audience quotes, and video drafts.</p>
+      </article>
+
+      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-weight:bold;font-size:18px">LinkedIn Video</span>
+          <span class="feature-status in-flight" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">in flight</span>
+        </div>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Context menu capture on LinkedIn video posts.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Local Whisper transcript, post text, and creator info.</p>
+        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> B2B summaries, technical updates, and demo notes.</p>
+      </article>
+
+      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-weight:bold;font-size:18px">Reddit Threads</span>
+          <span class="feature-status shipped" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">shipped</span>
+        </div>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Right-click context capture on discussion pages.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Comment hierarchies, usernames, and nested text blocks.</p>
+        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Sentiment analysis, feedback reports, and community guides.</p>
+      </article>
+
+      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-weight:bold;font-size:18px">Bluesky</span>
+          <span class="feature-status in-flight" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">in flight</span>
+        </div>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Context menu capture or public post link paste.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Thread replies, author handles, and link trees.</p>
+        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Research notes, social outlines, and article drafts.</p>
+      </article>
+
+      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-weight:bold;font-size:18px">Threads</span>
+          <span class="feature-status planned" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">planned</span>
+        </div>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Extension right-click menu or clipboard queue.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Thread tree, post text, and author data.</p>
+        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Social drafts and audience replies.</p>
+      </article>
+
+      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-weight:bold;font-size:18px">Mastodon</span>
+          <span class="feature-status in-flight" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">in flight</span>
+        </div>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Context right-click or public instance link paste.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Nested reply blocks, post text, and server handles.</p>
+        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Tech news digests and project summaries.</p>
+      </article>
+
+      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-weight:bold;font-size:18px">Beehiiv</span>
+          <span class="feature-status in-flight" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">in flight</span>
+        </div>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Context menu capture on newsletter pages.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Clean newsletter markdown text and outward links.</p>
+        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Tone calibration, outlines, and script ideas.</p>
+      </article>
+
+      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-weight:bold;font-size:18px">Ghost</span>
+          <span class="feature-status in-flight" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">in flight</span>
+        </div>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Context right-click or newsletter RSS feed poll.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Newsletter body text, metadata, tags, and links.</p>
+        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Outline drafts, blog edits, and topic comparisons.</p>
+      </article>
+
+      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-weight:bold;font-size:18px">Buttondown</span>
+          <span class="feature-status in-flight" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">in flight</span>
+        </div>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Right-click capture on newsletter article pages.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Clean body markdown text, author data, and links.</p>
+        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Email copy guides and topic drafts.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+    `,
+  },
+  developers: {
+    id: "developers",
+    route: "/developers",
+    mode: "mode-dark",
+    title: "Uoink for Developers: Local MCP Server and SQLite Database",
+    description:
+      "Connect Uoink to Claude Desktop, Cursor, and Cline using Model Context Protocol. Run loopback tools to query transcripts locally.",
+    keywords: [
+      "uoink for developers",
+      "mcp server video",
+      "model context protocol server",
+      "sqlite video corpus",
+      "local video indexer api",
+    ],
+    html: `
+<section class="hero" data-screen-label="developers / hero">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">uoink for developers</span>
+      <h1 class="display-xl">Local tools for <em>AI agents.</em></h1>
+      <p class="lede">Uoink runs a local Model Context Protocol (MCP) server on your machine. Give Claude Desktop, Cursor, and Cline tools to capture, index, and query web media without clipboard steps.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" data-screen-label="developers / integration">
+  <div class="container" style="max-width:80ch">
+    <h2 class="display-l" style="margin-bottom:24px">Standard stdio <em>transport.</em></h2>
+    <p class="body-l" style="margin-bottom:32px">The helper runs on port 5179. It exposes ${MCP_TOOL_COUNT} tools to search transcripts, retrieve screenshots, classify hooks, and extract claims. Everything runs offline on loopback.</p>
+
+    <h3>1. Copy the MCP configuration</h3>
+    <p>Add the server to your client configuration file. Uoink generates the exact paths for your system during setup.</p>
+    
+    <div class="docs-main" style="margin-bottom:32px">
+      <h4>Claude Desktop Configuration</h4>
+      <pre style="background:var(--ink-bg);padding:18px;border-radius:6px;border:1px solid var(--ink-dim);color:var(--parchment)">{
+  "mcpServers": {
+    "uoink": {
+      "command": "%LOCALAPPDATA%\\\\Uoink\\\\uoink_mcp.exe",
+      "args": []
+    }
+  }
+}</pre>
+    </div>
+
+    <h3>2. Run a sample tool call</h3>
+    <p>Your agent can call tools like <code>uoink_video</code>, poll for job completion, and read the local corpus directly.</p>
+    
+    <div class="docs-main" style="margin-bottom:32px">
+      <h4>Tool Call Schema</h4>
+      <pre style="background:var(--ink-bg);padding:18px;border-radius:6px;border:1px solid var(--ink-dim);color:var(--parchment)">{
+  "name": "uoink_video",
+  "arguments": {
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  }
+}</pre>
+    </div>
+
+    <h3>3. Local SQLite database</h3>
+    <p>Uoink stores transcripts, tags, and comment records in an offline SQLite database under your local app data directory. You can query the index via SQL, back up the files, or load the database into other tools.</p>
+  </div>
+</section>
+
+<section class="big-strip" data-screen-label="developers / github-cta">
+  <div class="container" style="display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center">
+    <div>
+      <span class="eyebrow">open source</span>
+      <h2 class="display-l" style="margin:8px 0 0">Built on MIT licensed code.</h2>
+      <p class="body-l" style="margin-top:18px">Inspect the MCP server implementation, sqlite schemas, and helper logic on GitHub.</p>
+    </div>
+    <a class="btn ink" href="${GITHUB_URL}">Browse GitHub -></a>
+  </div>
+</section>
+    `,
+  },
 };
 
 function featureCards(items: [string, string][]): string {

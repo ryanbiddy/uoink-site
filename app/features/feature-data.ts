@@ -423,6 +423,162 @@ export const features: Feature[] = [
     }
   },
   {
+    "slug": "substack",
+    "title": "Substack article extraction",
+    "category": "Capture",
+    "status": "in flight",
+    "summary": "Extract clean markdown texts and metadata from Substack newsletters.",
+    "keywords": [
+      "uoink feature",
+      "substack",
+      "substack article extraction",
+      "extract",
+      "markdown",
+      "newsletters"
+    ],
+    "whatItDoes": "Extract structured texts from Substack posts. Uoink strips ads, menus, and subscription prompts, saving clean markdown on disk. It preserves external links and layout. The files share the same format as your video corpus and save to your local library automatically.",
+    "gettingStarted": [
+      "Open a Substack article in your browser.",
+      "Right-click the page background.",
+      "Select Uoink this article from the context menu.",
+      "Approve the domain allowlist prompt.",
+      "Check your library for the clean markdown document."
+    ],
+    "behindScenes": "The local helper uses a standard extraction path to parse the Substack HTML content. It isolates the article body, filters out marketing widgets, and converts elements to clean markdown syntax. The helper indexes the text in your local database, making it available for local search. Everything runs on your machine.",
+    "mcpTools": [
+      "uoink_page"
+    ],
+    "mcpExample": "{\n  \"name\": \"uoink_page\",\n  \"arguments\": {\n    \"url\": \"https://example.substack.com/p/article-slug\"\n  }\n}",
+    "related": [
+      "universal-page-uoink",
+      "local-first",
+      "mcp-server"
+    ],
+    "cta": "Extract Substack posts as clean local markdown documents.",
+    "screenshot": {
+      "title": "Substack article source with clean markdown body",
+      "alt": "Substack article source with clean markdown body",
+      "src": "/screenshots/universal-page-uoink/hero-1280x800.png"
+    }
+  },
+  {
+    "slug": "linkedin-videos",
+    "title": "LinkedIn video extraction",
+    "category": "Capture",
+    "status": "in flight",
+    "summary": "Extract clean transcriptions and metadata from LinkedIn videos into your local library.",
+    "keywords": [
+      "uoink feature",
+      "linkedin",
+      "linkedin videos",
+      "linkedin video extraction",
+      "transcriptions",
+      "metadata"
+    ],
+    "whatItDoes": "Extract transcripts and metadata from LinkedIn video posts. Uoink uses its local yt-dlp path to fetch video streams, generates transcripts, and writes clean markdown. It files the output by topic, saving hours of manual notes.",
+    "gettingStarted": [
+      "Right-click any video post on LinkedIn.",
+      "Click Uoink video in the browser context menu.",
+      "Monitor progress in the extension toolbar popup.",
+      "Check your library folder for the auto-filed transcript.",
+      "Open the markdown file to read it as a document."
+    ],
+    "behindScenes": "The helper uses its local video tools to query the LinkedIn post. It extracts the raw media streams, routes them through the local Whisper transcriber, and builds the markdown metadata. The resulting files are saved to your local directory and indexed in the search database.",
+    "mcpTools": [
+      "uoink_video"
+    ],
+    "mcpExample": "{\n  \"name\": \"uoink_video\",\n  \"arguments\": {\n    \"url\": \"https://www.linkedin.com/posts/activity-123456789\"\n  }\n}",
+    "related": [
+      "twitter-video",
+      "in-page-button",
+      "mcp-server"
+    ],
+    "cta": "Convert LinkedIn video posts into readable local text documents.",
+    "screenshot": {
+      "title": "LinkedIn video post showing Uoink context menu",
+      "alt": "LinkedIn video post showing Uoink context menu",
+      "src": "/screenshots/right-click-any-link/hero-1280x800.png"
+    }
+  },
+  {
+    "slug": "reddit-threads",
+    "title": "Reddit thread extraction",
+    "category": "Capture",
+    "status": "in flight",
+    "summary": "Save structured text discussions from Reddit posts into your local library.",
+    "keywords": [
+      "uoink feature",
+      "reddit",
+      "reddit threads",
+      "reddit thread extraction",
+      "discussions",
+      "markdown"
+    ],
+    "whatItDoes": "Save complete Reddit discussions as clean text files. Uoink parses comment hierarchies, removes layout elements, and writes a readable markdown document. It saves the discussion directly to your disk, making it searchable offline.",
+    "gettingStarted": [
+      "Open a Reddit thread in your browser.",
+      "Right-click the background of the discussion page.",
+      "Select Uoink thread from the context menu list.",
+      "Approve the domain allowlist popup to run extraction.",
+      "Read the clean comment hierarchy in your library."
+    ],
+    "behindScenes": "The local helper parses the JSON representation of the Reddit page. It extracts the comments, resolves the nested relationships, and outputs the text using clean indentation. The helper indexes the thread contents in the local search database without external APIs.",
+    "mcpTools": [
+      "uoink_page"
+    ],
+    "mcpExample": "{\n  \"name\": \"uoink_page\",\n  \"arguments\": {\n    \"url\": \"https://www.reddit.com/r/subreddit/comments/id/slug/\"\n  }\n}",
+    "related": [
+      "universal-page-uoink",
+      "local-first",
+      "memory-search"
+    ],
+    "cta": "Convert noisy online threads into clean markdown files.",
+    "screenshot": {
+      "title": "Reddit discussion thread converted to clean markdown hierarchy",
+      "alt": "Reddit discussion thread converted to clean markdown hierarchy",
+      "src": "/screenshots/universal-page-uoink/hero-1280x800.png"
+    }
+  },
+  {
+    "slug": "bluesky-threads-mastodon",
+    "title": "Bluesky and Mastodon thread capture",
+    "category": "Capture",
+    "status": "in flight",
+    "summary": "Capture structured social threads from Bluesky and Mastodon into your local database.",
+    "keywords": [
+      "uoink feature",
+      "bluesky",
+      "mastodon",
+      "threads",
+      "thread capture",
+      "social"
+    ],
+    "whatItDoes": "Capture social threads from Bluesky and Mastodon. Uoink connects to public APIs, fetches thread replies, and writes a clean local text document. It indexes the text automatically, making social research searchable.",
+    "gettingStarted": [
+      "Open a post on Bluesky or Mastodon in your browser.",
+      "Right-click the post context to trigger the popup.",
+      "Click Uoink thread to start text extraction.",
+      "Check the toolbar popup badge for success feedback.",
+      "Open your library folder to view the structured thread."
+    ],
+    "behindScenes": "The helper resolves the post identifiers from the URL. It queries public endpoints to fetch the thread tree structure. The helper converts the replies into nested markdown blocks, preserves author links, and writes to disk. All data is stored locally.",
+    "mcpTools": [
+      "uoink_page"
+    ],
+    "mcpExample": "{\n  \"name\": \"uoink_page\",\n  \"arguments\": {\n    \"url\": \"https://bsky.app/profile/user/post/12345\"\n  }\n}",
+    "related": [
+      "reddit-threads",
+      "universal-page-uoink",
+      "mcp-server"
+    ],
+    "cta": "Save social threads to your local search database.",
+    "screenshot": {
+      "title": "Social thread from Bluesky indexed in library",
+      "alt": "Social thread from Bluesky indexed in library",
+      "src": "/screenshots/universal-page-uoink/hero-1280x800.png"
+    }
+  },
+  {
     "slug": "memory-search",
     "title": "Local SQLite FTS5 search",
     "category": "Library",

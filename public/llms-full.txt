@@ -1,11 +1,26 @@
-<!-- generated: 2026-05-30 / uoink v3.2 -->
+<!-- generated: 2026-05-30 / uoink v3.3 -->
 # Uoink full site context
 
 ## URL: https://uoink.app/
-Uoink turns videos, podcasts, web pages, and social video into private local corpora for Claude, ChatGPT, Cursor, and MCP-capable agents. The core loop is capture, corpus, search, verify, write.
+Uoink keeps the videos, podcasts, and articles creators and AI developers study on their own disk, then hands them to Claude, ChatGPT, Cursor, or a local MCP agent as a cited corpus.
 
 ## URL: https://uoink.app/install
 Install the desktop helper, install the browser extension, then click the Uoink button. The Windows helper runs from %LOCALAPPDATA%\Uoink and exposes localhost 127.0.0.1:5179. Browser extension support targets Chromium browsers. Chrome Web Store approval is pending, so the release zip is the launch path. macOS is on the v2.3 track.
+
+## URL: https://uoink.app/how-it-works
+How Uoink works. Five-step loop: capture sources, build a local library, assemble a workspace, iterate from evidence, and distribute with creator credit intact.
+
+## URL: https://uoink.app/sources
+Source catalog. Lists YouTube, X video, podcasts, Substack, LinkedIn videos, Reddit, Bluesky, Threads, Mastodon, Beehiiv, Ghost, and Buttondown with capture path, corpus shape, output use, and status.
+
+## URL: https://uoink.app/sources/podcasts
+Podcast source page. RSS feed capture, local Whisper transcription, speaker labels, episode metadata, and local corpus storage.
+
+## URL: https://uoink.app/creators
+Creator audience door. Source capture, hook study, Writing Studio, Voice DNA, screenshots, and creator-credit publishing workflow.
+
+## URL: https://uoink.app/developers
+Developer audience door. Local MCP setup, Claude Desktop and Cursor config snippets, tool catalog, manifest links, and source-card workflow for agents.
 
 ## URL: https://uoink.app/features
 The feature index groups Uoink into Capture, Library, Workspace, Verification, Distribution, and Identity. Dashboard and agents can fetch https://uoink.app/api/features-manifest for slug, name, URL, embed URL, status, category, summary, and MCP tools.
@@ -36,6 +51,18 @@ Feature detail page: YouTube Shorts transcription. Capture and classify YouTube 
 
 ## URL: https://uoink.app/features/playlist-mode
 Feature detail page: Playlist queue extraction. Batch extract up to 10 YouTube videos at once with partial-failure tolerance. Also supports https://uoink.app/features/playlist-mode?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/substack
+Feature detail page: Substack article extraction. Extract clean markdown texts and metadata from Substack newsletters. Also supports https://uoink.app/features/substack?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/linkedin-videos
+Feature detail page: LinkedIn video extraction. Extract clean transcriptions and metadata from LinkedIn videos into your local library. Also supports https://uoink.app/features/linkedin-videos?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/reddit-threads
+Feature detail page: Reddit thread extraction. Save structured text discussions from Reddit posts into your local library. Also supports https://uoink.app/features/reddit-threads?embed=true for dashboard embeds without site chrome.
+
+## URL: https://uoink.app/features/bluesky-threads-mastodon
+Feature detail page: Bluesky and Mastodon thread capture. Capture structured social threads from Bluesky and Mastodon into your local database. Also supports https://uoink.app/features/bluesky-threads-mastodon?embed=true for dashboard embeds without site chrome.
 
 ## URL: https://uoink.app/features/memory-search
 Feature detail page: Local SQLite FTS5 search. Search transcripts, comments, and metadata instantly using local SQLite full-text search. Also supports https://uoink.app/features/memory-search?embed=true for dashboard embeds without site chrome.
