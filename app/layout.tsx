@@ -47,12 +47,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${bungee.variable} ${mono.variable}`}>
       <head>
         <link href="/assets/favicon.svg" rel="mask-icon" color="#C2410C" />
         <link rel="alternate" type="application/json" title="Uoink MCP manifest" href="/mcp/manifest.json" />
       </head>
-      <body className={`${inter.variable} ${bungee.variable} ${mono.variable}`}>
+      <body>
         {children}
         <VercelAnalytics />
         <Script src="/nav.js" strategy="afterInteractive" />
