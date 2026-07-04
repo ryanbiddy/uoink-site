@@ -432,6 +432,7 @@ find_mentions("Karpathy")</pre>
     route: "/agents",
     mode: "mode-light",
     title: "MCP YouTube Server: Claude Desktop and Cursor Tools",
+    subtitle: "64 MCP tools in the registry, 14 curated over stdio. Available instantly.",
     description:
       "Use Uoink as a local MCP server for Claude Desktop, Cursor, Cline, Continue, and ChatGPT Desktop.",
     keywords: ["mcp youtube server", "claude desktop youtube tool", "cursor mcp server", "mcp video tool"],
