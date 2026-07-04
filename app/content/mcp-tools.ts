@@ -1,7 +1,8 @@
 // Generated from ryanbiddy/uoink origin/main:uoink_mcp_tools.py on 2026-05-30.
+// Re-synced against origin/main on 2026-07-04 (added uoink_reddit_thread).
 // Keep this aligned with the product MCP registry for agent-facing pages.
 
-export const MCP_TOOL_COUNT = 63;
+export const MCP_TOOL_COUNT = 64;
 
 export const mcpTools = [
   [
@@ -243,6 +244,10 @@ export const mcpTools = [
   [
     "uoink_page",
     "v3.2 Universal Site Uoinking: capture an allowed page as a uoink. Crawl4AI runs ON-DEVICE when available (JS render + screenshot); stdlib fallback otherwise (static HTML + markdown synthesis, no screenshot). Allowlist-gated -- add the host via add_allowed_site first if it's not in the defaults (youtube.com, youtu.be, x.com, twitter.com). Result auto-persists as a uoink with source_type='page'."
+  ],
+  [
+    "uoink_reddit_thread",
+    "Fetch a Reddit thread via its public .json (no API key, no OAuth), flatten the comment tree with a depth limit and a score threshold, and persist it as a uoink with source_type='reddit_thread'. Renders as Post -> Top comments -> nested replies so search and facets work on the conversation. Runs on-device; no allowlist gate."
   ],
   [
     "list_allowed_sites",

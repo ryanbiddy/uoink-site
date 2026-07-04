@@ -6,7 +6,7 @@ const page = pages.mcp;
 
 export const metadata: Metadata = {
   title: page.title,
-  description: "80+ MCP tools in the registry, 14 curated over stdio. Available instantly.",
+  description: "64 MCP tools in the registry, 14 curated over stdio. Available instantly.",
   keywords: page.keywords,
   alternates: { canonical: page.route },
   openGraph: { title: page.title, description: page.description, url: page.route },

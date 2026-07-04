@@ -57,7 +57,7 @@ const configs = [
 const toolGroups = [
   {
     title: "Core stdio tools",
-    dek: "The 13-tool daily path for capture, search, comments, hooks, citations, and health.",
+    dek: "The 14-tool daily path for capture, search, comments, hooks, citations, and health.",
     names: [
       "uoink_video",
       "uoink_playlist",
@@ -72,6 +72,7 @@ const toolGroups = [
       "get_citation_map",
       "get_uoink_health",
       "find_mentions",
+      "get_transcript_reliability",
     ],
   },
   {
@@ -109,7 +110,6 @@ const toolGroups = [
       "classify_facets",
       "query_by_facets",
       "get_facet_taxonomy",
-      "get_transcript_reliability",
       "assemble_workspace",
       "critique_against_corpus",
       "list_workspaces",
@@ -139,9 +139,9 @@ const toolGroups = [
     ],
   },
   {
-    title: "Universal page capture",
-    dek: "Allowed-site controls for capturing pages with the local helper.",
-    names: ["uoink_page", "list_allowed_sites", "add_allowed_site", "remove_allowed_site"],
+    title: "Universal page and thread capture",
+    dek: "Page and Reddit-thread capture plus allowed-site controls for the local helper.",
+    names: ["uoink_page", "uoink_reddit_thread", "list_allowed_sites", "add_allowed_site", "remove_allowed_site"],
   },
 ];
 
@@ -181,7 +181,7 @@ export default function Page() {
                 Give your agent a local <em>source layer.</em>
               </h1>
               <p className="lede">
-                Uoink runs a local MCP server on your machine. The stdio path gives Claude Desktop, Cursor, and Cline 13 core tools for capture, search, citations, hooks, and source health.
+                Uoink runs a local MCP server on your machine. The stdio path gives Claude Desktop, Cursor, and Cline 14 core tools for capture, search, citations, hooks, and source health.
               </p>
               <div className="ctas">
                 <a className="btn primary large" href="#configs">
@@ -241,7 +241,7 @@ export default function Page() {
               These snippets use placeholder paths. Uoink setup page generates the real command for your machine after install.
             </p>
             <p className="body-l">
-              Uoink has two local tool surfaces. Stdio is the curated 13-tool path for daily agent use in Claude Desktop, Cursor, Cline, and Continue. The HTTP registry and OpenAPI bridge expose the full 64-tool programmatic surface for local integrations that need lower-level capture, memory, writing, and admin controls.
+              Uoink has two local tool surfaces. Stdio is the curated 14-tool path for daily agent use in Claude Desktop, Cursor, Cline, and Continue. The HTTP registry and OpenAPI bridge expose the full 64-tool programmatic surface for local integrations that need lower-level capture, memory, writing, and admin controls.
             </p>
           </div>
           <div className="docs-main">
