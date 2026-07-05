@@ -67,7 +67,7 @@ const installFaq: FaqItem[] = [
   {
     question: "What browsers support the extension?",
     answer:
-      "The extension is Manifest V3 and targets Chromium browsers: Chrome, Edge, Brave, Vivaldi, Arc, and Opera GX. Web Store approval is pending, so the launch path uses the GitHub release zip.",
+      "The extension is Manifest V3 and targets Chromium browsers: Chrome, Edge, Brave, Vivaldi, Arc, and Opera GX. Since Chrome Web Store approval is pending, sideload the extension manually from the folder Uoink places on your machine.",
   },
   {
     question: "Why does Uoink need a desktop helper?",
@@ -234,7 +234,7 @@ find_mentions("Karpathy")</pre>
     </div>
     <div class="ledger">
       <div class="ledger-card live"><div class="top"><span>Windows</span><span>live path</span></div><div class="body-l"><h3>Download the helper.</h3><p class="ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p></div><div class="foot"><a class="btn primary small" href="${RELEASE_URL}">Download -></a></div></div>
-      <div class="ledger-card pend"><div class="top"><span>Extension</span><span>CWS pending</span></div><div class="body-l"><h3>Install the browser button.</h3><p class="ver">Chrome, Edge, Brave, Vivaldi, Opera GX</p><p>Until the Web Store listing lands, install the release zip from GitHub.</p></div><div class="foot"><a class="btn ghost small" href="/install#extension">Install notes -></a></div></div>
+      <div class="ledger-card pend"><div class="top"><span>Extension</span><span>pending review</span></div><div class="body-l"><h3>Install the browser button.</h3><p class="ver">Chrome / Edge / Brave / Vivaldi / Arc / Opera GX</p><p>Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at <code>%LOCALAPPDATA%\\Uoink\\extension</code>.</p></div><div class="foot"><a class="btn ghost small" href="/install#extension">Install notes -></a></div></div>
       <div class="ledger-card queue"><div class="top"><span>Mac</span><span>${PRODUCT_STATUS.mac.label}</span></div><div class="body-l"><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p></div><div class="foot"><a class="btn ghost small" href="/install#mac">Mac status -></a></div></div>
     </div>
   </div>
@@ -243,10 +243,6 @@ find_mentions("Karpathy")</pre>
   <div class="container text-center">
     <span class="wm-line" style="font-size:110px;color:var(--vermillion);justify-content:center"><uoink-mark aria-hidden="true"></uoink-mark><span class="oink">OINK</span></span>
     <p class="display-m" style="margin:24px auto 32px;max-width:24ch">Take the video. Make it <em>usable.</em></p>
-    <div class="ctas flex center" style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap">
-      <a class="btn primary large" href="${RELEASE_URL}">Get Uoink</a>
-      <a class="btn ghost large" href="${GITHUB_URL}">Browse the code</a>
-    </div>
   </div>
 </section>`,
   },
@@ -256,8 +252,8 @@ find_mentions("Karpathy")</pre>
     mode: "mode-dark",
     title: "Download Uoink: Local Helper and Browser Extension Install",
     description:
-      "Install Uoink for Windows, add the browser extension, and start extracting local video corpora for Claude, ChatGPT, and MCP.",
-    keywords: ["install uoink", "uoink download windows", "uoink chrome extension", "yt-dlp Chrome extension"],
+      "Install Uoink for Windows, add the browser extension, and start extracting local video and text corpora for Claude, ChatGPT, and MCP.",
+    keywords: ["install uoink", "uoink download windows", "uoink chrome extension", "yt-dlp Chrome extension", "reddit context for AI"],
     faq: installFaq,
     html: `
 <section class="hero" data-screen-label="install / hero">
@@ -266,47 +262,111 @@ find_mentions("Karpathy")</pre>
       <div class="copy">
         <span class="eyebrow">install</span>
         <h1 class="display-xl">Install <em>Uoink.</em></h1>
-        <p class="lede">Get the helper running, add the browser button, then click Uoink on any video. No Python install, no command line, no PATH wrangling.</p>
-        <div class="ctas"><a class="btn primary large with-logo" href="${RELEASE_URL}">${WINDOWS_MARK}Download Windows installer</a><a class="btn ghost large" href="/how-it-works">See what happens after install</a></div>
-        <p class="sub-cta">Windows 10/11 / local helper / extension sideload until Web Store approval</p>
+        <div class="ctas"><a class="btn primary large with-logo" href="${RELEASE_URL}">${WINDOWS_MARK}Download Windows installer</a><a class="btn ghost large" href="/how-it-works">See how it works</a></div>
+        <p class="footnote text-xs dim mt-8">Note: Windows may flag early builds. Click <strong>More info</strong> and then <strong>Run anyway</strong> if prompted.</p>
+        <p class="sub-cta mt-16">Windows 10/11 / Local helper & browser button</p>
+        <p class="lede">Get the helper running, add the browser button, and click Uoink on any video or Reddit thread. No Python, no command line, no path wrangling.</p>
         <div class="brand-strip" aria-label="Install surfaces">
           <!-- GitHub logo source: https://github.com/logos; license/usage confirmation: official GitHub mark, unmodified integration callout under GitHub logo guidelines. -->
           <span class="logo-chip logo-mark"><img src="/assets/brand-logos/github.svg" alt="GitHub" width="22" height="22" loading="lazy" decoding="async" /><span>GitHub Releases</span></span>
           <span>Chromium browsers</span>
-          <span class="cws-chip">Coming to Chrome Web Store</span>
+          <span class="cws-chip">Chrome Web Store pending</span>
         </div>
       </div>
       <div class="corpus">
-        <div class="hd"><span>install ledger</span><span>honest path</span></div>
-        <span class="ln k">1. Download and run Uoink installer</span>
-        <span class="ln dim">installs helper under %LOCALAPPDATA%\\Uoink</span>
-        <span class="ln k">2. Install extension from GitHub release zip</span>
-        <span class="ln dim">Chrome Web Store listing pending approval</span>
-        <span class="ln k">3. Click the U button on a video</span>
-        <span class="ln dim">corpus lands on disk and clipboard</span>
+        <div class="hd"><span>install steps</span><span>sideload flow</span></div>
+        <span class="ln k">1. Run helper installer</span>
+        <span class="ln dim">Places local helper under %LOCALAPPDATA%\\Uoink</span>
+        <span class="ln k">2. Sideload extension</span>
+        <span class="ln dim">Load unpacked folder from the helper directory</span>
+        <span class="ln k">3. Start capturing</span>
+        <span class="ln dim">YouTube and Reddit threads save directly to disk</span>
       </div>
     </div>
   </div>
 </section>
-<section class="section" data-screen-label="install / platforms">
+
+<section class="section" data-screen-label="install / steps">
   <div class="container">
-    <div class="ledger">
-      <div class="ledger-card live" id="windows"><div class="top"><span class="platform-label">${WINDOWS_MARK}Windows</span><span>now</span></div><div class="body-l"><h3>Desktop helper.</h3><p class="ver">Windows 10/11 / release page</p><p>The helper bundles Python, yt-dlp, ffmpeg, keyring, SQLite, and MCP pieces. It runs locally and exposes the loopback server at <code>127.0.0.1:5179</code>.</p><p>Windows may flag early builds as an unrecognized publisher. Click More info, then Run anyway if you trust the GitHub release.</p></div><div class="foot"><a class="btn primary small with-logo" href="${RELEASE_URL}">${WINDOWS_MARK}Open release -></a></div></div>
-      <div class="ledger-card pend" id="extension"><div class="top"><span>Extension</span><span>pending review</span></div><div class="body-l"><h3>Browser button.</h3><p class="ver">Chrome / Edge / Brave / Vivaldi / Opera GX</p><p>The extension needs host permissions for supported video pages so it can render the in-page Uoink button and context menu. It skips browsing-history permission.</p><p>Until Web Store approval lands, download the extension zip from the same GitHub release and load it through your browser extension page.</p></div><div class="foot"><a class="btn ghost small" href="${RELEASE_URL}">Get release zip -></a></div></div>
-      <div class="ledger-card queue" id="mac"><div class="top"><span class="platform-label">${MAC_MARK}Mac</span><span>${PRODUCT_STATUS.mac.label}</span></div><div class="body-l"><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p></div><div class="foot"><a class="btn ghost small with-logo" href="${GITHUB_URL}/watchers">${MAC_MARK}Watch GitHub -></a></div></div>
+    <div class="section-head">
+      <span class="eyebrow">setup steps</span>
+      <h2 class="display-l">Three steps to <em>sideload.</em></h2>
+      <p class="lede">Uoink runs entirely on your machine. Follow this sequence to set it up.</p>
+    </div>
+    <div class="three-cards">
+      <article class="card">
+        <span class="num">01</span>
+        <h3>Download the helper.</h3>
+        <p>Run the Windows installer. It places the local loopback helper in your user folder.</p>
+        <p class="footnote text-xs dim">Note: Windows may flag early builds. Click <strong>More info</strong> and then <strong>Run anyway</strong> if prompted.</p>
+      </article>
+      <article class="card">
+        <span class="num">02</span>
+        <h3>Load the browser extension.</h3>
+        <p>We're waiting on Web Store approval, so you'll need to load the extension folder manually:</p>
+        <ol class="step-list text-sm" style="margin-top: 12px; padding-left: 18px; list-style-type: decimal;">
+          <li style="margin-bottom: 6px;">Open your browser extensions page: <code>chrome://extensions</code> (Chrome), <code>edge://extensions</code> (Edge), or <code>brave://extensions</code> (Brave).</li>
+          <li style="margin-bottom: 6px;">Enable <strong>Developer mode</strong> in the top right.</li>
+          <li style="margin-bottom: 6px;">Click <strong>Load unpacked</strong> and select the <code>%LOCALAPPDATA%\\Uoink\\extension</code> directory.</li>
+        </ol>
+      </article>
+      <article class="card">
+        <span class="num">03</span>
+        <h3>Click capture.</h3>
+        <p>Open YouTube or Reddit. Click the Uoink button on any video or thread page to save the corpus directly to your local files.</p>
+      </article>
     </div>
   </div>
 </section>
+
+<section class="section" data-screen-label="install / platforms">
+  <div class="container">
+    <div class="ledger">
+      <div class="ledger-card live" id="windows">
+        <div class="top"><span class="platform-label">${WINDOWS_MARK}Windows</span><span>now</span></div>
+        <div class="body-l">
+          <h3>Desktop helper.</h3>
+          <p class="ver">Windows 10/11 / release page</p>
+          <p>The helper bundles Python, yt-dlp, ffmpeg, SQLite, and the local MCP server. It runs in user space and exposes the loopback server on port 5179.</p>
+        </div>
+        <div class="foot"><a class="btn primary small with-logo" href="${RELEASE_URL}">${WINDOWS_MARK}Open release -></a></div>
+      </div>
+      <div class="ledger-card pend" id="extension">
+        <div class="top"><span>Extension</span><span>pending review</span></div>
+        <div class="body-l">
+          <h3>Browser button.</h3>
+          <p class="ver">Chrome / Edge / Brave / Vivaldi / Arc / Opera GX</p>
+          <p>The extension adds capture buttons directly to supported web pages. It communicates locally with the helper and skips broad history permissions.</p>
+          <p>Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at <code>%LOCALAPPDATA%\\Uoink\\extension</code>.</p>
+        </div>
+        <div class="foot">
+          <span class="text-xs dim">Web Store review pending</span>
+        </div>
+      </div>
+      <div class="ledger-card queue" id="mac">
+        <div class="top"><span class="platform-label">${MAC_MARK}Mac</span><span>${PRODUCT_STATUS.mac.label}</span></div>
+        <div class="body-l">
+          <h3>${PRODUCT_STATUS.mac.heading}</h3>
+          <p class="ver">${PRODUCT_STATUS.mac.tech}</p>
+          <p>${PRODUCT_STATUS.mac.detail}</p>
+        </div>
+        <div class="foot"><a class="btn ghost small with-logo" href="${GITHUB_URL}/watchers">${MAC_MARK}Watch GitHub -></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section" data-screen-label="install / post install">
   <div class="container">
-    <div class="section-head"><span class="eyebrow">post-install</span><h2 class="display-l">What happens when it's <em>running.</em></h2><p class="lede">The helper starts in the background. The extension checks localhost. When both are green, the Uoink button appears on supported video pages.</p></div>
-    <div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+    <div class="section-head"><span class="eyebrow">post-install</span><h2 class="display-l">What happens when it's <em>running.</em></h2><p class="lede">The helper starts in the background. The extension checks localhost. When both are green, the Uoink button appears on supported pages.</p></div>
+    <div class="three-cards">
       <article class="card"><span class="num">01</span><h3>Tray status.</h3><p>The helper sits in the tray and opens the local dashboard when you need logs, settings, or recent jobs.</p></article>
       <article class="card"><span class="num">02</span><h3>Local files.</h3><p>Captures write to your Uoink folder and into a local SQLite index. Nothing uploads to Uoink because there's no Uoink cloud.</p></article>
       <article class="card"><span class="num">03</span><h3>AI handoff.</h3><p>Paste into Claude or ChatGPT, or skip the clipboard and let your MCP client call Uoink directly.</p></article>
     </div>
   </div>
 </section>
+
 <section class="section" data-screen-label="install / faq">
   <div class="container"><div class="section-head"><span class="eyebrow">troubleshooting</span><h2 class="display-l">The boring questions that <em>matter.</em></h2></div>${renderFaq(installFaq)}</div>
 </section>`,
@@ -427,7 +487,7 @@ find_mentions("Karpathy")</pre>
 <section class="section" data-screen-label="features / tune"><div class="container"><div class="section-head"><span class="eyebrow">job 4 / tune the helper</span><h2 class="display-l">Make the defaults fit your <em>machine.</em></h2></div><ul class="fact-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px 56px;list-style:none;padding:0"><li><div><b>BYO Anthropic key</b>Enables Hook Type, Comment Intelligence, and Entity Extraction. Stored in the OS credential vault.</div></li><li><div><b>Clipboard budget</b>Set screenshot caps, compression, and comment limits before pasting into a model.</div></li><li><div><b>Whisper model selector</b>Choose tiny/base/small/medium/large for podcast transcription cost and accuracy tradeoffs.</div></li><li><div><b>Output folder picker</b>Send corpora where your work already lives, including markdown vault workflows.</div></li></ul></div></section>
 <section class="big-strip" data-screen-label="features / comparison"><div class="container"><span class="eyebrow">why not Glasp, NoteGPT, or NotebookLM?</span><h2 class="display-l">Transcript tools give you text. Uoink gives you a <em>local asset.</em></h2><p class="body-l" style="max-width:70ch">Cloud tools summarize, extensions grab transcripts, and generic MCP servers fetch captions. Uoink's wedge is the combination: local corpus, screenshots, comments, hook classification, entity search, and MCP access. The archive compounds because it belongs to you.</p><p class="mt-24"><a class="btn ink" href="/privacy">Check privacy -></a> <a class="btn ghost" href="/agents">Check MCP -></a></p></div></section>`,
   },
-  podcasts: aliasPage("podcasts", "/podcasts", "Podcast details moved to Sources", "Podcasts are now listed on the Uoink sources page.", "/sources/podcasts"),
+  podcasts: aliasPage("podcasts", "/podcasts", "Podcast details moved to Sources", "Podcasts are now listed on the Uoink sources page.", "/sources#podcasts"),
   agents: {
     id: "agents",
     route: "/agents",
@@ -679,149 +739,79 @@ install:
     id: "sources",
     route: "/sources",
     mode: "mode-dark",
-    title: "Supported Sources: Capture YouTube, Podcasts, Substack, and social threads",
+    title: "Supported Sources: Capture YouTube, Podcasts, Reddit, and Web Pages",
     description:
-      "Browse supported sources in Uoink, including video platforms, podcast feeds, newsletters, and social thread discussions.",
+      "Browse supported sources in Uoink, including video platforms, podcast feeds, web articles, and social thread discussions.",
     keywords: [
       "uoink sources",
       "youtube to ai",
-      "substack to markdown",
       "reddit thread to ai",
       "podcast whisper transcription",
+      "web page markdown extractor",
     ],
     html: `
 <section class="hero" data-screen-label="sources / hero">
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">supported sources</span>
-      <h1 class="display-xl">Home for any <em>source.</em></h1>
-      <p class="lede">Uoink captures video, audio, and text discussions, saving them directly to your disk. We document what works and specify the platforms we support.</p>
+      <h1 class="display-xl">Supported <em>sources.</em></h1>
+      <p class="lede">Uoink runs entirely on your local machine to extract transcripts, text, and media. We are explicit about what we support and honest about where platforms block you.</p>
     </div>
   </div>
 </section>
 
 <section class="section" data-screen-label="sources / grid">
   <div class="container">
-    <div class="sources-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
+    <div class="sources-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px">
       
-      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+      <article class="card" id="youtube" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px;background:rgba(255,255,255,0.02)">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <span style="font-weight:bold;font-size:18px">YouTube</span>
-          <span class="feature-status shipped" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">shipped</span>
+          <span style="font-weight:bold;font-size:20px;color:var(--cream)">YouTube</span>
+          <span class="feature-status shipped" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px;background:rgba(0,200,83,0.15);color:#00C853;border:1px solid rgba(0,200,83,0.3)">active</span>
         </div>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Browser button, right-click, playlist link, or mobile queue.</p>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Timestamps, transcripts, screenshots, comments, and channel context.</p>
-        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Scripts, pacing teardowns, and code walkthroughs.</p>
+        <p style="font-size:14px;color:var(--parchment);margin-bottom:12px"><strong>What it captures:</strong> Video transcripts (both manual and auto-generated), descriptions, comments, and video frames (via the clipboard screenshot utility).</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><strong>How it lands:</strong> Saves directly to your local library as clean Markdown text files with timestamps and optional JSON sidecars.</p>
+        <p style="font-size:13px;color:var(--vermillion)"><strong>Limitations:</strong> Private or age-gated videos require configuring your local browser cookie path. HD video downloads are throttled by YouTube's rate limits.</p>
       </article>
 
-      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+      <article class="card" id="podcasts" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px;background:rgba(255,255,255,0.02)">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <span style="font-weight:bold;font-size:18px">Podcasts</span>
-          <span class="feature-status shipped" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">shipped</span>
+          <span style="font-weight:bold;font-size:20px;color:var(--cream)">Podcasts</span>
+          <span class="feature-status shipped" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px;background:rgba(0,200,83,0.15);color:#00C853;border:1px solid rgba(0,200,83,0.3)">active</span>
         </div>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> RSS feed links or direct audio file extraction.</p>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Multi-speaker transcripts (diarization) and show metadata.</p>
-        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Guest claim audits, research quotes, and interview outlines.</p>
+        <p style="font-size:14px;color:var(--parchment);margin-bottom:12px"><strong>What it captures:</strong> Audio files from public RSS podcast feeds or direct uploads, processing them through a local transcription engine.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><strong>How it lands:</strong> Transcribes audio into text using local Whisper/WhisperX with speaker diarization (separating guest and host dialogue).</p>
+        <p style="font-size:13px;color:var(--vermillion)"><strong>Limitations:</strong> Local audio processing requires CPU and GPU power. Transcribing a long episode can take a few minutes on standard hardware.</p>
       </article>
 
-      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+      <article class="card" id="reddit" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px;background:rgba(255,255,255,0.02)">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <span style="font-weight:bold;font-size:18px">Substack</span>
-          <span class="feature-status in-flight" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">in flight</span>
+          <span style="font-weight:bold;font-size:20px;color:var(--cream)">Reddit Threads</span>
+          <span class="feature-status shipped" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px;background:rgba(0,200,83,0.15);color:#00C853;border:1px solid rgba(0,200,83,0.3)">active</span>
         </div>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Context menu click on any article page.</p>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Clean article markdown text, author details, and outbound links.</p>
-        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Voice tone calibration, draft critiques, and cross-posts.</p>
+        <p style="font-size:14px;color:var(--parchment);margin-bottom:12px"><strong>What it captures:</strong> In-depth text discussions and comment trees from public Reddit thread links.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><strong>How it lands:</strong> Flattens nested reply trees into structured Markdown files, mapping author names, scores, and comment relationships.</p>
+        <p style="font-size:13px;color:var(--vermillion)"><strong>Limitations:</strong> Giant threads with thousands of replies are trimmed to top-rated branches to keep context within model limits.</p>
       </article>
 
-      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+      <article class="card" id="pages" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px;background:rgba(255,255,255,0.02)">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <span style="font-weight:bold;font-size:18px">X Video</span>
-          <span class="feature-status shipped" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">shipped</span>
+          <span style="font-weight:bold;font-size:20px;color:var(--cream)">Web Articles & Pages</span>
+          <span class="feature-status shipped" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px;background:rgba(0,200,83,0.15);color:#00C853;border:1px solid rgba(0,200,83,0.3)">active</span>
         </div>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Right-click context capture on tweets containing video.</p>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Local Whisper transcript, author handle, and post URL.</p>
-        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Highlight threads, audience quotes, and video drafts.</p>
+        <p style="font-size:14px;color:var(--parchment);margin-bottom:12px"><strong>What it captures:</strong> Universal web pages, technical articles, and text-based posts using local page extraction selectors.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><strong>How it lands:</strong> Strips out navigation bars, headers, ads, and trackers to save the primary body content as clean Markdown prose.</p>
+        <p style="font-size:13px;color:var(--vermillion)"><strong>Limitations:</strong> Dynamic single-page apps (SPAs) or sites protected behind paywalls and Cloudflare shields can fail to extract correctly.</p>
       </article>
 
-      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
+      <article class="card" id="twitter" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px;background:rgba(255,255,255,0.02)">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <span style="font-weight:bold;font-size:18px">LinkedIn Video</span>
-          <span class="feature-status in-flight" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">in flight</span>
+          <span style="font-weight:bold;font-size:20px;color:var(--cream)">X (Twitter) Video</span>
+          <span class="feature-status shipped" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px;background:rgba(0,200,83,0.15);color:#00C853;border:1px solid rgba(0,200,83,0.3)">active</span>
         </div>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Context menu capture on LinkedIn video posts.</p>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Local Whisper transcript, post text, and creator info.</p>
-        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> B2B summaries, technical updates, and demo notes.</p>
-      </article>
-
-      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <span style="font-weight:bold;font-size:18px">Reddit Threads</span>
-          <span class="feature-status shipped" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">shipped</span>
-        </div>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Right-click context capture on discussion pages.</p>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Comment hierarchies, usernames, and nested text blocks.</p>
-        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Sentiment analysis, feedback reports, and community guides.</p>
-      </article>
-
-      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <span style="font-weight:bold;font-size:18px">Bluesky</span>
-          <span class="feature-status in-flight" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">in flight</span>
-        </div>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Context menu capture or public post link paste.</p>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Thread replies, author handles, and link trees.</p>
-        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Research notes, social outlines, and article drafts.</p>
-      </article>
-
-      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <span style="font-weight:bold;font-size:18px">Threads</span>
-          <span class="feature-status planned" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">planned</span>
-        </div>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Extension right-click menu or clipboard queue.</p>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Thread tree, post text, and author data.</p>
-        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Social drafts and audience replies.</p>
-      </article>
-
-      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <span style="font-weight:bold;font-size:18px">Mastodon</span>
-          <span class="feature-status in-flight" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">in flight</span>
-        </div>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Context right-click or public instance link paste.</p>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Nested reply blocks, post text, and server handles.</p>
-        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Tech news digests and project summaries.</p>
-      </article>
-
-      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <span style="font-weight:bold;font-size:18px">Beehiiv</span>
-          <span class="feature-status in-flight" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">in flight</span>
-        </div>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Context menu capture on newsletter pages.</p>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Clean newsletter markdown text and outward links.</p>
-        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Tone calibration, outlines, and script ideas.</p>
-      </article>
-
-      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <span style="font-weight:bold;font-size:18px">Ghost</span>
-          <span class="feature-status in-flight" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">in flight</span>
-        </div>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Context right-click or newsletter RSS feed poll.</p>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Newsletter body text, metadata, tags, and links.</p>
-        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Outline drafts, blog edits, and topic comparisons.</p>
-      </article>
-
-      <article class="card" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <span style="font-weight:bold;font-size:18px">Buttondown</span>
-          <span class="feature-status in-flight" style="padding:2px 8px;font-size:10px;text-transform:uppercase;border-radius:4px">in flight</span>
-        </div>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Capture:</b> Right-click capture on newsletter article pages.</p>
-        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><b>Lands in corpus:</b> Clean body markdown text, author data, and links.</p>
-        <p style="font-size:14px;color:var(--parchment-dim)"><b>Best output:</b> Email copy guides and topic drafts.</p>
+        <p style="font-size:14px;color:var(--parchment);margin-bottom:12px"><strong>What it captures:</strong> Video media attached to tweets and posts.</p>
+        <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><strong>How it lands:</strong> Downloads the video stream, extracts the audio, and runs local Whisper transcription to produce text transcripts.</p>
+        <p style="font-size:13px;color:var(--vermillion)"><strong>Limitations:</strong> Video posts only. Text-only tweets, tweet threads, and image posts are not supported due to platform API access restrictions.</p>
       </article>
 
     </div>
