@@ -27,8 +27,10 @@ const configs = [
     body: `{
   "mcpServers": {
     "uoink": {
-      "command": "%LOCALAPPDATA%\\\\Uoink\\\\uoink_mcp.exe",
-      "args": []
+      "command": "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\python\\\\python.exe",
+      "args": [
+        "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\uoink_mcp.py"
+      ]
     }
   }
 }`,
@@ -38,8 +40,10 @@ const configs = [
     body: `{
   "mcpServers": {
     "uoink": {
-      "command": "%LOCALAPPDATA%\\\\Uoink\\\\uoink_mcp.exe",
-      "args": []
+      "command": "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\python\\\\python.exe",
+      "args": [
+        "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\uoink_mcp.py"
+      ]
     }
   }
 }`,
@@ -49,7 +53,10 @@ const configs = [
     body: `{
   "name": "uoink",
   "transport": "stdio",
-  "command": "%LOCALAPPDATA%\\\\Uoink\\\\uoink_mcp.exe"
+  "command": "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\python\\\\python.exe",
+  "args": [
+    "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\uoink_mcp.py"
+  ]
 }`,
   },
 ];
@@ -57,7 +64,7 @@ const configs = [
 const toolGroups = [
   {
     title: "Core stdio tools",
-    dek: "The 14-tool daily path for capture, search, comments, hooks, citations, and health.",
+    dek: "The core daily path for capture, search, comments, hooks, citations, and health.",
     names: [
       "uoink_video",
       "uoink_playlist",
@@ -181,7 +188,7 @@ export default function Page() {
                 Give your agent a local <em>source layer.</em>
               </h1>
               <p className="lede">
-                Uoink runs a local MCP server on your machine. The stdio path gives Claude Desktop, Cursor, and Cline 14 core tools for capture, search, citations, hooks, and source health.
+                Uoink runs a local Model Context Protocol (MCP) server on your machine. The stdio path gives Claude Desktop, Cursor, and Cline all 64 tools to capture, search, cite, classify, and write from your corpus.
               </p>
               <div className="ctas">
                 <a className="btn primary large" href="#configs">
@@ -235,14 +242,21 @@ export default function Page() {
           <div className="section-head">
             <span className="eyebrow">client config</span>
             <h2 className="display-l">
-              Stdio first. Local paths generated after <em>install.</em>
+              Stdio and HTTP <em>transports.</em>
             </h2>
             <p className="lede">
-              These snippets use placeholder paths. Uoink setup page generates the real command for your machine after install.
+              Configure stdio connections in your agent client, or query the programmatic HTTP endpoint.
             </p>
             <p className="body-l">
-              Uoink has two local tool surfaces. Stdio is the curated 14-tool path for daily agent use in Claude Desktop, Cursor, Cline, and Continue. The HTTP registry and OpenAPI bridge expose the full 64-tool programmatic surface for local integrations that need lower-level capture, memory, writing, and admin controls.
+              Uoink runs a local Model Context Protocol (MCP) server exposing all 64 tools. You can connect using either the standard stdio transport as a local subprocess, or query the local HTTP (SSE) endpoint.
             </p>
+            
+            <div style={{ marginTop: '24px', padding: '20px', background: 'rgba(255,255,255,0.02)', borderRadius: '6px', border: '1px solid var(--ink-dim)', marginBottom: '32px' }}>
+              <h3 style={{ margin: '0 0 12px 0', fontSize: '18px', color: 'var(--cream)' }}>HTTP (SSE) Transport Details</h3>
+              <p style={{ margin: '0 0 8px 0', fontSize: '14px', color: 'var(--parchment)' }}><strong>Endpoint URL:</strong> <code>http://localhost:5179/mcp/v1</code></p>
+              <p style={{ margin: '0 0 8px 0', fontSize: '14px', color: 'var(--parchment)' }}><strong>Authentication:</strong> Include the header <code>X-Uoink-Token</code> on every request.</p>
+              <p style={{ margin: '0', fontSize: '14px', color: 'var(--parchment)' }}><strong>Token Location:</strong> Read the token string from the local file <code>%LOCALAPPDATA%\Uoink\token.txt</code> (or <code>~/Library/Application Support/Uoink/token.txt</code> on macOS).</p>
+            </div>
           </div>
           <div className="docs-main">
             {configs.map((config) => (

@@ -1168,7 +1168,7 @@ export const features: Feature[] = [
       "classify_hook",
       "write_blog"
     ],
-    "mcpExample": "{\n  \"mcpServers\": {\n    \"uoink\": {\n      \"command\": \"C:\\\\Users\\\\hello\\\\AppData\\\\Local\\\\Uoink\\\\uoink_mcp.exe\",\n      \"args\": []\n    }\n  }\n}",
+    "mcpExample": "{\n  \"mcpServers\": {\n    \"uoink\": {\n      \"command\": \"C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\python\\\\python.exe\",\n      \"args\": [\n        \"C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\uoink_mcp.py\"\n      ]\n    }\n  }\n}",
     "related": [
       "mcp-server",
       "cursor-integration",
