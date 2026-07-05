@@ -1082,12 +1082,12 @@ body { overflow-x: hidden; }
 .site-root.mode-loud { background: var(--rust); color: var(--cream); }
 .site-root *, .site-root *::before, .site-root *::after { min-width: 0; }
 pre, code, .corpus, .mcp-log, .docs-main pre, .tool-row .desc .ex { overflow-wrap: anywhere; word-break: normal; }
-.site-root main > div > section:not(.hero),
-.site-root main > div > .big-strip,
-.site-footer {
-  content-visibility: auto;
-  contain-intrinsic-size: 720px;
-}
+/* IN-09: content-visibility:auto skipped rendering off-screen sections, which
+   is fine while scrolling but leaves them blank in any non-interactive
+   rasterization (full-page screenshots, print to PDF, link-preview bots) as
+   giant voids where the 720px placeholder never gets painted. The render win
+   on a marketing page this size is marginal, so drop it rather than ship a
+   page that captures and prints half-empty. */
 
 :focus-visible { outline: 2px solid var(--vermillion); outline-offset: 2px; }
 a:focus-visible, button:focus-visible { border-radius: 8px; }

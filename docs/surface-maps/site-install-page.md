@@ -34,3 +34,6 @@ The install page guides users through setting up the local desktop helper and br
 ## 3. Responsive Styling
 - **Breakpoints**: Collapses to single-column stacking layout at `max-width: 768px` for tablet compatibility.
 - **Grid Layout**: Redundant inline styles are removed from `.three-cards` grids to let the global CSS classes drive styling and clean stacking.
+
+## 4. Rendering Notes
+- **Full-page capture (IN-09)**: `globals.css` no longer applies `content-visibility: auto` to non-hero sections, big-strips, and the footer. That optimization skipped rendering off-screen sections, which was fine while scrolling but left them blank in any non-interactive rasterization (full-page screenshots, print to PDF, link-preview bots) as long black voids. Full-page captures of `/install` now render the FAQ, CTA, and footer instead of a void. This is a global CSS change; every page benefits.
