@@ -1,0 +1,45 @@
+{
+  "name": "io.github.ryanbiddy/uoink",
+  "display_name": "Uoink",
+  "description": "Uoink keeps the videos, podcasts, and articles creators and AI developers study on their own disk, then hands them to Claude, ChatGPT, Cursor, or a local MCP agent as a cited corpus.",
+  "version": "3.3",
+  "homepage": "https://uoink.app",
+  "documentation": "https://uoink.app/developers",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryanbiddy/uoink"
+  },
+  "license": "MIT",
+  "vendor": {
+    "name": "Uoink",
+    "url": "https://uoink.app"
+  },
+  "install": {
+    "windows": "https://uoink.app/install",
+    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/latest",
+    "notes": "Install the free local helper, then use the .mcpb bundle for one-click Claude Desktop setup, or paste the stdio config from the setup page."
+  },
+  "transports": [
+    {
+      "type": "stdio",
+      "command": "%LOCALAPPDATA%\\Uoink\\python\\python.exe",
+      "args": ["%LOCALAPPDATA%\\Uoink\\uoink_mcp.py"],
+      "tested_clients": ["Claude Desktop", "Cursor", "Cline", "Continue"]
+    },
+    {
+      "type": "http",
+      "url": "http://127.0.0.1:5179/mcp/v1",
+      "sse_url": "http://127.0.0.1:5179/mcp/v1/sse",
+      "auth_header": "X-Uoink-Token",
+      "note": "Local-only. Full tool registry. Token in %LOCALAPPDATA%\\Uoink\\token.txt."
+    },
+    {
+      "type": "openapi",
+      "spec_url": "http://127.0.0.1:5179/openapi/v1/spec.json",
+      "note": "For agents that do not speak MCP (Gemini, Grok, Perplexity)."
+    }
+  ],
+  "manifest": "https://uoink.app/mcp/manifest.json",
+  "tools_reference": "https://uoink.app/mcp",
+  "keywords": ["youtube", "transcription", "mcp", "local-first", "claude", "rag", "creator-tools", "podcast", "corpus"]
+}

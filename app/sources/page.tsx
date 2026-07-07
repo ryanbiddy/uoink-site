@@ -40,7 +40,7 @@ const sources: {
     corpus: "Transcript, frames, comments, metadata, channel context.",
     output: "Creator research, hook study, lecture notes, agent citations.",
     logos: ["youtube"],
-    href: "/features/in-page-button",
+    href: "/sources/youtube",
   },
   {
     title: "X video",
