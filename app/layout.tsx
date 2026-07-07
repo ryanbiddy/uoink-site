@@ -49,6 +49,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${bungee.variable} ${mono.variable}`}>
       <head>
+        {/*
+          Google Search Console site verification (HTML-tag method).
+          HOW TO USE:
+            1. Go to https://search.google.com/search-console and add a URL-prefix
+               property for https://uoink.app.
+            2. Choose the "HTML tag" verification method. Google shows you a tag like
+               <meta name="google-site-verification" content="AbC123..." />.
+            3. Paste that content token below, delete the surrounding comment markers
+               on the next line so the <meta> renders, then redeploy and click Verify.
+          TODO: paste your token, then uncomment the line below.
+        */}
+        {/* <meta name="google-site-verification" content="PASTE_YOUR_GOOGLE_TOKEN_HERE" /> */}
         <link href="/assets/favicon.svg" rel="mask-icon" color="#C2410C" />
         <link rel="alternate" type="application/json" title="Uoink MCP manifest" href="/mcp/manifest.json" />
       </head>
