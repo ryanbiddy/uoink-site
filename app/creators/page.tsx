@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   description: page.description,
   keywords: page.keywords,
   alternates: { canonical: page.route },
-  openGraph: { title: page.title, description: page.description, url: page.route },
-  twitter: { title: page.title, description: page.description },
+  openGraph: { title: page.title, description: page.description, url: page.route, images: [{ url: "/og-cover.png", width: 1200, height: 630, alt: "The Uoink dashboard: a populated local corpus of saved videos ready to hand to your AI." }] },
+  twitter: { title: page.title, description: page.description, images: ["/og-cover.png"] },
 };
 
 export default function Page() {
@@ -111,6 +111,25 @@ export default function Page() {
               <p>Threads and blogs keep the source line visible so the original creator gets credit.</p>
             </article>
           </div>
+          <figure className="feature-visual product-figure wide">
+            <div className="feature-visual-top">
+              <span>hooks</span>
+              <span>read the source</span>
+            </div>
+            <div className="feature-visual-body">
+              <div className="feature-visual-shot">
+                <img
+                  src="/product/hooks-explainer.webp"
+                  width={1440}
+                  height={900}
+                  loading="lazy"
+                  decoding="async"
+                  alt="Uoink hooks explainer inside the dashboard: nine hook patterns a video can use to earn its first ten seconds, with the definition of a hook and examples."
+                />
+                <figcaption>Study how a video earns its first ten seconds. Uoink classifies openings so you can borrow the pattern, not the words.</figcaption>
+              </div>
+            </div>
+          </figure>
         </div>
       </section>
 
@@ -145,6 +164,25 @@ export default function Page() {
           <p className="body-l" style={{ maxWidth: "72ch" }}>
             Uoink is built for creators who study other creators. The draft can move to X, a blog, or your editor, but the source link and creator handle stay close by default.
           </p>
+          <figure className="feature-visual product-figure wide">
+            <div className="feature-visual-top">
+              <span>writing studio</span>
+              <span>draft from the corpus</span>
+            </div>
+            <div className="feature-visual-body">
+              <div className="feature-visual-shot">
+                <img
+                  src="/product/writing-studio.webp"
+                  width={1440}
+                  height={900}
+                  loading="lazy"
+                  decoding="async"
+                  alt="Uoink Writing Studio drafting a post from a saved source: the generated draft sits next to the source corpus with creator credit and citation preserved."
+                />
+                <figcaption>Writing Studio drafts from the source you saved and keeps the citation trail attached to the output.</figcaption>
+              </div>
+            </div>
+          </figure>
           <p className="mt-24">
             <Link className="btn ink" href="/features/writing-studio">
               Writing Studio

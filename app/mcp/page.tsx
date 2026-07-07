@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   description: "64 MCP tools in the registry, 14 curated over stdio. Available instantly.",
   keywords: page.keywords,
   alternates: { canonical: page.route },
-  openGraph: { title: page.title, description: page.description, url: page.route },
-  twitter: { title: page.title, description: page.description },
+  openGraph: { title: page.title, description: page.description, url: page.route, images: [{ url: "/og-cover.png", width: 1200, height: 630, alt: "The Uoink dashboard: a populated local corpus of saved videos ready to hand to your AI." }] },
+  twitter: { title: page.title, description: page.description, images: ["/og-cover.png"] },
   other: {
     "mcp-manifest": `${CANONICAL_URL}/mcp/manifest.json`,
   },

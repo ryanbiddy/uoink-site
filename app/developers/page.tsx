@@ -157,8 +157,8 @@ export const metadata: Metadata = {
   description: page.description,
   keywords: page.keywords,
   alternates: { canonical: page.route },
-  openGraph: { title: page.title, description: page.description, url: page.route },
-  twitter: { title: page.title, description: page.description },
+  openGraph: { title: page.title, description: page.description, url: page.route, images: [{ url: "/og-cover.png", width: 1200, height: 630, alt: "The Uoink dashboard: a populated local corpus of saved videos ready to hand to your AI." }] },
+  twitter: { title: page.title, description: page.description, images: ["/og-cover.png"] },
   other: {
     "mcp-manifest": "https://uoink.app/mcp/manifest.json",
   },
@@ -296,6 +296,25 @@ search_uoinks("launch narrative")
 write_blog(corpus_set)`}</pre>
             </div>
           </div>
+          <figure className="feature-visual product-figure wide mt-32">
+            <div className="feature-visual-top">
+              <span>search_uoinks</span>
+              <span>local sqlite fts</span>
+            </div>
+            <div className="feature-visual-body">
+              <div className="feature-visual-shot">
+                <img
+                  src="/product/library-search.webp"
+                  width={1440}
+                  height={900}
+                  loading="lazy"
+                  decoding="async"
+                  alt="Uoink dashboard search: a query for nvidia narrows the local library to matching source cards, showing the full-text SQLite index that agents query through the MCP tools."
+                />
+                <figcaption>What <code>search_uoinks</code> reaches: a local SQLite full-text index over every transcript, comment, and title on disk.</figcaption>
+              </div>
+            </div>
+          </figure>
           <p className="mt-32">
             <Link className="btn ink" href="/install">
               Install Uoink

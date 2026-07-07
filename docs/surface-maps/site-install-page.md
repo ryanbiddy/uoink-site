@@ -28,6 +28,9 @@ The install page guides users through setting up the local desktop helper and br
   - **Extension**: Explains local communication and list of Chromium-supported browsers: Chrome, Edge, Brave, Vivaldi, Arc, and Opera GX. Lists CWS pending review status.
   - **Mac**: Mac development status.
 
+### 2.3b Post-install (`install / post install`)
+- After the section head, a framed product screenshot (`/product/hero-library.webp`, the real dashboard library) shows what the local app looks like once the helper is running, followed by the three post-install cards (tray status, local files, AI handoff). The screenshot uses the shared `.feature-visual` / `.product-figure` frame, `loading="lazy"`, and explicit width/height (1440x900) to avoid layout shift.
+
 ### 2.4 FAQ (`install / faq`)
 - Troubleshooting questions regarding OS support, admin privileges, browsers, and local-first architecture details.
 
