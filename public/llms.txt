@@ -12,6 +12,8 @@
 
 - [Features](https://uoink.app/features): complete feature index with 28 feature pages.
 - [Sources](https://uoink.app/sources): YouTube, X video, podcasts, articles, Reddit, and newsletter source cards.
+- [YouTube capture](https://uoink.app/sources/youtube): save a YouTube video to your disk as a timestamped transcript, screenshots, and comments, then chat with it in Claude or ChatGPT.
+- [Uoink vs NotebookLM](https://uoink.app/compare/notebooklm): the local, open-source NotebookLM alternative — sources on your disk, agent-callable over MCP.
 - [Creators](https://uoink.app/creators): creator workflow from source capture to Writing Studio to attribution.
 - [Developers](https://uoink.app/developers): local MCP setup, config snippets, and tool catalog.
 - [Feature manifest](https://uoink.app/api/features-manifest): dashboard and agent-readable feature URLs.
