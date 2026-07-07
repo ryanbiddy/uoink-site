@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+  Bing Webmaster Tools site verification (XML file method).
+  Bing also feeds ChatGPT Search, so do not skip this.
+
+  HOW TO USE:
+    1. Go to https://www.bing.com/webmasters and add site https://uoink.app
+       (or use "Import from Google Search Console" once GSC is verified — one click,
+       and then you can DELETE this file / ignore this step).
+    2. If verifying via XML file, Bing shows you a code inside <user>...</user>.
+    3. Replace PASTE_YOUR_BING_TOKEN_HERE below with that code.
+    4. Redeploy the site, then click Verify in Bing Webmaster Tools.
+
+  This file lives at https://uoink.app/BingSiteAuth.xml once deployed.
+-->
+<users>
+	<user>PASTE_YOUR_BING_TOKEN_HERE</user>
+</users>
