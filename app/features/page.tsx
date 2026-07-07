@@ -27,6 +27,15 @@ const page: SitePage = {
       <p class="lede">Capture the source, build the library, assemble workspaces, verify claims, then hand the evidence to Claude, ChatGPT, Cursor, or an MCP agent.</p>
       <div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Install Uoink</a><a class="btn ghost large" href="/api/features-manifest">Manifest JSON</a></div>
     </div>
+    <figure class="feature-visual product-figure wide">
+      <div class="feature-visual-top"><span>topics</span><span>auto-organized</span></div>
+      <div class="feature-visual-body">
+        <div class="feature-visual-shot">
+          <img src="/product/topics-overview.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Uoink topics view: the local library grouped into topic chips with live counts such as AI and ML, Social Media Research, and Job Hunt, each filtering the captured sources." />
+          <figcaption>Captures route themselves into topics with live counts, so the library stays browsable as it grows.</figcaption>
+        </div>
+      </div>
+    </figure>
   </div>
 </section>`,
 };

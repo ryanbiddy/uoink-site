@@ -23,6 +23,9 @@ The `/developers` page is the primary integration guide for AI agents, developer
 
 ---
 
+## Visuals
+- The `developers / sample agent run` section embeds a framed product screenshot (`/product/library-search.webp`) beneath the agent-demo trace, showing the local library filtered by a live search. It illustrates what `search_uoinks` reaches (the local SQLite full-text index). Uses the shared `.feature-visual` / `.product-figure` frame with lazy loading and explicit 1440x900 dimensions.
+
 ## Tool Catalog Layout
 The page houses a categorized accordion listing all **64 tools** exposed by the helper. Each category maps to its underlying helper modules:
 1. **Core stdio tools**: Basic capture (`uoink_video`), search, citations, and health.

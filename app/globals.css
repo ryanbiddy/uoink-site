@@ -1621,6 +1621,19 @@ button, .btn, .nav-cta, .mobile-menu a, .docs-sidebar a { min-height: 44px; }
   line-height: 1.35;
   text-transform: uppercase;
 }
+.feature-visual-shot video {
+  aspect-ratio: 16 / 9;
+  border-radius: calc(var(--r-md) - 4px);
+  display: block;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+.product-figure {
+  margin: clamp(28px, 5vw, 52px) auto 0;
+  max-width: 980px;
+}
+.product-figure.wide { max-width: 1120px; }
 .feature-detail-grid {
   align-items: start;
   display: grid;

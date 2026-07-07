@@ -53,8 +53,8 @@ export const metadata: Metadata = {
   description: page.description,
   keywords: page.keywords,
   alternates: { canonical: page.route },
-  openGraph: { title: page.title, description: page.description, url: page.route },
-  twitter: { title: page.title, description: page.description },
+  openGraph: { title: page.title, description: page.description, url: page.route, images: [{ url: "/og-cover.png", width: 1200, height: 630, alt: "The Uoink dashboard: a populated local corpus of saved videos ready to hand to your AI." }] },
+  twitter: { title: page.title, description: page.description, images: ["/og-cover.png"] },
 };
 
 export default function Page() {
@@ -191,6 +191,25 @@ classify_hook(corpus_id)
 agent drafts from the cited corpus`}</pre>
             </div>
           </div>
+          <figure className="feature-visual product-figure wide">
+            <div className="feature-visual-top">
+              <span>write</span>
+              <span>cited draft</span>
+            </div>
+            <div className="feature-visual-body">
+              <div className="feature-visual-shot">
+                <img
+                  src="/product/generate-result.webp"
+                  width={1440}
+                  height={900}
+                  loading="lazy"
+                  decoding="async"
+                  alt="Uoink generate result: a drafted tweet sits in the preview panel next to the source it was written from, with the creator credit and source link preserved."
+                />
+                <figcaption>The output stays tied to its source: a draft in the preview panel, written from the saved corpus with credit intact.</figcaption>
+              </div>
+            </div>
+          </figure>
           <p className="mt-32">
             <Link className="btn primary" href="/creators">
               Creator workflow

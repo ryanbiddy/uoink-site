@@ -162,6 +162,19 @@ export const pages: Record<PageId, SitePage> = {
     </div>
   </div>
 </section>
+<section class="section tight" data-screen-label="home / product shot">
+  <div class="container">
+    <figure class="feature-visual product-figure wide">
+      <div class="feature-visual-top"><span>uoink dashboard</span><span>local corpus</span></div>
+      <div class="feature-visual-body">
+        <div class="feature-visual-shot">
+          <img src="/product/hero-library.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Uoink dashboard library showing dozens of saved YouTube videos as searchable source cards with transcripts, hook labels, topic filters, and channel context on the local machine." />
+          <figcaption>Your library: every capture becomes a searchable source card with hooks, topics, and comments. Nothing leaves the machine.</figcaption>
+        </div>
+      </div>
+    </figure>
+  </div>
+</section>
 <hr class="rule"/>
 <section class="section" data-screen-label="home / corpus anatomy" id="corpus">
   <div class="container">
@@ -199,6 +212,25 @@ export const pages: Record<PageId, SitePage> = {
       <a class="card" href="/developers"><span class="num">02</span><h3>Developers.</h3><p>Treat your distribution loop like a local dev tool. Get an offline SQLite database, an MCP server, and copyable Claude/Cursor configs to query your library.</p><span class="arr-link">Open developer docs -></span></a>
       <a class="card" href="/sources"><span class="num">03</span><h3>Sources.</h3><p>Uoink captures video, audio, and text. Index YouTube, podcasts, newsletters, and social thread discussions directly on your workstation.</p><span class="arr-link">Browse supported sources -></span></a>
     </div>
+  </div>
+</section>
+<hr class="rule"/>
+<section class="section" data-screen-label="home / generate demo">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">from source to draft</span>
+      <h2 class="display-l">Pick a source, then <em>generate</em> from it.</h2>
+      <p class="lede">Choose something you saved, aim it at a tweet, thread, or script, and Writing Studio drafts from the corpus with the creator credit attached.</p>
+    </div>
+    <figure class="feature-visual product-figure wide">
+      <div class="feature-visual-top"><span>generate flow</span><span>silent loop</span></div>
+      <div class="feature-visual-body">
+        <div class="feature-visual-shot">
+          <video src="/product/generate-flow.mp4" poster="/product/generate-flow-poster.jpg" width="1280" height="720" muted autoplay loop playsinline preload="none" aria-label="Screen recording of Uoink generating a tweet: a source is picked, the output is set to Tweet, a prompt is typed, and a cited draft appears in the preview panel."></video>
+          <figcaption>Pick the ThursdAI source, set the output to Tweet, write the prompt, and the cited draft lands in the preview.</figcaption>
+        </div>
+      </div>
+    </figure>
   </div>
 </section>
 <hr class="rule"/>
@@ -359,6 +391,15 @@ find_mentions("Karpathy")</pre>
 <section class="section" data-screen-label="install / post install">
   <div class="container">
     <div class="section-head"><span class="eyebrow">post-install</span><h2 class="display-l">What happens when it's <em>running.</em></h2><p class="lede">The helper starts in the background. The extension checks localhost. When both are green, the Uoink button appears on supported pages.</p></div>
+    <figure class="feature-visual product-figure wide">
+      <div class="feature-visual-top"><span>dashboard</span><span>after install</span></div>
+      <div class="feature-visual-body">
+        <div class="feature-visual-shot">
+          <img src="/product/hero-library.webp" width="1440" height="900" loading="lazy" decoding="async" alt="The Uoink dashboard running locally after install: a populated library of captured videos with search, channel and topic filters, and per-source hook labels." />
+          <figcaption>The local dashboard once the helper is running: your captures, searchable and filterable on your own machine.</figcaption>
+        </div>
+      </div>
+    </figure>
     <div class="three-cards">
       <article class="card"><span class="num">01</span><h3>Tray status.</h3><p>The helper sits in the tray and opens the local dashboard when you need logs, settings, or recent jobs.</p></article>
       <article class="card"><span class="num">02</span><h3>Local files.</h3><p>Captures write to your Uoink folder and into a local SQLite index. Nothing uploads to Uoink because there's no Uoink cloud.</p></article>

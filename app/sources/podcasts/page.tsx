@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   description: page.description,
   keywords: page.keywords,
   alternates: { canonical: page.route },
-  openGraph: { title: page.title, description: page.description, url: page.route },
-  twitter: { title: page.title, description: page.description },
+  openGraph: { title: page.title, description: page.description, url: page.route, images: [{ url: "/og-cover.png", width: 1200, height: 630, alt: "The Uoink dashboard: a populated local corpus of saved videos ready to hand to your AI." }] },
+  twitter: { title: page.title, description: page.description, images: ["/og-cover.png"] },
 };
 
 export default function Page() {
