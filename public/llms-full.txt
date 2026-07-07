@@ -1,4 +1,4 @@
-<!-- generated: 2026-05-30 / uoink v3.3 -->
+<!-- generated: 2026-05-30 / uoink v3.3.1 -->
 # Uoink full site context
 
 ## URL: https://uoink.app/
@@ -104,7 +104,7 @@ Feature detail page: Claim extraction tool. Extract factual claims from transcri
 Feature detail page: Evidence and citation panel. View supporting evidence and source citations for claims in your corpus. Also supports https://uoink.app/features/evidence-panel?embed=true for dashboard embeds without site chrome.
 
 ## URL: https://uoink.app/features/mcp-server
-Feature detail page: Model Context Protocol server. Turn Uoink into a local MCP server with 63 tools for video capture, corpus search, hook analysis, writing, and local site access. Also supports https://uoink.app/features/mcp-server?embed=true for dashboard embeds without site chrome.
+Feature detail page: Model Context Protocol server. Turn Uoink into a local MCP server with 64 tools for video capture, corpus search, hook analysis, writing, and local site access. Also supports https://uoink.app/features/mcp-server?embed=true for dashboard embeds without site chrome.
 
 ## URL: https://uoink.app/features/claude-desktop-integration
 Feature detail page: Claude Desktop MCP integration. Connect Uoink to Claude Desktop to let Claude capture and search video files. Also supports https://uoink.app/features/claude-desktop-integration?embed=true for dashboard embeds without site chrome.

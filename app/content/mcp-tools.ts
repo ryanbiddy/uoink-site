@@ -2,7 +2,11 @@
 // Re-synced against origin/main on 2026-07-04 (added uoink_reddit_thread).
 // Keep this aligned with the product MCP registry for agent-facing pages.
 
+// Full local tool registry (HTTP JSON-RPC exposes all of these).
 export const MCP_TOOL_COUNT = 64;
+// Curated everyday set exposed over the stdio transport (uoink_mcp.py @mcp.tool
+// decorators). The full registry above is available over HTTP.
+export const MCP_STDIO_TOOL_COUNT = 14;
 
 export const mcpTools = [
   [

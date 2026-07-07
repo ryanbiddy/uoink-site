@@ -2,23 +2,27 @@
   const panel = document.querySelector("[data-config-generator]");
   if (!panel) return;
 
-  const commandPath = "%LOCALAPPDATA%\\Uoink\\uoink_mcp.exe";
+  // Authoritative stdio command: the bundled console python runs the installed
+  // uoink_mcp.py. Mirrors server.py::_mcp_stdio_command, the README, the .mcpb
+  // bundle, and /.well-known/mcp.json. There is no standalone .exe entrypoint.
+  const commandPath = "%LOCALAPPDATA%\\Uoink\\python\\python.exe";
+  const commandArgs = ["%LOCALAPPDATA%\\Uoink\\uoink_mcp.py"];
   const snippets = {
     "Claude Desktop": {
-      mcpServers: { uoink: { command: commandPath, args: [] } },
+      mcpServers: { uoink: { command: commandPath, args: commandArgs } },
     },
     Cursor: {
-      mcpServers: { uoink: { command: commandPath, args: [] } },
+      mcpServers: { uoink: { command: commandPath, args: commandArgs } },
     },
     Continue: {
       experimental: {
-        modelContextProtocolServers: [{ name: "uoink", command: commandPath, args: [] }],
+        modelContextProtocolServers: [{ name: "uoink", command: commandPath, args: commandArgs }],
       },
     },
     Cline: {
-      mcpServers: { uoink: { command: commandPath, args: [], disabled: false } },
+      mcpServers: { uoink: { command: commandPath, args: commandArgs, disabled: false } },
     },
-    "Generic stdio": `"${commandPath}"`,
+    "Generic stdio": `"${commandPath}" "${commandArgs[0]}"`,
   };
 
   const tabs = Array.from(panel.querySelectorAll("[data-config-client]"));

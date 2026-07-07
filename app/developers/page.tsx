@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "../components/PageShell";
 import { GITHUB_URL, SitePage } from "../content/pages";
-import { mcpTools } from "../content/mcp-tools";
+import { mcpTools, MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT } from "../content/mcp-tools";
 
 const page: SitePage = {
   id: "agents",
@@ -188,7 +188,7 @@ export default function Page() {
                 Give your agent a local <em>source layer.</em>
               </h1>
               <p className="lede">
-                Uoink runs a local Model Context Protocol (MCP) server on your machine. The stdio path gives Claude Desktop, Cursor, and Cline all 64 tools to capture, search, cite, classify, and write from your corpus.
+                Uoink runs a local Model Context Protocol (MCP) server on your machine. The stdio path gives Claude Desktop, Cursor, and Cline the {MCP_STDIO_TOOL_COUNT} curated everyday tools to capture, search, cite, classify, and write from your corpus. The local HTTP endpoint exposes the full {MCP_TOOL_COUNT}-tool registry.
               </p>
               <div className="ctas">
                 <a className="btn primary large" href="#configs">
@@ -248,7 +248,7 @@ export default function Page() {
               Configure stdio connections in your agent client, or query the programmatic HTTP endpoint.
             </p>
             <p className="body-l">
-              Uoink runs a local Model Context Protocol (MCP) server exposing all 64 tools. You can connect using either the standard stdio transport as a local subprocess, or query the local HTTP (SSE) endpoint.
+              Uoink runs a local Model Context Protocol (MCP) server. The stdio transport connects as a local subprocess and exposes the {MCP_STDIO_TOOL_COUNT} curated everyday tools. The local HTTP (SSE) endpoint exposes the full {MCP_TOOL_COUNT}-tool registry.
             </p>
             
             <div style={{ marginTop: '24px', padding: '20px', background: 'rgba(255,255,255,0.02)', borderRadius: '6px', border: '1px solid var(--ink-dim)', marginBottom: '32px' }}>
