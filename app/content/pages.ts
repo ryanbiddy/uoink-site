@@ -1,4 +1,4 @@
-import { MCP_TOOL_COUNT, mcpTools } from "./mcp-tools";
+import { MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT, mcpTools } from "./mcp-tools";
 import { PRODUCT_STATUS } from "./product-status";
 
 export type PageId =
@@ -46,7 +46,14 @@ export const RELEASE_URL = "https://github.com/ryanbiddy/uoink/releases/latest";
 export const X_URL = "https://www.twitter.com/uoinkapp";
 export const X_HANDLE = "@uoinkapp";
 export const CONTACT_EMAIL = "hi@uoink.app";
-export const VERSION = "v3.3";
+// Single source of truth for the product version on the site. Keep this in sync
+// with the app's VERSION file (ryanbiddy/uoink) on each release. The static JSON
+// surfaces that can't import it -- public/.well-known/mcp.json and
+// public/.well-known/mcp/server-card.json -- carry the same value and must be
+// bumped alongside this constant.
+export const VERSION = "v3.3.1";
+// Numeric form (no leading "v") for machine-readable manifests and server cards.
+export const VERSION_NUMBER = VERSION.replace(/^v/, "");
 
 const WINDOWS_MARK =
   '<span class="os-logo windows-logo" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M5 8l17-2.4v17.2H5V8zm20.5-2.8L43 2.7v20.1H25.5V5.2zM5 25.2h17v17.2L5 40V25.2zm20.5 0H43v20.1l-17.5-2.5V25.2z" fill="currentColor"/></svg></span>';
@@ -534,7 +541,7 @@ find_mentions("Karpathy")</pre>
     route: "/agents",
     mode: "mode-light",
     title: "MCP YouTube Server: Claude Desktop and Cursor Tools",
-    subtitle: "64 MCP tools in the registry, available instantly over stdio or HTTP.",
+    subtitle: `${MCP_TOOL_COUNT} MCP tools in the registry, ${MCP_STDIO_TOOL_COUNT} curated over stdio. Available instantly.`,
     description:
       "Use Uoink as a local MCP server for Claude Desktop, Cursor, Cline, Continue, and ChatGPT Desktop.",
     keywords: ["mcp youtube server", "claude desktop youtube tool", "cursor mcp server", "mcp video tool"],
@@ -607,7 +614,7 @@ search_uoinks("pacing")</pre></div></div></div></section>
       <p>Agents should use this page and <a href="/mcp/manifest.json">/mcp/manifest.json</a> to discover the local server, install path, supported transports, and tool names.</p>
       <h2 id="server">Server</h2>
       <pre>name: uoink
-version: 3.2
+version: ${VERSION_NUMBER}
 homepage: ${CANONICAL_URL}
 source: https://github.com/ryanbiddy/uoink
 license: MIT
@@ -626,7 +633,7 @@ install:
   </div>
 </section>
 <script type="application/json" id="uoink-mcp-manifest">
-{"server":{"name":"uoink","version":"3.2","homepage":"${CANONICAL_URL}","source":"https://github.com/ryanbiddy/uoink","license":"MIT","transports":["stdio","http-experimental"]},"tools":${JSON.stringify(mcpTools.map(([name, description]) => ({ name, description })))}}</script>`,
+{"server":{"name":"uoink","version":"${VERSION_NUMBER}","homepage":"${CANONICAL_URL}","source":"https://github.com/ryanbiddy/uoink","license":"MIT","transports":["stdio","http-experimental"]},"tools":${JSON.stringify(mcpTools.map(([name, description]) => ({ name, description })))}}</script>`,
   },
   about: {
     id: "about",
