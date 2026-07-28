@@ -75,7 +75,7 @@ Paste this snippet into your Claude Desktop configuration file:
   "mcpServers": {
     "uoink": {
       "command": "node",
-      "args": ["C:/Users/hello/AppData/Local/Uoink/mcp/server.js"]
+      "args": ["C:/Users/YOUR_USERNAME/AppData/Local/Uoink/mcp/server.js"]
     }
   }
 }
