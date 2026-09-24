@@ -12,7 +12,7 @@ const faq: FaqItem[] = [
   {
     question: "Can Claude actually watch or read a YouTube video?",
     answer:
-      "Not from a bare link — it hallucinates. Give it a Uoink corpus and it can quote the transcript, cite timestamps, and read the top comments, because the words and frames are in the paste. For agents, Uoink's local MCP server exposes uoink_video and search_uoinks so Claude Desktop, Cursor, or Cline can pull the transcript directly.",
+      "Not from a bare link — it hallucinates. Give it a Uoink corpus and it can quote the transcript, cite timestamps, and read the top comments, because the words and frames are in the paste. For agents, Uoink's local MCP server exposes uoink_video and search_uoinks so Claude Desktop and Cursor (the tested clients) can pull the transcript directly.",
   },
   {
     question: "What does Uoink capture besides the transcript?",
@@ -22,12 +22,12 @@ const faq: FaqItem[] = [
   {
     question: "Does the transcript include timestamps?",
     answer:
-      "Yes. Every line is timestamped and chapter-aware, and screenshots carry their own timestamps, so you (and your AI) can cite the exact moment and deep-link back to it on YouTube.",
+      "Transcripts and screenshots have timestamps. Chapter navigation is available for items that have chapters; cited range export includes speaker labels, chapters, and provenance.",
   },
   {
     question: "Where do the saved videos go?",
     answer:
-      "To your own disk, under your Uoink output folder (usually Desktop\\Uoink), auto-sorted into topic folders. No account, no Uoink cloud. You can search the whole library locally later.",
+      "To your own disk as structured Markdown and a JSON sidecar, indexed in one local library. No account, no Uoink cloud. The library does not organize or re-shelve itself.",
   },
   {
     question: "Can I save a whole playlist at once?",
@@ -115,7 +115,7 @@ export default function Page() {
               <span className="ln k">## Screenshots</span>
               <span className="ln hl">[04:12] [08:40] [12:03] frames on disk</span>
               <span className="ln k">## Comments</span>
-              <span className="ln dim">top 50 with authors + likes</span>
+              <span className="ln dim">top comments saved with the source</span>
             </div>
           </div>
         </div>

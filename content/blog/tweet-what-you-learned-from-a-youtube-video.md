@@ -14,7 +14,7 @@ To write a great post, you need more than a generic summary. You need the exact 
 
 When you watch a video, click the rust U button. If you are browsing your feed, right-click the thumbnail and select "Uoink video" to extract the content without opening the page. 
 
-Uoink downloads the video metadata, full transcript, screenshots, and the top 50 comments. It saves this data in a single markdown file on your hard drive. 
+Uoink downloads the video metadata, full transcript, screenshots, and top comments. It saves this data in a single markdown file on your hard drive.
 
 Having the full transcript allows you to search for exact quotes. You can skip scrubbing through a 20-minute video to find the name of the library the presenter mentioned.
 

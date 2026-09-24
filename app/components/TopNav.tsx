@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { VERSION } from "../content/pages";
 
 const links = [
   ["/install", "Install"],
@@ -11,19 +12,19 @@ const links = [
 ];
 
 function tickerFor(active: string) {
-  if (active.startsWith("/install")) return ["UOINK v3.3 / install", "helper / extension / local corpus"];
-  if (active.startsWith("/how-it-works")) return ["UOINK v3.3 / workflow", "capture / library / workspace / iterate / distribute"];
-  if (active.startsWith("/sources")) return ["UOINK v3.3 / sources", "youtube / podcasts / substack / articles / dev-hubs"];
-  if (active.startsWith("/creators")) return ["UOINK v3.3 / creators", "source capture / writing studio / Voice DNA / attribution"];
-  if (active.startsWith("/developers")) return ["UOINK v3.3 / developers", "local helper / sqlite / mcp server / agent tools"];
-  if (active.startsWith("/features")) return ["UOINK v3.3 / features", "corpus / memory / hooks / dashboard"];
-  if (active.startsWith("/blog")) return ["UOINK v3.3 / field notes", "hooks / agents / corpus / local-first"];
-  if (active.startsWith("/twitter")) return ["UOINK v3.3 / twitter video", "X capture / creator credit / Writing Studio"];
-  if (active.startsWith("/podcasts")) return ["UOINK v3.3 / podcasts", "RSS / Whisper / diarization / local"];
-  if (active.startsWith("/agents") || active.startsWith("/mcp")) return ["UOINK v3.3 / MCP", "local tools / Claude Desktop / Cursor / Cline"];
-  if (active.startsWith("/about")) return ["UOINK v3.3 / about", "GitHub releases / public downloads / no tracking"];
-  if (active.startsWith("/privacy")) return ["UOINK v3.3 / privacy", "local-first / no cloud / no telemetry"];
-  return ["UOINK v3.3 / local video corpus", "open source / MIT / model agnostic"];
+  if (active.startsWith("/install")) return [`UOINK ${VERSION} / install`, "helper / extension / local corpus"];
+  if (active.startsWith("/how-it-works")) return [`UOINK ${VERSION} / workflow`, "capture / library / workspace / iterate / distribute"];
+  if (active.startsWith("/sources")) return [`UOINK ${VERSION} / sources`, "youtube / podcasts / substack / articles / dev-hubs"];
+  if (active.startsWith("/creators")) return [`UOINK ${VERSION} / creators`, "source capture / writing studio / Voice DNA / attribution"];
+  if (active.startsWith("/developers")) return [`UOINK ${VERSION} / developers`, "local helper / sqlite / mcp server / agent tools"];
+  if (active.startsWith("/features")) return [`UOINK ${VERSION} / features`, "corpus / memory / hooks / dashboard"];
+  if (active.startsWith("/blog")) return [`UOINK ${VERSION} / field notes`, "hooks / agents / corpus / local-first"];
+  if (active.startsWith("/twitter")) return [`UOINK ${VERSION} / twitter video`, "X capture / creator credit / Writing Studio"];
+  if (active.startsWith("/podcasts")) return [`UOINK ${VERSION} / podcasts`, "RSS / Whisper / diarization / local"];
+  if (active.startsWith("/agents") || active.startsWith("/mcp")) return [`UOINK ${VERSION} / MCP`, "local tools / Claude Desktop / Cursor"];
+  if (active.startsWith("/about")) return [`UOINK ${VERSION} / about`, "GitHub releases / personal side project / no tracking"];
+  if (active.startsWith("/privacy")) return [`UOINK ${VERSION} / privacy`, "local-first / no cloud / no telemetry"];
+  return [`UOINK ${VERSION} / local video corpus`, "open source / MIT / model agnostic"];
 }
 
 export function TopNav({ active }: { active: string }) {

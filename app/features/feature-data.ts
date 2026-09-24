@@ -1,3 +1,5 @@
+import { MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT } from "../content/mcp-tools";
+
 export type FeatureCategory =
   | "Capture"
   | "Library"
@@ -147,7 +149,7 @@ export const features: Feature[] = [
     "title": "Keyboard capture shortcut",
     "category": "Capture",
     "status": "shipped",
-    "summary": "Trigger instant video extraction with customizable keyboard shortcuts.",
+    "summary": "Capture from the keyboard with Alt+U.",
     "keywords": [
       "uoink feature",
       "keyboard shortcut",
@@ -185,8 +187,8 @@ export const features: Feature[] = [
     "slug": "mobile-playlist-bridge",
     "title": "Mobile playlist bridge",
     "category": "Capture",
-    "status": "in flight",
-    "summary": "Save videos to a playlist named \"uoink me\" and let the desktop helper capture them.",
+    "status": "shipped",
+    "summary": "Follow a YouTube playlist and capture new videos into your local library.",
     "keywords": [
       "uoink feature",
       "mobile playlist bridge",
@@ -196,18 +198,18 @@ export const features: Feature[] = [
       "capture",
       "desktop"
     ],
-    "whatItDoes": "Capture videos from your phone. Create a YouTube playlist named \"uoink me\", save videos there while you browse on mobile, and the desktop helper polls the list when you return to your computer. It extracts every new video, groups them by topic, and adds them to your local index. Your mobile queue becomes a structured library automatically.",
+    "whatItDoes": "Standing capture follows a YouTube playlist so new videos land in your library without re-grabbing them. You choose which source to follow and enable capture.",
     "gettingStarted": [
-      "Create a public or unlisted YouTube playlist named \"uoink me\".",
-      "Open the desktop settings panel in Uoink.",
-      "Paste the playlist URL into the mobile bridge field.",
-      "Save videos to \"uoink me\" when browsing on your phone.",
-      "The desktop helper scans the list on boot and downloads the new entries."
+      "Add a YouTube playlist as a source.",
+      "Enable standing capture for that source.",
+      "Find new captures in your local library."
     ],
-    "behindScenes": "The local helper schedules a background job that queries the YouTube playlist API at regular intervals. It compares the playlist items against the local SQLite database to identify new URLs. When it detects a new video, it queues the URL for background extraction. The helper downloads the audio streams, runs transcription, and writes the markdown files to your corpus folder.",
+    "behindScenes": "The HTTP registry exposes source registration, status, and consent tools for YouTube channels, YouTube playlists, and podcast RSS feeds.",
     "mcpTools": [
-      "uoink_playlist",
-      "get_job_status"
+      "list_sources",
+      "register_source",
+      "source_status",
+      "set_source_consent"
     ],
     "related": [
       "playlist-mode",
@@ -224,8 +226,8 @@ export const features: Feature[] = [
     "slug": "universal-page-uoink",
     "title": "Universal page extraction",
     "category": "Capture",
-    "status": "in flight",
-    "summary": "Extract clean markdown and metadata from any web page using local Crawl4AI.",
+    "status": "shipped",
+    "summary": "Save web articles as Markdown and a JSON sidecar on your disk.",
     "keywords": [
       "uoink feature",
       "universal page uoink",
@@ -235,7 +237,7 @@ export const features: Feature[] = [
       "metadata",
       "crawl4ai"
     ],
-    "whatItDoes": "Extract clean markdown from general articles and documentation pages. The universal page feature strips ads, cookie banners, and navigation menus to save the core content of any web page. It uses a local Crawl4AI integration to package text, links, and inline images. The generated files share the same layout as your video corpus and land in your local library automatically.",
+    "whatItDoes": "Capture a web article into the same local library as your videos and podcasts. Saved text can be searched and handed to your AI as source material.",
     "gettingStarted": [
       "Open an article or documentation page in your browser.",
       "Right-click the page background.",
@@ -243,7 +245,7 @@ export const features: Feature[] = [
       "Approve the allowlist prompt if this is a new domain.",
       "Check your library for the clean markdown document."
     ],
-    "behindScenes": "The local helper integrates a Crawl4AI parser that fetches and processes the page HTML. It strips script tags, CSS styles, and cookie consent elements to extract the semantic text blocks. The helper formats this output as markdown, preserves external links, and indexes the text in the SQLite database. Everything runs on your machine without third-party cloud crawlers.",
+    "behindScenes": "The HTTP registry tool uoink_page captures an allowed page, using local Crawl4AI when available and a static HTML fallback otherwise.",
     "mcpTools": [
       "uoink_page",
       "list_allowed_sites",
@@ -265,8 +267,8 @@ export const features: Feature[] = [
     "slug": "twitter-video",
     "title": "X video transcripts",
     "category": "Capture",
-    "status": "in flight",
-    "summary": "Extract transcripts and creator citations from videos on X.",
+    "status": "shipped",
+    "summary": "Capture X video and post text into your local library.",
     "keywords": [
       "uoink feature",
       "twitter video",
@@ -307,7 +309,7 @@ export const features: Feature[] = [
     "title": "Podcast RSS ingestion",
     "category": "Capture",
     "status": "shipped",
-    "summary": "Poll podcast RSS feeds and transcribe episodes locally using Whisper.",
+    "summary": "Watch RSS/Atom feeds with optional auto-ingest and local WhisperX transcription.",
     "keywords": [
       "uoink feature",
       "podcast feeds",
@@ -317,18 +319,18 @@ export const features: Feature[] = [
       "episodes",
       "locally"
     ],
-    "whatItDoes": "Turn podcast feeds into a searchable text library. You add RSS URLs in your settings panel, and the helper polls for new episodes in the background. It downloads the audio files, runs local Whisper transcription, and applies speaker diarization. The final output is formatted as a standard markdown corpus, grouped by show and stored in your library.",
+    "whatItDoes": "Follow a podcast RSS or Atom feed. With per-feed auto-ingest enabled, new episodes download as local MP3s and transcribe with WhisperX before entering the library.",
     "gettingStarted": [
-      "Open the Uoink desktop settings.",
-      "Paste a podcast RSS feed URL into the field.",
-      "Click Add to register the feed.",
-      "Select your preferred Whisper model size.",
-      "Let the helper download and transcribe the latest episodes in the background."
+      "Add a podcast feed.",
+      "Enable Auto-ingest if you want new episodes captured.",
+      "Search the saved episodes in your library."
     ],
-    "behindScenes": "The helper polls registered feeds periodically using a feedparser client. It checks new episodes against the SQLite index to prevent duplicate downloads. The audio is downloaded locally, and Whisper performs the transcription. If WhisperX is configured, it runs a diarization pass to label speakers before writing the markdown file to your disk.",
+    "behindScenes": "Feed, episode, local transcription, and episode_to_corpus tools are available over stdio.",
     "mcpTools": [
       "add_podcast_feed",
-      "transcribe_podcast"
+      "list_podcast_episodes",
+      "transcribe_podcast_episode",
+      "episode_to_corpus"
     ],
     "related": [
       "local-first",
@@ -462,49 +464,10 @@ export const features: Feature[] = [
     }
   },
   {
-    "slug": "linkedin-videos",
-    "title": "LinkedIn video extraction",
-    "category": "Capture",
-    "status": "in flight",
-    "summary": "Extract clean transcriptions and metadata from LinkedIn videos into your local library.",
-    "keywords": [
-      "uoink feature",
-      "linkedin",
-      "linkedin videos",
-      "linkedin video extraction",
-      "transcriptions",
-      "metadata"
-    ],
-    "whatItDoes": "Extract transcripts and metadata from LinkedIn video posts. Uoink uses its local yt-dlp path to fetch video streams, generates transcripts, and writes clean markdown. It files the output by topic, saving hours of manual notes.",
-    "gettingStarted": [
-      "Right-click any video post on LinkedIn.",
-      "Click Uoink video in the browser context menu.",
-      "Monitor progress in the extension toolbar popup.",
-      "Check your library folder for the auto-filed transcript.",
-      "Open the markdown file to read it as a document."
-    ],
-    "behindScenes": "The helper uses its local video tools to query the LinkedIn post. It extracts the raw media streams, routes them through the local Whisper transcriber, and builds the markdown metadata. The resulting files are saved to your local directory and indexed in the search database.",
-    "mcpTools": [
-      "uoink_video"
-    ],
-    "mcpExample": "{\n  \"name\": \"uoink_video\",\n  \"arguments\": {\n    \"url\": \"https://www.linkedin.com/posts/activity-123456789\"\n  }\n}",
-    "related": [
-      "twitter-video",
-      "in-page-button",
-      "mcp-server"
-    ],
-    "cta": "Convert LinkedIn video posts into readable local text documents.",
-    "screenshot": {
-      "title": "LinkedIn video post showing Uoink context menu",
-      "alt": "LinkedIn video post showing Uoink context menu",
-      "src": "/screenshots/right-click-any-link/hero-1280x800.png"
-    }
-  },
-  {
     "slug": "reddit-threads",
     "title": "Reddit thread extraction",
     "category": "Capture",
-    "status": "in flight",
+    "status": "shipped",
     "summary": "Save structured text discussions from Reddit posts into your local library.",
     "keywords": [
       "uoink feature",
@@ -516,17 +479,15 @@ export const features: Feature[] = [
     ],
     "whatItDoes": "Save complete Reddit discussions as clean text files. Uoink parses comment hierarchies, removes layout elements, and writes a readable markdown document. It saves the discussion directly to your disk, making it searchable offline.",
     "gettingStarted": [
-      "Open a Reddit thread in your browser.",
-      "Right-click the background of the discussion page.",
-      "Select Uoink thread from the context menu list.",
-      "Approve the domain allowlist popup to run extraction.",
-      "Read the clean comment hierarchy in your library."
+      "Open a Reddit thread.",
+      "Capture it with Uoink.",
+      "Search or read the saved thread in your library."
     ],
     "behindScenes": "The local helper parses the JSON representation of the Reddit page. It extracts the comments, resolves the nested relationships, and outputs the text using clean indentation. The helper indexes the thread contents in the local search database without external APIs.",
     "mcpTools": [
-      "uoink_page"
+      "uoink_reddit_thread"
     ],
-    "mcpExample": "{\n  \"name\": \"uoink_page\",\n  \"arguments\": {\n    \"url\": \"https://www.reddit.com/r/subreddit/comments/id/slug/\"\n  }\n}",
+    "mcpExample": "{\n  \"name\": \"uoink_reddit_thread\",\n  \"arguments\": {\n    \"url\": \"https://www.reddit.com/r/subreddit/comments/id/slug/\"\n  }\n}",
     "related": [
       "universal-page-uoink",
       "local-first",
@@ -540,50 +501,11 @@ export const features: Feature[] = [
     }
   },
   {
-    "slug": "bluesky-threads-mastodon",
-    "title": "Bluesky and Mastodon thread capture",
-    "category": "Capture",
-    "status": "in flight",
-    "summary": "Capture structured social threads from Bluesky and Mastodon into your local database.",
-    "keywords": [
-      "uoink feature",
-      "bluesky",
-      "mastodon",
-      "threads",
-      "thread capture",
-      "social"
-    ],
-    "whatItDoes": "Capture social threads from Bluesky and Mastodon. Uoink connects to public APIs, fetches thread replies, and writes a clean local text document. It indexes the text automatically, making social research searchable.",
-    "gettingStarted": [
-      "Open a post on Bluesky or Mastodon in your browser.",
-      "Right-click the post context to trigger the popup.",
-      "Click Uoink thread to start text extraction.",
-      "Check the toolbar popup badge for success feedback.",
-      "Open your library folder to view the structured thread."
-    ],
-    "behindScenes": "The helper resolves the post identifiers from the URL. It queries public endpoints to fetch the thread tree structure. The helper converts the replies into nested markdown blocks, preserves author links, and writes to disk. All data is stored locally.",
-    "mcpTools": [
-      "uoink_page"
-    ],
-    "mcpExample": "{\n  \"name\": \"uoink_page\",\n  \"arguments\": {\n    \"url\": \"https://bsky.app/profile/user/post/12345\"\n  }\n}",
-    "related": [
-      "reddit-threads",
-      "universal-page-uoink",
-      "mcp-server"
-    ],
-    "cta": "Save social threads to your local search database.",
-    "screenshot": {
-      "title": "Social thread from Bluesky indexed in library",
-      "alt": "Social thread from Bluesky indexed in library",
-      "src": "/screenshots/universal-page-uoink/hero-1280x800.png"
-    }
-  },
-  {
     "slug": "memory-search",
     "title": "Local SQLite FTS5 search",
     "category": "Library",
     "status": "shipped",
-    "summary": "Search transcripts, comments, and metadata instantly using local SQLite full-text search.",
+    "summary": "Search and read sources saved in your local library.",
     "keywords": [
       "uoink feature",
       "memory search",
@@ -593,7 +515,7 @@ export const features: Feature[] = [
       "comments",
       "metadata"
     ],
-    "whatItDoes": "Search your entire corpus in milliseconds. The helper indexes every transcript, comment cluster, and metadata block in a local SQLite FTS5 database. You can run keyword, speaker, channel, or hook queries from your dashboard. Your search queries and index files stay on your machine because the database runs entirely on your local drive.",
+    "whatItDoes": "Find saved items through library search. Clip search goes inside videos to return timestamped, deep-linked excerpts, and evidence cards collect material your AI can quote and cite.",
     "gettingStarted": [
       "Open the Uoink desktop dashboard.",
       "Click the search bar at the top of the interface.",
@@ -601,10 +523,12 @@ export const features: Feature[] = [
       "View the matching corpus cards with highlighted search snippets.",
       "Click any card to open the markdown file."
     ],
-    "behindScenes": "The helper uses the SQLite FTS5 extension to build a virtual table of all text content. When a new video is captured, the helper parses the markdown file and inserts the text blocks into the search index. The dashboard queries this index via a local HTTP endpoint, returning results and text match positions without internet access.",
+    "behindScenes": "The stdio tools search_library, get_library_item, search_clips, and get_evidence_card expose saved source material to MCP clients.",
     "mcpTools": [
-      "search_uoinks",
-      "get_uoink_corpus"
+      "search_library",
+      "get_library_item",
+      "search_clips",
+      "get_evidence_card"
     ],
     "related": [
       "faceted-classification",
@@ -623,7 +547,7 @@ export const features: Feature[] = [
     "title": "Facet and tag organization",
     "category": "Library",
     "status": "shipped",
-    "summary": "Organize your video corpus using automatically generated topic folders, hook types, and creator tags.",
+    "summary": "Organize your video corpus using facets and tags you or your agent assign.",
     "keywords": [
       "uoink feature",
       "faceted classification",
@@ -633,24 +557,24 @@ export const features: Feature[] = [
       "automatically",
       "generated"
     ],
-    "whatItDoes": "Sort your captures without manual organization. The helper categorizes your markdown files using keyword rules and metadata attributes. It groups your corpus by channel name, duration, and hook type so you can filter your library in the dashboard. You can customize these sorting rules in your settings to match your folder preferences.",
+    "whatItDoes": "Filter saved sources using facets and tags assigned by you or your agent. The library does not organize, file, or re-shelve itself. The Librarian only proposes; applying is off by default and its quality gate has not passed.",
     "gettingStarted": [
-      "Open the Uoink dashboard and navigate to Settings.",
-      "Define keyword triggers for your target categories.",
-      "Capture a new video.",
-      "Check the dashboard Library tab to see the facet filters.",
-      "Select a channel or hook type facet to filter your card grid."
+      "Capture a source into your local library.",
+      "Search the library for the source you need.",
+      "Use assigned facets or tags to narrow the results."
     ],
-    "behindScenes": "When writing a corpus, the helper runs the metadata through a routing engine. It matches titles and descriptions against the keyword list in your settings. The helper writes the markdown file to the matching directory path. It also writes the tags and attributes to the local SQLite database to populate the sidebar filters in the dashboard UI.",
+    "behindScenes": "The HTTP registry’s classify_facets tool stores agent-assigned facets and tags. query_by_facets filters saved sources by those values; it does not move files or apply Librarian proposals.",
     "mcpTools": [
-      "search_uoinks"
+      "classify_facets",
+      "query_by_facets",
+      "get_facet_taxonomy"
     ],
     "related": [
       "memory-search",
       "your-channel",
       "taste-anchors"
     ],
-    "cta": "Configure your topic folders to keep your research library organized.",
+    "cta": "Search and filter the sources on your disk.",
     "screenshot": {
       "title": "Settings tab showing topic folder routing rules",
       "alt": "Settings tab showing topic folder routing rules",
@@ -672,7 +596,7 @@ export const features: Feature[] = [
       "channel",
       "analyze"
     ],
-    "whatItDoes": "Analyze your own content performance. Set up Uoink with your YouTube channel handle to separate your uploads from your research library. The dashboard marks your videos and calculates hook distribution across your top performers. It helps you see which script structures and hook categories drive audience engagement on your channel.",
+    "whatItDoes": "The HTTP registry tool analyze_self_channel aggregates your own saved videos. It can scope the read to a registered channel handle.",
     "gettingStarted": [
       "Open settings in the Uoink dashboard.",
       "Locate the Your Channel configuration section.",
@@ -680,10 +604,9 @@ export const features: Feature[] = [
       "Click Verify to connect and fetch public channel metadata.",
       "View your channel analytics dashboard to study your hook performance."
     ],
-    "behindScenes": "The helper queries the YouTube API using the verified channel ID to build a list of your uploads. It flags these videos in the local database. When you run a hook classification job, the helper aggregates the classification results for your channel. It renders the data in a local dashboard without transmitting metrics to external platforms.",
+    "behindScenes": "The tool reads the existing corpus and returns hook and format evolution, monthly performance, and top performers.",
     "mcpTools": [
-      "search_uoinks",
-      "find_mentions"
+      "analyze_self_channel"
     ],
     "related": [
       "faceted-classification",
@@ -769,7 +692,7 @@ export const features: Feature[] = [
       "memory-search",
       "taste-anchors"
     ],
-    "cta": "Let your research habits organize your most referenced video captures.",
+    "cta": "Revisit the sources you reference in your local library.",
     "screenshot": {
       "title": "Activity tab showing engagement history and action logs",
       "alt": "Activity tab showing engagement history and action logs",
@@ -841,7 +764,7 @@ export const features: Feature[] = [
     ],
     "behindScenes": "The helper reads the selected document files from your local storage. It extracts the content blocks and references, merging them into a unified project file. The helper writes the compiled file to a project directory under your Uoink path, updating the SQLite index to track the relationship between source documents and the new workspace.",
     "mcpTools": [
-      "build_workspace",
+      "assemble_workspace",
       "search_uoinks"
     ],
     "related": [
@@ -871,7 +794,7 @@ export const features: Feature[] = [
       "against",
       "article"
     ],
-    "whatItDoes": "Evaluate your script drafts against your research corpus. You load a draft and compare it against your saved video transcripts. The helper checks your text for factual discrepancies and identifies where you missed key source details. This helps you maintain accuracy and strong evidence before you publish your work.",
+    "whatItDoes": "The HTTP registry tool critique_against_corpus supplies context for an agent to critique a draft and can save findings the agent supplies.",
     "gettingStarted": [
       "Navigate to the Critique tab in the dashboard.",
       "Paste your draft text into the editor.",
@@ -879,9 +802,9 @@ export const features: Feature[] = [
       "Click Analyze Draft to run the critique.",
       "Review the highlighted corrections and source links."
     ],
-    "behindScenes": "The helper uses your API key to send the draft and selected reference corpus files to the model. It directs the model to perform a factual comparison and return structured annotations. The helper parses the response, highlights discrepancies in the UI, and maps comments back to specific timestamps in the source file.",
+    "behindScenes": "The calling agent performs the analysis. The local tool retrieves context and persists supplied findings.",
     "mcpTools": [
-      "critique_corpus",
+      "critique_against_corpus",
       "get_citation_map"
     ],
     "related": [
@@ -1032,7 +955,7 @@ export const features: Feature[] = [
       "claims",
       "transcripts"
     ],
-    "whatItDoes": "Extract factual claims from transcripts automatically. The helper scans the video text to isolate assertions, figures, and research references. It lists these claims with timestamp links, making it easy to verify statement accuracy. This helps researchers audit content without reading the entire transcript manually.",
+    "whatItDoes": "The calling agent identifies claims in saved source material. The HTTP registry tool extract_claims validates and stores supplied claims; it does not decide whether they are true.",
     "gettingStarted": [
       "Open a video in the Uoink dashboard.",
       "Navigate to the Claims tab.",
@@ -1040,10 +963,11 @@ export const features: Feature[] = [
       "Review the list of isolated assertions and metrics.",
       "Click any claim timestamp to play the video segment."
     ],
-    "behindScenes": "The helper uses the API key to send the transcript to the model. It instructs the model to extract and categorize claims into a structured list. The helper parses this output, maps each claim back to its segment offset, and writes the results to the markdown file header, ensuring the facts remain linked.",
+    "behindScenes": "The verify_claim tool records supporting or conflicting evidence. The user decides what the evidence establishes.",
     "mcpTools": [
       "extract_claims",
-      "get_citation_map"
+      "verify_claim",
+      "list_claims"
     ],
     "related": [
       "evidence-panel",
@@ -1102,7 +1026,7 @@ export const features: Feature[] = [
     "title": "Model Context Protocol server",
     "category": "Distribution",
     "status": "shipped",
-    "summary": "Turn Uoink into a local MCP server to give Claude and Cursor tools for video capture.",
+    "summary": `Connect to ${MCP_STDIO_TOOL_COUNT} tools over stdio or ${MCP_TOOL_COUNT} in the local HTTP registry for capture, search, and citations.`,
     "keywords": [
       "uoink feature",
       "mcp server",
@@ -1120,7 +1044,7 @@ export const features: Feature[] = [
       "Start the client and verify the connection.",
       "Ask the agent to capture a video to test the setup."
     ],
-    "behindScenes": "The helper runs a loopback server on port 5179 that implements the Model Context Protocol. It handles stdio transport for client connections. When an agent calls a tool, the helper executes the command, reads the local SQLite database, and returns the response in a structured JSON format, keeping everything on your local machine.",
+    "behindScenes": "Stdio runs the bundled Python against uoink_mcp.py. The separate HTTP JSON-RPC registry is at http://127.0.0.1:5179/mcp/v1 and uses X-Uoink-Token from the local install. Claude Desktop and Cursor are the tested clients.",
     "mcpTools": [
       "uoink_video",
       "search_uoinks",
@@ -1156,17 +1080,16 @@ export const features: Feature[] = [
     ],
     "whatItDoes": "Connect Uoink to Claude Desktop. By adding the helper command to your configuration file, you give Claude tools to capture videos and query your local library. Claude can pull transcripts, read comment clusters, and cite timestamps directly in your chat sessions. The connection runs locally on your computer.",
     "gettingStarted": [
-      "Open your Claude Desktop configuration file.",
-      "Add the Uoink server snippet to the configuration.",
-      "Save the file and restart Claude Desktop.",
-      "Look for the tool hammer icon in the input bar.",
-      "Prompt Claude to summarize a YouTube URL."
+      "Install Uoink on Windows 10/11.",
+      "Open the .mcpb bundle from the latest GitHub release for one-click Claude Desktop setup.",
+      "For manual setup, copy the generated config from the extension’s Settings page; Claude Desktop needs absolute paths.",
+      "Restart Claude Desktop and ask it to search your library."
     ],
     "behindScenes": "Claude Desktop starts the helper as a background process using the command path in your configuration. It establishes communication via stdio JSON-RPC. When you prompt Claude about a video, the model calls the uoink_video tool, and the helper executes the task locally, returning the text directly to the active chat.",
     "mcpTools": [
       "uoink_video",
       "classify_hook",
-      "write_blog"
+      "search_clips"
     ],
     "mcpExample": "{\n  \"mcpServers\": {\n    \"uoink\": {\n      \"command\": \"C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\python\\\\python.exe\",\n      \"args\": [\n        \"C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\uoink_mcp.py\"\n      ]\n    }\n  }\n}",
     "related": [
@@ -1204,10 +1127,10 @@ export const features: Feature[] = [
       "Paste the Uoink command path.",
       "Ask Cursor's chat panel to search your library."
     ],
-    "behindScenes": "Cursor runs the helper binary as a subprocess and establishes stdio communication. When you prompt Cursor about your code, the editor calls uoink_tools to search your transcripts or read specific corpus files. The helper queries SQLite and returns the markdown text to the editor context, ensuring fast local search.",
+    "behindScenes": "Cursor runs the bundled Python against uoink_mcp.py as a stdio subprocess. Tools such as search_library and get_library_item let the client search and read saved source material.",
     "mcpTools": [
       "search_uoinks",
-      "build_workspace",
+      "search_library",
       "get_uoink_corpus"
     ],
     "mcpExample": "{\n  \"name\": \"search_uoinks\",\n  \"arguments\": {\n    \"query\": \"Model Context Protocol\"\n  }\n}",
@@ -1238,7 +1161,7 @@ export const features: Feature[] = [
       "intelligence",
       "passes"
     ],
-    "whatItDoes": "Control your AI costs and data. Uoink uses your own Anthropic API key to run Hook Type, Comment clusters, and Entity extraction passes. Your key is stored in your operating system credential vault, never on our servers. You pay Anthropic for the tokens you use, keeping the helper free of subscriptions.",
+    "whatItDoes": "Optional AI features use your own Anthropic key. Entity extraction is opt-in and off by default. In 3.8.0, the model-usage meter shows real usage when you add your key.",
     "gettingStarted": [
       "Open your Anthropic developer console.",
       "Generate a new API key.",

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CONTACT_EMAIL, X_HANDLE, X_URL } from "../content/pages";
+import { CONTACT_EMAIL, X_HANDLE, X_URL, VERSION } from "../content/pages";
 
 export function SiteFooter() {
   return (
@@ -56,7 +56,7 @@ export function SiteFooter() {
           <h5>About</h5>
           <ul>
             <li>
-              <Link href="/about">About + downloads</Link>
+              <Link href="/about">About</Link>
             </li>
             <li>
               <Link href="/privacy">Privacy</Link>
@@ -80,7 +80,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="container footer-bottom">
-        <span>uoink.app / v3.3 / 2026</span>
+        <span>uoink.app / {VERSION} / 2026</span>
         <span>Local-first. Model-agnostic. MIT.</span>
       </div>
     </footer>

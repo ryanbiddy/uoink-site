@@ -18,7 +18,7 @@ const faq = [
   {
     question: "Does Uoink identify speakers by real name?",
     answer:
-      "Diarization separates speakers as Speaker 1, Speaker 2, and so on. You can rename them later when you know who is speaking.",
+      "Optional diarization separates speakers as Speaker 1, Speaker 2, and so on. It needs your own Hugging Face token for the speaker model. You can rename speakers later when you know who is speaking.",
   },
   {
     question: "Does local Whisper need a GPU?",

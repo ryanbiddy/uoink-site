@@ -9,7 +9,7 @@ export function GET() {
   return NextResponse.json({
     product: "Uoink",
     version: VERSION,
-    generated: "2026-05-30",
+    generated: "2026-09-23",
     canonical: `${CANONICAL_URL}/features`,
     featureCount: features.length,
     categories: featureCategories.map((category) => ({

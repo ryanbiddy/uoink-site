@@ -1,0 +1,162 @@
+[
+  {
+    "route": "/",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "viewportWidth": 1440,
+    "contentWidth": 1440,
+    "brokenImages": [],
+    "title": "Uoink: Local video, podcast, and text corpus for your AI",
+    "hasVersion": true,
+    "screenshots": [
+      "home-1440x900.png",
+      "home-1440x900-full.png"
+    ]
+  },
+  {
+    "route": "/install",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "viewportWidth": 1440,
+    "contentWidth": 1440,
+    "brokenImages": [],
+    "title": "Download Uoink: Local Helper and Browser Extension Install | Uoink",
+    "hasVersion": true,
+    "screenshots": [
+      "install-1440x900.png",
+      "install-1440x900-full.png"
+    ]
+  },
+  {
+    "route": "/developers",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "viewportWidth": 1440,
+    "contentWidth": 1440,
+    "brokenImages": [],
+    "title": "Uoink for Developers: Local MCP Tools for Source Research | Uoink",
+    "hasVersion": true,
+    "screenshots": [
+      "developers-1440x900.png",
+      "developers-1440x900-full.png"
+    ]
+  },
+  {
+    "route": "/changelog",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "viewportWidth": 1440,
+    "contentWidth": 1440,
+    "brokenImages": [],
+    "title": "Changelog: Version Updates and Universal Extraction | Uoink",
+    "hasVersion": true,
+    "screenshots": [
+      "changelog-1440x900.png",
+      "changelog-1440x900-full.png"
+    ]
+  },
+  {
+    "route": "/",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "viewportWidth": 390,
+    "contentWidth": 390,
+    "brokenImages": [],
+    "title": "Uoink: Local video, podcast, and text corpus for your AI",
+    "hasVersion": true,
+    "screenshots": [
+      "home-390x844.png",
+      "home-390x844-full.png"
+    ]
+  },
+  {
+    "route": "/install",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "viewportWidth": 390,
+    "contentWidth": 390,
+    "brokenImages": [],
+    "title": "Download Uoink: Local Helper and Browser Extension Install | Uoink",
+    "hasVersion": true,
+    "screenshots": [
+      "install-390x844.png",
+      "install-390x844-full.png"
+    ]
+  },
+  {
+    "route": "/developers",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "viewportWidth": 390,
+    "contentWidth": 390,
+    "brokenImages": [],
+    "title": "Uoink for Developers: Local MCP Tools for Source Research | Uoink",
+    "hasVersion": true,
+    "screenshots": [
+      "developers-390x844.png",
+      "developers-390x844-full.png"
+    ]
+  },
+  {
+    "route": "/changelog",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "viewportWidth": 390,
+    "contentWidth": 390,
+    "brokenImages": [],
+    "title": "Changelog: Version Updates and Universal Extraction | Uoink",
+    "hasVersion": true,
+    "screenshots": [
+      "changelog-390x844.png",
+      "changelog-390x844-full.png"
+    ]
+  }
+]

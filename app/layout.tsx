@@ -1,13 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Bungee, Inter, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import { VercelAnalytics } from "./components/VercelAnalytics";
 import { CANONICAL_URL } from "./content/pages";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], style: ["normal", "italic"], variable: "--font-inter", display: "swap" });
-const bungee = Bungee({ subsets: ["latin"], weight: "400", variable: "--font-bungee", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
+const inter = localFont({ src: [
+  { path: "./fonts/inter.woff", weight: "100 900", style: "normal" },
+  { path: "./fonts/inter-italic.woff", weight: "100 900", style: "italic" },
+], variable: "--font-inter", display: "swap" });
+const bungee = localFont({ src: "./fonts/bungee.woff", weight: "400", variable: "--font-bungee", display: "swap" });
+const mono = localFont({ src: "./fonts/jetbrains-mono.woff", weight: "100 800", variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(CANONICAL_URL),
