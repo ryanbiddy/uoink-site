@@ -17,7 +17,7 @@ const faq: FaqItem[] = [
   {
     question: "What does Uoink do that NotebookLM doesn't?",
     answer:
-      "Uoink captures more than a YouTube URL: timestamped screenshots, top comments, channel context, and a JSON sidecar, all saved as Markdown you own. It exposes your corpus to Claude, Cursor, and Cline as MCP tools, and to any agent via an OpenAPI bridge. And it keeps everything local — no account, no cloud storage, no telemetry.",
+      "Uoink captures more than a YouTube URL: timestamped screenshots, top comments, channel context, and a JSON sidecar, all saved as Markdown you own. It exposes your corpus to Claude Desktop and Cursor as MCP tools, and to any agent via an OpenAPI bridge. And it keeps everything local — no account, no cloud storage, no telemetry.",
   },
   {
     question: "Which should I use?",
@@ -32,7 +32,7 @@ const faq: FaqItem[] = [
   {
     question: "Does Uoink work on Mac?",
     answer:
-      "Windows 10 and 11 today. A Mac build is queued after Windows stabilizes, using the same corpus format and MCP surface. NotebookLM, being browser-based, works on any OS now.",
+      "Windows 10/11 only. No Mac build scheduled. NotebookLM, being browser-based, works on any OS now.",
   },
 ];
 
@@ -78,7 +78,7 @@ const rows: { feature: string; uoink: string; notebooklm: string }[] = [
   { feature: "Agent / MCP access", uoink: "Local MCP server + OpenAPI bridge", notebooklm: "No public MCP surface" },
   { feature: "Audio Overviews", uoink: "No", notebooklm: "Yes" },
   { feature: "Cost", uoink: "Free, open source (MIT)", notebooklm: "Free tier + paid plan" },
-  { feature: "Platform", uoink: "Windows today, Mac queued", notebooklm: "Any OS (browser)" },
+  { feature: "Platform", uoink: "Windows 10/11 only. No Mac build scheduled.", notebooklm: "Any OS (browser)" },
   { feature: "Telemetry", uoink: "None in the app", notebooklm: "Standard Google product data" },
 ];
 
@@ -136,7 +136,7 @@ export default function Page() {
             </table>
           </div>
           <p className="body-l mt-24" style={{ maxWidth: "72ch" }}>
-            Bottom line: pick NotebookLM for a hosted, cross-platform notebook with audio summaries and zero setup. Pick Uoink to own your sources on disk, feed them to your own AI agents over MCP, and keep everything private and local.
+            Pick NotebookLM for a hosted, cross-platform notebook with audio summaries and zero setup. Pick Uoink to own your sources on disk, feed them to your own AI agents over MCP, and keep everything private and local.
           </p>
         </div>
       </section>

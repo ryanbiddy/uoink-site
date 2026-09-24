@@ -16,7 +16,7 @@ First, you need data. You can uoink your own channel's recent uploads, or you ca
 
 Open your terminal. If you are using the Uoink MCP server with Claude Desktop, you can pull this data with a simple prompt. Or you can use Uoink's playlist feature in the browser extension. Paste the link of a channel's video upload playlist. 
 
-Uoink will queue the videos. The helper handles rate limits using exponential backoff. It retries after 60 seconds, then 5 minutes, then 15 minutes. This queue system helps you avoid YouTube rate limits while fetching metadata for 100 videos.
+Uoink saves the transcript, frames, comments, and metadata in your local library. Standing capture can follow a YouTube channel or playlist for new uploads.
 
 ## Step 2: Extract Hook Classifications
 
@@ -54,15 +54,15 @@ Query my uoinks database. Tell me which hook types have the highest median views
 
 The MCP server runs the query and returns the results. 
 
-On our test dataset of 200 software engineering videos, we found that the Contrarian Hook and the Demo Hook had a median view ratio 3.2 times higher than the Direct Value Prop. For technical tutorials, a working demo in the first 5 seconds keeps developers watching. The Direct Value Prop, which lists what the video covers, had the lowest retention.
+Compare patterns in your own saved sources. A view-count difference alone does not establish that the hook caused it.
 
 ## Step 4: Map the Topic Folders
 
-Uoink organizes your saved markdown files on disk into topic-classified folders. It reads the transcript and assigns a primary topic like "TypeScript," "Database Optimization," or "Web scraping."
+Uoink saves Markdown and a JSON sidecar on your disk. The library does not organize or re-shelve itself; the Librarian only proposes, and applying is off by default.
 
-Open your Uoink output folder. You will see these folders on disk. Compare the number of videos you have saved in each topic folder against their view counts. 
+Search your library for a topic and inspect the matching sources. Keep your comparison tied to the underlying videos.
 
-You might find that your "Rust" folder has 5 videos with an average of 40,000 views, while your "React" folder has 20 videos with an average of 3,000 views. This indicates a high demand for Rust content in your specific audience. It shows that React content is saturated on your channel.
+If one topic gets more views in your sample, treat it as a question to investigate. Audience size, publication date, and distribution can also affect the result.
 
 ## Step 5: Design Your Next Script
 

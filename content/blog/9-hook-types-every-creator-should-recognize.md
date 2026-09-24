@@ -4,9 +4,9 @@ Every YouTube video lives or dies in the first 10 seconds. You probably know thi
 
 Most advice tells you to make your intros punchier. They tell you to cut the fluff, add sound effects, or make the visuals flash faster. But changing the editing pace won't save a weak concept. You need to structure the hook to grab a human brain.
 
-We built a classification engine in Uoink to study these patterns. After parsing thousands of top-performing videos, we found that successful hooks fall into 9 distinct categories.
+These nine categories are a framework for studying openings. They are not a measured ranking of what performs best.
 
-Here are the 9 hook types, how they work, and real examples from channels that master them.
+Here are nine hook types and invented examples to make each pattern concrete.
 
 ## 1. The Curiosity Gap
 
@@ -82,6 +82,6 @@ It works for technical audiences who just want to solve a specific bug.
 
 ## How to Apply This
 
-When you uoink a video, Uoink parses the transcript and runs a classification check to identify which of these 9 categories the creator used.
+Save the transcript, frames, and comments with Uoink, then ask your AI to compare the opening against these categories.
 
 Look at your own library. Spot which hook types get the highest retention on your channel, then bolt that structure onto your next script outline.

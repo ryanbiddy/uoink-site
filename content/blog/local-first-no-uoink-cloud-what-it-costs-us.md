@@ -12,7 +12,7 @@ Here is what the local-first model costs us, and why we decided to build Uoink t
 
 A standard web application has a simple onboarding flow. You visit a website, click sign up, enter an email, and you are inside the dashboard. 
 
-For Uoink, onboarding is a heavy process. You must download a native executable. On Windows, you run an Inno Setup installer. On macOS, the same pattern will use a signed package once the Mac build ships. 
+For Uoink, onboarding is a heavy process. You must download a native executable. On Windows, you run an Inno Setup installer. The installer is unsigned. Windows 10/11 only. No Mac build scheduled.
 
 After installation, the python helper starts. It runs as a local loopback server on `127.0.0.1:5179`. You then install a Chrome extension to talk to this helper. 
 
@@ -26,7 +26,7 @@ This is a massive point of friction. Many creators have never used an API key. T
 
 We had to build an entire diagnostic and key-testing UI into the extension setup page. We added a cost estimator to show users how cheap it is to pay Anthropic directly compared to paying a SaaS markup. 
 
-For developers, this is a benefit. They pay pennies per query instead of a flat $20 monthly subscription. For non-technical users, it is a barrier that prevents them from using the tool.
+For developers, this is a benefit. Optional AI features use their own Anthropic key. For non-technical users, it is a barrier that prevents them from using the tool.
 
 ## We Have Zero Telemetry
 
@@ -50,7 +50,7 @@ By making the code open source under the MIT license, we invite users to inspect
 
 ## Designing for Offline Autonomy
 
-One of the biggest design advantages of a local-first tool is offline capability. Because your corpus lives on your hard drive, you can search your library, read transcripts, and generate scripts while completely offline. 
+One of the biggest design advantages of a local-first tool is offline capability. Because your corpus lives on your hard drive, you can search your library and read saved transcripts offline.
 
 If you are on an airplane or working in a remote area without internet access, Uoink functions perfectly. The SQLite index runs without a network request to run a text search. 
 
@@ -66,6 +66,6 @@ The first benefit is speed. Searching a local SQLite database using FTS5 search 
 
 The second benefit is privacy. Your transcripts and notes belong to you. No corporate server stores your intellectual property. 
 
-The third benefit is security. Your Anthropic API key is stored locally in Windows Credential Manager or macOS Keychain. It never touches our servers. 
+The third benefit is security. Your Anthropic API key is stored locally in Windows Credential Manager. It never touches our servers.
 
 Building a local-first application is a difficult path for a business. It forces you to build high-quality software because you can't patch bugs on a central server. For our users, the resulting privacy and performance are worth the trade-off.

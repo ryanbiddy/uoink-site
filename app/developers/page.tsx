@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "../components/PageShell";
-import { GITHUB_URL, SitePage } from "../content/pages";
-import { mcpTools, MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT } from "../content/mcp-tools";
+import { GITHUB_URL, RELEASE_URL, SitePage } from "../content/pages";
+import { MCP_STDIO_CONFIG } from "../content/mcp-config";
+import { mcpStdioToolNames, mcpTools, MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT } from "../content/mcp-tools";
 
 const page: SitePage = {
   id: "agents",
@@ -10,7 +11,7 @@ const page: SitePage = {
   mode: "mode-light",
   title: "Uoink for Developers: Local MCP Tools for Source Research",
   description:
-    "Connect Uoink to Claude Desktop, Cursor, Cline, Continue, and ChatGPT Desktop with local MCP tools for source capture and corpus search.",
+    "Connect Uoink to Claude Desktop and Cursor with local MCP tools for source capture and corpus search.",
   keywords: [
     "mcp source research",
     "mcp youtube server",
@@ -21,134 +22,19 @@ const page: SitePage = {
   html: "",
 };
 
-const configs = [
-  {
-    name: "Claude Desktop",
-    body: `{
-  "mcpServers": {
-    "uoink": {
-      "command": "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\python\\\\python.exe",
-      "args": [
-        "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\uoink_mcp.py"
-      ]
-    }
-  }
-}`,
-  },
-  {
-    name: "Cursor",
-    body: `{
-  "mcpServers": {
-    "uoink": {
-      "command": "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\python\\\\python.exe",
-      "args": [
-        "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\uoink_mcp.py"
-      ]
-    }
-  }
-}`,
-  },
-  {
-    name: "Cline / Continue",
-    body: `{
-  "name": "uoink",
-  "transport": "stdio",
-  "command": "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\python\\\\python.exe",
-  "args": [
-    "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\uoink_mcp.py"
-  ]
-}`,
-  },
-];
+const configs = [{ name: "README stdio config", body: MCP_STDIO_CONFIG }];
 
+const stdioNames = new Set<string>(mcpStdioToolNames);
 const toolGroups = [
   {
-    title: "Core stdio tools",
-    dek: "The core daily path for capture, search, comments, hooks, citations, and health.",
-    names: [
-      "uoink_video",
-      "uoink_playlist",
-      "get_job_status",
-      "cancel_job",
-      "list_recent_uoinks",
-      "search_uoinks",
-      "get_uoink_corpus",
-      "analyze_comments",
-      "classify_hook",
-      "get_taxonomy",
-      "get_citation_map",
-      "get_uoink_health",
-      "find_mentions",
-      "get_transcript_reliability",
-    ],
+    title: "Everyday stdio tools",
+    dek: "Capture, podcasts, clip search, evidence cards, library reads, and cited range export. Also available over HTTP.",
+    names: [...mcpStdioToolNames],
   },
   {
-    title: "Library, role, and live status",
-    dek: "Local reads and setup helpers that shape the library around the user's workflow.",
-    names: ["analyze_self_channel", "get_schema_version", "get_user_role", "set_user_role", "check_live_status"],
-  },
-  {
-    title: "Podcast and mobile bridge",
-    dek: "RSS feeds, WhisperX checks, monitored playlists, and mobile save-to-playlist workflows.",
-    names: [
-      "add_podcast_feed",
-      "list_podcast_feeds",
-      "remove_podcast_feed",
-      "poll_podcast_feed",
-      "list_podcast_episodes",
-      "download_podcast_episode",
-      "get_whisperx_status",
-      "transcribe_podcast_episode",
-      "add_monitored_playlist",
-      "list_monitored_playlists",
-      "remove_monitored_playlist",
-      "poll_monitored_playlist",
-      "list_monitored_playlist_events",
-    ],
-  },
-  {
-    title: "Memory, facets, and workspace assembly",
-    dek: "Taste memory, engagement signals, facet filters, workspace planning, and corpus critique.",
-    names: [
-      "get_user_taste",
-      "get_user_memory",
-      "update_user_taste",
-      "get_engagement_signal",
-      "classify_facets",
-      "query_by_facets",
-      "get_facet_taxonomy",
-      "assemble_workspace",
-      "critique_against_corpus",
-      "list_workspaces",
-      "get_workspace",
-    ],
-  },
-  {
-    title: "Claims, scripts, and Writing Studio",
-    dek: "Evidence capture, script versions, shot lists, tweets, blogs, and voice anchors.",
-    names: [
-      "extract_claims",
-      "verify_claim",
-      "list_claims",
-      "get_claim",
-      "generate_script",
-      "revise_script",
-      "get_shot_list",
-      "list_scripts",
-      "get_script",
-      "write_tweet",
-      "write_blog",
-      "list_writing_pieces",
-      "get_writing_piece",
-      "add_style_anchor",
-      "list_style_anchors",
-      "remove_style_anchor",
-    ],
-  },
-  {
-    title: "Universal page and thread capture",
-    dek: "Page and Reddit-thread capture plus allowed-site controls for the local helper.",
-    names: ["uoink_page", "uoink_reddit_thread", "list_allowed_sites", "add_allowed_site", "remove_allowed_site"],
+    title: "Additional HTTP registry tools",
+    dek: "Standing capture, library work, Writing Studio, workspaces, and source controls. The Librarian proposes; applying is off by default and its quality gate has not passed.",
+    names: mcpTools.map(([name]) => name).filter((name) => !stdioNames.has(name)),
   },
 ];
 
@@ -188,7 +74,7 @@ export default function Page() {
                 Give your agent a local <em>source layer.</em>
               </h1>
               <p className="lede">
-                Uoink runs a local Model Context Protocol (MCP) server on your machine. The stdio path gives Claude Desktop, Cursor, and Cline the {MCP_STDIO_TOOL_COUNT} curated everyday tools to capture, search, cite, classify, and write from your corpus. The local HTTP endpoint exposes the full {MCP_TOOL_COUNT}-tool registry.
+                Uoink runs a local Model Context Protocol (MCP) server on your machine. The stdio path gives Claude Desktop and Cursor the {MCP_STDIO_TOOL_COUNT} curated everyday tools to capture, search, and cite your corpus. The local HTTP endpoint exposes the full {MCP_TOOL_COUNT}-tool registry.
               </p>
               <div className="ctas">
                 <a className="btn primary large" href="#configs">
@@ -203,17 +89,9 @@ export default function Page() {
                 <span className="logo-chip brand-mark-pill logo-mark" aria-label="Claude">
                   <img src="/assets/brand-logos/claude.svg" alt="Claude" width="30" height="30" loading="lazy" decoding="async" />
                 </span>
-                {/* ChatGPT logo source: https://openai.com/brand/; official ChatGPT/OpenAI asset, unmodified integration callout. */}
-                <span className="logo-chip brand-mark-pill logo-mark logo-dark" aria-label="ChatGPT">
-                  <img src="/assets/brand-logos/chatgpt.svg" alt="ChatGPT" width="30" height="30" loading="lazy" decoding="async" />
-                </span>
                 {/* Cursor logo source: https://cursor.com/; official Cursor site asset, unmodified integration callout. */}
                 <span className="logo-chip brand-mark-pill logo-mark" aria-label="Cursor">
                   <img src="/assets/brand-logos/cursor.svg" alt="Cursor" width="30" height="30" loading="lazy" decoding="async" />
-                </span>
-                {/* Obsidian logo source: https://obsidian.md/brand; official Obsidian brand asset, unmodified integration callout. */}
-                <span className="logo-chip brand-mark-pill logo-mark" aria-label="Obsidian">
-                  <img src="/assets/brand-logos/obsidian.svg" alt="Obsidian" width="30" height="30" loading="lazy" decoding="async" />
                 </span>
                 {/* GitHub logo source: https://github.com/logos; official GitHub mark, unmodified integration callout under GitHub logo guidelines. */}
                 <span className="logo-chip brand-mark-pill logo-mark" aria-label="GitHub">
@@ -230,8 +108,8 @@ export default function Page() {
               <span className="ln dim">capture one source into the local library</span>
               <span className="ln k">search_uoinks(&quot;Karpathy&quot;)</span>
               <span className="ln dim">query transcript, comments, titles, metadata</span>
-              <span className="ln k">write_tweet(corpus_id)</span>
-              <span className="ln hl">draft from source with creator credit intact</span>
+              <span className="ln k">search_clips(query)</span>
+              <span className="ln hl">find timestamped excerpts with source links</span>
             </div>
           </div>
         </div>
@@ -245,20 +123,24 @@ export default function Page() {
               Stdio and HTTP <em>transports.</em>
             </h2>
             <p className="lede">
-              Configure stdio connections in your agent client, or query the programmatic HTTP endpoint.
+              Tested with Claude Desktop and Cursor. Install Uoink before connecting your client.
             </p>
             <p className="body-l">
-              Uoink runs a local Model Context Protocol (MCP) server. The stdio transport connects as a local subprocess and exposes the {MCP_STDIO_TOOL_COUNT} curated everyday tools. The local HTTP (SSE) endpoint exposes the full {MCP_TOOL_COUNT}-tool registry.
+              Uoink runs a local Model Context Protocol (MCP) server. The stdio transport connects as a local subprocess and exposes the {MCP_STDIO_TOOL_COUNT} curated everyday tools. The local HTTP JSON-RPC endpoint exposes the full {MCP_TOOL_COUNT}-tool registry.
             </p>
             
             <div style={{ marginTop: '24px', padding: '20px', background: 'rgba(255,255,255,0.02)', borderRadius: '6px', border: '1px solid var(--ink-dim)', marginBottom: '32px' }}>
-              <h3 style={{ margin: '0 0 12px 0', fontSize: '18px', color: 'var(--cream)' }}>HTTP (SSE) Transport Details</h3>
-              <p style={{ margin: '0 0 8px 0', fontSize: '14px', color: 'var(--parchment)' }}><strong>Endpoint URL:</strong> <code>http://localhost:5179/mcp/v1</code></p>
-              <p style={{ margin: '0 0 8px 0', fontSize: '14px', color: 'var(--parchment)' }}><strong>Authentication:</strong> Include the header <code>X-Uoink-Token</code> on every request.</p>
-              <p style={{ margin: '0', fontSize: '14px', color: 'var(--parchment)' }}><strong>Token Location:</strong> Read the token string from the local file <code>%LOCALAPPDATA%\Uoink\token.txt</code> (or <code>~/Library/Application Support/Uoink/token.txt</code> on macOS).</p>
+              <h3 style={{ margin: '0 0 12px 0', fontSize: '18px' }}>HTTP JSON-RPC Transport Details</h3>
+              <p style={{ margin: '0 0 8px 0', fontSize: '14px' }}><strong>Endpoint URL:</strong> <code>http://localhost:5179/mcp/v1</code></p>
+              <p style={{ margin: '0 0 8px 0', fontSize: '14px' }}><strong>Authentication:</strong> Include the header <code>X-Uoink-Token</code> on every request.</p>
+              <p style={{ margin: '0', fontSize: '14px' }}><strong>Token Location:</strong> Read the token string from the local file <code>%LOCALAPPDATA%\Uoink\token.txt</code>.</p>
             </div>
           </div>
           <div className="docs-main">
+            <h3>One-click Claude Desktop setup</h3>
+            <p>Open the <a href={RELEASE_URL}>.mcpb bundle from the latest release</a> to install the stdio server without editing config.</p>
+            <p>For manual setup, use the README JSON below. Claude Desktop does not expand <code>%LOCALAPPDATA%</code>: replace it in both paths with your full app-data directory (for example <code>{String.raw`C:\Users\YOUR_USERNAME\AppData\Local`}</code>), or copy the generated config from the extension’s Settings page. Restart the client after saving.</p>
+            <p>Cline and Continue are standard-stdio compatibility paths; they were not individually smoke-tested. Use the clipboard path for ChatGPT.</p>
             {configs.map((config) => (
               <section key={config.name}>
                 <h3>
@@ -280,20 +162,16 @@ export default function Page() {
           <div className="agent-demo mt-32">
             <div className="chat">
               <div className="mini-heading">prompt</div>
-              <p className="chat-bubble user">Uoink these three competitor videos, classify their hooks, and write a launch memo with citations.</p>
+              <p className="chat-bubble user">Search my saved videos for the launch announcement and give me timestamped excerpts I can cite.</p>
               <div className="mini-heading">result</div>
-              <p className="chat-bubble assistant">The agent captures each source, polls jobs, fetches corpora, classifies hooks, searches your library, then writes the memo into your workspace.</p>
+              <p className="chat-bubble assistant">The agent searches the local library, reads matching items, and retrieves evidence cards with timestamped source links.</p>
             </div>
             <div className="log">
               <div className="mini-heading">tool sequence</div>
-              <pre className="mcp-log" style={{ margin: 0, whiteSpace: "pre-wrap" }}>{`uoink_video(url_1)
-uoink_video(url_2)
-uoink_video(url_3)
-get_job_status(job_id)
-get_uoink_corpus(corpus_id)
-classify_hook(corpus_id)
-search_uoinks("launch narrative")
-write_blog(corpus_set)`}</pre>
+              <pre className="mcp-log" style={{ margin: 0, whiteSpace: "pre-wrap" }}>{`search_library({ query: "launch announcement" })
+get_library_item({ video_id })
+search_clips({ query: "launch announcement" })
+get_evidence_card({ video_id })`}</pre>
             </div>
           </div>
           <figure className="feature-visual product-figure wide mt-32">
@@ -334,7 +212,7 @@ write_blog(corpus_set)`}</pre>
               Names stay visible. Details stay <em>folded.</em>
             </h2>
             <p className="lede">
-              The manifest remains canonical for schemas. This page keeps the public tool names readable for humans, crawlers, and agents without turning the page into one endless list.
+              The manifest includes the release registry’s schemas and transport labels. This page keeps the public tool names readable for humans, crawlers, and agents without turning the page into one endless list.
             </p>
             <p className="body-l">
               Start with <code>uoink_video</code>, <code>search_uoinks</code>, <code>get_uoink_corpus</code>, <code>classify_hook</code>, and <code>find_mentions</code>. Open a bucket when you need the rest.

@@ -2,7 +2,7 @@
   "name": "io.github.ryanbiddy/uoink",
   "display_name": "Uoink",
   "description": "Uoink keeps the videos, podcasts, and articles creators and AI developers study on their own disk, then hands them to Claude, ChatGPT, Cursor, or a local MCP agent as a cited corpus.",
-  "version": "3.3.1",
+  "version": "3.8.0",
   "homepage": "https://uoink.app",
   "documentation": "https://uoink.app/developers",
   "repository": {
@@ -17,14 +17,20 @@
   "install": {
     "windows": "https://uoink.app/install",
     "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/latest",
-    "notes": "Install the free local helper, then use the .mcpb bundle for one-click Claude Desktop setup, or paste the stdio config from the setup page."
+    "notes": "Unsigned installer, about 390 MB; no admin rights needed. Windows SmartScreen: More info → Run anyway. Then open the .mcpb bundle for one-click Claude Desktop setup, or copy the setup page’s stdio config."
   },
   "transports": [
     {
       "type": "stdio",
       "command": "%LOCALAPPDATA%\\Uoink\\python\\python.exe",
-      "args": ["%LOCALAPPDATA%\\Uoink\\uoink_mcp.py"],
-      "tested_clients": ["Claude Desktop", "Cursor", "Cline", "Continue"]
+      "args": [
+        "%LOCALAPPDATA%\\Uoink\\uoink_mcp.py"
+      ],
+      "tested_clients": [
+        "Claude Desktop",
+        "Cursor"
+      ],
+      "note": "Claude Desktop does not expand %LOCALAPPDATA%; use absolute paths or the generated setup config. Cline and Continue were not individually smoke-tested."
     },
     {
       "type": "http",
@@ -36,10 +42,23 @@
     {
       "type": "openapi",
       "spec_url": "http://127.0.0.1:5179/openapi/v1/spec.json",
-      "note": "For agents that do not speak MCP (Gemini, Grok, Perplexity)."
+      "note": "OpenAPI 3.1 bridge for local agents that do not speak MCP."
     }
   ],
   "manifest": "https://uoink.app/mcp/manifest.json",
   "tools_reference": "https://uoink.app/mcp",
-  "keywords": ["youtube", "transcription", "mcp", "local-first", "claude", "rag", "creator-tools", "podcast", "corpus"]
+  "keywords": [
+    "youtube",
+    "transcription",
+    "mcp",
+    "local-first",
+    "claude",
+    "rag",
+    "creator-tools",
+    "podcast",
+    "corpus"
+  ],
+  "tool_count": 88,
+  "stdio_tool_count": 32,
+  "platform": "Windows 10/11 only. No Mac build scheduled."
 }

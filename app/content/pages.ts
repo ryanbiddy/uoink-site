@@ -1,4 +1,5 @@
 import { MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT, mcpTools } from "./mcp-tools";
+import { MCP_STDIO_CONFIG } from "./mcp-config";
 import { PRODUCT_STATUS } from "./product-status";
 
 export type PageId =
@@ -51,7 +52,7 @@ export const CONTACT_EMAIL = "hi@uoink.app";
 // surfaces that can't import it -- public/.well-known/mcp.json and
 // public/.well-known/mcp/server-card.json -- carry the same value and must be
 // bumped alongside this constant.
-export const VERSION = "v3.3.1";
+export const VERSION = "v3.8.0";
 // Numeric form (no leading "v") for machine-readable manifests and server cards.
 export const VERSION_NUMBER = VERSION.replace(/^v/, "");
 
@@ -64,7 +65,7 @@ const installFaq: FaqItem[] = [
   {
     question: "What operating systems are supported by Uoink?",
     answer:
-      `${PRODUCT_STATUS.mac.visible}. Uoink supports Windows 10 and 11 today. A manual source path is available for developers who want to run the local helper directly.`,
+      `${PRODUCT_STATUS.mac.visible}`,
   },
   {
     question: "Does the helper require administrator permissions?",
@@ -92,7 +93,7 @@ const privacyFaq: FaqItem[] = [
   {
     question: "Where is my Anthropic API key stored?",
     answer:
-      "Your key is stored in the operating system credential vault. On Windows that means Windows Credential Manager. On macOS that means Keychain.",
+      "Optional AI features use your own Anthropic key. Entity extraction is off by default.",
   },
   {
     question: "When does anything leave my machine?",
@@ -105,17 +106,17 @@ const agentsFaq: FaqItem[] = [
   {
     question: "What is MCP and how does Uoink use it?",
     answer:
-      "Model Context Protocol lets an AI client call local tools. Uoink exposes a local stdio MCP server so Claude Desktop, Cursor, Cline, Continue, and similar clients can capture and search your library.",
+      "Model Context Protocol lets an AI client call local tools. Uoink exposes a local stdio MCP server so Claude Desktop and Cursor (the tested clients) can capture and search your library.",
   },
   {
     question: "Does the agent need the clipboard flow?",
     answer:
-      "No. The agent can call uoink_video, poll get_job_status, then read the corpus with get_uoink_corpus.",
+      "No. Claude Desktop and Cursor can capture, search, and read your library over MCP. ChatGPT uses the clipboard path.",
   },
   {
     question: "Is HTTP transport supported?",
     answer:
-      "Stdio is the supported path. HTTP JSON-RPC on 127.0.0.1:5179/mcp is experimental for local integrations.",
+      "Uoink exposes 32 tools over stdio and 88 over local HTTP JSON-RPC at 127.0.0.1:5179/mcp/v1.",
   },
 ];
 
@@ -139,14 +140,14 @@ export const pages: Record<PageId, SitePage> = {
   <div class="container">
     <div class="hero-grid">
       <div class="copy">
-        <span class="eyebrow">uoink.app / v3.3</span>
+        <span class="eyebrow">uoink.app / ${VERSION}</span>
         <h1 class="display-xl">Uoink that <em>shit.</em></h1>
-        <p class="lede">Local corpus for creators and AI developers. One click saves the videos, podcasts, and articles you study to your own disk, then hands them to your AI as a cited corpus you write from in your voice.</p>
+        <p class="lede">A local library for the videos and podcasts you study, that any AI you use can search and cite.</p>
         <div class="ctas">
           <a class="btn primary large" href="${RELEASE_URL}">Get Uoink</a>
           <a class="btn ghost large" href="#live-uoink">See a live uoink</a>
         </div>
-        <p class="sub-cta">Open source / MIT / zero telemetry / ${MCP_TOOL_COUNT} MCP tools / Windows now / ${PRODUCT_STATUS.mac.visible}</p>
+        <p class="sub-cta">Free / MIT / no required telemetry / ${MCP_STDIO_TOOL_COUNT} stdio tools / ${MCP_TOOL_COUNT} HTTP tools / ${PRODUCT_STATUS.mac.visible}</p>
       </div>
       <div class="hero-demo" id="live-uoink">
         <div class="corpus" data-corpus-animate>
@@ -158,15 +159,31 @@ export const pages: Record<PageId, SitePage> = {
           <span class="ln k">## Metadata</span>
           <span class="ln dim">duration, views, upload date, channel context, source URL</span>
           <span class="ln k">## Transcript</span>
-          <span class="ln hl">[00:47] hook classified as curiosity_gap + stakes</span>
+          <span class="ln hl">[00:47] timestamped transcript excerpt</span>
           <span class="ln k">## Screenshots</span>
-          <span class="ln dim">12 frames on disk / 4 in clipboard budget</span>
+          <span class="ln dim">timestamped frames saved on disk</span>
           <span class="ln k">## Comments</span>
-          <span class="ln dim">top 50 comments with themes and disagreements</span>
+          <span class="ln dim">top comments saved with the source</span>
         </div>
         <p class="mono caps" style="color:var(--parchment);margin-top:14px;text-align:right;font-size:9.5px">one uoink / readable by Claude, ChatGPT, and agents</p>
       </div>
     </div>
+  </div>
+</section>
+<section class="section" data-screen-label="home / living library" id="living-library">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">New in 3.8.0: Living Library</span>
+      <h2 class="display-l">Find the moment. <em>Cite the source.</em></h2>
+    </div>
+    <div class="hook-grid">${featureCards([
+      ["Clip search + evidence cards", "Search inside videos for timestamped, deep-linked excerpts your AI can quote and cite. Now on everyday stdio MCP."],
+      ["Standing capture", "Follow a YouTube channel, YouTube playlist, or podcast RSS feed. With capture enabled, new uploads and episodes land in your library."],
+      ["Library reach over MCP", "Search the library, read items, and use resource templates and prompts from your MCP client."],
+      ["Cited range export", "Quote a stretch of video or an episode with speaker labels, chapters, and provenance."],
+      ["Chapter navigation", "Jump between chapters on items that have them."]
+    ])}</div>
+    <p class="mt-32"><a class="btn primary" href="https://github.com/ryanbiddy/uoink/releases/tag/v3.8.0">3.8.0 release notes</a> <a class="btn ghost" href="/changelog">Changelog</a></p>
   </div>
 </section>
 <section class="section tight" data-screen-label="home / product shot">
@@ -176,7 +193,7 @@ export const pages: Record<PageId, SitePage> = {
       <div class="feature-visual-body">
         <div class="feature-visual-shot">
           <img src="/product/hero-library.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Uoink dashboard library showing dozens of saved YouTube videos as searchable source cards with transcripts, hook labels, topic filters, and channel context on the local machine." />
-          <figcaption>Your library: every capture becomes a searchable source card with hooks, topics, and comments. Nothing leaves the machine.</figcaption>
+          <figcaption>Your captures, searchable on your own disk. Hand the transcript and frames to the AI you choose.</figcaption>
         </div>
       </div>
     </figure>
@@ -193,7 +210,7 @@ export const pages: Record<PageId, SitePage> = {
     <div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
       <article class="card"><span class="num">01</span><h3>Capture the <em>source.</em></h3><p>Transcript with timestamps, screenshots, description, title, thumbnail, channel context, and comments in one markdown file.</p><a class="arr-link" href="/how-it-works">See the workflow -></a></article>
       <article class="card"><span class="num">02</span><h3>Keep the <em>asset.</em></h3><p>Every capture writes to disk and into a local SQLite index. Search it later, cite it later, move it into your own vault.</p><a class="arr-link" href="/features">Browse features -></a></article>
-      <article class="card"><span class="num">03</span><h3>Hand it to <em>AI.</em></h3><p>Paste into Claude or ChatGPT, send directly, or let an MCP agent call Uoink without touching the clipboard.</p><a class="arr-link" href="/developers">Open developer docs -></a></article>
+      <article class="card"><span class="num">03</span><h3>Hand it to <em>AI.</em></h3><p>Paste transcript and frames into Claude or ChatGPT, or let an MCP agent search and cite your library.</p><a class="arr-link" href="/developers">Open developer docs -></a></article>
     </div>
   </div>
 </section>
@@ -201,8 +218,8 @@ export const pages: Record<PageId, SitePage> = {
   <div class="container" style="display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center">
     <div>
       <span class="eyebrow">local-first, by design</span>
-      <h2 class="display-l" style="margin:8px 0 0">No account. No Uoink cloud. <em>No telemetry.</em></h2>
-      <p class="body-l" style="margin-top:18px;max-width:60ch">The helper runs on localhost. Your corpus lands on your disk. Optional Hook Type, Comment Intelligence, and Entity Extraction calls use your own Anthropic key, not a Uoink proxy.</p>
+      <h2 class="display-l" style="margin:8px 0 0">No account. No Uoink cloud. <em>Your disk.</em></h2>
+      <p class="body-l" style="margin-top:18px;max-width:60ch">The helper runs on localhost. Your corpus lands on your disk. Entity extraction is opt-in and off by default. If you add your own Anthropic key, the model-usage meter shows real usage.</p>
     </div>
     <a class="btn ink" href="/privacy">Read privacy -></a>
   </div>
@@ -215,9 +232,9 @@ export const pages: Record<PageId, SitePage> = {
       <p class="lede">The card stays the shared object. The next move changes by job.</p>
     </div>
     <div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
-      <a class="card" href="/creators"><span class="num">01</span><h3>Creators.</h3><p>Skip the rewatch. Audit hooks, pacing, screenshots, and comments. Write threads and posts from your sources in Writing Studio with creator credit baked in.</p><span class="arr-link">See creator workflow -></span></a>
-      <a class="card" href="/developers"><span class="num">02</span><h3>Developers.</h3><p>Treat your distribution loop like a local dev tool. Get an offline SQLite database, an MCP server, and copyable Claude/Cursor configs to query your library.</p><span class="arr-link">Open developer docs -></span></a>
-      <a class="card" href="/sources"><span class="num">03</span><h3>Sources.</h3><p>Uoink captures video, audio, and text. Index YouTube, podcasts, newsletters, and social thread discussions directly on your workstation.</p><span class="arr-link">Browse supported sources -></span></a>
+      <a class="card" href="/creators"><span class="num">01</span><h3>Creators.</h3><p>Find the moment you need, read the transcript beside the frames, and export a cited range for your next draft.</p><span class="arr-link">See creator workflow -></span></a>
+      <a class="card" href="/developers"><span class="num">02</span><h3>Developers.</h3><p>Give Claude Desktop or Cursor a local library to search and cite. Start with the stdio config or the Claude Desktop bundle.</p><span class="arr-link">Open developer docs -></span></a>
+      <a class="card" href="/sources"><span class="num">03</span><h3>Sources.</h3><p>Capture YouTube, X video and post text, podcasts, web articles, and Reddit threads into one local library.</p><span class="arr-link">Browse supported sources -></span></a>
     </div>
   </div>
 </section>
@@ -246,16 +263,15 @@ export const pages: Record<PageId, SitePage> = {
     <div class="agent-demo">
       <div class="chat">
         <div class="mini-heading">model agnostic</div>
-        <p class="chat-bubble user">Uoink this video and compare the hook against my last ten saved competitor videos.</p>
-        <p class="chat-bubble assistant">Calling <code>uoink_video</code>, then <code>classify_hook</code>, then <code>search_uoinks</code>. Your model reads the corpus. Uoink stays the capture layer.</p>
+        <p class="chat-bubble user">Find the moment this saved video discusses language models and give me a source link.</p>
+        <p class="chat-bubble assistant">Calling <code>search_clips</code>, then <code>get_evidence_card</code>. Your AI reads timestamped excerpts it can quote and cite.</p>
       </div>
       <div class="log">
         <div class="mini-heading">mcp tool trace</div>
-        <pre class="mcp-log" style="margin:0;white-space:pre-wrap">uoink_video(url)
-get_job_status(job_id)
-get_uoink_corpus(corpus_id)
-classify_hook(corpus_id)
-find_mentions("Karpathy")</pre>
+        <pre class="mcp-log" style="margin:0;white-space:pre-wrap">search_library(query)
+get_library_item(video_id)
+search_clips(query)
+get_evidence_card(video_id)</pre>
       </div>
     </div>
     <div class="text-center mt-32">
@@ -267,14 +283,14 @@ find_mentions("Karpathy")</pre>
 <section class="section" data-screen-label="home / install">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">install in a minute</span>
+      <span class="eyebrow">install Uoink</span>
       <h2 class="display-l">One helper. One extension. Then the <em>U button.</em></h2>
       <p class="lede">Download the helper, install the extension, open a video, and click Uoink. The helper bundles Python, yt-dlp, and ffmpeg so you never install them yourself.</p>
     </div>
     <div class="ledger">
       <div class="ledger-card live"><div class="top"><span>Windows</span><span>live path</span></div><div class="body-l"><h3>Download the helper.</h3><p class="ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p></div><div class="foot"><a class="btn primary small" href="${RELEASE_URL}">Download -></a></div></div>
       <div class="ledger-card pend"><div class="top"><span>Extension</span><span>pending review</span></div><div class="body-l"><h3>Install the browser button.</h3><p class="ver">Chrome / Edge / Brave / Vivaldi / Arc / Opera GX</p><p>Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at <code>%LOCALAPPDATA%\\Uoink\\extension</code>.</p></div><div class="foot"><a class="btn ghost small" href="/install#extension">Install notes -></a></div></div>
-      <div class="ledger-card queue"><div class="top"><span>Mac</span><span>${PRODUCT_STATUS.mac.label}</span></div><div class="body-l"><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p></div><div class="foot"><a class="btn ghost small" href="/install#mac">Mac status -></a></div></div>
+      <div class="ledger-card"><div class="top"><span>Mac</span><span>${PRODUCT_STATUS.mac.label}</span></div><div class="body-l"><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p></div><div class="foot"><a class="btn ghost small" href="/install#mac">Mac status -></a></div></div>
     </div>
   </div>
 </section>
@@ -302,8 +318,8 @@ find_mentions("Karpathy")</pre>
         <span class="eyebrow">install</span>
         <h1 class="display-xl">Install <em>Uoink.</em></h1>
         <div class="ctas"><a class="btn primary large with-logo" href="${RELEASE_URL}">${WINDOWS_MARK}Download Windows installer</a><a class="btn ghost large" href="/how-it-works">See how it works</a></div>
-        <p class="footnote text-xs dim mt-8">Note: Windows may flag early builds. Click <strong>More info</strong> and then <strong>Run anyway</strong> if prompted.</p>
-        <p class="sub-cta mt-16">Windows 10/11 / Local helper & browser button</p>
+        <p class="footnote text-xs dim mt-8">The installer is unsigned. Windows SmartScreen will show a warning. <strong>More info → Run anyway</strong>.</p>
+        <p class="sub-cta mt-16">Windows 10/11 only / About 390 MB / No admin rights needed</p>
         <p class="lede">Get the helper running, add the browser button, and click Uoink on any video or Reddit thread. No Python, no command line, no path wrangling.</p>
         <div class="brand-strip" aria-label="Install surfaces">
           <!-- GitHub logo source: https://github.com/logos; license/usage confirmation: official GitHub mark, unmodified integration callout under GitHub logo guidelines. -->
@@ -336,8 +352,8 @@ find_mentions("Karpathy")</pre>
       <article class="card">
         <span class="num">01</span>
         <h3>Download the helper.</h3>
-        <p>Run the Windows installer. It places the local loopback helper in your user folder.</p>
-        <p class="footnote text-xs dim">Note: Windows may flag early builds. Click <strong>More info</strong> and then <strong>Run anyway</strong> if prompted.</p>
+        <p>Run the unsigned Windows installer (about 390 MB). No admin rights needed; it installs to <code>%LOCALAPPDATA%\\Uoink</code>.</p>
+        <p class="footnote text-xs dim">The installer is unsigned. Windows SmartScreen will show a warning. <strong>More info → Run anyway</strong>.</p>
       </article>
       <article class="card">
         <span class="num">02</span>
@@ -382,14 +398,14 @@ find_mentions("Karpathy")</pre>
           <span class="text-xs dim">Web Store review pending</span>
         </div>
       </div>
-      <div class="ledger-card queue" id="mac">
+      <div class="ledger-card" id="mac">
         <div class="top"><span class="platform-label">${MAC_MARK}Mac</span><span>${PRODUCT_STATUS.mac.label}</span></div>
         <div class="body-l">
           <h3>${PRODUCT_STATUS.mac.heading}</h3>
           <p class="ver">${PRODUCT_STATUS.mac.tech}</p>
           <p>${PRODUCT_STATUS.mac.detail}</p>
         </div>
-        <div class="foot"><a class="btn ghost small with-logo" href="${GITHUB_URL}/watchers">${MAC_MARK}Watch GitHub -></a></div>
+        <div class="foot"><span class="text-xs dim">Windows 10/11 only</span></div>
       </div>
     </div>
   </div>
@@ -487,7 +503,7 @@ find_mentions("Karpathy")</pre>
       <article class="step-card" style="border-left:4px solid var(--vermillion);padding-left:24px">
         <span class="num" style="font-size:24px;font-weight:bold;color:var(--vermillion)">05</span>
         <h3 style="margin:8px 0;font-size:22px">Distribute with agents.</h3>
-        <p>Uoink runs an MCP server that connects directly to Cursor, Claude Desktop, and ChatGPT. Your agents search the library and write drafts without ever touching the clipboard.</p>
+        <p>Claude Desktop and Cursor can search and cite your library over MCP. For ChatGPT, paste the transcript and frames from the clipboard.</p>
       </article>
     </div>
   </div>
@@ -525,7 +541,7 @@ find_mentions("Karpathy")</pre>
 ])}</div></div></section>
 <section class="section" data-screen-label="features / organize"><div class="container"><div class="section-head"><span class="eyebrow">job 2 / organize</span><h2 class="display-l">Turn captures into a <em>library.</em></h2><p class="lede">Every capture compounds: searchable, tagged, and citable from one local index that keeps getting denser.</p></div><div class="hook-grid">${featureCards([
 ["SQLite FTS5 search","Search transcripts, titles, comments, metadata, and corpus text locally."],
-["Topic folders","Route captures into folders from editable keyword rules."],
+["Local files","Structured Markdown and a JSON sidecar on your own disk."],
 ["Memory dashboard","Browse recent captures, job states, thumbnails, health, and actions."],
 ["Entity mentions","Find every corpus that names a person, tool, company, or topic."],
 ["Hook taxonomy","Classify openings across nine categories for creator research."],
@@ -543,48 +559,19 @@ find_mentions("Karpathy")</pre>
     title: "MCP YouTube Server: Claude Desktop and Cursor Tools",
     subtitle: `${MCP_TOOL_COUNT} MCP tools in the registry, ${MCP_STDIO_TOOL_COUNT} curated over stdio. Available instantly.`,
     description:
-      "Use Uoink as a local MCP server for Claude Desktop, Cursor, Cline, Continue, and ChatGPT Desktop.",
+      "Use Uoink as a local MCP server for Claude Desktop and Cursor.",
     keywords: ["mcp youtube server", "claude desktop youtube tool", "cursor mcp server", "mcp video tool"],
     faq: agentsFaq,
     html: `
-<section class="hero" data-screen-label="agents / hero"><div class="container"><div class="section-head"><span class="eyebrow">agents and MCP</span><h1 class="display-xl">Uoink is an <em>MCP server.</em></h1><p class="lede">Give your local AI agent eyes and ears on the web. Uoink exposes ${MCP_TOOL_COUNT} local tools, including capture, search, hook classification, comment analysis, and entity lookup.</p><div class="ctas"><a class="btn primary large" href="#configs">Copy config</a><a class="btn ghost large" href="/mcp">Read MCP manifest</a></div><div class="brand-strip" aria-label="Agent clients">
+<section class="hero" data-screen-label="agents / hero"><div class="container"><div class="section-head"><span class="eyebrow">agents and MCP</span><h1 class="display-xl">Uoink is an <em>MCP server.</em></h1><p class="lede">Give your agent a local library to search and cite. Uoink exposes ${MCP_STDIO_TOOL_COUNT} tools over stdio and ${MCP_TOOL_COUNT} in the HTTP registry.</p><div class="ctas"><a class="btn primary large" href="#configs">Copy config</a><a class="btn ghost large" href="/mcp">Read MCP manifest</a></div><div class="brand-strip" aria-label="Agent clients">
 <!-- Claude logo source: https://www.anthropic.com/ and https://claude.ai/favicon.svg; license/usage confirmation: official Claude site mark, unmodified integration callout. -->
 <span class="logo-chip brand-mark-pill logo-mark" aria-label="Claude"><img src="/assets/brand-logos/claude.svg" alt="Claude" width="30" height="30" loading="lazy" decoding="async" /></span>
-<!-- ChatGPT logo source: https://openai.com/brand/ and https://cdn.oaistatic.com/assets/favicon-l4nq08hd.svg; license/usage confirmation: official ChatGPT/OpenAI asset, unmodified integration callout. -->
-<span class="logo-chip brand-mark-pill logo-mark logo-dark" aria-label="ChatGPT"><img src="/assets/brand-logos/chatgpt.svg" alt="ChatGPT" width="30" height="30" loading="lazy" decoding="async" /></span>
 <!-- Cursor logo source: https://cursor.com/ and https://cursor.com/marketing-static/favicon.svg; license/usage confirmation: official Cursor site asset, unmodified integration callout because no separate public brand portal was found. -->
 <span class="logo-chip brand-mark-pill logo-mark" aria-label="Cursor"><img src="/assets/brand-logos/cursor.svg" alt="Cursor" width="30" height="30" loading="lazy" decoding="async" /></span>
-<!-- Obsidian logo source: https://obsidian.md/brand; license/usage confirmation: official Obsidian brand asset, unmodified integration callout. -->
-<span class="logo-chip brand-mark-pill logo-mark" aria-label="Obsidian"><img src="/assets/brand-logos/obsidian.svg" alt="Obsidian" width="30" height="30" loading="lazy" decoding="async" /></span>
 <!-- GitHub logo source: https://github.com/logos; license/usage confirmation: official GitHub mark, unmodified integration callout under GitHub logo guidelines. -->
 <span class="logo-chip brand-mark-pill logo-mark" aria-label="GitHub"><img src="/assets/brand-logos/github.svg" alt="GitHub" width="30" height="30" loading="lazy" decoding="async" /></span>
 </div></div></div></section>
-<section class="section" data-screen-label="agents / configs" id="configs"><div class="container"><div class="section-head"><span class="eyebrow">install in your client</span><h2 class="display-l">Copy the config. Then let the agent <em>call tools.</em></h2><p class="lede">These snippets use absolute paths to your installation directory (replacing <code>YOUR_USERNAME</code> with your actual Windows username).</p></div><div class="docs-main"><h3><span class="anchor">Claude Desktop</span></h3><pre>{
-  "mcpServers": {
-    "uoink": {
-      "command": "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\python\\\\python.exe",
-      "args": [
-        "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\uoink_mcp.py"
-      ]
-    }
-  }
-}</pre><h3><span class="anchor">Cursor</span></h3><pre>{
-  "mcpServers": {
-    "uoink": {
-      "command": "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\python\\\\python.exe",
-      "args": [
-        "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\uoink_mcp.py"
-      ]
-    }
-  }
-}</pre><h3><span class="anchor">Cline / Continue</span></h3><pre>{
-  "name": "uoink",
-  "transport": "stdio",
-  "command": "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\python\\\\python.exe",
-  "args": [
-    "C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\uoink_mcp.py"
-  ]
-}</pre></div></div></section>
+<section class="section" data-screen-label="agents / configs" id="configs"><div class="container"><div class="section-head"><span class="eyebrow">install in your client</span><h2 class="display-l">Connect your <em>library.</em></h2><p class="lede">Tested with Claude Desktop and Cursor. Open the <a href="${RELEASE_URL}">.mcpb bundle from the latest release</a> for one-click Claude Desktop setup, or use the README config:</p></div><div class="docs-main"><pre>${escapeHtml(MCP_STDIO_CONFIG)}</pre><p>Claude Desktop does not expand <code>%LOCALAPPDATA%</code>. Use absolute paths in both fields, or copy the generated config from the extension’s Settings page. Restart the client after saving. Cline and Continue were not individually smoke-tested. ChatGPT uses the clipboard path.</p></div></div></section>
 <section class="section" data-screen-label="agents / tools"><div class="container"><div class="section-head"><span class="eyebrow">tools your agent can call</span><h2 class="display-l">Real names, real <em>tools.</em></h2><p class="lede">Use the <code>uoink_*</code> names for new configs. Migration aliases may exist in older installs, but the public docs should point agents at Uoink.</p></div><div class="docs-main">${toolRows()}</div><p class="mt-32"><a class="btn primary" href="/mcp">Open machine-readable MCP page -></a></p></div></section>
 <section class="section" data-screen-label="agents / trace"><div class="container"><div class="section-head"><span class="eyebrow">composing Uoink with other tools</span><h2 class="display-l">Ask Cursor to tear down 3 competitor videos <em>for real.</em></h2></div><div class="agent-demo"><div class="chat"><div class="mini-heading">prompt</div><p class="chat-bubble user">Uoink these three competitor videos, classify the hooks, then write a short doc comparing pacing patterns.</p><div class="mini-heading">result</div><p class="chat-bubble assistant">The agent extracts each video, polls the jobs, fetches the corpora, runs hook classification, then writes the comparison into your repo or notes folder.</p></div><div class="log"><div class="mini-heading">tool sequence</div><pre class="mcp-log" style="margin:0;white-space:pre-wrap">uoink_video(url_1)
 uoink_video(url_2)
@@ -620,20 +607,29 @@ source: https://github.com/ryanbiddy/uoink
 license: MIT
 transport:
   - stdio: supported
-  - http: experimental at 127.0.0.1:5179/mcp
+  - http: http://127.0.0.1:5179/mcp/v1
+tools:
+  stdio: ${MCP_STDIO_TOOL_COUNT}
+  http: ${MCP_TOOL_COUNT}
 install:
   windows: ${CANONICAL_URL}/install#windows
-  mac: ${CANONICAL_URL}/install#mac</pre>
+platform: Windows 10/11 only. No Mac build scheduled.</pre>
+      <h2>Stdio setup</h2>
+      <p>Tested with Claude Desktop and Cursor. Install Uoink, then open the <a href="${RELEASE_URL}">.mcpb bundle from the latest release</a> for one-click Claude Desktop setup, or use this README config:</p>
+      <pre>${escapeHtml(MCP_STDIO_CONFIG)}</pre>
+      <p>Claude Desktop does not expand <code>%LOCALAPPDATA%</code>. Replace it in both paths with your full user app-data directory, or copy the generated config from the extension’s Settings page. Restart your client after saving. Cline and Continue are standard-stdio compatibility paths; they were not individually smoke-tested.</p>
+      <p>HTTP uses <code>X-Uoink-Token</code> from <code>%LOCALAPPDATA%\\Uoink\\token.txt</code>. The OpenAPI 3.1 bridge is for local agents that do not speak MCP.</p>
       <h2 id="tools">Tools</h2>
+      <p>${MCP_STDIO_TOOL_COUNT} over stdio; ${MCP_TOOL_COUNT} in the HTTP registry below. The manifest marks each tool’s transports.</p>
       ${toolRows()}
       <h2>Canonical config note</h2>
       <p>Use the generated local paths. After install, Uoink's setup page generates the real config for the user's machine. Snippets on the website are templates for humans and crawlers.</p>
-      <p><a class="btn primary" href="/agents">Human setup page</a> <a class="btn ghost" href="/mcp/manifest.json">Raw manifest JSON</a></p>
+      <p><a class="btn primary" href="/developers">Human setup page</a> <a class="btn ghost" href="/mcp/manifest.json">Raw manifest JSON</a></p>
     </article>
   </div>
 </section>
 <script type="application/json" id="uoink-mcp-manifest">
-{"server":{"name":"uoink","version":"${VERSION_NUMBER}","homepage":"${CANONICAL_URL}","source":"https://github.com/ryanbiddy/uoink","license":"MIT","transports":["stdio","http-experimental"]},"tools":${JSON.stringify(mcpTools.map(([name, description]) => ({ name, description })))}}</script>`,
+{"server":{"name":"uoink","version":"${VERSION_NUMBER}","homepage":"${CANONICAL_URL}","source":"https://github.com/ryanbiddy/uoink","license":"MIT","transports":["stdio","http"],"stdio_tool_count":${MCP_STDIO_TOOL_COUNT},"tool_count":${MCP_TOOL_COUNT}},"tools":${JSON.stringify(mcpTools.map(([name, description]) => ({ name, description })))}}</script>`,
   },
   about: {
     id: "about",
@@ -642,15 +638,15 @@ install:
     title: "About Uoink: Open Source Local Corpus Software",
     description:
       "Learn why Uoink is local-first, open source, and built around public GitHub releases instead of user tracking.",
-    keywords: ["uoink about", "uoink github downloads", "open source youtube tool", "local-first ai tool"],
+    keywords: ["uoink about", "uoink maker", "open source youtube tool", "local-first ai tool"],
     html: `
 <section class="hero" data-screen-label="about / hero">
   <div class="container">
     <div class="hero-grid">
       <div class="copy">
         <span class="eyebrow">about</span>
-        <h1 class="display-xl">Built in public. Counted in <em>public.</em></h1>
-        <p class="lede">Uoink is local corpus software for people who want to own the source material they study. The code is MIT, the releases are public, and the download count below comes straight from GitHub's API.</p>
+        <h1 class="display-xl">Your sources. Your disk. <em>Your AI.</em></h1>
+        <p class="lede">Uoink is local corpus software for people who want to own the source material they study. Ryan Biddy (@replayryan) makes Uoink as a personal side project. It is free and MIT-licensed.</p>
         <div class="ctas">
           <a class="btn primary large" href="${RELEASE_URL}">Latest release</a>
           <a class="btn ghost large" href="${GITHUB_URL}">Browse GitHub</a>
@@ -662,8 +658,8 @@ install:
         <span class="ln dim">source: github.com/ryanbiddy/uoink</span>
         <span class="ln k">tracking: none from Uoink</span>
         <span class="ln dim">Vercel Web Analytics only; cookieless pageviews</span>
-        <span class="ln k">downloads: GitHub public API</span>
-        <span class="ln dim">release assets counted, people never counted</span>
+        <span class="ln k">platform: Windows 10/11 only</span>
+        <span class="ln dim">no Mac build scheduled</span>
       </div>
     </div>
   </div>
@@ -693,7 +689,7 @@ install:
     keywords: ["uoink privacy", "local-first youtube extractor", "no telemetry youtube tool", "byo key youtube ai"],
     faq: privacyFaq,
     html: `
-<section class="section" data-screen-label="privacy / main"><div class="container"><article class="article"><div class="meta"><span>privacy</span><span>local-first</span></div><h1>Your corpus never leaves your <em>machine.</em></h1><p class="standfirst">Uoink extracts video and podcast content, stores it on your disk, and hands it to the AI you choose. There is no Uoink cloud because we never built one.</p><h2>What Uoink does.</h2><p>Uoink captures transcripts, screenshots, comments, channel context, podcast transcripts, metadata, and local indexes. It writes those artifacts into normal local files and a local SQLite index. You can paste the corpus into Claude or ChatGPT, or let an MCP agent read it directly.</p><h2>What Uoink skips.</h2><p>No telemetry. No analytics SDK in the application or extension. No account. No phone-home. No hosted corpus. No remote logging.</p><h3>Website analytics vs. local app privacy</h3><p>While the local Uoink desktop application and browser extension collect absolutely zero telemetry, the public marketing website (<code>uoink.video</code>) uses basic, privacy-respecting Vercel Analytics to count page visits and help us see how people find the installer. No information from your local captures, library, settings, or API keys is ever accessible to or shared with website analytics.</p><h3>Manual update check</h3><p>When you click the update check button in the dashboard settings, the application makes a direct query to <code>api.github.com</code> to compare version tags. This request transmits no user details, telemetry, or library data.</p><h2>Where your data lives.</h2><p>On Windows, the helper lives under <code>%LOCALAPPDATA%\\Uoink</code>. Captures write into your Uoink library folder. The optional Anthropic key is stored in Windows Credential Manager. On macOS, the planned path uses <code>~/Library/Application Support/Uoink/</code> and Keychain.</p><h2>Network calls Uoink makes.</h2><p>Extraction calls go to the source you asked for: YouTube, X, RSS hosts, or another supported URL. Optional Comment Intelligence, Hook Type, and Entity Extraction calls go to Anthropic with your key only when enabled. Nothing is proxied through Uoink.</p><h2>Open source: audit it yourself.</h2><p>The source is MIT-licensed at <a href="${GITHUB_URL}">github.com/ryanbiddy/uoink</a>. You can inspect the helper, loopback server, and network code.</p><p><a class="btn primary large" href="/install">Install Uoink</a> <a class="btn ghost large" href="/terms">Read terms</a></p></article></div></section><section class="section" data-screen-label="privacy / faq"><div class="container">${renderFaq(privacyFaq)}</div></section>`,
+<section class="section" data-screen-label="privacy / main"><div class="container"><article class="article"><div class="meta"><span>privacy</span><span>local-first</span></div><h1>Your corpus lives on your <em>machine.</em></h1><p class="standfirst">Uoink extracts video and podcast content, stores it on your disk, and hands it to the AI you choose. There is no Uoink cloud because we never built one.</p><h2>What Uoink does.</h2><p>Uoink captures transcripts, screenshots, comments, channel context, podcast transcripts, metadata, and local indexes. It writes those artifacts into normal local files and a local SQLite index. You can paste the corpus into Claude or ChatGPT, or let an MCP agent read it directly.</p><h2>What Uoink skips.</h2><p>No account, no Uoink cloud, and no required telemetry.</p><h3>Website analytics vs. local app privacy</h3><p>While the local Uoink desktop application and browser extension require no telemetry, the public marketing website (<code>uoink.app</code>) uses basic, privacy-respecting Vercel Analytics to count page visits and help us see how people find the installer. No information from your local captures, library, settings, or API keys is ever accessible to or shared with website analytics.</p><h3>Manual update check</h3><p>When you click the update check button in the dashboard settings, the application makes a direct query to <code>api.github.com</code> to compare version tags. This request transmits no user details, telemetry, or library data.</p><h2>Where your data lives.</h2><p>On Windows, the helper lives under <code>%LOCALAPPDATA%\\Uoink</code>. Captures write into your Uoink library folder. The optional Anthropic key is stored in Windows Credential Manager.</p><h2>Network calls Uoink makes.</h2><p>Extraction calls go to the source you asked for: YouTube, X, RSS hosts, or another supported URL. Optional AI calls use your own Anthropic key. Entity extraction is opt-in and off by default; the model-usage meter reports real usage. Nothing is proxied through Uoink.</p><h2>Open source: audit it yourself.</h2><p>The source is MIT-licensed at <a href="${GITHUB_URL}">github.com/ryanbiddy/uoink</a>. You can inspect the helper, loopback server, and network code.</p><p><a class="btn primary large" href="/install">Install Uoink</a> <a class="btn ghost large" href="/terms">Read terms</a></p></article></div></section><section class="section" data-screen-label="privacy / faq"><div class="container">${renderFaq(privacyFaq)}</div></section>`,
   },
   changelog: {
     id: "changelog",
@@ -701,10 +697,17 @@ install:
     mode: "mode-dark",
     title: "Changelog: Version Updates and Universal Extraction",
     description:
-      "Read Uoink release notes, v3.2 direction, universal extraction, podcast support, MCP improvements, and local corpus roadmap.",
+      "Read dated Uoink release notes from 3.4 through 3.8.0 Living Library.",
     keywords: ["uoink changelog", "uoink release notes", "uoink updates", "universal video uoink changelog"],
     html: `
-<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>latest first</span></div><h1>What's shipped, what's <em>coming.</em></h1><p class="standfirst">Engineers read changelogs to decide whether a tool is alive. Uoink is alive. This is the public summary; GitHub remains canonical.</p><h2>Latest: v3.2 track</h2><ul><li>Universal URL expansion for web video via yt-dlp backed extraction.</li><li>Podcast RSS and local transcription workstream.</li><li>Agent-readable site surfaces: /agents, /mcp, /llms.txt, /llms-full.txt.</li><li>Sharper positioning around corpus, local memory, and model-agnostic workflows.</li></ul><h2>Recent: v2.2</h2><ul><li>Dashboard, tray flow, install wizard, and local helper polish.</li><li>Memory/library surfaces for local captures.</li><li>${MCP_TOOL_COUNT} MCP tools for capture, search, health, citation maps, comments, hooks, taxonomy, entities, writing, and site access.</li></ul><h2>In flight.</h2><ul><li>${PRODUCT_STATUS.mac.visible}.</li><li>Podcast corpus UI and Whisper model controls.</li><li>Markdown memory layer and richer local corpus map.</li><li>Verification assistance that surfaces evidence and leaves the verdict to you.</li></ul><h2>Boundaries.</h2><p>Uoink stays away from hosted video warehouses, recommendation feeds, and social networks. The point is deliberate local work on your own machine.</p><p><a class="btn primary large" href="${RELEASE_URL}">Latest GitHub release</a> <a class="btn ghost large" href="/features">Feature inventory</a></p></article></div></section>`,
+<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">3.8.0 is Living Library. Dates below follow the product changelog.</p>
+<h2>v3.8.0 — Living Library</h2><p class="meta"><time datetime="2026-09-15">2026-09-15</time></p><p>Clip search and evidence cards join everyday stdio MCP. Standing capture follows YouTube channels, playlists, and podcast RSS feeds; MCP library search, item reads, resource templates, and prompts make the library easier to cite. Cited range export carries speaker labels, chapters, and provenance, with chapter navigation where chapters exist. Captures now show a toast instead of opening Explorer. Entity extraction is opt-in, the Anthropic usage meter reports real usage, and the recall hook is hardened against prompt injection from captured text.</p>
+<h2>v3.7.0</h2><p class="meta"><time datetime="2026-07-24">2026-07-24</time></p><p>Library cards and filters became quieter, Sources put available captures first, and saved items gained a clearer action menu. Updated video extraction and stricter URL, schema, and path checks hardened capture and local integrations; MCP initialization began reporting the product version.</p>
+<h2>v3.6.0</h2><p class="meta"><time datetime="2026-07-08">2026-07-08</time></p><p>Added local notes, short-video capture for TikTok, Reels, and Shorts, and image capture as library items. Each entered the shared corpus with source filters; image search used captions, filenames, and source metadata, with OCR deferred.</p>
+<h2>v3.5.0</h2><p class="meta"><time datetime="2026-07-08">2026-07-08</time></p><p>Made the Library source-first with platform, source-type, and author filters, readable folders, and searchable author information. X Article detection became consistent across capture entry points, with clearer messages when X blocked a fetch.</p>
+<h2>v3.4.1</h2><p class="meta"><time datetime="2026-07-07">2026-07-07</time></p><p>Pinned the extension popup’s primary capture action so it stayed reachable while secondary panels scrolled. Enlarged source and screenshot thumbnails in Generate and gave text sources an explicit no-preview tile.</p>
+<h2>v3.4.0</h2><p class="meta"><time datetime="2026-07-07">2026-07-07</time></p><p>Added X Article capture from the rendered, logged-in page and clearer failures for blocked link fetches. Activity messages better explained X posts without downloadable video, and saved-item action buttons wrapped to stay reachable on smaller displays.</p>
+<p><a class="btn primary large" href="https://github.com/ryanbiddy/uoink/releases/tag/v3.8.0">3.8.0 release notes</a> <a class="btn ghost large" href="${RELEASE_URL}">Latest GitHub release</a></p></article></div></section>`,
   },
   terms: {
     id: "terms",
@@ -750,7 +753,7 @@ install:
     <div style="display:flex;flex-direction:column;gap:32px">
       <div>
         <h3>1. Capture any source</h3>
-        <p>Save YouTube videos, podcasts, Substack posts, Reddit threads, and LinkedIn clips with one click. Uoink structures the transcript, frames, comments, and metadata into a clean markdown document on your disk.</p>
+        <p>Save YouTube videos, podcasts, web articles, X video and post text, and Reddit threads. Uoink structures the transcript, frames, comments, and metadata into a clean markdown document on your disk.</p>
       </div>
 
       <div>
@@ -866,7 +869,7 @@ install:
         </div>
         <p style="font-size:14px;color:var(--parchment);margin-bottom:12px"><strong>What it captures:</strong> Video media attached to tweets and posts.</p>
         <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><strong>How it lands:</strong> Downloads the video stream, extracts the audio, and runs local Whisper transcription to produce text transcripts.</p>
-        <p style="font-size:13px;color:var(--vermillion)"><strong>Limitations:</strong> Video posts only. Text-only tweets, tweet threads, and image posts are not supported due to platform API access restrictions.</p>
+        <p style="font-size:13px;color:var(--vermillion)"><strong>Limitations:</strong> X post text can also be captured into the local library.</p>
       </article>
 
     </div>
@@ -880,7 +883,7 @@ install:
     mode: "mode-dark",
     title: "Uoink for Developers: Local MCP Server and SQLite Database",
     description:
-      "Connect Uoink to Claude Desktop, Cursor, and Cline using Model Context Protocol. Run loopback tools to query transcripts locally.",
+      "Connect Uoink to Claude Desktop and Cursor using Model Context Protocol. Run loopback tools to query transcripts locally.",
     keywords: [
       "uoink for developers",
       "mcp server video",
@@ -894,7 +897,7 @@ install:
     <div class="section-head">
       <span class="eyebrow">uoink for developers</span>
       <h1 class="display-xl">Local tools for <em>AI agents.</em></h1>
-      <p class="lede">Uoink runs a local Model Context Protocol (MCP) server on your machine. Give Claude Desktop, Cursor, and Cline tools to capture, index, and query web media without clipboard steps.</p>
+      <p class="lede">Uoink runs a local Model Context Protocol (MCP) server on your machine. Give Claude Desktop and Cursor tools to capture, index, and query web media without clipboard steps.</p>
     </div>
   </div>
 </section>
@@ -902,7 +905,7 @@ install:
 <section class="section" data-screen-label="developers / integration">
   <div class="container" style="max-width:80ch">
     <h2 class="display-l" style="margin-bottom:24px">Standard stdio & HTTP <em>transports.</em></h2>
-    <p class="body-l" style="margin-bottom:32px">The helper runs on port 5179. It exposes ${MCP_TOOL_COUNT} tools to search transcripts, retrieve screenshots, classify hooks, and extract claims. Everything runs offline on loopback.</p>
+    <p class="body-l" style="margin-bottom:32px">The helper exposes ${MCP_STDIO_TOOL_COUNT} tools over stdio and ${MCP_TOOL_COUNT} over local HTTP. Capture fetches the source; optional AI calls use your own Anthropic key.</p>
 
     <h3>1. Copy the stdio MCP configuration</h3>
     <p>Add the server to your client configuration file. Use absolute paths to your installation directory (e.g. replacing <code>YOUR_USERNAME</code> with your Windows username):</p>
@@ -925,7 +928,7 @@ install:
     <div class="docs-main" style="margin-bottom:32px;padding:20px;background:rgba(255,255,255,0.02);border-radius:6px;border:1px solid var(--ink-dim)">
       <p style="margin:0 0 8px"><strong>Endpoint URL:</strong> <code>http://localhost:5179/mcp/v1</code></p>
       <p style="margin:0 0 8px"><strong>Authentication Header:</strong> <code>X-Uoink-Token</code></p>
-      <p style="margin:0"><strong>Token Location:</strong> Read the token from the local file <code>%LOCALAPPDATA%\\Uoink\\token.txt</code> (or <code>~/Library/Application Support/Uoink/token.txt</code> on macOS).</p>
+      <p style="margin:0"><strong>Token Location:</strong> Read the token from the local file <code>%LOCALAPPDATA%\\Uoink\\token.txt</code>.</p>
     </div>
 
     <h3>2. Run a sample tool call</h3>
@@ -973,7 +976,7 @@ function toolRows(): string {
   return mcpTools
     .map(
       ([name, description]) =>
-        `<div class="tool-row"><div class="name">${escapeHtml(name)}<span class="args">local MCP tool</span></div><div class="desc">${escapeHtml(description)}<span class="ex">See /mcp/manifest.json for machine-readable schema.</span></div></div>`,
+        `<div class="tool-row"><div class="name">${escapeHtml(name)}<span class="args">HTTP registry; see manifest for stdio availability</span></div><div class="desc">${escapeHtml(description)}<span class="ex">See /mcp/manifest.json for machine-readable schema.</span></div></div>`,
     )
     .join("");
 }

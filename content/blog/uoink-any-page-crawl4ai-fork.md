@@ -49,7 +49,7 @@ async def scrape_local_page(url: str):
 
 It processes the DOM. It extracts the main content block, converts it to clean markdown, and saves both the markdown file and the screenshot into your local folder. 
 
-Finally, it indexes the content in `%LOCALAPPDATA%\Uoink\index.db` using SQLite's FTS5 engine. The entire process takes less than 3 seconds.
+Finally, it indexes the content in `%LOCALAPPDATA%\Uoink\index.db` using SQLite's FTS5 engine. Capture time depends on the source.
 
 ## Managing Dynamic Content and Timeouts
 
