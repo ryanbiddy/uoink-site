@@ -56,7 +56,7 @@ PowerShell blocks npm.ps1, so the npm.cmd shim was used. Playwright 1.62.1 was c
 
 ```powershell
 $env:NODE_PATH = (Resolve-Path .playwright/node_modules).Path
-$env:PLAYWRIGHT_CHROMIUM_EXECUTABLE = 'C:/Users/hello/AppData/Local/ms-playwright/chromium-1228/chrome-win64/chrome.exe'
+$env:PLAYWRIGHT_CHROMIUM_EXECUTABLE = "$env:LOCALAPPDATA/ms-playwright/chromium-1228/chrome-win64/chrome.exe"
 node scripts/check-launch.cjs
 ```
 

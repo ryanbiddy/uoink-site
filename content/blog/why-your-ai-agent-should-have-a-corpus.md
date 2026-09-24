@@ -74,8 +74,8 @@ Paste this snippet into your Claude Desktop configuration file:
 {
   "mcpServers": {
     "uoink": {
-      "command": "node",
-      "args": ["C:/Users/hello/AppData/Local/Uoink/mcp/server.js"]
+      "command": "C:\\Users\\<you>\\AppData\\Local\\Uoink\\python\\python.exe",
+      "args": ["C:\\Users\\<you>\\AppData\\Local\\Uoink\\uoink_mcp.py"]
     }
   }
 }
