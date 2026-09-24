@@ -23,7 +23,7 @@ The live site still says v3.3.1, "64 MCP tools", "14 over stdio", and "Mac build
 
 ## Checks you must run and report
 
-- `npm ci` (if node_modules is stale) then `npm run lint` and `npm run build` (this repo uses static export to `out/`): both must pass.
-- Serve `out/` locally (`npx serve out` or `python -m http.server -d out`) and screenshot `/`, `/install`, `/developers`, `/changelog` at 1440x900 and 390x844 with Playwright into `docs/launch/screens/`. Report console errors (must be zero).
+- `npm ci` (if node_modules is stale) then `npm run lint` and `npm run build` (this repo uses a static export; the export folder is named out): both must pass.
+- Serve the export folder locally (npx serve, or python -m http.server with -d pointing at it) and screenshot `/`, `/install`, `/developers`, `/changelog` at 1440x900 and 390x844 with Playwright into `docs/launch/screens/`. Report console errors (must be zero).
 - The grep list from change 10: paste the remaining hits with a reason each.
 - Write `docs/launch/handoff-astra-3.8.0-refresh.md`: files changed, counts you derived and how, commands run with results, screenshots, open questions.
