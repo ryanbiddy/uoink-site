@@ -1,24 +1,26 @@
-<!-- generated: 2026-09-23 / uoink v3.8.0 -->
-# Uoink 3.8.0 — Living Library
+<!-- reviewed: 2026-10-07 / candidate 3.8.1 / published 3.7.0 -->
+# Uoink - local source library
 
-> A local library for the videos and podcasts you study, that any AI you use can search and cite.
+Release status: **3.7.0 is the public download. 3.8.1 is a candidate in testing.** The Living Library features and tool catalog below describe that candidate; do not attribute them to the public 3.7.0 installer.
+
+> A local library for the videos and podcasts you study, that you can search and share with an AI client.
 
 Free, MIT-licensed. No account, no Uoink cloud, no required telemetry. Made by Ryan Biddy (@replayryan), a personal side project.
 
 ## Install
 
-Windows 10/11 only. No Mac build scheduled. Unsigned installer, about 390 MB; no admin rights needed. Windows SmartScreen will show a warning: More info → Run anyway. Installs to %LOCALAPPDATA%\Uoink. Sideload the browser extension from the install; Chrome Web Store listing pending.
+Windows 10/11 only. No Mac build scheduled. The published 3.7.0 Windows installer is 338,746,647 bytes (339 MB) and unsigned; no admin rights are needed. Windows may show a SmartScreen warning. Verify the download source before deciding to run it. Installs to %LOCALAPPDATA%\Uoink. Sideload the browser extension from the install; a store publication date is not promised.
 
 - [Install](https://uoink.app/install): helper and extension instructions.
 - [Latest release](https://github.com/ryanbiddy/uoink/releases/latest): installer and Claude Desktop .mcpb bundle.
-- [3.8.0 release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.8.0): Living Library.
+- [Published 3.7.0 release](https://github.com/ryanbiddy/uoink/releases/tag/v3.7.0): the current public download.
 - [Changelog](https://uoink.app/changelog): dated release summaries.
 
 ## Capture and library
 
 YouTube: timestamped transcript, screenshots, top comments, channel context, metadata. Also X video and post text, podcast RSS/Atom feeds, web articles, and Reddit threads. Capture with the YouTube button, right-click, Alt+U, or your AI agent. Files are structured Markdown plus a JSON sidecar on your own disk, indexed in one local library.
 
-3.8.0 adds clip search and evidence cards; standing capture for YouTube channels, YouTube playlists, and podcast RSS; MCP library search, item reads, resource templates and prompts; cited range export with speaker labels, chapters and provenance; and chapter navigation where chapters exist. Captures show toast notifications. Entity extraction is opt-in and off by default; the usage meter shows real Anthropic usage; the recall hook is hardened against prompt injection.
+The unpublished 3.8.1 candidate adds clip search and evidence cards; standing capture for YouTube channels, YouTube playlists, and podcast RSS; MCP library search, item reads, resource templates and prompts; cited range export with speaker labels, chapters and provenance; and chapter navigation where chapters exist. Captures show toast notifications. Entity extraction is opt-in and off by default; the usage meter shows real Anthropic usage; the recall hook is hardened against prompt injection.
 
 The library does not organize, file, or re-shelve itself. The Librarian only proposes; applying is off by default and its quality gate has not passed.
 
@@ -28,7 +30,7 @@ The library does not organize, file, or re-shelve itself. The Librarian only pro
 
 ## AI access
 
-Clipboard paste with transcript and frames works with Claude and ChatGPT. Local MCP exposes 32 tools over stdio and 88 in the HTTP registry, counted from release code. Tested clients: Claude Desktop and Cursor. Cline and Continue are standard-stdio compatibility paths, not individually smoke-tested. Do not claim ChatGPT app MCP support. OpenAPI 3.1 bridges local agents that do not speak MCP.
+Clipboard paste with transcript and frames works with Claude and ChatGPT. Local MCP exposes 32 tools over stdio and 88 in the HTTP registry, counted from candidate source at 2e724709d32e9bbf0ef6ccf62eb623d3d513c46c. Configuration examples target Claude Desktop and Cursor; fresh installed-client checks for this candidate are pending. Cline and Continue are standard-stdio compatibility paths, not individually smoke-tested. Do not claim ChatGPT app MCP support. OpenAPI 3.1 bridges local agents that do not speak MCP.
 
 - [Developers](https://uoink.app/developers): README config, .mcpb setup and tool catalog.
 - [MCP](https://uoink.app/mcp): transport details and tools.
@@ -42,3 +44,7 @@ Clipboard paste with transcript and frames works with Claude and ChatGPT. Local 
 - [Privacy](https://uoink.app/privacy): local corpus and optional AI calls.
 - [About](https://uoink.app/about): the project and maker.
 - [Field notes](https://uoink.app/blog): articles.
+
+## Network and privacy
+
+Capture contacts source websites. Enabled subscriptions poll for new items; enabled auto-ingest can capture them in the background. Truncated X text may use the FxTwitter fallback. Consented transcription/model downloads and optional Anthropic features contact their providers. Exporting or sharing with an agent sends content to the destination you choose. The marketing website separately uses Vercel Web Analytics. See the privacy page for details.

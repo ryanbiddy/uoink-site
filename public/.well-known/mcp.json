@@ -2,7 +2,7 @@
   "name": "io.github.ryanbiddy/uoink",
   "display_name": "Uoink",
   "description": "Uoink keeps the videos, podcasts, and articles creators and AI developers study on their own disk, then hands them to Claude, ChatGPT, Cursor, or a local MCP agent as a cited corpus.",
-  "version": "3.8.0",
+  "version": "3.8.1",
   "homepage": "https://uoink.app",
   "documentation": "https://uoink.app/developers",
   "repository": {
@@ -16,8 +16,8 @@
   },
   "install": {
     "windows": "https://uoink.app/install",
-    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/latest",
-    "notes": "Unsigned installer, about 390 MB; no admin rights needed. Windows SmartScreen: More info → Run anyway. Then open the .mcpb bundle for one-click Claude Desktop setup, or copy the setup page’s stdio config."
+    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/download/v3.7.0/uoink-3.7.0.mcpb",
+    "notes": "This catalog describes the 3.8.1 candidate; it is not the public installer. The published Windows download is 3.7.0 (339 MB, unsigned), with an unpacked browser extension. Follow /install for that release. Fresh installed-client checks for 3.8.1 are pending."
   },
   "transports": [
     {
@@ -26,11 +26,11 @@
       "args": [
         "%LOCALAPPDATA%\\Uoink\\uoink_mcp.py"
       ],
-      "tested_clients": [
+      "note": "Claude Desktop does not expand %LOCALAPPDATA%; use absolute paths or the generated setup config. Cline and Continue were not individually smoke-tested.",
+      "configuration_examples_for": [
         "Claude Desktop",
         "Cursor"
-      ],
-      "note": "Claude Desktop does not expand %LOCALAPPDATA%; use absolute paths or the generated setup config. Cline and Continue were not individually smoke-tested."
+      ]
     },
     {
       "type": "http",
@@ -60,5 +60,7 @@
   ],
   "tool_count": 88,
   "stdio_tool_count": 32,
-  "platform": "Windows 10/11 only. No Mac build scheduled."
+  "platform": "Windows 10/11 only. No Mac build scheduled.",
+  "release_status": "candidate",
+  "public_download_version": "3.7.0"
 }

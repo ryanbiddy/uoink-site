@@ -123,7 +123,7 @@ export default function Page() {
               Stdio and HTTP <em>transports.</em>
             </h2>
             <p className="lede">
-              Tested with Claude Desktop and Cursor. Install Uoink before connecting your client.
+              Configuration examples target Claude Desktop and Cursor. Install Uoink before connecting your client.
             </p>
             <p className="body-l">
               Uoink runs a local Model Context Protocol (MCP) server. The stdio transport connects as a local subprocess and exposes the {MCP_STDIO_TOOL_COUNT} curated everyday tools. The local HTTP JSON-RPC endpoint exposes the full {MCP_TOOL_COUNT}-tool registry.

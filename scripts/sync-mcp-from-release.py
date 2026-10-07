@@ -9,9 +9,16 @@ import subprocess
 
 parser = argparse.ArgumentParser()
 parser.add_argument("checkout", type=Path)
+parser.add_argument("--status", choices=("candidate", "published"), default="candidate")
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
 checkout = args.checkout.resolve()
+version = (checkout / "VERSION").read_text(encoding="utf-8").strip()
+if not re.fullmatch(r"\d+\.\d+\.\d+", version):
+    raise SystemExit("Invalid source VERSION")
+sources = ["VERSION", "uoink_mcp.py", "uoink_mcp_tools.py", "source_subscriptions.py"]
+if subprocess.check_output(["git", "-C", str(checkout), "diff", "HEAD", "--", *sources]):
+    raise SystemExit("Commit the MCP source inputs before generating their manifest")
 commit = subprocess.check_output([
     "git", "-c", f"safe.directory={checkout.as_posix()}", "-C", str(checkout),
     "rev-parse", "HEAD",
@@ -85,7 +92,7 @@ def summary(description):
 
 today = datetime.date.today().isoformat()
 rows = [[tool["name"], summary(tool["description"])] for tool in tools]
-output = f"""// Generated from ryanbiddy/uoink release/3.8.0 on {today}.
+output = f"""// Generated from ryanbiddy/uoink {version} ({args.status}) on {today}.
 // Source commit: {commit}
 // HTTP: TOOL_REGISTRY in uoink_mcp_tools.py; stdio: @mcp.tool in uoink_mcp.py.
 // Regenerate with: python scripts/sync-mcp-from-release.py <release-checkout>
@@ -101,7 +108,7 @@ export type McpTool = (typeof mcpTools)[number];
 """
 (root / "app/content/mcp-tools.ts").write_text(output, encoding="utf-8")
 manifest = {
-    "schema_version": "3.2", "version": "3.8.0", "name": "Uoink MCP Tool Manifest",
+    "schema_version": "3.2", "version": version, "release_status": args.status, "name": "Uoink MCP Tool Manifest",
     "description": "Local HTTP registry; tools marked stdio also appear on the everyday stdio surface.",
     "source": f"ryanbiddy/uoink@{commit}:uoink_mcp_tools.py",
     "generated": today, "tool_count": len(tools), "stdio_tool_count": len(stdio),

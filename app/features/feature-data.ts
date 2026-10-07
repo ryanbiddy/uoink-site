@@ -1044,7 +1044,7 @@ export const features: Feature[] = [
       "Start the client and verify the connection.",
       "Ask the agent to capture a video to test the setup."
     ],
-    "behindScenes": "Stdio runs the bundled Python against uoink_mcp.py. The separate HTTP JSON-RPC registry is at http://127.0.0.1:5179/mcp/v1 and uses X-Uoink-Token from the local install. Claude Desktop and Cursor are the tested clients.",
+    "behindScenes": "Stdio runs the bundled Python against uoink_mcp.py. The separate HTTP JSON-RPC registry is at http://127.0.0.1:5179/mcp/v1 and uses X-Uoink-Token from the local install. Configuration examples target Claude Desktop and Cursor; fresh installed-client checks for this candidate are pending.",
     "mcpTools": [
       "uoink_video",
       "search_uoinks",
@@ -1161,7 +1161,7 @@ export const features: Feature[] = [
       "intelligence",
       "passes"
     ],
-    "whatItDoes": "Optional AI features use your own Anthropic key. Entity extraction is opt-in and off by default. In 3.8.0, the model-usage meter shows real usage when you add your key.",
+    "whatItDoes": "Optional AI features use your own Anthropic key. Entity extraction is opt-in and off by default. In the 3.8.1 candidate, the model-usage meter shows real usage when you add your key.",
     "gettingStarted": [
       "Open your Anthropic developer console.",
       "Generate a new API key.",

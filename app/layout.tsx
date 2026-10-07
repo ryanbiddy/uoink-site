@@ -3,7 +3,9 @@ import localFont from "next/font/local";
 import Script from "next/script";
 import { VercelAnalytics } from "./components/VercelAnalytics";
 import { CANONICAL_URL } from "./content/pages";
+import { CANDIDATE_VERSION, PUBLISHED_VERSION } from "./content/release-status";
 import "./globals.css";
+import "./release-story.css";
 
 const inter = localFont({ src: [
   { path: "./fonts/inter.woff", weight: "100 900", style: "normal" },
@@ -14,9 +16,9 @@ const mono = localFont({ src: "./fonts/jetbrains-mono.woff", weight: "100 800", 
 
 export const metadata: Metadata = {
   metadataBase: new URL(CANONICAL_URL),
-  title: { default: "Uoink - local corpus for creators and AI developers", template: "%s | Uoink" },
+  title: { default: "Uoink: Save the good stuff. Use it again.", template: "%s | Uoink" },
   description:
-    "Uoink keeps videos, podcasts, and articles on your disk, then hands them to your AI as a cited corpus you can write from.",
+    "Turn videos, podcasts and articles into readable local files. Search your saved sources and bring them into your AI conversations.",
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [
@@ -30,15 +32,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Uoink",
-    title: "Uoink - local corpus for creators and AI developers",
-    description: "Save videos, podcasts, and articles as a cited local corpus for Claude, ChatGPT, Cursor, and MCP agents.",
+    title: "Uoink: Save the good stuff. Use it again.",
+    description: "Save the words and context from videos, podcasts and articles. Keep a local library you can search, read and give to your AI.",
     url: CANONICAL_URL,
     images: [{ url: "/og-cover.png", width: 1200, height: 630, alt: "The Uoink dashboard: a populated local corpus of saved videos ready to hand to your AI." }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Uoink - local corpus for creators and AI developers",
-    description: "Save videos, podcasts, and articles as a cited local corpus for Claude, ChatGPT, Cursor, and MCP agents.",
+    title: "Uoink: Save the good stuff. Use it again.",
+    description: "Save the words and context from videos, podcasts and articles. Keep a local library you can search, read and give to your AI.",
     images: ["/og-cover.png"],
   },
 };
@@ -68,6 +70,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="alternate" type="application/json" title="Uoink MCP manifest" href="/mcp/manifest.json" />
       </head>
       <body>
+        <div className="release-preview-note">
+          <div className="container"><span>Release preview · {CANDIDATE_VERSION} is in testing.</span><a href="/install">Public download: {PUBLISHED_VERSION} ↗</a></div>
+        </div>
         {children}
         <VercelAnalytics />
         <Script src="/nav.js" strategy="afterInteractive" />

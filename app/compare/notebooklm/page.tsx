@@ -7,7 +7,7 @@ const faq: FaqItem[] = [
   {
     question: "Is Uoink a local NotebookLM alternative?",
     answer:
-      "Yes, for the video-and-research use case. Both let you ask questions grounded in sources instead of a model's guesses. The difference: NotebookLM runs in Google's cloud on your Google account; Uoink runs on your machine, saves sources to your own disk, needs no account, and is open source (MIT). Your corpus never leaves your computer unless you turn on an optional AI feature.",
+      "Yes, for the video-and-research use case. Both let you ask questions grounded in sources instead of a model's guesses. The difference: NotebookLM runs in Google's cloud on your Google account; Uoink runs on your machine, saves sources to your own disk, needs no account, and is open source (MIT). Captures are stored locally. Optional AI features, exports and connected agents can share content with the providers you choose.",
   },
   {
     question: "What does NotebookLM do that Uoink doesn't?",
