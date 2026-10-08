@@ -44,7 +44,7 @@ export const homeStory = `
 </section>
 <section class="section story-ownership" aria-labelledby="ownership-heading"><div class="container story-ownership-grid">
   <div><span class="eyebrow">Keep control of the collection</span><h2 id="ownership-heading">Local files.<br><em>Useful anywhere.</em></h2></div>
-  <div><p class="story-lede">Uoink stores captures on your computer. You choose what to export and which AI tools can read them.</p><p>Capturing contacts the source website. Enabled feed subscriptions can check for new items in the background. Optional AI features send the selected content to your provider using your key.</p><a class="story-text-link" href="/privacy">See what connects to the internet ↗</a></div>
+  <div><p class="story-lede">Uoink stores captures on your computer. You choose what to export and which AI tools can read them.</p><p>Capturing contacts the source website; enabled subscriptions check for new items in the background. AI features can send source text and saved context to Anthropic using your key. Some page loads and model-library connections happen with AI features off.</p><a class="story-text-link" href="/privacy">See what connects to the internet ↗</a></div>
 </div></section>
 <section class="section story-next" aria-labelledby="next-heading"><div class="container story-next-grid">
   <div><span class="story-preview-label">Next release / ${CANDIDATE_VERSION} / in testing</span><h2 id="next-heading">Find the moment.<br>Cite the source.</h2><p>The Living Library candidate adds clip search, evidence cards, source subscriptions and more library access over MCP. We’re testing the complete install-to-capture journey before making it the public download.</p></div>

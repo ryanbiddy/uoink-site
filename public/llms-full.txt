@@ -1,11 +1,11 @@
-<!-- reviewed: 2026-10-07 / candidate 3.8.1 / published 3.7.0 -->
+<!-- reviewed: 2026-10-08 / candidate 3.8.1 / published 3.7.0 -->
 # Uoink - local source library
 
 Release status: **3.7.0 is the public download. 3.8.1 is a candidate in testing.** The Living Library features and tool catalog below describe that candidate; do not attribute them to the public 3.7.0 installer.
 
 > A local library for the videos and podcasts you study, that you can search and share with an AI client.
 
-Free, MIT-licensed. No account, no Uoink cloud, no required telemetry. Made by Ryan Biddy (@replayryan), a personal side project.
+Free, MIT-licensed. No Uoink account or hosted corpus. Network connections and model telemetry are described below. Made by Ryan Biddy (@replayryan), a personal side project.
 
 ## Install
 
@@ -75,8 +75,8 @@ Watch RSS/Atom feeds. Per-feed auto-ingest is optional: when enabled, new episod
 
 ## Tool inventory
 
-Source commit: a311e627330111884e404b92240583afe4514129. Counted from @mcp.tool functions in uoink_mcp.py (32) and TOOL_REGISTRY in uoink_mcp_tools.py (88). Tool names, descriptions, schemas, and transport labels are in https://uoink.app/mcp/manifest.json.
+Source commit: 2e724709d32e9bbf0ef6ccf62eb623d3d513c46c. Counted from @mcp.tool functions in uoink_mcp.py (32) and TOOL_REGISTRY in uoink_mcp_tools.py (88). Tool names, descriptions, schemas, and transport labels are in https://uoink.app/mcp/manifest.json.
 
 ## Network and privacy
 
-Capture contacts source websites. Enabled subscriptions poll for new items; enabled auto-ingest can capture them in the background. Truncated X text may use the FxTwitter fallback. Consented transcription/model downloads and optional Anthropic features contact their providers. Exporting or sharing with an agent sends content to the destination you choose. The marketing website separately uses Vercel Web Analytics. See the privacy page for details.
+These details describe the 3.8.1 source candidate; installed network checks remain pending. Capture contacts source websites and can use FxTwitter for X text, even when a post was not identified as truncated. Enabled subscriptions poll with automatic capture off; connected agents can register them. The API-only x_text_capture_enabled setting stops X text extraction, including FxTwitter. Clear key removes only the Uoink credential; a legacy Yoink key remains usable until removed in Windows Credential Manager. The dashboard loads a feature guide from uoink.app and Google Fonts; extension pages also load fonts and thumbnails. After copying a successful extension capture, Uoink opens claude.ai/new without pasting the content. There is no setting to disable that tab. A connected agent can approve missing Whisper-model downloads without a Uoink prompt. The pinned pyannote dependency enables metrics by default, including during voice-activity detection with speaker labeling off; Uoink does not disable it. Optional Anthropic calls, connected clients, exports and mirrors can share source text and saved context. Uninstall retains library data but removes edited topics.json routing rules. The website separately uses Vercel Web Analytics. See https://uoink.app/privacy for controls and scope; do not describe the candidate as telemetry-free or wholly offline.

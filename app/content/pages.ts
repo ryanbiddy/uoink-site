@@ -2,6 +2,7 @@ import { MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT, mcpTools } from "./mcp-tools";
 import { MCP_STDIO_CONFIG } from "./mcp-config";
 import { PRODUCT_STATUS } from "./product-status";
 import { homeStory } from "./home-story";
+import { privacyStory } from "./privacy-story";
 import { CANDIDATE_VERSION, PUBLISHED_VERSION, PUBLISHED_RELEASE_URL, WINDOWS_DOWNLOAD_URL } from "./release-status";
 
 export type PageId =
@@ -87,17 +88,17 @@ const privacyFaq: FaqItem[] = [
   {
     question: "Is my data sent to Uoink servers?",
     answer:
-      "No. Uoink has no corpus server, no account system, and no telemetry endpoint. Captures live on your disk.",
+      "Captures live on your disk; Uoink has no hosted library or account system. The dashboard requests its feature guide from uoink.app, and the candidate’s model dependencies can send telemetry to their providers. See the privacy details before treating the app as offline.",
   },
   {
     question: "Where is my Anthropic API key stored?",
     answer:
-      "On Windows, Uoink stores your Anthropic key in Windows Credential Manager through the operating system keyring. It is not saved in plaintext in the settings file. Optional AI features use your own key.",
+      "On Windows, Uoink uses Windows Credential Manager. Normal settings writes exclude the key, but failed migration can leave an older plaintext setting or legacy Yoink credential. Clear and check those separately when removing access.",
   },
   {
     question: "When does anything leave my machine?",
     answer:
-      "Capture contacts source websites and may use FxTwitter for truncated X posts. Enabled subscriptions poll for new items. Model downloads, optional Anthropic features, exports and connected agents have their own network behavior; the privacy page describes the controls.",
+      "Capture contacts source websites and can use FxTwitter for X text. Other connections include background subscription polling, dashboard and font loads, an automatic Claude tab after extension capture, model downloads, dependency telemetry, optional AI calls and connected clients.",
   },
 ];
 
@@ -520,12 +521,12 @@ platform: Windows 10/11 only. No Mac build scheduled.</pre>
     mode: "mode-light",
     title: "Uoink privacy: Local storage and network connections",
     description:
-      "How Uoink stores captures locally, contacts sources and optional AI services, and uses separate website analytics.",
-    keywords: ["uoink privacy", "local-first youtube extractor", "no telemetry youtube tool", "byo key youtube ai"],
+      "Review the Uoink candidate’s local storage, automatic connections, model telemetry, AI sharing and data-retention controls.",
+    keywords: ["uoink privacy", "local source library", "uoink network connections", "byo key youtube ai"],
     faq: privacyFaq,
-    html: `
-<section class="section" data-screen-label="privacy / main"><div class="container"><article class="article"><div class="meta"><span>privacy</span><span>local-first</span></div><h1>Your corpus lives on your <em>machine.</em></h1><p class="standfirst">Uoink extracts video and podcast content, stores it on your disk, and hands it to the AI you choose. There is no Uoink cloud because we never built one.</p><h2>What Uoink does.</h2><p>Uoink captures transcripts, screenshots, comments, channel context, podcast transcripts, metadata, and local indexes. It writes those artifacts into normal local files and a local SQLite index. You can paste the corpus into Claude or ChatGPT, or let an MCP agent read it directly.</p><h2>What Uoink skips.</h2><p>No account, no Uoink cloud, and no required telemetry.</p><h3>Website analytics vs. local app privacy</h3><p>While the local Uoink desktop application and browser extension require no telemetry, the public marketing website (<code>uoink.app</code>) uses Vercel Web Analytics for page-view statistics such as visited pages, referring sites and browser or device information. The website analytics integration does not send capture contents or API keys. See <a href="https://vercel.com/docs/analytics/privacy-policy">Vercel’s description of the data it collects</a>.</p><h3>Manual update check</h3><p>When you click the update check button in the dashboard settings, the application makes a direct query to <code>api.github.com</code> to compare version tags. This request does not include your library contents. GitHub receives ordinary connection metadata, such as your IP address.</p><h2>Where your data lives.</h2><p>On Windows, the helper lives under <code>%LOCALAPPDATA%\\Uoink</code>. Captures write into your Uoink library folder. The optional Anthropic key is stored in Windows Credential Manager.</p><h2>Network calls Uoink makes.</h2><p>Extraction calls go to the source you asked for: YouTube, X, RSS hosts, or another supported URL. Enabled subscriptions can poll the YouTube channels, playlists and podcast feeds you add. Auto-ingest can capture new items for subscriptions where you enable it. When an X post comes back truncated, Uoink may ask the public FxTwitter API for the full text of that post. Local transcription downloads Whisper models with your consent; optional speaker diarization downloads its model from Hugging Face and needs your own Hugging Face token. Optional AI calls use your own Anthropic key. Entity extraction is opt-in and off by default. Pasting or exporting a capture to an AI service shares it with that service. Connected agents can receive the library content you make available through local tools; their provider’s data handling applies.</p><h2>Open source: audit it yourself.</h2><p>The source is MIT-licensed at <a href="${GITHUB_URL}">github.com/ryanbiddy/uoink</a>. You can inspect the helper, loopback server, and network code.</p><p><a class="btn primary large" href="/install">Install Uoink</a> <a class="btn ghost large" href="/terms">Read terms</a></p></article></div></section><section class="section" data-screen-label="privacy / faq"><div class="container">${renderFaq(privacyFaq)}</div></section>`,
+    html: privacyStory + `<section class="section" data-screen-label="privacy / faq"><div class="container">${renderFaq(privacyFaq)}</div></section>`,
   },
+
   changelog: {
     id: "changelog",
     route: "/changelog",
