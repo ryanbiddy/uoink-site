@@ -93,7 +93,7 @@ const privacyFaq: FaqItem[] = [
   {
     question: "Where is my Anthropic API key stored?",
     answer:
-      "On Windows, Uoink uses Windows Credential Manager. Normal settings writes exclude the key, but failed migration can leave an older plaintext setting or legacy Yoink credential. Clear and check those separately when removing access.",
+      "On Windows, Uoink uses Windows Credential Manager. Normal settings writes exclude the key. In the candidate, a successful Clear key removes current and legacy saved entries plus any legacy plaintext key in the active profile settings. A failed removal reports an error and can be partial.",
   },
   {
     question: "When does anything leave my machine?",
