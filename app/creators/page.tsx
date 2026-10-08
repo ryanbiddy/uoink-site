@@ -200,7 +200,7 @@ export default function Page() {
             <div className="chat">
               <div className="mini-heading">local by default</div>
               <p className="chat-bubble user">I am studying a competitor channel. Where does that research go?</p>
-              <p className="chat-bubble assistant">Onto your disk. Uoink has no hosted corpus, no account, and no telemetry endpoint.</p>
+              <p className="chat-bubble assistant">Captures are saved in your local library. Source requests, AI features, connected agents and model dependencies have network behavior too. <Link href="/privacy">See what leaves your computer.</Link></p>
             </div>
             <div className="log">
               <div className="mini-heading">best next click</div>

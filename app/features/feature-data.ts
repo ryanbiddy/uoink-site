@@ -1044,7 +1044,7 @@ export const features: Feature[] = [
       "Start the client and verify the connection.",
       "Ask the agent to capture a video to test the setup."
     ],
-    "behindScenes": "Stdio runs the bundled Python against uoink_mcp.py. The separate HTTP JSON-RPC registry is at http://127.0.0.1:5179/mcp/v1 and uses X-Uoink-Token from the local install. Claude Desktop and Cursor are the tested clients.",
+    "behindScenes": "Stdio runs the bundled Python against uoink_mcp.py. The separate HTTP JSON-RPC registry is at http://127.0.0.1:5179/mcp/v1 and uses X-Uoink-Token from the local install. Configuration examples target Claude Desktop and Cursor; fresh installed-client checks for this candidate are pending.",
     "mcpTools": [
       "uoink_video",
       "search_uoinks",
@@ -1161,7 +1161,7 @@ export const features: Feature[] = [
       "intelligence",
       "passes"
     ],
-    "whatItDoes": "Optional AI features use your own Anthropic key. Entity extraction is opt-in and off by default. In 3.8.0, the model-usage meter shows real usage when you add your key.",
+    "whatItDoes": "Optional AI features use your own Anthropic key. Entity extraction is opt-in and off by default. In the 3.8.1 candidate, the model-usage meter shows real usage when you add your key.",
     "gettingStarted": [
       "Open your Anthropic developer console.",
       "Generate a new API key.",
@@ -1210,7 +1210,7 @@ export const features: Feature[] = [
       "Open any markdown file in your text editor.",
       "Backup your library by copying the folder."
     ],
-    "behindScenes": "The desktop helper runs an internal server that reads and writes files on your storage drive. It logs transactions in a local SQLite file. The browser extension speaks to this helper via a loopback port. No external tracking scripts, cloud servers, or remote databases are used, maintaining privacy.",
+    "behindScenes": "The desktop helper runs an internal server that reads and writes files on your storage drive. It logs transactions in a local SQLite file. The browser extension speaks to this helper via a loopback port. The library is local. The dashboard still loads a remote feature guide and fonts; sources, model dependencies and AI features can make network requests. See the privacy page for those connections.",
     "mcpTools": [
       "get_uoink_health",
       "search_uoinks"
@@ -1232,7 +1232,7 @@ export const features: Feature[] = [
     "title": "No cloud database",
     "category": "Identity",
     "status": "shipped",
-    "summary": "Keep your video corpus and research private with no cloud databases or remote servers.",
+    "summary": "Keep your captured sources in local files and a local index without a Uoink-hosted corpus.",
     "keywords": [
       "uoink feature",
       "no cloud",
@@ -1242,7 +1242,7 @@ export const features: Feature[] = [
       "private",
       "databases"
     ],
-    "whatItDoes": "No Uoink cloud database. The helper runs entirely on your local machine, keeping your captured transcripts and files offline. There is no account sign-up, no server database, and no usage tracking. If our website is breached, your research database is safe because we avoid collect your files.",
+    "whatItDoes": "Uoink stores your captured files and library index on your computer without a Uoink account or hosted corpus. Captures, automatic page loads, model dependencies and AI features can still make network requests. Local storage is not a promise that nothing leaves the computer.",
     "gettingStarted": [
       "Download the helper without creating an account.",
       "Open the dashboard to see your local files.",

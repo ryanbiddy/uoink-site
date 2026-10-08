@@ -22,8 +22,8 @@ function tickerFor(active: string) {
   if (active.startsWith("/twitter")) return [`UOINK ${VERSION} / twitter video`, "X capture / creator credit / Writing Studio"];
   if (active.startsWith("/podcasts")) return [`UOINK ${VERSION} / podcasts`, "RSS / Whisper / diarization / local"];
   if (active.startsWith("/agents") || active.startsWith("/mcp")) return [`UOINK ${VERSION} / MCP`, "local tools / Claude Desktop / Cursor"];
-  if (active.startsWith("/about")) return [`UOINK ${VERSION} / about`, "GitHub releases / personal side project / no tracking"];
-  if (active.startsWith("/privacy")) return [`UOINK ${VERSION} / privacy`, "local-first / no cloud / no telemetry"];
+  if (active.startsWith("/about")) return [`UOINK ${VERSION} / about`, "open source / personal side project"];
+  if (active.startsWith("/privacy")) return [`UOINK ${VERSION} / privacy`, "local files / network connections / your choices"];
   return [`UOINK ${VERSION} / local video corpus`, "open source / MIT / model agnostic"];
 }
 

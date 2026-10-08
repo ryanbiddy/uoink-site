@@ -12,7 +12,7 @@ const faq: FaqItem[] = [
   {
     question: "Can Claude actually watch or read a YouTube video?",
     answer:
-      "Not from a bare link — it hallucinates. Give it a Uoink corpus and it can quote the transcript, cite timestamps, and read the top comments, because the words and frames are in the paste. For agents, Uoink's local MCP server exposes uoink_video and search_uoinks so Claude Desktop and Cursor (the tested clients) can pull the transcript directly.",
+      "It needs access to the source content to answer reliably. Give it a Uoink corpus and it can quote the transcript, cite timestamps, and read the top comments, because the words and frames are in the paste. For agents, Uoink's local MCP server exposes uoink_video and search_uoinks so Claude Desktop and Cursor can pull the transcript directly.",
   },
   {
     question: "What does Uoink capture besides the transcript?",
