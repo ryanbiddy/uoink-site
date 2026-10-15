@@ -111,14 +111,14 @@ export default function Page() {
     <PageShell page={page}>
       <section className="hero" data-screen-label="sources / hero">
         <div className="container">
-          <div className="section-head">
+          <div className="doc">
             <span className="eyebrow">sources</span>
             <h1 className="display-xl">
               One corpus.
               <br />
               Every <em>source.</em>
             </h1>
-            <p className="lede" style={{ maxWidth: "32ch" }}>
+            <p className="lede">
               Uoink starts with video and podcasts.
               <br />
               Articles and threads join the same local library.
@@ -137,61 +137,69 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="feature-index section" data-screen-label="sources / source grid">
+      <section className="section flush" data-screen-label="sources / source grid">
         <div className="container">
-          <div className="feature-card-grid">
-            {sources.map((source) => {
-              const body = (
-                <>
-                  <div className="feature-card-head">
-                    <PlatformLogoStrip logos={source.logos} compact />
-                    <span className={`feature-status ${statusClass(source.status)}`}>{source.status}</span>
-                  </div>
-                  <h3>{source.title}</h3>
-                  <p>
-                    <b>Capture:</b> {source.capture}
-                  </p>
-                  <p>
-                    <b>Corpus:</b> {source.corpus}
-                  </p>
-                  <p>
-                    <b>Best for:</b> {source.output}
-                  </p>
-                  <span className="arr-link">{source.href ? "Open source page ->" : "Tracked on roadmap ->"}</span>
-                </>
-              );
+          <div className="doc">
+            <ul className="doc-list linked">
+              {sources.map((source) => {
+                const body = (
+                  <>
+                    <span className="row-meta">
+                      <PlatformLogoStrip logos={source.logos} compact />
+                      <span className={`feature-status ${statusClass(source.status)}`}>{source.status}</span>
+                    </span>
+                    <h3>{source.title}</h3>
+                    <p>
+                      <b>Capture:</b> {source.capture}
+                    </p>
+                    <p>
+                      <b>Corpus:</b> {source.corpus}
+                    </p>
+                    <p>
+                      <b>Best for:</b> {source.output}
+                    </p>
+                    <span className="arr-link">{source.href ? "Open source page ->" : "Tracked on roadmap ->"}</span>
+                  </>
+                );
 
-              return source.href ? (
-                <Link className="feature-card" href={source.href} key={source.title}>
-                  {body}
-                </Link>
-              ) : (
-                <article className="feature-card" key={source.title}>
-                  {body}
-                </article>
-              );
-            })}
+                return (
+                  <li key={source.title}>
+                    {source.href ? (
+                      <Link className="doc-row" href={source.href}>
+                        {body}
+                      </Link>
+                    ) : (
+                      <div className="doc-row">{body}</div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>
       </section>
 
-      <section className="big-strip" data-screen-label="sources / local library">
+      <section className="section" data-screen-label="sources / local library">
         <div className="container">
-          <span className="eyebrow">why source breadth matters</span>
-          <h2 className="display-l">
-            The source changes. The library <em>compounds.</em>
-          </h2>
-          <p className="body-l" style={{ maxWidth: "72ch" }}>
-            A video, a podcast, and a newsletter issue can all mention the same person, tool, company, or idea. Uoink keeps those mentions on disk so your agent can search across the whole library later.
-          </p>
-          <p className="mt-24">
-            <Link className="btn ink" href="/developers">
-              See developer path
-            </Link>{" "}
-            <Link className="btn ghost" href="/features/memory-search">
-              Local search
-            </Link>
-          </p>
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">why source breadth matters</span>
+              <h2 className="display-l">
+                The source changes. The library <em>compounds.</em>
+              </h2>
+              <p className="body-l">
+                A video, a podcast, and a newsletter issue can all mention the same person, tool, company, or idea. Uoink keeps those mentions on disk so your agent can search across the whole library later.
+              </p>
+            </div>
+            <div className="ctas">
+              <Link className="btn primary" href="/developers">
+                See developer path
+              </Link>
+              <Link className="btn ghost" href="/features/memory-search">
+                Local search
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

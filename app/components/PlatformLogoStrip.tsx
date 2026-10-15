@@ -210,8 +210,8 @@ function renderInlineLogo(logo: PlatformLogoKey): ReactNode {
     case "web":
       return (
         <svg viewBox="0 0 48 48" aria-hidden="true">
-          <circle cx="24" cy="24" r="20" fill="#fff4ec" stroke="#ff3d00" strokeWidth="4" />
-          <path d="M5 24h38M24 5c6 6 9 12.3 9 19s-3 13-9 19c-6-6-9-12.3-9-19s3-13 9-19z" fill="none" stroke="#ff3d00" strokeWidth="3" strokeLinecap="round" />
+          <circle cx="24" cy="24" r="20" fill="#fff4ec" stroke="#c2410c" strokeWidth="4" />
+          <path d="M5 24h38M24 5c6 6 9 12.3 9 19s-3 13-9 19c-6-6-9-12.3-9-19s3-13 9-19z" fill="none" stroke="#c2410c" strokeWidth="3" strokeLinecap="round" />
         </svg>
       );
     case "mcp":

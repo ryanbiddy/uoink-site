@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DocRule } from "../components/Doc";
 import { PageShell } from "../components/PageShell";
 import { RELEASE_URL, SitePage } from "../content/pages";
 
@@ -94,130 +95,141 @@ export default function Page() {
               </div>
               <p className="sub-cta">Capture - Library - Workspace - Iterate - Distribute</p>
             </div>
-            <figure className="feature-visual">
-              <div className="feature-visual-top">
+            <figure className="figure">
+              <div className="figure-label">
                 <span>dashboard hero</span>
                 <span>local corpus</span>
               </div>
-              <div className="feature-visual-body">
-                <div className="feature-visual-shot">
-                  <img
-                    src="/screenshots/memory-search/library-populated-computer-use.png"
-                    alt="Uoink dashboard showing a populated local library of source cards"
-                    loading="eager"
-                  />
-                  <figcaption>The library is the home base. Source cards stay searchable, citable, and ready for agents.</figcaption>
-                </div>
-              </div>
+              <img
+                src="/screenshots/memory-search/library-populated-computer-use.png"
+                alt="Uoink dashboard showing a populated local library of source cards"
+                loading="eager"
+              />
+              <figcaption>The library is the home base. Source cards stay searchable, citable, and ready for agents.</figcaption>
             </figure>
           </div>
         </div>
       </section>
 
-      <hr className="rule" />
-
       <section className="section" data-screen-label="how-it-works / five step loop">
         <div className="container">
-          <div className="section-head">
-            <span className="eyebrow">the five-step loop</span>
-            <h2 className="display-l">
-              From source to output, without losing the <em>receipts.</em>
-            </h2>
-            <p className="lede">
-              The browser path and the agent path share one spine: save the source, keep it on disk, write from it with citations.
-            </p>
-          </div>
-          <div className="hook-grid">
-            {steps.map((step, index) => (
-              <article className="hook" key={step.label}>
-                <span className="num">{String(index + 1).padStart(2, "0")}</span>
-                <span className="label">step</span>
-                <h3>{step.label}</h3>
-                <p>{step.body}</p>
-              </article>
-            ))}
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">the five-step loop</span>
+              <h2 className="display-l">
+                From source to output, without losing the <em>receipts.</em>
+              </h2>
+              <p className="lede">
+                The browser path and the agent path share one spine: save the source, keep it on disk, write from it with citations.
+              </p>
+            </div>
+            <ol className="doc-list numbered">
+              {steps.map((step, index) => (
+                <li key={step.label}>
+                  <span className="num">{String(index + 1).padStart(2, "0")}</span>
+                  <h3>{step.label}</h3>
+                  <p>{step.body}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
 
-      <section className="big-strip" data-screen-label="how-it-works / source card">
-        <div
-          className="container"
-          style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))", gap: 32, alignItems: "center" }}
-        >
-          <div>
-            <span className="eyebrow">same card, different verbs</span>
-            <h2 className="display-l">
-              One source card serves creators and <em>developers.</em>
-            </h2>
-            <p className="body-l">
-              Creators click Study hooks, Write thread, or Pull evidence. Developers copy the MCP call, open the corpus file, or hand it to Cursor. Same source, different next move.
-            </p>
-          </div>
-          <div className="corpus">
-            <div className="hd">
-              <span>source card</span>
-              <span>karpathy-intro-to-llms.md</span>
+      <DocRule />
+
+      <section className="section" data-screen-label="how-it-works / source card">
+        <div className="container">
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">same card, different verbs</span>
+              <h2 className="display-l">
+                One source card serves creators and <em>developers.</em>
+              </h2>
+              <p className="body-l">
+                Creators click Study hooks, Write thread, or Pull evidence. Developers copy the MCP call, open the corpus file, or hand it to Cursor. Same source, different next move.
+              </p>
             </div>
-            <span className="ln k">hook: curiosity_gap + stakes</span>
-            <span className="ln dim">creator: Andrej Karpathy / source: YouTube</span>
-            <span className="ln dim">entities: OpenAI, transformer, tokenization, RLHF</span>
-            <span className="ln hl">actions: Study hooks / Write thread / Copy MCP call</span>
-            <span className="ln k">citation: source URL + timestamps preserved</span>
+            <aside className="facts" aria-label="Source card">
+              <p className="facts-head">
+                <span>source card</span>
+                <span className="verbatim">karpathy-intro-to-llms.md</span>
+              </p>
+              <dl className="facts-list">
+                <div>
+                  <dt>hook</dt>
+                  <dd>curiosity_gap + stakes</dd>
+                </div>
+                <div>
+                  <dt>creator</dt>
+                  <dd>Andrej Karpathy / source: YouTube</dd>
+                </div>
+                <div>
+                  <dt>entities</dt>
+                  <dd>OpenAI, transformer, tokenization, RLHF</dd>
+                </div>
+                <div className="is-hl">
+                  <dt>actions</dt>
+                  <dd>Study hooks / Write thread / Copy MCP call</dd>
+                </div>
+                <div>
+                  <dt>citation</dt>
+                  <dd>source URL + timestamps preserved</dd>
+                </div>
+              </dl>
+            </aside>
           </div>
         </div>
       </section>
+
+      <DocRule />
 
       <section className="section" data-screen-label="how-it-works / paths">
         <div className="container">
-          <div className="section-head">
-            <span className="eyebrow">two paths after capture</span>
-            <h2 className="display-l">
-              Paste it yourself, or let your agent <em>pull it.</em>
-            </h2>
-          </div>
-          <div className="agent-demo">
-            <div className="chat">
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">two paths after capture</span>
+              <h2 className="display-l">
+                Paste it yourself, or let your agent <em>pull it.</em>
+              </h2>
+            </div>
+            <div className="exchange">
               <div className="mini-heading">creator path</div>
               <p className="chat-bubble user">Uoink this video, paste the corpus into Claude or ChatGPT, and ask for a hook breakdown.</p>
               <p className="chat-bubble assistant">The answer cites transcript moments, screenshots, and audience comments from the saved source.</p>
-            </div>
-            <div className="log">
               <div className="mini-heading">developer path</div>
-              <pre className="mcp-log" style={{ margin: 0, whiteSpace: "pre-wrap" }}>{`uoink_video(url)
+              <pre className="code-block">{`uoink_video(url)
 get_job_status(job_id)
 get_uoink_corpus(corpus_id)
 classify_hook(corpus_id)
 agent drafts from the cited corpus`}</pre>
             </div>
           </div>
-          <figure className="feature-visual product-figure wide">
-            <div className="feature-visual-top">
+          <figure className="figure">
+            <div className="figure-label">
               <span>write</span>
               <span>cited draft</span>
             </div>
-            <div className="feature-visual-body">
-              <div className="feature-visual-shot">
-                <img
-                  src="/product/generate-result.webp"
-                  width={1440}
-                  height={900}
-                  loading="lazy"
-                  decoding="async"
-                  alt="Uoink generate result: a drafted tweet sits in the preview panel next to the source it was written from, with the creator credit and source link preserved."
-                />
-                <figcaption>The output stays tied to its source: a draft in the preview panel, written from the saved corpus with credit intact.</figcaption>
-              </div>
-            </div>
+            <img
+              src="/product/generate-result.webp"
+              width={1440}
+              height={900}
+              loading="lazy"
+              decoding="async"
+              alt="Uoink generate result: a drafted tweet sits in the preview panel next to the source it was written from, with the creator credit and source link preserved."
+            />
+            <figcaption>The output stays tied to its source: a draft in the preview panel, written from the saved corpus with credit intact.</figcaption>
           </figure>
-          <p className="mt-32">
-            <Link className="btn primary" href="/creators">
-              Creator workflow
-            </Link>{" "}
-            <Link className="btn ghost" href="/developers">
-              Developer setup
-            </Link>
-          </p>
+          <div className="doc">
+            <div className="ctas">
+              <Link className="btn primary" href="/creators">
+                Creator workflow
+              </Link>
+              <Link className="btn ghost" href="/developers">
+                Developer setup
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

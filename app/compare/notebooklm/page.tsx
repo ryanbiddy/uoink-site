@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DocRule, FaqList } from "../../components/Doc";
 import { PageShell } from "../../components/PageShell";
 import { RELEASE_URL, SitePage, FaqItem } from "../../content/pages";
 
@@ -87,12 +88,12 @@ export default function Page() {
     <PageShell page={page}>
       <section className="hero" data-screen-label="compare notebooklm / hero">
         <div className="container">
-          <div className="section-head">
+          <div className="doc">
             <span className="eyebrow">compare / notebooklm</span>
             <h1 className="display-xl">
               A NotebookLM you <em>own.</em>
             </h1>
-            <p className="lede" style={{ maxWidth: "60ch" }}>
+            <p className="lede">
               NotebookLM is a great cloud notebook. Uoink is the local, open-source alternative: it saves your videos, podcasts, and articles to your own disk and hands them to Claude, Cursor, or any MCP agent — no account, no cloud.
             </p>
             <div className="ctas">
@@ -107,55 +108,54 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="section" data-screen-label="compare notebooklm / table">
+      <section className="section flush" data-screen-label="compare notebooklm / table">
         <div className="container">
-          <div className="section-head">
-            <span className="eyebrow">honest comparison</span>
-            <h2 className="display-l">
-              Uoink vs <em>NotebookLM.</em>
-            </h2>
-          </div>
-          <div style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "15px" }}>
-              <thead>
-                <tr>
-                  <th style={{ textAlign: "left", padding: "12px", borderBottom: "2px solid var(--ink)" }}>Feature</th>
-                  <th style={{ textAlign: "left", padding: "12px", borderBottom: "2px solid var(--ink)" }}>Uoink</th>
-                  <th style={{ textAlign: "left", padding: "12px", borderBottom: "2px solid var(--ink)" }}>NotebookLM</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((row) => (
-                  <tr key={row.feature}>
-                    <td style={{ padding: "12px", borderBottom: "1px solid var(--ink-dim, #ddd)", fontWeight: 600 }}>{row.feature}</td>
-                    <td style={{ padding: "12px", borderBottom: "1px solid var(--ink-dim, #ddd)" }}>{row.uoink}</td>
-                    <td style={{ padding: "12px", borderBottom: "1px solid var(--ink-dim, #ddd)" }}>{row.notebooklm}</td>
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">honest comparison</span>
+              <h2 className="display-l">
+                Uoink vs <em>NotebookLM.</em>
+              </h2>
+            </div>
+            <div className="table-wrap" role="region" aria-label="Uoink vs NotebookLM comparison" tabIndex={0}>
+              <table className="data-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Feature</th>
+                    <th scope="col">Uoink</th>
+                    <th scope="col">NotebookLM</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {rows.map((row) => (
+                    <tr key={row.feature}>
+                      <th scope="row">{row.feature}</th>
+                      <td>{row.uoink}</td>
+                      <td>{row.notebooklm}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="body-l">
+              Pick NotebookLM for a hosted, cross-platform notebook with audio summaries and zero setup. Pick Uoink to own your sources on disk, feed them to your own AI agents over MCP, and keep everything private and local.
+            </p>
           </div>
-          <p className="body-l mt-24" style={{ maxWidth: "72ch" }}>
-            Pick NotebookLM for a hosted, cross-platform notebook with audio summaries and zero setup. Pick Uoink to own your sources on disk, feed them to your own AI agents over MCP, and keep everything private and local.
-          </p>
         </div>
       </section>
 
+      <DocRule />
+
       <section className="section" data-screen-label="compare notebooklm / faq">
         <div className="container">
-          <div className="section-head">
-            <span className="eyebrow">NotebookLM alternative FAQ</span>
-            <h2 className="display-l">
-              Common <em>questions.</em>
-            </h2>
-          </div>
-          <div className="three-cards">
-            {faq.map((item) => (
-              <article className="card" key={item.question}>
-                <h3>{item.question}</h3>
-                <p>{item.answer}</p>
-              </article>
-            ))}
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">NotebookLM alternative FAQ</span>
+              <h2 className="display-l">
+                Common <em>questions.</em>
+              </h2>
+            </div>
+            <FaqList items={faq} />
           </div>
         </div>
       </section>

@@ -52,7 +52,7 @@ export function markdownToHtml(markdown: string) {
 
     if (line.startsWith("```")) {
       if (inCode) {
-        html.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+        html.push(`<pre class="code-block"><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
         codeLines = [];
         inCode = false;
       } else {
@@ -128,7 +128,7 @@ export function markdownToHtml(markdown: string) {
   flushList();
 
   if (inCode) {
-    html.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+    html.push(`<pre class="code-block"><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
   }
 
   return html.join("\n");

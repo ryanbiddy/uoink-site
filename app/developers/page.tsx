@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DocRule } from "../components/Doc";
 import { PageShell } from "../components/PageShell";
 import { GITHUB_URL, RELEASE_URL, SitePage } from "../content/pages";
 import { MCP_STDIO_CONFIG } from "../content/mcp-config";
@@ -99,160 +100,183 @@ export default function Page() {
                 </span>
               </div>
             </div>
-            <div className="corpus">
-              <div className="hd">
+            <aside className="facts" aria-label="Local MCP trace">
+              <p className="facts-head">
                 <span>local mcp trace</span>
                 <span>stdio</span>
-              </div>
-              <span className="ln k">uoink_video(url)</span>
-              <span className="ln dim">capture one source into the local library</span>
-              <span className="ln k">search_uoinks(&quot;Karpathy&quot;)</span>
-              <span className="ln dim">query transcript, comments, titles, metadata</span>
-              <span className="ln k">search_clips(query)</span>
-              <span className="ln hl">find timestamped excerpts with source links</span>
-            </div>
+              </p>
+              <ol className="facts-list">
+                <li>
+                  <pre className="code-block">uoink_video(url)</pre>
+                  <span>capture one source into the local library</span>
+                </li>
+                <li>
+                  <pre className="code-block">search_uoinks(&quot;Karpathy&quot;)</pre>
+                  <span>query transcript, comments, titles, metadata</span>
+                </li>
+                <li className="is-hl">
+                  <pre className="code-block">search_clips(query)</pre>
+                  <span>find timestamped excerpts with source links</span>
+                </li>
+              </ol>
+            </aside>
           </div>
         </div>
       </section>
 
       <section className="section" data-screen-label="developers / configs" id="configs">
         <div className="container">
-          <div className="section-head">
-            <span className="eyebrow">client config</span>
-            <h2 className="display-l">
-              Stdio and HTTP <em>transports.</em>
-            </h2>
-            <p className="lede">
-              Tested with Claude Desktop and Cursor. Install Uoink before connecting your client.
-            </p>
-            <p className="body-l">
-              Uoink runs a local Model Context Protocol (MCP) server. The stdio transport connects as a local subprocess and exposes the {MCP_STDIO_TOOL_COUNT} curated everyday tools. The local HTTP JSON-RPC endpoint exposes the full {MCP_TOOL_COUNT}-tool registry.
-            </p>
-            
-            <div style={{ marginTop: '24px', padding: '20px', background: 'rgba(255,255,255,0.02)', borderRadius: '6px', border: '1px solid var(--ink-dim)', marginBottom: '32px' }}>
-              <h3 style={{ margin: '0 0 12px 0', fontSize: '18px' }}>HTTP JSON-RPC Transport Details</h3>
-              <p style={{ margin: '0 0 8px 0', fontSize: '14px' }}><strong>Endpoint URL:</strong> <code>http://localhost:5179/mcp/v1</code></p>
-              <p style={{ margin: '0 0 8px 0', fontSize: '14px' }}><strong>Authentication:</strong> Include the header <code>X-Uoink-Token</code> on every request.</p>
-              <p style={{ margin: '0', fontSize: '14px' }}><strong>Token Location:</strong> Read the token string from the local file <code>%LOCALAPPDATA%\Uoink\token.txt</code>.</p>
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">client config</span>
+              <h2 className="display-l">
+                Stdio and HTTP <em>transports.</em>
+              </h2>
+              <p className="lede">
+                Tested with Claude Desktop and Cursor. Install Uoink before connecting your client.
+              </p>
+              <p className="body-l">
+                Uoink runs a local Model Context Protocol (MCP) server. The stdio transport connects as a local subprocess and exposes the {MCP_STDIO_TOOL_COUNT} curated everyday tools. The local HTTP JSON-RPC endpoint exposes the full {MCP_TOOL_COUNT}-tool registry.
+              </p>
             </div>
-          </div>
-          <div className="docs-main">
-            <h3>One-click Claude Desktop setup</h3>
-            <p>Open the <a href={RELEASE_URL}>.mcpb bundle from the latest release</a> to install the stdio server without editing config.</p>
-            <p>For manual setup, use the README JSON below. Claude Desktop does not expand <code>%LOCALAPPDATA%</code>: replace it in both paths with your full app-data directory (for example <code>{String.raw`C:\Users\YOUR_USERNAME\AppData\Local`}</code>), or copy the generated config from the extension’s Settings page. Restart the client after saving.</p>
-            <p>Cline and Continue are standard-stdio compatibility paths; they were not individually smoke-tested. Use the clipboard path for ChatGPT.</p>
-            {configs.map((config) => (
-              <section key={config.name}>
-                <h3>
-                  <span className="anchor">{config.name}</span>
-                </h3>
-                <pre>{config.body}</pre>
-              </section>
-            ))}
+            <div className="callout">
+              <h3>HTTP JSON-RPC Transport Details</h3>
+              <p><strong>Endpoint URL:</strong> <code>http://localhost:5179/mcp/v1</code></p>
+              <p><strong>Authentication:</strong> Include the header <code>X-Uoink-Token</code> on every request.</p>
+              <p><strong>Token Location:</strong> Read the token string from the local file <code>%LOCALAPPDATA%\Uoink\token.txt</code>.</p>
+            </div>
+            <div className="docs-main">
+              <h3>One-click Claude Desktop setup</h3>
+              <p>Open the <a href={RELEASE_URL}>.mcpb bundle from the latest release</a> to install the stdio server without editing config.</p>
+              <p>For manual setup, use the README JSON below. Claude Desktop does not expand <code>%LOCALAPPDATA%</code>: replace it in both paths with your full app-data directory (for example <code>{String.raw`C:\Users\YOUR_USERNAME\AppData\Local`}</code>), or copy the generated config from the extension’s Settings page. Restart the client after saving.</p>
+              <p>Cline and Continue are standard-stdio compatibility paths; they were not individually smoke-tested. Use the clipboard path for ChatGPT.</p>
+              {configs.map((config) => (
+                <section key={config.name}>
+                  <h3>
+                    <span className="anchor">{config.name}</span>
+                  </h3>
+                  <pre className="code-block">{config.body}</pre>
+                </section>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="big-strip" data-screen-label="developers / sample run">
+      <DocRule />
+
+      <section className="section" data-screen-label="developers / sample run">
         <div className="container">
-          <span className="eyebrow">sample agent run</span>
-          <h2 className="display-l">
-            Ask Cursor to research a launch video from <em>source.</em>
-          </h2>
-          <div className="agent-demo mt-32">
-            <div className="chat">
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">sample agent run</span>
+              <h2 className="display-l">
+                Ask Cursor to research a launch video from <em>source.</em>
+              </h2>
+            </div>
+            <div className="exchange">
               <div className="mini-heading">prompt</div>
               <p className="chat-bubble user">Search my saved videos for the launch announcement and give me timestamped excerpts I can cite.</p>
               <div className="mini-heading">result</div>
               <p className="chat-bubble assistant">The agent searches the local library, reads matching items, and retrieves evidence cards with timestamped source links.</p>
-            </div>
-            <div className="log">
               <div className="mini-heading">tool sequence</div>
-              <pre className="mcp-log" style={{ margin: 0, whiteSpace: "pre-wrap" }}>{`search_library({ query: "launch announcement" })
+              <pre className="code-block">{`search_library({ query: "launch announcement" })
 get_library_item({ video_id })
 search_clips({ query: "launch announcement" })
 get_evidence_card({ video_id })`}</pre>
             </div>
           </div>
-          <figure className="feature-visual product-figure wide mt-32">
-            <div className="feature-visual-top">
-              <span>search_uoinks</span>
+          <figure className="figure">
+            <div className="figure-label">
+              <span className="verbatim">search_uoinks</span>
               <span>local sqlite fts</span>
             </div>
-            <div className="feature-visual-body">
-              <div className="feature-visual-shot">
-                <img
-                  src="/product/library-search.webp"
-                  width={1440}
-                  height={900}
-                  loading="lazy"
-                  decoding="async"
-                  alt="Uoink dashboard search: a query for nvidia narrows the local library to matching source cards, showing the full-text SQLite index that agents query through the MCP tools."
-                />
-                <figcaption>What <code>search_uoinks</code> reaches: a local SQLite full-text index over every transcript, comment, and title on disk.</figcaption>
-              </div>
-            </div>
+            <img
+              src="/product/library-search.webp"
+              width={1440}
+              height={900}
+              loading="lazy"
+              decoding="async"
+              alt="Uoink dashboard search: a query for nvidia narrows the local library to matching source cards, showing the full-text SQLite index that agents query through the MCP tools."
+            />
+            <figcaption>What <code>search_uoinks</code> reaches: a local SQLite full-text index over every transcript, comment, and title on disk.</figcaption>
           </figure>
-          <p className="mt-32">
-            <Link className="btn ink" href="/install">
-              Install Uoink
-            </Link>{" "}
-            <a className="btn ghost" href={GITHUB_URL}>
-              GitHub
-            </a>
-          </p>
+          <div className="doc">
+            <div className="ctas">
+              <Link className="btn primary" href="/install">
+                Install Uoink
+              </Link>
+              <a className="btn ghost" href={GITHUB_URL}>
+                GitHub
+              </a>
+            </div>
+          </div>
         </div>
       </section>
+
+      <DocRule />
 
       <section className="section" data-screen-label="developers / tool catalog">
         <div className="container">
-          <div className="section-head compact-head">
-            <span className="eyebrow">tool catalog</span>
-            <h2 className="display-l">
-              Names stay visible. Details stay <em>folded.</em>
-            </h2>
-            <p className="lede">
-              The manifest includes the release registry’s schemas and transport labels. This page keeps the public tool names readable for humans, crawlers, and agents without turning the page into one endless list.
-            </p>
-            <p className="body-l">
-              Start with <code>uoink_video</code>, <code>search_uoinks</code>, <code>get_uoink_corpus</code>, <code>classify_hook</code>, and <code>find_mentions</code>. Open a bucket when you need the rest.
-            </p>
-          </div>
-          <div className="tool-accordion" aria-label="Uoink MCP tool groups">
-            {toolGroups.map((group) => (
-              <ToolGroup key={group.title} group={group} />
-            ))}
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">tool catalog</span>
+              <h2 className="display-l">
+                Names stay visible. Details stay <em>folded.</em>
+              </h2>
+              <p className="lede">
+                The manifest includes the release registry’s schemas and transport labels. This page keeps the public tool names readable for humans, crawlers, and agents without turning the page into one endless list.
+              </p>
+              <p className="body-l">
+                Start with <code>uoink_video</code>, <code>search_uoinks</code>, <code>get_uoink_corpus</code>, <code>classify_hook</code>, and <code>find_mentions</code>. Open a bucket when you need the rest.
+              </p>
+            </div>
+            <div className="tool-accordion" aria-label="Uoink MCP tool groups">
+              {toolGroups.map((group) => (
+                <ToolGroup key={group.title} group={group} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
+      <DocRule />
+
       <section className="section" data-screen-label="developers / docs split">
         <div className="container">
-          <div className="section-head">
-            <span className="eyebrow">docs split</span>
-            <h2 className="display-l">
-              Humans read this page. Agents read the <em>manifest.</em>
-            </h2>
-          </div>
-          <div className="three-cards">
-            <Link className="card" href="/mcp">
-              <span className="num">01</span>
-              <h3>MCP page.</h3>
-              <p>Human-readable server metadata, transport notes, config reminders, and tool list.</p>
-              <span className="arr-link">Open /mcp {"->"}</span>
-            </Link>
-            <a className="card" href="/mcp/manifest.json">
-              <span className="num">02</span>
-              <h3>Manifest JSON.</h3>
-              <p>Machine-readable tool surface for agent crawlers and registry submissions.</p>
-              <span className="arr-link">Open JSON {"->"}</span>
-            </a>
-            <a className="card" href="/llms.txt">
-              <span className="num">03</span>
-              <h3>llms.txt.</h3>
-              <p>Short product summary, install links, source pages, and agent docs in crawler-friendly text.</p>
-              <span className="arr-link">Open llms.txt {"->"}</span>
-            </a>
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">docs split</span>
+              <h2 className="display-l">
+                Humans read this page. Agents read the <em>manifest.</em>
+              </h2>
+            </div>
+            <ol className="doc-list numbered linked">
+              <li>
+                <Link className="doc-row" href="/mcp">
+                  <span className="num">01</span>
+                  <h3>MCP page.</h3>
+                  <p>Human-readable server metadata, transport notes, config reminders, and tool list.</p>
+                  <span className="arr-link">Open /mcp {"->"}</span>
+                </Link>
+              </li>
+              <li>
+                <a className="doc-row" href="/mcp/manifest.json">
+                  <span className="num">02</span>
+                  <h3>Manifest JSON.</h3>
+                  <p>Machine-readable tool surface for agent crawlers and registry submissions.</p>
+                  <span className="arr-link">Open JSON {"->"}</span>
+                </a>
+              </li>
+              <li>
+                <a className="doc-row" href="/llms.txt">
+                  <span className="num">03</span>
+                  <h3>llms.txt.</h3>
+                  <p>Short product summary, install links, source pages, and agent docs in crawler-friendly text.</p>
+                  <span className="arr-link">Open llms.txt {"->"}</span>
+                </a>
+              </li>
+            </ol>
           </div>
         </div>
       </section>

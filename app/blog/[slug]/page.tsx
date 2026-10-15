@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { DocRule } from "../../components/Doc";
 import { PageShell } from "../../components/PageShell";
 import { CANONICAL_URL, RELEASE_URL, SitePage } from "../../content/pages";
-import { BlogPoster } from "../BlogPoster";
 import { BlogArticle, blogArticles, getAdjacentArticles, getArticleBySlug, getArticleUrl } from "../blog-data";
 import { markdownToHtml } from "../markdown";
 
@@ -57,9 +57,9 @@ export default async function ArticlePage({ params }: Props) {
   return (
     <PageShell page={page}>
       <article className="blog-article" data-screen-label={`blog / ${article.slug}`}>
-        <section className="blog-article-hero">
-          <div className="container blog-article-hero-grid">
-            <div>
+        <section className="hero blog-article-hero">
+          <div className="container">
+            <div className="doc">
               <p className="crumb">
                 <Link href="/blog">Field notes</Link> / {article.tags[0]}
               </p>
@@ -77,26 +77,19 @@ export default async function ArticlePage({ params }: Props) {
                 ))}
               </div>
             </div>
-            <BlogPoster
-              tone={article.heroTone}
-              size="large"
-              label={`${article.title} custom visual`}
-              captionLeft={article.tags[0]}
-              captionRight={`${article.readingMinutes} min`}
-            />
           </div>
         </section>
 
         <section className="section blog-article-section">
           <div className="container blog-article-layout">
             <aside className="article-rail" aria-label="Article tools">
-              <div className="rail-card">
+              <div className="rail-block">
                 <span className="eyebrow">source trail</span>
                 <a href="/llms-full.txt">llms-full.txt</a>
                 <a href="/api/features-manifest">feature manifest</a>
                 <a href="/blog/rss.xml">RSS feed</a>
               </div>
-              <div className="rail-card">
+              <div className="rail-block">
                 <span className="eyebrow">try it</span>
                 <a href={RELEASE_URL}>Install Uoink</a>
                 <Link href="/features">Feature index</Link>
@@ -106,34 +99,44 @@ export default async function ArticlePage({ params }: Props) {
           </div>
         </section>
 
-        <section className="section tight next-articles" data-screen-label={`blog / ${article.slug} / next`}>
-          <div className="container next-article-grid">
-            {adjacent.previous ? (
-              <Link href={`/blog/${adjacent.previous.slug}`} className="next-article-card">
-                <span className="eyebrow">previous</span>
-                <h2>{adjacent.previous.title}</h2>
-                <p>{adjacent.previous.dek}</p>
-              </Link>
-            ) : (
-              <Link href="/blog" className="next-article-card">
-                <span className="eyebrow">index</span>
-                <h2>Back to field notes</h2>
-                <p>Read the rest of the launch cluster.</p>
-              </Link>
-            )}
-            {adjacent.next ? (
-              <Link href={`/blog/${adjacent.next.slug}`} className="next-article-card accent">
-                <span className="eyebrow">next</span>
-                <h2>{adjacent.next.title}</h2>
-                <p>{adjacent.next.dek}</p>
-              </Link>
-            ) : (
-              <Link href="/install" className="next-article-card accent">
-                <span className="eyebrow">ship it</span>
-                <h2>Install Uoink</h2>
-                <p>Turn the next useful video into a local corpus.</p>
-              </Link>
-            )}
+        <DocRule />
+
+        <section className="section next-articles" data-screen-label={`blog / ${article.slug} / next`}>
+          <div className="container">
+            <div className="doc">
+              <ul className="doc-list linked">
+                <li>
+                  {adjacent.previous ? (
+                    <Link href={`/blog/${adjacent.previous.slug}`} className="doc-row">
+                      <span className="eyebrow">previous</span>
+                      <h2>{adjacent.previous.title}</h2>
+                      <p>{adjacent.previous.dek}</p>
+                    </Link>
+                  ) : (
+                    <Link href="/blog" className="doc-row">
+                      <span className="eyebrow">index</span>
+                      <h2>Back to field notes</h2>
+                      <p>Read the rest of the launch cluster.</p>
+                    </Link>
+                  )}
+                </li>
+                <li>
+                  {adjacent.next ? (
+                    <Link href={`/blog/${adjacent.next.slug}`} className="doc-row">
+                      <span className="eyebrow">next</span>
+                      <h2>{adjacent.next.title}</h2>
+                      <p>{adjacent.next.dek}</p>
+                    </Link>
+                  ) : (
+                    <Link href="/install" className="doc-row">
+                      <span className="eyebrow">ship it</span>
+                      <h2>Install Uoink</h2>
+                      <p>Turn the next useful video into a local corpus.</p>
+                    </Link>
+                  )}
+                </li>
+              </ul>
+            </div>
           </div>
         </section>
       </article>

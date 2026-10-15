@@ -58,9 +58,9 @@ export default async function FeaturePage({ params }: Props) {
     <PageShell page={page}>
       <EmbedMode />
       <article className="feature-page" data-screen-label={`feature / ${feature.slug}`}>
-        <section className="feature-hero">
-          <div className="container feature-hero-grid">
-            <div>
+        <section className="hero feature-hero">
+          <div className="container hero-grid">
+            <div className="copy">
               <p className="crumb">
                 <Link href="/features">Features</Link> / {feature.category}
               </p>
@@ -80,7 +80,7 @@ export default async function FeaturePage({ params }: Props) {
           </div>
         </section>
 
-        <section className="section">
+        <section className="section flush">
           <div className="container feature-detail-grid">
             <div className="feature-copy">
               <section id="what-it-does" data-screen-label={`feature / ${feature.slug} / what it does`}>
@@ -118,7 +118,7 @@ export default async function FeaturePage({ params }: Props) {
                   <p>This feature runs without a dedicated MCP tool. Agents can still use the local corpus it produces.</p>
                 )}
                 {feature.mcpExample ? (
-                  <pre className="feature-code-example">
+                  <pre className="code-block">
                     <code>{feature.mcpExample}</code>
                   </pre>
                 ) : null}
@@ -132,22 +132,22 @@ export default async function FeaturePage({ params }: Props) {
                 <span className="eyebrow">try it now</span>
                 <h2 className="display-m">Run it on your next source.</h2>
                 <p>{feature.cta}</p>
-                <p>
+                <div className="ctas">
                   <a className="btn primary large" href={RELEASE_URL}>
                     Install Uoink
                   </a>
-                </p>
+                </div>
               </section>
             </div>
 
             <aside className="feature-side">
-              <div className="feature-side-card">
+              <div className="side-block">
                 <span className="eyebrow">product shot</span>
                 <h3>{feature.screenshot.title}</h3>
                 <p>{feature.screenshot.alt}</p>
-                <p className="mono caps">Dashboard embed ready</p>
+                <p>Dashboard embed ready</p>
               </div>
-              <div className="feature-side-card">
+              <div className="side-block">
                 <span className="eyebrow">related</span>
                 <div className="related-list">
                   {getRelatedFeatures(feature).map((related) => (
@@ -157,7 +157,7 @@ export default async function FeaturePage({ params }: Props) {
                   ))}
                 </div>
               </div>
-              <div className="feature-side-card">
+              <div className="side-block">
                 <span className="eyebrow">source</span>
                 <a className="arr-link" href={GITHUB_URL}>
                   Audit the code -&gt;
@@ -172,48 +172,28 @@ export default async function FeaturePage({ params }: Props) {
   );
 }
 
+// The real dashboard screen for the feature, labelled with its category,
+// platforms and status. Every feature ships a screenshot; without one the
+// hero is copy alone rather than a stand-in drawing.
 function FeatureVisual({ feature }: { feature: Feature }) {
-  const tool = feature.mcpTools[0] ?? "local corpus";
-  const logos = getFeatureLogoKeys(feature);
+  if (!feature.screenshot.src) return null;
 
   return (
-    <div className="feature-visual" aria-label={feature.screenshot.alt}>
-      <div className="feature-visual-top">
+    <figure className={`figure${feature.slug === "twitter-video" ? " tweet" : ""}`}>
+      <div className="figure-label">
         <span>{feature.category}</span>
-        <PlatformLogoStrip logos={logos} compact className="feature-visual-logos" />
+        <PlatformLogoStrip logos={getFeatureLogoKeys(feature)} compact />
         <span>{feature.status}</span>
       </div>
-      <div className="feature-visual-body">
-        <div className="mini-heading">{feature.title}</div>
-        {feature.screenshot.src ? (
-          <figure className={`feature-visual-shot ${feature.slug === "twitter-video" ? "tweet-creative" : ""}`}>
-            <Image
-              src={feature.screenshot.src}
-              alt={feature.screenshot.alt}
-              width={feature.screenshot.width ?? 1280}
-              height={feature.screenshot.height ?? 800}
-              priority
-            />
-            <figcaption>{feature.screenshot.title}</figcaption>
-          </figure>
-        ) : (
-          <div className="corpus compact">
-            <div className="hd">
-              <span>{feature.slug}.md</span>
-              <span>{tool}</span>
-            </div>
-            <span className="ln k"># {feature.title}</span>
-            <span className="ln dim">status: {feature.status}</span>
-            <span className="ln dim">category: {feature.category}</span>
-            <span className="ln">&nbsp;</span>
-            <span className="ln k">## What it does</span>
-            <span className="ln dim">{feature.summary}</span>
-            <span className="ln k">## Agent path</span>
-            <span className="ln hl">{tool}</span>
-          </div>
-        )}
-      </div>
-    </div>
+      <Image
+        src={feature.screenshot.src}
+        alt={feature.screenshot.alt}
+        width={feature.screenshot.width ?? 1280}
+        height={feature.screenshot.height ?? 800}
+        priority
+      />
+      <figcaption>{feature.screenshot.title}</figcaption>
+    </figure>
   );
 }
 
