@@ -136,9 +136,9 @@ export const pages: Record<PageId, SitePage> = {
       "writing studio",
     ],
     html: `
-<section class="hero" data-screen-label="home / hero">
+<section class="home-hero" data-screen-label="home / hero">
   <div class="container">
-    <div class="hero-grid">
+    <div class="home-hero-grid">
       <div class="copy">
         <span class="eyebrow">uoink.app / ${VERSION}</span>
         <h1 class="display-xl">Uoink that <em>shit.</em></h1>
@@ -149,155 +149,145 @@ export const pages: Record<PageId, SitePage> = {
         </div>
         <p class="sub-cta">Free / MIT / no required telemetry / ${MCP_STDIO_TOOL_COUNT} stdio tools / ${MCP_TOOL_COUNT} HTTP tools / ${PRODUCT_STATUS.mac.visible}</p>
       </div>
-      <div class="hero-demo" id="live-uoink">
-        <div class="corpus" data-corpus-animate>
-          <div class="hd"><span>karpathy-intro-to-llms.md</span><span>local corpus</span></div>
-          <span class="ln k"># Intro to Large Language Models</span>
-          <span class="ln dim">source: YouTube / channel: Andrej Karpathy</span>
-          <span class="ln dim">saved: Desktop/Uoink/AI-and-ML/karpathy-intro-to-llms/</span>
-          <span class="ln">&nbsp;</span>
-          <span class="ln k">## Metadata</span>
-          <span class="ln dim">duration, views, upload date, channel context, source URL</span>
-          <span class="ln k">## Transcript</span>
-          <span class="ln hl">[00:47] timestamped transcript excerpt</span>
-          <span class="ln k">## Screenshots</span>
-          <span class="ln dim">timestamped frames saved on disk</span>
-          <span class="ln k">## Comments</span>
-          <span class="ln dim">top comments saved with the source</span>
-        </div>
-        <p class="mono caps" style="color:var(--parchment);margin-top:14px;text-align:right;font-size:9.5px">one uoink / readable by Claude, ChatGPT, and agents</p>
-      </div>
+      <figure class="reader-demo" id="live-uoink">
+        ${readerDemo()}
+        <figcaption>one uoink / readable by Claude, ChatGPT, and agents</figcaption>
+      </figure>
     </div>
   </div>
 </section>
-<section class="section" data-screen-label="home / living library" id="living-library">
+<section class="home-section" data-screen-label="home / living library" id="living-library">
   <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">New in 3.8.0: Living Library</span>
-      <h2 class="display-l">Find the moment. <em>Cite the source.</em></h2>
+    <div class="doc">
+      <div class="doc-head">
+        <span class="eyebrow">New in 3.8.0: Living Library</span>
+        <h2 class="display-l">Find the moment. <em>Cite the source.</em></h2>
+      </div>
+      <ul class="doc-list">${docItems([
+        ["Clip search + evidence cards", "Search inside videos for timestamped, deep-linked excerpts your AI can quote and cite. Now on everyday stdio MCP."],
+        ["Standing capture", "Follow a YouTube channel, YouTube playlist, or podcast RSS feed. With capture enabled, new uploads and episodes land in your library."],
+        ["Library reach over MCP", "Search the library, read items, and use resource templates and prompts from your MCP client."],
+        ["Cited range export", "Quote a stretch of video or an episode with speaker labels, chapters, and provenance."],
+        ["Chapter navigation", "Jump between chapters on items that have them."]
+      ])}</ul>
+      <p class="doc-links"><a class="arr-link" href="https://github.com/ryanbiddy/uoink/releases/tag/v3.8.0">3.8.0 release notes</a> <a class="arr-link" href="/changelog">Changelog</a></p>
     </div>
-    <div class="hook-grid">${featureCards([
-      ["Clip search + evidence cards", "Search inside videos for timestamped, deep-linked excerpts your AI can quote and cite. Now on everyday stdio MCP."],
-      ["Standing capture", "Follow a YouTube channel, YouTube playlist, or podcast RSS feed. With capture enabled, new uploads and episodes land in your library."],
-      ["Library reach over MCP", "Search the library, read items, and use resource templates and prompts from your MCP client."],
-      ["Cited range export", "Quote a stretch of video or an episode with speaker labels, chapters, and provenance."],
-      ["Chapter navigation", "Jump between chapters on items that have them."]
-    ])}</div>
-    <p class="mt-32"><a class="btn primary" href="https://github.com/ryanbiddy/uoink/releases/tag/v3.8.0">3.8.0 release notes</a> <a class="btn ghost" href="/changelog">Changelog</a></p>
   </div>
 </section>
-<section class="section tight" data-screen-label="home / product shot">
+<section class="home-section flush" data-screen-label="home / product shot">
   <div class="container">
-    <figure class="feature-visual product-figure wide">
-      <div class="feature-visual-top"><span>uoink dashboard</span><span>local corpus</span></div>
-      <div class="feature-visual-body">
-        <div class="feature-visual-shot">
-          <img src="/product/hero-library.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Uoink dashboard library showing dozens of saved YouTube videos as searchable source cards with transcripts, hook labels, topic filters, and channel context on the local machine." />
-          <figcaption>Your captures, searchable on your own disk. Hand the transcript and frames to the AI you choose.</figcaption>
-        </div>
-      </div>
+    <figure class="home-figure">
+      <div class="home-figure-label"><span>uoink dashboard</span><span>local corpus</span></div>
+      <img src="/product/hero-library.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Uoink dashboard library showing dozens of saved YouTube videos as searchable source cards with transcripts, hook labels, topic filters, and channel context on the local machine." />
+      <figcaption>Your captures, searchable on your own disk. Hand the transcript and frames to the AI you choose.</figcaption>
     </figure>
   </div>
 </section>
-<hr class="rule"/>
-<section class="section" data-screen-label="home / corpus anatomy" id="corpus">
+<div class="container"><hr class="doc-rule"/></div>
+<section class="home-section" data-screen-label="home / corpus anatomy" id="corpus">
   <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">what you get per uoink</span>
-      <h2 class="display-l">Why paste a transcript when you can feed the <em>entire corpus?</em></h2>
-      <p class="lede">Transcript-only tools flatten video into text. Uoink keeps the parts that make video useful: the words, the frames, the audience reaction, the channel context, and the source metadata.</p>
-    </div>
-    <div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
-      <article class="card"><span class="num">01</span><h3>Capture the <em>source.</em></h3><p>Transcript with timestamps, screenshots, description, title, thumbnail, channel context, and comments in one markdown file.</p><a class="arr-link" href="/how-it-works">See the workflow -></a></article>
-      <article class="card"><span class="num">02</span><h3>Keep the <em>asset.</em></h3><p>Every capture writes to disk and into a local SQLite index. Search it later, cite it later, move it into your own vault.</p><a class="arr-link" href="/features">Browse features -></a></article>
-      <article class="card"><span class="num">03</span><h3>Hand it to <em>AI.</em></h3><p>Paste transcript and frames into Claude or ChatGPT, or let an MCP agent search and cite your library.</p><a class="arr-link" href="/developers">Open developer docs -></a></article>
-    </div>
-  </div>
-</section>
-<section class="big-strip" data-screen-label="home / local first">
-  <div class="container" style="display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center">
-    <div>
-      <span class="eyebrow">local-first, by design</span>
-      <h2 class="display-l" style="margin:8px 0 0">No account. No Uoink cloud. <em>Your disk.</em></h2>
-      <p class="body-l" style="margin-top:18px;max-width:60ch">The helper runs on localhost. Your corpus lands on your disk. Entity extraction is opt-in and off by default. If you add your own Anthropic key, the model-usage meter shows real usage.</p>
-    </div>
-    <a class="btn ink" href="/privacy">Read privacy -></a>
-  </div>
-</section>
-<section class="section" data-screen-label="home / three audiences">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">three doors, one corpus</span>
-      <h2 class="display-l">Creators and developers use the same <em>source card.</em></h2>
-      <p class="lede">The card stays the shared object. The next move changes by job.</p>
-    </div>
-    <div class="three-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
-      <a class="card" href="/creators"><span class="num">01</span><h3>Creators.</h3><p>Find the moment you need, read the transcript beside the frames, and export a cited range for your next draft.</p><span class="arr-link">See creator workflow -></span></a>
-      <a class="card" href="/developers"><span class="num">02</span><h3>Developers.</h3><p>Give Claude Desktop or Cursor a local library to search and cite. Start with the stdio config or the Claude Desktop bundle.</p><span class="arr-link">Open developer docs -></span></a>
-      <a class="card" href="/sources"><span class="num">03</span><h3>Sources.</h3><p>Capture YouTube, X video and post text, podcasts, web articles, and Reddit threads into one local library.</p><span class="arr-link">Browse supported sources -></span></a>
-    </div>
-  </div>
-</section>
-<hr class="rule"/>
-<section class="section" data-screen-label="home / generate demo">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">from source to draft</span>
-      <h2 class="display-l">Pick a source, then <em>generate</em> from it.</h2>
-      <p class="lede">Choose something you saved, aim it at a tweet, thread, or script, and Writing Studio drafts from the corpus with the creator credit attached.</p>
-    </div>
-    <figure class="feature-visual product-figure wide">
-      <div class="feature-visual-top"><span>generate flow</span><span>silent loop</span></div>
-      <div class="feature-visual-body">
-        <div class="feature-visual-shot">
-          <video src="/product/generate-flow.mp4" poster="/product/generate-flow-poster.jpg" width="1280" height="720" muted autoplay loop playsinline preload="none" aria-label="Screen recording of Uoink generating a tweet: a source is picked, the output is set to Tweet, a prompt is typed, and a cited draft appears in the preview panel."></video>
-          <figcaption>Pick the ThursdAI source, set the output to Tweet, write the prompt, and the cited draft lands in the preview.</figcaption>
-        </div>
+    <div class="doc">
+      <div class="doc-head">
+        <span class="eyebrow">what you get per uoink</span>
+        <h2 class="display-l">Why paste a transcript when you can feed the <em>entire corpus?</em></h2>
+        <p class="lede">Transcript-only tools flatten video into text. Uoink keeps the parts that make video useful: the words, the frames, the audience reaction, the channel context, and the source metadata.</p>
       </div>
+      <ol class="doc-list numbered">
+        <li><span class="num">01</span><h3>Capture the <em>source.</em></h3><p>Transcript with timestamps, screenshots, description, title, thumbnail, channel context, and comments in one markdown file.</p><a class="arr-link" href="/how-it-works">See the workflow -></a></li>
+        <li><span class="num">02</span><h3>Keep the <em>asset.</em></h3><p>Every capture writes to disk and into a local SQLite index. Search it later, cite it later, move it into your own vault.</p><a class="arr-link" href="/features">Browse features -></a></li>
+        <li><span class="num">03</span><h3>Hand it to <em>AI.</em></h3><p>Paste transcript and frames into Claude or ChatGPT, or let an MCP agent search and cite your library.</p><a class="arr-link" href="/developers">Open developer docs -></a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+<div class="container"><hr class="doc-rule"/></div>
+<section class="home-section" data-screen-label="home / local first">
+  <div class="container">
+    <div class="doc">
+      <div class="doc-head">
+        <span class="eyebrow">local-first, by design</span>
+        <h2 class="display-l">No account. No Uoink cloud. <em>Your disk.</em></h2>
+        <p class="lede">The helper runs on localhost. Your corpus lands on your disk. Entity extraction is opt-in and off by default. If you add your own Anthropic key, the model-usage meter shows real usage.</p>
+      </div>
+      <p class="doc-links"><a class="arr-link" href="/privacy">Read privacy -></a></p>
+    </div>
+  </div>
+</section>
+<div class="container"><hr class="doc-rule"/></div>
+<section class="home-section" data-screen-label="home / three audiences">
+  <div class="container">
+    <div class="doc">
+      <div class="doc-head">
+        <span class="eyebrow">three doors, one corpus</span>
+        <h2 class="display-l">Creators and developers use the same <em>source card.</em></h2>
+        <p class="lede">The card stays the shared object. The next move changes by job.</p>
+      </div>
+      <ul class="doc-list linked">
+        <li><a class="doc-row" href="/creators"><h3>Creators.</h3><p>Find the moment you need, read the transcript beside the frames, and export a cited range for your next draft.</p><span class="arr-link">See creator workflow -></span></a></li>
+        <li><a class="doc-row" href="/developers"><h3>Developers.</h3><p>Give Claude Desktop or Cursor a local library to search and cite. Start with the stdio config or the Claude Desktop bundle.</p><span class="arr-link">Open developer docs -></span></a></li>
+        <li><a class="doc-row" href="/sources"><h3>Sources.</h3><p>Capture YouTube, X video and post text, podcasts, web articles, and Reddit threads into one local library.</p><span class="arr-link">Browse supported sources -></span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+<div class="container"><hr class="doc-rule"/></div>
+<section class="home-section" data-screen-label="home / generate demo">
+  <div class="container">
+    <div class="doc">
+      <div class="doc-head">
+        <span class="eyebrow">from source to draft</span>
+        <h2 class="display-l">Pick a source, then <em>generate</em> from it.</h2>
+        <p class="lede">Choose something you saved, aim it at a tweet, thread, or script, and Writing Studio drafts from the corpus with the creator credit attached.</p>
+      </div>
+    </div>
+    <figure class="home-figure">
+      <div class="home-figure-label"><span>generate flow</span><span>silent loop</span></div>
+      <video class="motion-only" src="/product/generate-flow.mp4" poster="/product/generate-flow-poster.jpg" width="1280" height="720" muted autoplay loop playsinline preload="none" aria-label="Screen recording of Uoink generating a tweet: a source is picked, the output is set to Tweet, a prompt is typed, and a cited draft appears in the preview panel."></video>
+      <img class="still-only" src="/product/generate-flow-poster.jpg" width="1280" height="800" fetchpriority="low" decoding="async" alt="Uoink Generate view: hook pattern and style options beside the X composer, which holds a drafted tweet with its source credit." />
+      <figcaption>Pick the ThursdAI source, set the output to Tweet, write the prompt, and the cited draft lands in the preview.</figcaption>
     </figure>
   </div>
 </section>
-<hr class="rule"/>
-<section class="section" data-screen-label="home / model agnostic">
+<div class="container"><hr class="doc-rule"/></div>
+<section class="home-section" data-screen-label="home / model agnostic">
   <div class="container">
-    <div class="agent-demo">
-      <div class="chat">
+    <div class="doc">
+      <div class="home-agent">
         <div class="mini-heading">model agnostic</div>
         <p class="chat-bubble user">Find the moment this saved video discusses language models and give me a source link.</p>
         <p class="chat-bubble assistant">Calling <code>search_clips</code>, then <code>get_evidence_card</code>. Your AI reads timestamped excerpts it can quote and cite.</p>
-      </div>
-      <div class="log">
         <div class="mini-heading">mcp tool trace</div>
-        <pre class="mcp-log" style="margin:0;white-space:pre-wrap">search_library(query)
+        <pre class="home-code">search_library(query)
 get_library_item(video_id)
 search_clips(query)
 get_evidence_card(video_id)</pre>
       </div>
-    </div>
-    <div class="text-center mt-32">
-      <a class="btn ghost" href="/developers">Read MCP setup -></a>
-      <a class="btn ghost" href="/mcp">Machine-readable MCP manifest -></a>
+      <p class="doc-links"><a class="arr-link" href="/developers">Read MCP setup -></a> <a class="arr-link" href="/mcp">Machine-readable MCP manifest -></a></p>
     </div>
   </div>
 </section>
-<section class="section" data-screen-label="home / install">
+<div class="container"><hr class="doc-rule"/></div>
+<section class="home-section" data-screen-label="home / install">
   <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">install Uoink</span>
-      <h2 class="display-l">One helper. One extension. Then the <em>U button.</em></h2>
-      <p class="lede">Download the helper, install the extension, open a video, and click Uoink. The helper bundles Python, yt-dlp, and ffmpeg so you never install them yourself.</p>
-    </div>
-    <div class="ledger">
-      <div class="ledger-card live"><div class="top"><span>Windows</span><span>live path</span></div><div class="body-l"><h3>Download the helper.</h3><p class="ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p></div><div class="foot"><a class="btn primary small" href="${RELEASE_URL}">Download -></a></div></div>
-      <div class="ledger-card pend"><div class="top"><span>Extension</span><span>pending review</span></div><div class="body-l"><h3>Install the browser button.</h3><p class="ver">Chrome / Edge / Brave / Vivaldi / Arc / Opera GX</p><p>Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at <code>%LOCALAPPDATA%\\Uoink\\extension</code>.</p></div><div class="foot"><a class="btn ghost small" href="/install#extension">Install notes -></a></div></div>
-      <div class="ledger-card"><div class="top"><span>Mac</span><span>${PRODUCT_STATUS.mac.label}</span></div><div class="body-l"><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p></div><div class="foot"><a class="btn ghost small" href="/install#mac">Mac status -></a></div></div>
+    <div class="doc">
+      <div class="doc-head">
+        <span class="eyebrow">install Uoink</span>
+        <h2 class="display-l">One helper. One extension. Then the <em>U button.</em></h2>
+        <p class="lede">Download the helper, install the extension, open a video, and click Uoink. The helper bundles Python, yt-dlp, and ffmpeg so you never install them yourself.</p>
+      </div>
+      <ul class="doc-list">
+        <li><p class="doc-meta"><b>Windows</b><span>live path</span></p><h3>Download the helper.</h3><p class="doc-ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p><a class="btn primary small" href="${RELEASE_URL}">Download -></a></li>
+        <li><p class="doc-meta"><b>Extension</b><span>pending review</span></p><h3>Install the browser button.</h3><p class="doc-ver">Chrome / Edge / Brave / Vivaldi / Arc / Opera GX</p><p>Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at <code>%LOCALAPPDATA%\\Uoink\\extension</code>.</p><a class="arr-link" href="/install#extension">Install notes -></a></li>
+        <li><p class="doc-meta"><b>Mac</b><span>${PRODUCT_STATUS.mac.label}</span></p><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="doc-ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p><a class="arr-link" href="/install#mac">Mac status -></a></li>
+      </ul>
     </div>
   </div>
 </section>
-<section class="section tight" data-final-cta data-screen-label="home / final cta">
-  <div class="container text-center">
-    <span class="wm-line" style="font-size:110px;color:var(--vermillion);justify-content:center"><uoink-mark aria-hidden="true"></uoink-mark><span class="oink">OINK</span></span>
-    <p class="display-m" style="margin:24px auto 32px;max-width:24ch">Take the video. Make it <em>usable.</em></p>
+<div class="container"><hr class="doc-rule"/></div>
+<section class="home-end" data-final-cta data-screen-label="home / final cta">
+  <div class="container">
+    <span class="wm-line" role="img" aria-label="Uoink"><uoink-mark aria-hidden="true"></uoink-mark><span class="oink" aria-hidden="true">OINK</span></span>
+    <p class="display-m">Take the video. Make it <em>usable.</em></p>
   </div>
 </section>`,
   },
@@ -970,6 +960,58 @@ function featureCards(items: [string, string][]): string {
         `<article class="hook"><span class="num">${String(index + 1).padStart(2, "0")}</span><span class="label">capability</span><h3>${title}</h3><p>${body}</p></article>`,
     )
     .join("");
+}
+
+function docItems(items: [string, string][]): string {
+  return items.map(([title, body]) => `<li><h3>${title}</h3><p>${body}</p></li>`).join("");
+}
+
+// The home hero's picture of the Reader: a capture list beside the open
+// transcript. Sample titles are generic and the transcript is bracketed
+// placeholder text, so nothing here quotes or names a real creator.
+// (Data lives inside the function: it runs while `pages` initialises.)
+function readerDemo(): string {
+  const captureList: { title: string; source: string; state: string; step?: number; open?: boolean }[] = [
+    { title: "Talk: building a personal research library", source: "YouTube · 41:08", state: "Done · YouTube captions", open: true },
+    { title: "Episode 42: how we take notes", source: "Podcast · 58:20", state: "Capturing · transcript (3 of 5)", step: 3 },
+    { title: "Why I keep a reading log", source: "Article · example.com", state: "Done · article text" },
+  ];
+  const steps = 5;
+  const transcriptLines: { time: string; text?: string; shot?: boolean }[] = [
+    { time: "00:00", text: "[Transcript paragraph: the speaker opens the talk.]" },
+    { time: "00:52", text: "[Transcript paragraph, word for word from the captions.]" },
+    { time: "03:16", shot: true },
+    { time: "03:40", text: "[Next paragraph of the transcript.]" },
+  ];
+
+  const captures = captureList.map(({ title, source, state, step = 0, open }) => {
+    const segments = Array.from({ length: steps }, (_, index) => {
+      const n = index + 1;
+      return `<i${n < step ? ' class="done"' : n === step ? ' class="active"' : ""}></i>`;
+    }).join("");
+    const strip = step ? `<span class="reader-steps">${segments}</span>` : "";
+    return `<li class="reader-item${open ? " is-open" : ""}"><span class="reader-item-title">${title}</span><span class="reader-item-source">${source}</span><span class="reader-item-state${step ? " is-active" : ""}">${state}</span>${strip}</li>`;
+  }).join("");
+  const transcript = transcriptLines.map(({ time, text, shot }) =>
+    shot
+      ? `<div class="reader-para"><span class="reader-ts">${time}</span><span class="reader-shot"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 16l5-5 4 4 3-3 6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>[Screenshot · ${time}]</span></div>`
+      : `<p class="reader-para"><span class="reader-ts">${time}</span><span>${text}</span></p>`,
+  ).join("");
+  const current = captureList.find((capture) => capture.open) ?? captureList[0];
+
+  return `<div class="reader-app" role="img" aria-label="The Uoink Reader with sample items: a capture list showing one finished capture and one still capturing its transcript, beside the open transcript with timestamp links, an inline screenshot, and a Copy as Markdown button.">
+  <div class="reader-list">
+    <div class="reader-list-head"><span class="reader-list-title"><b>Library</b><span>${captureList.length} captures</span></span><span class="reader-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Search library</span></div>
+    <ul class="reader-items">${captures}</ul>
+  </div>
+  <div class="reader-doc">
+    <div class="reader-doc-head">
+      <div class="reader-doc-bar"><span class="reader-doc-meta">${current.source}</span><span class="reader-copy"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Copy as Markdown</span></div>
+      <span class="reader-doc-title">${current.title}</span>
+    </div>
+    <div class="reader-transcript">${transcript}</div>
+  </div>
+</div>`;
 }
 
 function toolRows(): string {
