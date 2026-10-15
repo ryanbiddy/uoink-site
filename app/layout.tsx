@@ -70,7 +70,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <VercelAnalytics />
-        <Script src="/nav.js" strategy="afterInteractive" />
         <Script src="/uoink-mark.js" strategy="afterInteractive" />
       </body>
     </html>
