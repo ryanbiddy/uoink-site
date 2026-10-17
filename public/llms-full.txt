@@ -3,7 +3,7 @@
 
 > A local library for the videos and podcasts you study, that any AI you use can search and cite.
 
-Free, MIT-licensed. No account, no Uoink cloud, no required telemetry. Made by Ryan Biddy (@replayryan), a personal side project.
+Free, MIT-licensed. No account or Uoink-hosted corpus. Model dependencies can send telemetry. Made by Ryan Biddy (@replayryan), a personal side project.
 
 ## Install
 
@@ -45,7 +45,17 @@ Clipboard paste with transcript and frames works with Claude and ChatGPT. Local 
 - [Feature manifest](https://uoink.app/api/features-manifest): feature URLs and summaries.
 - [Full text](https://uoink.app/llms-full.txt): setup details.
 
-## Optional network calls and retention
+## Network calls and retention
+
+Capture contacts source sites and can use FxTwitter for X text even when a post was not identified as truncated. Enabled subscriptions poll with automatic capture off, and connected agents can register them. Turning automatic capture off stops new starts; already-started work may finish. Stop Uoink stops polling until restart; Autostart on login controls the next Windows login. The authenticated local API can archive subscriptions; legacy feed and monitored-playlist enable controls cover only sources with those records.
+
+X text capture defaults to true. Setting x_text_capture_enabled to false in local settings stops both syndication and FxTwitter text requests. There is no dashboard or extension toggle, and POST /settings does not accept this field. Video capture is separate.
+
+Removing the saved Anthropic key attempts to delete the current credential, but a legacy Yoink credential or older plaintext settings entry can remain, and deletion failures can go unreported. Check Windows Credential Manager and the active profile settings; local removal does not revoke the key at Anthropic. Disconnect agents in their clients to end access.
+
+Extension setup and previews can load remote thumbnails. After copying a completed capture, the extension opens claude.ai/new without pasting or submitting the content, even with AI off; there is no setting to disable the tab. Missing Whisper-model downloads require a per-request approval flag that a connected agent can set without a Uoink prompt. Optional speaker labeling downloads pyannote/speaker-diarization-community-1 from Hugging Face when needed and can send your Hugging Face token to huggingface.co. Supporting transcription and alignment models can also download from Hugging Face or PyTorch hosts, and language data from NLTK. The pinned pyannote-audio 4.0.7 dependency enables metrics by default, including during voice-activity detection with speaker labeling off. Uoink provides no dashboard switch; PYANNOTE_METRICS_ENABLED=false in the helper environment disables those metrics. Release checks query GitHub when the cache needs refreshing or a caller forces a check, without sending the library or installing an update.
+
+Captures, local indexes and settings remain on disk. Logs can contain source URLs and paths. Exported files and optional mirrors create additional copies; sync software can upload them. The extension screenshot interval uses browser sync storage. Trash cleanup is attempted at startup and daily for items older than 30 days. Uninstall retains library data and credentials but removes edited topics.json routing rules. The website separately uses Vercel Web Analytics. See https://uoink.app/privacy for controls and retention details.
 
 Connected agents can start paid Anthropic calls with the saved key when the user allows those actions, even with automatic analysis off. Relevant library text and, for research, saved discovery rows can be sent. Local MCP playbook packets make no model call.
 

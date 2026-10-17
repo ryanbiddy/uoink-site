@@ -148,7 +148,7 @@ export default function Page() {
             <div className="docs-main">
               <h3>One-click Claude Desktop setup</h3>
               <p>Open the <a href={RELEASE_URL}>.mcpb bundle from the latest release</a> to install the stdio server without editing config.</p>
-              <p>For manual setup, use the README JSON below. Claude Desktop does not expand <code>%LOCALAPPDATA%</code>: replace it in both paths with your full app-data directory (for example <code>{String.raw`C:\Users\YOUR_USERNAME\AppData\Local`}</code>), or copy the generated config from the extension’s Settings page. Restart the client after saving.</p>
+              <p>For manual setup, use the README JSON below. Claude Desktop does not expand <code>%LOCALAPPDATA%</code>: replace it in both paths with your full app-data directory, or copy the generated config from the extension’s Settings page. Restart the client after saving.</p>
               <p>Cline and Continue are standard-stdio compatibility paths; they were not individually smoke-tested. Use the clipboard path for ChatGPT.</p>
               {configs.map((config) => (
                 <section key={config.name}>

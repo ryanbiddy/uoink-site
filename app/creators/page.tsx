@@ -226,7 +226,7 @@ export default function Page() {
             <div className="exchange">
               <div className="mini-heading">local by default</div>
               <p className="chat-bubble user">I am studying a competitor channel. Where does that research go?</p>
-              <p className="chat-bubble assistant">Onto your disk. Uoink has no hosted corpus, no account, and no telemetry endpoint.</p>
+              <p className="chat-bubble assistant">Onto your disk. Uoink has no hosted corpus or account. Source requests and model dependencies still use the network; AI features and connected clients can share content.</p>
               <div className="mini-heading">best next click</div>
               <p className="body-l">Install Uoink, capture one source, then open Writing Studio with that source selected.</p>
             </div>

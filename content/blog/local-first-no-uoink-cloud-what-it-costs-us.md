@@ -1,8 +1,8 @@
 # Local-First, No Uoink Cloud: What It Costs Us
 
-When we started building Uoink, we made a core design decision. We decided to build a local-first application. There are no user accounts, no database servers in the cloud, and zero telemetry tracking your activity. 
+When we started building Uoink, we made a core design decision. We decided to build a local-first application. There are no Uoink accounts or hosted corpus databases. Model dependencies can still send telemetry.
 
-Your transcripts, metadata, and screenshots live on your local drive. They stay in a local SQLite database at `%LOCALAPPDATA%\Uoink\index.db`. 
+Your transcripts, metadata, and screenshots live on your local drive. The searchable index lives in a local SQLite database at `%LOCALAPPDATA%\Uoink\index.db`.
 
 This decision was great for user privacy. It also came with severe costs for our business. 
 
@@ -28,15 +28,15 @@ We had to build an entire diagnostic and key-testing UI into the extension setup
 
 For developers, this is a benefit. Optional AI features use their own Anthropic key. For non-technical users, it is a barrier that prevents them from using the tool.
 
-## We Have Zero Telemetry
+## No Uoink Crash-Report Endpoint
 
-If a user runs into a bug, we have no automated way of knowing. We skip error-log tracking, tracking pixels, and click-event collection. 
+If a user runs into a bug, we have no automated way of knowing. The helper has no dedicated Uoink crash-report upload endpoint. The pinned pyannote model dependency enables its own metrics by default, including during voice-activity detection. See the [privacy page](/privacy) for network behavior and controls.
 
 This makes product development difficult. We can't see which hook types are most popular. We can't see how many playlists fail because of YouTube rate limits. 
 
 We rely entirely on users filing issues on GitHub. When they file a report, they must manually open the Uoink dashboard, export a diagnostic log, and paste it into the issue. 
 
-This lack of telemetry makes resolving issues slow. It forces us to write highly detailed local validation routines to help users debug their local setup on their own.
+This lack of automatic crash reports makes resolving issues slow. It forces us to write highly detailed local validation routines to help users debug their local setup on their own.
 
 ## Monetization is Difficult
 
@@ -52,9 +52,9 @@ By making the code open source under the MIT license, we invite users to inspect
 
 One of the biggest design advantages of a local-first tool is offline capability. Because your corpus lives on your hard drive, you can search your library and read saved transcripts offline.
 
-If you are on an airplane or working in a remote area without internet access, Uoink functions perfectly. The SQLite index runs without a network request to run a text search. 
+If you are on an airplane or working in a remote area without internet access, you can still read saved files and search the local index. The SQLite index runs without a network request to run a text search.
 
-The only feature that requires internet is the AI generation step, which needs to talk to the Anthropic API. 
+New captures, subscription polling, model downloads, dependency telemetry, remote thumbnails, release checks and AI calls use the internet. The extension also opens a Claude tab after copying a completed capture; it does not paste or submit the content.
 
 This design means your productivity is never tied to our servers. If our company closes down or our site goes offline, your local copy of Uoink continues to work. You are never locked out of your research library.
 
@@ -64,7 +64,7 @@ Despite these business challenges, the local-first model provides benefits that 
 
 The first benefit is speed. Searching a local SQLite database using FTS5 search is faster than querying a remote API. Your search results appear instantly. 
 
-The second benefit is privacy. Your transcripts and notes belong to you. No corporate server stores your intellectual property. 
+The second benefit is privacy. Your transcripts and notes belong to you. Uoink does not host your library. Content you share with an AI client or copy into a synced folder is handled by that service.
 
 The third benefit is security. Your Anthropic API key is stored locally in Windows Credential Manager. It never touches our servers.
 

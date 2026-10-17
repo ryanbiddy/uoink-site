@@ -8,7 +8,7 @@ const faq: FaqItem[] = [
   {
     question: "Is Uoink a local NotebookLM alternative?",
     answer:
-      "Yes, for the video-and-research use case. Both let you ask questions grounded in sources instead of a model's guesses. The difference: NotebookLM runs in Google's cloud on your Google account; Uoink runs on your machine, saves sources to your own disk, needs no account, and is open source (MIT). Your corpus never leaves your computer unless you turn on an optional AI feature.",
+      "Yes, for the video-and-research use case. Both let you ask questions grounded in sources instead of a model's guesses. The difference: NotebookLM runs in Google's cloud on your Google account; Uoink runs on your machine, saves sources to your own disk, needs no account, and is open source (MIT). Captures are stored locally. AI features, connected agents, exports and synced mirror folders can share content.",
   },
   {
     question: "What does NotebookLM do that Uoink doesn't?",
@@ -18,12 +18,12 @@ const faq: FaqItem[] = [
   {
     question: "What does Uoink do that NotebookLM doesn't?",
     answer:
-      "Uoink captures more than a YouTube URL: timestamped screenshots, top comments, channel context, and a JSON sidecar, all saved as Markdown you own. It exposes your corpus to Claude Desktop and Cursor as MCP tools, and to any agent via an OpenAPI bridge. And it keeps everything local — no account, no cloud storage, no telemetry.",
+      "Uoink captures more than a YouTube URL: timestamped screenshots, top comments, channel context, and a JSON sidecar, all saved as Markdown you own. It exposes your corpus to Claude Desktop and Cursor as MCP tools, and to any agent via an OpenAPI bridge. The library stays on your disk without a Uoink account. Source requests, model downloads and dependency telemetry can still contact outside services.",
   },
   {
     question: "Which should I use?",
     answer:
-      "Use NotebookLM if you want a hosted, cross-platform notebook with audio summaries and zero setup. Use Uoink if you want to own your sources on disk, feed them to your own AI agents over MCP, and keep everything private and local. They're not mutually exclusive — Uoink's Markdown corpora import cleanly into other tools, including NotebookLM.",
+      "Use NotebookLM if you want a hosted, cross-platform notebook with audio summaries and zero setup. Use Uoink if you want to own your sources on disk, feed them to your own AI agents over MCP, and keep a local copy of your sources. They're not mutually exclusive — Uoink's Markdown corpora import cleanly into other tools, including NotebookLM.",
   },
   {
     question: "Is Uoink free?",
@@ -138,7 +138,7 @@ export default function Page() {
               </table>
             </div>
             <p className="body-l">
-              Pick NotebookLM for a hosted, cross-platform notebook with audio summaries and zero setup. Pick Uoink to own your sources on disk, feed them to your own AI agents over MCP, and keep everything private and local.
+              Pick NotebookLM for a hosted, cross-platform notebook with audio summaries and zero setup. Pick Uoink to own your sources on disk, feed them to your own AI agents over MCP, and keep a local copy of your sources.
             </p>
           </div>
         </div>

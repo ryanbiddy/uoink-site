@@ -1082,7 +1082,7 @@ export const features: Feature[] = [
     "gettingStarted": [
       "Install Uoink on Windows 10/11.",
       "Open the .mcpb bundle from the latest GitHub release for one-click Claude Desktop setup.",
-      "For manual setup, copy the generated config from the extension’s Settings page; Claude Desktop needs absolute paths.",
+      "For manual setup, copy the generated config from the extension’s Settings page, or replace %LOCALAPPDATA% in both example paths with your full local app-data directory; Claude Desktop needs absolute paths.",
       "Restart Claude Desktop and ask it to search your library."
     ],
     "behindScenes": "Claude Desktop starts the helper as a background process using the command path in your configuration. It establishes communication via stdio JSON-RPC. When you prompt Claude about a video, the model calls the uoink_video tool, and the helper executes the task locally, returning the text directly to the active chat.",
@@ -1091,7 +1091,7 @@ export const features: Feature[] = [
       "classify_hook",
       "search_clips"
     ],
-    "mcpExample": "{\n  \"mcpServers\": {\n    \"uoink\": {\n      \"command\": \"C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\python\\\\python.exe\",\n      \"args\": [\n        \"C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Uoink\\\\uoink_mcp.py\"\n      ]\n    }\n  }\n}",
+    "mcpExample": "{\n  \"mcpServers\": {\n    \"uoink\": {\n      \"command\": \"%LOCALAPPDATA%\\\\Uoink\\\\python\\\\python.exe\",\n      \"args\": [\n        \"%LOCALAPPDATA%\\\\Uoink\\\\uoink_mcp.py\"\n      ]\n    }\n  }\n}",
     "related": [
       "mcp-server",
       "cursor-integration",
@@ -1210,7 +1210,7 @@ export const features: Feature[] = [
       "Open any markdown file in your text editor.",
       "Backup your library by copying the folder."
     ],
-    "behindScenes": "The desktop helper runs an internal server that reads and writes files on your storage drive. It logs transactions in a local SQLite file. The browser extension speaks to this helper via a loopback port. No external tracking scripts, cloud servers, or remote databases are used, maintaining privacy.",
+    "behindScenes": "The desktop helper runs an internal server that reads and writes files on your storage drive. It logs transactions in a local SQLite file. The browser extension speaks to this helper via a loopback port. The library stays on your disk. Source requests, background polling, thumbnails, model downloads and dependency telemetry can still contact outside services; AI features and connected clients can share content.",
     "mcpTools": [
       "get_uoink_health",
       "search_uoinks"
@@ -1232,7 +1232,7 @@ export const features: Feature[] = [
     "title": "No cloud database",
     "category": "Identity",
     "status": "shipped",
-    "summary": "Keep your video corpus and research private with no cloud databases or remote servers.",
+    "summary": "Keep your video corpus and research in local files and a local index without a Uoink-hosted database.",
     "keywords": [
       "uoink feature",
       "no cloud",
@@ -1242,7 +1242,7 @@ export const features: Feature[] = [
       "private",
       "databases"
     ],
-    "whatItDoes": "No Uoink cloud database. The helper runs entirely on your local machine, keeping your captured transcripts and files offline. There is no account sign-up, no server database, and no usage tracking. If our website is breached, your research database is safe because we avoid collect your files.",
+    "whatItDoes": "No Uoink cloud database. The helper stores captured transcripts and files on your computer without an account or hosted corpus. Source requests, background polling, model downloads and dependency telemetry still use the network. AI features, connected clients, exports and mirrors can share saved content.",
     "gettingStarted": [
       "Download the helper without creating an account.",
       "Open the dashboard to see your local files.",
@@ -1250,7 +1250,7 @@ export const features: Feature[] = [
       "Turn off your internet connection.",
       "Run a search across your library to test the offline index."
     ],
-    "behindScenes": "The helper binds to port 5179 on the loopback interface, meaning it only accepts requests from your own machine. It stores all indexed text in a local SQLite database file. Since there is no cloud database or syncing mechanism, your data remains offline and under your direct control.",
+    "behindScenes": "The helper binds to port 5179 on the loopback interface, meaning it only accepts requests from your own machine. It stores all indexed text in a local SQLite database file. Optional mirrors create additional local copies; sync software watching those folders can upload them.",
     "mcpTools": [
       "get_uoink_health"
     ],
