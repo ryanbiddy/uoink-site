@@ -1,5 +1,5 @@
-<!-- generated: 2026-09-23 / uoink v3.8.0 -->
-# Uoink 3.8.0 — Living Library
+<!-- updated: 2026-10-17 / uoink v3.9.0 -->
+# Uoink 3.9.0 — Living Library and research
 
 > A local library for the videos and podcasts you study, that any AI you use can search and cite.
 
@@ -9,16 +9,25 @@ Free, MIT-licensed. No account, no Uoink cloud, no required telemetry. Made by R
 
 Windows 10/11 only. No Mac build scheduled. Unsigned installer, about 390 MB; no admin rights needed. Windows SmartScreen will show a warning: More info → Run anyway. Installs to %LOCALAPPDATA%\Uoink. Sideload the browser extension from the install; Chrome Web Store listing pending.
 
+After updating, reload the extension once. If its ID changes to the pinned bkcapfidedhfcjpmjabeopfbcjcbmdmi, reapply extension preferences. Saved captures are unaffected.
+
 - [Install](https://uoink.app/install): helper and extension instructions.
 - [Latest release](https://github.com/ryanbiddy/uoink/releases/latest): installer and Claude Desktop .mcpb bundle.
-- [3.8.0 release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.8.0): Living Library.
+- [Windows installer](https://github.com/ryanbiddy/uoink/releases/download/v3.9.0/Uoink-Setup-3.9.0.exe): Uoink 3.9.0.
+- [3.9.0 release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.9.0): changes since the last public release, v3.7.0.
 - [Changelog](https://uoink.app/changelog): dated release summaries.
 
 ## Capture and library
 
 YouTube: timestamped transcript, screenshots, top comments, channel context, metadata. Also X video and post text, podcast RSS/Atom feeds, web articles, and Reddit threads. Capture with the YouTube button, right-click, Alt+U, or your AI agent. Files are structured Markdown plus a JSON sidecar on your own disk, indexed in one local library.
 
-3.8.0 adds clip search and evidence cards; standing capture for YouTube channels, YouTube playlists, and podcast RSS; MCP library search, item reads, resource templates and prompts; cited range export with speaker labels, chapters and provenance; and chapter navigation where chapters exist. Captures show toast notifications. Entity extraction is opt-in and off by default; the usage meter shows real Anthropic usage; the recall hook is hardened against prompt injection.
+3.9.0 includes the previously unpublished Living Library work: clip search and evidence cards; standing capture for YouTube channels, YouTube playlists, and podcast RSS; MCP library search, item reads, resource templates and prompts; cited range export with speaker labels, chapters and provenance; and chapter navigation where chapters exist. Podcast transcripts enter the searchable corpus and interrupted jobs resume after restart. Feed audio stays off until Auto-ingest is enabled. Captures show toast notifications that can be muted and are suppressed during fullscreen use. Entity extraction is opt-in and off by default; the usage meter shows real Anthropic usage; the recall hook is hardened against prompt injection.
+
+The redesigned dashboard has Library search-or-paste, Reader, Activity with a five-step capture strip, and one Settings page that saves individual preferences automatically. The extension popup and setup provide capture and connection controls. Caption rate limits no longer fail an entire YouTube capture: local transcription can use an already-downloaded model, or the missing transcript stays labeled. Requests are paced and yt-dlp is newer. Waiting, failures and cancellation remain distinct; cancellation is refused once publication starts.
+
+Five local research playbooks cover outlier posts, transcript intelligence, comment mining, creator teardowns and repurposing over the user's own library. MCP agents can request cited packets without model or network calls. Optional ScrapeCreators discovery is off by default, uses the user's own key, and defaults to a 25-credit daily cap. Paid calls require credit confirmation and a dashboard intent or separately enabled agent discovery.
+
+Security changes pin the extension ID and check it when minting tokens, reject scripted clicks on capture buttons, add private-network protection to supported fetch paths, scrub paths and credentials from returned and stored job errors, and confine corpus imports to the output folder's _exports directory. Requests inside yt-dlp and the browser renderer are outside the private-network checks; the local diagnostic log can retain raw tool output.
 
 The library does not organize, file, or re-shelve itself. The Librarian only proposes; applying is off by default and its quality gate has not passed.
 
@@ -28,13 +37,19 @@ The library does not organize, file, or re-shelve itself. The Librarian only pro
 
 ## AI access
 
-Clipboard paste with transcript and frames works with Claude and ChatGPT. Local MCP exposes 32 tools over stdio and 88 in the HTTP registry, counted from release code. Tested clients: Claude Desktop and Cursor. Cline and Continue are standard-stdio compatibility paths, not individually smoke-tested. Do not claim ChatGPT app MCP support. OpenAPI 3.1 bridges local agents that do not speak MCP.
+Clipboard paste with transcript and frames works with Claude and ChatGPT. Local MCP exposes 35 tools over stdio and 91 in the HTTP registry, counted from the product branch. Tested clients: Claude Desktop and Cursor. Cline and Continue are standard-stdio compatibility paths, not individually smoke-tested. Do not claim ChatGPT app MCP support. OpenAPI 3.1 bridges local agents that do not speak MCP.
 
 - [Developers](https://uoink.app/developers): README config, .mcpb setup and tool catalog.
 - [MCP](https://uoink.app/mcp): transport details and tools.
-- [MCP manifest](https://uoink.app/mcp/manifest.json): all 88 tools, schemas and stdio availability.
+- [MCP manifest](https://uoink.app/mcp/manifest.json): all 91 tools, schemas and stdio availability.
 - [Feature manifest](https://uoink.app/api/features-manifest): feature URLs and summaries.
 - [Full text](https://uoink.app/llms-full.txt): setup details.
+
+## Optional network calls and retention
+
+Connected agents can start paid Anthropic calls with the saved key when the user allows those actions, even with automatic analysis off. Relevant library text and, for research, saved discovery rows can be sent. Local MCP playbook packets make no model call.
+
+ScrapeCreators receives the typed handle, channel ID or query only after discovery is enabled and the request authorized. Local run files store that input, request identity, normalized candidates and metrics, credit accounting, coverage, queue state and errors, including failed runs. No raw vendor responses, thumbnails or API keys are stored in these files. The daily purge removes run files older than 90 days; local playbooks may reuse eligible snapshots up to 30 days old.
 
 ## Project
 
@@ -73,4 +88,4 @@ Watch RSS/Atom feeds. Per-feed auto-ingest is optional: when enabled, new episod
 
 ## Tool inventory
 
-Source commit: a311e627330111884e404b92240583afe4514129. Counted from @mcp.tool functions in uoink_mcp.py (32) and TOOL_REGISTRY in uoink_mcp_tools.py (88). Tool names, descriptions, schemas, and transport labels are in https://uoink.app/mcp/manifest.json.
+Source: feat/research-playbooks, commit b6ab27de72f193364bca92902a107751ba026937. Counted from @mcp.tool functions in uoink_mcp.py (35), checked against .mcpb/manifest.json, and TOOL_REGISTRY in uoink_mcp_tools.py (91). Tool names, descriptions, schemas, and transport labels are in https://uoink.app/mcp/manifest.json.

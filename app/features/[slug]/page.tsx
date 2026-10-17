@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageShell } from "../../components/PageShell";
 import { getFeatureLogoKeys, PlatformLogoStrip } from "../../components/PlatformLogoStrip";
-import { CANONICAL_URL, GITHUB_URL, RELEASE_URL, SitePage } from "../../content/pages";
+import { CANONICAL_URL, DOWNLOAD_URL, GITHUB_URL, SitePage, VERSION_NUMBER } from "../../content/pages";
 import { Feature, featureBySlug, features, getRelatedFeatures } from "../feature-data";
 import { EmbedMode } from "./EmbedMode";
 
@@ -68,7 +68,7 @@ export default async function FeaturePage({ params }: Props) {
               <h1 className="display-xl">{feature.title}</h1>
               <p className="lede">{feature.summary}</p>
               <div className="ctas">
-                <a className="btn primary large" href={RELEASE_URL}>
+                <a className="btn primary large" href={DOWNLOAD_URL}>
                   Install Uoink
                 </a>
                 <Link className="btn ghost large" href="/features">
@@ -133,7 +133,7 @@ export default async function FeaturePage({ params }: Props) {
                 <h2 className="display-m">Run it on your next source.</h2>
                 <p>{feature.cta}</p>
                 <div className="ctas">
-                  <a className="btn primary large" href={RELEASE_URL}>
+                  <a className="btn primary large" href={DOWNLOAD_URL}>
                     Install Uoink
                   </a>
                 </div>
@@ -206,8 +206,8 @@ function FeatureJsonLd({ feature }: { feature: Feature }) {
       name: "Uoink",
       applicationCategory: "UtilityApplication",
       operatingSystem: "Windows 10, Windows 11",
-      softwareVersion: "3.2",
-      downloadUrl: RELEASE_URL,
+      softwareVersion: VERSION_NUMBER,
+      downloadUrl: DOWNLOAD_URL,
       url: CANONICAL_URL,
       license: `${GITHUB_URL}/blob/main/LICENSE`,
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

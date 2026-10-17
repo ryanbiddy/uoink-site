@@ -1161,7 +1161,7 @@ export const features: Feature[] = [
       "intelligence",
       "passes"
     ],
-    "whatItDoes": "Optional AI features use your own Anthropic key. Entity extraction is opt-in and off by default. In 3.8.0, the model-usage meter shows real usage when you add your key.",
+    "whatItDoes": "Optional AI features use your own Anthropic key. Entity extraction is opt-in and off by default. In 3.9.0, the model-usage meter shows real usage when you add your key.",
     "gettingStarted": [
       "Open your Anthropic developer console.",
       "Generate a new API key.",

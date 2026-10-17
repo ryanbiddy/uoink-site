@@ -1,6 +1,7 @@
 import { MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT, mcpTools } from "./mcp-tools";
 import { MCP_STDIO_CONFIG } from "./mcp-config";
 import { PRODUCT_STATUS } from "./product-status";
+import release from "../../content/release.json";
 
 export type PageId =
   | "home"
@@ -47,14 +48,12 @@ export const RELEASE_URL = "https://github.com/ryanbiddy/uoink/releases/latest";
 export const X_URL = "https://www.twitter.com/uoinkapp";
 export const X_HANDLE = "@uoinkapp";
 export const CONTACT_EMAIL = "hi@uoink.app";
-// Single source of truth for the product version on the site. Keep this in sync
-// with the app's VERSION file (ryanbiddy/uoink) on each release. The static JSON
-// surfaces that can't import it -- public/.well-known/mcp.json and
-// public/.well-known/mcp/server-card.json -- carry the same value and must be
-// bumped alongside this constant.
-export const VERSION = "v3.8.0";
+// content/release.json also supplies the release version to both content scripts.
+// Static public metadata is checked against it by check-launch-content.cjs.
+export const VERSION = `v${release.version}`;
 // Numeric form (no leading "v") for machine-readable manifests and server cards.
-export const VERSION_NUMBER = VERSION.replace(/^v/, "");
+export const VERSION_NUMBER = release.version;
+export const DOWNLOAD_URL = `${GITHUB_URL}/releases/download/${VERSION}/Uoink-Setup-${VERSION_NUMBER}.exe`;
 
 const WINDOWS_MARK =
   '<span class="os-logo windows-logo" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M5 8l17-2.4v17.2H5V8zm20.5-2.8L43 2.7v20.1H25.5V5.2zM5 25.2h17v17.2L5 40V25.2zm20.5 0H43v20.1l-17.5-2.5V25.2z" fill="currentColor"/></svg></span>';
@@ -96,12 +95,12 @@ const privacyFaq: FaqItem[] = [
   {
     question: "Where is my Anthropic API key stored?",
     answer:
-      "Optional AI features use your own Anthropic key. Entity extraction is off by default.",
+      "Your Anthropic key is stored in Windows Credential Manager. Entity extraction is off by default. When you allow a connected agent to start an AI action, it can use the saved key even if automatic analysis is off.",
   },
   {
     question: "When does anything leave my machine?",
     answer:
-      "Network calls go to the source you asked to extract, such as YouTube, X, or an RSS feed. Optional AI passes call Anthropic with your own key only when enabled.",
+      "Capture requests go to the source you asked for, such as YouTube, X, or an RSS feed. Anthropic receives data for automatic AI analysis you enable or an on-demand action you or an allowed agent starts with your key. ScrapeCreators receives a handle, channel ID, or query only after you enable discovery and authorize the request.",
   },
 ];
 
@@ -119,7 +118,7 @@ const agentsFaq: FaqItem[] = [
   {
     question: "Is HTTP transport supported?",
     answer:
-      "Uoink exposes 32 tools over stdio and 88 over local HTTP JSON-RPC at 127.0.0.1:5179/mcp/v1.",
+      `Uoink exposes ${MCP_STDIO_TOOL_COUNT} tools over stdio and ${MCP_TOOL_COUNT} over local HTTP JSON-RPC at 127.0.0.1:5179/mcp/v1.`,
   },
 ];
 
@@ -147,7 +146,7 @@ export const pages: Record<PageId, SitePage> = {
         <h1 class="display-xl">Uoink that <em>shit.</em></h1>
         <p class="lede">A local library for the videos and podcasts you study, that any AI you use can search and cite.</p>
         <div class="ctas">
-          <a class="btn primary large" href="${RELEASE_URL}">Get Uoink</a>
+          <a class="btn primary large" href="${DOWNLOAD_URL}">Get Uoink</a>
           <a class="btn ghost large" href="#live-uoink">See a live uoink</a>
         </div>
         <p class="sub-cta">Free / MIT / no required telemetry / ${MCP_STDIO_TOOL_COUNT} stdio tools / ${MCP_TOOL_COUNT} HTTP tools / ${PRODUCT_STATUS.mac.visible}</p>
@@ -163,7 +162,7 @@ export const pages: Record<PageId, SitePage> = {
   <div class="container">
     <div class="doc">
       <div class="doc-head">
-        <span class="eyebrow">New in 3.8.0: Living Library</span>
+        <span class="eyebrow">New in ${VERSION_NUMBER}: Living Library and research</span>
         <h2 class="display-l">Find the moment. <em>Cite the source.</em></h2>
       </div>
       <ul class="doc-list">${docItems([
@@ -171,9 +170,14 @@ export const pages: Record<PageId, SitePage> = {
         ["Standing capture", "Follow a YouTube channel, YouTube playlist, or podcast RSS feed. With capture enabled, new uploads and episodes land in your library."],
         ["Library reach over MCP", "Search the library, read items, and use resource templates and prompts from your MCP client."],
         ["Cited range export", "Quote a stretch of video or an episode with speaker labels, chapters, and provenance."],
-        ["Chapter navigation", "Jump between chapters on items that have them."]
+        ["Chapter navigation", "Jump between chapters on items that have them."],
+        ["Library, Reader, and Activity", "Search or paste a link in Library, open a capture in Reader, and follow Activity’s five-step strip. One Settings page saves individual preferences as you change them; the extension popup and setup keep capture and connection controls close."],
+        ["Five research playbooks", "Use your own library for outlier posts, transcript intelligence, comment mining, creator teardowns, and repurposing. MCP agents can request cited packets without a model call. Optional ScrapeCreators discovery is off by default, with a default 25-credit daily cap and paid calls only with consent."],
+        ["Podcasts and quieter notifications", "Podcast transcripts enter the searchable library; interrupted jobs resume after a restart. Feed audio stays off until you enable Auto-ingest. Captures show a toast instead of opening Explorer, and notifications can be muted or suppressed during fullscreen use."],
+        ["More reliable YouTube capture", "Caption rate limits no longer fail the whole capture. Local transcription can fill in when an already-downloaded model is available; missing transcripts stay labeled. Requests are paced, yt-dlp is newer, and Activity distinguishes waiting, failure, and cancellation."],
+        ["Tighter local boundaries", "Extension token minting checks the pinned extension ID, and page scripts cannot trigger capture buttons. Public-network checks protect supported fetch paths; error responses scrub paths and credentials, and corpus imports stay inside the exports folder."]
       ])}</ul>
-      <p class="doc-links"><a class="arr-link" href="https://github.com/ryanbiddy/uoink/releases/tag/v3.8.0">3.8.0 release notes</a> <a class="arr-link" href="/changelog">Changelog</a></p>
+      <p class="doc-links"><a class="arr-link" href="${GITHUB_URL}/releases/tag/${VERSION}">${VERSION_NUMBER} release notes</a> <a class="arr-link" href="/changelog">Changelog</a></p>
     </div>
   </div>
 </section>
@@ -279,7 +283,7 @@ get_evidence_card(video_id)</pre>
         <p class="lede">Download the helper, install the extension, open a video, and click Uoink. The helper bundles Python, yt-dlp, and ffmpeg so you never install them yourself.</p>
       </div>
       <ul class="doc-list">
-        <li><p class="doc-meta"><b>Windows</b><span>live path</span></p><h3>Download the helper.</h3><p class="doc-ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p><a class="btn primary small" href="${RELEASE_URL}">Download -></a></li>
+        <li><p class="doc-meta"><b>Windows</b><span>live path</span></p><h3>Download the helper.</h3><p class="doc-ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p><a class="btn primary small" href="${DOWNLOAD_URL}">Download -></a></li>
         <li><p class="doc-meta"><b>Extension</b><span>pending review</span></p><h3>Install the browser button.</h3><p class="doc-ver">Chrome / Edge / Brave / Vivaldi / Arc / Opera GX</p><p>Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at <code>%LOCALAPPDATA%\\Uoink\\extension</code>.</p><a class="arr-link" href="/install#extension">Install notes -></a></li>
         <li><p class="doc-meta"><b>Mac</b><span>${PRODUCT_STATUS.mac.label}</span></p><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="doc-ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p><a class="arr-link" href="/install#mac">Mac status -></a></li>
       </ul>
@@ -311,7 +315,7 @@ get_evidence_card(video_id)</pre>
         <span class="eyebrow">install</span>
         <h1 class="display-xl">Install <em>Uoink.</em></h1>
         <p class="lede">Get the helper running, add the browser button, and click Uoink on any video or Reddit thread. No Python, no command line, no path wrangling.</p>
-        <div class="ctas"><a class="btn primary large with-logo" href="${RELEASE_URL}">${WINDOWS_MARK}Download Windows installer</a><a class="btn ghost large" href="/how-it-works">See how it works</a></div>
+        <div class="ctas"><a class="btn primary large with-logo" href="${DOWNLOAD_URL}">${WINDOWS_MARK}Download Windows installer</a><a class="btn ghost large" href="/how-it-works">See how it works</a></div>
         <p class="footnote">The installer is unsigned. Windows SmartScreen will show a warning. <strong>More info → Run anyway</strong>.</p>
         <p class="sub-cta">Windows 10/11 only / About 390 MB / No admin rights needed</p>
         <div class="brand-strip" aria-label="Install surfaces">
@@ -385,6 +389,7 @@ get_evidence_card(video_id)</pre>
           <p class="doc-ver">Chrome / Edge / Brave / Vivaldi / Arc / Opera GX</p>
           <p>The extension adds capture buttons directly to supported web pages. It communicates locally with the helper and skips broad history permissions.</p>
           <p>Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at <code>%LOCALAPPDATA%\\Uoink\\extension</code>.</p>
+          <p>After updating the helper, reload the extension once from your browser’s extensions page. If its ID changes to the pinned <code>bkcapfidedhfcjpmjabeopfbcjcbmdmi</code>, reapply your extension preferences. Your saved captures are unaffected.</p>
           <p class="footnote">Web Store review pending</p>
         </li>
         <li id="mac">
@@ -651,11 +656,11 @@ platform: Windows 10/11 only. No Mac build scheduled.</pre>
     mode: "mode-light",
     title: "Local-First Privacy: No Cloud Telemetry Policy",
     description:
-      "Uoink stores your corpus locally, uses no telemetry, and only calls Anthropic with your own key when optional AI features are enabled.",
+      "Uoink stores your corpus locally with no app telemetry. Optional Anthropic calls and ScrapeCreators discovery use your own keys with your permission.",
     keywords: ["uoink privacy", "local-first youtube extractor", "no telemetry youtube tool", "byo key youtube ai"],
     faq: privacyFaq,
     html: `
-<section class="section" data-screen-label="privacy / main"><div class="container"><article class="article"><div class="meta"><span>privacy</span><span>local-first</span></div><h1>Your corpus lives on your <em>machine.</em></h1><p class="standfirst">Uoink extracts video and podcast content, stores it on your disk, and hands it to the AI you choose. There is no Uoink cloud because we never built one.</p><h2>What Uoink does.</h2><p>Uoink captures transcripts, screenshots, comments, channel context, podcast transcripts, metadata, and local indexes. It writes those artifacts into normal local files and a local SQLite index. You can paste the corpus into Claude or ChatGPT, or let an MCP agent read it directly.</p><h2>What Uoink skips.</h2><p>No account, no Uoink cloud, and no required telemetry.</p><h3>Website analytics vs. local app privacy</h3><p>While the local Uoink desktop application and browser extension require no telemetry, the public marketing website (<code>uoink.app</code>) uses basic, privacy-respecting Vercel Analytics to count page visits and help us see how people find the installer. No information from your local captures, library, settings, or API keys is ever accessible to or shared with website analytics.</p><h3>Manual update check</h3><p>When you click the update check button in the dashboard settings, the application makes a direct query to <code>api.github.com</code> to compare version tags. This request transmits no user details, telemetry, or library data.</p><h2>Where your data lives.</h2><p>On Windows, the helper lives under <code>%LOCALAPPDATA%\\Uoink</code>. Captures write into your Uoink library folder. The optional Anthropic key is stored in Windows Credential Manager.</p><h2>Network calls Uoink makes.</h2><p>Extraction calls go to the source you asked for: YouTube, X, RSS hosts, or another supported URL. Podcast watches poll only the feeds you add, and Auto-ingest downloads new episodes only for feeds where you turn it on. When an X post comes back truncated, Uoink may ask the public FxTwitter API for the full text of that post. Local transcription downloads Whisper models with your consent; optional speaker diarization downloads its model from Hugging Face and needs your own Hugging Face token. Optional AI calls use your own Anthropic key. Entity extraction is opt-in and off by default; the model-usage meter reports real usage. Nothing is proxied through Uoink.</p><h2>Open source: audit it yourself.</h2><p>The source is MIT-licensed at <a href="${GITHUB_URL}">github.com/ryanbiddy/uoink</a>. You can inspect the helper, loopback server, and network code.</p><div class="ctas"><a class="btn primary large" href="/install">Install Uoink</a><a class="btn ghost large" href="/terms">Read terms</a></div></article></div></section>
+<section class="section" data-screen-label="privacy / main"><div class="container"><article class="article"><div class="meta"><span>privacy</span><span>local-first</span></div><h1>Your corpus lives on your <em>machine.</em></h1><p class="standfirst">Uoink extracts video and podcast content, stores it on your disk, and hands it to the AI you choose. There is no Uoink cloud because we never built one.</p><h2>What Uoink does.</h2><p>Uoink captures transcripts, screenshots, comments, channel context, podcast transcripts, metadata, and local indexes. It writes those artifacts into normal local files and a local SQLite index. You can paste the corpus into Claude or ChatGPT, or let an MCP agent read it directly.</p><h2>What Uoink skips.</h2><p>No account, no Uoink cloud, and no required telemetry.</p><h3>Website analytics vs. local app privacy</h3><p>While the local Uoink desktop application and browser extension require no telemetry, the public marketing website (<code>uoink.app</code>) uses basic, privacy-respecting Vercel Analytics to count page visits and help us see how people find the installer. No information from your local captures, library, settings, or API keys is ever accessible to or shared with website analytics.</p><h3>Manual update check</h3><p>When you click the update check button in the dashboard settings, the application makes a direct query to <code>api.github.com</code> to compare version tags. This request transmits no user details, telemetry, or library data.</p><h2>Where your data lives.</h2><p>On Windows, the helper lives under <code>%LOCALAPPDATA%\\Uoink</code>. Captures write into your Uoink library folder. Optional Anthropic and ScrapeCreators keys are stored in Windows Credential Manager.</p><h2>Network calls Uoink makes.</h2><p>Extraction calls go to the source you asked for: YouTube, X, RSS hosts, or another supported URL. Podcast watches poll only the feeds you add, and Auto-ingest downloads new episodes only for feeds where you turn it on. When an X post comes back truncated, Uoink may ask the public FxTwitter API for the full text of that post. Local transcription downloads Whisper models with your consent; optional speaker diarization downloads its model from Hugging Face and needs your own Hugging Face token. Optional AI calls use your own Anthropic key. Entity extraction is opt-in and off by default; the model-usage meter reports real usage.</p><p>Connected agents can start paid Anthropic calls with your saved key when you allow those actions, even when automatic analysis is off. Comment and hook analysis, writing, and research generation can send relevant library text, comments, metadata, and saved discovery results to Anthropic; repurposing can also send active writing style anchors. Local MCP playbook packets make no model call. Clear the saved key to prevent Uoink from using it for on-demand calls. Nothing is proxied through Uoink.</p><h3>Optional ScrapeCreators discovery</h3><p>Discovery is off by default. Only after you enable it, add your own key, and authorize a request does Uoink send your typed creator handle, YouTube channel ID, or search query to ScrapeCreators. It sends no library text, transcripts, or comments. Paid calls require credit confirmation and either a dashboard intent or separately enabled agent discovery. The daily cap defaults to 25 credits; checking the balance may also use a credit. Picking saved candidates queues ordinary source captures without another ScrapeCreators call.</p><p>Local discovery run files store the typed handle, channel ID, or query; request identity (provider, endpoint, mode, platform, and fetch time); normalized candidates and metrics; credit accounting, daily cap, and coverage; queue state; and errors, including partial and failed runs. They contain no raw vendor responses, thumbnails, or API keys. The daily purge removes these run files once they are older than 90 days. Local playbooks may reuse eligible snapshots up to 30 days old.</p><h2>Open source: audit it yourself.</h2><p>The source is MIT-licensed at <a href="${GITHUB_URL}">github.com/ryanbiddy/uoink</a>. You can inspect the helper, loopback server, and network code.</p><div class="ctas"><a class="btn primary large" href="/install">Install Uoink</a><a class="btn ghost large" href="/terms">Read terms</a></div></article></div></section>
 ${DOC_RULE}
 <section class="section" data-screen-label="privacy / faq"><div class="container"><div class="doc">${renderFaq(privacyFaq)}</div></div></section>`,
   },
@@ -665,17 +670,22 @@ ${DOC_RULE}
     mode: "mode-dark",
     title: "Changelog: Version Updates and Universal Extraction",
     description:
-      "Read dated Uoink release notes from 3.4 through 3.8.0 Living Library.",
+      `Read Uoink release notes from 3.4 through ${VERSION_NUMBER}, including Living Library and research playbooks.`,
     keywords: ["uoink changelog", "uoink release notes", "uoink updates", "universal video uoink changelog"],
     html: `
-<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">3.8.0 is Living Library. Dates below follow the product changelog.</p>
-<h2>v3.8.0 — Living Library</h2><p class="meta"><time datetime="2026-09-15">2026-09-15</time></p><p>Clip search and evidence cards join everyday stdio MCP. Standing capture follows YouTube channels, playlists, and podcast RSS feeds; MCP library search, item reads, resource templates, and prompts make the library easier to cite. Cited range export carries speaker labels, chapters, and provenance, with chapter navigation where chapters exist. Captures now show a toast instead of opening Explorer. Entity extraction is opt-in, the Anthropic usage meter reports real usage, and the recall hook is hardened against prompt injection from captured text.</p>
+<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} brings together the changes since the last public release, v3.7.0. The 3.8.x work was not published separately. Historical dates below follow the product changelog.</p>
+<h2>${VERSION} — Living Library and research</h2><p class="meta">First public release since v3.7.0</p><p>Clip search and evidence cards join everyday stdio MCP. Standing capture follows YouTube channels, playlists, and podcast RSS feeds; MCP library search, item reads, resource templates, and prompts make the library easier to cite. Cited range export carries speaker labels, chapters, and provenance, with chapter navigation where chapters exist. Captures now show a toast instead of opening Explorer. Entity extraction is opt-in, the Anthropic usage meter reports real usage, and the recall hook is hardened against prompt injection from captured text.</p>
+<p>Podcast feeds poll for new episode metadata; audio stays off until you enable Auto-ingest for a feed. Local transcription jobs survive restarts, and completed episodes enter the searchable corpus. Notifications can be silenced and are suppressed during fullscreen use without losing Activity history.</p>
+<p>The redesigned dashboard puts search-or-paste in Library and opens saved captures in Reader. Activity shows five steps: details, waiting for YouTube, video, transcript, and screenshots and save. Settings brings preferences into one page and saves individual changes automatically. The extension popup keeps capture at hand, with setup and connection controls available.</p>
+<p>Five local research playbooks cover outlier posts, transcript intelligence, comment mining, creator teardowns, and repurposing over your own library. MCP agents can request cited packets without a model or network call. The local registry now has ${MCP_STDIO_TOOL_COUNT} stdio tools and ${MCP_TOOL_COUNT} HTTP tools. Optional ScrapeCreators discovery is off by default, uses your own key, and has a default 25-credit daily cap. Paid calls need credit confirmation and a dashboard intent or separately enabled agent discovery.</p>
+<p>YouTube caption rate limits no longer fail a capture: Uoink tries local transcription with an already-downloaded model when fallback is enabled, and labels a missing transcript when it cannot produce one. Paced requests and newer yt-dlp improve capture reliability. Waiting, failures, and cancellation remain distinct; a cancellation request is refused once publication has started.</p>
+<p>Extension token minting checks the pinned extension ID (or an ID you explicitly configure), and in-page capture buttons reject scripted clicks. Private-network fetch protection now covers feed polls, standard page fetches, thumbnails, and checked redirect chains. Requests inside yt-dlp and the browser renderer are outside that protection. Returned and stored job errors scrub local paths and credentials; the local diagnostic log can retain raw tool output. Corpus imports accept only files inside the active output folder’s <code>_exports</code> directory.</p>
 <h2>v3.7.0</h2><p class="meta"><time datetime="2026-07-24">2026-07-24</time></p><p>Library cards and filters became quieter, Sources put available captures first, and saved items gained a clearer action menu. Updated video extraction and stricter URL, schema, and path checks hardened capture and local integrations; MCP initialization began reporting the product version.</p>
 <h2>v3.6.0</h2><p class="meta"><time datetime="2026-07-08">2026-07-08</time></p><p>Added local notes, short-video capture for TikTok, Reels, and Shorts, and image capture as library items. Each entered the shared corpus with source filters; image search used captions, filenames, and source metadata, with OCR deferred.</p>
 <h2>v3.5.0</h2><p class="meta"><time datetime="2026-07-08">2026-07-08</time></p><p>Made the Library source-first with platform, source-type, and author filters, readable folders, and searchable author information. X Article detection became consistent across capture entry points, with clearer messages when X blocked a fetch.</p>
 <h2>v3.4.1</h2><p class="meta"><time datetime="2026-07-07">2026-07-07</time></p><p>Pinned the extension popup’s primary capture action so it stayed reachable while secondary panels scrolled. Enlarged source and screenshot thumbnails in Generate and gave text sources an explicit no-preview tile.</p>
 <h2>v3.4.0</h2><p class="meta"><time datetime="2026-07-07">2026-07-07</time></p><p>Added X Article capture from the rendered, logged-in page and clearer failures for blocked link fetches. Activity messages better explained X posts without downloadable video, and saved-item action buttons wrapped to stay reachable on smaller displays.</p>
-<div class="ctas"><a class="btn primary large" href="https://github.com/ryanbiddy/uoink/releases/tag/v3.8.0">3.8.0 release notes</a><a class="btn ghost large" href="${RELEASE_URL}">Latest GitHub release</a></div></article></div></section>`,
+<div class="ctas"><a class="btn primary large" href="${GITHUB_URL}/releases/tag/${VERSION}">${VERSION_NUMBER} release notes</a><a class="btn ghost large" href="${RELEASE_URL}">Latest GitHub release</a></div></article></div></section>`,
   },
   terms: {
     id: "terms",

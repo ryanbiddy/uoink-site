@@ -1,12 +1,12 @@
 {
   "schema_version": "3.2",
-  "version": "3.8.0",
+  "version": "3.9.0",
   "name": "Uoink MCP Tool Manifest",
   "description": "Local HTTP registry; tools marked stdio also appear on the everyday stdio surface.",
-  "source": "ryanbiddy/uoink@a311e627330111884e404b92240583afe4514129:uoink_mcp_tools.py",
-  "generated": "2026-09-23",
-  "tool_count": 88,
-  "stdio_tool_count": 32,
+  "source": "ryanbiddy/uoink@b6ab27de72f193364bca92902a107751ba026937:uoink_mcp_tools.py",
+  "generated": "2026-10-17",
+  "tool_count": 91,
+  "stdio_tool_count": 35,
   "tools": [
     {
       "name": "uoink_video",
@@ -4023,6 +4023,136 @@
         "additionalProperties": false,
         "required": [
           "uri"
+        ]
+      },
+      "transports": [
+        "stdio",
+        "http"
+      ]
+    },
+    {
+      "name": "get_playbook_input",
+      "description": "Prepare a bounded, cited research packet from the local library for outlier-posts, transcript-intel, comment-mining, creator-teardown or repurpose-pack. Returns instruction, packet and packet_hash; the client writes the report. No model, network, capture or settings changes.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "playbook": {
+            "type": "string",
+            "enum": [
+              "outlier-posts",
+              "transcript-intel",
+              "comment-mining",
+              "creator-teardown",
+              "repurpose-pack"
+            ]
+          },
+          "arguments": {
+            "type": "object",
+            "description": "The selected playbook's prompt arguments, with string values. Pass video_ids and kinds as comma-separated strings."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "playbook",
+          "arguments"
+        ]
+      },
+      "transports": [
+        "stdio",
+        "http"
+      ]
+    },
+    {
+      "name": "discover_candidates",
+      "description": "Plan or run one ScrapeCreators discovery search with your saved key. Off by default. Omit confirm_credits for a free plan; set it to the planned credits to spend. Requires discovery enabled, room under the daily cap, and agent discovery enabled or a dashboard intent. Saves normalized candidates locally; does not capture them or fetch thumbnails.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "creator",
+              "keyword"
+            ]
+          },
+          "platform": {
+            "type": "string",
+            "enum": [
+              "tiktok",
+              "instagram",
+              "youtube",
+              "youtube_shorts"
+            ]
+          },
+          "handle": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "channel_id": {
+            "type": "string",
+            "pattern": "^UC[A-Za-z0-9_-]{22}$"
+          },
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "pages": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3,
+            "default": 1
+          },
+          "confirm_credits": {
+            "type": "integer"
+          },
+          "user_intent_token": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "mode",
+          "platform"
+        ]
+      },
+      "transports": [
+        "stdio",
+        "http"
+      ]
+    },
+    {
+      "name": "queue_discovered",
+      "description": "Queue 1-10 saved discovery candidates for normal Uoink capture. Requires agent discovery enabled or a dashboard intent. Skips captured, queued, unsupported and unknown picks. No ScrapeCreators call or credits; the normal retry worker captures the selected URLs.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,150}$"
+          },
+          "keys": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 10,
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,100}$"
+            }
+          },
+          "user_intent_token": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "run_id",
+          "keys"
         ]
       },
       "transports": [

@@ -1,4 +1,4 @@
-import { CANONICAL_URL, GITHUB_URL, RELEASE_URL, SitePage, VERSION, X_URL } from "../content/pages";
+import { CANONICAL_URL, DOWNLOAD_URL, GITHUB_URL, SitePage, VERSION, X_URL } from "../content/pages";
 import { applySiteLinks } from "../lib/links";
 import { SiteFooter } from "./SiteFooter";
 import { TopNav } from "./TopNav";
@@ -44,7 +44,7 @@ function JsonLd({ page }: { page: SitePage }) {
       applicationCategory: "UtilityApplication",
       operatingSystem: "Windows 10, Windows 11",
       softwareVersion: VERSION.replace("v", ""),
-      downloadUrl: RELEASE_URL,
+      downloadUrl: DOWNLOAD_URL,
       url: CANONICAL_URL,
       license: "https://github.com/ryanbiddy/uoink/blob/main/LICENSE",
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

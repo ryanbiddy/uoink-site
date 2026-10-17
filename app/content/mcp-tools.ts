@@ -1,10 +1,10 @@
-// Generated from ryanbiddy/uoink release/3.8.0 on 2026-09-23.
-// Source commit: a311e627330111884e404b92240583afe4514129
+// Generated for Uoink 3.9.0 from ryanbiddy/uoink feat/research-playbooks on 2026-10-17.
+// Source commit: b6ab27de72f193364bca92902a107751ba026937
 // HTTP: TOOL_REGISTRY in uoink_mcp_tools.py; stdio: @mcp.tool in uoink_mcp.py.
-// Regenerate with: python scripts/sync-mcp-from-release.py <release-checkout>
+// Regenerate with: python scripts/sync-mcp-from-release.py <product-checkout> [--ref <git-ref>]
 
-export const MCP_TOOL_COUNT = 88;
-export const MCP_STDIO_TOOL_COUNT = 32;
+export const MCP_TOOL_COUNT = 91;
+export const MCP_STDIO_TOOL_COUNT = 35;
 
 export const mcpStdioToolNames = [
   "uoink_video",
@@ -36,6 +36,9 @@ export const mcpStdioToolNames = [
   "search_library",
   "get_library_item",
   "read_library_resource",
+  "get_playbook_input",
+  "discover_candidates",
+  "queue_discovered",
   "get_library_brief_input",
   "publish_library_brief",
   "export_cited_range"
@@ -381,6 +384,18 @@ export const mcpTools = [
   [
     "read_library_resource",
     "Read one uoink://library/v1/ resource URI (card, excerpt, corpus chunk, shelf page or brief) with the same validation, contents and refusals as resources/read."
+  ],
+  [
+    "get_playbook_input",
+    "Prepare a bounded, cited research packet from the local library for outlier-posts, transcript-intel, comment-mining, creator-teardown or repurpose-pack."
+  ],
+  [
+    "discover_candidates",
+    "Plan or run one ScrapeCreators discovery search with your saved key."
+  ],
+  [
+    "queue_discovered",
+    "Queue 1-10 saved discovery candidates for normal Uoink capture."
   ],
   [
     "get_library_brief_input",

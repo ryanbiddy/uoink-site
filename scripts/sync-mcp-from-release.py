@@ -9,14 +9,22 @@ import subprocess
 
 parser = argparse.ArgumentParser()
 parser.add_argument("checkout", type=Path)
+parser.add_argument("--ref", help="Product Git ref to read (defaults to content/release.json).")
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
+release = json.loads((root / "content/release.json").read_text(encoding="utf-8"))
+version = release["version"]
+ref = args.ref or release["mcpSourceRef"]
 checkout = args.checkout.resolve()
-commit = subprocess.check_output([
-    "git", "-c", f"safe.directory={checkout.as_posix()}", "-C", str(checkout),
-    "rev-parse", "HEAD",
-], text=True).strip()
-tree = ast.parse((checkout / "uoink_mcp_tools.py").read_text(encoding="utf-8-sig"))
+git = ["git", "-c", f"safe.directory={checkout.as_posix()}", "-C", str(checkout)]
+commit = subprocess.check_output(git + ["show", "--no-patch", "--format=%H", ref],
+                                 text=True, encoding="utf-8").strip()
+
+def source(path):
+    return subprocess.check_output(git + ["show", f"{commit}:{path}"],
+                                   text=True, encoding="utf-8-sig")
+
+tree = ast.parse(source("uoink_mcp_tools.py"))
 constants = {}
 
 def literal(node):
@@ -41,7 +49,7 @@ def literal(node):
     return ast.literal_eval(node)
 
 registry = None
-source_tree = ast.parse((checkout / "source_subscriptions.py").read_text(encoding="utf-8-sig"))
+source_tree = ast.parse(source("source_subscriptions.py"))
 for node in [*source_tree.body, *tree.body]:
     if isinstance(node, (ast.Assign, ast.AnnAssign)):
         target = node.targets[0] if isinstance(node, ast.Assign) else node.target
@@ -64,7 +72,7 @@ for key, spec in zip(registry.keys, registry.values):
                   "inputSchema": literal(fields["input_schema"])})
 assert len({tool["name"] for tool in tools}) == len(tools)
 
-stdio_tree = ast.parse((checkout / "uoink_mcp.py").read_text(encoding="utf-8-sig"))
+stdio_tree = ast.parse(source("uoink_mcp.py"))
 stdio = []
 for node in ast.walk(stdio_tree):
     if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
@@ -74,8 +82,12 @@ for node in ast.walk(stdio_tree):
                     and dec.func.attr == "tool"):
                 names = [kw.value for kw in dec.keywords if kw.arg == "name"]
                 stdio.append(ast.literal_eval(names[0]) if names else node.name)
-assert len(stdio) == len(set(stdio)) == 32
+assert len(stdio) == len(set(stdio)) == release["stdioToolCount"]
+assert len(tools) == release["httpToolCount"]
 assert set(stdio) <= {tool["name"] for tool in tools}
+bundle_tools = json.loads(source(".mcpb/manifest.json"))["tools"]
+assert len(bundle_tools) == len(stdio)
+assert {tool["name"] for tool in bundle_tools} == set(stdio)
 
 def summary(description):
     text = re.sub(r"^v\d+(?:\.\d+)?(?:\s+[A-Z]\d)?(?:\s+[^:]+)?:\s*", "", description)
@@ -85,10 +97,10 @@ def summary(description):
 
 today = datetime.date.today().isoformat()
 rows = [[tool["name"], summary(tool["description"])] for tool in tools]
-output = f"""// Generated from ryanbiddy/uoink release/3.8.0 on {today}.
+output = f"""// Generated for Uoink {version} from ryanbiddy/uoink {ref} on {today}.
 // Source commit: {commit}
 // HTTP: TOOL_REGISTRY in uoink_mcp_tools.py; stdio: @mcp.tool in uoink_mcp.py.
-// Regenerate with: python scripts/sync-mcp-from-release.py <release-checkout>
+// Regenerate with: python scripts/sync-mcp-from-release.py <product-checkout> [--ref <git-ref>]
 
 export const MCP_TOOL_COUNT = {len(tools)};
 export const MCP_STDIO_TOOL_COUNT = {len(stdio)};
@@ -101,7 +113,7 @@ export type McpTool = (typeof mcpTools)[number];
 """
 (root / "app/content/mcp-tools.ts").write_text(output, encoding="utf-8")
 manifest = {
-    "schema_version": "3.2", "version": "3.8.0", "name": "Uoink MCP Tool Manifest",
+    "schema_version": "3.2", "version": version, "name": "Uoink MCP Tool Manifest",
     "description": "Local HTTP registry; tools marked stdio also appear on the everyday stdio surface.",
     "source": f"ryanbiddy/uoink@{commit}:uoink_mcp_tools.py",
     "generated": today, "tool_count": len(tools), "stdio_tool_count": len(stdio),

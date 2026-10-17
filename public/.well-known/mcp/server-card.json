@@ -2,7 +2,7 @@
   "name": "io.github.ryanbiddy/uoink",
   "display_name": "Uoink",
   "description": "Uoink keeps the videos, podcasts, and articles creators and AI developers study on their own disk, then hands them to Claude, ChatGPT, Cursor, or a local MCP agent as a cited corpus.",
-  "version": "3.8.0",
+  "version": "3.9.0",
   "homepage": "https://uoink.app",
   "documentation": "https://uoink.app/developers",
   "repository": {
@@ -58,7 +58,7 @@
     "podcast",
     "corpus"
   ],
-  "tool_count": 88,
-  "stdio_tool_count": 32,
+  "tool_count": 91,
+  "stdio_tool_count": 35,
   "platform": "Windows 10/11 only. No Mac build scheduled."
 }
