@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { DocRule } from "../components/Doc";
 import { PageShell } from "../components/PageShell";
 import { CANONICAL_URL, RELEASE_URL, SitePage } from "../content/pages";
 
@@ -38,9 +39,9 @@ export const metadata: Metadata = {
 export default function TwitterPage() {
   return (
     <PageShell page={page}>
-      <section className="hero twitter-hero" data-screen-label="twitter / hero">
-        <div className="container twitter-hero-grid">
-          <div className="section-head">
+      <section className="hero" data-screen-label="twitter / hero">
+        <div className="container hero-grid">
+          <div className="copy">
             <span className="eyebrow">twitter video</span>
             <div className="x-lockup" aria-label="X and Uoink">
               <span className="x-mark" aria-hidden="true">X</span>
@@ -67,7 +68,7 @@ export default function TwitterPage() {
               }}
             />
           </div>
-          <figure className="twitter-shot tweet-creative">
+          <figure className="figure tweet">
             <Image
               src="/screenshots/twitter-video/micky-personal-agents-tweet.png"
               alt="X post with a video about personal agents"
@@ -80,46 +81,50 @@ export default function TwitterPage() {
         </div>
       </section>
 
-      <section className="section twitter-flow" data-screen-label="twitter / flow">
+      <section className="section" data-screen-label="twitter / flow">
         <div className="container">
-          <div className="section-head center">
-            <span className="eyebrow">the loop</span>
-            <h2 className="display-l">Right-click. Save. Write with credit.</h2>
-            <p className="lede">A tweet with video is still a source. Uoink treats it like one.</p>
-          </div>
-          <div className="twitter-step-grid">
-            {[
-              ["01", "Capture the video", "Use the browser context menu on a Twitter or X video link. Uoink sends the URL to the local helper."],
-              ["02", "Keep creator credit", "The corpus keeps source URL, creator handle, title text, and citation notes close to the transcript."],
-              ["03", "Draft from evidence", "Writing Studio turns the corpus into a post, thread, or blog draft while keeping the original creator visible."],
-            ].map(([num, title, body]) => (
-              <article className="twitter-step" key={num}>
-                <span>{num}</span>
-                <h3>{title}</h3>
-                <p>{body}</p>
-              </article>
-            ))}
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">the loop</span>
+              <h2 className="display-l">Right-click. Save. Write with credit.</h2>
+              <p className="lede">A tweet with video is still a source. Uoink treats it like one.</p>
+            </div>
+            <ol className="doc-list numbered">
+              {[
+                ["01", "Capture the video", "Use the browser context menu on a Twitter or X video link. Uoink sends the URL to the local helper."],
+                ["02", "Keep creator credit", "The corpus keeps source URL, creator handle, title text, and citation notes close to the transcript."],
+                ["03", "Draft from evidence", "Writing Studio turns the corpus into a post, thread, or blog draft while keeping the original creator visible."],
+              ].map(([num, title, body]) => (
+                <li key={num}>
+                  <span className="num">{num}</span>
+                  <h3>{title}</h3>
+                  <p>{body}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
 
-      <section className="section twitter-code" data-screen-label="twitter / agent examples">
-        <div className="container twitter-code-grid">
-          <div>
-            <span className="eyebrow">agent path</span>
-            <h2 className="display-l">Let the agent run the capture.</h2>
-            <p className="body-l">
-              If your client can call Uoink through MCP, the clipboard step disappears. The agent can capture the source, fetch the corpus, then draft with creator credit.
-            </p>
-          </div>
-          <div className="code-stack">
-            <pre>
+      <DocRule />
+
+      <section className="section" data-screen-label="twitter / agent examples">
+        <div className="container">
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">agent path</span>
+              <h2 className="display-l">Let the agent run the capture.</h2>
+              <p className="body-l">
+                If your client can call Uoink through MCP, the clipboard step disappears. The agent can capture the source, fetch the corpus, then draft with creator credit.
+              </p>
+            </div>
+            <pre className="code-block">
               <code>{`uoink_page({
   url: "https://x.com/creator/status/...",
   mode: "video"
 })`}</code>
             </pre>
-            <pre>
+            <pre className="code-block">
               <code>{`write_tweet({
   source_uoink_id: "x-video-2026-05-30",
   angle: "what technical creators should steal"
@@ -129,20 +134,26 @@ export default function TwitterPage() {
         </div>
       </section>
 
-      <section className="section tight twitter-credit" data-screen-label="twitter / creator credit">
-        <div className="container credit-card">
-          <span className="eyebrow">creator credit</span>
-          <h2 className="display-m">The source stays attached.</h2>
-          <p>
-            Uoink is built for research and remixing with receipts. Twitter video capture keeps the creator handle, source link, and citation trail in the corpus so your output points back to the person who made the original thing.
-          </p>
-          <div className="ctas">
-            <Link className="btn ink" href="/blog/tweet-what-you-learned-from-a-youtube-video">
-              Read the writing workflow
-            </Link>
-            <Link className="btn ghost" href="/features/writing-studio">
-              Writing Studio
-            </Link>
+      <DocRule />
+
+      <section className="section" data-screen-label="twitter / creator credit">
+        <div className="container">
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">creator credit</span>
+              <h2 className="display-m">The source stays attached.</h2>
+              <p className="body-l">
+                Uoink is built for research and remixing with receipts. Twitter video capture keeps the creator handle, source link, and citation trail in the corpus so your output points back to the person who made the original thing.
+              </p>
+            </div>
+            <div className="ctas">
+              <Link className="btn primary" href="/blog/tweet-what-you-learned-from-a-youtube-video">
+                Read the writing workflow
+              </Link>
+              <Link className="btn ghost" href="/features/writing-studio">
+                Writing Studio
+              </Link>
+            </div>
           </div>
         </div>
       </section>

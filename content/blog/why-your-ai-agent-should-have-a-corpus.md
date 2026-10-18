@@ -18,7 +18,7 @@ A local corpus solves this problem. It acts as a private library of reference ma
 
 ## Grounding in Action via MCP
 
-The Model Context Protocol (MCP) provides a clean way to connect AI agents to local data. We designed Uoink with a built-in MCP server that exposes over 65 tools to your AI client. 
+The Model Context Protocol (MCP) provides a clean way to connect AI agents to local data. We designed Uoink with a built-in MCP server that exposes 35 tools over stdio and 91 in the local HTTP registry.
 
 When you run Cursor or Claude Desktop, the agent can call these tools to search and read your local library. It searches your local library before it falls back to web search or memory. 
 
@@ -48,11 +48,11 @@ You can monitor these database queries in the native dashboard window. When the 
 
 ## Keeping Your Data Private
 
-A local-first architecture keeps your data secure. Your corpus resides on your machine. 
+A local-first architecture keeps your corpus on your machine.
 
-Uoink uploads zero corpus files to a cloud server. It skips search tracking. The only time your data leaves your machine is when the agent sends the selected search results to your chosen LLM provider. 
+Uoink does not host your corpus. It skips search tracking. AI features and connected clients can send selected library content to a provider. Exports and optional mirrors can also put copies in folders watched by sync software.
 
-This local design means you can store sensitive company transcripts or private code snippets without worrying about data leaks. You maintain complete control over your files.
+Sensitive company transcripts and private code snippets still need access and sharing controls. Local storage does not prevent leaks through connected clients or shared copies.
 
 ## Future Roadmap: Optional Sync Tier
 
@@ -68,14 +68,14 @@ This hosted sync tier is optional. It will allow you to access your corpus on mu
 
 To give your agent access to your corpus, you need to configure the MCP settings. Open the Uoink dashboard and navigate to the Settings tab. Copy the JSON config snippet. 
 
-Paste this snippet into your Claude Desktop configuration file:
+Paste this snippet into your Claude Desktop configuration file. Replace `%LOCALAPPDATA%` in both paths with your full local app-data directory; Claude Desktop does not expand it:
 
 ```json
 {
   "mcpServers": {
     "uoink": {
-      "command": "node",
-      "args": ["C:/Users/hello/AppData/Local/Uoink/mcp/server.js"]
+      "command": "%LOCALAPPDATA%\\Uoink\\python\\python.exe",
+      "args": ["%LOCALAPPDATA%\\Uoink\\uoink_mcp.py"]
     }
   }
 }

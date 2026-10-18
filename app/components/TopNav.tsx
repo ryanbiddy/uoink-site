@@ -1,104 +1,78 @@
 import Link from "next/link";
+import { MobileMenu } from "./MobileMenu";
 
-const links = [
+const links: [string, string][] = [
   ["/install", "Install"],
-  ["/how-it-works", "How It Works"],
+  ["/how-it-works", "How it works"],
   ["/sources", "Sources"],
   ["/creators", "Creators"],
   ["/developers", "Developers"],
   ["/features", "Features"],
-  ["/blog", "Field Notes"],
+  ["/blog", "Field notes"],
 ];
 
-function tickerFor(active: string) {
-  if (active.startsWith("/install")) return ["UOINK v3.3 / install", "helper / extension / local corpus"];
-  if (active.startsWith("/how-it-works")) return ["UOINK v3.3 / workflow", "capture / library / workspace / iterate / distribute"];
-  if (active.startsWith("/sources")) return ["UOINK v3.3 / sources", "youtube / podcasts / substack / articles / dev-hubs"];
-  if (active.startsWith("/creators")) return ["UOINK v3.3 / creators", "source capture / writing studio / Voice DNA / attribution"];
-  if (active.startsWith("/developers")) return ["UOINK v3.3 / developers", "local helper / sqlite / mcp server / agent tools"];
-  if (active.startsWith("/features")) return ["UOINK v3.3 / features", "corpus / memory / hooks / dashboard"];
-  if (active.startsWith("/blog")) return ["UOINK v3.3 / field notes", "hooks / agents / corpus / local-first"];
-  if (active.startsWith("/twitter")) return ["UOINK v3.3 / twitter video", "X capture / creator credit / Writing Studio"];
-  if (active.startsWith("/podcasts")) return ["UOINK v3.3 / podcasts", "RSS / Whisper / diarization / local"];
-  if (active.startsWith("/agents") || active.startsWith("/mcp")) return ["UOINK v3.3 / MCP", "local tools / Claude Desktop / Cursor / Cline"];
-  if (active.startsWith("/about")) return ["UOINK v3.3 / about", "GitHub releases / public downloads / no tracking"];
-  if (active.startsWith("/privacy")) return ["UOINK v3.3 / privacy", "local-first / no cloud / no telemetry"];
-  return ["UOINK v3.3 / local video corpus", "open source / MIT / model agnostic"];
+const moreLinks: [string, string][] = [
+  ["/privacy", "Privacy"],
+  ["/changelog", "Changelog"],
+  ["/about", "About"],
+];
+
+function isActive(active: string, href: string) {
+  return active === href || active.startsWith(`${href}/`);
+}
+
+function Wordmark() {
+  return (
+    <span className="wm-line">
+      <uoink-mark aria-hidden="true"></uoink-mark>
+      <span className="oink">OINK</span>
+    </span>
+  );
+}
+
+function NavLink({ href, label, active }: { href: string; label: string; active: string }) {
+  const current = isActive(active, href);
+
+  return (
+    <Link href={href} className={current ? "active" : undefined} aria-current={current ? "page" : undefined}>
+      {label}
+    </Link>
+  );
 }
 
 export function TopNav({ active }: { active: string }) {
-  const [left, right] = tickerFor(active);
-
   return (
     <header className="site-header">
-      <div className="ticker" role="banner">
-        <div className="row">
-          <span>
-            <b>{left}</b>
-          </span>
-          <span>{right}</span>
-        </div>
-      </div>
       <nav className="top-nav" aria-label="Primary">
         <div className="container nav-inner">
           <Link href="/" className="brand" aria-label="Uoink home">
-            <span className="wm-line">
-              <uoink-mark aria-hidden="true"></uoink-mark>
-              <span className="oink">OINK</span>
-            </span>
+            <Wordmark />
           </Link>
           <div className="nav-links">
             {links.map(([href, label]) => (
-              <Link key={href} href={href} className={active === href || active.startsWith(`${href}/`) ? "active" : ""}>
-                {label}
-              </Link>
+              <NavLink key={href} href={href} label={label} active={active} />
             ))}
           </div>
           <Link className="nav-cta" href="/install">
             Get Uoink
           </Link>
-          <button
-            className="nav-burger"
-            type="button"
-            data-nav-burger
-            aria-label="Open menu"
-            aria-expanded="false"
-            aria-controls="mobile-menu"
-          >
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path d="M2 4h12M2 8h12M2 12h12" />
-            </svg>
-          </button>
+          <MobileMenu wordmark={<Wordmark />}>
+            <div className="links">
+              {links.map(([href, label]) => (
+                <NavLink key={href} href={href} label={label} active={active} />
+              ))}
+            </div>
+            <div className="links-more">
+              {moreLinks.map(([href, label]) => (
+                <NavLink key={href} href={href} label={label} active={active} />
+              ))}
+            </div>
+            <Link className="nav-cta" href="/install">
+              Get Uoink
+            </Link>
+          </MobileMenu>
         </div>
       </nav>
-      <div id="mobile-menu" className="mobile-menu" data-mobile-menu aria-hidden="true" aria-modal="true" role="dialog">
-        <button className="close" type="button" data-nav-close aria-label="Close menu">
-          x
-        </button>
-        <span className="wm-line" style={{ fontSize: 48, color: "var(--vermillion)" }}>
-          <uoink-mark aria-hidden="true"></uoink-mark>
-          <span className="oink">OINK</span>
-        </span>
-        <div className="links">
-          {links.map(([href, label]) => (
-            <Link key={href} href={href} className={active === href || active.startsWith(`${href}/`) ? "active" : ""}>
-              {label}
-            </Link>
-          ))}
-          <Link href="/privacy" className={active === "/privacy" ? "active" : ""}>
-            Privacy
-          </Link>
-          <Link href="/changelog" className={active === "/changelog" ? "active" : ""}>
-            Changelog
-          </Link>
-          <Link href="/about" className={active === "/about" ? "active" : ""}>
-            About
-          </Link>
-        </div>
-        <Link className="nav-cta" href="/install">
-          Get Uoink
-        </Link>
-      </div>
     </header>
   );
 }

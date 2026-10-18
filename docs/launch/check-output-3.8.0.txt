@@ -1,0 +1,130 @@
+lint-3.8.0.log
+
+> uoink-site@0.1.0 lint
+> next lint
+
+npm.cmd : `next lint` is deprecated and will be removed in Next.js 16.
+At line:2 char:1
++ npm.cmd run lint *> docs/launch/lint-3.8.0.log; $lintExit = $LASTEXIT ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (`next lint` is ... in Next.js 16.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+For new projects, use create-next-app to choose your preferred linter.
+For existing projects, migrate to the ESLint CLI:
+npx @next/codemod@canary next-lint-to-eslint-cli .
+
+
+./app/creators/page.tsx
+121:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+174:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/developers/page.tsx
+90:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+94:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+98:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+184:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/how-it-works/page.tsx
+104:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+201:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/sources/podcasts/page.tsx
+69:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+73:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+
+
+build-3.8.0.log
+
+> uoink-site@0.1.0 build
+> next build && node scripts/postbuild-static-cleanup.mjs
+
+   ▲ Next.js 15.5.18
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 1737ms
+   Linting and checking validity of types ...
+
+./app/creators/page.tsx
+121:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+174:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/developers/page.tsx
+90:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+94:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+98:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+184:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/how-it-works/page.tsx
+104:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+201:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/sources/podcasts/page.tsx
+69:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+73:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+   Generating static pages (0/70) ...
+   Generating static pages (17/70) 
+   Generating static pages (34/70) 
+   Generating static pages (52/70) 
+ ✓ Generating static pages (70/70)
+   Finalizing page optimization ...
+   Collecting build traces ...
+   Exporting (0/2) ...
+ ✓ Exporting (2/2)
+
+Route (app)                                                     Size  First Load JS  Revalidate  Expire
+┌ ○ /                                                          225 B         106 kB
+├ ○ /_not-found                                                131 B         103 kB
+├ ○ /about                                                     225 B         106 kB
+├ ○ /agent-docs                                                225 B         106 kB
+├ ○ /agents                                                    225 B         106 kB
+├ ○ /api/features-manifest                                     131 B         103 kB          1h      1y
+├ ○ /blog                                                    1.32 kB         107 kB
+├ ● /blog/[slug]                                               225 B         106 kB
+├   ├ /blog/9-hook-types-every-creator-should-recognize
+├   ├ /blog/how-to-find-your-channels-overperformer-pattern
+├   ├ /blog/why-your-ai-agent-should-have-a-corpus
+├   └ [+5 more paths]
+├ ○ /blog/rss.xml                                              131 B         103 kB
+├ ○ /changelog                                                 225 B         106 kB
+├ ○ /compare/notebooklm                                        225 B         106 kB
+├ ○ /creators                                                  225 B         106 kB
+├ ○ /dashboard                                                 225 B         106 kB
+├ ○ /developers                                                225 B         106 kB
+├ ○ /features                                                  225 B         106 kB
+├ ● /features/[slug]                                           357 B         111 kB
+├   ├ /features/in-page-button
+├   ├ /features/right-click-any-link
+├   ├ /features/keyboard-shortcut
+├   └ [+27 more paths]
+├ ○ /hooks                                                     225 B         106 kB
+├ ○ /how                                                       225 B         106 kB
+├ ○ /how-it-works                                              225 B         106 kB
+├ ○ /install                                                   225 B         106 kB
+├ ○ /installed                                                 225 B         106 kB
+├ ○ /mcp                                                       225 B         106 kB
+├ ○ /memory                                                    225 B         106 kB
+├ ○ /podcasts                                                  225 B         106 kB
+├ ○ /privacy                                                   225 B         106 kB
+├ ○ /research                                                  225 B         106 kB
+├ ○ /sources                                                   225 B         106 kB
+├ ○ /sources/podcasts                                          225 B         106 kB
+├ ○ /sources/youtube                                           225 B         106 kB
+├ ○ /terms                                                     225 B         106 kB
+├ ○ /tweaks                                                    225 B         106 kB
+└ ○ /twitter                                                   173 B         111 kB
++ First Load JS shared by all                                 103 kB
+  ├ chunks/255-d47fd57964443afe.js                           46.3 kB
+  ├ chunks/4bd1b696-c023c6e3521b1417.js                      54.2 kB
+  └ other shared chunks (total)                              1.99 kB
+
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+
+postbuild-static-cleanup: preserved Next runtime for Vercel Analytics and client stats

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DocRule } from "../components/Doc";
 import { PageShell } from "../components/PageShell";
 import { CANONICAL_URL, RELEASE_URL, SitePage } from "../content/pages";
 import { BlogIndexClient } from "./BlogIndexClient";
@@ -20,18 +21,18 @@ const page: SitePage = {
     "creator research blog",
   ],
   html: `
-<section class="hero blog-hero" data-screen-label="blog / hero">
-  <div class="container blog-hero-grid">
-    <div class="section-head">
+<section class="hero" data-screen-label="blog / hero">
+  <div class="container">
+    <div class="doc">
       <span class="eyebrow">field notes</span>
       <h1 class="display-xl">The working notes behind Uoink.</h1>
       <p class="lede">Hooks, corpus workflows, agent memory, local-first tradeoffs, and the product decisions underneath the launch.</p>
       <div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Install Uoink</a><a class="btn ghost large" href="/blog/rss.xml">RSS feed</a></div>
-    </div>
-    <div class="blog-hero-note" aria-label="Blog publishing model">
-      <span class="eyebrow">agent-readable</span>
-      <p>Every article ships with canonical metadata, schema, RSS, and clean text for crawlers. Humans get the readable version. Agents get the same facts without guessing.</p>
-      <a class="arr-link" href="${CANONICAL_URL}/llms.txt">Read llms.txt -&gt;</a>
+      <aside class="callout" aria-label="Blog publishing model">
+        <span class="eyebrow">agent-readable</span>
+        <p>Every article ships with canonical metadata, schema, RSS, and clean text for crawlers. Humans get the readable version. Agents get the same facts without guessing.</p>
+        <a class="arr-link" href="${CANONICAL_URL}/llms.txt">Read llms.txt -&gt;</a>
+      </aside>
     </div>
   </div>
 </section>`,
@@ -58,17 +59,20 @@ export default function BlogPage() {
   return (
     <PageShell page={page}>
       <BlogIndexClient articles={blogArticles} tags={blogTags} />
-      <section className="section tight blog-agent-strip" data-screen-label="blog / agent ingest">
-        <div className="container blog-agent-grid">
-          <div>
-            <span className="eyebrow">crawl this first</span>
-            <h2 className="display-m">Canonical paths for people and agents.</h2>
-          </div>
-          <div className="blog-agent-links">
-            <Link href="/features">Feature index</Link>
-            <Link href="/mcp">MCP manifest</Link>
-            <a href="/llms-full.txt">llms-full.txt</a>
-            <a href="/blog/rss.xml">RSS</a>
+      <DocRule />
+      <section className="section" data-screen-label="blog / agent ingest">
+        <div className="container">
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">crawl this first</span>
+              <h2 className="display-m">Canonical paths for people and agents.</h2>
+            </div>
+            <nav className="doc-links" aria-label="Canonical paths">
+              <Link className="arr-link" href="/features">Feature index</Link>
+              <Link className="arr-link" href="/mcp">MCP manifest</Link>
+              <a className="arr-link" href="/llms-full.txt">llms-full.txt</a>
+              <a className="arr-link" href="/blog/rss.xml">RSS</a>
+            </nav>
           </div>
         </div>
       </section>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CONTACT_EMAIL, X_HANDLE, X_URL } from "../content/pages";
+import { CONTACT_EMAIL, GITHUB_URL, X_HANDLE, X_URL, VERSION } from "../content/pages";
 
 export function SiteFooter() {
   return (
@@ -13,7 +13,7 @@ export function SiteFooter() {
           <p>Local video and podcast corpus software. Open source. No Uoink cloud.</p>
         </div>
         <div>
-          <h5>Product</h5>
+          <h2>Product</h2>
           <ul>
             <li>
               <Link href="/install">Install</Link>
@@ -33,7 +33,7 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <h5>Developers</h5>
+          <h2>Developers</h2>
           <ul>
             <li>
               <Link href="/developers">Developer door</Link>
@@ -53,10 +53,10 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <h5>About</h5>
+          <h2>About</h2>
           <ul>
             <li>
-              <Link href="/about">About + downloads</Link>
+              <Link href="/about">About</Link>
             </li>
             <li>
               <Link href="/privacy">Privacy</Link>
@@ -68,7 +68,7 @@ export function SiteFooter() {
               <Link href="/terms">Terms</Link>
             </li>
             <li>
-              <a href="https://github.com/ryanbiddy/uoink">GitHub</a>
+              <a href={GITHUB_URL}>GitHub</a>
             </li>
             <li>
               <a href={X_URL}>X {X_HANDLE}</a>
@@ -80,7 +80,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="container footer-bottom">
-        <span>uoink.app / v3.3 / 2026</span>
+        <span>uoink.app / {VERSION} / 2026</span>
         <span>Local-first. Model-agnostic. MIT.</span>
       </div>
     </footer>

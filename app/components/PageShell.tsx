@@ -1,4 +1,4 @@
-import { CANONICAL_URL, GITHUB_URL, RELEASE_URL, SitePage, VERSION, X_URL } from "../content/pages";
+import { CANONICAL_URL, DOWNLOAD_URL, GITHUB_URL, SitePage, VERSION, X_URL } from "../content/pages";
 import { applySiteLinks } from "../lib/links";
 import { SiteFooter } from "./SiteFooter";
 import { TopNav } from "./TopNav";
@@ -44,7 +44,7 @@ function JsonLd({ page }: { page: SitePage }) {
       applicationCategory: "UtilityApplication",
       operatingSystem: "Windows 10, Windows 11",
       softwareVersion: VERSION.replace("v", ""),
-      downloadUrl: RELEASE_URL,
+      downloadUrl: DOWNLOAD_URL,
       url: CANONICAL_URL,
       license: "https://github.com/ryanbiddy/uoink/blob/main/LICENSE",
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -96,7 +96,7 @@ function JsonLd({ page }: { page: SitePage }) {
       description: "Install the local helper, install the browser extension, then click Uoink on a video.",
       step: [
         { "@type": "HowToStep", name: "Download the helper", text: "Download the Windows installer from GitHub Releases." },
-        { "@type": "HowToStep", name: "Install the extension", text: "Install the browser extension from the release zip until Web Store approval lands." },
+        { "@type": "HowToStep", name: "Install the extension", text: "Sideload the extension from %LOCALAPPDATA%\\Uoink\\extension; the Chrome Web Store listing is pending. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible." },
         { "@type": "HowToStep", name: "Click Uoink", text: "Open a supported video page and click the Uoink button." },
       ],
     });

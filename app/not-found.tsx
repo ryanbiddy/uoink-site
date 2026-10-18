@@ -15,9 +15,9 @@ const page: SitePage = {
 export default function NotFound() {
   return (
     <PageShell page={page}>
-      <section className="hero not-found-page" data-screen-label="404 / hero">
-        <div className="container not-found-grid">
-          <div className="section-head">
+      <section className="hero" data-screen-label="404 / hero">
+        <div className="container hero-grid">
+          <div className="copy">
             <span className="eyebrow">404</span>
             <h1 className="display-xl">This page slipped out of the corpus.</h1>
             <p className="lede">The feature map, field notes, install path, and MCP docs are still where they should be.</p>
@@ -33,18 +33,32 @@ export default function NotFound() {
               </a>
             </div>
           </div>
-          <div className="corpus lost-corpus" aria-label="Missing page diagnostic">
-            <div className="hd">
-              <span>missing-page.md</span>
+          <aside className="facts" aria-label="Missing page diagnostic">
+            <p className="facts-head">
+              <span className="verbatim">missing-page.md</span>
               <span>local diagnostic</span>
-            </div>
-            <span className="ln k"># 404</span>
-            <span className="ln dim">requested: page outside the current map</span>
-            <span className="ln k">## suggested paths</span>
-            <span className="ln hl">/features</span>
-            <span className="ln hl">/blog</span>
-            <span className="ln hl">/install</span>
-          </div>
+            </p>
+            <dl className="facts-list">
+              <div>
+                <dt>404</dt>
+                <dd>requested: page outside the current map</dd>
+              </div>
+              <div className="is-hl">
+                <dt>suggested paths</dt>
+                <dd className="paths">
+                  <Link className="arr-link" href="/features">
+                    /features
+                  </Link>
+                  <Link className="arr-link" href="/blog">
+                    /blog
+                  </Link>
+                  <Link className="arr-link" href="/install">
+                    /install
+                  </Link>
+                </dd>
+              </div>
+            </dl>
+          </aside>
         </div>
       </section>
     </PageShell>

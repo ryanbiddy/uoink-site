@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { PageShell } from "../components/PageShell";
 import { pages } from "../content/pages";
-import { DownloadStats } from "./DownloadStats";
 
 const page = pages.about;
 
@@ -16,8 +15,6 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <PageShell page={page}>
-      <DownloadStats />
-    </PageShell>
+    <PageShell page={page} />
   );
 }

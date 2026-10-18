@@ -21,20 +21,16 @@ const page: SitePage = {
   html: `
 <section class="hero" data-screen-label="features / hero">
   <div class="container">
-    <div class="section-head">
+    <div class="doc">
       <span class="eyebrow">feature inventory</span>
       <h1 class="display-xl">Everything Uoink does.</h1>
       <p class="lede">Capture the source, build the library, assemble workspaces, verify claims, then hand the evidence to Claude, ChatGPT, Cursor, or an MCP agent.</p>
       <div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Install Uoink</a><a class="btn ghost large" href="/api/features-manifest">Manifest JSON</a></div>
     </div>
-    <figure class="feature-visual product-figure wide">
-      <div class="feature-visual-top"><span>topics</span><span>auto-organized</span></div>
-      <div class="feature-visual-body">
-        <div class="feature-visual-shot">
-          <img src="/product/topics-overview.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Uoink topics view: the local library grouped into topic chips with live counts such as AI and ML, Social Media Research, and Job Hunt, each filtering the captured sources." />
-          <figcaption>Captures route themselves into topics with live counts, so the library stays browsable as it grows.</figcaption>
-        </div>
-      </div>
+    <figure class="figure">
+      <div class="figure-label"><span>topics</span><span>local library</span></div>
+      <img src="/product/topics-overview.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Uoink topics view: the local library grouped into topic chips with live counts such as AI and ML, Social Media Research, and Job Hunt, each filtering the captured sources." />
+      <figcaption>Browse the sources saved in your local library. The library does not organize or re-shelve itself.</figcaption>
     </figure>
   </div>
 </section>`,
@@ -57,42 +53,46 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <PageShell page={page}>
-      <section className="section feature-index" data-screen-label="features / grouped index">
+      <section className="section" data-screen-label="features / grouped index">
         <div className="container">
-          <div className="feature-index-bar" aria-label="Feature category links">
-            {featureCategories.map((category) => (
-              <a key={category.name} href={`#${category.name.toLowerCase().replaceAll(" ", "-").replaceAll("&", "and")}`}>
-                {category.name}
-              </a>
-            ))}
-          </div>
-          {featureCategories.map((category) => {
-            const categoryFeatures = featuresByCategory(category.name);
-            const id = category.name.toLowerCase().replaceAll(" ", "-").replaceAll("&", "and");
+          <div className="doc">
+            <nav className="doc-links feature-jump" aria-label="Feature category links">
+              {featureCategories.map((category) => (
+                <a className="arr-link" key={category.name} href={`#${category.name.toLowerCase().replaceAll(" ", "-").replaceAll("&", "and")}`}>
+                  {category.name}
+                </a>
+              ))}
+            </nav>
+            {featureCategories.map((category) => {
+              const categoryFeatures = featuresByCategory(category.name);
+              const id = category.name.toLowerCase().replaceAll(" ", "-").replaceAll("&", "and");
 
-            return (
-              <section key={category.name} id={id} className="feature-category" data-screen-label={`features / ${id}`}>
-                <div className="feature-category-head">
-                  <span className="eyebrow">{category.name}</span>
-                  <h2 className="display-l">{category.name}</h2>
-                  <p>{category.deck}</p>
-                </div>
-                <div className="feature-card-grid">
-                  {categoryFeatures.map((feature) => (
-                    <Link key={feature.slug} href={`/features/${feature.slug}`} className="feature-card">
-                      <div className="feature-card-head">
-                        <PlatformLogoStrip logos={getFeatureLogoKeys(feature)} compact />
-                        <span className={`feature-status ${feature.status.replaceAll(" ", "-")}`}>{feature.status}</span>
-                      </div>
-                      <h3>{feature.title}</h3>
-                      <p>{feature.summary}</p>
-                      <span className="arr-link">Open feature -&gt;</span>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            );
-          })}
+              return (
+                <section key={category.name} id={id} className="feature-category" data-screen-label={`features / ${id}`}>
+                  <div className="doc-head">
+                    <span className="eyebrow">{category.name}</span>
+                    <h2 className="display-l">{category.name}</h2>
+                    <p className="lede">{category.deck}</p>
+                  </div>
+                  <ul className="doc-list linked">
+                    {categoryFeatures.map((feature) => (
+                      <li key={feature.slug}>
+                        <Link href={`/features/${feature.slug}`} className="doc-row">
+                          <span className="row-meta">
+                            <PlatformLogoStrip logos={getFeatureLogoKeys(feature)} compact />
+                            <span className={`feature-status ${feature.status.replaceAll(" ", "-")}`}>{feature.status}</span>
+                          </span>
+                          <h3>{feature.title}</h3>
+                          <p>{feature.summary}</p>
+                          <span className="arr-link">Open feature -&gt;</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              );
+            })}
+          </div>
         </div>
       </section>
       <FeatureIndexJsonLd />

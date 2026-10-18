@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DocRule, FaqList } from "../../components/Doc";
 import { PageShell } from "../../components/PageShell";
 import { GITHUB_URL, RELEASE_URL, SitePage } from "../../content/pages";
 
@@ -18,7 +19,7 @@ const faq = [
   {
     question: "Does Uoink identify speakers by real name?",
     answer:
-      "Diarization separates speakers as Speaker 1, Speaker 2, and so on. You can rename them later when you know who is speaking.",
+      "Optional diarization separates speakers as Speaker 1, Speaker 2, and so on. It needs your own Hugging Face token for the speaker model. You can rename speakers later when you know who is speaking.",
   },
   {
     question: "Does local Whisper need a GPU?",
@@ -76,90 +77,95 @@ export default function Page() {
                 <span>Whisper</span>
               </div>
             </div>
-            <div className="corpus">
-              <div className="hd">
+            <figure className="code-figure">
+              <div className="figure-label">
                 <span>podcast corpus</span>
                 <span>audio-first</span>
               </div>
-              <span className="ln k"># Episode title</span>
-              <span className="ln dim">feed, episode URL, duration, publish date</span>
-              <span className="ln k">## Speakers</span>
-              <span className="ln hl">Speaker 1 / Speaker 2 / Speaker 3</span>
-              <span className="ln k">## Transcript</span>
-              <span className="ln dim">[14:22] Speaker 2: the claim is...</span>
-              <span className="ln k">## Entities</span>
-              <span className="ln dim">companies, tools, people, topics</span>
-            </div>
+              <pre className="code-block">{`# Episode title
+feed, episode URL, duration, publish date
+## Speakers
+Speaker 1 / Speaker 2 / Speaker 3
+## Transcript
+[14:22] Speaker 2: the claim is...
+## Entities
+companies, tools, people, topics`}</pre>
+            </figure>
           </div>
         </div>
       </section>
 
       <section className="section" data-screen-label="sources podcasts / workflow">
         <div className="container">
-          <div className="section-head">
-            <span className="eyebrow">audio to corpus</span>
-            <h2 className="display-l">
-              Same source card, longer <em>runtime.</em>
-            </h2>
-            <p className="lede">
-              Podcasts sit in the same local library as videos. Your agent can search a founder interview, a lecture, and a YouTube teardown with the same tool call.
-            </p>
-          </div>
-          <div className="three-cards">
-            <article className="card">
-              <span className="num">01</span>
-              <h3>Feed in.</h3>
-              <p>Add a public RSS feed or episode URL from the settings page.</p>
-            </article>
-            <article className="card">
-              <span className="num">02</span>
-              <h3>Whisper runs local.</h3>
-              <p>The helper downloads audio and runs transcription on your machine.</p>
-            </article>
-            <article className="card">
-              <span className="num">03</span>
-              <h3>Corpus lands.</h3>
-              <p>Episode markdown, speaker labels, metadata, and entities land in the library.</p>
-            </article>
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">audio to corpus</span>
+              <h2 className="display-l">
+                Same source card, longer <em>runtime.</em>
+              </h2>
+              <p className="lede">
+                Podcasts sit in the same local library as videos. Your agent can search a founder interview, a lecture, and a YouTube teardown with the same tool call.
+              </p>
+            </div>
+            <ol className="doc-list numbered">
+              <li>
+                <span className="num">01</span>
+                <h3>Feed in.</h3>
+                <p>Add a public RSS feed or episode URL from the settings page.</p>
+              </li>
+              <li>
+                <span className="num">02</span>
+                <h3>Whisper runs local.</h3>
+                <p>The helper downloads audio and runs transcription on your machine.</p>
+              </li>
+              <li>
+                <span className="num">03</span>
+                <h3>Corpus lands.</h3>
+                <p>Episode markdown, speaker labels, metadata, and entities land in the library.</p>
+              </li>
+            </ol>
           </div>
         </div>
       </section>
 
-      <section className="big-strip" data-screen-label="sources podcasts / tradeoff">
+      <DocRule />
+
+      <section className="section" data-screen-label="sources podcasts / tradeoff">
         <div className="container">
-          <span className="eyebrow">the local whisper trade</span>
-          <h2 className="display-l">
-            Private transcription costs <em>time.</em>
-          </h2>
-          <p className="body-l" style={{ maxWidth: "70ch" }}>
-            Expect compute time for long audio, especially on CPU. Uoink keeps the job in the background and saves the transcript on disk when it finishes.
-          </p>
-          <p className="mt-24">
-            <Link className="btn ink" href="/privacy">
-              Privacy details
-            </Link>{" "}
-            <a className="btn ghost" href={`${GITHUB_URL}/issues`}>
-              Request feed support
-            </a>
-          </p>
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">the local whisper trade</span>
+              <h2 className="display-l">
+                Private transcription costs <em>time.</em>
+              </h2>
+              <p className="body-l">
+                Expect compute time for long audio, especially on CPU. Uoink keeps the job in the background and saves the transcript on disk when it finishes.
+              </p>
+            </div>
+            <div className="ctas">
+              <Link className="btn primary" href="/privacy">
+                Privacy details
+              </Link>
+              <a className="btn ghost" href={`${GITHUB_URL}/issues`}>
+                Request feed support
+              </a>
+            </div>
+          </div>
         </div>
       </section>
+
+      <DocRule />
 
       <section className="section" data-screen-label="sources podcasts / faq">
         <div className="container">
-          <div className="section-head">
-            <span className="eyebrow">podcast FAQ</span>
-            <h2 className="display-l">
-              Useful caveats, kept <em>visible.</em>
-            </h2>
-          </div>
-          <div className="three-cards">
-            {faq.map((item) => (
-              <article className="card" key={item.question}>
-                <h3>{item.question}</h3>
-                <p>{item.answer}</p>
-              </article>
-            ))}
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">podcast FAQ</span>
+              <h2 className="display-l">
+                Useful caveats, kept <em>visible.</em>
+              </h2>
+            </div>
+            <FaqList items={faq} />
           </div>
         </div>
       </section>

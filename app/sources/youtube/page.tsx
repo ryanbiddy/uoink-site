@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DocRule, FaqList } from "../../components/Doc";
 import { PageShell } from "../../components/PageShell";
 import { GITHUB_URL, RELEASE_URL, SitePage, FaqItem } from "../../content/pages";
 
@@ -12,7 +13,7 @@ const faq: FaqItem[] = [
   {
     question: "Can Claude actually watch or read a YouTube video?",
     answer:
-      "Not from a bare link — it hallucinates. Give it a Uoink corpus and it can quote the transcript, cite timestamps, and read the top comments, because the words and frames are in the paste. For agents, Uoink's local MCP server exposes uoink_video and search_uoinks so Claude Desktop, Cursor, or Cline can pull the transcript directly.",
+      "Not from a bare link — it hallucinates. Give it a Uoink corpus and it can quote the transcript, cite timestamps, and read the top comments, because the words and frames are in the paste. For agents, Uoink's local MCP server exposes uoink_video and search_uoinks so Claude Desktop and Cursor (the tested clients) can pull the transcript directly.",
   },
   {
     question: "What does Uoink capture besides the transcript?",
@@ -22,12 +23,12 @@ const faq: FaqItem[] = [
   {
     question: "Does the transcript include timestamps?",
     answer:
-      "Yes. Every line is timestamped and chapter-aware, and screenshots carry their own timestamps, so you (and your AI) can cite the exact moment and deep-link back to it on YouTube.",
+      "Transcripts and screenshots have timestamps. Chapter navigation is available for items that have chapters; cited range export includes speaker labels, chapters, and provenance.",
   },
   {
     question: "Where do the saved videos go?",
     answer:
-      "To your own disk, under your Uoink output folder (usually Desktop\\Uoink), auto-sorted into topic folders. No account, no Uoink cloud. You can search the whole library locally later.",
+      "To your own disk as structured Markdown and a JSON sidecar, indexed in one local library. No account, no Uoink cloud. The library does not organize or re-shelve itself.",
   },
   {
     question: "Can I save a whole playlist at once?",
@@ -103,97 +104,102 @@ export default function Page() {
                 <span>MCP</span>
               </div>
             </div>
-            <div className="corpus">
-              <div className="hd">
+            <figure className="code-figure">
+              <div className="figure-label">
                 <span>youtube corpus</span>
                 <span>video-native</span>
               </div>
-              <span className="ln k"># Video title</span>
-              <span className="ln dim">channel, subs, views, upload date, tags</span>
-              <span className="ln k">## Transcript</span>
-              <span className="ln dim">[04:12] the hook lands right here...</span>
-              <span className="ln k">## Screenshots</span>
-              <span className="ln hl">[04:12] [08:40] [12:03] frames on disk</span>
-              <span className="ln k">## Comments</span>
-              <span className="ln dim">top 50 with authors + likes</span>
-            </div>
+              <pre className="code-block">{`# Video title
+channel, subs, views, upload date, tags
+## Transcript
+[04:12] the hook lands right here...
+## Screenshots
+[04:12] [08:40] [12:03] frames on disk
+## Comments
+top comments saved with the source`}</pre>
+            </figure>
           </div>
         </div>
       </section>
 
       <section className="section" data-screen-label="sources youtube / what gets captured">
         <div className="container">
-          <div className="section-head">
-            <span className="eyebrow">youtube transcript, and everything around it</span>
-            <h2 className="display-l">
-              A transcript downloader stops at the <em>words.</em>
-            </h2>
-            <p className="lede">
-              Uoink saves the full context so your AI can quote it, cite the timestamp, and read the room.
-            </p>
-          </div>
-          <div className="three-cards">
-            <article className="card">
-              <span className="num">01</span>
-              <h3>Timestamped transcript.</h3>
-              <p>Full, chapter-aware transcript. Every line carries a timestamp your AI can cite and deep-link back to.</p>
-            </article>
-            <article className="card">
-              <span className="num">02</span>
-              <h3>Screenshots + comments.</h3>
-              <p>Timestamped frames throughout the video, plus the top comments with authors and like counts.</p>
-            </article>
-            <article className="card">
-              <span className="num">03</span>
-              <h3>Metadata + channel context.</h3>
-              <p>Title, description, tags, views, upload date, thumbnail, channel context, and a JSON sidecar for agents.</p>
-            </article>
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">youtube transcript, and everything around it</span>
+              <h2 className="display-l">
+                A transcript downloader stops at the <em>words.</em>
+              </h2>
+              <p className="lede">
+                Uoink saves the full context so your AI can quote it, cite the timestamp, and read the room.
+              </p>
+            </div>
+            <ol className="doc-list numbered">
+              <li>
+                <span className="num">01</span>
+                <h3>Timestamped transcript.</h3>
+                <p>Full, chapter-aware transcript. Every line carries a timestamp your AI can cite and deep-link back to.</p>
+              </li>
+              <li>
+                <span className="num">02</span>
+                <h3>Screenshots + comments.</h3>
+                <p>Timestamped frames throughout the video, plus the top comments with authors and like counts.</p>
+              </li>
+              <li>
+                <span className="num">03</span>
+                <h3>Metadata + channel context.</h3>
+                <p>Title, description, tags, views, upload date, thumbnail, channel context, and a JSON sidecar for agents.</p>
+              </li>
+            </ol>
           </div>
         </div>
       </section>
 
-      <section className="big-strip" data-screen-label="sources youtube / agent path">
+      <DocRule />
+
+      <section className="section" data-screen-label="sources youtube / agent path">
         <div className="container">
-          <span className="eyebrow">for agents: youtube mcp server</span>
-          <h2 className="display-l">
-            Or let your agent <em>uoink it.</em>
-          </h2>
-          <p className="body-l" style={{ maxWidth: "72ch" }}>
-            Connect Claude Desktop, Cursor, or Cline to the local Uoink helper and your agent can call{" "}
-            <code>uoink_video</code>, <code>search_uoinks</code>, and <code>find_mentions</code> directly — no clipboard step. Ask it to &ldquo;uoink this video and decode the hook&rdquo; and it extracts, then analyzes.
-          </p>
-          <p className="mt-24">
-            <Link className="btn ink" href="/developers">
-              Developer setup
-            </Link>{" "}
-            <Link className="btn ghost" href="/compare/notebooklm">
-              Uoink vs NotebookLM
-            </Link>
-          </p>
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">for agents: youtube mcp server</span>
+              <h2 className="display-l">
+                Or let your agent <em>uoink it.</em>
+              </h2>
+              <p className="body-l">
+                Connect Claude Desktop, Cursor, or Cline to the local Uoink helper and your agent can call{" "}
+                <code>uoink_video</code>, <code>search_uoinks</code>, and <code>find_mentions</code> directly — no clipboard step. Ask it to &ldquo;uoink this video and decode the hook&rdquo; and it extracts, then analyzes.
+              </p>
+            </div>
+            <div className="ctas">
+              <Link className="btn primary" href="/developers">
+                Developer setup
+              </Link>
+              <Link className="btn ghost" href="/compare/notebooklm">
+                Uoink vs NotebookLM
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
+
+      <DocRule />
 
       <section className="section" data-screen-label="sources youtube / faq">
         <div className="container">
-          <div className="section-head">
-            <span className="eyebrow">youtube FAQ</span>
-            <h2 className="display-l">
-              How to chat with a <em>YouTube video.</em>
-            </h2>
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">youtube FAQ</span>
+              <h2 className="display-l">
+                How to chat with a <em>YouTube video.</em>
+              </h2>
+            </div>
+            <FaqList items={faq} />
+            <div className="ctas">
+              <a className="btn ghost" href={`${GITHUB_URL}`}>
+                Source on GitHub
+              </a>
+            </div>
           </div>
-          <div className="three-cards">
-            {faq.map((item) => (
-              <article className="card" key={item.question}>
-                <h3>{item.question}</h3>
-                <p>{item.answer}</p>
-              </article>
-            ))}
-          </div>
-          <p className="mt-24">
-            <a className="btn ghost" href={`${GITHUB_URL}`}>
-              Source on GitHub
-            </a>
-          </p>
         </div>
       </section>
     </PageShell>
