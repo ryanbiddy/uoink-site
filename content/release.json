@@ -1,6 +1,6 @@
 {
-  "version": "3.9.0",
-  "mcpSourceRef": "v3.9.0",
+  "version": "3.9.1",
+  "mcpSourceRef": "v3.9.1",
   "stdioToolCount": 35,
   "httpToolCount": 91
 }

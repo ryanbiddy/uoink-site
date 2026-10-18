@@ -1,9 +1,11 @@
-<!-- updated: 2026-10-17 / uoink v3.9.0 -->
-# Uoink 3.9.0 — Living Library and research
+<!-- updated: 2026-10-18 / uoink v3.9.1 -->
+# Uoink 3.9.1 — Living Library and research
 
 > A local library for the videos and podcasts you study, that any AI you use can search and cite.
 
 Free, MIT-licensed. No account or Uoink-hosted corpus. Model dependencies can send telemetry. Made by Ryan Biddy (@replayryan), a personal side project.
+
+This patch changes writing-check wording to "canned-phrase warnings" and includes reliability and test fixes. Voice DNA remains the voice spec's name. No data or settings changes; installing over 3.9.0 keeps your library and saved captures.
 
 ## Install
 
@@ -13,15 +15,15 @@ After updating, reload the extension once. If its ID changes to the pinned bkcap
 
 - [Install](https://uoink.app/install): helper and extension instructions.
 - [Latest release](https://github.com/ryanbiddy/uoink/releases/latest): installer and Claude Desktop .mcpb bundle.
-- [Windows installer](https://github.com/ryanbiddy/uoink/releases/download/v3.9.0/Uoink-Setup-3.9.0.exe): Uoink 3.9.0.
-- [3.9.0 release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.9.0): changes since the last public release, v3.7.0.
+- [Windows installer](https://github.com/ryanbiddy/uoink/releases/download/v3.9.1/Uoink-Setup-3.9.1.exe): Uoink 3.9.1.
+- [3.9.1 release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.9.1): changes since the last public release, v3.9.0.
 - [Changelog](https://uoink.app/changelog): dated release summaries.
 
 ## Capture and library
 
 YouTube: timestamped transcript, screenshots, top comments, channel context, metadata. Also X video and post text, podcast RSS/Atom feeds, web articles, and Reddit threads. Capture with the YouTube button, right-click, Alt+U, or your AI agent. Files are structured Markdown plus a JSON sidecar on your own disk, indexed in one local library.
 
-3.9.0 includes the previously unpublished Living Library work: clip search and evidence cards; standing capture for YouTube channels, YouTube playlists, and podcast RSS; MCP library search, item reads, resource templates and prompts; cited range export with speaker labels, chapters and provenance; and chapter navigation where chapters exist. Podcast transcripts enter the searchable corpus and interrupted jobs resume after restart. Feed audio stays off until Auto-ingest is enabled. Captures show toast notifications that can be muted and are suppressed during fullscreen use. Entity extraction is opt-in and off by default; the usage meter shows real Anthropic usage; the recall hook is hardened against prompt injection.
+3.9.0 introduced the previously unpublished Living Library work: clip search and evidence cards; standing capture for YouTube channels, YouTube playlists, and podcast RSS; MCP library search, item reads, resource templates and prompts; cited range export with speaker labels, chapters and provenance; and chapter navigation where chapters exist. Podcast transcripts enter the searchable corpus and interrupted jobs resume after restart. Feed audio stays off until Auto-ingest is enabled. Captures show toast notifications that can be muted and are suppressed during fullscreen use. Entity extraction is opt-in and off by default; the usage meter shows real Anthropic usage; the recall hook is hardened against prompt injection.
 
 The redesigned dashboard has Library search-or-paste, Reader, Activity with a five-step capture strip, and one Settings page that saves individual preferences automatically. The extension popup and setup provide capture and connection controls. Caption rate limits no longer fail an entire YouTube capture: local transcription can use an already-downloaded model, or the missing transcript stays labeled. Requests are paced and yt-dlp is newer. Waiting, failures and cancellation remain distinct; cancellation is refused once publication starts.
 

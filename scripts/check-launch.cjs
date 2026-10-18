@@ -1,9 +1,11 @@
 const { chromium } = require("playwright");
 const fs = require("node:fs/promises");
 const path = require("node:path");
+const os = require("node:os");
+const release = require("../content/release.json");
 
 (async () => {
-  const destination = path.resolve("docs/launch/screens");
+  const destination = path.join(os.tmpdir(), "uoink-launch", `v${release.version}`);
   await fs.mkdir(destination, { recursive: true });
   const browser = await chromium.launch({
     headless: true,
@@ -43,7 +45,7 @@ const path = require("node:path");
         }));
         const text = await page.locator("body").innerText();
         const result = { route, viewport, status: response.status(), consoleErrors, pageErrors, failedRequests, ...layout,
-          hasVersion: /v3\.8\.0/i.test(text), screenshots: [`${stem}.png`, `${stem}-full.png`] };
+          hasVersion: text.includes(`v${release.version}`), screenshots: [`${stem}.png`, `${stem}-full.png`] };
         results.push(result);
         console.log(JSON.stringify(result));
         await page.close();

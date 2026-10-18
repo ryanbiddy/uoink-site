@@ -882,7 +882,7 @@ export const features: Feature[] = [
       "Select your style mode and anchors.",
       "Click Generate to write the draft."
     ],
-    "behindScenes": "The helper formats a request with the source corpus text and sends it to the model. It directs the model to extract key ideas and write the draft. When Voice DNA checks are enabled, the helper runs a scan across the output, returning warnings in the UI if it spots banned slop patterns before you copy.",
+    "behindScenes": "The helper formats a request with the source corpus text and sends it to the model. It directs the model to extract key ideas and write the draft. When writing checks are enabled, the helper scans the output and returns canned-phrase warnings in the UI before you copy.",
     "mcpTools": [
       "write_tweet",
       "write_blog"
@@ -1161,7 +1161,7 @@ export const features: Feature[] = [
       "intelligence",
       "passes"
     ],
-    "whatItDoes": "Optional AI features use your own Anthropic key. Entity extraction is opt-in and off by default. In 3.9.0, the model-usage meter shows real usage when you add your key.",
+    "whatItDoes": "Optional AI features use your own Anthropic key. Entity extraction is opt-in and off by default. Since 3.9.0, the model-usage meter shows real usage when you add your key.",
     "gettingStarted": [
       "Open your Anthropic developer console.",
       "Generate a new API key.",
