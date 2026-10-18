@@ -96,7 +96,7 @@ function JsonLd({ page }: { page: SitePage }) {
       description: "Install the local helper, install the browser extension, then click Uoink on a video.",
       step: [
         { "@type": "HowToStep", name: "Download the helper", text: "Download the Windows installer from GitHub Releases." },
-        { "@type": "HowToStep", name: "Install the extension", text: "Sideload the extension from %LOCALAPPDATA%\\Uoink\\extension; the Chrome Web Store listing is pending." },
+        { "@type": "HowToStep", name: "Install the extension", text: "Sideload the extension from %LOCALAPPDATA%\\Uoink\\extension; the Chrome Web Store listing is pending. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible." },
         { "@type": "HowToStep", name: "Click Uoink", text: "Open a supported video page and click the Uoink button." },
       ],
     });

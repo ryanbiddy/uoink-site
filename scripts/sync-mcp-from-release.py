@@ -17,7 +17,8 @@ version = release["version"]
 ref = args.ref or release["mcpSourceRef"]
 checkout = args.checkout.resolve()
 git = ["git", "-c", f"safe.directory={checkout.as_posix()}", "-C", str(checkout)]
-commit = subprocess.check_output(git + ["show", "--no-patch", "--format=%H", ref],
+# rev-parse peels annotated tags (git show would print the tag header too).
+commit = subprocess.check_output(git + ["rev-parse", "--verify", f"{ref}^{{commit}}"],
                                  text=True, encoding="utf-8").strip()
 
 def source(path):

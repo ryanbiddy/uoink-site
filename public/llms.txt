@@ -7,7 +7,7 @@ Free, MIT-licensed. No account or Uoink-hosted corpus. Model dependencies can se
 
 ## Install
 
-Windows 10/11 only. No Mac build scheduled. Unsigned installer, about 390 MB; no admin rights needed. Windows SmartScreen will show a warning: More info → Run anyway. Installs to %LOCALAPPDATA%\Uoink. Sideload the browser extension from the install; Chrome Web Store listing pending.
+Windows 10/11 only. No Mac build scheduled. Unsigned installer, about 390 MB; no admin rights needed. Windows SmartScreen will show a warning: More info → Run anyway. Installs to %LOCALAPPDATA%\Uoink. Sideload the browser extension from the install; Chrome Web Store listing pending. Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested. Open chrome://extensions, enable Developer mode, click Load unpacked, and select %LOCALAPPDATA%\Uoink\extension. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.
 
 After updating, reload the extension once. If its ID changes to the pinned bkcapfidedhfcjpmjabeopfbcjcbmdmi, reapply extension preferences. Saved captures are unaffected.
 

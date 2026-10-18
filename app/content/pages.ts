@@ -77,7 +77,7 @@ const installFaq: FaqItem[] = [
   {
     question: "What browsers support the extension?",
     answer:
-      "The extension is Manifest V3 and targets Chromium browsers: Chrome, Edge, Brave, Vivaldi, Arc, and Opera GX. Since Chrome Web Store approval is pending, sideload the extension manually from the folder Uoink places on your machine.",
+      "The extension is Manifest V3 and is built and tested for Chrome. Other Chromium browsers such as Edge and Brave may work but are not tested. Since Chrome Web Store approval is pending, sideload the extension manually from the folder Uoink places on your machine.",
   },
   {
     question: "Why does Uoink need a desktop helper?",
@@ -284,7 +284,7 @@ get_evidence_card(video_id)</pre>
       </div>
       <ul class="doc-list">
         <li><p class="doc-meta"><b>Windows</b><span>live path</span></p><h3>Download the helper.</h3><p class="doc-ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p><a class="btn primary small" href="${DOWNLOAD_URL}">Download -></a></li>
-        <li><p class="doc-meta"><b>Extension</b><span>pending review</span></p><h3>Install the browser button.</h3><p class="doc-ver">Chrome / Edge / Brave / Vivaldi / Arc / Opera GX</p><p>Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at <code>%LOCALAPPDATA%\\Uoink\\extension</code>.</p><a class="arr-link" href="/install#extension">Install notes -></a></li>
+        <li><p class="doc-meta"><b>Extension</b><span>pending review</span></p><h3>Install the browser button.</h3><p class="doc-ver">Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested.</p><p>Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at <code>%LOCALAPPDATA%\\Uoink\\extension</code>. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.</p><a class="arr-link" href="/install#extension">Install notes -></a></li>
         <li><p class="doc-meta"><b>Mac</b><span>${PRODUCT_STATUS.mac.label}</span></p><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="doc-ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p><a class="arr-link" href="/install#mac">Mac status -></a></li>
       </ul>
     </div>
@@ -321,7 +321,7 @@ get_evidence_card(video_id)</pre>
         <div class="brand-strip" aria-label="Install surfaces">
           <!-- GitHub logo source: https://github.com/logos; license/usage confirmation: official GitHub mark, unmodified integration callout under GitHub logo guidelines. -->
           <span class="logo-chip logo-mark"><img src="/assets/brand-logos/github.svg" alt="GitHub" width="22" height="22" loading="lazy" decoding="async" /><span>GitHub Releases</span></span>
-          <span>Chromium browsers</span>
+          <span>Chrome (tested)</span>
           <span class="cws-chip">Chrome Web Store pending</span>
         </div>
       </div>
@@ -329,7 +329,7 @@ get_evidence_card(video_id)</pre>
         <p class="facts-head"><span>install steps</span><span>sideload flow</span></p>
         <ol class="facts-list">
           <li><b>1. Run helper installer</b><span>Places local helper under %LOCALAPPDATA%\\Uoink</span></li>
-          <li><b>2. Sideload extension</b><span>Load unpacked folder from the helper directory</span></li>
+          <li><b>2. Sideload extension</b><span>Load unpacked folder from the helper directory. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.</span></li>
           <li><b>3. Start capturing</b><span>YouTube and Reddit threads save directly to disk</span></li>
         </ol>
       </aside>
@@ -357,9 +357,10 @@ get_evidence_card(video_id)</pre>
           <h3>Load the browser extension.</h3>
           <p>We're waiting on Web Store approval, so you'll need to load the extension folder manually:</p>
           <ol class="steps">
-            <li>Open your browser extensions page: <code>chrome://extensions</code> (Chrome), <code>edge://extensions</code> (Edge), or <code>brave://extensions</code> (Brave).</li>
+            <li>Open Chrome's extensions page: <code>chrome://extensions</code>.</li>
             <li>Enable <strong>Developer mode</strong> in the top right.</li>
             <li>Click <strong>Load unpacked</strong> and select the <code>%LOCALAPPDATA%\\Uoink\\extension</code> directory.</li>
+            <li>Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.</li>
           </ol>
         </li>
         <li>
@@ -386,9 +387,9 @@ get_evidence_card(video_id)</pre>
         <li id="extension">
           <p class="doc-meta"><b>Extension</b><span>pending review</span></p>
           <h3>Browser button.</h3>
-          <p class="doc-ver">Chrome / Edge / Brave / Vivaldi / Arc / Opera GX</p>
+          <p class="doc-ver">Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested.</p>
           <p>The extension adds capture buttons directly to supported web pages. It communicates locally with the helper and skips broad history permissions.</p>
-          <p>Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at <code>%LOCALAPPDATA%\\Uoink\\extension</code>.</p>
+          <p>Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at <code>%LOCALAPPDATA%\\Uoink\\extension</code>. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.</p>
           <p>After updating the helper, reload the extension once from your browser’s extensions page. If its ID changes to the pinned <code>bkcapfidedhfcjpmjabeopfbcjcbmdmi</code>, reapply your extension preferences. Your saved captures are unaffected.</p>
           <p class="footnote">Web Store review pending</p>
         </li>
