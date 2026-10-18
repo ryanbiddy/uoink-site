@@ -121,7 +121,7 @@ export default function Page() {
                 <span className="num">03</span>
                 <span className="eyebrow">write</span>
                 <h3>Draft from the source card.</h3>
-                <p>Writing Studio pulls the saved material, checks Voice DNA, and keeps citations close.</p>
+                <p>Writing Studio pulls the saved material, shows canned-phrase warnings, and keeps citations close.</p>
               </li>
               <li>
                 <span className="num">04</span>

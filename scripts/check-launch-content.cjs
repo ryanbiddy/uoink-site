@@ -45,17 +45,18 @@ for (const file of ["public/.well-known/mcp.json", "public/.well-known/mcp/serve
 for (const feature of features) {
   for (const name of feature.mcpTools) assert(mcpTools.some(([tool]) => tool === name), `${feature.slug}: unknown tool ${name}`);
 }
-for (const text of [`New in ${release.version}: Living Library`, "Clip search + evidence cards", "Standing capture", "Library reach over MCP", "Cited range export", "Chapter navigation", "Five research playbooks", "ScrapeCreators", "25-credit daily cap", "Caption rate limits", "five-step strip"]) assert(pages.home.html.includes(text), text);
+for (const text of ["Living Library and research", "Clip search + evidence cards", "Standing capture", "Library reach over MCP", "Cited range export", "Chapter navigation", "Five research playbooks", "ScrapeCreators", "25-credit daily cap", "Caption rate limits", "five-step strip"]) assert(pages.home.html.includes(text), text);
 for (const text of ["unsigned", "SmartScreen will show a warning", "More info → Run anyway", "390 MB", "No admin rights needed", "reload the extension once", "bkcapfidedhfcjpmjabeopfbcjcbmdmi", "reapply your extension preferences", "saved captures are unaffected"]) assert(pages.install.html.includes(text), text);
 for (const text of ["Connected agents can start paid Anthropic calls", "even when automatic analysis is off", "ScrapeCreators", "credit confirmation", "separately enabled agent discovery", "typed handle, channel ID, or query", "request identity", "normalized candidates", "credit accounting", "partial and failed runs", "daily purge", "older than 90 days", "up to 30 days old"]) assert(pages.privacy.html.includes(text), text);
 const versions = [...pages.changelog.html.matchAll(/<h2>v(\d+\.\d+\.\d+)/g)].map(match => match[1]);
-assert.deepEqual(versions, [release.version, "3.7.0", "3.6.0", "3.5.0", "3.4.1", "3.4.0"]);
-// No release date is supplied for the new public release. Keep the five
-// published historical dates instead of carrying over the unpublished date.
-assert.deepEqual([...pages.changelog.html.matchAll(/<time datetime="([^"]+)"/g)].map(match => match[1]), ["2026-07-24", "2026-07-08", "2026-07-08", "2026-07-07", "2026-07-07"]);
+assert.deepEqual(versions, [release.version, "3.9.0", "3.7.0", "3.6.0", "3.5.0", "3.4.1", "3.4.0"]);
+// The patch date comes from the product changelog. Preserve the undated
+// 3.9.0 entry and the five earlier published dates.
+assert.deepEqual([...pages.changelog.html.matchAll(/<time datetime="([^"]+)"/g)].map(match => match[1]), ["2026-10-18", "2026-07-24", "2026-07-08", "2026-07-08", "2026-07-07", "2026-07-07"]);
+for (const text of ["canned-phrase warnings", "Voice DNA remains the voice spec", "reliability and test fixes", "no data or settings changes", "Installing over 3.9.0 keeps your library and saved captures"]) assert(pages.changelog.html.includes(text), text);
 for (const text of ["First public release since v3.7.0", "3.8.x work was not published separately", "five steps", "cancellation request is refused once publication has started", "inside yt-dlp and the browser renderer", "_exports"]) assert(pages.changelog.html.includes(text), text);
 for (const file of ["public/llms.txt", "public/llms-full.txt"]) {
   const text = fs.readFileSync(file, "utf8");
   for (const fact of [VERSION, `${release.stdioToolCount} tools over stdio`, `${release.httpToolCount} in the HTTP registry`, DOWNLOAD_URL, "No Mac build scheduled", "unsigned", "off by default", "five local research playbooks", "25-credit daily cap", "older than 90 days", "reload the extension once"]) assert(text.toLowerCase().includes(fact.toLowerCase()), `${file}: ${fact}`);
 }
-console.log(`PASS: ${VERSION}, ${MCP_TOOL_COUNT} registry schemas, ${MCP_STDIO_TOOL_COUNT} stdio names, discovery cards, config, ${features.length} feature tool lists, Living Library, research, privacy, installer, current release plus five dated releases, and crawler text.`);
+console.log(`PASS: ${VERSION}, ${MCP_TOOL_COUNT} registry schemas, ${MCP_STDIO_TOOL_COUNT} stdio names, discovery cards, config, ${features.length} feature tool lists, Living Library, research, privacy, installer, patch plus six earlier releases, and crawler text.`);

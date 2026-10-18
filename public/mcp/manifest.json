@@ -1,9 +1,9 @@
 {
   "schema_version": "3.2",
-  "version": "3.9.0",
+  "version": "3.9.1",
   "name": "Uoink MCP Tool Manifest",
   "description": "Local HTTP registry; tools marked stdio also appear on the everyday stdio surface.",
-  "source": "ryanbiddy/uoink@f945751fca795a4aecc784fc697dbee867b62ce7:uoink_mcp_tools.py",
+  "source": "ryanbiddy/uoink@d2f093e886098fa99c50628e6c81eb2e27a5cc92:uoink_mcp_tools.py",
   "generated": "2026-10-18",
   "tool_count": 91,
   "stdio_tool_count": 35,
@@ -3343,7 +3343,7 @@
     },
     {
       "name": "write_tweet",
-      "description": "Two-phase tweet/thread generator. Phase 1 (no `body`) returns grounding (source yoink + creator credit + style anchors + Voice DNA prompt). Phase 2 (`body` present) persists + scans for Voice DNA violations + returns structured warnings (soft warn -- NEVER auto-blocks). Creator credit is required in the body.",
+      "description": "Two-phase tweet/thread generator. Phase 1 (no `body`) returns grounding (source yoink + creator credit + style anchors + Voice DNA prompt). Phase 2 (`body` present) persists + scans for canned phrases + returns structured warnings (soft warn -- NEVER auto-blocks). Creator credit is required in the body.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3437,7 +3437,7 @@
     },
     {
       "name": "write_blog",
-      "description": "Two-phase blog generator. Same shape as write_tweet but Phase 2 accepts title, dek, tags, and expects markdown body with a Source section. Soft-warn Voice DNA scan; creator credit non-suppressible.",
+      "description": "Two-phase blog generator. Same shape as write_tweet but Phase 2 accepts title, dek, tags, and expects markdown body with a Source section. Soft-warn canned-phrase scan; creator credit non-suppressible.",
       "inputSchema": {
         "type": "object",
         "properties": {

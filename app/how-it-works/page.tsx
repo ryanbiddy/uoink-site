@@ -40,7 +40,7 @@ const steps = [
   {
     label: "Iterate",
     body:
-      "Writing Studio pulls from the corpus, checks Voice DNA, keeps creator credit visible, and lets you revise from evidence instead of memory.",
+      "Writing Studio pulls from the corpus, shows canned-phrase warnings, keeps creator credit visible, and lets you revise from evidence instead of memory.",
   },
   {
     label: "Distribute",
