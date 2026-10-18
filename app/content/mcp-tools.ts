@@ -1,5 +1,5 @@
-// Generated for Uoink 3.9.1 from ryanbiddy/uoink release/3.9.1 on 2026-10-18.
-// Source commit: dec72ee317ad8113319c4733043116ffc84f5314
+// Generated for Uoink 3.9.1 from ryanbiddy/uoink v3.9.1 on 2026-10-18.
+// Source commit: d2f093e886098fa99c50628e6c81eb2e27a5cc92
 // HTTP: TOOL_REGISTRY in uoink_mcp_tools.py; stdio: @mcp.tool in uoink_mcp.py.
 // Regenerate with: python scripts/sync-mcp-from-release.py <product-checkout> [--ref <git-ref>]
 

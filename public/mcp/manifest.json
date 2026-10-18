@@ -3,7 +3,7 @@
   "version": "3.9.1",
   "name": "Uoink MCP Tool Manifest",
   "description": "Local HTTP registry; tools marked stdio also appear on the everyday stdio surface.",
-  "source": "ryanbiddy/uoink@dec72ee317ad8113319c4733043116ffc84f5314:uoink_mcp_tools.py",
+  "source": "ryanbiddy/uoink@d2f093e886098fa99c50628e6c81eb2e27a5cc92:uoink_mcp_tools.py",
   "generated": "2026-10-18",
   "tool_count": 91,
   "stdio_tool_count": 35,

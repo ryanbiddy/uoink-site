@@ -32,7 +32,7 @@ node scripts/check-launch-content.cjs
 
 The sync script reads committed files with `git show`, parses Python ASTs without importing product code, and checks stdio names against `.mcpb/manifest.json`. It defaults to the product ref in `content/release.json`; `--ref <git-ref>` selects another ref. It writes only the site's tool catalog and manifest.
 
-For 3.9.1, regenerate from `release/3.9.1` with `--ref release/3.9.1` until the `v3.9.1` tag is created, then rerun against the tag. The catalog has 35 stdio tools and 91 HTTP tools. The public changelog keeps the 3.9.1 patch separate from 3.9.0, which includes the unpublished 3.8.x work since v3.7.0. Earlier public release dates are preserved; no 3.9.0 publication date is asserted.
+For 3.9.1, the catalog is regenerated from the `v3.9.1` tag (the default `mcpSourceRef`). The catalog has 35 stdio tools and 91 HTTP tools. The public changelog keeps the 3.9.1 patch separate from 3.9.0, which includes the unpublished 3.8.x work since v3.7.0. Earlier public release dates are preserved; no 3.9.0 publication date is asserted.
 
 ## Deploy
 
