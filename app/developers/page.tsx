@@ -1,3 +1,4 @@
+import { AGENT_SETUP_HTML } from "../content/agent-setup";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DocRule } from "../components/Doc";
@@ -10,9 +11,9 @@ const page: SitePage = {
   id: "agents",
   route: "/developers",
   mode: "mode-light",
-  title: "Uoink for Developers: Local MCP Tools for Source Research",
+  title: "Use Uoink from Any AI Agent: MCP, Skill, and CLI",
   description:
-    "Connect Uoink to Claude Desktop, Claude Code, and Cursor with local MCP tools for source capture and corpus search.",
+    "Use MCP, the Uoink skill, or the uoink command to search saved sources, cite evidence, and capture from a local agent.",
   keywords: [
     "mcp source research",
     "mcp youtube server",
@@ -69,15 +70,15 @@ export default function Page() {
             <div className="copy">
               <span className="eyebrow">for developers</span>
               <h1 className="display-xl">
-                Give your agent a local <em>source layer.</em>
+                Use Uoink from any <em>AI agent.</em>
               </h1>
               <p className="lede">
-                Uoink gives Claude Desktop, Claude Code, and Cursor every tool to capture, search, cite, and write from your local library: {MCP_STDIO_TOOL_COUNT} tools over stdio and {MCP_TOOL_COUNT} in the HTTP registry.
+                Connect over MCP, install the Uoink skill, or use the uoink command to search and cite your local library. MCP exposes {MCP_STDIO_TOOL_COUNT} tools over stdio and {MCP_TOOL_COUNT} in the HTTP registry.
               </p>
               <p>Official MCP registry: <code>io.github.ryanbiddy/uoink</code>. Clients and directories that read the registry can find Uoink.</p>
               <div className="ctas">
                 <a className="btn primary large" href="#configs">
-                  Copy config
+                  Set up your agent
                 </a>
                 <Link className="btn ghost large" href="/mcp">
                   Raw manifest
@@ -126,17 +127,18 @@ export default function Page() {
         <div className="container">
           <div className="doc">
             <div className="doc-head">
-              <span className="eyebrow">client config</span>
+              <span className="eyebrow">agent setup</span>
               <h2 className="display-l">
                 Stdio and HTTP <em>transports.</em>
               </h2>
               <p className="lede">
-                Tested with Claude Desktop, Claude Code, and Cursor. Install Uoink before connecting your client.
+                Install Uoink before connecting your client. Choose a setup below, then check the testing notes for your agent.
               </p>
               <p className="body-l">
                 Stdio connects as a local subprocess with all {MCP_STDIO_TOOL_COUNT} tools. It works without the Uoink helper running. Start Uoink from the Start menu for the dashboard, browser button, and monitored-playlist polling. HTTP exposes the same {MCP_TOOL_COUNT} tools through the running helper.
               </p>
             </div>
+            <div className="docs-main" dangerouslySetInnerHTML={{ __html: AGENT_SETUP_HTML }} />
             <div className="callout">
               <h3>HTTP JSON-RPC Transport Details</h3>
               <p><strong>Endpoint URL:</strong> <code>http://localhost:5179/mcp/v1</code></p>
