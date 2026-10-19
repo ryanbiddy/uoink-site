@@ -1,13 +1,15 @@
-<!-- updated: 2026-10-19 / uoink v3.9.3 -->
-# Uoink 3.9.3: MCP registry listing and HTTP tool fix
+<!-- updated: 2026-10-19 / uoink v3.10.0 -->
+# Uoink 3.10.0: CLI, skill, and agent setup
 
 > A local library for the videos and podcasts you study, that any AI you use can search and cite.
 
 Free, MIT-licensed. No account or Uoink-hosted corpus. Model dependencies can send telemetry. Made by Ryan Biddy (@replayryan), a personal side project.
 
-Uoink is listed in the official MCP registry as io.github.ryanbiddy/uoink, so clients and directories that read the registry can find it. HTTP MCP now uses the same flattened tool schemas as stdio, so HTTP clients no longer drop Uoink's tools because of their schema shape. The server still checks the exact schema for every call. Activity reads are faster on large libraries: median time fell from 461 to 286 ms at 10,000 items in local runs.
+Uoink 3.10.0 adds the uoink command for local agents, a portable Uoink skill, the Claude Code plugin marketplace at ryanbiddy/uoink-agent-kit, and setup recipes for 38 clients and integrations. Start with `uoink status` in a new terminal after installation.
 
-Every Uoink tool is available through the standard connection used by Claude Desktop (.mcpb), Claude Code, and Cursor: 91 tools over stdio and 91 in the HTTP registry. Agents can capture pages, X posts, Reddit threads, notes, and images; use writing, script, and workspace tools; and work with sources and the Library queue. UOINK_MCP_TOOLSET=core keeps the previous 35-tool set for clients that cap tool counts. Full mode keeps those tools first. Consent gates are unchanged. No data or settings changes; installing over 3.9.2 keeps your library and saved captures.
+Uoink is listed in the official MCP registry as io.github.ryanbiddy/uoink. Both MCP transports advertise flattened tool schemas; the server still checks the exact schema for every call.
+
+Every Uoink tool is available through the standard connection used by Claude Desktop (.mcpb), Claude Code, and Cursor: 91 tools over stdio and 91 in the HTTP registry. Agents can capture pages, X posts, Reddit threads, notes, and images; use writing, script, and workspace tools; and work with sources and the Library queue. UOINK_MCP_TOOLSET=core keeps the previous 35-tool set for clients that cap tool counts. Full mode keeps those tools first. Consent gates are unchanged. No data or settings changes besides the optional PATH entry. No new index or migration. Installing over the previous release keeps your library and saved captures.
 
 ## Install
 
@@ -17,8 +19,8 @@ After updating, reload the extension once. If its ID changes to the pinned bkcap
 
 - [Install](https://uoink.app/install): helper and extension instructions.
 - [Latest release](https://github.com/ryanbiddy/uoink/releases/latest): installer and Claude Desktop .mcpb bundle.
-- [Windows installer](https://github.com/ryanbiddy/uoink/releases/download/v3.9.3/Uoink-Setup-3.9.3.exe): Uoink 3.9.3.
-- [3.9.3 release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.9.3): changes since the last public release, v3.9.2.
+- [Windows installer](https://github.com/ryanbiddy/uoink/releases/download/v3.10.0/Uoink-Setup-3.10.0.exe): Uoink 3.10.0.
+- [3.10.0 release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.10.0): CLI, skill, plugin marketplace, and agent setup.
 - [Changelog](https://uoink.app/changelog): dated release summaries.
 
 ## Capture and library
@@ -41,9 +43,9 @@ The library does not organize, file, or re-shelve itself. The Librarian only pro
 
 ## AI access
 
-Clipboard paste with transcript and frames works with ChatGPT and claude.ai. Uoink does not connect to the ChatGPT app over MCP. Local MCP exposes 91 tools over stdio and 91 in the HTTP registry, counted from the release source. Tested clients: Claude Desktop, Claude Code, and Cursor. Cline and Continue are standard-stdio compatibility paths, not individually smoke-tested. OpenAPI 3.1 bridges local agents that do not speak MCP.
+Clipboard paste with transcript and frames works with ChatGPT and claude.ai. Uoink does not connect to the ChatGPT app over MCP. Local MCP exposes 91 tools over stdio and 91 in the HTTP registry, counted from the release source. Previously tested MCP clients include Claude Desktop and Cursor. The 3.10.0 testing notes below cover Claude Code, Codex CLI, the CLI and skill, and the plugin's limits. OpenAPI 3.1 bridges local agents that do not speak MCP.
 
-- [Developers](https://uoink.app/developers): README config, .mcpb setup and tool catalog.
+- [Developers](https://uoink.app/developers): MCP clients, portable skill, plugin marketplace, CLI, and testing notes.
 - [MCP](https://uoink.app/mcp): transport details and tools.
 - [MCP manifest](https://uoink.app/mcp/manifest.json): all 91 tools, schemas and stdio availability.
 - [Feature manifest](https://uoink.app/api/features-manifest): feature URLs and summaries.
@@ -73,12 +75,13 @@ ScrapeCreators receives the typed handle, channel ID or query only after discove
 - [Field notes](https://uoink.app/blog): articles.
 
 ## Set it up with an agent (Windows 10/11)
-Windows 10/11 only. No Mac build scheduled. Uoink v3.9.3 is free and MIT-licensed; the unsigned installer is about 390 MB. No admin rights needed.
+Windows 10/11 only. No Mac build scheduled. Uoink v3.10.0 is free and MIT-licensed; the unsigned installer is about 390 MB. No admin rights needed.
+[Agent installation steps](https://github.com/ryanbiddy/uoink/blob/main/llms-install.md): download, verify SHA-256, install, and connect.
 ### An agent can run
-1. Download [Uoink-Setup-3.9.3.exe](https://github.com/ryanbiddy/uoink/releases/download/v3.9.3/Uoink-Setup-3.9.3.exe) to `$env:TEMP\Uoink-Setup-3.9.3.exe`.
-2. Before running it, compare `Get-FileHash -Algorithm SHA256 "$env:TEMP\Uoink-Setup-3.9.3.exe"` with the installer entry in [SHA256SUMS.txt](https://github.com/ryanbiddy/uoink/releases/download/v3.9.3/SHA256SUMS.txt).
-3. Install per user: `Start-Process -Wait -FilePath "$env:TEMP\Uoink-Setup-3.9.3.exe" -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART'`. It installs to `%LOCALAPPDATA%\Uoink` and exits 0 in about a minute. No data or settings changes; installing over 3.9.2 keeps the library and saved captures.
-4. Connect a client below. Silent install does not start Uoink; MCP works without it running. For the dashboard, browser button, and monitored-playlist polling, start "Uoink" from the Start menu or run `& "$env:LOCALAPPDATA\Uoink\python\pythonw.exe" "$env:LOCALAPPDATA\Uoink\server.py"` in PowerShell.
+1. Download [Uoink-Setup-3.10.0.exe](https://github.com/ryanbiddy/uoink/releases/download/v3.10.0/Uoink-Setup-3.10.0.exe) to `$env:TEMP\Uoink-Setup-3.10.0.exe`.
+2. Before running it, compare `Get-FileHash -Algorithm SHA256 "$env:TEMP\Uoink-Setup-3.10.0.exe"` with the installer entry in [SHA256SUMS.txt](https://github.com/ryanbiddy/uoink/releases/download/v3.10.0/SHA256SUMS.txt).
+3. Install per user: `Start-Process -Wait -FilePath "$env:TEMP\Uoink-Setup-3.10.0.exe" -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART'`. It installs to `%LOCALAPPDATA%\Uoink` with Add the uoink command to PATH for AI agents checked by default. No data or settings changes besides the optional PATH entry; no new index or migration. Installing over the previous release keeps the library and saved captures.
+4. Open a new terminal, run `uoink status`, then connect a client below. Silent install does not start Uoink; MCP works without it running. For the dashboard, browser button, and monitored-playlist polling, start "Uoink" from the Start menu or run `& "$env:LOCALAPPDATA\Uoink\python\pythonw.exe" "$env:LOCALAPPDATA\Uoink\server.py"` in PowerShell.
 ### The person must do
 - Allow the unsigned installer if Windows asks. For SmartScreen, choose More info, then Run anyway.
 - For the optional browser button: open chrome://extensions, enable Developer mode, click Load unpacked, and select %LOCALAPPDATA%\Uoink\extension. An agent can capture without the button.
@@ -88,8 +91,14 @@ Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink
 
 ## Connect your AI
 Official MCP registry: io.github.ryanbiddy/uoink
+- Setup recipes: `uoink connect --list` prints setup choices for 38 clients and integrations. Run `uoink connect <client>` for config or instructions and their destination; it does not edit client settings. Run the printed Claude Code command in PowerShell; merge other clients' entries into the location shown, then restart their MCP connection.
+- Codex: `uoink connect codex` prints tables for `~/.codex/config.toml`. VS Code: `uoink connect vscode` prints config for `.vscode/mcp.json`. The dashboard's Add to Cursor / Add to VS Code buttons open the client's review flow; acceptance of these buttons is not yet tested.
+- Uoink skill for Claude Code, Codex, pi, Hermes Agent, and OpenClaw: `uoink skill path` locates it; `uoink skill install --to <dir>` copies it with references into a uoink subfolder of the parent skills directory. Restart the agent or reload its skills.
+- Claude Code plugin for a default install: `claude plugin marketplace add ryanbiddy/uoink-agent-kit`, then `claude plugin install uoink@uoink`. Restart Claude Code and enable the plugin MCP server when prompted. Custom installs use `uoink connect claude-code` plus the standalone skill; avoid duplicate MCP entries.
+- CLI examples: `uoink search "working memory" --limit 5`, `uoink recent --limit 10`, `uoink note "A useful thought" --title "Research note"`. Agents can search sources, read evidence, capture URLs, save notes, and call registry tools. Local reads work without the helper running; capture and paid tools keep their existing gates. The agent must be able to execute Uoink on the Windows machine holding the library.
+Tested on a clean, isolated install: Claude Code 2.1.302 over MCP (all 91 tools listed; a note saved and listed back); Claude Code with the skill and CLI only (skill loaded; uoink note and uoink recent ran); Codex CLI 0.153.4 over MCP (a note saved and listed back); CLI status, note, recent, and connect. The Claude Code plugin loads its skill and starts its MCP server; its tool calls were not run end to end because the test install is isolated from a normal one. Not yet tested: Gemini CLI and pi (no sign-in on the test machine) and every other uoink connect recipe. Claude Desktop and Cursor retain their earlier MCP testing status.
 
-Claude Desktop: download and open [uoink-3.9.3.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.9.3/uoink-3.9.3.mcpb). Desktop installs it as an extension and asks for your Uoink folder (%LOCALAPPDATA%\Uoink). Enter the full path; Desktop does not expand %LOCALAPPDATA%. After updating, reinstall the bundle and restart Desktop.
+Claude Desktop: download and open [uoink-3.10.0.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.10.0/uoink-3.10.0.mcpb). Desktop installs it as an extension and asks for your Uoink folder (%LOCALAPPDATA%\Uoink). Enter the full path; Desktop does not expand %LOCALAPPDATA%. After updating, reinstall the bundle and restart Desktop.
 
 Claude Code (verified with 2.1.302, including all tools listed, a note saved, and recent captures read): run this in PowerShell with absolute paths:
 
@@ -118,6 +127,22 @@ Cursor and other stdio clients use this config. Replace %LOCALAPPDATA% in both p
 
 Cursor is reported to send only the first 40 tools to its agent. Add `"UOINK_MCP_TOOLSET": "core"` to the server env to keep the previous 35-tool set and stay under that cap. Omit it for the full toolset, which is the default. ChatGPT and claude.ai use copy and paste only; Uoink does not connect to the ChatGPT app over MCP.
 
+## Skill directories
+
+Run `uoink skill install --to <dir>` with your agent's parent skills directory. In PowerShell:
+- Claude Code: `uoink skill install --to "$env:USERPROFILE\.claude\skills"`.
+- Codex: `uoink skill install --to "$env:USERPROFILE\.agents\skills"` (older setups may use `~/.codex/skills`).
+- pi: `uoink skill install --to "$env:USERPROFILE\.pi\agent\skills"`.
+- Hermes Agent: `uoink skill install --to "$env:USERPROFILE\.hermes\skills"`.
+- OpenClaw: `uoink skill install --to "$env:USERPROFILE\.openclaw\skills"`.
+
+The copy includes references. An existing copy needs `--force` to overwrite. Restart the agent or reload its skills. A skill copied into a remote environment does not expose this PC's library.
+
+## Release checksums
+
+- Uoink-Setup-3.10.0.exe: 389,901,916 bytes (about 390 MB). SHA-256: `9e024a31ea890f061ac3a43c97672c2b721b777089766d09156091de8f6e983b`.
+- uoink-3.10.0.mcpb SHA-256: `3c2048c6ec78472a923a0852f0cb83c1984ee7e75fb2fbfa7a484d69aa41c69b`.
+
 ## Local HTTP and OpenAPI
 
 HTTP JSON-RPC: http://127.0.0.1:5179/mcp/v1. Include X-Uoink-Token, read from %LOCALAPPDATA%\Uoink\token.txt.
@@ -129,4 +154,4 @@ Watch RSS/Atom feeds. Per-feed auto-ingest is optional: when enabled, new episod
 
 ## Tool inventory
 
-Source: v3.9.3, commit 8a95129821c827797ded0550e9ddda1ce95e9e06. The shared TOOL_REGISTRY and default stdio inventory expose 91 tools over stdio and 91 in the HTTP registry, checked against .mcpb/manifest.json. Tool names, descriptions, HTTP registry schemas, and transport labels are in https://uoink.app/mcp/manifest.json. Both HTTP and stdio advertise the same flattened top-level schema variants for client compatibility; handlers still validate the exact registry schema.
+Source: v3.10.0, commit 93ab34151715a423dc4950f5c5b3b56563d3c737. The shared TOOL_REGISTRY and default stdio inventory expose 91 tools over stdio and 91 in the HTTP registry, checked against .mcpb/manifest.json. Tool names, descriptions, HTTP registry schemas, and transport labels are in https://uoink.app/mcp/manifest.json. Both HTTP and stdio advertise the same flattened top-level schema variants for client compatibility; handlers still validate the exact registry schema.

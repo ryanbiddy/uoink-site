@@ -1,8 +1,8 @@
 {
   "name": "io.github.ryanbiddy/uoink",
   "display_name": "Uoink",
-  "description": "Uoink keeps videos, podcasts, and articles on your disk for AI search and citations. Claude Desktop, Claude Code, and Cursor connect over MCP; ChatGPT and claude.ai use copy and paste.",
-  "version": "3.9.3",
+  "description": "Uoink keeps videos, podcasts, and articles on your disk for AI search and citations. Claude Desktop, Claude Code, Cursor, and Codex CLI connect over MCP; ChatGPT and claude.ai use copy and paste.",
+  "version": "3.10.0",
   "homepage": "https://uoink.app",
   "documentation": "https://uoink.app/developers",
   "repository": {
@@ -16,7 +16,7 @@
   },
   "install": {
     "windows": "https://uoink.app/install",
-    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/download/v3.9.3/uoink-3.9.3.mcpb",
+    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/download/v3.10.0/uoink-3.10.0.mcpb",
     "notes": "Unsigned installer, about 390 MB; no admin rights needed. Windows SmartScreen: More info → Run anyway. Then open the .mcpb bundle for one-click Claude Desktop setup, or copy the setup page’s stdio config."
   },
   "transports": [
@@ -29,7 +29,8 @@
       "tested_clients": [
         "Claude Desktop",
         "Claude Code",
-        "Cursor"
+        "Cursor",
+        "Codex CLI"
       ],
       "note": "Every tool is available over stdio without the helper running. Use absolute paths; Claude Desktop does not expand %LOCALAPPDATA%. Cursor can use UOINK_MCP_TOOLSET=core for the previous 35-tool set under its reported 40-tool cap. Cline and Continue were not individually smoke-tested.",
       "env": {

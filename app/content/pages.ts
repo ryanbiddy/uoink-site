@@ -1,3 +1,4 @@
+import { AGENT_SETUP_HTML } from "./agent-setup";
 import { MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT, mcpTools } from "./mcp-tools";
 import { CLAUDE_CODE_COMMAND, MCP_CURSOR_CONFIG, MCP_STDIO_CONFIG } from "./mcp-config";
 import { PRODUCT_STATUS } from "./product-status";
@@ -380,9 +381,9 @@ get_evidence_card(video_id)</pre>
       <ul class="doc-list">
         <li id="windows">
           <p class="doc-meta"><b class="platform-label">${WINDOWS_MARK}Windows</b><span>now</span></p>
-          <h3>Desktop helper.</h3>
+          <h3>Desktop helper.</h3><p>Leave <strong>Add the uoink command to PATH for AI agents</strong> checked to use the command in new terminals. After installing, open a new terminal and run <code>uoink status</code>. See <a href="/developers">agent setup</a> or the <a href="https://github.com/ryanbiddy/uoink/blob/main/llms-install.md">agent installation steps</a>.</p>
           <p class="doc-ver">Windows 10/11 / release page</p>
-          <p>The helper bundles Python, yt-dlp, ffmpeg, SQLite, and the local MCP server. It runs in user space and exposes the loopback server on port 5179.</p>
+          <p>The helper bundles Python, yt-dlp, ffmpeg, SQLite, the local MCP server, and the uoink command. It runs in user space and exposes the loopback server on port 5179.</p>
           <a class="btn primary small with-logo" href="${RELEASE_URL}">${WINDOWS_MARK}Open release -></a>
         </li>
         <li id="extension">
@@ -587,8 +588,9 @@ tools:
 install:
   windows: ${CANONICAL_URL}/install#windows
 platform: Windows 10/11 only. No Mac build scheduled.</pre>
+      ${AGENT_SETUP_HTML}
       <h2>Stdio setup</h2>
-      <p>Tested with Claude Desktop, Claude Code, and Cursor. Download and open <a href="${GITHUB_URL}/releases/download/${VERSION}/uoink-${VERSION_NUMBER}.mcpb">uoink-${VERSION_NUMBER}.mcpb</a> for one-click Claude Desktop setup. Enter your full Uoink folder path when asked. After updating, reinstall the bundle and restart Desktop.</p>
+      <p>For Claude Desktop, download and open <a href="${GITHUB_URL}/releases/download/${VERSION}/uoink-${VERSION_NUMBER}.mcpb">uoink-${VERSION_NUMBER}.mcpb</a> for one-click Claude Desktop setup. Enter your full Uoink folder path when asked. After updating, reinstall the bundle and restart Desktop.</p>
       <p>Stdio works without the Uoink helper running. Start Uoink from the Start menu for the dashboard, browser button, and monitored-playlist polling.</p>
       <h3>Claude Code</h3>
       <p>Run this in PowerShell to use absolute paths. Verified with Claude Code 2.1.302:</p>
@@ -686,8 +688,22 @@ ${DOC_RULE}
       `Read Uoink release notes from 3.4 through ${VERSION_NUMBER}, including Living Library and research playbooks.`,
     keywords: ["uoink changelog", "uoink release notes", "uoink updates", "universal video uoink changelog"],
     html: `
-<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} adds the official MCP registry listing, fixes HTTP tool compatibility, and speeds up Activity reads on large libraries. Earlier releases are listed below, with dates from the product changelog.</p>
-<h2>${VERSION}: MCP registry listing and HTTP tool fix</h2><p class="meta"><time datetime="2026-10-19">2026-10-19</time></p><p>Uoink is now listed in the official MCP registry as <code>io.github.ryanbiddy/uoink</code>. Clients and directories that read the registry can find it.</p>
+<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} adds the uoink command, a portable skill, the Claude Code plugin marketplace, and setup recipes for 38 clients and integrations. Earlier releases are listed below, with dates from the product changelog.</p>
+<h2>${VERSION}: Use Uoink from any AI agent</h2><p class="meta"><time datetime="2026-10-19">2026-10-19</time></p>
+<p>The <code>uoink</code> command lets agents search saved sources, read evidence, capture URLs, save notes, and call registry tools from a shell:</p>
+<pre class="code-block">uoink search "working memory" --limit 5
+uoink recent --limit 10
+uoink note "A useful thought" --title "Research note"</pre>
+<p>Local reads work without the helper running. Capture and paid tools keep their existing gates. The installer leaves <strong>Add the uoink command to PATH for AI agents</strong> checked by default. Open a new terminal after installing, then run <code>uoink status</code>.</p>
+<p>The portable Uoink skill covers Claude Code, Codex, pi, Hermes Agent, and OpenClaw. Find it with <code>uoink skill path</code> or copy it with its references using <code>uoink skill install --to &lt;dir&gt;</code>. The Claude Code plugin marketplace bundles the skill and MCP connection for a default install:</p>
+<pre class="code-block">claude plugin marketplace add ryanbiddy/uoink-agent-kit
+claude plugin install uoink@uoink</pre>
+<p><code>uoink connect --list</code> lists setup recipes for 38 clients and integrations. Run <code>uoink connect &lt;client&gt;</code> for config or instructions and their destination. It does not edit client settings. The dashboard's <strong>Add to Cursor</strong> and <strong>Add to VS Code</strong> buttons open the client's review flow.</p>
+<p>The MCP server still exposes 91 tools by default. Consent gates are unchanged. There are no data or settings changes besides the optional PATH entry, and no new index or migration. Installing over the previous release keeps your library and saved captures.</p>
+<p>Tested on a clean, isolated install: Claude Code 2.1.302 over MCP (all 91 tools listed; a note saved and listed back), Claude Code with the skill and CLI only (skill loaded; <code>uoink note</code> and <code>uoink recent</code> ran), Codex CLI 0.153.4 over MCP (a note saved and listed back), and the CLI's <code>status</code>, <code>note</code>, <code>recent</code>, and <code>connect</code> commands.</p>
+<p>The Claude Code plugin loads its skill and starts its MCP server. Its tool calls were not run end to end because the test install is isolated from a normal one. Not yet tested: Gemini CLI and pi (no sign-in on the test machine) and every other recipe in <code>uoink connect</code>.</p>
+<p>See <a href="/developers">agent setup</a>, <a href="${GITHUB_URL}/blob/main/docs/connect-your-agent.md">Connect your agent</a>, and the <a href="${GITHUB_URL}/blob/main/llms-install.md">agent installation steps</a>.</p>
+<h2>v3.9.3: MCP registry listing and HTTP tool fix</h2><p class="meta"><time datetime="2026-10-19">2026-10-19</time></p><p>Uoink is now listed in the official MCP registry as <code>io.github.ryanbiddy/uoink</code>. Clients and directories that read the registry can find it.</p>
 <p>HTTP MCP now uses the same flattened tool schemas as stdio, so HTTP clients no longer drop Uoink's tools because of their schema shape. The server still checks the exact schema for every call.</p>
 <p>Activity reads are faster on large libraries. Median read time fell from 461 to 286 ms at 10,000 items in local runs. This release makes no data or settings changes. Installing over 3.9.2 keeps your library and saved captures.</p>
 <h2>v3.9.2: Every tool on the standard connection</h2><p class="meta"><time datetime="2026-10-18">2026-10-18</time></p><p>Every Uoink tool is now available through the standard stdio connection used by Claude Desktop (.mcpb), Claude Code, and Cursor: 91 tools over stdio and 91 in the HTTP registry. Agents can capture pages, X posts, Reddit threads, notes, and images; use writing, script, and workspace tools; and work with sources and the Library queue.</p>
@@ -893,7 +909,7 @@ ${DOC_RULE}
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">uoink for developers</span>
-      <h1 class="display-xl">Local tools for <em>AI agents.</em></h1>
+      <h1 class="display-xl">Use Uoink from any <em>AI agent.</em></h1>
       <p class="lede">Uoink runs a local Model Context Protocol (MCP) server on your machine. Give Claude Desktop, Claude Code, and Cursor tools to capture, index, and query web media without clipboard steps.</p>
     </div>
   </div>
@@ -901,10 +917,11 @@ ${DOC_RULE}
 
 <section class="section" data-screen-label="developers / integration">
   <div class="container" style="max-width:80ch">
+    ${AGENT_SETUP_HTML}
     <h2 class="display-l" style="margin-bottom:24px">Standard stdio & HTTP <em>transports.</em></h2>
     <p class="body-l" style="margin-bottom:32px">The helper exposes ${MCP_STDIO_TOOL_COUNT} tools over stdio and ${MCP_TOOL_COUNT} over local HTTP. Capture fetches the source; optional AI calls use your own Anthropic key.</p>
 
-      <p>Tested with Claude Desktop, Claude Code, and Cursor. Download and open <a href="${GITHUB_URL}/releases/download/${VERSION}/uoink-${VERSION_NUMBER}.mcpb">uoink-${VERSION_NUMBER}.mcpb</a> for one-click Claude Desktop setup. Enter your full Uoink folder path when asked. After updating, reinstall the bundle and restart Desktop.</p>
+      <p>For Claude Desktop, download and open <a href="${GITHUB_URL}/releases/download/${VERSION}/uoink-${VERSION_NUMBER}.mcpb">uoink-${VERSION_NUMBER}.mcpb</a> for one-click Claude Desktop setup. Enter your full Uoink folder path when asked. After updating, reinstall the bundle and restart Desktop.</p>
       <p>Stdio works without the Uoink helper running. Start Uoink from the Start menu for the dashboard, browser button, and monitored-playlist polling.</p>
       <h3>Claude Code</h3>
       <p>Run this in PowerShell to use absolute paths. Verified with Claude Code 2.1.302:</p>

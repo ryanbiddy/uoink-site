@@ -1,7 +1,7 @@
 {
-  "version": "3.9.3",
-  "mcpSourceRef": "v3.9.3",
-  "installerSizeBytes": 389898199,
+  "version": "3.10.0",
+  "mcpSourceRef": "v3.10.0",
+  "installerSizeBytes": 389901916,
   "stdioToolCount": 91,
   "httpToolCount": 91
 }
