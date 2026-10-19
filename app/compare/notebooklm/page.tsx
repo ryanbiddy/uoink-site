@@ -33,7 +33,7 @@ const faq: FaqItem[] = [
   {
     question: "Does Uoink work on Mac?",
     answer:
-      "Windows 10/11 only. No Mac build scheduled. NotebookLM, being browser-based, works on any OS now.",
+      "Windows 10/11 today. A Mac version is in development. NotebookLM, being browser-based, works on any OS now.",
   },
 ];
 
@@ -79,7 +79,7 @@ const rows: { feature: string; uoink: string; notebooklm: string }[] = [
   { feature: "Agent / MCP access", uoink: "Local MCP server + OpenAPI bridge", notebooklm: "No public MCP surface" },
   { feature: "Audio Overviews", uoink: "No", notebooklm: "Yes" },
   { feature: "Cost", uoink: "Free, open source (MIT)", notebooklm: "Free tier + paid plan" },
-  { feature: "Platform", uoink: "Windows 10/11 only. No Mac build scheduled.", notebooklm: "Any OS (browser)" },
+  { feature: "Platform", uoink: "Windows 10/11 today. A Mac version is in development.", notebooklm: "Any OS (browser)" },
   { feature: "Telemetry", uoink: "None in the app", notebooklm: "Standard Google product data" },
 ];
 

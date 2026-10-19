@@ -522,6 +522,41 @@ pre code { background: transparent; border: 0; color: inherit; font-size: inheri
 }
 .home-hero .copy { max-width: 540px; }
 .home-hero h1 { margin: 12px 0 20px; }
+.home-ai-line { color: var(--ink); font-size: 15px; line-height: 1.6; margin: 18px 0 0; }
+
+/* Homepage catalogs use the Reader's surfaces, type and border tokens. */
+.home-catalog { border-top: 1px solid var(--line); }
+.home-section-head { display: grid; gap: 12px; margin-bottom: 28px; max-width: 740px; }
+.home-section-head .display-l { margin: 0; text-wrap: balance; }
+.home-section-head .lede { margin: 0; }
+.home-card-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; }
+.home-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); min-width: 0; padding: 24px; }
+.home-card h3, .home-discovery h3 { font-size: 20px; line-height: 1.3; margin: 0 0 12px; text-wrap: balance; }
+.home-card p, .home-discovery p { color: var(--text-2); font-size: 16px; line-height: 1.6; margin: 0; text-wrap: pretty; }
+.home-card .source-kind { color: var(--ink); font-size: 14px; font-weight: 600; margin: 0 0 12px; }
+.home-discovery { border-left: 3px solid var(--rust); margin-top: 24px; max-width: 960px; padding: 8px 0 8px 20px; }
+.home-discovery h3 { font-size: 17px; margin-bottom: 8px; }
+.ai-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.ai-grid > .home-card { grid-column: span 2; }
+.ai-grid > .coding-clients { grid-column: span 4; }
+.client-chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0 0 16px; padding: 0; }
+.client-chip { background: var(--sunk); border: 1px solid var(--line); border-radius: var(--r-sm); display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; font-size: 14px; font-weight: 600; line-height: 1.5; max-width: 100%; padding: 6px 10px; }
+.client-chip small { color: var(--text-2); font-size: 12px; font-weight: 500; }
+.tested-clients .client-chip { border-color: var(--line-strong); }
+.home-card .client-label { font-size: 13px; font-weight: 600; margin: 16px 0 8px; }
+.home-card .client-note, .home-setup-link .client-note { color: var(--text-2); font-size: 14px; line-height: 1.6; margin-top: 12px; }
+.home-setup-link { margin-top: 24px; max-width: 740px; }
+.home-setup-link p { margin: 0 0 12px; }
+.home-catalog code { font-size: 0.9em; overflow-wrap: anywhere; }
+@media (max-width: 1000px) {
+  .home-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ai-grid > .home-card { grid-column: auto; }
+  .ai-grid > .coding-clients { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .home-card-grid { grid-template-columns: minmax(0, 1fr); }
+  .home-card { padding: 22px; }
+}
 
 /* READER — an HTML picture of the app: capture list beside the open transcript */
 .reader-demo { margin: 0; min-width: 0; }
