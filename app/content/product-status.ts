@@ -1,9 +1,9 @@
 export const PRODUCT_STATUS = {
   mac: {
-    visible: "Windows 10/11 only. No Mac build scheduled.",
-    label: "not available",
-    heading: "No Mac build scheduled.",
-    tech: "Windows 10/11 only",
-    detail: "There is no Mac installer or scheduled Mac release.",
+    visible: "Windows 10/11 today. A Mac version is in development.",
+    label: "in development",
+    heading: "A Mac version is in development.",
+    tech: "Windows 10/11 today",
+    detail: "A Mac version is in development. The installer available today is for Windows.",
   },
 } as const;
