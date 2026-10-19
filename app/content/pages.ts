@@ -1,5 +1,5 @@
 import { MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT, mcpTools } from "./mcp-tools";
-import { MCP_STDIO_CONFIG } from "./mcp-config";
+import { CLAUDE_CODE_COMMAND, MCP_CURSOR_CONFIG, MCP_STDIO_CONFIG } from "./mcp-config";
 import { PRODUCT_STATUS } from "./product-status";
 import release from "../../content/release.json";
 
@@ -108,12 +108,12 @@ const agentsFaq: FaqItem[] = [
   {
     question: "What is MCP and how does Uoink use it?",
     answer:
-      "Model Context Protocol lets an AI client call local tools. Uoink exposes a local stdio MCP server so Claude Desktop and Cursor (the tested clients) can capture and search your library.",
+      "Model Context Protocol lets an AI client call local tools. Uoink exposes a local stdio MCP server so Claude Desktop, Claude Code, and Cursor (the tested clients) can capture and search your library.",
   },
   {
     question: "Does the agent need the clipboard flow?",
     answer:
-      "No. Claude Desktop and Cursor can capture, search, and read your library over MCP. ChatGPT uses the clipboard path.",
+      "No. Claude Desktop, Claude Code, and Cursor can capture, search, and read your library over MCP. ChatGPT uses the clipboard path.",
   },
   {
     question: "Is HTTP transport supported?",
@@ -469,7 +469,7 @@ ${DOC_RULE}
         <li><span class="num">02</span><h3>Build the library.</h3><p>Every capture lands on your workstation as standard markdown and gets indexed in a local SQLite database. Search transcripts and comments instantly, even offline.</p></li>
         <li><span class="num">03</span><h3>Assemble workspaces.</h3><p>Group your captures around the thing you're making: transcripts, self-channel performance metrics, and research themes in one workspace. That workspace becomes clean grounding data for your model.</p></li>
         <li><span class="num">04</span><h3>Iterate on drafts.</h3><p>Draft in the local Writing Studio. The helper feeds grounding context to your AI client, checks each draft against your style anchors and formatting rules, and appends creator credit automatically.</p></li>
-        <li><span class="num">05</span><h3>Distribute with agents.</h3><p>Claude Desktop and Cursor can search and cite your library over MCP. For ChatGPT, paste the transcript and frames from the clipboard.</p></li>
+        <li><span class="num">05</span><h3>Distribute with agents.</h3><p>Claude Desktop, Claude Code, and Cursor can search and cite your library over MCP. For ChatGPT, paste the transcript and frames from the clipboard.</p></li>
       </ol>
     </div>
   </div>
@@ -523,10 +523,10 @@ ${DOC_RULE}
     id: "agents",
     route: "/agents",
     mode: "mode-light",
-    title: "MCP YouTube Server: Claude Desktop and Cursor Tools",
-    subtitle: `${MCP_TOOL_COUNT} MCP tools in the registry, ${MCP_STDIO_TOOL_COUNT} curated over stdio. Available instantly.`,
+    title: "MCP YouTube Server: Claude Desktop, Claude Code, and Cursor Tools",
+    subtitle: `${MCP_STDIO_TOOL_COUNT} tools over stdio and ${MCP_TOOL_COUNT} in the HTTP registry. Every tool is available on both transports.`,
     description:
-      "Use Uoink as a local MCP server for Claude Desktop and Cursor.",
+      "Use Uoink as a local MCP server for Claude Desktop, Claude Code, and Cursor.",
     keywords: ["mcp youtube server", "claude desktop youtube tool", "cursor mcp server", "mcp video tool"],
     faq: agentsFaq,
     html: `
@@ -538,7 +538,7 @@ ${DOC_RULE}
 <!-- GitHub logo source: https://github.com/logos; license/usage confirmation: official GitHub mark, unmodified integration callout under GitHub logo guidelines. -->
 <span class="logo-chip brand-mark-pill logo-mark" aria-label="GitHub"><img src="/assets/brand-logos/github.svg" alt="GitHub" width="30" height="30" loading="lazy" decoding="async" /></span>
 </div></div></div></section>
-<section class="section" data-screen-label="agents / configs" id="configs"><div class="container"><div class="doc"><div class="doc-head"><span class="eyebrow">install in your client</span><h2 class="display-l">Connect your <em>library.</em></h2><p class="lede">Tested with Claude Desktop and Cursor. Open the <a href="${RELEASE_URL}">.mcpb bundle from the latest release</a> for one-click Claude Desktop setup, or use the README config:</p></div><div class="docs-main"><pre class="code-block">${escapeHtml(MCP_STDIO_CONFIG)}</pre><p>Claude Desktop does not expand <code>%LOCALAPPDATA%</code>. Use absolute paths in both fields, or copy the generated config from the extension’s Settings page. Restart the client after saving. Cline and Continue were not individually smoke-tested. ChatGPT uses the clipboard path.</p></div></div></div></section>
+<section class="section" data-screen-label="agents / configs" id="configs"><div class="container"><div class="doc"><div class="doc-head"><span class="eyebrow">install in your client</span><h2 class="display-l">Connect your <em>library.</em></h2><p class="lede">Tested with Claude Desktop, Claude Code, and Cursor. Open the <a href="${RELEASE_URL}">.mcpb bundle from the latest release</a> for one-click Claude Desktop setup, or use the README config:</p></div><div class="docs-main"><pre class="code-block">${escapeHtml(MCP_STDIO_CONFIG)}</pre><p>Claude Desktop does not expand <code>%LOCALAPPDATA%</code>. Use absolute paths in both fields, or copy the generated config from the extension’s Settings page. Restart the client after saving. Cline and Continue were not individually smoke-tested. ChatGPT uses the clipboard path.</p></div></div></div></section>
 ${DOC_RULE}
 <section class="section" data-screen-label="agents / tools"><div class="container"><div class="doc"><div class="doc-head"><span class="eyebrow">tools your agent can call</span><h2 class="display-l">Real names, real <em>tools.</em></h2><p class="lede">Use the <code>uoink_*</code> names for new configs. Migration aliases may exist in older installs, but the public docs should point agents at Uoink.</p></div><div class="docs-main">${toolRows()}</div><div class="ctas"><a class="btn primary" href="/mcp">Open machine-readable MCP page -></a></div></div></div></section>
 ${DOC_RULE}
@@ -586,12 +586,21 @@ install:
   windows: ${CANONICAL_URL}/install#windows
 platform: Windows 10/11 only. No Mac build scheduled.</pre>
       <h2>Stdio setup</h2>
-      <p>Tested with Claude Desktop and Cursor. Install Uoink, then open the <a href="${RELEASE_URL}">.mcpb bundle from the latest release</a> for one-click Claude Desktop setup, or use this README config:</p>
+      <p>Tested with Claude Desktop, Claude Code, and Cursor. Download and open <a href="${GITHUB_URL}/releases/download/${VERSION}/uoink-${VERSION_NUMBER}.mcpb">uoink-${VERSION_NUMBER}.mcpb</a> for one-click Claude Desktop setup. Enter your full Uoink folder path when asked. After updating, reinstall the bundle and restart Desktop.</p>
+      <p>Stdio works without the Uoink helper running. Start Uoink from the Start menu for the dashboard, browser button, and monitored-playlist polling.</p>
+      <h3>Claude Code</h3>
+      <p>Run this in PowerShell to use absolute paths. Verified with Claude Code 2.1.302:</p>
+      <pre class="code-block">${escapeHtml(CLAUDE_CODE_COMMAND)}</pre>
+      <h3>Cursor</h3>
+      <p>Cursor is reported to send only the first 40 tools to its agent. Set <code>UOINK_MCP_TOOLSET=core</code> in the server environment to keep the previous 35-tool set and stay under that cap:</p>
+      <pre class="code-block">${escapeHtml(MCP_CURSOR_CONFIG)}</pre>
+      <h3>Other stdio clients and manual Claude Desktop config</h3>
       <pre class="code-block">${escapeHtml(MCP_STDIO_CONFIG)}</pre>
-      <p>Claude Desktop does not expand <code>%LOCALAPPDATA%</code>. Replace it in both paths with your full user app-data directory, or copy the generated config from the extension’s Settings page. Restart your client after saving. Cline and Continue are standard-stdio compatibility paths; they were not individually smoke-tested.</p>
+      <p>Replace <code>%LOCALAPPDATA%</code> in both paths with your full local app-data directory. Claude Desktop does not expand it. You can also copy the generated config from the extension's Settings page. Restart your client after saving. Cline and Continue were not individually smoke-tested.</p>
+      <p>ChatGPT and claude.ai use copy and paste. Uoink does not connect to the ChatGPT app over MCP.</p>
       <p>HTTP uses <code>X-Uoink-Token</code> from <code>%LOCALAPPDATA%\\Uoink\\token.txt</code>. The OpenAPI 3.1 bridge is for local agents that do not speak MCP.</p>
       <h2 id="tools">Tools</h2>
-      <p>${MCP_STDIO_TOOL_COUNT} over stdio; ${MCP_TOOL_COUNT} in the HTTP registry below. The manifest marks each tool’s transports.</p>
+      <p>${MCP_STDIO_TOOL_COUNT} tools over stdio and ${MCP_TOOL_COUNT} in the HTTP registry below. Every tool is available on both transports. Consent gates are unchanged.</p>
       ${toolRows()}
       <h2>Canonical config note</h2>
       <p>Use the generated local paths. After install, Uoink's setup page generates the real config for the user's machine. Snippets on the website are templates for humans and crawlers.</p>
@@ -674,12 +683,14 @@ ${DOC_RULE}
       `Read Uoink release notes from 3.4 through ${VERSION_NUMBER}, including Living Library and research playbooks.`,
     keywords: ["uoink changelog", "uoink release notes", "uoink updates", "universal video uoink changelog"],
     html: `
-<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} is a patch release with clearer writing warnings and reliability fixes. Earlier releases are listed below, with dates from the product changelog.</p>
-<h2>${VERSION} — Writing warnings and reliability</h2><p class="meta"><time datetime="2026-10-18">2026-10-18</time></p><p>Writing checks now say “canned-phrase warnings”. Voice DNA remains the voice spec’s name. This patch includes reliability and test fixes, with no data or settings changes. Installing over 3.9.0 keeps your library and saved captures.</p>
+<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} brings every Uoink tool to the standard AI connection used by Claude Desktop, Claude Code, and Cursor. Earlier releases are listed below, with dates from the product changelog.</p>
+<h2>${VERSION}: Every tool on the standard connection</h2><p class="meta"><time datetime="2026-10-18">2026-10-18</time></p><p>Every Uoink tool is now available through the standard stdio connection used by Claude Desktop (.mcpb), Claude Code, and Cursor: ${MCP_STDIO_TOOL_COUNT} tools over stdio and ${MCP_TOOL_COUNT} in the HTTP registry. Agents can capture pages, X posts, Reddit threads, notes, and images; use writing, script, and workspace tools; and work with sources and the Library queue.</p>
+<p><code>UOINK_MCP_TOOLSET=core</code> keeps the previous 35-tool set for clients that cap tool counts. Full mode is the default and keeps those tools first. Consent gates are unchanged. This release makes no data or settings changes. Installing over 3.9.1 keeps your library and saved captures.</p>
+<h2>v3.9.1 — Writing warnings and reliability</h2><p class="meta"><time datetime="2026-10-18">2026-10-18</time></p><p>Writing checks now say “canned-phrase warnings”. Voice DNA remains the voice spec’s name. This patch includes reliability and test fixes, with no data or settings changes. Installing over 3.9.0 keeps your library and saved captures.</p>
 <h2>v3.9.0 — Living Library and research</h2><p class="meta">First public release since v3.7.0</p><p>The 3.8.x work was not published separately. Clip search and evidence cards join everyday stdio MCP. Standing capture follows YouTube channels, playlists, and podcast RSS feeds; MCP library search, item reads, resource templates, and prompts make the library easier to cite. Cited range export carries speaker labels, chapters, and provenance, with chapter navigation where chapters exist. Captures now show a toast instead of opening Explorer. Entity extraction is opt-in, the Anthropic usage meter reports real usage, and the recall hook is hardened against prompt injection from captured text.</p>
 <p>Podcast feeds poll for new episode metadata; audio stays off until you enable Auto-ingest for a feed. Local transcription jobs survive restarts, and completed episodes enter the searchable corpus. Notifications can be silenced and are suppressed during fullscreen use without losing Activity history.</p>
 <p>The redesigned dashboard puts search-or-paste in Library and opens saved captures in Reader. Activity shows five steps: details, waiting for YouTube, video, transcript, and screenshots and save. Settings brings preferences into one page and saves individual changes automatically. The extension popup keeps capture at hand, with setup and connection controls available.</p>
-<p>Five local research playbooks cover outlier posts, transcript intelligence, comment mining, creator teardowns, and repurposing over your own library. MCP agents can request cited packets without a model or network call. The local registry now has ${MCP_STDIO_TOOL_COUNT} stdio tools and ${MCP_TOOL_COUNT} HTTP tools. Optional ScrapeCreators discovery is off by default, uses your own key, and has a default 25-credit daily cap. Paid calls need credit confirmation and a dashboard intent or separately enabled agent discovery.</p>
+<p>Five local research playbooks cover outlier posts, transcript intelligence, comment mining, creator teardowns, and repurposing over your own library. MCP agents can request cited packets without a model or network call. That release had 35 stdio tools and 91 HTTP tools. Optional ScrapeCreators discovery is off by default, uses your own key, and has a default 25-credit daily cap. Paid calls need credit confirmation and a dashboard intent or separately enabled agent discovery.</p>
 <p>YouTube caption rate limits no longer fail a capture: Uoink tries local transcription with an already-downloaded model when fallback is enabled, and labels a missing transcript when it cannot produce one. Paced requests and newer yt-dlp improve capture reliability. Waiting, failures, and cancellation remain distinct; a cancellation request is refused once publication has started.</p>
 <p>Extension token minting checks the pinned extension ID (or an ID you explicitly configure), and in-page capture buttons reject scripted clicks. Private-network fetch protection now covers feed polls, standard page fetches, thumbnails, and checked redirect chains. Requests inside yt-dlp and the browser renderer are outside that protection. Returned and stored job errors scrub local paths and credentials; the local diagnostic log can retain raw tool output. Corpus imports accept only files inside the active output folder’s <code>_exports</code> directory.</p>
 <h2>v3.7.0</h2><p class="meta"><time datetime="2026-07-24">2026-07-24</time></p><p>Library cards and filters became quieter, Sources put available captures first, and saved items gained a clearer action menu. Updated video extraction and stricter URL, schema, and path checks hardened capture and local integrations; MCP initialization began reporting the product version.</p>
@@ -863,7 +874,7 @@ ${DOC_RULE}
     mode: "mode-dark",
     title: "Uoink for Developers: Local MCP Server and SQLite Database",
     description:
-      "Connect Uoink to Claude Desktop and Cursor using Model Context Protocol. Run loopback tools to query transcripts locally.",
+      "Connect Uoink to Claude Desktop, Claude Code, and Cursor using Model Context Protocol. Run loopback tools to query transcripts locally.",
     keywords: [
       "uoink for developers",
       "mcp server video",
@@ -877,7 +888,7 @@ ${DOC_RULE}
     <div class="section-head">
       <span class="eyebrow">uoink for developers</span>
       <h1 class="display-xl">Local tools for <em>AI agents.</em></h1>
-      <p class="lede">Uoink runs a local Model Context Protocol (MCP) server on your machine. Give Claude Desktop and Cursor tools to capture, index, and query web media without clipboard steps.</p>
+      <p class="lede">Uoink runs a local Model Context Protocol (MCP) server on your machine. Give Claude Desktop, Claude Code, and Cursor tools to capture, index, and query web media without clipboard steps.</p>
     </div>
   </div>
 </section>
@@ -887,22 +898,18 @@ ${DOC_RULE}
     <h2 class="display-l" style="margin-bottom:24px">Standard stdio & HTTP <em>transports.</em></h2>
     <p class="body-l" style="margin-bottom:32px">The helper exposes ${MCP_STDIO_TOOL_COUNT} tools over stdio and ${MCP_TOOL_COUNT} over local HTTP. Capture fetches the source; optional AI calls use your own Anthropic key.</p>
 
-    <h3>1. Copy the stdio MCP configuration</h3>
-    <p>Add the server to your client configuration file. Replace <code>%LOCALAPPDATA%</code> in both paths with your full local app-data directory; Claude Desktop does not expand environment variables:</p>
-    
-    <div class="docs-main" style="margin-bottom:32px">
-      <h4>Claude Desktop Configuration</h4>
-      <pre style="background:var(--ink-bg);padding:18px;border-radius:6px;border:1px solid var(--ink-dim);color:var(--parchment)">{
-  "mcpServers": {
-    "uoink": {
-      "command": "%LOCALAPPDATA%\\\\Uoink\\\\python\\\\python.exe",
-      "args": [
-        "%LOCALAPPDATA%\\\\Uoink\\\\uoink_mcp.py"
-      ]
-    }
-  }
-}</pre>
-    </div>
+      <p>Tested with Claude Desktop, Claude Code, and Cursor. Download and open <a href="${GITHUB_URL}/releases/download/${VERSION}/uoink-${VERSION_NUMBER}.mcpb">uoink-${VERSION_NUMBER}.mcpb</a> for one-click Claude Desktop setup. Enter your full Uoink folder path when asked. After updating, reinstall the bundle and restart Desktop.</p>
+      <p>Stdio works without the Uoink helper running. Start Uoink from the Start menu for the dashboard, browser button, and monitored-playlist polling.</p>
+      <h3>Claude Code</h3>
+      <p>Run this in PowerShell to use absolute paths. Verified with Claude Code 2.1.302:</p>
+      <pre class="code-block">${escapeHtml(CLAUDE_CODE_COMMAND)}</pre>
+      <h3>Cursor</h3>
+      <p>Cursor is reported to send only the first 40 tools to its agent. Set <code>UOINK_MCP_TOOLSET=core</code> in the server environment to keep the previous 35-tool set and stay under that cap:</p>
+      <pre class="code-block">${escapeHtml(MCP_CURSOR_CONFIG)}</pre>
+      <h3>Other stdio clients and manual Claude Desktop config</h3>
+      <pre class="code-block">${escapeHtml(MCP_STDIO_CONFIG)}</pre>
+      <p>Replace <code>%LOCALAPPDATA%</code> in both paths with your full local app-data directory. Claude Desktop does not expand it. You can also copy the generated config from the extension's Settings page. Restart your client after saving. Cline and Continue were not individually smoke-tested.</p>
+      <p>ChatGPT and claude.ai use copy and paste. Uoink does not connect to the ChatGPT app over MCP.</p>
 
     <h3>2. HTTP (SSE) Transport Details</h3>
     <div class="docs-main" style="margin-bottom:32px;padding:20px;background:rgba(255,255,255,0.02);border-radius:6px;border:1px solid var(--ink-dim)">
@@ -1008,7 +1015,7 @@ function toolRows(): string {
   return mcpTools
     .map(
       ([name, description]) =>
-        `<div class="tool-row"><div class="name">${escapeHtml(name)}<span class="args">HTTP registry; see manifest for stdio availability</span></div><div class="desc">${escapeHtml(description)}<span class="ex">See /mcp/manifest.json for machine-readable schema.</span></div></div>`,
+        `<div class="tool-row"><div class="name">${escapeHtml(name)}<span class="args">Available over stdio and HTTP</span></div><div class="desc">${escapeHtml(description)}<span class="ex">See /mcp/manifest.json for machine-readable schema.</span></div></div>`,
     )
     .join("");
 }

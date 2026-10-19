@@ -1,12 +1,12 @@
 {
   "schema_version": "3.2",
-  "version": "3.9.1",
+  "version": "3.9.2",
   "name": "Uoink MCP Tool Manifest",
-  "description": "Local HTTP registry; tools marked stdio also appear on the everyday stdio surface.",
-  "source": "ryanbiddy/uoink@d2f093e886098fa99c50628e6c81eb2e27a5cc92:uoink_mcp_tools.py",
+  "description": "Local MCP tool inventory with HTTP registry schemas and supported transports. Stdio adapts top-level schema variants for client compatibility.",
+  "source": "ryanbiddy/uoink@20bcc255bb80295590363b0b335ac5bfa7304bde:uoink_mcp_tools.py",
   "generated": "2026-10-18",
   "tool_count": 91,
-  "stdio_tool_count": 35,
+  "stdio_tool_count": 91,
   "tools": [
     {
       "name": "uoink_video",
@@ -233,7 +233,7 @@
     },
     {
       "name": "list_library_work",
-      "description": "List Librarian assignment work for a run: counts by work state and manifest disposition, the run revision, one cursor page of items, and whether staged work is waiting for a subscribed client. Read-only; the server never runs the Librarian itself.",
+      "description": "List Librarian assignment work for a run: counts by work state and manifest disposition, the run revision, one cursor page of items, and whether staged work is waiting for a subscribed client. Expires stale leases while listing; the server never runs the Librarian itself.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$defs": {
@@ -500,6 +500,7 @@
         "additionalProperties": false
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -838,6 +839,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -1128,6 +1130,7 @@
         "additionalProperties": false
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -1422,6 +1425,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -1702,6 +1706,7 @@
         "additionalProperties": false
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -1964,6 +1969,7 @@
         "additionalProperties": false
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2006,6 +2012,7 @@
         "additionalProperties": false
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2047,6 +2054,7 @@
         "additionalProperties": false
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2079,6 +2087,7 @@
         "additionalProperties": false
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2154,6 +2163,7 @@
         "additionalProperties": false
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2350,6 +2360,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2363,6 +2374,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2376,6 +2388,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2401,6 +2414,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2420,6 +2434,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2665,6 +2680,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2683,6 +2699,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2702,6 +2719,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2721,6 +2739,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2753,6 +2772,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2766,6 +2786,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2779,6 +2800,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2807,6 +2829,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2827,6 +2850,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2896,6 +2920,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2934,6 +2959,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -2947,6 +2973,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3003,6 +3030,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3036,6 +3064,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3056,6 +3085,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3076,6 +3106,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3109,6 +3140,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3143,6 +3175,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3174,6 +3207,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3194,6 +3228,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3241,6 +3276,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3276,6 +3312,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3295,6 +3332,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3318,6 +3356,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3338,6 +3377,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3432,6 +3472,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3522,6 +3563,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3553,6 +3595,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3573,6 +3616,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3604,6 +3648,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3622,6 +3667,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3642,6 +3688,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3674,6 +3721,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3699,6 +3747,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3733,6 +3782,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3752,6 +3802,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3789,6 +3840,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3821,6 +3873,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3839,6 +3892,7 @@
         "required": []
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3858,6 +3912,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },
@@ -3877,6 +3932,7 @@
         ]
       },
       "transports": [
+        "stdio",
         "http"
       ]
     },

@@ -83,12 +83,36 @@ for node in ast.walk(stdio_tree):
                     and dec.func.attr == "tool"):
                 names = [kw.value for kw in dec.keywords if kw.arg == "name"]
                 stdio.append(ast.literal_eval(names[0]) if names else node.name)
-assert len(stdio) == len(set(stdio)) == release["stdioToolCount"]
-assert len(tools) == release["httpToolCount"]
+if not stdio:
+    # 3.9.2 publishes the shared registry, keeping the old core names first.
+    # Check the AST contract rather than importing the product and its backend.
+    inventory = next(node for node in tree.body
+                     if isinstance(node, ast.FunctionDef) and node.name == "stdio_tool_names")
+    expected = ast.parse("CORE_STDIO_TOOLS + tuple(name for name in TOOL_REGISTRY if name not in CORE_STDIO_TOOLS)", mode="eval").body
+    assert ast.dump(inventory.body[-1].value) == ast.dump(expected)
+    selector = next(node for node in stdio_tree.body
+                    if isinstance(node, ast.FunctionDef) and node.name == "_selected_toolset")
+    assert any(isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
+               and ast.unparse(node.func) == "os.environ.get"
+               and [literal(arg) for arg in node.args] == ["UOINK_MCP_TOOLSET", "full"]
+               for node in ast.walk(selector))
+    publisher = next(node for node in ast.walk(stdio_tree)
+                     if isinstance(node, ast.AsyncFunctionDef) and node.name == "list_tools")
+    assert any(isinstance(node, ast.Call)
+               and ast.unparse(node) == "uoink_mcp_tools.stdio_tool_names(STDIO_TOOLSET)"
+               for node in ast.walk(publisher))
+    core = constants["CORE_STDIO_TOOLS"]
+    assert len(core) == len(set(core)) and set(core) <= {tool["name"] for tool in tools}
+    stdio = core + [tool["name"] for tool in tools if tool["name"] not in core]
+assert len(stdio) == len(set(stdio)) > 0
 assert set(stdio) <= {tool["name"] for tool in tools}
 bundle_tools = json.loads(source(".mcpb/manifest.json"))["tools"]
 assert len(bundle_tools) == len(stdio)
 assert {tool["name"] for tool in bundle_tools} == set(stdio)
+
+release["stdioToolCount"] = len(stdio)
+release["httpToolCount"] = len(tools)
+(root / "content/release.json").write_text(json.dumps(release, indent=2) + "\n", encoding="utf-8")
 
 def summary(description):
     text = re.sub(r"^v\d+(?:\.\d+)?(?:\s+[A-Z]\d)?(?:\s+[^:]+)?:\s*", "", description)
@@ -100,11 +124,13 @@ today = datetime.date.today().isoformat()
 rows = [[tool["name"], summary(tool["description"])] for tool in tools]
 output = f"""// Generated for Uoink {version} from ryanbiddy/uoink {ref} on {today}.
 // Source commit: {commit}
-// HTTP: TOOL_REGISTRY in uoink_mcp_tools.py; stdio: @mcp.tool in uoink_mcp.py.
+// HTTP: TOOL_REGISTRY; stdio: registry inventory (3.9.2+) or @mcp.tool decorators.
 // Regenerate with: python scripts/sync-mcp-from-release.py <product-checkout> [--ref <git-ref>]
 
-export const MCP_TOOL_COUNT = {len(tools)};
-export const MCP_STDIO_TOOL_COUNT = {len(stdio)};
+import release from "../../content/release.json";
+
+export const MCP_TOOL_COUNT = release.httpToolCount;
+export const MCP_STDIO_TOOL_COUNT = release.stdioToolCount;
 
 export const mcpStdioToolNames = {json.dumps(stdio, indent=2)} as const;
 
@@ -115,7 +141,7 @@ export type McpTool = (typeof mcpTools)[number];
 (root / "app/content/mcp-tools.ts").write_text(output, encoding="utf-8")
 manifest = {
     "schema_version": "3.2", "version": version, "name": "Uoink MCP Tool Manifest",
-    "description": "Local HTTP registry; tools marked stdio also appear on the everyday stdio surface.",
+    "description": "Local MCP tool inventory with HTTP registry schemas and supported transports. Stdio adapts top-level schema variants for client compatibility.",
     "source": f"ryanbiddy/uoink@{commit}:uoink_mcp_tools.py",
     "generated": today, "tool_count": len(tools), "stdio_tool_count": len(stdio),
     "tools": [{**tool, "transports": ["stdio", "http"] if tool["name"] in stdio else ["http"]} for tool in tools],

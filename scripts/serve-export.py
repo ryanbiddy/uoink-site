@@ -7,7 +7,9 @@ from pathlib import Path
 class ExportHandler(SimpleHTTPRequestHandler):
     def translate_path(self, path):
         target = super().translate_path(path)
-        if not Path(target).exists() and Path(target + ".html").is_file():
+        # A route such as /mcp also has an asset directory (mcp/manifest.json).
+        # Prefer its exported page over SimpleHTTPRequestHandler's directory listing.
+        if Path(target + ".html").is_file():
             return target + ".html"
         return target
 

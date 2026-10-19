@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocRule } from "../components/Doc";
 import { PageShell } from "../components/PageShell";
-import { GITHUB_URL, RELEASE_URL, SitePage } from "../content/pages";
-import { MCP_STDIO_CONFIG } from "../content/mcp-config";
+import { GITHUB_URL, VERSION, VERSION_NUMBER, SitePage } from "../content/pages";
+import { CLAUDE_CODE_COMMAND, MCP_CURSOR_CONFIG, MCP_STDIO_CONFIG } from "../content/mcp-config";
 import { mcpStdioToolNames, mcpTools, MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT } from "../content/mcp-tools";
 
 const page: SitePage = {
@@ -12,7 +12,7 @@ const page: SitePage = {
   mode: "mode-light",
   title: "Uoink for Developers: Local MCP Tools for Source Research",
   description:
-    "Connect Uoink to Claude Desktop and Cursor with local MCP tools for source capture and corpus search.",
+    "Connect Uoink to Claude Desktop, Claude Code, and Cursor with local MCP tools for source capture and corpus search.",
   keywords: [
     "mcp source research",
     "mcp youtube server",
@@ -23,19 +23,16 @@ const page: SitePage = {
   html: "",
 };
 
-const configs = [{ name: "README stdio config", body: MCP_STDIO_CONFIG }];
+const configs = [
+  { name: "Cursor config with the core toolset", body: MCP_CURSOR_CONFIG },
+  { name: "Other stdio clients and manual Claude Desktop config", body: MCP_STDIO_CONFIG },
+];
 
-const stdioNames = new Set<string>(mcpStdioToolNames);
 const toolGroups = [
   {
-    title: "Everyday stdio tools",
-    dek: "Capture, podcasts, clip search, evidence cards, library reads, and cited range export. Also available over HTTP.",
+    title: "All tools over stdio and HTTP",
+    dek: "Capture, search, citations, research, writing, scripts, workspaces, sources, and the Library queue. Consent gates are unchanged. The Librarian proposes; applying is off by default and its quality gate has not passed.",
     names: [...mcpStdioToolNames],
-  },
-  {
-    title: "Additional HTTP registry tools",
-    dek: "Standing capture, library work, Writing Studio, workspaces, and source controls. The Librarian proposes; applying is off by default and its quality gate has not passed.",
-    names: mcpTools.map(([name]) => name).filter((name) => !stdioNames.has(name)),
   },
 ];
 
@@ -75,7 +72,7 @@ export default function Page() {
                 Give your agent a local <em>source layer.</em>
               </h1>
               <p className="lede">
-                Uoink runs a local Model Context Protocol (MCP) server on your machine. The stdio path gives Claude Desktop and Cursor the {MCP_STDIO_TOOL_COUNT} curated everyday tools to capture, search, and cite your corpus. The local HTTP endpoint exposes the full {MCP_TOOL_COUNT}-tool registry.
+                Uoink gives Claude Desktop, Claude Code, and Cursor every tool to capture, search, cite, and write from your local library: {MCP_STDIO_TOOL_COUNT} tools over stdio and {MCP_TOOL_COUNT} in the HTTP registry.
               </p>
               <div className="ctas">
                 <a className="btn primary large" href="#configs">
@@ -133,10 +130,10 @@ export default function Page() {
                 Stdio and HTTP <em>transports.</em>
               </h2>
               <p className="lede">
-                Tested with Claude Desktop and Cursor. Install Uoink before connecting your client.
+                Tested with Claude Desktop, Claude Code, and Cursor. Install Uoink before connecting your client.
               </p>
               <p className="body-l">
-                Uoink runs a local Model Context Protocol (MCP) server. The stdio transport connects as a local subprocess and exposes the {MCP_STDIO_TOOL_COUNT} curated everyday tools. The local HTTP JSON-RPC endpoint exposes the full {MCP_TOOL_COUNT}-tool registry.
+                Stdio connects as a local subprocess with all {MCP_STDIO_TOOL_COUNT} tools. It works without the Uoink helper running. Start Uoink from the Start menu for the dashboard, browser button, and monitored-playlist polling. HTTP exposes the same {MCP_TOOL_COUNT} tools through the running helper.
               </p>
             </div>
             <div className="callout">
@@ -147,9 +144,14 @@ export default function Page() {
             </div>
             <div className="docs-main">
               <h3>One-click Claude Desktop setup</h3>
-              <p>Open the <a href={RELEASE_URL}>.mcpb bundle from the latest release</a> to install the stdio server without editing config.</p>
+              <p>Download and open <a href={`${GITHUB_URL}/releases/download/${VERSION}/uoink-${VERSION_NUMBER}.mcpb`}>uoink-{VERSION_NUMBER}.mcpb</a>. Claude Desktop installs it as an extension and asks for the Uoink folder. Enter the full path to <code>%LOCALAPPDATA%\Uoink</code>; Desktop does not expand that variable. After updating, reinstall the bundle and restart Desktop.</p>
+              <h3>Claude Code</h3>
+              <p>Run this in PowerShell. It expands the paths to your local install. Verified with Claude Code 2.1.302, including tool listing, saving a note, and reading recent captures.</p>
+              <pre className="code-block">{CLAUDE_CODE_COMMAND}</pre>
+              <h3>Cursor and other stdio clients</h3>
+              <p>Cursor is reported to send only the first 40 tools to its agent. Add <code>UOINK_MCP_TOOLSET=core</code> to the server environment to keep the previous 35-tool set and stay under that cap. The Cursor config below includes it. Omit that setting for the full toolset.</p>
               <p>For manual setup, use the README JSON below. Claude Desktop does not expand <code>%LOCALAPPDATA%</code>: replace it in both paths with your full app-data directory, or copy the generated config from the extension’s Settings page. Restart the client after saving.</p>
-              <p>Cline and Continue are standard-stdio compatibility paths; they were not individually smoke-tested. Use the clipboard path for ChatGPT.</p>
+              <p>Cline and Continue are standard-stdio compatibility paths; they were not individually smoke-tested. ChatGPT and claude.ai use copy and paste. Uoink does not connect to the ChatGPT app over MCP.</p>
               {configs.map((config) => (
                 <section key={config.name}>
                   <h3>

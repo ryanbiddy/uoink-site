@@ -1,8 +1,8 @@
 {
   "name": "io.github.ryanbiddy/uoink",
   "display_name": "Uoink",
-  "description": "Uoink keeps the videos, podcasts, and articles creators and AI developers study on their own disk, then hands them to Claude, ChatGPT, Cursor, or a local MCP agent as a cited corpus.",
-  "version": "3.9.1",
+  "description": "Uoink keeps videos, podcasts, and articles on your disk for AI search and citations. Claude Desktop, Claude Code, and Cursor connect over MCP; ChatGPT and claude.ai use copy and paste.",
+  "version": "3.9.2",
   "homepage": "https://uoink.app",
   "documentation": "https://uoink.app/developers",
   "repository": {
@@ -16,7 +16,7 @@
   },
   "install": {
     "windows": "https://uoink.app/install",
-    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/latest",
+    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/download/v3.9.2/uoink-3.9.2.mcpb",
     "notes": "Unsigned installer, about 390 MB; no admin rights needed. Windows SmartScreen: More info → Run anyway. Then open the .mcpb bundle for one-click Claude Desktop setup, or copy the setup page’s stdio config."
   },
   "transports": [
@@ -28,9 +28,14 @@
       ],
       "tested_clients": [
         "Claude Desktop",
+        "Claude Code",
         "Cursor"
       ],
-      "note": "Claude Desktop does not expand %LOCALAPPDATA%; use absolute paths or the generated setup config. Cline and Continue were not individually smoke-tested."
+      "note": "Every tool is available over stdio without the helper running. Use absolute paths; Claude Desktop does not expand %LOCALAPPDATA%. Cursor can use UOINK_MCP_TOOLSET=core for the previous 35-tool set under its reported 40-tool cap. Cline and Continue were not individually smoke-tested.",
+      "env": {
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONUTF8": "1"
+      }
     },
     {
       "type": "http",
@@ -59,6 +64,6 @@
     "corpus"
   ],
   "tool_count": 91,
-  "stdio_tool_count": 35,
+  "stdio_tool_count": 91,
   "platform": "Windows 10/11 only. No Mac build scheduled."
 }

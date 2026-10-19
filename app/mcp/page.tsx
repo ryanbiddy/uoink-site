@@ -7,7 +7,7 @@ const page = pages.mcp;
 
 export const metadata: Metadata = {
   title: page.title,
-  description: `${MCP_TOOL_COUNT} MCP tools in the registry, ${MCP_STDIO_TOOL_COUNT} curated over stdio. Available instantly.`,
+  description: `${MCP_STDIO_TOOL_COUNT} tools over stdio and ${MCP_TOOL_COUNT} in the HTTP registry. Every Uoink tool is available on both transports.`,
   keywords: page.keywords,
   alternates: { canonical: page.route },
   openGraph: { title: page.title, description: page.description, url: page.route, images: [{ url: "/og-cover.png", width: 1200, height: 630, alt: "The Uoink dashboard: a populated local corpus of saved videos ready to hand to your AI." }] },
