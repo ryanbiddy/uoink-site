@@ -1044,7 +1044,7 @@ export const features: Feature[] = [
       "Start the client and verify the connection.",
       "Ask the agent to capture a video to test the setup."
     ],
-    "behindScenes": "Stdio runs the bundled Python against uoink_mcp.py. The separate HTTP JSON-RPC registry is at http://127.0.0.1:5179/mcp/v1 and uses X-Uoink-Token from the local install. Claude Desktop and Cursor are the tested clients.",
+    "behindScenes": "Stdio runs the bundled Python against uoink_mcp.py. The separate HTTP JSON-RPC registry is at http://127.0.0.1:5179/mcp/v1 and uses X-Uoink-Token from the local install. HTTP and stdio advertise the same flattened tool schemas; the server still checks the exact schema for every call. Claude Desktop, Claude Code, and Cursor are the tested clients.",
     "mcpTools": [
       "uoink_video",
       "search_uoinks",

@@ -141,7 +141,7 @@ export type McpTool = (typeof mcpTools)[number];
 (root / "app/content/mcp-tools.ts").write_text(output, encoding="utf-8")
 manifest = {
     "schema_version": "3.2", "version": version, "name": "Uoink MCP Tool Manifest",
-    "description": "Local MCP tool inventory with HTTP registry schemas and supported transports. Stdio adapts top-level schema variants for client compatibility.",
+    "description": "Local MCP tool inventory with exact registry schemas and supported transports. Both stdio and HTTP advertise flattened top-level schema variants for client compatibility; the server validates the exact registry schemas.",
     "source": f"ryanbiddy/uoink@{commit}:uoink_mcp_tools.py",
     "generated": today, "tool_count": len(tools), "stdio_tool_count": len(stdio),
     "tools": [{**tool, "transports": ["stdio", "http"] if tool["name"] in stdio else ["http"]} for tool in tools],
