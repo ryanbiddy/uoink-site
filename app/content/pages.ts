@@ -53,6 +53,7 @@ export const CONTACT_EMAIL = "hi@uoink.app";
 export const VERSION = `v${release.version}`;
 // Numeric form (no leading "v") for machine-readable manifests and server cards.
 export const VERSION_NUMBER = release.version;
+export const INSTALLER_SIZE = `${Math.round(release.installerSizeBytes / 1_000_000)} MB`;
 export const DOWNLOAD_URL = `${GITHUB_URL}/releases/download/${VERSION}/Uoink-Setup-${VERSION_NUMBER}.exe`;
 
 const WINDOWS_MARK =
@@ -317,7 +318,7 @@ get_evidence_card(video_id)</pre>
         <p class="lede">Get the helper running, add the browser button, and click Uoink on any video or Reddit thread. No Python, no command line, no path wrangling.</p>
         <div class="ctas"><a class="btn primary large with-logo" href="${DOWNLOAD_URL}">${WINDOWS_MARK}Download Windows installer</a><a class="btn ghost large" href="/how-it-works">See how it works</a></div>
         <p class="footnote">The installer is unsigned. Windows SmartScreen will show a warning. <strong>More info → Run anyway</strong>.</p>
-        <p class="sub-cta">Windows 10/11 only / About 390 MB / No admin rights needed</p>
+        <p class="sub-cta">Windows 10/11 only / About ${INSTALLER_SIZE} / No admin rights needed</p>
         <div class="brand-strip" aria-label="Install surfaces">
           <!-- GitHub logo source: https://github.com/logos; license/usage confirmation: official GitHub mark, unmodified integration callout under GitHub logo guidelines. -->
           <span class="logo-chip logo-mark"><img src="/assets/brand-logos/github.svg" alt="GitHub" width="22" height="22" loading="lazy" decoding="async" /><span>GitHub Releases</span></span>
@@ -349,7 +350,7 @@ get_evidence_card(video_id)</pre>
         <li>
           <span class="num">01</span>
           <h3>Download the helper.</h3>
-          <p>Run the unsigned Windows installer (about 390 MB). No admin rights needed; it installs to <code>%LOCALAPPDATA%\\Uoink</code>.</p>
+          <p>Run the unsigned Windows installer (about ${INSTALLER_SIZE}). No admin rights needed; it installs to <code>%LOCALAPPDATA%\\Uoink</code>.</p>
           <p class="footnote">The installer is unsigned. Windows SmartScreen will show a warning. <strong>More info → Run anyway</strong>.</p>
         </li>
         <li>
@@ -570,6 +571,7 @@ ${DOC_RULE}
       <p class="crumb">machine-readable product surface</p>
       <h1 class="display-l">Uoink MCP <em>manifest.</em></h1>
       <p>Agents should use this page and <a href="/mcp/manifest.json">/mcp/manifest.json</a> to discover the local server, install path, supported transports, and tool names.</p>
+      <p>Official MCP registry: <code>io.github.ryanbiddy/uoink</code>. Clients and directories that read the registry can find Uoink.</p>
       <h2 id="server">Server</h2>
       <pre class="code-block">name: uoink
 version: ${VERSION_NUMBER}
@@ -599,6 +601,7 @@ platform: Windows 10/11 only. No Mac build scheduled.</pre>
       <p>Replace <code>%LOCALAPPDATA%</code> in both paths with your full local app-data directory. Claude Desktop does not expand it. You can also copy the generated config from the extension's Settings page. Restart your client after saving. Cline and Continue were not individually smoke-tested.</p>
       <p>ChatGPT and claude.ai use copy and paste. Uoink does not connect to the ChatGPT app over MCP.</p>
       <p>HTTP uses <code>X-Uoink-Token</code> from <code>%LOCALAPPDATA%\\Uoink\\token.txt</code>. The OpenAPI 3.1 bridge is for local agents that do not speak MCP.</p>
+      <p>HTTP MCP uses the same flattened tool schemas as stdio, so HTTP clients no longer drop Uoink's tools because of their schema shape. The server still checks the exact schema for every call.</p>
       <h2 id="tools">Tools</h2>
       <p>${MCP_STDIO_TOOL_COUNT} tools over stdio and ${MCP_TOOL_COUNT} in the HTTP registry below. Every tool is available on both transports. Consent gates are unchanged.</p>
       ${toolRows()}
@@ -683,8 +686,11 @@ ${DOC_RULE}
       `Read Uoink release notes from 3.4 through ${VERSION_NUMBER}, including Living Library and research playbooks.`,
     keywords: ["uoink changelog", "uoink release notes", "uoink updates", "universal video uoink changelog"],
     html: `
-<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} brings every Uoink tool to the standard AI connection used by Claude Desktop, Claude Code, and Cursor. Earlier releases are listed below, with dates from the product changelog.</p>
-<h2>${VERSION}: Every tool on the standard connection</h2><p class="meta"><time datetime="2026-10-18">2026-10-18</time></p><p>Every Uoink tool is now available through the standard stdio connection used by Claude Desktop (.mcpb), Claude Code, and Cursor: ${MCP_STDIO_TOOL_COUNT} tools over stdio and ${MCP_TOOL_COUNT} in the HTTP registry. Agents can capture pages, X posts, Reddit threads, notes, and images; use writing, script, and workspace tools; and work with sources and the Library queue.</p>
+<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} adds the official MCP registry listing, fixes HTTP tool compatibility, and speeds up Activity reads on large libraries. Earlier releases are listed below, with dates from the product changelog.</p>
+<h2>${VERSION}: MCP registry listing and HTTP tool fix</h2><p class="meta"><time datetime="2026-10-19">2026-10-19</time></p><p>Uoink is now listed in the official MCP registry as <code>io.github.ryanbiddy/uoink</code>. Clients and directories that read the registry can find it.</p>
+<p>HTTP MCP now uses the same flattened tool schemas as stdio, so HTTP clients no longer drop Uoink's tools because of their schema shape. The server still checks the exact schema for every call.</p>
+<p>Activity reads are faster on large libraries. Median read time fell from 461 to 286 ms at 10,000 items in local runs. This release makes no data or settings changes. Installing over 3.9.2 keeps your library and saved captures.</p>
+<h2>v3.9.2: Every tool on the standard connection</h2><p class="meta"><time datetime="2026-10-18">2026-10-18</time></p><p>Every Uoink tool is now available through the standard stdio connection used by Claude Desktop (.mcpb), Claude Code, and Cursor: 91 tools over stdio and 91 in the HTTP registry. Agents can capture pages, X posts, Reddit threads, notes, and images; use writing, script, and workspace tools; and work with sources and the Library queue.</p>
 <p><code>UOINK_MCP_TOOLSET=core</code> keeps the previous 35-tool set for clients that cap tool counts. Full mode is the default and keeps those tools first. Consent gates are unchanged. This release makes no data or settings changes. Installing over 3.9.1 keeps your library and saved captures.</p>
 <h2>v3.9.1 — Writing warnings and reliability</h2><p class="meta"><time datetime="2026-10-18">2026-10-18</time></p><p>Writing checks now say “canned-phrase warnings”. Voice DNA remains the voice spec’s name. This patch includes reliability and test fixes, with no data or settings changes. Installing over 3.9.0 keeps your library and saved captures.</p>
 <h2>v3.9.0 — Living Library and research</h2><p class="meta">First public release since v3.7.0</p><p>The 3.8.x work was not published separately. Clip search and evidence cards join everyday stdio MCP. Standing capture follows YouTube channels, playlists, and podcast RSS feeds; MCP library search, item reads, resource templates, and prompts make the library easier to cite. Cited range export carries speaker labels, chapters, and provenance, with chapter navigation where chapters exist. Captures now show a toast instead of opening Explorer. Entity extraction is opt-in, the Anthropic usage meter reports real usage, and the recall hook is hardened against prompt injection from captured text.</p>

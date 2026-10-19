@@ -1,4 +1,4 @@
-# Uoink v3.9.2
+# Uoink v3.9.3
 A local library for the videos and podcasts you study, that any AI you use can search and cite.
 
 ## What it does
@@ -10,11 +10,11 @@ A local library for the videos and podcasts you study, that any AI you use can s
 - Get writing help in your voice with Voice DNA and Writing Studio.
 
 ## Set it up with an agent (Windows 10/11)
-Windows 10/11 only. No Mac build scheduled. Uoink v3.9.2 is free and MIT-licensed; the unsigned installer is about 390 MB. No admin rights needed.
+Windows 10/11 only. No Mac build scheduled. Uoink v3.9.3 is free and MIT-licensed; the unsigned installer is about 390 MB. No admin rights needed.
 ### An agent can run
-1. Download [Uoink-Setup-3.9.2.exe](https://github.com/ryanbiddy/uoink/releases/download/v3.9.2/Uoink-Setup-3.9.2.exe) to `$env:TEMP\Uoink-Setup-3.9.2.exe`.
-2. Before running it, compare `Get-FileHash -Algorithm SHA256 "$env:TEMP\Uoink-Setup-3.9.2.exe"` with the installer entry in [SHA256SUMS.txt](https://github.com/ryanbiddy/uoink/releases/download/v3.9.2/SHA256SUMS.txt).
-3. Install per user: `Start-Process -Wait -FilePath "$env:TEMP\Uoink-Setup-3.9.2.exe" -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART'`. It installs to `%LOCALAPPDATA%\Uoink` and exits 0 in about a minute. No data or settings changes; installing over 3.9.1 keeps the library and saved captures.
+1. Download [Uoink-Setup-3.9.3.exe](https://github.com/ryanbiddy/uoink/releases/download/v3.9.3/Uoink-Setup-3.9.3.exe) to `$env:TEMP\Uoink-Setup-3.9.3.exe`.
+2. Before running it, compare `Get-FileHash -Algorithm SHA256 "$env:TEMP\Uoink-Setup-3.9.3.exe"` with the installer entry in [SHA256SUMS.txt](https://github.com/ryanbiddy/uoink/releases/download/v3.9.3/SHA256SUMS.txt).
+3. Install per user: `Start-Process -Wait -FilePath "$env:TEMP\Uoink-Setup-3.9.3.exe" -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART'`. It installs to `%LOCALAPPDATA%\Uoink` and exits 0 in about a minute. No data or settings changes; installing over 3.9.2 keeps the library and saved captures.
 4. Connect a client below. Silent install does not start Uoink; MCP works without it running. For the dashboard, browser button, and monitored-playlist polling, start "Uoink" from the Start menu or run `& "$env:LOCALAPPDATA\Uoink\python\pythonw.exe" "$env:LOCALAPPDATA\Uoink\server.py"` in PowerShell.
 ### The person must do
 - Allow the unsigned installer if Windows asks. For SmartScreen, choose More info, then Run anyway.
@@ -24,7 +24,8 @@ Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink
 - After updating, reload the extension once. If its ID changes to bkcapfidedhfcjpmjabeopfbcjcbmdmi, reapply extension preferences; saved captures are unaffected.
 
 ## Connect your AI
-- Claude Desktop: download and open [uoink-3.9.2.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.9.2/uoink-3.9.2.mcpb) for one-click setup. It installs as an extension and asks for the Uoink folder (%LOCALAPPDATA%\Uoink). Enter the full path; Desktop does not expand %LOCALAPPDATA%. Reinstall the bundle and restart Desktop after updating.
+Official MCP registry: io.github.ryanbiddy/uoink
+- Claude Desktop: download and open [uoink-3.9.3.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.9.3/uoink-3.9.3.mcpb) for one-click setup. It installs as an extension and asks for the Uoink folder (%LOCALAPPDATA%\Uoink). Enter the full path; Desktop does not expand %LOCALAPPDATA%. Reinstall the bundle and restart Desktop after updating.
 - Claude Code (verified with 2.1.302): run in PowerShell: `claude mcp add --scope user --transport stdio uoink -e PYTHONIOENCODING=utf-8 -e PYTHONUTF8=1 -- "$env:LOCALAPPDATA\Uoink\python\python.exe" "$env:LOCALAPPDATA\Uoink\uoink_mcp.py"`.
 - Cursor: use the config below and add `"UOINK_MCP_TOOLSET": "core"` to the server env for the previous 35-tool set. Cursor is reported to send only the first 40 tools to its agent; core stays under that cap.
 - Other stdio clients: use this config with absolute paths. Full mode is the default. Cline and Continue were not individually smoke-tested.
@@ -54,4 +55,4 @@ Full disclosures: [llms-full.txt](https://uoink.app/llms-full.txt) and [Privacy]
 ## Links
 [Install](https://uoink.app/install) | [Developers](https://uoink.app/developers) | [MCP](https://uoink.app/mcp)
 [Features](https://uoink.app/features) | [Sources](https://uoink.app/sources) | [Changelog](https://uoink.app/changelog)
-[GitHub](https://github.com/ryanbiddy/uoink) | [Release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.9.2)
+[GitHub](https://github.com/ryanbiddy/uoink) | [Release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.9.3)

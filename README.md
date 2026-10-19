@@ -32,13 +32,13 @@ node scripts/check-launch-content.cjs
 
 The sync script reads committed files with `git show`, parses Python ASTs without importing product code, and checks stdio names against `.mcpb/manifest.json`. It defaults to the product ref in `content/release.json`; `--ref <git-ref>` selects another ref. It updates the counts in content/release.json and writes the site's tool catalog and manifest.
 
-For 3.9.2, the catalog is regenerated from `release/3.9.2` until the `v3.9.2` tag exists (the default `mcpSourceRef`). Run `python scripts/sync-mcp-from-release.py E:/AI/projects/uoink/checkouts/Yoink-integration --ref release/3.9.2` before the tag is available. The sync reports 91 tools over stdio and 91 in the HTTP registry. The stdio inventory comes from the shared registry with the original core tools first. The public changelog keeps 3.9.2, 3.9.1, and 3.9.0 separate; 3.9.0 includes the unpublished 3.8.x work since v3.7.0. Earlier dates are preserved; no 3.9.0 publication date is asserted.
+For 3.9.3, regenerate the catalog from the published `v3.9.3` tag (the default `mcpSourceRef`). The sync reports 91 tools over stdio and 91 in the HTTP registry. Both transports advertise flattened tool schemas; the server still checks the exact schema. The public changelog keeps 3.9.3, 3.9.2, 3.9.1, and 3.9.0 separate. Earlier dates are preserved; no 3.9.0 publication date is asserted.
 
 ## Connect a local Uoink install
 
 Claude Desktop, Claude Code, and Cursor are tested clients. Stdio works without the Uoink helper running. Start Uoink from the Start menu for the dashboard, browser button, and monitored-playlist polling.
 
-For Claude Desktop, download and open [uoink-3.9.2.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.9.2/uoink-3.9.2.mcpb). Enter the full path to your Uoink folder when asked; Desktop does not expand `%LOCALAPPDATA%`. Reinstall the bundle and restart Desktop after updating.
+For Claude Desktop, download and open [uoink-3.9.3.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.9.3/uoink-3.9.3.mcpb). Enter the full path to your Uoink folder when asked; Desktop does not expand `%LOCALAPPDATA%`. Reinstall the bundle and restart Desktop after updating.
 
 For Claude Code, run this in PowerShell. The expanded paths are absolute:
 

@@ -74,6 +74,7 @@ export default function Page() {
               <p className="lede">
                 Uoink gives Claude Desktop, Claude Code, and Cursor every tool to capture, search, cite, and write from your local library: {MCP_STDIO_TOOL_COUNT} tools over stdio and {MCP_TOOL_COUNT} in the HTTP registry.
               </p>
+              <p>Official MCP registry: <code>io.github.ryanbiddy/uoink</code>. Clients and directories that read the registry can find Uoink.</p>
               <div className="ctas">
                 <a className="btn primary large" href="#configs">
                   Copy config
@@ -227,7 +228,7 @@ get_evidence_card({ video_id })`}</pre>
                 Names stay visible. Details stay <em>folded.</em>
               </h2>
               <p className="lede">
-                The manifest includes the release registry’s schemas and transport labels. This page keeps the public tool names readable for humans, crawlers, and agents without turning the page into one endless list.
+                HTTP MCP uses the same flattened tool schemas as stdio, so HTTP clients no longer drop Uoink&apos;s tools because of their schema shape. The server still checks the exact schema for every call. The manifest includes those exact registry schemas and transport labels.
               </p>
               <p className="body-l">
                 Start with <code>uoink_video</code>, <code>search_uoinks</code>, <code>get_uoink_corpus</code>, <code>classify_hook</code>, and <code>find_mentions</code>. Open a bucket when you need the rest.
