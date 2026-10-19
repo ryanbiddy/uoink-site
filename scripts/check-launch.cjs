@@ -15,7 +15,10 @@ const release = require("../content/release.json");
   try {
     for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
       const context = await browser.newContext({ viewport, deviceScaleFactor: 1, reducedMotion: "reduce" });
-      for (const route of ["/", "/install", "/developers", "/changelog"]) {
+      // Keep release verification offline; any attempted external request fails the check.
+      await context.route("**/*", route => new URL(route.request().url()).origin === "http://127.0.0.1:4173"
+        ? route.continue() : route.abort("blockedbyclient"));
+      for (const route of ["/", "/install", "/developers", "/mcp", "/changelog"]) {
         const page = await context.newPage();
         const consoleErrors = [], pageErrors = [], failedRequests = [];
         page.on("console", message => { if (message.type() === "error") consoleErrors.push(message.text()); });

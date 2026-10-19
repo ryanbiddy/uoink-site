@@ -1026,7 +1026,7 @@ export const features: Feature[] = [
     "title": "Model Context Protocol server",
     "category": "Distribution",
     "status": "shipped",
-    "summary": `Connect to ${MCP_STDIO_TOOL_COUNT} tools over stdio or ${MCP_TOOL_COUNT} in the local HTTP registry for capture, search, and citations.`,
+    "summary": `Every Uoink tool is available to your AI: ${MCP_STDIO_TOOL_COUNT} tools over stdio and ${MCP_TOOL_COUNT} in the local HTTP registry for capture, search, citations, and writing.`,
     "keywords": [
       "uoink feature",
       "mcp server",
@@ -1124,7 +1124,8 @@ export const features: Feature[] = [
       "Open Settings in Cursor.",
       "Navigate to features and select MCP.",
       "Click Add New MCP Server.",
-      "Paste the Uoink command path.",
+      "Paste the Uoink command, args, and env from the stdio config, using absolute paths.",
+      "Set UOINK_MCP_TOOLSET=core in the server env to use the previous 35-tool set under Cursor's reported 40-tool cap.",
       "Ask Cursor's chat panel to search your library."
     ],
     "behindScenes": "Cursor runs the bundled Python against uoink_mcp.py as a stdio subprocess. Tools such as search_library and get_library_item let the client search and read saved source material.",

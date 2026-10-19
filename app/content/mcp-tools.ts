@@ -1,10 +1,12 @@
-// Generated for Uoink 3.9.1 from ryanbiddy/uoink v3.9.1 on 2026-10-18.
-// Source commit: d2f093e886098fa99c50628e6c81eb2e27a5cc92
-// HTTP: TOOL_REGISTRY in uoink_mcp_tools.py; stdio: @mcp.tool in uoink_mcp.py.
+// Generated for Uoink 3.9.2 from ryanbiddy/uoink release/3.9.2 on 2026-10-18.
+// Source commit: 20bcc255bb80295590363b0b335ac5bfa7304bde
+// HTTP: TOOL_REGISTRY; stdio: registry inventory (3.9.2+) or @mcp.tool decorators.
 // Regenerate with: python scripts/sync-mcp-from-release.py <product-checkout> [--ref <git-ref>]
 
-export const MCP_TOOL_COUNT = 91;
-export const MCP_STDIO_TOOL_COUNT = 35;
+import release from "../../content/release.json";
+
+export const MCP_TOOL_COUNT = release.httpToolCount;
+export const MCP_STDIO_TOOL_COUNT = release.stdioToolCount;
 
 export const mcpStdioToolNames = [
   "uoink_video",
@@ -41,7 +43,63 @@ export const mcpStdioToolNames = [
   "queue_discovered",
   "get_library_brief_input",
   "publish_library_brief",
-  "export_cited_range"
+  "export_cited_range",
+  "list_library_work",
+  "claim_library_work",
+  "submit_library_result",
+  "apply_reshelving",
+  "pin_shelf",
+  "undo_library_apply",
+  "list_sources",
+  "register_source",
+  "source_status",
+  "set_source_consent",
+  "analyze_self_channel",
+  "get_schema_version",
+  "get_user_role",
+  "set_user_role",
+  "check_live_status",
+  "add_monitored_playlist",
+  "list_monitored_playlists",
+  "remove_monitored_playlist",
+  "poll_monitored_playlist",
+  "list_monitored_playlist_events",
+  "get_user_taste",
+  "get_user_memory",
+  "update_user_taste",
+  "get_engagement_signal",
+  "classify_facets",
+  "query_by_facets",
+  "get_facet_taxonomy",
+  "assemble_workspace",
+  "critique_against_corpus",
+  "list_workspaces",
+  "get_workspace",
+  "extract_claims",
+  "verify_claim",
+  "list_claims",
+  "get_claim",
+  "generate_script",
+  "revise_script",
+  "get_shot_list",
+  "list_scripts",
+  "get_script",
+  "write_tweet",
+  "write_blog",
+  "list_writing_pieces",
+  "get_writing_piece",
+  "add_style_anchor",
+  "list_style_anchors",
+  "remove_style_anchor",
+  "uoink_url",
+  "uoink_note",
+  "uoink_image",
+  "uoink_x",
+  "uoink_page",
+  "uoink_reddit_thread",
+  "list_allowed_sites",
+  "add_allowed_site",
+  "remove_allowed_site"
 ] as const;
 
 export const mcpTools = [

@@ -18,9 +18,9 @@ A local corpus solves this problem. It acts as a private library of reference ma
 
 ## Grounding in Action via MCP
 
-The Model Context Protocol (MCP) provides a clean way to connect AI agents to local data. We designed Uoink with a built-in MCP server that exposes 35 tools over stdio and 91 in the local HTTP registry.
+The Model Context Protocol (MCP) connects AI agents to local data. Uoink's built-in MCP server exposes every tool over both stdio and local HTTP.
 
-When you run Cursor or Claude Desktop, the agent can call these tools to search and read your local library. It searches your local library before it falls back to web search or memory. 
+When you run Cursor, Claude Desktop, or Claude Code, the agent can call these tools to search and read your local library. It searches your local library before it falls back to web search or memory.
 
 If you ask your agent to write a script about a specific database topic, the agent can call `search_uoinks` to find every relevant video, podcast, or page you have saved. It then calls `get_uoink_corpus` to read the full transcripts and code blocks. 
 

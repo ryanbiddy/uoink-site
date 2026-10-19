@@ -1,71 +1,57 @@
-<!-- updated: 2026-10-18 / uoink v3.9.1 -->
-# Uoink 3.9.1 — Living Library and research
+# Uoink v3.9.2
+A local library for the videos and podcasts you study, that any AI you use can search and cite.
 
-> A local library for the videos and podcasts you study, that any AI you use can search and cite.
+## What it does
+- Capture YouTube videos with transcripts, frames, and comments.
+- Save X posts and videos, podcasts, articles, and Reddit threads.
+- Keep everything on your disk as Markdown + JSON, with a local search index.
+- Let your AI search the library and cite timestamps.
+- Run five local research playbooks on your saved sources.
+- Get writing help in your voice with Voice DNA and Writing Studio.
 
-Free, MIT-licensed. No account or Uoink-hosted corpus. Model dependencies can send telemetry. Made by Ryan Biddy (@replayryan), a personal side project.
+## Set it up with an agent (Windows 10/11)
+Windows 10/11 only. No Mac build scheduled. Uoink v3.9.2 is free and MIT-licensed; the unsigned installer is about 390 MB. No admin rights needed.
+### An agent can run
+1. Download [Uoink-Setup-3.9.2.exe](https://github.com/ryanbiddy/uoink/releases/download/v3.9.2/Uoink-Setup-3.9.2.exe) to `$env:TEMP\Uoink-Setup-3.9.2.exe`.
+2. Before running it, compare `Get-FileHash -Algorithm SHA256 "$env:TEMP\Uoink-Setup-3.9.2.exe"` with the installer entry in [SHA256SUMS.txt](https://github.com/ryanbiddy/uoink/releases/download/v3.9.2/SHA256SUMS.txt).
+3. Install per user: `Start-Process -Wait -FilePath "$env:TEMP\Uoink-Setup-3.9.2.exe" -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART'`. It installs to `%LOCALAPPDATA%\Uoink` and exits 0 in about a minute. No data or settings changes; installing over 3.9.1 keeps the library and saved captures.
+4. Connect a client below. Silent install does not start Uoink; MCP works without it running. For the dashboard, browser button, and monitored-playlist polling, start "Uoink" from the Start menu or run `& "$env:LOCALAPPDATA\Uoink\python\pythonw.exe" "$env:LOCALAPPDATA\Uoink\server.py"` in PowerShell.
+### The person must do
+- Allow the unsigned installer if Windows asks. For SmartScreen, choose More info, then Run anyway.
+- For the optional browser button: open chrome://extensions, enable Developer mode, click Load unpacked, and select %LOCALAPPDATA%\Uoink\extension. An agent can capture without the button.
+Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested.
+Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.
+- After updating, reload the extension once. If its ID changes to bkcapfidedhfcjpmjabeopfbcjcbmdmi, reapply extension preferences; saved captures are unaffected.
 
-This patch changes writing-check wording to "canned-phrase warnings" and includes reliability and test fixes. Voice DNA remains the voice spec's name. No data or settings changes; installing over 3.9.0 keeps your library and saved captures.
+## Connect your AI
+- Claude Desktop: download and open [uoink-3.9.2.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.9.2/uoink-3.9.2.mcpb) for one-click setup. It installs as an extension and asks for the Uoink folder (%LOCALAPPDATA%\Uoink). Enter the full path; Desktop does not expand %LOCALAPPDATA%. Reinstall the bundle and restart Desktop after updating.
+- Claude Code (verified with 2.1.302): run in PowerShell: `claude mcp add --scope user --transport stdio uoink -e PYTHONIOENCODING=utf-8 -e PYTHONUTF8=1 -- "$env:LOCALAPPDATA\Uoink\python\python.exe" "$env:LOCALAPPDATA\Uoink\uoink_mcp.py"`.
+- Cursor: use the config below and add `"UOINK_MCP_TOOLSET": "core"` to the server env for the previous 35-tool set. Cursor is reported to send only the first 40 tools to its agent; core stays under that cap.
+- Other stdio clients: use this config with absolute paths. Full mode is the default. Cline and Continue were not individually smoke-tested.
+`{"mcpServers": {"uoink": {"command": "%LOCALAPPDATA%\\Uoink\\python\\python.exe", "args": ["%LOCALAPPDATA%\\Uoink\\uoink_mcp.py"], "env": {"PYTHONIOENCODING": "utf-8", "PYTHONUTF8": "1"}}}}`
+Replace %LOCALAPPDATA% in both JSON paths with your full app-data directory; restart the client after saving. Claude Desktop, Claude Code, and Cursor are tested clients.
+- ChatGPT and claude.ai: copy and paste only; Uoink does not connect to the ChatGPT app over MCP.
 
-## Install
+## Tools
+91 tools over stdio and 91 in the HTTP registry. Every tool is on both transports; consent gates are unchanged.
+- Capture: video, playlists, podcasts, pages, X, Reddit, notes, and images.
+- Search and citations: library search, clips, evidence cards, chapters, and cited range export.
+- Research: playbook packets from local sources and optional paid discovery.
+- Writing: Voice DNA, drafts, scripts, and writing checks.
+- Workspaces: saved projects and context for your agent.
+- Library and sources: queue work, subscriptions, and source consent. Librarian applying is off by default; its quality gate has not passed.
+[Tool manifest and schemas](https://uoink.app/mcp/manifest.json).
 
-Windows 10/11 only. No Mac build scheduled. Unsigned installer, about 390 MB; no admin rights needed. Windows SmartScreen will show a warning: More info → Run anyway. Installs to %LOCALAPPDATA%\Uoink. Sideload the browser extension from the install; Chrome Web Store listing pending. Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested. Open chrome://extensions, enable Developer mode, click Load unpacked, and select %LOCALAPPDATA%\Uoink\extension. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.
+## Privacy in brief
+- Local-first: captures and indexes stay on disk; capture requests contact source sites.
+- No account or Uoink-hosted corpus.
+- Optional AI calls use your own key. Allowed agents can start paid calls even when automatic analysis is off.
+- ScrapeCreators discovery is off by default, uses your own key, and defaults to a 25-credit daily cap; paid calls need credit confirmation and consent.
+- Discovery run files are purged daily when older than 90 days.
+- Model dependencies can send telemetry. Model downloads, thumbnails, and release checks can also contact outside services; this website uses Vercel Web Analytics.
+Full disclosures: [llms-full.txt](https://uoink.app/llms-full.txt) and [Privacy](https://uoink.app/privacy).
 
-After updating, reload the extension once. If its ID changes to the pinned bkcapfidedhfcjpmjabeopfbcjcbmdmi, reapply extension preferences. Saved captures are unaffected.
-
-- [Install](https://uoink.app/install): helper and extension instructions.
-- [Latest release](https://github.com/ryanbiddy/uoink/releases/latest): installer and Claude Desktop .mcpb bundle.
-- [Windows installer](https://github.com/ryanbiddy/uoink/releases/download/v3.9.1/Uoink-Setup-3.9.1.exe): Uoink 3.9.1.
-- [3.9.1 release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.9.1): changes since the last public release, v3.9.0.
-- [Changelog](https://uoink.app/changelog): dated release summaries.
-
-## Capture and library
-
-YouTube: timestamped transcript, screenshots, top comments, channel context, metadata. Also X video and post text, podcast RSS/Atom feeds, web articles, and Reddit threads. Capture with the YouTube button, right-click, Alt+U, or your AI agent. Files are structured Markdown plus a JSON sidecar on your own disk, indexed in one local library.
-
-3.9.0 introduced the previously unpublished Living Library work: clip search and evidence cards; standing capture for YouTube channels, YouTube playlists, and podcast RSS; MCP library search, item reads, resource templates and prompts; cited range export with speaker labels, chapters and provenance; and chapter navigation where chapters exist. Podcast transcripts enter the searchable corpus and interrupted jobs resume after restart. Feed audio stays off until Auto-ingest is enabled. Captures show toast notifications that can be muted and are suppressed during fullscreen use. Entity extraction is opt-in and off by default; the usage meter shows real Anthropic usage; the recall hook is hardened against prompt injection.
-
-The redesigned dashboard has Library search-or-paste, Reader, Activity with a five-step capture strip, and one Settings page that saves individual preferences automatically. The extension popup and setup provide capture and connection controls. Caption rate limits no longer fail an entire YouTube capture: local transcription can use an already-downloaded model, or the missing transcript stays labeled. Requests are paced and yt-dlp is newer. Waiting, failures and cancellation remain distinct; cancellation is refused once publication starts.
-
-Five local research playbooks cover outlier posts, transcript intelligence, comment mining, creator teardowns and repurposing over the user's own library. MCP agents can request cited packets without model or network calls. Optional ScrapeCreators discovery is off by default, uses the user's own key, and defaults to a 25-credit daily cap. Paid calls require credit confirmation and a dashboard intent or separately enabled agent discovery.
-
-Security changes pin the extension ID and check it when minting tokens, reject scripted clicks on capture buttons, add private-network protection to supported fetch paths, scrub paths and credentials from returned and stored job errors, and confine corpus imports to the output folder's _exports directory. Requests inside yt-dlp and the browser renderer are outside the private-network checks; the local diagnostic log can retain raw tool output.
-
-The library does not organize, file, or re-shelve itself. The Librarian only proposes; applying is off by default and its quality gate has not passed.
-
-- [Features](https://uoink.app/features): feature details.
-- [Sources](https://uoink.app/sources): capture paths.
-- [How it works](https://uoink.app/how-it-works): capture to cited corpus.
-
-## AI access
-
-Clipboard paste with transcript and frames works with Claude and ChatGPT. Local MCP exposes 35 tools over stdio and 91 in the HTTP registry, counted from the product branch. Tested clients: Claude Desktop and Cursor. Cline and Continue are standard-stdio compatibility paths, not individually smoke-tested. Do not claim ChatGPT app MCP support. OpenAPI 3.1 bridges local agents that do not speak MCP.
-
-- [Developers](https://uoink.app/developers): README config, .mcpb setup and tool catalog.
-- [MCP](https://uoink.app/mcp): transport details and tools.
-- [MCP manifest](https://uoink.app/mcp/manifest.json): all 91 tools, schemas and stdio availability.
-- [Feature manifest](https://uoink.app/api/features-manifest): feature URLs and summaries.
-- [Full text](https://uoink.app/llms-full.txt): setup details.
-
-## Network calls and retention
-
-Capture contacts source sites and can use FxTwitter for X text even when a post was not identified as truncated. Enabled subscriptions poll with automatic capture off, and connected agents can register them. Turning automatic capture off stops new starts; already-started work may finish. Stop Uoink stops polling until restart; Autostart on login controls the next Windows login. The authenticated local API can archive subscriptions; legacy feed and monitored-playlist enable controls cover only sources with those records.
-
-X text capture defaults to true. Setting x_text_capture_enabled to false in local settings stops both syndication and FxTwitter text requests. There is no dashboard or extension toggle, and POST /settings does not accept this field. Video capture is separate.
-
-Removing the saved Anthropic key attempts to delete the current credential, but a legacy Yoink credential or older plaintext settings entry can remain, and deletion failures can go unreported. Check Windows Credential Manager and the active profile settings; local removal does not revoke the key at Anthropic. Disconnect agents in their clients to end access.
-
-Extension setup and previews can load remote thumbnails. After copying a completed capture, the extension opens claude.ai/new without pasting or submitting the content, even with AI off; there is no setting to disable the tab. Missing Whisper-model downloads require a per-request approval flag that a connected agent can set without a Uoink prompt. Optional speaker labeling downloads pyannote/speaker-diarization-community-1 from Hugging Face when needed and can send your Hugging Face token to huggingface.co. Supporting transcription and alignment models can also download from Hugging Face or PyTorch hosts, and language data from NLTK. The pinned pyannote-audio 4.0.7 dependency enables metrics by default, including during voice-activity detection with speaker labeling off. Uoink provides no dashboard switch; PYANNOTE_METRICS_ENABLED=false in the helper environment disables those metrics. Release checks query GitHub when the cache needs refreshing or a caller forces a check, without sending the library or installing an update.
-
-Captures, local indexes and settings remain on disk. Logs can contain source URLs and paths. Exported files and optional mirrors create additional copies; sync software can upload them. The extension screenshot interval uses browser sync storage. Trash cleanup is attempted at startup and daily for items older than 30 days. Uninstall retains library data and credentials but removes edited topics.json routing rules. The website separately uses Vercel Web Analytics. See https://uoink.app/privacy for controls and retention details.
-
-Connected agents can start paid Anthropic calls with the saved key when the user allows those actions, even with automatic analysis off. Relevant library text and, for research, saved discovery rows can be sent. Local MCP playbook packets make no model call.
-
-ScrapeCreators receives the typed handle, channel ID or query only after discovery is enabled and the request authorized. Local run files store that input, request identity, normalized candidates and metrics, credit accounting, coverage, queue state and errors, including failed runs. No raw vendor responses, thumbnails or API keys are stored in these files. The daily purge removes run files older than 90 days; local playbooks may reuse eligible snapshots up to 30 days old.
-
-## Project
-
-- [GitHub](https://github.com/ryanbiddy/uoink): MIT source.
-- [Privacy](https://uoink.app/privacy): local corpus and optional AI calls.
-- [About](https://uoink.app/about): the project and maker.
-- [Field notes](https://uoink.app/blog): articles.
+## Links
+[Install](https://uoink.app/install) | [Developers](https://uoink.app/developers) | [MCP](https://uoink.app/mcp)
+[Features](https://uoink.app/features) | [Sources](https://uoink.app/sources) | [Changelog](https://uoink.app/changelog)
+[GitHub](https://github.com/ryanbiddy/uoink) | [Release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.9.2)

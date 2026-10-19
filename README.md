@@ -30,9 +30,44 @@ python scripts/sync-mcp-from-release.py E:/AI/projects/uoink/checkouts/Yoink-int
 node scripts/check-launch-content.cjs
 ```
 
-The sync script reads committed files with `git show`, parses Python ASTs without importing product code, and checks stdio names against `.mcpb/manifest.json`. It defaults to the product ref in `content/release.json`; `--ref <git-ref>` selects another ref. It writes only the site's tool catalog and manifest.
+The sync script reads committed files with `git show`, parses Python ASTs without importing product code, and checks stdio names against `.mcpb/manifest.json`. It defaults to the product ref in `content/release.json`; `--ref <git-ref>` selects another ref. It updates the counts in content/release.json and writes the site's tool catalog and manifest.
 
-For 3.9.1, the catalog is regenerated from the `v3.9.1` tag (the default `mcpSourceRef`). The catalog has 35 stdio tools and 91 HTTP tools. The public changelog keeps the 3.9.1 patch separate from 3.9.0, which includes the unpublished 3.8.x work since v3.7.0. Earlier public release dates are preserved; no 3.9.0 publication date is asserted.
+For 3.9.2, the catalog is regenerated from `release/3.9.2` until the `v3.9.2` tag exists (the default `mcpSourceRef`). Run `python scripts/sync-mcp-from-release.py E:/AI/projects/uoink/checkouts/Yoink-integration --ref release/3.9.2` before the tag is available. The sync reports 91 tools over stdio and 91 in the HTTP registry. The stdio inventory comes from the shared registry with the original core tools first. The public changelog keeps 3.9.2, 3.9.1, and 3.9.0 separate; 3.9.0 includes the unpublished 3.8.x work since v3.7.0. Earlier dates are preserved; no 3.9.0 publication date is asserted.
+
+## Connect a local Uoink install
+
+Claude Desktop, Claude Code, and Cursor are tested clients. Stdio works without the Uoink helper running. Start Uoink from the Start menu for the dashboard, browser button, and monitored-playlist polling.
+
+For Claude Desktop, download and open [uoink-3.9.2.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.9.2/uoink-3.9.2.mcpb). Enter the full path to your Uoink folder when asked; Desktop does not expand `%LOCALAPPDATA%`. Reinstall the bundle and restart Desktop after updating.
+
+For Claude Code, run this in PowerShell. The expanded paths are absolute:
+
+```powershell
+claude mcp add --scope user --transport stdio uoink -e PYTHONIOENCODING=utf-8 -e PYTHONUTF8=1 -- "$env:LOCALAPPDATA\Uoink\python\python.exe" "$env:LOCALAPPDATA\Uoink\uoink_mcp.py"
+```
+
+For Cursor and other stdio clients, add this server config. Replace `%LOCALAPPDATA%` in both paths with your full local app-data directory, then restart the client:
+
+```json
+{
+  "mcpServers": {
+    "uoink": {
+      "command": "%LOCALAPPDATA%\\Uoink\\python\\python.exe",
+      "args": [
+        "%LOCALAPPDATA%\\Uoink\\uoink_mcp.py"
+      ],
+      "env": {
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONUTF8": "1"
+      }
+    }
+  }
+}
+```
+
+Cursor is reported to send only the first 40 tools to its agent. Add `"UOINK_MCP_TOOLSET": "core"` to the server `env` to keep the previous 35-tool set and stay under that cap. Omit it for every tool. Consent gates are unchanged.
+
+ChatGPT and claude.ai use copy and paste only. Uoink does not connect to the ChatGPT app over MCP.
 
 ## Deploy
 
