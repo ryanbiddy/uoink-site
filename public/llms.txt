@@ -56,6 +56,7 @@ Replace %LOCALAPPDATA% in both JSON paths with your full app-data directory; res
 - Optional AI calls use your own key. Allowed agents can start paid calls even when automatic analysis is off.
 - ScrapeCreators discovery is off by default, uses your own key, and defaults to a 25-credit daily cap; paid calls need credit confirmation and consent.
 - Discovery run files are purged daily when older than 90 days.
+- Anonymous usage counts are off by default. If turned on in Settings, the helper sends one daily report of counts (tool calls, AI apps by a fixed name list, captures by source, searches) with a random install ID; never content, URLs, titles, paths or search text.
 - Model dependencies can send telemetry. Model downloads, thumbnails, and release checks can also contact outside services; this website uses Vercel Web Analytics.
 Full disclosures: [llms-full.txt](https://uoink.app/llms-full.txt) and [Privacy](https://uoink.app/privacy).
 

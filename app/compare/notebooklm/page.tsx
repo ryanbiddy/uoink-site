@@ -80,7 +80,7 @@ const rows: { feature: string; uoink: string; notebooklm: string }[] = [
   { feature: "Audio Overviews", uoink: "No", notebooklm: "Yes" },
   { feature: "Cost", uoink: "Free, open source (MIT)", notebooklm: "Free tier + paid plan" },
   { feature: "Platform", uoink: "Windows 10/11 only. No Mac build scheduled.", notebooklm: "Any OS (browser)" },
-  { feature: "Telemetry", uoink: "None in the app", notebooklm: "Standard Google product data" },
+  { feature: "Telemetry", uoink: "Off by default; optional anonymous counts", notebooklm: "Standard Google product data" },
 ];
 
 export default function Page() {
