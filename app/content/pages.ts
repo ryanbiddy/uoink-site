@@ -104,13 +104,11 @@ const privacyFaq: FaqItem[] = [
     answer:
       "Capture requests go to source sites and can use FxTwitter for X text. Enabled subscriptions poll in the background. Thumbnails, the automatic Claude tab after extension capture, model downloads, dependency telemetry and release checks can also connect. Anthropic receives data for automatic AI analysis you enable or an on-demand action you or an allowed agent starts with your key. ScrapeCreators receives a handle, channel ID, or query only after you enable discovery and authorize the request.",
   },
-  // <!-- 3.11: smarter-search -->
   {
     question: "Does semantic search send my library anywhere?",
     answer:
       "No. Semantic search is optional and stays off until you turn it on in Settings. After you accept Google's Gemma terms, Uoink downloads the EmbeddingGemma model from Hugging Face once (about 330 MB) and builds its index on your computer. Your searches and saved text stay on your computer, and search works offline after setup. The model is never bundled with Uoink. Removing semantic search deletes the model and its index; keyword search keeps working.",
   },
-  // <!-- /3.11: smarter-search -->
 ];
 
 const agentsFaq: FaqItem[] = [
@@ -175,9 +173,7 @@ export const pages: Record<PageId, SitePage> = {
         <h2 class="display-l">Find the moment. <em>Cite the source.</em></h2>
       </div>
       <ul class="doc-list">${docItems([
-        // <!-- 3.11: smarter-search -->
         ["Smarter search", "Search no longer needs every word to match, so plain questions find the right source. Choose Exact words when you need every word. Optional semantic search finds similar meaning and runs on your computer after you turn it on in Settings."],
-        // <!-- /3.11: smarter-search -->
         ["Clip search + evidence cards", "Search inside videos for timestamped, deep-linked excerpts your AI can quote and cite. Now on everyday stdio MCP."],
         ["Standing capture", "Follow a YouTube channel, YouTube playlist, or podcast RSS feed. With capture enabled, new uploads and episodes land in your library."],
         ["Library reach over MCP", "Search the library, read items, and use resource templates and prompts from your MCP client."],
@@ -651,7 +647,7 @@ platform: ${PRODUCT_STATUS.mac.visible}</pre>
         <p class="facts-head"><span>project posture</span><span>public facts</span></p>
         <dl class="facts-list">
           <div><dt>license</dt><dd>MIT<small>source: github.com/ryanbiddy/uoink</small></dd></div>
-          <div><dt>tracking</dt><dd>none from Uoink<!-- 3.11: usage-counts --> unless you opt in<!-- /3.11: usage-counts --><small>Vercel Web Analytics only; cookieless pageviews</small></dd></div>
+          <div><dt>tracking</dt><dd>none from Uoink unless you opt in<small>Vercel Web Analytics only; cookieless pageviews</small></dd></div>
           <div><dt>platform</dt><dd>${PRODUCT_STATUS.mac.aboutPlatform}<small>${PRODUCT_STATUS.mac.aboutNote}</small></dd></div>
         </dl>
       </aside>
@@ -698,20 +694,18 @@ ${DOC_RULE}
       `Read Uoink release notes from 3.4 through ${VERSION_NUMBER}, including Living Library and research playbooks.`,
     keywords: ["uoink changelog", "uoink release notes", "uoink updates", "universal video uoink changelog"],
     html: `
-<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} <!-- 3.11: smarter-search -->brings smarter search and <!-- /3.11: smarter-search -->moves the MCP server to the official SDK 2.3.0. Earlier releases are listed below, with dates from the product changelog.</p>
-<h2>${VERSION}: <!-- 3.11: smarter-search -->Smarter search and <!-- /3.11: smarter-search -->MCP SDK 2.3.0</h2>
-<!-- 3.11: smarter-search -->
+<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} brings smarter search and moves the MCP server to the official SDK 2.3.0. Earlier releases are listed below, with dates from the product changelog.</p>
+<h2>${VERSION}: Smarter search and MCP SDK 2.3.0</h2><p class="meta"><time datetime="2026-10-22">2026-10-22</time></p>
 <p>Search no longer requires every word. It skips common words, matches the words that remain, and ranks sources with every word and exact titles first. In a test of 30 questions over 693 saved sources, keyword search now puts the right source in the top 5 for 24 questions; the old search found it for 10.</p>
 <p>Optional semantic search finds passages with similar meaning even when the words differ. Turn it on in Settings under <strong>Semantic search</strong>. After you accept Google's Gemma terms, Uoink downloads the EmbeddingGemma model once (about 330 MB) and builds its index in the background. It runs on your computer, works offline after setup, and is never bundled with Uoink. In the same test, semantic search found the right source for 27 of 30 questions, and hybrid search, which combines both, found 28. Removing semantic search deletes the model and its index; keyword search keeps working.</p>
 <p>Strict matching is still there: choose <strong>Exact words</strong> in the dashboard, or pass <code>match: "strict"</code> to a search tool. A result includes a quotable passage only when that passage really contains the match. Otherwise <code>passage_verified</code> is false and the result says why.</p>
 <p>For agents, <code>search_library</code>, <code>search_uoinks</code>, and <code>search_clips</code> take optional <code>match</code> (<code>forgiving</code> or <code>strict</code>) and <code>mode</code> (<code>auto</code>, <code>keyword</code>, <code>semantic</code>, or <code>hybrid</code>) parameters; <code>find_mentions</code> takes <code>match</code>. Auto uses hybrid when semantic search is ready and keyword search otherwise, and each response says which mode ran. The MCP server still exposes 91 tools, or 35 with <code>UOINK_MCP_TOOLSET=core</code>. Updating rebuilds the local keyword search index once.</p>
-<!-- /3.11: smarter-search -->
 <p>The MCP server now runs on the official MCP Python SDK 2.3.0. Claude Desktop, Claude Code, Cursor, and Codex keep connecting as before, and apps that speak the newer 2026-07-28 MCP protocol can connect too. No action is needed. The local HTTP endpoint keeps its existing behavior.</p>
 <p><code>uoink connect</code> recipes and the client tables in <a href="${GITHUB_URL}/blob/main/docs/connect-your-agent.md">Connect your agent</a> now list a Linux location where the client has a Linux setup. Clients without a Linux build say so instead of printing another system's path. Continue is set up by hand; the dashboard now shows it as connected once its config launches this Uoink install. Claude Desktop, Cursor, and Cline also count as connected only when an entry launches this install, so an entry that points at an old or moved install shows Connect, which rewrites it and keeps a backup.</p>
-<!-- 3.11: usage-counts -->
+<p><code>uoink connect --list</code> now has setup recipes for 48 clients and integrations, 10 more than 3.10.0. 45 are checked against each client's official documentation, and each recipe prints its verification status. Most recipes are not yet tested in the client itself.</p>
 <p>Anonymous usage counts are off by default. If you turn on <strong>Share anonymous usage counts</strong> in Settings, Uoink sends at most one report a day: a random install ID, the app version, your OS family and version, and counts of tool calls, connected AI apps, captures by source type, and searches. It never sends content, URLs, titles, file paths, search text, prompts, or API keys. Settings shows the exact report before it is sent. See <a href="/privacy">Privacy</a> for details.</p>
-<!-- /3.11: usage-counts -->
 ${PRODUCT_STATUS.mac.changelog}
+<p>Tested with the installed 3.11.0 build in an isolated profile: Claude Code 2.1.308 listed all 91 tools and called one, and Codex CLI 0.153.4 called two tools.</p>
 <p>Installing over the previous release keeps your library and saved captures.</p>
 <h2>v3.10.0: Use Uoink from any AI agent</h2><p class="meta"><time datetime="2026-10-19">2026-10-19</time></p>
 <p>The <code>uoink</code> command lets agents search saved sources, read evidence, capture URLs, save notes, and call registry tools from a shell:</p>
