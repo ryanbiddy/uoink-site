@@ -10,12 +10,15 @@ A local library for the videos and podcasts you study, that any AI you use can s
 - Get writing help in your voice with Voice DNA and Writing Studio.
 
 ## Set it up with an agent (Windows 10/11)
-Windows 10/11 only. No Mac build scheduled. Uoink v3.10.0 is free and MIT-licensed; the unsigned installer is about 390 MB. No admin rights needed.
+<!-- 3.11: mac -->
+Windows 10/11, plus a signed and notarized preview for Apple Silicon Macs (macOS 15 or later). Mac preview: download the Apple Silicon DMG from the [latest release](https://github.com/ryanbiddy/uoink/releases/latest), open it, and drag Uoink to Applications. The person opens Uoink from Applications and chooses Open when macOS asks to confirm an app downloaded from the internet, then opens it once before loading the extension from ~/Library/Application Support/Uoink/extension. `uoink connect <client>` prints macOS paths; Claude Desktop uses the macOS .mcpb from the release. The app does not add `uoink` to PATH, and the Claude Code plugin's MCP entry is Windows-only. The steps below are for Windows.
+<!-- /3.11: mac -->
+Uoink v3.10.0 is free and MIT-licensed; the unsigned Windows installer is about 390 MB. No admin rights needed.
 [Agent installation steps](https://github.com/ryanbiddy/uoink/blob/main/llms-install.md): download, verify SHA-256, install, and connect.
 ### An agent can run
 1. Download [Uoink-Setup-3.10.0.exe](https://github.com/ryanbiddy/uoink/releases/download/v3.10.0/Uoink-Setup-3.10.0.exe) to `$env:TEMP\Uoink-Setup-3.10.0.exe`.
 2. Before running it, compare `Get-FileHash -Algorithm SHA256 "$env:TEMP\Uoink-Setup-3.10.0.exe"` with the installer entry in [SHA256SUMS.txt](https://github.com/ryanbiddy/uoink/releases/download/v3.10.0/SHA256SUMS.txt).
-3. Install per user: `Start-Process -Wait -FilePath "$env:TEMP\Uoink-Setup-3.10.0.exe" -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART'`. It installs to `%LOCALAPPDATA%\Uoink` with Add the uoink command to PATH for AI agents checked by default. No data or settings changes besides the optional PATH entry; no new index or migration. Installing over the previous release keeps the library and saved captures.
+3. Install per user: `Start-Process -Wait -FilePath "$env:TEMP\Uoink-Setup-3.10.0.exe" -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART'`. It installs to `%LOCALAPPDATA%\Uoink` with Add the uoink command to PATH for AI agents checked by default. Installing over the previous release keeps the library and saved captures.
 4. Open a new terminal, run `uoink status`, then connect a client below. Silent install does not start Uoink; MCP works without it running. For the dashboard, browser button, and monitored-playlist polling, start "Uoink" from the Start menu or run `& "$env:LOCALAPPDATA\Uoink\python\pythonw.exe" "$env:LOCALAPPDATA\Uoink\server.py"` in PowerShell.
 ### The person must do
 - Allow the unsigned installer if Windows asks. For SmartScreen, choose More info, then Run anyway.
@@ -26,7 +29,8 @@ Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink
 
 ## Connect your AI
 Official MCP registry: io.github.ryanbiddy/uoink
-- Setup recipes: `uoink connect --list` prints setup choices for 38 clients and integrations. Run `uoink connect <client>` for config or instructions and their destination; it does not edit client settings. Run the printed Claude Code command in PowerShell; merge other clients' entries into the location shown, then restart their MCP connection.
+- MCP SDK 2.3.0: Claude Desktop, Claude Code, Cursor, and Codex connect as before; apps that speak the 2026-07-28 MCP protocol can also connect. No action needed.
+- Setup recipes: `uoink connect --list` prints setup choices for 38 clients and integrations. Run `uoink connect <client>` for config or instructions and their destination; it does not edit client settings. Run the printed Claude Code command in PowerShell; merge other clients' entries into the location shown, then restart their MCP connection. Recipes list a Linux location where the client has a Linux setup.
 - Codex: `uoink connect codex` prints tables for `~/.codex/config.toml`. VS Code: `uoink connect vscode` prints config for `.vscode/mcp.json`. The dashboard's Add to Cursor / Add to VS Code buttons open the client's review flow; acceptance of these buttons is not yet tested.
 - Uoink skill for Claude Code, Codex, pi, Hermes Agent, and OpenClaw: `uoink skill path` locates it; `uoink skill install --to <dir>` copies it with references into a uoink subfolder of the parent skills directory. Restart the agent or reload its skills.
 - Claude Code plugin for a default install: `claude plugin marketplace add ryanbiddy/uoink-agent-kit`, then `claude plugin install uoink@uoink`. Restart Claude Code and enable the plugin MCP server when prompted. Custom installs use `uoink connect claude-code` plus the standalone skill; avoid duplicate MCP entries.
@@ -35,7 +39,7 @@ Tested on a clean, isolated install: Claude Code 2.1.302 over MCP (all 91 tools 
 - Claude Desktop: download and open [uoink-3.10.0.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.10.0/uoink-3.10.0.mcpb) for one-click setup. It installs as an extension and asks for the Uoink folder (%LOCALAPPDATA%\Uoink). Enter the full path; Desktop does not expand %LOCALAPPDATA%. Reinstall the bundle and restart Desktop after updating.
 - Claude Code (verified with 2.1.302): run in PowerShell: `claude mcp add --scope user --transport stdio uoink -e PYTHONIOENCODING=utf-8 -e PYTHONUTF8=1 -- "$env:LOCALAPPDATA\Uoink\python\python.exe" "$env:LOCALAPPDATA\Uoink\uoink_mcp.py"`.
 - Cursor: use the config below and add `"UOINK_MCP_TOOLSET": "core"` to the server env for the previous 35-tool set. Cursor is reported to send only the first 40 tools to its agent; core stays under that cap.
-- Other stdio clients: use this config with absolute paths. Full mode is the default. Cline and Continue were not individually smoke-tested.
+- Other stdio clients: use this config with absolute paths. Full mode is the default. Cline and Continue were not individually smoke-tested. Continue is set up by hand; the dashboard shows it as connected once its entry launches this install.
 `{"mcpServers": {"uoink": {"command": "%LOCALAPPDATA%\\Uoink\\python\\python.exe", "args": ["%LOCALAPPDATA%\\Uoink\\uoink_mcp.py"], "env": {"PYTHONIOENCODING": "utf-8", "PYTHONUTF8": "1"}}}}`
 Replace %LOCALAPPDATA% in both JSON paths with your full app-data directory; restart the client after saving. See the release testing notes above.
 - ChatGPT and claude.ai: copy and paste only; Uoink does not connect to the ChatGPT app over MCP.
@@ -44,6 +48,10 @@ Replace %LOCALAPPDATA% in both JSON paths with your full app-data directory; res
 91 tools over stdio and 91 in the HTTP registry. Every tool is on both transports; consent gates are unchanged.
 - Capture: video, playlists, podcasts, pages, X, Reddit, notes, and images.
 - Search and citations: library search, clips, evidence cards, chapters, and cited range export.
+<!-- 3.11: smarter-search -->
+- Search modes: search no longer requires every word. search_library, search_uoinks, and search_clips take optional `match` ("forgiving" by default, "strict" to require every word) and `mode` ("auto" by default, "keyword", "semantic", "hybrid"); find_mentions takes `match`. Auto uses hybrid when semantic search is ready, otherwise keyword; each response says which mode ran. Quote a passage only when passage_verified is true.
+- Semantic search is optional and off until a person turns it on in Uoink Settings (Semantic search) and accepts Google's Gemma terms. Uoink then downloads EmbeddingGemma from Hugging Face once (about 330 MB) and runs it on this computer; it works offline after setup, and searches and saved text stay local.
+<!-- /3.11: smarter-search -->
 - Research: playbook packets from local sources and optional paid discovery.
 - Writing: Voice DNA, drafts, scripts, and writing checks.
 - Workspaces: saved projects and context for your agent.

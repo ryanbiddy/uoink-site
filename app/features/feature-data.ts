@@ -515,7 +515,12 @@ export const features: Feature[] = [
       "comments",
       "metadata"
     ],
-    "whatItDoes": "Find saved items through library search. Clip search goes inside videos to return timestamped, deep-linked excerpts, and evidence cards collect material your AI can quote and cite.",
+    "whatItDoes": [
+      "Find saved items through library search. Clip search goes inside videos to return timestamped, deep-linked excerpts, and evidence cards collect material your AI can quote and cite.",
+      // <!-- 3.11: smarter-search -->
+      "Search no longer needs every word: it skips common words and ranks sources with every word and exact titles first. Choose Exact words when you need every word to match. Optional semantic search finds passages with similar meaning; turn it on in Settings, and it downloads its model once (about 330 MB) and runs on your computer.",
+      // <!-- /3.11: smarter-search -->
+    ].join(" "),
     "gettingStarted": [
       "Open the Uoink desktop dashboard.",
       "Click the search bar at the top of the interface.",
@@ -523,7 +528,12 @@ export const features: Feature[] = [
       "View the matching corpus cards with highlighted search snippets.",
       "Click any card to open the markdown file."
     ],
-    "behindScenes": "The stdio tools search_library, get_library_item, search_clips, and get_evidence_card expose saved source material to MCP clients.",
+    "behindScenes": [
+      "The stdio tools search_library, get_library_item, search_clips, and get_evidence_card expose saved source material to MCP clients.",
+      // <!-- 3.11: smarter-search -->
+      "Keyword search runs on the local SQLite full-text index with BM25 ranking. Optional semantic search keeps an EmbeddingGemma vector index on your computer. search_library, search_uoinks, and search_clips take optional match and mode parameters, and each result cites a passage only when that passage contains the match.",
+      // <!-- /3.11: smarter-search -->
+    ].join(" "),
     "mcpTools": [
       "search_library",
       "get_library_item",
@@ -1243,7 +1253,12 @@ export const features: Feature[] = [
       "private",
       "databases"
     ],
-    "whatItDoes": "No Uoink cloud database. The helper stores captured transcripts and files on your computer without an account or hosted corpus. Source requests, background polling, model downloads and dependency telemetry still use the network. AI features, connected clients, exports and mirrors can share saved content.",
+    "whatItDoes": [
+      "No Uoink cloud database. The helper stores captured transcripts and files on your computer without an account or hosted corpus. Source requests, background polling, model downloads and dependency telemetry still use the network. AI features, connected clients, exports and mirrors can share saved content.",
+      // <!-- 3.11: usage-counts -->
+      "Anonymous usage counts are off by default. If you turn them on in Settings, the helper sends one daily report of counts with a random install ID, never content, URLs, titles, file paths or search text.",
+      // <!-- /3.11: usage-counts -->
+    ].join(" "),
     "gettingStarted": [
       "Download the helper without creating an account.",
       "Open the dashboard to see your local files.",

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { DocRule, FaqList } from "../../components/Doc";
 import { PageShell } from "../../components/PageShell";
 import { RELEASE_URL, SitePage, FaqItem } from "../../content/pages";
+import { PRODUCT_STATUS } from "../../content/product-status";
 
 const faq: FaqItem[] = [
   {
@@ -33,7 +34,7 @@ const faq: FaqItem[] = [
   {
     question: "Does Uoink work on Mac?",
     answer:
-      "Windows 10/11 only. No Mac build scheduled. NotebookLM, being browser-based, works on any OS now.",
+      `${PRODUCT_STATUS.mac.visible} NotebookLM, being browser-based, works on any OS now.`,
   },
 ];
 
@@ -79,7 +80,7 @@ const rows: { feature: string; uoink: string; notebooklm: string }[] = [
   { feature: "Agent / MCP access", uoink: "Local MCP server + OpenAPI bridge", notebooklm: "No public MCP surface" },
   { feature: "Audio Overviews", uoink: "No", notebooklm: "Yes" },
   { feature: "Cost", uoink: "Free, open source (MIT)", notebooklm: "Free tier + paid plan" },
-  { feature: "Platform", uoink: "Windows 10/11 only. No Mac build scheduled.", notebooklm: "Any OS (browser)" },
+  { feature: "Platform", uoink: PRODUCT_STATUS.mac.visible, notebooklm: "Any OS (browser)" },
   { feature: "Telemetry", uoink: "Off by default; optional anonymous counts", notebooklm: "Standard Google product data" },
 ];
 

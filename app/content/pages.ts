@@ -104,6 +104,13 @@ const privacyFaq: FaqItem[] = [
     answer:
       "Capture requests go to source sites and can use FxTwitter for X text. Enabled subscriptions poll in the background. Thumbnails, the automatic Claude tab after extension capture, model downloads, dependency telemetry and release checks can also connect. Anthropic receives data for automatic AI analysis you enable or an on-demand action you or an allowed agent starts with your key. ScrapeCreators receives a handle, channel ID, or query only after you enable discovery and authorize the request.",
   },
+  // <!-- 3.11: smarter-search -->
+  {
+    question: "Does semantic search send my library anywhere?",
+    answer:
+      "No. Semantic search is optional and stays off until you turn it on in Settings. After you accept Google's Gemma terms, Uoink downloads the EmbeddingGemma model from Hugging Face once (about 330 MB) and builds its index on your computer. Your searches and saved text stay on your computer, and search works offline after setup. The model is never bundled with Uoink. Removing semantic search deletes the model and its index; keyword search keeps working.",
+  },
+  // <!-- /3.11: smarter-search -->
 ];
 
 const agentsFaq: FaqItem[] = [
@@ -168,6 +175,9 @@ export const pages: Record<PageId, SitePage> = {
         <h2 class="display-l">Find the moment. <em>Cite the source.</em></h2>
       </div>
       <ul class="doc-list">${docItems([
+        // <!-- 3.11: smarter-search -->
+        ["Smarter search", "Search no longer needs every word to match, so plain questions find the right source. Choose Exact words when you need every word. Optional semantic search finds similar meaning and runs on your computer after you turn it on in Settings."],
+        // <!-- /3.11: smarter-search -->
         ["Clip search + evidence cards", "Search inside videos for timestamped, deep-linked excerpts your AI can quote and cite. Now on everyday stdio MCP."],
         ["Standing capture", "Follow a YouTube channel, YouTube playlist, or podcast RSS feed. With capture enabled, new uploads and episodes land in your library."],
         ["Library reach over MCP", "Search the library, read items, and use resource templates and prompts from your MCP client."],
@@ -287,7 +297,7 @@ get_evidence_card(video_id)</pre>
       <ul class="doc-list">
         <li><p class="doc-meta"><b>Windows</b><span>live path</span></p><h3>Download the helper.</h3><p class="doc-ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p><a class="btn primary small" href="${DOWNLOAD_URL}">Download -></a></li>
         <li><p class="doc-meta"><b>Extension</b><span>pending review</span></p><h3>Install the browser button.</h3><p class="doc-ver">Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested.</p><p>Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at <code>%LOCALAPPDATA%\\Uoink\\extension</code>. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.</p><a class="arr-link" href="/install#extension">Install notes -></a></li>
-        <li><p class="doc-meta"><b>Mac</b><span>${PRODUCT_STATUS.mac.label}</span></p><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="doc-ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p><a class="arr-link" href="/install#mac">Mac status -></a></li>
+        <li><p class="doc-meta"><b>Mac</b><span>${PRODUCT_STATUS.mac.label}</span></p><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="doc-ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p><a class="arr-link" href="/install#mac">${PRODUCT_STATUS.mac.linkLabel}</a></li>
       </ul>
     </div>
   </div>
@@ -319,7 +329,7 @@ get_evidence_card(video_id)</pre>
         <p class="lede">Get the helper running, add the browser button, and click Uoink on any video or Reddit thread. No Python, no command line, no path wrangling.</p>
         <div class="ctas"><a class="btn primary large with-logo" href="${DOWNLOAD_URL}">${WINDOWS_MARK}Download Windows installer</a><a class="btn ghost large" href="/how-it-works">See how it works</a></div>
         <p class="footnote">The installer is unsigned. Windows SmartScreen will show a warning. <strong>More info → Run anyway</strong>.</p>
-        <p class="sub-cta">Windows 10/11 only / About ${INSTALLER_SIZE} / No admin rights needed</p>
+        <p class="sub-cta">${PRODUCT_STATUS.mac.windowsLabel} / About ${INSTALLER_SIZE} / No admin rights needed</p>${PRODUCT_STATUS.mac.heroLink}
         <div class="brand-strip" aria-label="Install surfaces">
           <!-- GitHub logo source: https://github.com/logos; license/usage confirmation: official GitHub mark, unmodified integration callout under GitHub logo guidelines. -->
           <span class="logo-chip logo-mark"><img src="/assets/brand-logos/github.svg" alt="GitHub" width="22" height="22" loading="lazy" decoding="async" /><span>GitHub Releases</span></span>
@@ -399,8 +409,8 @@ get_evidence_card(video_id)</pre>
           <p class="doc-meta"><b class="platform-label">${MAC_MARK}Mac</b><span>${PRODUCT_STATUS.mac.label}</span></p>
           <h3>${PRODUCT_STATUS.mac.heading}</h3>
           <p class="doc-ver">${PRODUCT_STATUS.mac.tech}</p>
-          <p>${PRODUCT_STATUS.mac.detail}</p>
-          <p class="footnote">Windows 10/11 only</p>
+          <p>${PRODUCT_STATUS.mac.detail}</p>${PRODUCT_STATUS.mac.installSteps}
+          <p class="footnote">${PRODUCT_STATUS.mac.footnote}</p>
         </li>
       </ul>
     </div>
@@ -587,7 +597,7 @@ tools:
   http: ${MCP_TOOL_COUNT}
 install:
   windows: ${CANONICAL_URL}/install#windows
-platform: Windows 10/11 only. No Mac build scheduled.</pre>
+platform: ${PRODUCT_STATUS.mac.visible}</pre>
       ${AGENT_SETUP_HTML}
       <h2>Stdio setup</h2>
       <p>For Claude Desktop, download and open <a href="${GITHUB_URL}/releases/download/${VERSION}/uoink-${VERSION_NUMBER}.mcpb">uoink-${VERSION_NUMBER}.mcpb</a> for one-click Claude Desktop setup. Enter your full Uoink folder path when asked. After updating, reinstall the bundle and restart Desktop.</p>
@@ -641,8 +651,8 @@ platform: Windows 10/11 only. No Mac build scheduled.</pre>
         <p class="facts-head"><span>project posture</span><span>public facts</span></p>
         <dl class="facts-list">
           <div><dt>license</dt><dd>MIT<small>source: github.com/ryanbiddy/uoink</small></dd></div>
-          <div><dt>tracking</dt><dd>none from Uoink<small>Vercel Web Analytics only; cookieless pageviews</small></dd></div>
-          <div><dt>platform</dt><dd>Windows 10/11 only<small>no Mac build scheduled</small></dd></div>
+          <div><dt>tracking</dt><dd>none from Uoink<!-- 3.11: usage-counts --> unless you opt in<!-- /3.11: usage-counts --><small>Vercel Web Analytics only; cookieless pageviews</small></dd></div>
+          <div><dt>platform</dt><dd>${PRODUCT_STATUS.mac.aboutPlatform}<small>${PRODUCT_STATUS.mac.aboutNote}</small></dd></div>
         </dl>
       </aside>
     </div>
@@ -688,8 +698,22 @@ ${DOC_RULE}
       `Read Uoink release notes from 3.4 through ${VERSION_NUMBER}, including Living Library and research playbooks.`,
     keywords: ["uoink changelog", "uoink release notes", "uoink updates", "universal video uoink changelog"],
     html: `
-<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} adds the uoink command, a portable skill, the Claude Code plugin marketplace, and setup recipes for 38 clients and integrations. Earlier releases are listed below, with dates from the product changelog.</p>
-<h2>${VERSION}: Use Uoink from any AI agent</h2><p class="meta"><time datetime="2026-10-19">2026-10-19</time></p>
+<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} <!-- 3.11: smarter-search -->brings smarter search and <!-- /3.11: smarter-search -->moves the MCP server to the official SDK 2.3.0. Earlier releases are listed below, with dates from the product changelog.</p>
+<h2>${VERSION}: <!-- 3.11: smarter-search -->Smarter search and <!-- /3.11: smarter-search -->MCP SDK 2.3.0</h2>
+<!-- 3.11: smarter-search -->
+<p>Search no longer requires every word. It skips common words, matches the words that remain, and ranks sources with every word and exact titles first. In a test of 30 questions over 693 saved sources, keyword search now puts the right source in the top 5 for 24 questions; the old search found it for 10.</p>
+<p>Optional semantic search finds passages with similar meaning even when the words differ. Turn it on in Settings under <strong>Semantic search</strong>. After you accept Google's Gemma terms, Uoink downloads the EmbeddingGemma model once (about 330 MB) and builds its index in the background. It runs on your computer, works offline after setup, and is never bundled with Uoink. In the same test, semantic search found the right source for 27 of 30 questions, and hybrid search, which combines both, found 28. Removing semantic search deletes the model and its index; keyword search keeps working.</p>
+<p>Strict matching is still there: choose <strong>Exact words</strong> in the dashboard, or pass <code>match: "strict"</code> to a search tool. A result includes a quotable passage only when that passage really contains the match. Otherwise <code>passage_verified</code> is false and the result says why.</p>
+<p>For agents, <code>search_library</code>, <code>search_uoinks</code>, and <code>search_clips</code> take optional <code>match</code> (<code>forgiving</code> or <code>strict</code>) and <code>mode</code> (<code>auto</code>, <code>keyword</code>, <code>semantic</code>, or <code>hybrid</code>) parameters; <code>find_mentions</code> takes <code>match</code>. Auto uses hybrid when semantic search is ready and keyword search otherwise, and each response says which mode ran. The MCP server still exposes 91 tools, or 35 with <code>UOINK_MCP_TOOLSET=core</code>. Updating rebuilds the local keyword search index once.</p>
+<!-- /3.11: smarter-search -->
+<p>The MCP server now runs on the official MCP Python SDK 2.3.0. Claude Desktop, Claude Code, Cursor, and Codex keep connecting as before, and apps that speak the newer 2026-07-28 MCP protocol can connect too. No action is needed. The local HTTP endpoint keeps its existing behavior.</p>
+<p><code>uoink connect</code> recipes and the client tables in <a href="${GITHUB_URL}/blob/main/docs/connect-your-agent.md">Connect your agent</a> now list a Linux location where the client has a Linux setup. Clients without a Linux build say so instead of printing another system's path. Continue is set up by hand; the dashboard now shows it as connected once its config launches this Uoink install. Claude Desktop, Cursor, and Cline also count as connected only when an entry launches this install, so an entry that points at an old or moved install shows Connect, which rewrites it and keeps a backup.</p>
+<!-- 3.11: usage-counts -->
+<p>Anonymous usage counts are off by default. If you turn on <strong>Share anonymous usage counts</strong> in Settings, Uoink sends at most one report a day: a random install ID, the app version, your OS family and version, and counts of tool calls, connected AI apps, captures by source type, and searches. It never sends content, URLs, titles, file paths, search text, prompts, or API keys. Settings shows the exact report before it is sent. See <a href="/privacy">Privacy</a> for details.</p>
+<!-- /3.11: usage-counts -->
+${PRODUCT_STATUS.mac.changelog}
+<p>Installing over the previous release keeps your library and saved captures.</p>
+<h2>v3.10.0: Use Uoink from any AI agent</h2><p class="meta"><time datetime="2026-10-19">2026-10-19</time></p>
 <p>The <code>uoink</code> command lets agents search saved sources, read evidence, capture URLs, save notes, and call registry tools from a shell:</p>
 <pre class="code-block">uoink search "working memory" --limit 5
 uoink recent --limit 10
