@@ -1,5 +1,5 @@
-// Generated for Uoink 3.10.0 from ryanbiddy/uoink v3.10.0 on 2026-10-19.
-// Source commit: 0846fd165da36a0784fbef7d927b3ce9aa16cd00
+// Generated for Uoink 3.11.0 from ryanbiddy/uoink v3.11.0 on 2026-10-22.
+// Source commit: 756730c704bfc1327a16ea5591ebfb1852918881
 // HTTP: TOOL_REGISTRY; stdio: registry inventory (3.9.2+) or @mcp.tool decorators.
 // Regenerate with: python scripts/sync-mcp-from-release.py <product-checkout> [--ref <git-ref>]
 
@@ -201,7 +201,7 @@ export const mcpTools = [
   ],
   [
     "find_mentions",
-    "Find every place an entity (person, tool, product, company, or topic) is mentioned across saved uoinks, newest first, each with a timestamped YouTube deep link."
+    "Find every place an entity (person, tool, product, company, or topic) is mentioned across saved uoinks."
   ],
   [
     "analyze_self_channel",
@@ -433,7 +433,7 @@ export const mcpTools = [
   ],
   [
     "search_library",
-    "Bounded clip-first search of the saved library (default 5, at most 20 hits) with an item-text fallback for items without clips."
+    "Bounded clip-first search of the saved library (default 5, at most 20 hits) with verified clip or item-text passages when available."
   ],
   [
     "get_library_item",
