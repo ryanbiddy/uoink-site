@@ -1,3 +1,5 @@
+import { PRODUCT_STATUS } from "./product-status";
+
 // Shared by the developer setup page and the MCP reference.
 export const AGENT_SETUP_HTML = String.raw`
 <h2>Use Uoink from any AI agent</h2>
@@ -10,8 +12,10 @@ uoink connect claude-code
 uoink connect cursor
 uoink connect codex
 uoink connect vscode</pre>
-<p><code>uoink connect --list</code> prints setup choices for 38 clients and integrations. Run <code>uoink connect &lt;client&gt;</code> to print config or instructions. The destination and notes go to stderr; config goes to stdout. It does not edit client settings. Run the printed Claude Code command in PowerShell. For other clients, merge the entry into the location shown, then restart the MCP connection.</p>
+<p><code>uoink connect --list</code> prints setup choices for 48 clients and integrations, 10 of them new in 3.11.0. 45 recipes are checked against each client's official documentation, and each recipe prints its verification status. Run <code>uoink connect &lt;client&gt;</code> to print config or instructions. The destination and notes go to stderr; config goes to stdout. It does not edit client settings. Run the printed Claude Code command in PowerShell. For other clients, merge the entry into the location shown, then restart the MCP connection.</p>
 <p>Cursor's recipe sets <code>UOINK_MCP_TOOLSET=core</code>. In the dashboard, open <strong>Settings &gt; Agents (MCP) &gt; Agent connection</strong> and choose <strong>Add to Cursor</strong> or <strong>Add to VS Code</strong> to open the client's review flow. Client acceptance of these buttons is not yet tested.</p>
+<p>Recipes and the client tables in Connect your agent list a Linux location where the client has a Linux setup. Continue is set up by hand from its recipe; the dashboard shows Continue as connected once its entry launches this install.</p>
+<p>Uoink's MCP server uses the official MCP Python SDK 2.3.0. Claude Desktop, Claude Code, Cursor, and Codex connect as before, and apps that speak the 2026-07-28 MCP protocol can also connect. No action is needed.</p>
 <h3>2. Install the Uoink skill</h3>
 <p>The portable skill teaches Claude Code, Codex, pi, Hermes Agent, and OpenClaw to find evidence, cite sources, and use MCP or the CLI. Run <code>uoink skill path</code> to locate it, or <code>uoink skill install --to &lt;dir&gt;</code> to copy it with its references. The destination is the parent skills directory; Uoink creates a <code>uoink</code> folder inside it. Restart the agent or reload its skills.</p>
 <pre class="code-block"># Choose your agent's directory in PowerShell:
@@ -35,14 +39,20 @@ claude plugin install uoink@uoink</pre>
 uoink recent --limit 10
 uoink note "A useful thought" --title "Research note"</pre>
 <p>Local reads work without the helper running. Capture and paid tools keep their existing requirements and consent gates. See <a href="https://github.com/ryanbiddy/uoink/blob/main/docs/connect-your-agent.md">Connect your agent</a> for commands and known limits.</p>
-<h3>What was tested for 3.10.0</h3>
-<p>Tested on a clean, isolated install:</p>
+<h3>Search options</h3>
+<p>Search matches the useful words in a query; it no longer needs every word. <code>search_library</code>, <code>search_uoinks</code>, and <code>search_clips</code> take optional <code>match</code> and <code>mode</code> parameters, and <code>find_mentions</code> takes <code>match</code>:</p>
 <ul>
-<li>Claude Code 2.1.302 over MCP: all 91 tools listed; a note saved and listed back.</li>
-<li>Claude Code with the Uoink skill and the <code>uoink</code> command only, with no MCP server: the skill loaded, and <code>uoink note</code> and <code>uoink recent</code> ran.</li>
-<li>Codex CLI 0.153.4 over MCP: a note saved and listed back.</li>
-<li>The <code>uoink</code> command: <code>status</code>, <code>note</code>, <code>recent</code>, and <code>connect</code>.</li>
-<li>Claude Code plugin: loads its skill and starts its MCP server. Its tool calls were not run end to end because the test install is isolated from a normal one.</li>
+<li><code>match</code>: <code>forgiving</code> (default) or <code>strict</code>, which requires every word, like <strong>Exact words</strong> in the dashboard.</li>
+<li><code>mode</code>: <code>auto</code> (default), <code>keyword</code>, <code>semantic</code>, or <code>hybrid</code>. Auto uses hybrid when semantic search is ready and keyword search otherwise. Each response says which mode ran.</li>
 </ul>
+<p>Semantic search is optional. A person turns it on in Uoink Settings under <strong>Semantic search</strong> and accepts Google's Gemma terms. Uoink then downloads the EmbeddingGemma model once (about 330 MB) and indexes saved sources on this computer. Until it is ready, use <code>keyword</code> or <code>auto</code>. Quote <code>passage.text</code> only when <code>passage_verified</code> is true; otherwise <code>citation_reason</code> explains why no passage was returned. The tool list is unchanged.</p>
+${PRODUCT_STATUS.mac.agentSetup}
+<h3>What was tested for 3.11.0</h3>
+<p>Tested with the installed 3.11.0 build in an isolated profile:</p>
+<ul>
+<li>Claude Code 2.1.308 over MCP: all 91 tools listed; a tool called.</li>
+<li>Codex CLI 0.153.4 over MCP: two tools called.</li>
+</ul>
+<p>From 3.10.0 testing: Claude Code with the Uoink skill and the <code>uoink</code> command only, with no MCP server, loaded the skill and ran <code>uoink note</code> and <code>uoink recent</code>. The Claude Code plugin loads its skill and starts its MCP server; its tool calls were not run end to end because the test install is isolated from a normal one.</p>
 <p>Not yet tested: Gemini CLI and pi (no sign-in on the test machine) and every other recipe in <code>uoink connect</code>. Claude Desktop and Cursor retain their earlier MCP testing status; that does not verify the new recipes.</p>
 <p>ChatGPT and claude.ai use copy and paste only. Uoink does not connect to the ChatGPT app over MCP.</p>`;

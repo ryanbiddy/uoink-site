@@ -2,7 +2,7 @@
   "name": "io.github.ryanbiddy/uoink",
   "display_name": "Uoink",
   "description": "Uoink keeps videos, podcasts, and articles on your disk for AI search and citations. Claude Desktop, Claude Code, Cursor, and Codex CLI connect over MCP; ChatGPT and claude.ai use copy and paste.",
-  "version": "3.10.0",
+  "version": "3.11.0",
   "homepage": "https://uoink.app",
   "documentation": "https://uoink.app/developers",
   "repository": {
@@ -16,7 +16,7 @@
   },
   "install": {
     "windows": "https://uoink.app/install",
-    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/download/v3.10.0/uoink-3.10.0.mcpb",
+    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/download/v3.11.0/uoink-3.11.0.mcpb",
     "notes": "Unsigned installer, about 390 MB; no admin rights needed. Windows SmartScreen: More info → Run anyway. Then open the .mcpb bundle for one-click Claude Desktop setup, or copy the setup page’s stdio config."
   },
   "transports": [

@@ -1,10 +1,10 @@
 {
   "schema_version": "3.2",
-  "version": "3.10.0",
+  "version": "3.11.0",
   "name": "Uoink MCP Tool Manifest",
   "description": "Local MCP tool inventory with exact registry schemas and supported transports. Both stdio and HTTP advertise flattened top-level schema variants for client compatibility; the server validates the exact registry schemas.",
-  "source": "ryanbiddy/uoink@0846fd165da36a0784fbef7d927b3ce9aa16cd00:uoink_mcp_tools.py",
-  "generated": "2026-10-19",
+  "source": "ryanbiddy/uoink@756730c704bfc1327a16ea5591ebfb1852918881:uoink_mcp_tools.py",
+  "generated": "2026-10-22",
   "tool_count": 91,
   "stdio_tool_count": 91,
   "tools": [
@@ -133,6 +133,26 @@
       "inputSchema": {
         "type": "object",
         "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "keyword",
+              "semantic",
+              "hybrid"
+            ],
+            "default": "auto",
+            "description": "Auto uses hybrid when the local semantic index is ready, otherwise keyword."
+          },
+          "match": {
+            "type": "string",
+            "enum": [
+              "forgiving",
+              "strict"
+            ],
+            "default": "forgiving",
+            "description": "Forgiving matches useful words; strict requires every word."
+          },
           "query": {
             "type": "string"
           },
@@ -167,6 +187,26 @@
       "inputSchema": {
         "type": "object",
         "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "keyword",
+              "semantic",
+              "hybrid"
+            ],
+            "default": "auto",
+            "description": "Auto uses hybrid when the local semantic index is ready, otherwise keyword."
+          },
+          "match": {
+            "type": "string",
+            "enum": [
+              "forgiving",
+              "strict"
+            ],
+            "default": "forgiving",
+            "description": "Forgiving matches useful words; strict requires every word."
+          },
           "query": {
             "type": "string"
           },
@@ -2314,10 +2354,19 @@
     },
     {
       "name": "find_mentions",
-      "description": "Find every place an entity (person, tool, product, company, or topic) is mentioned across saved uoinks, newest first, each with a timestamped YouTube deep link.",
+      "description": "Find every place an entity (person, tool, product, company, or topic) is mentioned across saved uoinks. Rank by name match, with newest first for ties. Results include stored timestamps and source links.",
       "inputSchema": {
         "type": "object",
         "properties": {
+          "match": {
+            "type": "string",
+            "enum": [
+              "forgiving",
+              "strict"
+            ],
+            "default": "forgiving",
+            "description": "Forgiving matches entity name words; strict requires the exact normalized name."
+          },
           "entity": {
             "type": "string",
             "description": "Entity name to look up (case-insensitive)."
@@ -4016,10 +4065,30 @@
     },
     {
       "name": "search_library",
-      "description": "Bounded clip-first search of the saved library (default 5, at most 20 hits) with an item-text fallback for items without clips. Each hit carries the item id, source revision, safe title and link, evidence kind and timing, a 240-character preview and revision-bound card and excerpt URIs for read_library_resource. Results are bounded, not exhaustive; follow next_step when more retrieval is needed.",
+      "description": "Bounded clip-first search of the saved library (default 5, at most 20 hits) with verified clip or item-text passages when available. Check passage_verified before quoting; citation_reason explains missing passages. Each hit carries the item id, source revision, safe title and link, evidence kind and timing, a 240-character preview and revision-bound card and excerpt URIs for read_library_resource. Results are bounded, not exhaustive; follow next_step when more retrieval is needed.",
       "inputSchema": {
         "type": "object",
         "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "keyword",
+              "semantic",
+              "hybrid"
+            ],
+            "default": "auto",
+            "description": "Auto uses hybrid when the local semantic index is ready, otherwise keyword."
+          },
+          "match": {
+            "type": "string",
+            "enum": [
+              "forgiving",
+              "strict"
+            ],
+            "default": "forgiving",
+            "description": "Forgiving matches useful words; strict requires every word."
+          },
           "query": {
             "type": "string",
             "description": "Search text, at most 512 characters."
