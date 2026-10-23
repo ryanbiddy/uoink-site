@@ -1,6 +1,6 @@
-// Uoink — magnet-U web component, size-aware tip colour.
-// At rendered width <=32px, tips are CREAM (high luminance contrast on dark Chrome).
-// Above 32px, tips are ACID yellow (the brand kick).
+// Uoink: magnet-U web component with a size-aware tip drawing.
+// At rendered width <=32px it uses the thicker small tips; above that, the slim tips.
+// Both are ACID yellow #FFD23F at every size, matching Zing's charge (family rule).
 (function () {
   if (customElements.get('uoink-mark')) return;
   const PATH = 'M 0 0 L 32 0 L 32 60 L 68 60 L 68 0 L 100 0 L 100 80 Q 100 100 80 100 L 20 100 Q 0 100 0 80 Z';
@@ -14,7 +14,7 @@
           // large variant — slim acid tips (14% glyph height)
           '<rect class="u-tip-l" x="0"  y="0" width="32" height="14"></rect>' +
           '<rect class="u-tip-l" x="68" y="0" width="32" height="14"></rect>' +
-          // small variant — thicker cream tips (20% glyph height) for favicon legibility
+          // small variant: thicker acid tips (20% glyph height) for small-size legibility
           '<rect class="u-tip-s" x="0"  y="0" width="32" height="20"></rect>' +
           '<rect class="u-tip-s" x="68" y="0" width="32" height="20"></rect>' +
         '</svg>';
