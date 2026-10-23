@@ -1,7 +1,7 @@
 <!-- updated: 2026-10-22 / uoink v3.11.0 -->
 # Uoink 3.11.0: smarter search, MCP SDK 2.3.0, and agent setup
 
-> A local library for the videos and podcasts you study, that any AI you use can search and cite.
+> A local library of the YouTube videos, podcasts and articles you study, saved on your Windows PC, that your AI can search and cite with timestamps.
 
 Free, MIT-licensed. No account or Uoink-hosted corpus. Model dependencies can send telemetry. Made by Ryan Biddy (@replayryan), a personal side project.
 

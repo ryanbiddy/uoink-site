@@ -1,5 +1,5 @@
 # Uoink v3.11.0
-A local library for the videos and podcasts you study, that any AI you use can search and cite.
+A local library of the YouTube videos, podcasts and articles you study, saved on your Windows PC, that your AI can search and cite with timestamps.
 
 ## What it does
 - Capture YouTube videos with transcripts, frames, and comments.
