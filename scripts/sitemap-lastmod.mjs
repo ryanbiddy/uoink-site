@@ -10,7 +10,7 @@ function sourceFiles(route) {
   let entry = route === '/' ? 'app/page.tsx' : `app${route}/page.tsx`;
   if (route === '/blog/rss.xml') entry = 'app/blog/rss.xml/route.ts';
   if (!fs.existsSync(path.join(root, entry))) {
-    entry = route.startsWith('/features/') ? 'app/features/[slug]/page.tsx' : 'app/blog/[slug]/page.tsx';
+    entry = route.startsWith('/compare/') ? 'app/compare/[slug]/page.tsx' : route.startsWith('/features/') ? 'app/features/[slug]/page.tsx' : 'app/blog/[slug]/page.tsx';
   }
   const found = new Set();
   function visit(file) {
@@ -27,6 +27,7 @@ function sourceFiles(route) {
   visit(path.join(root, entry));
   visit(path.join(root, 'app/layout.tsx'));
   if (route.startsWith('/blog/') && route !== '/blog/rss.xml') visit(path.join(root, `content${route}.md`));
+  if (route.startsWith('/compare/') && route !== '/compare/notebooklm') visit(path.join(root, `content/compare/uoink-vs-${route.split('/').at(-1)}.md`));
   if (route === '/') visit(path.join(root, 'public/hero-story.js'));
   return [...found].map(relative);
 }
