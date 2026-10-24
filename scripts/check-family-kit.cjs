@@ -30,11 +30,11 @@ const { FamilyWordmark } = require("../app/components/FamilyWordmark.tsx");
 const actualCard = renderToStaticMarkup(React.createElement(SavedSourceCard));
 // The reference shows review footage; this public repo uses the neutral manifest
 // entry, so swap in the manifest's text and compare layout, not content.
-const media = require("../app/content/family-media.json").savedSource;
+const labels = require("../public/media/hero/labels.json").example;
 const referenceCard = reference.match(/<div class="saved-source"[^>]*><img[^>]*><div class="source-meta">[\s\S]*?<\/div><\/div>/)[0]
-  .replace('data-image="source"', 'src="/assets/family/source.jpg"')
-  .replace(/ThursdAI \/ Swyx/g, media.title)
-  .replace(/alt="[^"]*"/, `alt="${media.thumbnailAlt}"`);
+  .replace(/<img[^>]*>/, '')
+  .replace(/<strong>[^<]*<\/strong>/, `<strong>${labels.savedTitle}</strong>`)
+  .replace(/<span>[^<]*<\/span>/, `<span>· ${labels.savedTimestamp} · ${labels.savedStatus}</span>`);
 function fixture(isReference, marks = false) {
   const specimens = ["cream", "ink", "field"].flatMap(ground => [96, 48, 28, 16].flatMap(cap => ["u", "z"].map(brand =>
     `<div style="padding:20px;overflow:auto;background:${ground === "cream" ? "#FFF4EC" : ground === "ink" ? "#0A0A0A" : brand === "u" ? "#C2410C" : "#002C9B"}">${renderToStaticMarkup(React.createElement(FamilyWordmark, { brand, cap, ground }))}</div>`))).join("");
@@ -110,7 +110,8 @@ async function captureYellow(page, file, fullPage = false) {
               stripWordmarks: document.querySelectorAll('.family-footer .family-wordmark[data-brand="u"]').length,
               closingLine: document.querySelector('.site-footer > [data-final-cta]')?.textContent.trim(),
               cards: document.querySelectorAll(".saved-source").length,
-              buttons: [...document.querySelectorAll("button, .btn, .nav-cta, .button")].filter(visible).map(el => {
+              // Receipt passage jumps are inline citation controls in WEB-4.
+              buttons: [...document.querySelectorAll("button:not(.receipt-jump), .btn, .nav-cta, .button")].filter(visible).map(el => {
                 const s = getComputedStyle(el);
                 return { text: el.textContent.trim(), height: el.getBoundingClientRect().height, radius: s.borderRadius, padding: s.padding, size: s.fontSize, weight: s.fontWeight, line: s.lineHeight };
               }),
@@ -120,7 +121,7 @@ async function captureYellow(page, file, fullPage = false) {
           assert.equal(m.header, 120, `${stem} ${route}: header`);
           assert(Math.abs(m.cap - 24) < .01, `${stem} ${route}: cap ${m.cap}`);
           assert.equal(m.overflow, 0, `${stem} ${route}: overflow`);
-          assert.equal(m.footer, 1); assert.equal(m.cards, 0);
+          assert.equal(m.footer, 1); assert.equal(m.cards, route === "/" ? 1 : 0);
           assert.equal(m.footerWordmarks, 1, `${stem} ${route}: exactly one UOINK wordmark in footer area`);
           assert.equal(m.stripWordmarks, 1, `${stem} ${route}: footer wordmark belongs to family strip`);
           assert.equal(m.closingLine, "Take the video. Make it usable.");
@@ -142,7 +143,7 @@ async function captureYellow(page, file, fullPage = false) {
         assert.equal(await cta.evaluate(el => getComputedStyle(el).backgroundColor), width === 390 ? "rgb(194, 65, 12)" : "rgb(155, 45, 14)");
         await page.keyboard.press("Tab"); await cta.focus();
         assert.equal(await cta.evaluate(el => getComputedStyle(el).outlineWidth), "3px");
-        const secondary = page.locator("main .btn.ghost").first();
+        const secondary = page.locator('.receipt-picker .button[aria-pressed="false"]').first();
         await secondary.hover(); await page.waitForTimeout(200);
         assert.equal(await secondary.evaluate(el => getComputedStyle(el).backgroundColor), width === 390 ? "rgb(255, 244, 236)" : "rgb(234, 217, 204)");
         await page.keyboard.press("Tab"); await secondary.focus();
@@ -200,6 +201,8 @@ async function captureYellow(page, file, fullPage = false) {
         await page.emulateMedia({ reducedMotion: "no-preference" });
         await page.getByRole("button", { name: "Send it back" }).click();
         await page.emulateMedia({ reducedMotion: "reduce" });
+        // Media-query change listeners run on a rendering update after CDP acknowledges.
+        await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
         const interrupted = await handle.boundingBox();
         await page.waitForTimeout(400);
         assert.deepEqual(await handle.boundingBox(), interrupted, "Preference change cancels active motion");
