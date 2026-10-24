@@ -59,6 +59,33 @@ export function inputVariants(schema: Schema): Schema[] {
   }));
 }
 
+export function inputType(input: Schema, root: Schema): string {
+  const schema = resolveSchema(input, root);
+  if (schema.enum) {
+    if (schema.enum.some(value => value !== null && typeof value === "object")) return "see full schema";
+    return `one of: ${schema.enum.map(value => String(value)).join(", ")}`;
+  }
+  if (schema.anyOf) {
+    const variants = schema.anyOf.map(value => resolveSchema(value, root));
+    const types = [...new Set(variants.filter(value => value.type !== "null").map(value => inputType(value, root)))];
+    return types.length ? types.join(" or ") + (variants.some(value => value.type === "null") ? " or empty" : "") : "see full schema";
+  }
+  switch (schema.type) {
+    case "string": return "text";
+    case "integer": return "whole number";
+    case "number": return "number";
+    case "boolean": return "true or false";
+    case "array": return `list of ${inputType(schema.items || {}, root)}`;
+    case "object": return "object";
+    default: return "see full schema";
+  }
+}
+
+export function inputDefault(schema: Schema): string {
+  const value = JSON.stringify(schema.default);
+  return value?.includes("{") ? "see full schema" : value ?? "see full schema";
+}
+
 // Illustrative request values, never captured results. Defaults/enums come from
 // the registry. Strings and minimum numeric values are replaceable placeholders.
 function exampleValue(input: Schema, root: Schema, name: string): unknown {

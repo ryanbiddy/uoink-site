@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { TopNav } from "../../../components/TopNav";
 import { SiteFooter } from "../../../components/SiteFooter";
-import { displayText, exampleCall, inputVariants, resolveSchema, toolAnswer, toolDescription, toolManifest, toolPages, toolPath, toolTitle } from "../../../content/mcp-tool-pages";
+import { displayText, exampleCall, inputDefault, inputType, inputVariants, resolveSchema, toolAnswer, toolDescription, toolManifest, toolPages, toolPath, toolTitle } from "../../../content/mcp-tool-pages";
 import "./tool-page.css";
 
 type Props = { params: Promise<{ tool: string }> };
@@ -50,15 +50,15 @@ export default async function ToolPage({ params }: Props) {
             {!Object.keys(variant.properties || {}).length ? <p>No input arguments.</p> : <dl className="mcp-tool-inputs">
               {Object.entries(variant.properties || {}).map(([name, raw]) => {
                 const schema = resolveSchema(raw, tool.inputSchema);
-                const { description, ...constraints } = schema;
+                const { description } = schema;
                 return <div key={name}>
                   <dt><code>{name}</code><span>{variant.required?.includes(name) ? "Required" : "Optional"}</span></dt>
-                  <dd>{description && <p>{displayText(description)}</p>}<pre>{displayText(JSON.stringify(constraints, null, 2))}</pre></dd>
+                  <dd>{description && <p>{displayText(description)}</p>}<p data-input-type>{displayText(inputType(schema, tool.inputSchema))}{"default" in schema && ` (default: ${displayText(inputDefault(schema))})`}</p></dd>
                 </div>;
               })}
             </dl>}
           </div>)}
-          <details><summary>Exact input schema</summary><pre>{displayText(JSON.stringify(tool.inputSchema, null, 2))}</pre></details>
+          <details><summary>Full input schema</summary><pre>{JSON.stringify(tool.inputSchema, null, 2).replace(/\u2014/g, "\\u2014")}</pre></details>
         </section>
         <section id="outputs">
           <h2>Outputs and behavior</h2>

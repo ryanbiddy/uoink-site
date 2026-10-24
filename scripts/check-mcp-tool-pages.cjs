@@ -56,6 +56,10 @@ const samples = new Set(['search_clips', 'get_schema_version', 'claim_library_wo
         h1: [...document.querySelectorAll('h1')].map(el => el.textContent),
         links: [...document.querySelectorAll('a[href]')].map(el => el.getAttribute('href')),
         answer: document.querySelector('[data-tool-answer]')?.textContent,
+        inputRows: document.querySelectorAll('.mcp-tool-inputs dd').length,
+        inputTypes: [...document.querySelectorAll('.mcp-tool-inputs [data-input-type]')].map(el => el.textContent),
+        inputSchemas: [...document.querySelectorAll('#inputs details')].filter(el => el.querySelector('summary')?.textContent === 'Full input schema').map(el => JSON.parse(el.querySelector('pre').textContent)),
+        rawInputBlocks: document.querySelectorAll('.mcp-tool-inputs pre').length,
         examples: [...document.querySelectorAll('[data-example-call]')].map(el => JSON.parse(el.textContent)),
         text: document.querySelector('main').textContent,
         overflow: document.documentElement.scrollWidth - innerWidth,
@@ -82,6 +86,10 @@ const samples = new Set(['search_clips', 'get_schema_version', 'claim_library_wo
       }
       const tool = manifest.tools.find(tool => route.endsWith('/' + tool.name));
       assert.equal(data.h1[0], tool.name);
+      assert.equal(data.inputTypes.length, data.inputRows, `${route}: every input needs a type`);
+      for (const type of data.inputTypes) assert(type && !type.includes('{'), `${route}: raw JSON in type cell`);
+      assert.equal(data.rawInputBlocks, 0, `${route}: raw schema outside disclosure`);
+      assert.deepEqual(data.inputSchemas, [tool.inputSchema], `${route}: full input schema disclosure must match manifest`);
       assert(data.title && !titles.has(data.title), `${route}: duplicate or empty title`);
       assert(data.description && !descriptions.has(data.description), `${route}: duplicate or empty description`);
       titles.add(data.title); descriptions.add(data.description);
