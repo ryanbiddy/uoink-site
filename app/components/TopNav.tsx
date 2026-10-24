@@ -37,7 +37,7 @@ function NavLink({ href, label, active }: { href: string; label: string; active:
 
 export function TopNav({ active }: { active: string }) {
   return (
-    <header className="site-header family-header">
+    <header className="site-header family-header" data-home-part={active === "/" ? "header" : undefined}>
       <div className="container">
         <div className="site-header-top">
           <Link href="/" className="brand-link" aria-label="Uoink home">

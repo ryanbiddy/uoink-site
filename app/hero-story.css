@@ -180,7 +180,12 @@ h5{margin:0}
 /* Native sticky scenes, with a fully expanded baseline before JS. */
 .site-root:has(.hero-story) > .site-header { position: relative; }
 html:has(.hero-story) { scroll-behavior: auto; scroll-padding-top: 0; }
-.hero-story { --yellow:#FFD23F; --deep-rust:#9B2D0E; --scene-height:max(760px,100svh); color:#0A0A0A; background:#FFF4EC; font-family:var(--body); }
+.hero-story { position:relative; --yellow:#FFD23F; --deep-rust:#9B2D0E; --scene-height:max(760px,100svh); color:#0A0A0A; background:#FFF4EC; font-family:var(--body); }
+.story-motion-control { position:absolute; right:20px; top:12px; z-index:2; }
+.hero-story .story-motion-control button { background:transparent; color:var(--deep-rust); border-color:#C9A18B; }
+.hero-story:not(.enhanced) .story-motion-control { display:none; }
+.hero-story .u-opening { padding-top:76px; }
+html[data-motion-paused="true"] *,html[data-motion-paused="true"] *::before,html[data-motion-paused="true"] *::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }
 .hero-story :is(h1,h2,h5,p,ol,ul) { margin-top:0; }
 .hero-story p { margin-bottom:0; }
 .hero-story h1 { font-size:54px; line-height:54px; font-weight:800; letter-spacing:-.06em; margin-bottom:0; }
@@ -239,6 +244,11 @@ html:has(.hero-story) { scroll-behavior: auto; scroll-padding-top: 0; }
 .hero-story:not(.enhanced) .incoming-sources,.hero-story.no-motion .incoming-sources { display:none; }
 .hero-story:not(.enhanced) .magnet-demo,.hero-story.no-motion .magnet-demo { height:150px; }
 .go-deeper { padding:64px 0; }
+.home-proof,.home-sibling { padding:32px 0; border-top:1px solid var(--line-strong); }
+.home-proof p { margin:0 0 12px; font-size:14px; }
+.home-sibling h2 { font-size:32px; line-height:1.15; letter-spacing:-.035em; }
+.home-sibling p { margin:16px 0; }
+.site-footer[data-home-part="footer"] { padding-bottom:0; }
 .go-deeper h2 { font-size:40px; letter-spacing:-.04em; }
 .go-deeper-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:32px; }
 .go-deeper-grid>a { display:flex; align-items:center; min-height:72px; padding:16px; border:1px solid var(--line-strong); color:inherit; font-weight:700; text-decoration:none; }

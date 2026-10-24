@@ -14,6 +14,7 @@ fs.mkdirSync(shots, {recursive:true});
 const story = require('../app/content/hero-story.json');
 const labels = require('../public/media/hero/labels.json');
 const {slots,folder} = require('./hero-media.cjs');
+const {checkStructure,checkMoves,checkPause} = require('./check-home-review.cjs');
 const resolveLabels = text => text.replace(/\{\{([\w.]+)\}\}/g, (_, key) => key.split('.').reduce((node,part)=>node[part],labels));
 const media = require('../app/content/family-media.json');
 const home = fs.readFileSync(path.join(out,'index.html'),'utf8');
@@ -45,9 +46,7 @@ for (const entry of media.legacyAssets) {
 }
 for (const entry of media.approvedAssets) assert.equal(crypto.createHash('sha256').update(fs.readFileSync(entry.path)).digest('hex'),entry.sha256,`Unreviewed asset: ${entry.path}`);
 for (const scene of story.scenes) assert(fs.existsSync(path.join(out,scene.href+'.html')), `Missing scene route ${scene.href}`);
-// Every old homepage destination remains in the new exported page.
-const previous = execFileSync('git',['show','HEAD:app/content/pages.ts'],{encoding:'utf8'}).split('  home: {')[1].split('  install: {')[0];
-for (const [,href] of previous.matchAll(/href="([^"$]+)"/g)) assert(html.includes(`href="${href}"`), `Lost home link ${href}`);
+// Removed home text and links are checked on their target routes below.
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.woff':'font/woff','.woff2':'font/woff2'};
 const server=http.createServer((req,res)=>{
   const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
@@ -73,6 +72,8 @@ const results=[], fitIssues=[];
   }
   const staticContext=await context(390,'light','reduce',{javaScriptEnabled:false});
   const staticPage=await staticContext.newPage(); await staticPage.goto(origin);
+  await checkStructure(staticPage);
+  const movedContent = await checkMoves(staticPage,out);
   for(const scene of story.scenes) {
    const text=await staticPage.locator('#'+scene.id).textContent();
    for(const value of scene.strings) assert(text.includes(resolveLabels(value)),`Static scene ${scene.id}: ${resolveLabels(value)}`);
@@ -96,6 +97,7 @@ const results=[], fitIssues=[];
    const ctx=await context(width,theme,motion), page=await ctx.newPage(), errors=[];
    page.on('pageerror',error=>errors.push(error.message));
    await page.goto(origin); await page.locator('.hero-story.enhanced').waitFor(); await page.evaluate(()=>document.fonts.ready);
+   const pageHeight = await checkStructure(page);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'No horizontal overflow');
    const sources=await page.locator('.hero-story video').evaluateAll(videos=>videos.map(video=>new URL(video.src).pathname));
    assert.deepEqual(sources,heroMedia,'All rendered hero media comes from manifest');
@@ -112,6 +114,7 @@ const results=[], fitIssues=[];
     }
    }
    if(width===390&&theme==='light'&&motion==='no-preference') {
+    await checkPause(page);
      await page.locator('.hero-media-gallery').evaluate(el=>window.scrollTo(0,el.getBoundingClientRect().top+scrollY-20));
      await page.screenshot({path:path.join(shots,'media-390-light.png')});
      await page.evaluate(()=>window.scrollTo(0,0));
@@ -154,7 +157,7 @@ const results=[], fitIssues=[];
     assert.equal(await page.locator('.scene-sticky').first().evaluate(el=>getComputedStyle(el).position),'relative');
    }
    if(motion==='reduce') {assert.equal(await page.locator('.tab-panel:visible').count(),6); assert.equal(await page.locator('.receipt-detail:visible').count(),3);}
-   assert.deepEqual(errors,[]);results.push({width,theme,motion,errors}); await ctx.close();
+   assert.deepEqual(errors,[]);results.push({width,theme,motion,pageHeight,errors}); await ctx.close();
   }
   assert.deepEqual(fitIssues,[], 'Every scene must fit the phone viewport');
   if(!process.argv.includes('--no-record')) {
@@ -203,7 +206,7 @@ const results=[], fitIssues=[];
    assert.equal(conversion.status,0,conversion.stderr);
    results.push({recording:'rec-hero-uoink.mp4',width:390,height:844,receiptTap:true,finalScroll});
   }
-  fs.writeFileSync(path.join(shots,'results.json'),JSON.stringify({strings:story.scenes.reduce((n,s)=>n+s.strings.length,0),mediaBytes,results},null,2));
-  console.log(`PASS: ${story.scenes.reduce((n,s)=>n+s.strings.length,0)} static scene strings, 9 exact scene links, 6 Go deeper cards, old home links, no em dashes, folder-based hero media (${mediaBytes} bytes), no missing exported media, editable text-only source cards, receipt tap/keyboard/tabs, reduced motion, no JS, phone/desktop, local-only Chrome, proof saved. Run check-public-media.cjs separately for the repository-wide media gate.`);
+  fs.writeFileSync(path.join(shots,'results.json'),JSON.stringify({strings:story.scenes.reduce((n,s)=>n+s.strings.length,0),mediaBytes,movedContent,results},null,2));
+  console.log(`PASS: exact home order, all moved text/links on target routes, Pause motion, footer boundary, ${story.scenes.reduce((n,s)=>n+s.strings.length,0)} static scene strings, 9 exact scene links, 6 Go deeper cards, no em dashes, folder-based hero media (${mediaBytes} bytes), no missing exported media, editable text-only source cards, receipt tap/keyboard/tabs, reduced motion, no JS, phone/desktop, local-only Chrome, proof saved. Run check-public-media.cjs separately for the repository-wide media gate.`);
  } finally {for(const ctx of contexts) await ctx.close().catch(()=>{});server.close();}
 })().catch(error=>{console.error(error);server.close();process.exitCode=1;});

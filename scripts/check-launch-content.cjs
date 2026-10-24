@@ -7,7 +7,7 @@ require.extensions[".ts"] = (module, file) => module._compile(ts.transpileModule
 }).outputText, file);
 
 const release = require("../content/release.json");
-const { pages, VERSION, VERSION_NUMBER, DOWNLOAD_URL, INSTALLER_SIZE } = require("../app/content/pages.ts");
+const { pages, HOME_MOVED_CONTENT, VERSION, VERSION_NUMBER, DOWNLOAD_URL, INSTALLER_SIZE } = require("../app/content/pages.ts");
 const { mcpTools, mcpStdioToolNames, MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT } = require("../app/content/mcp-tools.ts");
 const { CLAUDE_CODE_COMMAND, MCP_CURSOR_CONFIG, MCP_STDIO_CONFIG } = require("../app/content/mcp-config.ts");
 const { features } = require("../app/features/feature-data.ts");
@@ -73,7 +73,7 @@ for (const fact of ["no longer needs every word", "<code>match</code>", "<code>m
 assert(!AGENT_SETUP_HTML.includes("On a Mac"), "Agent setup: Mac section");
 // No Mac build ships, so pages keep the Windows-only copy.
 assert(pages.install.html.includes("<h3>No Mac build scheduled.</h3>") && pages.install.html.includes('<p class="footnote">Windows 10/11 only</p>') && pages.install.html.includes("Windows 10/11 only / About"), "install: no-Mac copy");
-assert(pages.home.html.includes("Windows 10/11 only. No Mac build scheduled.</p>") && pages.home.html.includes("Mac status ->"), "home: no-Mac copy");
+assert(pages.home.html.includes("Windows 10/11 only. No Mac build scheduled.</p>") && HOME_MOVED_CONTENT['/install'].includes("Mac status ->"), "home platform fact and relocated install status");
 assert(pages.mcp.html.includes("platform: Windows 10/11 only. No Mac build scheduled.</pre>"), "mcp: no-Mac copy");
 assert(pages.about.html.includes("Windows 10/11 only<small>no Mac build scheduled</small>"), "about: no-Mac copy");
 assert(fs.readFileSync("app/developers/page.tsx", "utf8").includes("__html: AGENT_SETUP_HTML"));
@@ -82,7 +82,7 @@ assert(!AGENT_SETUP_HTML.includes("38 clients"), "Agent setup: stale client coun
 for (const feature of features) {
   for (const name of feature.mcpTools) assert(mcpTools.some(([tool]) => tool === name), `${feature.slug}: unknown tool ${name}`);
 }
-for (const text of ["Living Library and research", "Clip search + evidence cards", "Standing capture", "Library reach over MCP", "Cited range export", "Chapter navigation", "Five research playbooks", "ScrapeCreators", "25-credit daily cap", "Caption rate limits", "five-step strip"]) assert(pages.home.html.includes(text), text);
+for (const text of ["Living Library and research", "Clip search + evidence cards", "Standing capture", "Library reach over MCP", "Cited range export", "Chapter navigation", "Five research playbooks", "ScrapeCreators", "25-credit daily cap", "Caption rate limits", "five-step strip"]) assert(HOME_MOVED_CONTENT['/changelog'].includes(text), `Relocated to changelog: ${text}`);
 for (const text of ["unsigned", "SmartScreen will show a warning", "More info → Run anyway", INSTALLER_SIZE, "No admin rights needed", "reload the extension once", "bkcapfidedhfcjpmjabeopfbcjcbmdmi", "reapply your extension preferences", "saved captures are unaffected"]) assert(pages.install.html.includes(text), text);
 for (const text of ["Connected agents can start paid Anthropic calls", "even when automatic analysis is off", "ScrapeCreators", "credit confirmation", "separately enabled agent discovery", "typed handle, channel ID, or query", "request identity", "normalized candidates", "credit accounting", "partial and failed runs", "daily purge", "older than 90 days", "up to 30 days old"]) assert(pages.privacy.html.includes(text), text);
 const versions = [...pages.changelog.html.matchAll(/<h2>v(\d+\.\d+\.\d+)/g)].map(match => match[1]);
@@ -124,7 +124,7 @@ const telemetryText = [...Object.values(pages).map(page => [page.html, page.desc
 for (const text of telemetryText) assert(!/\bno[- ]telemetry\b|none in the app/i.test(text), `"no telemetry" without the opt-in exception: ${text.slice(0, 80)}`);
 assert(features.find(feature => feature.slug === "no-cloud").whatItDoes.includes("Anonymous usage counts are off by default"), "no-cloud: opt-in usage counts");
 assert(features.find(feature => feature.slug === "memory-search").whatItDoes.includes("Search no longer needs every word"), "memory-search: smarter search");
-assert(pages.home.html.includes("Smarter search"), "home: smarter search");
+assert(HOME_MOVED_CONTENT['/changelog'].includes("Smarter search"), "changelog: relocated smarter search");
 assert(pages.privacy.faq.some(item => item.question === "Does semantic search send my library anywhere?"), "privacy: semantic search FAQ");
 const llmsFull = fs.readFileSync("public/llms-full.txt", "utf8");
 for (const fact of ["Uoink-Setup-3.11.0.exe: 390,064,945 bytes (about 390 MB). SHA-256: `639bf5c9c452a480afbfb71cbd5c9f6ba506b881f562f42e4078f6dbbe6e0bab`.", "uoink-3.11.0.mcpb: 90,345 bytes. SHA-256: `3b29aeb457349e68e31e1465179d0d475b554771f6cd526d6538c6c847e945e6`."]) assert(llmsFull.includes(fact), `llms-full.txt checksums: ${fact}`);

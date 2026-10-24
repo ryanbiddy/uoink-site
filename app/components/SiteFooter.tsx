@@ -2,15 +2,15 @@ import Link from "next/link";
 import { FamilyStrip } from "./FamilyStrip";
 import { CONTACT_EMAIL, GITHUB_URL, X_HANDLE, X_URL, VERSION } from "../content/pages";
 
-export function SiteFooter() {
+export function SiteFooter({ home = false }: { home?: boolean }) {
+  const closing = <section className="home-end" data-final-cta data-home-part={home ? "closing" : undefined}>
+    <div className="container"><p className="display-m">Take the video. Make it usable.</p></div>
+  </section>;
   return (
-    <footer className="site-footer">
-      <section className="home-end" data-final-cta>
-        <div className="container">
-          <p className="display-m">Take the video. Make it usable.</p>
-        </div>
-      </section>
-      <FamilyStrip />
+    <>
+    {home && closing}
+    <footer className="site-footer" data-home-part={home ? "footer" : undefined}>
+      {!home && <>{closing}<FamilyStrip /></>}
       <div className="container footer-grid">
         <div className="footer-brand">
           <p>Local video and podcast corpus software. Open source. No Uoink cloud.</p>
@@ -86,6 +86,8 @@ export function SiteFooter() {
         <span>uoink.app / {VERSION} / 2026</span>
         <span>Local-first. Model-agnostic. MIT.</span>
       </div>
+      {home && <FamilyStrip />}
     </footer>
+    </>
   );
 }

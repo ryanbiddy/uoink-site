@@ -15,4 +15,5 @@ const heroMedia = `<div class="hero-media-gallery" aria-label="Saved video examp
 
 const storyHtml = story.html.replace("{{savedSource}}", savedSource).replace("{{heroMedia}}", heroMedia).replace(/\{\{([\w.]+)\}\}/g, (_, key: string) => label(key)).replace(story.returnToDraft,
   `<span data-return-label="draft">${story.returnToDraft}</span><span data-return-label="answer" hidden>${story.returnToAnswer}</span>`);
-export const HERO_HTML = `<div class="hero-story" id="uoink-home">${storyHtml}<a class="scene-deeper source-disclosure" href="#live-uoink">${story.deeperLabel} <span aria-hidden="true">↓</span></a></div>`;
+const filmHtml = storyHtml.replace(/<\/div>$/, `<a class="scene-deeper source-disclosure" href="#live-uoink">${story.deeperLabel} <span aria-hidden="true">↓</span></a></div>`);
+export const HERO_HTML = `<div class="hero-story" id="uoink-home"><div class="story-motion-control"><button type="button" id="story-motion-toggle" aria-pressed="false" data-pause="Pause motion" data-resume="Resume motion">Pause motion</button></div>${filmHtml}</div>`;

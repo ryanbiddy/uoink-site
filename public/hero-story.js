@@ -1,14 +1,20 @@
 // WEB-4 interactions using native scrolling and Web Animations.
-(() => {
-  const root = document.querySelector('.hero-story');
+window.initUoinkStory = root => {
   if (!root) return;
+  const listeners = [];
+  const on = (target, event, callback) => {
+    target.addEventListener(event, callback);
+    listeners.push(() => target.removeEventListener(event, callback));
+  };
   const all = (selector, parent = root) => [...parent.querySelectorAll(selector)];
   const one = (selector, parent = root) => parent.querySelector(selector);
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
+  let paused = false;
+  const still = () => paused || preference.matches;
   let receipt = 'job', opener = null;
   const animations = new Set();
   const animate = (element, frames, options = {}) => {
-    if (preference.matches || !element) return;
+    if (still() || document.hidden || !element) return;
     const animation = element.animate(frames, { duration: 340, easing: 'cubic-bezier(.2,.7,.3,1)', ...options });
     animations.add(animation);
     animation.finished.catch(() => {}).finally(() => animations.delete(animation));
@@ -20,13 +26,13 @@
     const select = (index, focus = false) => {
       selected = index;
       buttons.forEach((button, i) => { button.setAttribute('aria-selected', String(i === index)); button.tabIndex = i === index ? 0 : -1; });
-      panels.forEach((panel, i) => { panel.hidden = !preference.matches && i !== index; });
+      panels.forEach((panel, i) => { panel.hidden = !still() && i !== index; });
       if (focus) buttons[index].focus();
       highlight(one('mark', panels[index]));
     };
     buttons.forEach((button, i) => {
-      button.addEventListener('click', () => select(i));
-      button.addEventListener('keydown', event => {
+      on(button, 'click', () => select(i));
+      on(button, 'keydown', event => {
         if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
         event.preventDefault();
         select(event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1 : (selected + (event.key === 'ArrowRight' ? 1 : -1) + buttons.length) % buttons.length, true);
@@ -36,13 +42,13 @@
   });
   function showReceipt(key, focus = false) {
     receipt = key;
-    all('[data-receipt-card]').forEach(card => { card.hidden = !preference.matches && card.dataset.receiptCard !== key; });
+    all('[data-receipt-card]').forEach(card => { card.hidden = !still() && card.dataset.receiptCard !== key; });
     all('[data-receipt-select]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.receiptSelect === key)));
     const card = one(`[data-receipt-card="${key}"]`);
     highlight(one('mark', card));
     if (focus) { card.tabIndex = -1; card.focus({ preventScroll: true }); }
   }
-  all('[data-receipt]').forEach(chip => chip.addEventListener('click', () => {
+  all('[data-receipt]').forEach(chip => on(chip, 'click', () => {
     opener = chip;
     showReceipt(chip.dataset.receipt, true);
     const back = one('.back-to-draft');
@@ -50,14 +56,14 @@
     // Both labels are exported in the content HTML.
     all('[data-return-label]', back).forEach(label => { label.hidden = (label.dataset.returnLabel === 'answer') !== !!chip.closest('.library-answer'); });
   }));
-  all('[data-receipt-select]').forEach(button => button.addEventListener('click', () => showReceipt(button.dataset.receiptSelect)));
-  all('[data-jump]').forEach(button => button.addEventListener('click', () => {
+  all('[data-receipt-select]').forEach(button => on(button, 'click', () => showReceipt(button.dataset.receiptSelect)));
+  all('[data-jump]').forEach(button => on(button, 'click', () => {
     const line = one(`#receipt-line-${button.dataset.jump}`);
     line.focus({ preventScroll: true }); highlight(one('mark', line));
   }));
-  one('.back-to-draft').addEventListener('click', () => requestAnimationFrame(() => opener?.focus({ preventScroll: true })));
+  on(one('.back-to-draft'), 'click', () => requestAnimationFrame(() => opener?.focus({ preventScroll: true })));
   const answer = () => animate(one('.library-answer'), [{ opacity: .25, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }]);
-  one('#ask-library').addEventListener('click', answer);
+  on(one('#ask-library'), 'click', answer);
   function enter(scene) {
     const calendar = one('.relative-calendar', scene);
     if (calendar) {
@@ -80,12 +86,36 @@
   }), { threshold: [.0, .2] });
   function refresh() {
     animations.forEach(animation => animation.cancel());
-    root.classList.toggle('no-motion', preference.matches);
+    document.documentElement.dataset.motionPaused = String(still());
+    root.classList.toggle('no-motion', still());
+    if (still() || document.hidden) {
+      document.getAnimations().forEach(animation => animation.cancel());
+      document.querySelectorAll('video,audio').forEach(media => media.pause());
+    }
+    document.dispatchEvent(new Event('uoink-motion-change'));
     tabs.forEach(refreshTab => refreshTab()); showReceipt(receipt);
     observer.disconnect();
-    if (!preference.matches) all('.scene-sticky').forEach(scene => observer.observe(scene));
+    if (!still() && !document.hidden) all('.scene-sticky').forEach(scene => observer.observe(scene));
   }
+  const toggle = one('#story-motion-toggle');
+  on(toggle, 'click', () => {
+    paused = !paused;
+    toggle.textContent = paused ? toggle.dataset.resume : toggle.dataset.pause;
+    toggle.setAttribute('aria-pressed', String(paused));
+    refresh();
+  });
+  // Also guard native media play controls and future autoplay slots while paused.
+  const guardMedia = event => { if (still() || document.hidden) event.target.pause(); };
+  document.addEventListener('play', guardMedia, true);
   root.classList.add('enhanced');
-  refresh(); preference.addEventListener('change', refresh);
-  document.addEventListener('visibilitychange', () => { if (document.hidden) animations.forEach(animation => animation.cancel()); });
-})();
+  refresh(); on(preference, 'change', refresh);
+  on(document, 'visibilitychange', refresh);
+  return () => {
+    observer.disconnect(); animations.forEach(animation => animation.cancel());
+    listeners.forEach(remove => remove());
+    document.removeEventListener('play', guardMedia, true);
+    delete document.documentElement.dataset.motionPaused;
+    root.classList.remove('enhanced', 'no-motion');
+    document.dispatchEvent(new Event('uoink-motion-change'));
+  };
+};

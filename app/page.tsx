@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageShell } from "./components/PageShell";
 import { pages } from "./content/pages";
-import Script from "next/script";
+import { HeroMotion } from "./components/HeroMotion";
 import "./hero-story.css";
 
 const page = pages.home;
@@ -15,5 +15,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <><PageShell page={page} /><Script src="/hero-story.js" strategy="afterInteractive" /></>;
+  return <><PageShell page={page} /><HeroMotion /></>;
 }

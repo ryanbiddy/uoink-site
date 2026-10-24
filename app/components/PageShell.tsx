@@ -1,4 +1,4 @@
-import { CANONICAL_URL, DOWNLOAD_URL, GITHUB_URL, SitePage, VERSION, X_URL } from "../content/pages";
+import { CANONICAL_URL, DOWNLOAD_URL, GITHUB_URL, HOME_MOVED_CONTENT, SitePage, VERSION, X_URL } from "../content/pages";
 import { applySiteLinks } from "../lib/links";
 import { SiteFooter } from "./SiteFooter";
 import { TopNav } from "./TopNav";
@@ -10,9 +10,10 @@ export function PageShell({ page, children }: { page: SitePage; children?: React
       <main>
         <div dangerouslySetInnerHTML={{ __html: applySiteLinks(page.html) }} />
         {children}
+        {HOME_MOVED_CONTENT[page.route] && <div dangerouslySetInnerHTML={{ __html: applySiteLinks(HOME_MOVED_CONTENT[page.route]) }} />}
       </main>
       <JsonLd page={page} />
-      <SiteFooter />
+      <SiteFooter home={page.id === "home"} />
     </div>
   );
 }

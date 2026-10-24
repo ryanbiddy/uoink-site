@@ -108,7 +108,7 @@ async function captureYellow(page, file, fullPage = false) {
               footer: document.querySelectorAll(".family-footer").length,
               footerWordmarks: document.querySelectorAll('.site-footer .family-wordmark[data-brand="u"], .site-footer .wm-line, .home-end .wm-line').length,
               stripWordmarks: document.querySelectorAll('.family-footer .family-wordmark[data-brand="u"]').length,
-              closingLine: document.querySelector('.site-footer > [data-final-cta]')?.textContent.trim(),
+              closingLine: document.querySelector('[data-final-cta]')?.textContent.trim(),
               cards: document.querySelectorAll(".saved-source").length,
               // Receipt passage jumps are inline citation controls in WEB-4.
               buttons: [...document.querySelectorAll("button:not(.receipt-jump), .btn, .nav-cta, .button")].filter(visible).map(el => {

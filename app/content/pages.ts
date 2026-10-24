@@ -130,26 +130,9 @@ const agentsFaq: FaqItem[] = [
   },
 ];
 
-export const pages: Record<PageId, SitePage> = {
-  home: {
-    id: "home",
-    route: "/",
-    mode: "mode-dark",
-    title: "Uoink: Local video, podcast, and text corpus for your AI",
-    description:
-      "Uoink keeps the videos, podcasts, and articles you study on your own disk, then hands them to your AI as a cited corpus.",
-    keywords: [
-      "youtube to AI",
-      "local video corpus",
-      "mcp youtube server",
-      "local knowledge base",
-      "writing studio",
-    ],
-    html: `
-${HERO_HTML}
-<section class="go-deeper" id="live-uoink"><div class="container"><h2>Go deeper</h2><p class="sub-cta">Free / MIT / local library / ${MCP_STDIO_TOOL_COUNT} stdio tools / ${MCP_TOOL_COUNT} HTTP tools / ${PRODUCT_STATUS.mac.visible}</p><nav class="go-deeper-grid" aria-label="Go deeper"><a href="/sources">Sources</a><a href="/how-it-works">How it works</a><a href="/features">Features</a><a href="/mcp">MCP</a><a href="/creators">Creators</a><a href="/blog">Field notes</a></nav><div class="go-deeper-details">
-
-<section class="section" data-screen-label="home / living library" id="living-library">
+// Text moved off home by REVIEW-HERO-1. Render only on the matching route.
+export const HOME_MOVED_CONTENT: Record<string, string> = {
+  "/changelog": `<section class="section" data-screen-label="changelog / living library" id="living-library">
   <div class="container">
     <div class="doc">
       <div class="doc-head">
@@ -172,10 +155,8 @@ ${HERO_HTML}
       <p class="doc-links"><a class="arr-link" href="${GITHUB_URL}/releases/tag/${VERSION}">${VERSION_NUMBER} release notes</a> <a class="arr-link" href="/changelog">Changelog</a></p>
     </div>
   </div>
-</section>
-
-
-<section class="section" data-screen-label="home / corpus anatomy" id="corpus">
+</section>`,
+  "/how-it-works": `<section class="section" data-screen-label="how-it-works / corpus anatomy" id="corpus">
   <div class="container">
     <div class="doc">
       <div class="doc-head">
@@ -190,9 +171,8 @@ ${HERO_HTML}
       </ol>
     </div>
   </div>
-</section>
-
-<section class="section" data-screen-label="home / local first">
+</section>`,
+  "/privacy": `<section class="section" data-screen-label="privacy / local first">
   <div class="container">
     <div class="doc">
       <div class="doc-head">
@@ -203,9 +183,8 @@ ${HERO_HTML}
       <p class="doc-links"><a class="arr-link" href="/privacy">Read privacy -></a></p>
     </div>
   </div>
-</section>
-
-<section class="section" data-screen-label="home / three audiences">
+</section>`,
+  "/creators": `<section class="section" data-screen-label="creators / three audiences">
   <div class="container">
     <div class="doc">
       <div class="doc-head">
@@ -215,16 +194,13 @@ ${HERO_HTML}
       </div>
       <ul class="doc-list linked">
         <li><a class="doc-row" href="/creators"><h3>Creators.</h3><p>Find the moment you need, read the transcript beside the frames, and export a cited range for your next draft.</p><span class="arr-link">See creator workflow -></span></a></li>
-        <li><a class="doc-row" href="/developers"><h3>Developers.</h3><p>Give Claude Desktop or Cursor a local library to search and cite. Start with the stdio config or the Claude Desktop bundle.</p><span class="arr-link">Open developer docs -></span></a></li>
-        <li><a class="doc-row" href="/sources"><h3>Sources.</h3><p>Capture YouTube, X video and post text, podcasts, web articles, and Reddit threads into one local library.</p><span class="arr-link">Browse supported sources -></span></a></li>
+        <li><a class="doc-row" href="/developers"><h3>Developers.</h3><span class="arr-link">Open developer docs -></span></a></li>
+        <li><a class="doc-row" href="/sources"><h3>Sources.</h3><span class="arr-link">Browse supported sources -></span></a></li>
       </ul>
     </div>
   </div>
-</section>
-
-
-
-<section class="section" data-screen-label="home / model agnostic">
+</section>`,
+  "/mcp": `<section class="section" data-screen-label="mcp / model agnostic">
   <div class="container">
     <div class="doc">
       <div class="exchange">
@@ -240,9 +216,8 @@ get_evidence_card(video_id)</pre>
       <p class="doc-links"><a class="arr-link" href="/developers">Read MCP setup -></a> <a class="arr-link" href="/mcp">Machine-readable MCP manifest -></a></p>
     </div>
   </div>
-</section>
-
-<section class="section" data-screen-label="home / install">
+</section>`,
+  "/install": `<section class="section" data-screen-label="install / install">
   <div class="container">
     <div class="doc">
       <div class="doc-head">
@@ -251,15 +226,37 @@ get_evidence_card(video_id)</pre>
         <p class="lede">Download the helper, install the extension, open a video, and click Uoink. The helper bundles Python, yt-dlp, and ffmpeg so you never install them yourself.</p>
       </div>
       <ul class="doc-list">
-        <li><p class="doc-meta"><b>Windows</b><span>live path</span></p><h3>Download the helper.</h3><p class="doc-ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p><a class="btn primary small" href="${DOWNLOAD_URL}">Download -></a></li>
-        <li><p class="doc-meta"><b>Extension</b><span>pending review</span></p><h3>Install the browser button.</h3><p class="doc-ver">Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested.</p><p>Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at <code>%LOCALAPPDATA%\\Uoink\\extension</code>. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.</p><a class="arr-link" href="/install#extension">Install notes -></a></li>
-        <li><p class="doc-meta"><b>Mac</b><span>${PRODUCT_STATUS.mac.label}</span></p><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="doc-ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p><a class="arr-link" href="/install#mac">${PRODUCT_STATUS.mac.linkLabel}</a></li>
+        <li><p class="doc-meta"><b>Windows</b><span>live path</span></p><p class="doc-ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p><a class="btn primary small" href="${DOWNLOAD_URL}">Download -></a></li>
+        <li><h3>Install the browser button.</h3><a class="arr-link" href="/install#extension">Install notes -></a></li>
+        <li><p class="doc-meta"><b>Mac</b><span>${PRODUCT_STATUS.mac.label}</span></p><a class="arr-link" href="/install#mac">${PRODUCT_STATUS.mac.linkLabel}</a></li>
       </ul>
     </div>
   </div>
-</section>
-</div></div></section>
+</section>`,
+  "/developers": `<section class="section"><div class="container"><div class="doc"><ul class="doc-list linked"><li><a class="doc-row" href="/developers"><h3>Developers.</h3><p>Give Claude Desktop or Cursor a local library to search and cite. Start with the stdio config or the Claude Desktop bundle.</p><span class="arr-link">Open developer docs -></span></a></li></ul></div></div></section>`,
+  "/sources": `<section class="section"><div class="container"><div class="doc"><ul class="doc-list linked"><li><a class="doc-row" href="/sources"><h3>Sources.</h3><p>Capture YouTube, X video and post text, podcasts, web articles, and Reddit threads into one local library.</p><span class="arr-link">Browse supported sources -></span></a></li></ul></div></div></section>`,
+};
 
+export const pages: Record<PageId, SitePage> = {
+  home: {
+    id: "home",
+    route: "/",
+    mode: "mode-dark",
+    title: "Uoink: Local video, podcast, and text corpus for your AI",
+    description:
+      "Uoink keeps the videos, podcasts, and articles you study on your own disk, then hands them to your AI as a cited corpus.",
+    keywords: [
+      "youtube to AI",
+      "local video corpus",
+      "mcp youtube server",
+      "local knowledge base",
+      "writing studio",
+    ],
+    html: `
+${HERO_HTML}
+<section class="go-deeper" id="live-uoink" data-home-part="go-deeper"><div class="container"><h2>Go deeper</h2><nav class="go-deeper-grid" aria-label="Go deeper"><a href="/sources">Sources</a><a href="/how-it-works">How it works</a><a href="/features">Features</a><a href="/mcp">MCP</a><a href="/creators">Creators</a><a href="/blog">Field notes</a></nav></div></section>
+<section class="home-proof" data-home-part="proof" aria-label="Uoink facts"><div class="container"><p>Free / MIT / runs on your machine</p><p>Local library / ${MCP_STDIO_TOOL_COUNT} stdio tools / ${MCP_TOOL_COUNT} HTTP tools</p><p>${PRODUCT_STATUS.mac.visible}</p><a class="arr-link" href="/install">Install Uoink -&gt;</a></div></section>
+<section class="home-sibling" data-home-part="sibling" aria-labelledby="sibling-title"><div class="container"><h2 id="sibling-title">Works with Zing</h2><p>Uoink pulls it in. Zing sends it out.</p><a class="arr-link" href="https://myzing.app">Meet Zing -&gt;</a></div></section>
 `,
   },
   install: {
