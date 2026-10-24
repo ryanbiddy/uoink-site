@@ -228,7 +228,7 @@ get_evidence_card(video_id)</pre>
       <ul class="doc-list">
         <li><p class="doc-meta"><b>Windows</b><span>live path</span></p><p class="doc-ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p><a class="btn primary small" href="${DOWNLOAD_URL}">Download -></a></li>
         <li><h3>Install the browser button.</h3><a class="arr-link" href="/install#extension">Install notes -></a></li>
-        <li><p class="doc-meta"><b>Mac</b><span>${PRODUCT_STATUS.mac.label}</span></p><a class="arr-link" href="/install#mac">${PRODUCT_STATUS.mac.linkLabel}</a></li>
+        <li><p class="doc-meta"><b>Mac</b></p><a class="arr-link" href="/install#mac">${PRODUCT_STATUS.mac.linkLabel}</a></li>
       </ul>
     </div>
   </div>
@@ -355,11 +355,9 @@ ${HERO_HTML}
           <p class="footnote">Web Store review pending</p>
         </li>
         <li id="mac">
-          <p class="doc-meta"><b class="platform-label">${MAC_MARK}Mac</b><span>${PRODUCT_STATUS.mac.label}</span></p>
+          <p class="doc-meta"><b class="platform-label">${MAC_MARK}Mac</b></p>
           <h3>${PRODUCT_STATUS.mac.heading}</h3>
-          <p class="doc-ver">${PRODUCT_STATUS.mac.tech}</p>
-          <p>${PRODUCT_STATUS.mac.detail}</p>${PRODUCT_STATUS.mac.installSteps}
-          <p class="footnote">${PRODUCT_STATUS.mac.footnote}</p>
+          ${PRODUCT_STATUS.mac.installSteps}
         </li>
       </ul>
     </div>

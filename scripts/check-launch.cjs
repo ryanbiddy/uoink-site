@@ -1,4 +1,6 @@
-const { chromium } = require("playwright");
+let chromium;
+try { ({ chromium } = require("playwright")); }
+catch { ({ chromium } = require("E:/AI/projects/zing-site/node_modules/playwright-core")); }
 const fs = require("node:fs/promises");
 const path = require("node:path");
 const os = require("node:os");
@@ -9,7 +11,7 @@ const release = require("../content/release.json");
   await fs.mkdir(destination, { recursive: true });
   const browser = await chromium.launch({
     headless: true,
-    ...(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE } : {}),
+    executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || "C:/Program Files/Google/Chrome/Application/chrome.exe",
   });
   const results = [];
   try {
@@ -38,7 +40,7 @@ const release = require("../content/release.json");
         const stem = `${route === "/" ? "home" : route.slice(1)}-${viewport.width}x${viewport.height}`;
         await page.screenshot({ path: path.join(destination, `${stem}.png`), animations: "disabled" });
         await page.screenshot({ path: path.join(destination, `${stem}-full.png`), fullPage: true, animations: "disabled" });
-        if (route === "/") await page.locator("#living-library").screenshot({ path: path.join(destination, `${stem}-living-library.png`), animations: "disabled" });
+        if (route === "/") await page.locator("#u-film").screenshot({ path: path.join(destination, `${stem}-hero.png`), animations: "disabled" });
         if (route === "/developers") await page.locator("#configs").screenshot({ path: path.join(destination, `${stem}-setup.png`), animations: "disabled" });
         const layout = await page.evaluate(() => ({
           viewportWidth: innerWidth,

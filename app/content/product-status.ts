@@ -1,13 +1,10 @@
 // Everything the site says about Mac availability. Pages read PRODUCT_STATUS.mac;
-// the first object is the copy shown when no Mac build ships.
+// Windows is the only supported platform until the Mac preview is released.
+export const MAC_PREVIEW_STATUS = "Mac (Apple Silicon, macOS 15 or later): preview coming soon.";
 export type MacStatus = {
   available: boolean;
   visible: string; // one-line platform summary: home, install FAQ, MCP page, NotebookLM comparison
-  label: string; // status chip on the Mac entries
   heading: string;
-  tech: string; // line under the Mac heading
-  detail: string;
-  footnote: string; // install page Mac entry
   linkLabel: string; // home page link to /install#mac
   windowsLabel: string; // install hero line under the Windows download
   aboutPlatform: string;
@@ -21,17 +18,13 @@ export type MacStatus = {
 export const PRODUCT_STATUS: { mac: MacStatus } = {
   mac: {
     available: false,
-    visible: "Windows 10/11 only. No Mac build scheduled.",
-    label: "not available",
-    heading: "No Mac build scheduled.",
-    tech: "Windows 10/11 only",
-    detail: "There is no Mac installer or scheduled Mac release.",
-    footnote: "Windows 10/11 only",
+    visible: `Windows 10/11 only. ${MAC_PREVIEW_STATUS}`,
+    heading: MAC_PREVIEW_STATUS,
     linkLabel: "Mac status ->",
     windowsLabel: "Windows 10/11 only",
     aboutPlatform: "Windows 10/11 only",
-    aboutNote: "no Mac build scheduled",
-    heroLink: "",
+    aboutNote: MAC_PREVIEW_STATUS,
+    heroLink: `<p class="footnote">${MAC_PREVIEW_STATUS}</p>`,
     installSteps: "",
     agentSetup: "",
     changelog: "",

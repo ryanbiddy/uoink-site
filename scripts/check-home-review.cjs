@@ -3,7 +3,24 @@ const fs = require('node:fs');
 const path = require('node:path');
 const moves = require('./fixtures/home-content-moves.json');
 
+async function checkFooterOrder(page, label = page.url()) {
+  const order = await page.evaluate(() => {
+    const selectors = ['[data-final-cta]', '.family-footer', '.footer-grid', '.footer-bottom'];
+    const nodes = selectors.map(selector => document.querySelector(selector));
+    return {
+      counts: selectors.map(selector => document.querySelectorAll(selector).length),
+      dom: nodes.every((node, i) => node && (!i || (nodes[i - 1].compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING))),
+      visual: nodes.every((node, i) => node && (!i || nodes[i - 1].getBoundingClientRect().bottom <= node.getBoundingClientRect().top + 1)),
+      last: nodes[3] === document.querySelector('.site-footer')?.lastElementChild,
+    };
+  });
+  assert.deepEqual(order.counts, [1, 1, 1, 1], `${label}: one of each footer section`);
+  assert(order.dom && order.visual, `${label}: closing line, family strip, link columns, bottom line in DOM and visual order`);
+  assert(order.last, `${label}: bottom line is final footer content`);
+}
+
 async function checkStructure(page) {
+  await checkFooterOrder(page);
   const structure = await page.evaluate(() => {
     const parts = [], unexpected = [];
     function visit(el) {
@@ -13,14 +30,13 @@ async function checkStructure(page) {
       [...el.children].forEach(visit);
     }
     document.querySelectorAll('.site-root').forEach(visit);
-    const footer = document.querySelector('.family-footer');
+    const footer = document.querySelector('.site-footer');
     const footerBottom = footer.getBoundingClientRect().bottom + scrollY;
     return {
       parts, unexpected,
       headers: document.querySelectorAll('.site-header').length,
       heroes: document.querySelectorAll('#u-opening').length,
       afterFooter: [...document.querySelectorAll('.site-header,.hero-story,#u-opening')].filter(el => footer.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING).length,
-      lastFooterChild: footer === document.querySelector('.site-footer').lastElementChild,
       extraSections: [...document.querySelectorAll('main section')].filter(el=>!el.closest('#u-film')&&!el.hasAttribute('data-home-part')).map(el=>el.outerHTML.slice(0,100)),
       height: document.documentElement.scrollHeight,
       footerBottom,
@@ -31,8 +47,7 @@ async function checkStructure(page) {
   assert.deepEqual(structure.extraSections,[], 'No old body sections nested inside Go deeper');
   assert.equal(structure.headers,1); assert.equal(structure.heroes,1);
   assert.equal(structure.afterFooter,0,'No header or hero after the family footer');
-  assert(structure.lastFooterChild,'Family strip is the final footer content');
-  assert(Math.abs(structure.height - structure.footerBottom) < 2,'Page ends at the family footer');
+  assert(Math.abs(structure.height - structure.footerBottom) < 2,'Page ends at the site footer');
   await page.evaluate(()=>window.scrollTo(0,document.documentElement.scrollHeight));
   assert.equal(await page.locator('.site-header,#u-opening').evaluateAll(elements=>elements.some(el=>{const r=el.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight;})),false,'Header and hero do not escape at page bottom');
   await page.evaluate(()=>window.scrollTo(0,0));
@@ -69,8 +84,8 @@ async function checkMoves(page, out) {
       report.push({block:move.label,route:move.route,checkedBlocks:count});
     }
     const install=targets['/install'];
-    for(const text of ['No Mac build scheduled.','There is no Mac installer or scheduled Mac release.','Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at']) {
-      const matches=[...install.querySelectorAll('h3,p')].filter(el=>normalize(el.textContent).startsWith(text));
+    for(const text of ['Mac (Apple Silicon, macOS 15 or later): preview coming soon.','Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at']) {
+      const matches=[...install.querySelectorAll('h3,p')].filter(el=>normalize(el.textContent).startsWith(text) && (text.startsWith('Mac (') ? el.tagName==='H3' : true));
       if(matches.length!==1) failures.push(`Duplicate existing install copy: ${text} (${matches.length})`);
     }
     return {failures,report};
@@ -121,4 +136,58 @@ async function checkPause(page) {
   await page.evaluate(()=>window.scrollTo(0,0));
 }
 
-module.exports={checkStructure,checkMoves,checkPause};
+module.exports={checkStructure,checkMoves,checkPause,checkFooterOrder};
+
+// Direct invocation checks every exported site route and refreshes mobile proof.
+if (require.main === module) (async () => {
+  const http = require('node:http');
+  let chromium;
+  try { ({chromium} = require('playwright-core')); }
+  catch { ({chromium} = require('E:/AI/projects/zing-site/node_modules/playwright-core')); }
+  const out = path.resolve(__dirname, '../out');
+  const walk = dir => fs.readdirSync(dir, {withFileTypes:true}).flatMap(entry => entry.isDirectory() ? walk(path.join(dir, entry.name)) : [path.join(dir, entry.name)]);
+  const routes = walk(out).filter(file => file.endsWith('.html') && fs.readFileSync(file, 'utf8').includes('class="site-header family-header"'))
+    .map(file => '/' + path.relative(out, file).replaceAll('\\', '/').replace(/index\.html$/, '').replace(/\.html$/, ''));
+  assert(routes.includes('/'), 'Built site routes exist');
+  const mime = {'.html':'text/html','.css':'text/css','.js':'text/javascript','.json':'application/json','.svg':'image/svg+xml','.woff2':'font/woff2'};
+  const server = http.createServer((req, res) => {
+    let file = path.resolve(out, '.' + decodeURIComponent(new URL(req.url, 'http://localhost').pathname));
+    if (!file.startsWith(out + path.sep) && file !== out) return res.writeHead(403).end();
+    if (fs.existsSync(file + '.html')) file += '.html';
+    else if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
+    if (!fs.existsSync(file)) return res.writeHead(404).end();
+    res.setHeader('Content-Type', mime[path.extname(file)] || 'application/octet-stream');
+    fs.createReadStream(file).pipe(res);
+  });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  const origin = `http://127.0.0.1:${server.address().port}`;
+  let browser;
+  try {
+    browser = await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe', headless:true});
+    for (const width of [390, 1440]) for (const colorScheme of ['light', 'dark']) {
+      const context = await browser.newContext({viewport:{width,height:844}, deviceScaleFactor:1, isMobile:width===390, hasTouch:width===390, colorScheme, serviceWorkers:'block'});
+      try {
+        await context.route('**/*', route => new URL(route.request().url()).origin === origin ? route.continue() : route.abort());
+        const page = await context.newPage();
+        for (const route of routes) {
+          await page.goto(origin + route);
+          await page.evaluate(() => document.fonts.ready);
+          await checkFooterOrder(page, `${width} ${colorScheme} ${route}`);
+        }
+        await page.goto(origin);
+        await page.locator('.hero-story.enhanced').waitFor();
+        await page.evaluate(() => document.fonts.ready);
+        await checkStructure(page);
+        if (width === 390 && colorScheme === 'light') {
+          await checkMoves(page, out);
+          await checkPause(page);
+          const shots = path.resolve(__dirname, '../_scratch/shots-hero');
+          fs.mkdirSync(shots, {recursive:true});
+          await page.screenshot({path:path.join(shots, 'home-390-light.png'), fullPage:true});
+          await page.locator('.site-footer').screenshot({path:path.join(shots, 'footer-390-light.png'), style:'.site-header { visibility: hidden !important; }'});
+        }
+      } finally { await context.close(); }
+    }
+    console.log(`PASS: footer DOM and visual order on ${routes.length} routes at 390/1440 in light/dark; home structure, moved content, motion controls; mobile screenshots refreshed.`);
+  } finally { if (browser) await browser.close(); server.close(); }
+})().catch(error => {console.error(error); process.exitCode = 1;});
