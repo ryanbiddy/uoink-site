@@ -8,6 +8,8 @@ let chromium;
 try { ({ chromium } = require("playwright-core")); }
 catch { ({ chromium } = require("E:/AI/projects/zing-site/node_modules/playwright-core")); }
 
+const { checkFooterOrder } = require("./check-home-review.cjs");
+
 const root = path.resolve(__dirname, "..");
 const out = path.join(root, "out");
 const shots = path.join(root, "_scratch/shots-family");
@@ -99,6 +101,7 @@ async function captureYellow(page, file, fullPage = false) {
         for (const route of routes) {
           await page.goto(origin + route, { waitUntil: "load" });
           await page.evaluate(() => document.fonts.ready);
+          await checkFooterOrder(page, `${stem} ${route}`);
           const m = await page.evaluate(() => {
             const visible = el => el.getBoundingClientRect().width > 0 && el.getBoundingClientRect().height > 0;
             return {

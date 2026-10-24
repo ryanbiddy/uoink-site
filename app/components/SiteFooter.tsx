@@ -10,7 +10,8 @@ export function SiteFooter({ home = false }: { home?: boolean }) {
     <>
     {home && closing}
     <footer className="site-footer" data-home-part={home ? "footer" : undefined}>
-      {!home && <>{closing}<FamilyStrip /></>}
+      {!home && closing}
+      <FamilyStrip />
       <div className="container footer-grid">
         <div className="footer-brand">
           <p>Local video and podcast corpus software. Open source. No Uoink cloud.</p>
@@ -86,7 +87,6 @@ export function SiteFooter({ home = false }: { home?: boolean }) {
         <span>uoink.app / {VERSION} / 2026</span>
         <span>Local-first. Model-agnostic. MIT.</span>
       </div>
-      {home && <FamilyStrip />}
     </footer>
     </>
   );
