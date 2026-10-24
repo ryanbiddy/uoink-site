@@ -40,8 +40,8 @@ export function parseFacts(source: string) {
     return value;
   };
   const version = take(/^# Uoink v([^\r\n]+)$/m, "version");
-  const platform = take(/^([^\r\n.]+) only\. No Mac build scheduled\./m, "platform");
-  const unsupported = take(/only\. (No Mac build scheduled\.)/, "unsupported platform");
+  const platform = take(/^([^\r\n.]+) only\. Mac \(Apple Silicon/m, "platform");
+  const unsupported = take(/only\. (Mac \(Apple Silicon, macOS 15 or later\): preview coming soon\.)/, "unsupported platform");
   const price = take(/Uoink v[^\s]+ is (\w+) and /, "price");
   const license = take(/ is \w+ and ([\w.-]+)-licensed;/, "license");
   const storage = take(/^- (Keep everything [^\r\n]+)$/m, "storage");
