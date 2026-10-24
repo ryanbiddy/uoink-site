@@ -10,7 +10,7 @@ function sourceFiles(route) {
   let entry = route === '/' ? 'app/page.tsx' : `app${route}/page.tsx`;
   if (route === '/blog/rss.xml') entry = 'app/blog/rss.xml/route.ts';
   if (!fs.existsSync(path.join(root, entry))) {
-    entry = route.startsWith('/features/') ? 'app/features/[slug]/page.tsx' : 'app/blog/[slug]/page.tsx';
+    entry = route.startsWith('/use-cases/') ? 'app/use-cases/[slug]/page.tsx' : route.startsWith('/features/') ? 'app/features/[slug]/page.tsx' : 'app/blog/[slug]/page.tsx';
   }
   const found = new Set();
   function visit(file) {
@@ -26,6 +26,9 @@ function sourceFiles(route) {
   }
   visit(path.join(root, entry));
   visit(path.join(root, 'app/layout.tsx'));
+  if (route.startsWith('/use-cases/')) {
+    for (const file of ['public/llms.txt', 'public/mcp/manifest.json', 'scripts/generate-use-cases.cjs']) visit(path.join(root, file));
+  }
   if (route.startsWith('/blog/') && route !== '/blog/rss.xml') visit(path.join(root, `content${route}.md`));
   if (route === '/') visit(path.join(root, 'public/hero-story.js'));
   return [...found].map(relative);
@@ -39,7 +42,13 @@ export function lastmod(files) {
     return dates.at(-1) || buildDate;
   } catch { return buildDate; }
 }
-const template = fs.readFileSync(path.join(root, 'public/sitemap.xml'), 'utf8');
+let template = fs.readFileSync(path.join(root, 'public/sitemap.xml'), 'utf8');
+const useCases = JSON.parse(fs.readFileSync(path.join(root, 'app/content/use-cases.generated.json'), 'utf8'));
+for (const { route } of useCases.pages) {
+  if (!template.includes(`<loc>https://uoink.app${route}</loc>`)) {
+    template = template.replace('</urlset>', `  <url><loc>https://uoink.app${route}</loc><lastmod>${lastmod(sourceFiles(route))}</lastmod></url>\n</urlset>`);
+  }
+}
 const evidence = [];
 const sitemap = template.replace(/<url>([\s\S]*?)<\/url>/g, (block, body) => {
   const route = new URL(body.match(/<loc>(.*?)<\/loc>/)[1]).pathname;
