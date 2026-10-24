@@ -10,3 +10,6 @@ out
 lighthouse-*.json
 lighthouse-*-summary.png
 verification-*.png
+
+# Local proof (screenshots, runs)
+_scratch/

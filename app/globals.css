@@ -457,7 +457,6 @@ button, .btn, .nav-cta, .docs-sidebar a { min-height: 44px; }
   transition: color var(--ease);
 }
 .footer-grid a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
-.footer-brand .wm-line { font-size: 32px; }
 .footer-brand p { color: var(--text-2); font-size: 15px; line-height: 1.55; margin: 16px 0 0; max-width: 32ch; }
 .footer-bottom {
   border-top: 1px solid var(--line);
@@ -801,8 +800,7 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
 .table-wrap + .body-l { margin: 24px 0 0; }
 
 .home-end { padding: clamp(56px, 8vw, 104px) 0 clamp(64px, 9vw, 112px); text-align: center; }
-.home-end .wm-line { font-size: clamp(64px, 16vw, 120px); }
-.home-end .display-m { margin: 24px auto 0; max-width: 24ch; }
+.home-end .display-m { margin: 0 auto; max-width: 24ch; }
 
 /* BRAND STRIP — integration chips */
 .brand-strip { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
