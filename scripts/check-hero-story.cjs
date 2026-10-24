@@ -38,9 +38,10 @@ for (const file of repoFiles) {
   const bytes=fs.readFileSync(file);
   assert(!bytes.toString('utf8').toLowerCase().includes(forbiddenName.toLowerCase()), `Forbidden guest name: ${file}`);
 }
-for (const entry of media.legacyPlaceholders) {
-  assert(entry.placeholder);
-  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(entry.path)).digest('hex'),entry.sha256,`Unreviewed replacement: ${entry.path}`);
+for (const entry of media.legacyAssets) {
+  assert(media.pendingReshootSha256.includes(entry.sha256));
+  assert(!media.blockedMediaSha256.includes(entry.sha256));
+  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(entry.path)).digest('hex'),entry.sha256,`Unreviewed legacy asset: ${entry.path}`);
 }
 for (const entry of media.approvedAssets) assert.equal(crypto.createHash('sha256').update(fs.readFileSync(entry.path)).digest('hex'),entry.sha256,`Unreviewed asset: ${entry.path}`);
 for (const scene of story.scenes) assert(fs.existsSync(path.join(out,scene.href+'.html')), `Missing scene route ${scene.href}`);

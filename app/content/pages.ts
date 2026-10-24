@@ -414,7 +414,7 @@ ${DOC_RULE}
       <p class="body-l">A local helper does the work: download, transcribe, index. Your browser extension and your AI agents talk to it over localhost. Captures are stored locally; AI features, connected clients, exports and synced folders can share copies.</p>
     </div>
     <figure class="figure">
-      <img src="/product/hero-library.webp" alt="Library preview placeholder" />
+      <img src="/product/hero-library.webp" alt="Dashboard Main Screen showing library grid and active tasks" />
       <figcaption><b>Dashboard Main Screen:</b> Browsing the local library grid and active transcription tasks. Your files stay on your disk.</figcaption>
     </figure>
   </div>
