@@ -31,6 +31,9 @@ export function SiteFooter({ home = false }: { home?: boolean }) {
               <Link href="/features">Features</Link>
             </li>
             <li>
+              <Link href="/compare">Compare</Link>
+            </li>
+            <li>
               <Link href="/blog">Field notes</Link>
             </li>
           </ul>
