@@ -6,7 +6,7 @@
     "dev": "next dev",
     "media": "node scripts/hero-media.cjs",
     "preview": "node scripts/preview.cjs",
-    "build": "next build && node scripts/postbuild-static-cleanup.mjs",
+    "build": "next build && node scripts/postbuild-static-cleanup.mjs && node scripts/check-seo-pages.cjs",
     "start": "next start",
     "lint": "next lint"
   },
