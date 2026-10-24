@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MobileMenu } from "./MobileMenu";
+import { FamilyWordmark } from "./FamilyWordmark";
 
 const links: [string, string][] = [
   ["/install", "Install"],
@@ -21,15 +22,6 @@ function isActive(active: string, href: string) {
   return active === href || active.startsWith(`${href}/`);
 }
 
-function Wordmark() {
-  return (
-    <span className="wm-line">
-      <uoink-mark aria-hidden="true"></uoink-mark>
-      <span className="oink">OINK</span>
-    </span>
-  );
-}
-
 function NavLink({ href, label, active }: { href: string; label: string; active: string }) {
   const current = isActive(active, href);
 
@@ -42,21 +34,23 @@ function NavLink({ href, label, active }: { href: string; label: string; active:
 
 export function TopNav({ active }: { active: string }) {
   return (
-    <header className="site-header">
-      <nav className="top-nav" aria-label="Primary">
-        <div className="container nav-inner">
-          <Link href="/" className="brand" aria-label="Uoink home">
-            <Wordmark />
+    <header className="site-header family-header">
+      <div className="container">
+        <div className="site-header-top">
+          <Link href="/" className="brand-link" aria-label="Uoink home">
+            <FamilyWordmark />
           </Link>
-          <div className="nav-links">
-            {links.map(([href, label]) => (
-              <NavLink key={href} href={href} label={label} active={active} />
-            ))}
-          </div>
           <Link className="nav-cta" href="/install">
             Get Uoink
           </Link>
-          <MobileMenu wordmark={<Wordmark />}>
+        </div>
+        <div className="family-nav-row">
+          <nav className="family-nav" aria-label="Primary">
+            {links.filter(([href]) => ["/install", "/how-it-works", "/features"].includes(href)).map(([href, label]) => (
+              <NavLink key={href} href={href} label={label} active={active} />
+            ))}
+          </nav>
+          <MobileMenu wordmark={<FamilyWordmark />}>
             <div className="links">
               {links.map(([href, label]) => (
                 <NavLink key={href} href={href} label={label} active={active} />
@@ -72,7 +66,7 @@ export function TopNav({ active }: { active: string }) {
             </Link>
           </MobileMenu>
         </div>
-      </nav>
+      </div>
     </header>
   );
 }

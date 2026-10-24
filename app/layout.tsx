@@ -4,6 +4,7 @@ import Script from "next/script";
 import { VercelAnalytics } from "./components/VercelAnalytics";
 import { CANONICAL_URL } from "./content/pages";
 import "./globals.css";
+import "./family-kit.css";
 
 const inter = localFont({ src: [
   { path: "./fonts/inter.woff", weight: "100 900", style: "normal" },

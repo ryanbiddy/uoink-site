@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { FamilyStrip } from "./FamilyStrip";
 import { CONTACT_EMAIL, GITHUB_URL, X_HANDLE, X_URL, VERSION } from "../content/pages";
 
 export function SiteFooter() {
   return (
     <footer className="site-footer">
+      <FamilyStrip />
       <div className="container footer-grid">
         <div className="footer-brand">
           <span className="wm-line">
