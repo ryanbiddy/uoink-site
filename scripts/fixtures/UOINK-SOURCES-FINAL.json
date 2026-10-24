@@ -1,0 +1,83 @@
+{
+  "sources": [
+    {
+      "slot": "lesson",
+      "label": "Lesson",
+      "title": "Boris Cherny: We Cut 80% of Claude Code's Prompt",
+      "who": "Boris Cherny, creator of Claude Code (Anthropic), YC Startup School 2026",
+      "channel": "Y Combinator",
+      "date": "2026-07-27",
+      "length": "35:51",
+      "url": "https://www.youtube.com/watch?v=qyPCVqFUyDo",
+      "receipts": [
+        {
+          "point": "Less prompting, more checking",
+          "time": "20:13",
+          "quote": "the skill nowadays is less about prompt engineering",
+          "link": "https://www.youtube.com/watch?v=qyPCVqFUyDo&t=1213s"
+        },
+        {
+          "point": "Give it a way to check its work",
+          "time": "22:43",
+          "quote": "give it a way to verify the output of its work",
+          "link": "https://www.youtube.com/watch?v=qyPCVqFUyDo&t=1363s"
+        },
+        {
+          "point": "Goal plus check, run until done",
+          "time": "21:48",
+          "quote": "don't stop until you're done.",
+          "link": "https://www.youtube.com/watch?v=qyPCVqFUyDo&t=1308s"
+        },
+        {
+          "point": "A loop is one repeating job on a timer",
+          "time": "27:59",
+          "quote": "For loops and routines, it's one task that is repetitive",
+          "link": "https://www.youtube.com/watch?v=qyPCVqFUyDo&t=1679s"
+        }
+      ]
+    },
+    {
+      "slot": "podcast",
+      "label": "Podcast",
+      "title": "How to write AI agent loops in Claude Code and Codex",
+      "who": "Claire Vo, How I AI (Lenny's Podcast Network)",
+      "channel": "How I AI",
+      "date": "2026-06-17",
+      "length": "29:07",
+      "url": "https://www.youtube.com/watch?v=JoXbk2fm7jM"
+    },
+    {
+      "slot": "x-video",
+      "label": "X video",
+      "title": "The 15 agent loops people are actually running",
+      "who": "Matt Van Horn (@mvanhorn), indie developer",
+      "date": "2026-06-20",
+      "length": "1:40",
+      "url": "https://x.com/mvanhorn/status/2068438900193042695"
+    }
+  ],
+  "where_they_agree": [
+    {
+      "line": "Give the loop a way to check its work.",
+      "cites": [
+        "lesson 22:43",
+        "podcast 27:11",
+        "podcast 05:32"
+      ]
+    },
+    {
+      "line": "Run it on a schedule.",
+      "cites": [
+        "lesson 28:07",
+        "podcast 03:50"
+      ]
+    },
+    {
+      "line": "Write it as one clear job.",
+      "cites": [
+        "lesson 27:59",
+        "podcast 09:36"
+      ]
+    }
+  ]
+}

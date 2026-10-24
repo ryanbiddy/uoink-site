@@ -1,16 +1,13 @@
-import media from "../content/family-media.json";
+import labels from "../../public/media/hero/labels.json";
 
 // Intentionally unmounted until the new heroes are approved.
 export function SavedSourceCard({ id }: { id?: string }) {
-  const source = media.savedSource;
+  const source = labels.example;
   return (
     <div className="saved-source" id={id}>
-      {/* Local manifest media keeps the reviewed crop unchanged. */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={source.thumbnail} width={126} height={110} alt={source.thumbnailAlt} />
       <div className="source-meta">
-        <strong>{source.title}</strong>
-        <span>· {source.timestamp} · {source.status}</span>
+        <strong>{source.savedTitle}</strong>
+        <span>· {source.savedTimestamp} · {source.savedStatus}</span>
       </div>
     </div>
   );

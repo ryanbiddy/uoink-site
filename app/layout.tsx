@@ -34,13 +34,13 @@ export const metadata: Metadata = {
     title: "Uoink - local corpus for creators and AI developers",
     description: "Save videos, podcasts, and articles as a cited local corpus for Claude, ChatGPT, Cursor, and MCP agents.",
     url: CANONICAL_URL,
-    images: [{ url: "/og-cover.png", width: 1200, height: 630, alt: "The Uoink dashboard: a populated local corpus of saved videos ready to hand to your AI." }],
+    images: [{ url: "/og-cover.png", width: 1200, height: 630, alt: "Uoink: Save what you watch. Your AI writes from it, with receipts." }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Uoink - local corpus for creators and AI developers",
     description: "Save videos, podcasts, and articles as a cited local corpus for Claude, ChatGPT, Cursor, and MCP agents.",
-    images: ["/og-cover.png"],
+    images: [{ url: "/og-cover.png", width: 1200, height: 630, alt: "Uoink: Save what you watch. Your AI writes from it, with receipts." }],
   },
 };
 
