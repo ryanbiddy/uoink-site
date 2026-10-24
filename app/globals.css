@@ -1317,3 +1317,6 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
   .article .standfirst { font-size: 18px; }
   .article p { font-size: 16px; }
 }
+
+.article-draft { margin: 0 0 24px; }
+.article-body { overflow-wrap: anywhere; }

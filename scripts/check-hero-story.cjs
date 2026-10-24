@@ -80,7 +80,7 @@ const results=[], fitIssues=[];
    assert.equal(await staticPage.locator(`#${scene.id} [data-scene-link]`).first().getAttribute('href'),scene.href);
   }
   assert((await staticPage.locator('p.source-disclosure').textContent()).includes(resolveLabels(story.disclosure)));
-  const sceneLinks=[['0','Get Uoink','/install'],['1','How evidence cards work','/features/evidence-panel'],['2','Everything Uoink can save','/sources'],['3','How capture works','/how-it-works'],['4','Claims and key points','/features/claim-extraction'],['5','Your library stays on your machine','/privacy'],['6','Connect your AI','/developers'],['7','Writing Studio','/features/writing-studio'],['7-zing','Meet Zing','https://myzing.app']];
+  const sceneLinks=[['0','Get Uoink','/install'],['1','How evidence cards work','/features/evidence-panel'],['2','Everything Uoink can save','/sources'],['3','How capture works','/how-it-works'],['4','Read the field notes','/blog/loop-engineering'],['5','Your library stays on your machine','/privacy'],['6','Connect your AI','/developers'],['7','Writing Studio','/features/writing-studio'],['7-zing','Meet Zing','https://myzing.app']];
   for(const [number,text,href] of sceneLinks) {
     const link=staticPage.locator(`[data-scene-link="${number}"]`);
     assert.equal(await link.getAttribute('href'),href);
