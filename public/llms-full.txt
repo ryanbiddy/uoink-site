@@ -17,7 +17,7 @@ Every Uoink tool is available through the standard connection used by Claude Des
 
 ## Install
 
-Windows 10/11 only. No Mac build scheduled. Unsigned Windows installer, about 390 MB; no admin rights needed. If Windows SmartScreen shows a warning, choose More info, then Run anyway. Installs to %LOCALAPPDATA%\Uoink. Sideload the browser extension from the install; Chrome Web Store listing pending. Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested. Open chrome://extensions, enable Developer mode, click Load unpacked, and select %LOCALAPPDATA%\Uoink\extension. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.
+Windows 10/11 only. Mac (Apple Silicon, macOS 15 or later): preview coming soon. Unsigned Windows installer, about 390 MB; no admin rights needed. If Windows SmartScreen shows a warning, choose More info, then Run anyway. Installs to %LOCALAPPDATA%\Uoink. Sideload the browser extension from the install; Chrome Web Store listing pending. Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested. Open chrome://extensions, enable Developer mode, click Load unpacked, and select %LOCALAPPDATA%\Uoink\extension. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.
 
 After updating, reload the extension once. If its ID changes to the pinned bkcapfidedhfcjpmjabeopfbcjcbmdmi, reapply extension preferences. Saved captures are unaffected.
 
@@ -87,7 +87,7 @@ ScrapeCreators receives the typed handle, channel ID or query only after discove
 - [Field notes](https://uoink.app/blog): articles.
 
 ## Set it up with an agent (Windows 10/11)
-Windows 10/11 only. No Mac build scheduled. Uoink v3.11.0 is free and MIT-licensed; the unsigned Windows installer is about 390 MB. No admin rights needed.
+Windows 10/11 only. Mac (Apple Silicon, macOS 15 or later): preview coming soon. Uoink v3.11.0 is free and MIT-licensed; the unsigned Windows installer is about 390 MB. No admin rights needed.
 [Agent installation steps](https://github.com/ryanbiddy/uoink/blob/main/llms-install.md): download, verify SHA-256, install, and connect.
 ### An agent can run
 1. Download [Uoink-Setup-3.11.0.exe](https://github.com/ryanbiddy/uoink/releases/download/v3.11.0/Uoink-Setup-3.11.0.exe) to `$env:TEMP\Uoink-Setup-3.11.0.exe`.

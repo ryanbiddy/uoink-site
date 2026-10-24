@@ -3,7 +3,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const http = require("node:http");
 const assert = require("node:assert/strict");
-const { spawnSync } = require("node:child_process");
+const { spawnSync, execFileSync } = require("node:child_process");
 let chromium;
 try { ({ chromium } = require("playwright-core")); }
 catch { ({ chromium } = require("E:/AI/projects/zing-site/node_modules/playwright-core")); }
@@ -16,7 +16,9 @@ const shots = path.join(root, "_scratch/shots-family");
 fs.mkdirSync(shots, { recursive: true });
 const referenceRoot = process.env.FAMILY_REFERENCE_ROOT || "E:/AI/projects/uoink/handoff/suite-split/family-web-2026-10";
 const reference = fs.readFileSync(path.join(referenceRoot, "out/the-pick.html"), "utf8");
-const referenceCSS = fs.readFileSync(path.join(referenceRoot, "src/pick.css"), "utf8");
+// Apply the later family resolutions to the original layout reference.
+const referenceCSS = fs.readFileSync(path.join(referenceRoot, "src/pick.css"), "utf8")
+  .replaceAll("#65544A", "#5C4A40").replaceAll("#CBB6A7", "#EBD5C5").replaceAll("#C9A18B", "#EBD5C5");
 const home = fs.readFileSync(path.join(out, "index.html"), "utf8");
 const cssLinks = [...home.matchAll(/<link[^>]*rel="stylesheet"[^>]*>/g)].map(m => m[0]).join("");
 const htmlClass = home.match(/<html[^>]*class="([^"]+)"/)[1];
@@ -59,6 +61,15 @@ const server = http.createServer((req, res) => {
 function walk(dir) { return fs.readdirSync(dir, { withFileTypes: true }).flatMap(d => d.isDirectory() ? walk(path.join(dir, d.name)) : [path.join(dir, d.name)]); }
 const routes = walk(out).filter(f => f.endsWith(".html") && fs.readFileSync(f, "utf8").includes('class="site-header family-header"'))
   .map(f => "/" + path.relative(out, f).replaceAll("\\", "/").replace(/index\.html$/, "").replace(/\.html$/, ""));
+// Scan tracked and new source files as well as the exported site, including docs.
+const repoFiles = execFileSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "-z"], {encoding:"utf8"}).split("\0").filter(file => file && fs.existsSync(file));
+const retiredBlue = "#" + "002" + "071";
+for (const file of [...repoFiles, ...walk(out)]) {
+  if (!/\.(?:css|svg|html|md|txt|[cm]?js|tsx?|json)$/i.test(file)) continue;
+  const text = fs.readFileSync(file, "utf8");
+  assert(!text.toUpperCase().includes(retiredBlue), `${file}: retired blue`);
+  if (/\.svg$/i.test(file) && /family|wordmark/i.test(file)) assert(!/<text\b/i.test(text), `${file}: wordmark must use paths`);
+}
 const results = [], pixels = [], errors = [];
 const yellow = "rgb(255, 210, 63)";
 
@@ -102,9 +113,23 @@ async function captureYellow(page, file, fullPage = false) {
           await page.goto(origin + route, { waitUntil: "load" });
           await page.evaluate(() => document.fonts.ready);
           await checkFooterOrder(page, `${stem} ${route}`);
+          await page.keyboard.press("Tab");
           const m = await page.evaluate(() => {
             const visible = el => el.getBoundingClientRect().width > 0 && el.getBoundingClientRect().height > 0;
             return {
+              primaryColors: [...document.querySelectorAll(".btn.primary, .nav-cta, .button.primary")].map(el => getComputedStyle(el).color),
+              eyebrows: [...document.querySelectorAll(".eyebrow")].map(el => {
+                const s = getComputedStyle(el);
+                return {size:s.fontSize, weight:s.fontWeight, tracking:s.letterSpacing, casing:s.textTransform, font:s.fontFamily};
+              }),
+              textWordmarks: [...document.querySelectorAll('.family-wordmark, .wm-line, .wm, .oink, .brand-link')].filter(el => el.textContent.trim() || el.querySelector('text')).map(el => el.outerHTML),
+              focus: [...document.querySelectorAll('a[href],button,input,select,textarea,summary,[tabindex],[contenteditable="true"]')].filter(el => visible(el) && !el.disabled && !el.closest('[inert]')).map(el => {
+                el.focus({preventScroll:true});
+                const s = getComputedStyle(el);
+                return {label:el.getAttribute('aria-label') || el.textContent.trim().slice(0,50), width:s.outlineWidth, offset:s.outlineOffset, color:s.outlineColor, style:s.outlineStyle};
+              }),
+              gap: (() => {const marks=[...document.querySelectorAll('.family-wordmarks svg')].map(el=>el.getBoundingClientRect()); return (marks[1].left-marks[0].right)/marks[0].height;})(),
+              dot: getComputedStyle(document.querySelector('.family-dot')).color,
               header: document.querySelector(".family-header").getBoundingClientRect().height,
               cap: document.querySelector(".brand-link .letter-body-path").getBoundingClientRect().height,
               overflow: Math.max(0, document.documentElement.scrollWidth - innerWidth),
@@ -121,6 +146,18 @@ async function captureYellow(page, file, fullPage = false) {
               yellows: [...document.querySelectorAll(".yellow-detail, .u-tip-l, .u-tip-s")].filter(visible).map(el => getComputedStyle(el).fill),
             };
           });
+          for (const color of m.primaryColors) assert.equal(color, "rgb(255, 244, 236)", `${stem} ${route}: primary text`);
+          for (const e of m.eyebrows) {
+            assert.equal(e.size,"12px"); assert.equal(e.weight,"700"); assert.equal(e.tracking,"0.96px"); assert.equal(e.casing,"uppercase"); assert(/inter/i.test(e.font));
+          }
+          assert.deepEqual(m.textWordmarks, [], `${stem} ${route}: SVG path wordmarks only`);
+          for (const f of m.focus) {
+            assert.equal(f.width,"2px",`${stem} ${route}: ${f.label} focus width`);
+            assert.equal(f.offset,"2px",`${stem} ${route}: ${f.label} focus offset`);
+            assert.equal(f.color,"rgb(194, 65, 12)"); assert.equal(f.style,"solid");
+          }
+          assert(Math.abs(m.gap-.8)<.001, `${stem} ${route}: family gap`);
+          assert.equal(m.dot,"rgb(92, 74, 64)");
           assert.equal(m.header, 120, `${stem} ${route}: header`);
           assert(Math.abs(m.cap - 24) < .01, `${stem} ${route}: cap ${m.cap}`);
           assert.equal(m.overflow, 0, `${stem} ${route}: overflow`);
@@ -140,17 +177,18 @@ async function captureYellow(page, file, fullPage = false) {
         await page.goto(origin, { waitUntil: "networkidle" });
         await page.evaluate(() => document.fonts.ready);
         await captureYellow(page, `header-${stem}.png`);
+        await page.screenshot({path:path.join(shots, `home-${stem}.png`), fullPage:true});
         const cta = page.locator(".site-header-top .nav-cta");
         await cta.hover();
         await page.waitForTimeout(200);
         assert.equal(await cta.evaluate(el => getComputedStyle(el).backgroundColor), width === 390 ? "rgb(194, 65, 12)" : "rgb(155, 45, 14)");
         await page.keyboard.press("Tab"); await cta.focus();
-        assert.equal(await cta.evaluate(el => getComputedStyle(el).outlineWidth), "3px");
+        assert.equal(await cta.evaluate(el => getComputedStyle(el).outlineWidth), "2px");
         const secondary = page.locator('.receipt-picker .button[aria-pressed="false"]').first();
         await secondary.hover(); await page.waitForTimeout(200);
         assert.equal(await secondary.evaluate(el => getComputedStyle(el).backgroundColor), width === 390 ? "rgb(255, 244, 236)" : "rgb(234, 217, 204)");
         await page.keyboard.press("Tab"); await secondary.focus();
-        assert.equal(await secondary.evaluate(el => getComputedStyle(el).outlineWidth), "3px");
+        assert.equal(await secondary.evaluate(el => getComputedStyle(el).outlineWidth), "2px");
         await page.locator(".family-footer").scrollIntoViewIfNeeded();
         await page.waitForTimeout(100);
         const handle = page.locator(".charge-handle");
@@ -173,7 +211,7 @@ async function captureYellow(page, file, fullPage = false) {
         assert.equal(await handle.getAttribute("aria-valuenow"), "0");
         await page.keyboard.press("End"); await page.waitForTimeout(400);
         assert.equal(await handle.getAttribute("aria-valuenow"), "100");
-        assert.equal(await handle.evaluate(el => getComputedStyle(el).outlineWidth), "3px");
+        assert.equal(await handle.evaluate(el => getComputedStyle(el).outlineWidth), "2px");
         await page.keyboard.press("ArrowRight"); await page.waitForTimeout(400);
         // Exercise pointer capture with a real mouse or CDP touch sequence.
         const b = await handle.boundingBox();

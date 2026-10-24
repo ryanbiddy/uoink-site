@@ -77,4 +77,4 @@ Connect this repo to Vercel and let it auto-detect Next.js. Production canonical
 
 ## Brand
 
-Brand v3.1 is the source of truth: rust primary, vermillion sparse, acid only as solid shapes, Inter-led typography, Bungee wordmark only. See [docs/V3.1-LEGIBILITY-PATCH.md](docs/V3.1-LEGIBILITY-PATCH.md).
+The family resolutions govern the site: rust #C2410C actions, cream #FFF4EC primary button text and reversed marks, blue #002C9B links on cream, muted #5C4A40, and hairlines #EBD5C5. Every focusable element gets a 2 px rust focus ring with a 2 px offset. Eyebrows use uppercase Inter 700 at 12 px with 0.08em tracking. Wordmarks use the shared SVG paths. The family strip has a 0.8 x cap-height gap and a muted middle dot. The yellow detail is #FFD23F at every size and on every ground. The favicon, dark theme decision, and app-art outline remain unchanged.
