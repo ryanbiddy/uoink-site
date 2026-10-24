@@ -106,6 +106,9 @@ async function captureYellow(page, file, fullPage = false) {
               cap: document.querySelector(".brand-link .letter-body-path").getBoundingClientRect().height,
               overflow: Math.max(0, document.documentElement.scrollWidth - innerWidth),
               footer: document.querySelectorAll(".family-footer").length,
+              footerWordmarks: document.querySelectorAll('.site-footer .family-wordmark[data-brand="u"], .site-footer .wm-line, .home-end .wm-line').length,
+              stripWordmarks: document.querySelectorAll('.family-footer .family-wordmark[data-brand="u"]').length,
+              closingLine: document.querySelector('.site-footer > [data-final-cta]')?.textContent.trim(),
               cards: document.querySelectorAll(".saved-source").length,
               buttons: [...document.querySelectorAll("button, .btn, .nav-cta, .button")].filter(visible).map(el => {
                 const s = getComputedStyle(el);
@@ -118,6 +121,9 @@ async function captureYellow(page, file, fullPage = false) {
           assert(Math.abs(m.cap - 24) < .01, `${stem} ${route}: cap ${m.cap}`);
           assert.equal(m.overflow, 0, `${stem} ${route}: overflow`);
           assert.equal(m.footer, 1); assert.equal(m.cards, 0);
+          assert.equal(m.footerWordmarks, 1, `${stem} ${route}: exactly one UOINK wordmark in footer area`);
+          assert.equal(m.stripWordmarks, 1, `${stem} ${route}: footer wordmark belongs to family strip`);
+          assert.equal(m.closingLine, "Take the video. Make it usable.");
           for (const b of m.buttons) {
             assert.equal(b.height, 48, `${stem} ${route}: ${b.text} height`);
             assert.equal(b.radius, "10px", `${stem} ${route}: ${b.text} radius`);
@@ -145,7 +151,12 @@ async function captureYellow(page, file, fullPage = false) {
         await page.waitForTimeout(100);
         const handle = page.locator(".charge-handle");
         const before = await handle.boundingBox();
-        await captureYellow(page, `footer-rest-${stem}.png`);
+        await captureYellow(page, `footer-viewport-${stem}.png`);
+        await page.locator(".site-footer").screenshot({
+          path: path.join(shots, `footer-rest-${stem}.png`),
+          // Keep the sticky header from covering the footer in the element capture.
+          style: ".site-header { visibility: hidden !important; }",
+        });
         if (width === 390) await page.getByRole("button", { name: "Send the charge" }).tap();
         else await page.getByRole("button", { name: "Send the charge" }).click();
         await page.waitForTimeout(400);

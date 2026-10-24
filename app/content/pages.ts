@@ -299,12 +299,7 @@ get_evidence_card(video_id)</pre>
   </div>
 </section>
 <div class="container"><hr class="doc-rule"/></div>
-<section class="home-end" data-final-cta data-screen-label="home / final cta">
-  <div class="container">
-    <span class="wm-line" role="img" aria-label="Uoink"><uoink-mark aria-hidden="true"></uoink-mark><span class="oink" aria-hidden="true">OINK</span></span>
-    <p class="display-m">Take the video. Make it <em>usable.</em></p>
-  </div>
-</section>`,
+`,
   },
   install: {
     id: "install",

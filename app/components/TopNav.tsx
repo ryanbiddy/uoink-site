@@ -2,6 +2,9 @@ import Link from "next/link";
 import { MobileMenu } from "./MobileMenu";
 import { FamilyWordmark } from "./FamilyWordmark";
 
+// Shared header rule: show up to 3 links in the row; put any extras in the menu.
+// uoink.app has more than 3 pages, so keeps the hamburger. myzing.app has 3;
+// when it grows past 3, it gets the same menu and button.
 const links: [string, string][] = [
   ["/install", "Install"],
   ["/how-it-works", "How it works"],
