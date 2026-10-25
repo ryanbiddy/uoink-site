@@ -66,5 +66,5 @@
   ],
   "tool_count": 91,
   "stdio_tool_count": 91,
-  "platform": "Windows 10/11 only. No Mac build scheduled."
+  "platform": "Windows 10/11 only. Mac (Apple Silicon, macOS 15 or later): preview coming soon."
 }

@@ -1,7 +1,7 @@
 /* ==========================================================
-   Uoink — Reader (October 2026)
+   Uoink - Reader (October 2026)
    Cream ground · ink text · Inter for UI and display · rust actions
-   Bungee for the wordmark only · JetBrains Mono for code only
+   SVG paths for wordmarks · JetBrains Mono for code only
    ========================================================== */
 
 :root {
@@ -17,11 +17,13 @@
   --line-strong: #D9BBA6;   /* control borders, rules */
 
   /* the one action colour on cream (4.8:1), its pressed/hover step, and
-     the text that sits on it (white on rust 5.2:1) */
+     the cream text that sits on it */
   --rust:      #C2410C;
+  --blue:      #002C9B;
+  --blue-text: #002C9B;
   --rust-deep: #9B2D0E;
   --rust-tint: rgba(194, 65, 12, 0.08);
-  --on-action: #FFFFFF;
+  --on-action: #FFF4EC;
 
   /* brand accent with a ground rule: acid as solid shapes only, never text.
      Vermillion (#FF3D00) belongs on dark grounds, and this site has none. */
@@ -30,7 +32,6 @@
   --body:    var(--font-inter), system-ui, sans-serif;
   --display: var(--font-inter), system-ui, sans-serif;
   --mono:    var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
-  --wood:    var(--font-bungee), sans-serif;
 
   --container: 1280px;
   --doc: 700px;       /* the reading column */
@@ -101,27 +102,7 @@ h1, h2, h3, h4, h5, h6 {
 /* rounds the ring on bare links; :where keeps component radii (pills) intact */
 :where(a, button, summary):focus-visible { border-radius: var(--r-sm); }
 
-/* WORDMARK — uoink-mark + Bungee OINK. Bungee is used nowhere else. */
-.wm-line {
-  align-items: flex-end;
-  color: var(--rust);
-  display: inline-flex;
-  font-family: var(--wood);
-  font-weight: 400;
-  letter-spacing: -0.025em;
-  line-height: 0.85;
-}
-.wm-line uoink-mark {
-  align-self: flex-end;
-  display: block;
-  flex-shrink: 0;
-  height: 0.84em;
-  margin-right: 0.02em;
-  width: 0.66em;
-}
-.wm-line uoink-mark svg { display: block; height: 100%; overflow: visible; width: 100%; }
-.wm-line uoink-mark .u-body { fill: currentColor; }
-.wm-line .oink { display: inline-block; }
+/* Wordmarks use the shared FamilyWordmark SVG paths. */
 
 /* Magnet tips: always acid #FFD23F, at every size and on every ground,
    matching Zing's charge (family rule). Small marks switch to the thicker
@@ -154,11 +135,11 @@ uoink-mark[data-size="small"] .u-tip-s { display: block; }
   color: var(--text-2);
   display: block;
   font-family: var(--body);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   line-height: 1.4;
-  text-transform: none;
+  text-transform: uppercase;
 }
 .eyebrow::first-letter,
 .mini-heading::first-letter,
@@ -216,7 +197,7 @@ uoink-mark[data-size="small"] .u-tip-s { display: block; }
 }
 .sub-cta b { color: var(--ink); }
 
-/* LAYOUT — container for the frame, .doc for anything meant to be read,
+/* LAYOUT - container for the frame, .doc for anything meant to be read,
    .figure for product UI shown wider than the copy around it */
 .container { margin: 0 auto; max-width: var(--container); padding: 0 var(--gutter); }
 .section { padding: clamp(56px, 8vw, 96px) 0; }
@@ -248,7 +229,6 @@ uoink-mark[data-size="small"] .u-tip-s { display: block; }
   margin-right: auto;
   min-height: 44px;
 }
-.brand .wm-line { color: var(--rust); }
 .nav-links { align-items: center; display: flex; gap: 2px; }
 .nav-links a {
   align-items: center;
@@ -307,7 +287,7 @@ uoink-mark[data-size="small"] .u-tip-s { display: block; }
 .nav-burger svg { height: 20px; pointer-events: none; width: 20px; }
 .top-nav a, .top-nav button { min-width: 44px; }
 
-/* MOBILE MENU — full-screen sheet; MobileMenu.tsx toggles .open, traps focus,
+/* MOBILE MENU - full-screen sheet; MobileMenu.tsx toggles .open, traps focus,
    closes on Escape and restores focus to the burger. */
 .mobile-menu {
   background: var(--cream);
@@ -330,7 +310,6 @@ uoink-mark[data-size="small"] .u-tip-s { display: block; }
   min-height: var(--nav-h);
   padding: 8px 0;
 }
-.mobile-menu-head .wm-line { font-size: 22px; }
 .mobile-menu .close {
   align-items: center;
   background: transparent;
@@ -371,7 +350,7 @@ uoink-mark[data-size="small"] .u-tip-s { display: block; }
 .mobile-menu .links-more a.active { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 .mobile-menu .nav-cta { font-size: 16px; margin-top: 28px; min-height: 52px; width: 100%; }
 
-/* BUTTONS — one action colour. .primary is rust; .ghost is the quiet
+/* BUTTONS - one action colour. .primary is rust; .ghost is the quiet
    outline for secondary moves. */
 .btn {
   align-items: center;
@@ -469,7 +448,7 @@ button, .btn, .nav-cta, .docs-sidebar a { min-height: 44px; }
   padding-top: 20px;
 }
 
-/* CODE — JetBrains Mono lives here and nowhere else: blocks that scroll
+/* CODE - JetBrains Mono lives here and nowhere else: blocks that scroll
    inside their own box rather than wrap or push the page. A path, tool name
    or URL inside a sentence stays in Inter, set on a quiet inset. */
 code {
@@ -499,7 +478,7 @@ code {
 pre code { background: transparent; border: 0; color: inherit; font-size: inherit; font-weight: inherit; overflow-wrap: normal; padding: 0; }
 .code-block + .code-block { margin-top: 14px; }
 
-/* HERO — inner pages open either on the reading column, or with the copy
+/* HERO - inner pages open either on the reading column, or with the copy
    beside a piece of real product (a screenshot, a record, a file) */
 .hero { padding: clamp(48px, 7vw, 96px) 0 clamp(48px, 7vw, 88px); }
 .hero h1 { margin: 12px 0 20px; }
@@ -511,7 +490,7 @@ pre code { background: transparent; border: 0; color: inherit; font-size: inheri
 }
 .hero .copy { max-width: 600px; }
 
-/* HOME — the hero shows the Reader itself */
+/* HOME - the hero shows the Reader itself */
 .home-hero { padding: clamp(48px, 7vw, 96px) 0 clamp(56px, 7vw, 96px); }
 .home-hero-grid {
   align-items: center;
@@ -522,7 +501,7 @@ pre code { background: transparent; border: 0; color: inherit; font-size: inheri
 .home-hero .copy { max-width: 540px; }
 .home-hero h1 { margin: 12px 0 20px; }
 
-/* READER — an HTML picture of the app: capture list beside the open transcript */
+/* READER - an HTML picture of the app: capture list beside the open transcript */
 .reader-demo { margin: 0; min-width: 0; }
 .reader-demo figcaption { color: var(--text-2); font-size: 14px; font-weight: 500; line-height: 1.5; margin-top: 12px; }
 .reader-demo figcaption::first-letter { text-transform: uppercase; }
@@ -634,7 +613,7 @@ pre code { background: transparent; border: 0; color: inherit; font-size: inheri
 }
 .reader-shot svg { height: 22px; width: 22px; }
 
-/* DOC — one reading column; rows split by hairlines instead of boxed cards */
+/* DOC - one reading column; rows split by hairlines instead of boxed cards */
 .doc-head { display: grid; gap: 14px; margin-bottom: 28px; }
 .doc-head .display-l { font-size: clamp(28px, 3.6vw, 40px); letter-spacing: -0.028em; line-height: 1.1; }
 .doc-head .lede { max-width: none; }
@@ -685,7 +664,7 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
 .doc-list .doc-ver { font-size: 14px; font-weight: 600; }
 .row-meta { align-items: center; display: flex; flex-wrap: wrap; gap: 8px 12px; margin-bottom: 6px; }
 
-/* FIGURE — real product UI, labelled above and captioned on the reading column */
+/* FIGURE - real product UI, labelled above and captioned on the reading column */
 .figure { margin: clamp(28px, 4vw, 40px) auto 0; max-width: var(--figure); }
 .section.flush .figure { margin-top: 0; }
 .figure-label { align-items: center; color: var(--text-2); display: flex; flex-wrap: wrap; font-size: 14px; font-weight: 600; gap: 4px 12px; justify-content: space-between; margin-bottom: 10px; }
@@ -704,7 +683,7 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
 .figure.tweet { max-width: 596px; }
 .hero-grid .figure.tweet { justify-self: center; width: 100%; }
 
-/* EXCHANGE — a prompt and its answer as prose, the tool trace as real code */
+/* EXCHANGE - a prompt and its answer as prose, the tool trace as real code */
 .exchange { display: grid; justify-items: start; }
 .exchange .chat-bubble { margin: 0 0 14px; }
 .exchange .chat-bubble.assistant { margin-bottom: 28px; }
@@ -721,7 +700,7 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
 }
 .chat-bubble.assistant { border-left: 2px solid var(--line-strong); color: var(--ink); padding: 2px 0 2px 14px; }
 
-/* FACTS — a short record shown the way the product shows it: label over
+/* FACTS - a short record shown the way the product shows it: label over
    value in Inter, code only where the value is a tool call */
 .facts {
   background: var(--surface);
@@ -766,7 +745,7 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
 .facts-list .paths { display: flex; flex-wrap: wrap; gap: 2px 18px; }
 .facts-list .paths .arr-link { min-height: 32px; }
 
-/* CALLOUT — a quiet inset note inside the reading column */
+/* CALLOUT - a quiet inset note inside the reading column */
 .callout {
   background: var(--sunk);
   border: 1px solid var(--line);
@@ -783,7 +762,7 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
 .doc-head + .callout { margin-top: 0; }
 .callout + .docs-main { margin-top: 32px; }
 
-/* TABLE — scrolls inside its own box on phones; the page never does */
+/* TABLE - scrolls inside its own box on phones; the page never does */
 .table-wrap {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -802,7 +781,7 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
 .home-end { padding: clamp(56px, 8vw, 104px) 0 clamp(64px, 9vw, 112px); text-align: center; }
 .home-end .display-m { margin: 0 auto; max-width: 24ch; }
 
-/* BRAND STRIP — integration chips */
+/* BRAND STRIP - integration chips */
 .brand-strip { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .brand-strip > span,
 .brand-strip > .logo-chip {
@@ -878,7 +857,7 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
 .feature-status.in-flight { background: var(--rust-tint); border-color: rgba(194, 65, 12, 0.28); color: var(--rust-deep); }
 .feature-status.planned { border-style: dashed; }
 
-/* DOCS LAYOUT — the MCP page keeps a sidebar; .docs-main is the shared
+/* DOCS LAYOUT - the MCP page keeps a sidebar; .docs-main is the shared
    prose style for setup copy with code in it */
 .docs-shell { display: grid; gap: 56px; grid-template-columns: 220px minmax(0, 1fr); }
 .docs-sidebar { align-self: start; position: sticky; top: calc(var(--nav-h) + 24px); }
@@ -986,7 +965,7 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
 .tool-row.compact { gap: 22px; grid-template-columns: minmax(180px, 0.34fr) minmax(0, 1fr); padding: 16px 0; }
 .tool-row.compact .desc { font-size: 15px; }
 
-/* ARTICLE — document-width reading column for policies, notes and posts */
+/* ARTICLE - document-width reading column for policies, notes and posts */
 .article { margin: 0 auto; max-width: var(--doc); }
 .article .meta {
   color: var(--text-2);
@@ -1059,7 +1038,7 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
 .download-error p { color: var(--text-2); margin: 8px 0 0; }
 .download-total.is-loading span { color: var(--text-2); }
 
-/* FEATURE INDEX — categories as reading-column sections */
+/* FEATURE INDEX - categories as reading-column sections */
 .feature-category + .feature-category { border-top: 1px solid var(--line); margin-top: clamp(48px, 6vw, 72px); padding-top: clamp(48px, 6vw, 72px); }
 .feature-jump { margin: 0 0 clamp(40px, 5vw, 56px); }
 
@@ -1180,7 +1159,7 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
 .blog-article-layout .article-body { grid-column: 2; grid-row: 1; }
 .article-rail { display: grid; gap: 24px; grid-column: 1; grid-row: 1; justify-self: end; position: sticky; top: calc(var(--nav-h) + 40px); width: min(100%, 200px); }
 .rail-block { border-top: 1px solid var(--line); display: grid; gap: 2px; justify-items: start; padding-top: 12px; }
-.rail-block .eyebrow { font-size: 14px; margin-bottom: 4px; }
+.rail-block .eyebrow { margin-bottom: 4px; }
 .rail-block a { align-items: center; color: var(--rust); display: inline-flex; font-size: 15px; font-weight: 600; min-height: 32px; }
 .rail-block a:hover { color: var(--rust-deep); text-decoration: underline; text-underline-offset: 3px; }
 .article-body h3,
@@ -1222,7 +1201,7 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
   width: 36px;
 }
 
-/* MOTION — the Reader's active capture step fills once. Reduced motion
+/* MOTION - the Reader's active capture step fills once. Reduced motion
    drops it, and autoplaying loops give way to their still frame. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -1311,7 +1290,6 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
   :root { --gutter: 18px; }
   .btn { font-size: 15px; padding: 10px 18px; }
   .nav-cta { padding: 0 16px; }
-  .wm-line uoink-mark { width: 0.72em; }
   .lede, .body-l { font-size: 17px; }
   .article h1 { font-size: 34px; }
   .article .standfirst { font-size: 18px; }

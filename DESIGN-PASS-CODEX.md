@@ -26,7 +26,7 @@ Read this block first. Everything below it is the original design pass; this blo
 - **APPROVED — `prefers-reduced-motion` support** for corpus animations and hover transforms.
 - **APPROVED — Normalize brand tokens** (rust primary, vermillion sparse, acid solid-shapes only).
 - **APPROVED — Add real H1 to `agent-docs.html`** ("Uoink agent docs.").
-- **APPROVED — Self-host fonts** (Inter, Inter italic, Bungee, JetBrains Mono) with `font-display:swap`. Preload Bungee since it's the wordmark.
+- **APPROVED - Self-host fonts** (Inter, Inter italic, Bungee for numerals, JetBrains Mono) with `font-display:swap`. Wordmarks use SVG paths and do not depend on a font load.
 - **APPROVED — Generate separate social assets:** OG 1200×630 + GitHub 1280×640 (use the verbatim proposed render in your §7).
 - **APPROVED — Convert nav/footer/head to shared components** during the port.
 
@@ -99,7 +99,7 @@ Counts in this pass:
 - `site/styles.css:.corpus .ln.hl` — current acid text — should not use acid for text — proposed fix: use cream + rust/vermillion accent, or a rust/oxblood pill/background if this needs emphasis.
 - `site/styles.css:.mcp-log .arg` and `.docs-main pre .s` — current acid code token text — should not use acid for type — proposed fix: use parchment for string tokens and vermillion only for sparse active tokens.
 - `site/styles.css:.block-tile h2 em` — current acid italic text on rust/dark surfaces — should not use acid for type — proposed fix: cream italic on rust, vermillion italic only on dark/ink.
-- `site/styles.css:.tips-vermillion uoink-mark[data-size="small"] .u-tip-s` — current small wordmark override can make the <=32 px tips vermillion — should follow size-aware cream tips at <=32 px — proposed fix: do not override small-tip color except for deliberate large decorative marks.
+- `site/styles.css:uoink-mark` - The yellow detail is #FFD23F at every size and on every ground. Small marks may use thicker tips; the favicon stays unchanged pending Ryan's decision.
 - `site/styles.css` overall — vermillion appears as the default hover, active, label, code, CTA, footer, and heading accent across many components — should be roughly a 5% accent — proposed fix: promote rust for most brand emphasis and keep vermillion for CTAs, hover states, and one hero italic.
 
 ### Homepage: `site/index.html`
@@ -305,7 +305,7 @@ Per page hero/nav/CTA/footer summary:
 - Homepage-specific risk: `index.html` loads React 18 development UMD, ReactDOM development UMD, Babel standalone, then two `text/babel` scripts for the tweaks panel. This should not ship on the public homepage.
 - Font loading: CSS references Inter, Bungee, and JetBrains Mono, but I found no `@font-face`, `font-display`, preload, or hosted font links. The prototype looked good locally because fonts are likely installed. Production should self-host or use Next/font with `font-display:swap`.
 - CLS risk: `<uoink-mark>` renders after the deferred web component loads. The wrapper has dimensions, so major shift is contained, but brand links may briefly show only "OINK" or an empty U slot. Keep explicit width/height on every mark.
-- CLS risk: if Bungee is not available immediately, the wordmark width may shift after font load. Preload/self-host the wordmark font.
+- Wordmarks use SVG paths with explicit dimensions, so their width does not depend on a font load.
 - Image format: favicon PNGs are tiny and fine. `og-image.png` is also small, but it is the wrong size/aspect for common social previews.
 - Motion: corpus-line animation is low cost, but should be disabled for reduced motion.
 - CSS: one global CSS file is fine. During the port, avoid splitting critical nav/hero styles behind delayed client JS.
@@ -386,7 +386,7 @@ Proposed GitHub social preview render:
 - `improvement` — Add `prefers-reduced-motion` support for corpus animations and hover transforms.
 - `improvement` — Normalize brand tokens in production CSS: rust primary, vermillion sparse, acid only solid shapes.
 - `improvement` — Add one real H1 to `agent-docs.html`.
-- `improvement` — Self-host/load Inter, Inter italic, Bungee, and JetBrains Mono with `font-display:swap`; preload the wordmark/display font only if needed.
+- `improvement` - Self-host Inter, Inter italic, Bungee for numerals, and JetBrains Mono with `font-display:swap`. Use SVG paths for wordmarks.
 - `improvement` — Generate separate social assets: OG 1200 x 630 and GitHub 1280 x 640.
 - `improvement` — Convert repeated footer/nav/head markup into shared components during the port, so the eight pages cannot drift.
 - `idea` — Add a compact "See a real corpus" interactive preview page with one sanitized sample corpus.

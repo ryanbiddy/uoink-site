@@ -12,16 +12,39 @@ const { mcpTools, mcpStdioToolNames, MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT } = re
 const { CLAUDE_CODE_COMMAND, MCP_CURSOR_CONFIG, MCP_STDIO_CONFIG } = require("../app/content/mcp-config.ts");
 const { features } = require("../app/features/feature-data.ts");
 const { AGENT_SETUP_HTML } = require("../app/content/agent-setup.ts");
-const { PRODUCT_STATUS } = require("../app/content/product-status.ts");
+const { PRODUCT_STATUS, MAC_PREVIEW_STATUS } = require("../app/content/product-status.ts");
 const manifest = JSON.parse(fs.readFileSync("public/mcp/manifest.json", "utf8"));
+const path = require("node:path");
+function walk(dir) { return fs.readdirSync(dir, {withFileTypes:true}).flatMap(entry => entry.isDirectory() ? walk(path.join(dir, entry.name)) : [path.join(dir, entry.name)]); }
+function checkMacDownloads(text, file) {
+  assert(!/\.(?:dmg|pkg)(?:["'\s?#<]|$)/i.test(text), `${file}: Mac installer URL`);
+  for (const [link, href, body] of [...text.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)].map(match => [match[0], match[1], match[2]])) {
+    const label = body.replace(/<[^>]*>/g, " ");
+    const mac = /\bmac\b|macos|darwin|apple silicon/i.test(`${href} ${label}`);
+    const download = /\bdownload\b|releases\/download|installer|\.(?:zip|tar|gz)\b/i.test(link);
+    assert(!(mac && download), `${file}: Mac download offered: ${href}`);
+  }
+}
+// Guard the guard: reject installer files and download calls to action, even
+// when a download endpoint has no file extension.
+for (const unsafe of ['<a href="/build.dmg">Preview</a>', '<a href="/build.pkg">Preview</a>', '<a href="/download">Download for Mac</a>', '<a href="/mac-preview.zip">Get preview</a>']) {
+  assert.throws(() => checkMacDownloads(unsafe, "regression fixture"));
+}
+for (const file of walk("out").filter(file => /\.(?:html|txt|json)$/.test(file))) {
+  const text = fs.readFileSync(file, "utf8");
+  checkMacDownloads(text, file);
+  assert(!/No Mac build scheduled|no scheduled Mac build|no Mac installer or scheduled Mac release/i.test(text), `${file}: stale Mac status`);
+  for (const [, os] of text.matchAll(/"operatingSystem"\s*:\s*"([^"]+)"/g)) assert.equal(os, "Windows 10, Windows 11", `${file}: supported platform`);
+}
 // 3.11.0 ships smarter search and opt-in usage counts; the Mac preview is not in
 // this release. The removable <!-- 3.11: NAME --> blocks are resolved, so no
-// marker may remain and no page or crawler file may describe a Mac build.
+// marker may remain. Mac copy may announce the preview but never offer a download.
+assert.equal(MAC_PREVIEW_STATUS, "Mac (Apple Silicon, macOS 15 or later): preview coming soon.");
 const contentFiles = ["app/content/pages.ts", "app/content/agent-setup.ts", "app/content/product-status.ts", "app/features/feature-data.ts", "app/compare/notebooklm/page.tsx", "app/developers/page.tsx", "public/llms.txt", "public/llms-full.txt", "public/.well-known/mcp.json", "public/.well-known/mcp/server-card.json"];
 for (const file of contentFiles) {
   const text = fs.readFileSync(file, "utf8");
   assert(!/<!-- \/?3\.11:/.test(text), `${file}: leftover 3.11 block marker`);
-  assert(!/\bDMG\b|Apple Silicon|notariz|\bmacOS\b/i.test(text), `${file}: Mac build copy, but 3.11.0 ships Windows only`);
+  assert(!/No Mac build scheduled|no scheduled Mac build|no Mac installer or scheduled Mac release/i.test(text), `${file}: stale Mac status`);
 }
 assert.equal(PRODUCT_STATUS.mac.available, false, "3.11.0 ships no Mac build");
 assert.equal(release.version, "3.11.0");
@@ -54,6 +77,7 @@ assert(fs.readFileSync("app/content/mcp-tools.ts", "utf8").startsWith(`// Genera
 for (const file of ["public/.well-known/mcp.json", "public/.well-known/mcp/server-card.json"]) {
   const card = JSON.parse(fs.readFileSync(file, "utf8"));
   assert.equal(card.version, release.version);
+  assert.equal(card.platform, PRODUCT_STATUS.mac.visible, `${file}: Windows support and Mac preview status`);
   assert.equal(card.name, "io.github.ryanbiddy/uoink");
   assert(card.install.notes.includes(`about ${INSTALLER_SIZE}`));
   assert.equal(card.tool_count, release.httpToolCount);
@@ -72,10 +96,10 @@ for (const fact of ["official MCP Python SDK 2.3.0", "Claude Desktop, Claude Cod
 for (const fact of ["no longer needs every word", "<code>match</code>", "<code>mode</code>", "<code>strict</code>", "<code>hybrid</code>", "Exact words", "A person turns it on in Uoink Settings", "Gemma terms", "about 330 MB", "passage_verified", "The tool list is unchanged"]) assert(AGENT_SETUP_HTML.includes(fact), `Agent setup smarter-search: ${fact}`);
 assert(!AGENT_SETUP_HTML.includes("On a Mac"), "Agent setup: Mac section");
 // No Mac build ships, so pages keep the Windows-only copy.
-assert(pages.install.html.includes("<h3>No Mac build scheduled.</h3>") && pages.install.html.includes('<p class="footnote">Windows 10/11 only</p>') && pages.install.html.includes("Windows 10/11 only / About"), "install: no-Mac copy");
-assert(pages.home.html.includes("Windows 10/11 only. No Mac build scheduled.</p>") && HOME_MOVED_CONTENT['/install'].includes("Mac status ->"), "home platform fact and relocated install status");
-assert(pages.mcp.html.includes("platform: Windows 10/11 only. No Mac build scheduled.</pre>"), "mcp: no-Mac copy");
-assert(pages.about.html.includes("Windows 10/11 only<small>no Mac build scheduled</small>"), "about: no-Mac copy");
+assert(pages.install.html.includes(`<h3>${MAC_PREVIEW_STATUS}</h3>`) && pages.install.html.includes("Windows 10/11 only / About"), "install: preview status and Windows support");
+assert(pages.home.html.includes(`${PRODUCT_STATUS.mac.visible}</p>`) && HOME_MOVED_CONTENT['/install'].includes("Mac status ->"), "home platform fact and relocated install status");
+assert(pages.mcp.html.includes(`platform: ${PRODUCT_STATUS.mac.visible}</pre>`), "mcp: preview status");
+assert(pages.about.html.includes(`Windows 10/11 only<small>${MAC_PREVIEW_STATUS}</small>`), "about: preview status");
 assert(fs.readFileSync("app/developers/page.tsx", "utf8").includes("__html: AGENT_SETUP_HTML"));
 for (const fact of ["Use Uoink from any AI agent", "uoink connect --list", "48 clients and integrations", "10 of them new in 3.11.0", "45 recipes are checked", "verification status", "uoink connect claude-code", "uoink connect cursor", "uoink connect codex", "uoink connect vscode", "does not edit client settings", "Add to Cursor", "Add to VS Code", "uoink skill install --to &lt;dir&gt;", "Claude Code, Codex, pi, Hermes Agent, and OpenClaw", "claude plugin marketplace add ryanbiddy/uoink-agent-kit", "claude plugin install uoink@uoink", 'uoink search "working memory" --limit 5', "uoink recent --limit 10", 'uoink note "A useful thought" --title "Research note"', "What was tested for 3.11.0", "installed 3.11.0 build in an isolated profile", "Claude Code 2.1.308 over MCP: all 91 tools listed; a tool called", "Codex CLI 0.153.4 over MCP: two tools called", "with no MCP server", "tool calls were not run end to end", "Not yet tested: Gemini CLI and pi", "every other recipe", "https://github.com/ryanbiddy/uoink/blob/main/llms-install.md", "Uoink does not connect to the ChatGPT app over MCP"]) assert(AGENT_SETUP_HTML.includes(fact), `Agent setup: ${fact}`);
 assert(!AGENT_SETUP_HTML.includes("38 clients"), "Agent setup: stale client count");
@@ -107,7 +131,7 @@ for (const text of ["First public release since v3.7.0", "3.8.x work was not pub
 for (const file of ["public/llms.txt", "public/llms-full.txt"]) {
   const text = fs.readFileSync(file, "utf8");
   for (const fact of [VERSION, `${release.stdioToolCount} tools over stdio`, `${release.httpToolCount} in the HTTP registry`, DOWNLOAD_URL, `about ${INSTALLER_SIZE}`, "Official MCP registry: io.github.ryanbiddy/uoink", "unsigned", "off by default", "five local research playbooks", "25-credit daily cap", "older than 90 days", "reload the extension once", "Anonymous usage counts are off by default", "SDK 2.3.0", "2026-07-28 MCP protocol", "Linux location where the client has a Linux setup", "Continue is set up by hand"]) assert(text.toLowerCase().includes(fact.toLowerCase()), `${file}: ${fact}`);
-  assert(text.includes(`Windows 10/11 only. No Mac build scheduled. Uoink ${VERSION} is free`), `${file}: Windows-only setup line`);
+  assert(text.includes(`${PRODUCT_STATUS.mac.visible} Uoink ${VERSION} is free`), `${file}: Windows-only setup and Mac preview line`);
   for (const fact of ["no longer requires", "`match`", "`mode`", '"strict"', '"hybrid"', "find_mentions takes `match`", "passage_verified", "a person", "Uoink Settings", "Gemma terms", "EmbeddingGemma", "about 330 MB", "works offline after setup"]) assert(text.toLowerCase().includes(fact.toLowerCase()), `${file} smarter-search: ${fact}`);
   for (const fact of ["Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested", "Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.", CLAUDE_CODE_COMMAND, "Get-FileHash -Algorithm SHA256", "'/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART'", `${VERSION}/SHA256SUMS.txt`, '"UOINK_MCP_TOOLSET": "core"', "first 40 tools", "Uoink does not connect to the ChatGPT app over MCP"]) assert(text.includes(fact), `${file}: ${fact}`);
   assert(!text.includes("Do not claim"), `${file}: internal writer note`);
@@ -133,4 +157,4 @@ assert.equal(release.installerSizeBytes.toLocaleString("en-US"), "390,064,945");
 const manifestCommit = manifest.source.match(/@([0-9a-f]{40}):/)[1];
 assert(llmsFull.includes(`Source: ${VERSION}, commit ${manifestCommit}.`), `llms-full.txt: tool inventory commit should be ${manifestCommit}`);
 assert(fs.readFileSync("README.md", "utf8").includes(CLAUDE_CODE_COMMAND));
-console.log(`PASS: ${VERSION}, ${MCP_TOOL_COUNT} registry schemas, ${MCP_STDIO_TOOL_COUNT} stdio names, discovery cards, config, ${features.length} feature tool lists, Living Library, research, privacy, installer, agent setup, release plus ten earlier releases, crawler text, and checksums. Windows only; no Mac build.`);
+console.log(`PASS: ${VERSION}, ${MCP_TOOL_COUNT} registry schemas, ${MCP_STDIO_TOOL_COUNT} stdio names, discovery cards, config, ${features.length} feature tool lists, Living Library, research, privacy, installer, agent setup, release plus ten earlier releases, crawler text, and checksums. Windows only; Mac preview coming soon, no Mac downloads.`);

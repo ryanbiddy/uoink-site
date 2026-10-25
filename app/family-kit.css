@@ -1,6 +1,6 @@
 /* WEB-2 reference lock: outlined marks, cream header, ink family strip.
    Measurements and colors are shared with the reviewed pick.css. */
-:root { --nav-h: 120px; --family-focus: #002C9B; }
+:root { --nav-h: 120px; --family-focus: var(--rust); }
 .family-wordmark { display: block; flex: none; overflow: visible; }
 .family-wordmark .yellow-detail { fill: #FFD23F; }
 
@@ -26,13 +26,13 @@
 .site-root :is(.btn.primary, .nav-cta) { color: #FFF4EC; background: #C2410C; border-color: #C2410C; }
 .site-root .btn.ghost { color: #9B2D0E; background: #FFF4EC; border-color: currentColor; }
 .site-root :is(button, .btn, .nav-cta, .button):focus-visible,
-.family-header a:focus-visible { outline: 3px solid var(--family-focus); outline-offset: 4px; }
+.family-header a:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
 @media (hover: hover) {
   .site-root :is(.btn.primary, .nav-cta):hover { background: #9B2D0E; border-color: #9B2D0E; }
   .site-root :is(.btn.ghost, .nav-burger, .mobile-menu .close):hover { background: #EAD9CC; }
 }
 
-.family-header { height: 120px; border-bottom: 1px solid #D9BBA6; background: #FFF4EC; color: #0A0A0A; }
+.family-header { height: 120px; border-bottom: 1px solid var(--line); background: #FFF4EC; color: #0A0A0A; }
 .family-header > .container { padding-inline: 20px; }
 .site-header-top { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .brand-link { display: flex; align-items: center; min-height: 44px; }
@@ -44,28 +44,28 @@
 .family-nav-row .nav-burger svg, .mobile-menu .close svg { flex: none; }
 .family-header .mobile-menu-head { min-height: 72px; }
 
-.saved-source { width: 350px; max-width: 100%; height: 112px; display: flex; align-items: center; border: 1px solid #C9A18B; background: #FFF4EC; color: #0A0A0A; overflow: hidden; flex: none; font-family: var(--body); }
+.saved-source { width: 350px; max-width: 100%; height: 112px; display: flex; align-items: center; border: 1px solid var(--line); background: #FFF4EC; color: #0A0A0A; overflow: hidden; flex: none; font-family: var(--body); }
 .saved-source > img { width: 126px; height: 110px; max-width: none; flex: none; object-fit: cover; transform: translateZ(0); }
 .source-meta { padding: 12px; display: flex; flex-direction: column; gap: 7px; min-width: 0; }
 .source-meta strong { font-size: 14px; line-height: 20px; font-weight: 700; letter-spacing: 0; }
-.source-meta span { font-size: 11px; line-height: 17px; color: #65544A; font-weight: 400; letter-spacing: 0; }
+.source-meta span { font-size: 11px; line-height: 17px; color: var(--text-2); font-weight: 400; letter-spacing: 0; }
 
 .site-footer { padding-top: 0; }
 .site-footer > .footer-grid { padding-top: 56px; }
-.family-footer { background: #0A0A0A; color: #FFF4EC; padding: 28px 0 24px; line-height: 1.5; --family-focus: #FFD23F; }
+.family-footer { background: #0A0A0A; color: #FFF4EC; padding: 28px 0 24px; line-height: 1.5; --family-focus: var(--rust); }
 .family-footer > .container { padding-inline: 20px; }
 .family-strip { width: 350px; max-width: 100%; }
 .family-footer p { margin: 0; }
 .family-caption { font-size: 24px; line-height: 28px; letter-spacing: -.035em; font-weight: 700; }
 .family-stage { height: 84px; position: relative; margin-top: 20px; }
 .family-wordmarks { display: flex; align-items: center; gap: 0; padding-top: 23px; }
-.family-dot { width: 27.2px; flex: none; text-align: center; font-size: 24px; line-height: 34px; color: #B8ADA6; }
+.family-dot { width: 27.2px; flex: none; text-align: center; font-size: 24px; line-height: 34px; color: var(--text-2); }
 .family-product { display: block; min-height: 44px; padding: 5px 0; }
 .family-footer .z-charge { visibility: hidden; }
 .charge-handle { position: absolute; left: 0; top: 0; width: 48px; height: 48px; display: grid; place-items: center; touch-action: none; cursor: grab; z-index: 3; transform: translate(166.06px, 8.76px); }
 .charge-handle:active { cursor: grabbing; }
 .charge-handle i { display: block; width: 9.52px; height: 9.52px; background: #FFD23F; pointer-events: none; }
-.family-footer :is(a, .charge-handle):focus-visible { outline: 3px solid #FFD23F; outline-offset: 4px; }
+.family-footer :is(a, .charge-handle):focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
 .drag-hint { font-size: 11px; line-height: 17px; color: #B8ADA6; }
 .family-actions { display: flex; align-items: center; gap: 12px; margin: 16px 0 24px; }
 .family-actions .button { display: inline-flex; color: #FFF4EC; background: transparent; border-color: #B6B3B0; white-space: nowrap; }
