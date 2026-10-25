@@ -563,7 +563,7 @@ platform: ${PRODUCT_STATUS.mac.visible}</pre>
       <p>HTTP MCP uses the same flattened tool schemas as stdio, so HTTP clients no longer drop Uoink's tools because of their schema shape. The server still checks the exact schema for every call.</p>
       <h2 id="tools">Tools</h2>
       <p>${MCP_STDIO_TOOL_COUNT} tools over stdio and ${MCP_TOOL_COUNT} in the HTTP registry below. Every tool is available on both transports. Consent gates are unchanged.</p>
-      ${toolRows()}
+      ${toolRows(true)}
       <h2>Canonical config note</h2>
       <p>Use the generated local paths. After install, Uoink's setup page generates the real config for the user's machine. Snippets on the website are templates for humans and crawlers.</p>
       <div class="ctas"><a class="btn primary" href="/developers">Human setup page</a><a class="btn ghost" href="/mcp/manifest.json">Raw manifest JSON</a></div>
@@ -955,11 +955,11 @@ function docItems(items: [string, string][]): string {
   return items.map(([title, body]) => `<li><h3>${title}</h3><p>${body}</p></li>`).join("");
 }
 
-function toolRows(): string {
+function toolRows(linkTools = false): string {
   return mcpTools
     .map(
       ([name, description]) =>
-        `<div class="tool-row"><div class="name">${escapeHtml(name)}<span class="args">Available over stdio and HTTP</span></div><div class="desc">${escapeHtml(description)}<span class="ex">See /mcp/manifest.json for machine-readable schema.</span></div></div>`,
+        `<div class="tool-row"><div class="name">${linkTools ? `<a style="text-decoration:underline;text-underline-offset:3px" href="/mcp/tools/${escapeHtml(name)}">${escapeHtml(name)}</a>` : escapeHtml(name)}<span class="args">Available over stdio and HTTP</span></div><div class="desc">${escapeHtml(description)}<span class="ex">See /mcp/manifest.json for machine-readable schema.</span></div></div>`,
     )
     .join("");
 }
