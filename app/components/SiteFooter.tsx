@@ -1,15 +1,18 @@
 import Link from "next/link";
+import { FamilyStrip } from "./FamilyStrip";
 import { CONTACT_EMAIL, GITHUB_URL, X_HANDLE, X_URL, VERSION } from "../content/pages";
 
 export function SiteFooter() {
   return (
     <footer className="site-footer">
+      <section className="home-end" data-final-cta>
+        <div className="container">
+          <p className="display-m">Take the video. Make it usable.</p>
+        </div>
+      </section>
+      <FamilyStrip />
       <div className="container footer-grid">
         <div className="footer-brand">
-          <span className="wm-line">
-            <uoink-mark aria-hidden="true"></uoink-mark>
-            <span className="oink">OINK</span>
-          </span>
           <p>Local video and podcast corpus software. Open source. No Uoink cloud.</p>
         </div>
         <div>
