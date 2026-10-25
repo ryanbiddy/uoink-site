@@ -82,15 +82,14 @@ function check(group) {
   } else if (group === 'field-notes') {
     const route = '/blog/loop-engineering';
     const { html, raw, evidence } = page(route, '/blog');
-    const notice = 'Draft: two lines in this post become true after Ryan saves the three links in Uoink and edits the post.';
-    assert(html.includes(notice) && html.indexOf(notice) < html.indexOf('<h1'), 'Unchanged draft notice before the title');
+    assert(!/Draft notice|article-draft|Draft: two lines/.test(html), 'No draft notice on the published post');
     const schemas = [...raw.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(([, json]) => JSON.parse(json));
     assert.deepEqual(schemas.find(schema => schema['@type'] === 'Article'), JSON.parse(read('content/blog/loop-engineering.jsonld')));
     assert(!/"(?:aggregateRating|reviews?)"/.test(JSON.stringify(schemas)));
     assert(evidence.files.includes('content/blog/loop-engineering.md'));
     assert(read('out/blog.html').includes(`href="${route}"`));
     assert(/<a\b(?=[^>]*data-scene-link="4")(?=[^>]*href="\/blog\/loop-engineering")[^>]*>/.test(read('out/index.html')));
-    console.log('PASS: loop engineering metadata, JSON-LD, unchanged draft notice, source dates and discovery links (static).');
+    console.log('PASS: loop engineering metadata, JSON-LD, no draft notice, source dates and discovery links (static).');
   } else throw new Error(`Unknown SEO group: ${group}`);
 }
 module.exports = { check };
