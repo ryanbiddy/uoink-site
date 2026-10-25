@@ -13,3 +13,5 @@ verification-*.png
 
 # Local proof (screenshots, runs)
 _scratch/
+*.orig.*
+*.shrink.mp4

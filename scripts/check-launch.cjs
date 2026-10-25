@@ -1,4 +1,6 @@
-const { chromium } = require("playwright");
+let chromium;
+try { ({ chromium } = require("playwright")); }
+catch { ({ chromium } = require("E:/AI/projects/zing-site/node_modules/playwright-core")); }
 const fs = require("node:fs/promises");
 const path = require("node:path");
 const os = require("node:os");
@@ -9,7 +11,7 @@ const release = require("../content/release.json");
   await fs.mkdir(destination, { recursive: true });
   const browser = await chromium.launch({
     headless: true,
-    ...(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE } : {}),
+    executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || "C:/Program Files/Google/Chrome/Application/chrome.exe",
   });
   const results = [];
   try {
@@ -20,10 +22,16 @@ const release = require("../content/release.json");
         ? route.continue() : route.abort("blockedbyclient"));
       for (const route of ["/", "/install", "/developers", "/mcp", "/changelog"]) {
         const page = await context.newPage();
-        const consoleErrors = [], pageErrors = [], failedRequests = [];
+        const consoleErrors = [], pageErrors = [], failedRequests = [], cancelledMedia = [];
         page.on("console", message => { if (message.type() === "error") consoleErrors.push(message.text()); });
         page.on("pageerror", error => pageErrors.push(error.message));
-        page.on("requestfailed", request => failedRequests.push({ url: request.url(), error: request.failure()?.errorText }));
+        page.on("requestfailed", request => {
+          const failure = { url: request.url(), error: request.failure()?.errorText };
+          // Chromium may cancel a local media range once its buffer is filled.
+          // These are accepted only after checking the response and decoded video below.
+          if (request.resourceType() === 'media' && new URL(request.url()).origin === 'http://127.0.0.1:4173' && failure.error === 'net::ERR_ABORTED') cancelledMedia.push(failure);
+          else failedRequests.push(failure);
+        });
         const response = await page.goto(`http://127.0.0.1:4173${route}`, { waitUntil: "networkidle" });
         await page.evaluate(() => document.fonts.ready);
         // Visit all sections so lazy product screenshots are present in the full-page capture.
@@ -35,10 +43,17 @@ const release = require("../content/release.json");
           window.scrollTo(0, 0);
         });
         await page.waitForTimeout(400);
+        const media = await page.locator('video').evaluateAll(videos => videos.map(video => ({ src: video.src, readyState: video.readyState, error: video.error?.message, width: video.videoWidth, height: video.videoHeight })));
+        for (const video of media) {
+          const check = await page.request.get(video.src, { headers: { Range: 'bytes=0-1023' } });
+          if (check.status() !== 206 || !check.headers()['content-type']?.startsWith('video/') || !check.headers()['content-range']?.startsWith('bytes 0-1023/') || video.error || video.readyState < 2 || !video.width || !video.height) failedRequests.push({ url: video.src, error: 'Media range response or decoded frame check failed' });
+        }
+        for (const failure of cancelledMedia) if (!media.some(video => video.src === failure.url)) failedRequests.push(failure);
         const stem = `${route === "/" ? "home" : route.slice(1)}-${viewport.width}x${viewport.height}`;
         await page.screenshot({ path: path.join(destination, `${stem}.png`), animations: "disabled" });
         await page.screenshot({ path: path.join(destination, `${stem}-full.png`), fullPage: true, animations: "disabled" });
-        if (route === "/") await page.locator("#living-library").screenshot({ path: path.join(destination, `${stem}-living-library.png`), animations: "disabled" });
+        if (route === "/") await page.locator("#u-film").screenshot({ path: path.join(destination, `${stem}-hero.png`), animations: "disabled" });
+        if (route === "/changelog") await page.locator("#living-library").screenshot({ path: path.join(destination, `${stem}-living-library.png`), animations: "disabled" });
         if (route === "/developers") await page.locator("#configs").screenshot({ path: path.join(destination, `${stem}-setup.png`), animations: "disabled" });
         const layout = await page.evaluate(() => ({
           viewportWidth: innerWidth,
@@ -47,7 +62,7 @@ const release = require("../content/release.json");
           title: document.title,
         }));
         const text = await page.locator("body").innerText();
-        const result = { route, viewport, status: response.status(), consoleErrors, pageErrors, failedRequests, ...layout,
+        const result = { route, viewport, status: response.status(), consoleErrors, pageErrors, failedRequests, cancelledMedia, media, ...layout,
           hasVersion: text.includes(`v${release.version}`), screenshots: [`${stem}.png`, `${stem}-full.png`] };
         results.push(result);
         console.log(JSON.stringify(result));

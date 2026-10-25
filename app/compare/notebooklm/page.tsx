@@ -24,7 +24,7 @@ const faq: FaqItem[] = [
   {
     question: "Which should I use?",
     answer:
-      "Use NotebookLM if you want a hosted, cross-platform notebook with audio summaries and zero setup. Use Uoink if you want to own your sources on disk, feed them to your own AI agents over MCP, and keep a local copy of your sources. They're not mutually exclusive — Uoink's Markdown corpora import cleanly into other tools, including NotebookLM.",
+      "Use NotebookLM if you want a hosted, cross-platform notebook with audio summaries and zero setup. Use Uoink if you want to own your sources on disk, feed them to your own AI agents over MCP, and keep a local copy of your sources. They're not mutually exclusive; Uoink's Markdown corpora import cleanly into other tools, including NotebookLM.",
   },
   {
     question: "Is Uoink free?",
@@ -90,12 +90,12 @@ export default function Page() {
       <section className="hero" data-screen-label="compare notebooklm / hero">
         <div className="container">
           <div className="doc">
-            <span className="eyebrow">compare / notebooklm</span>
+            <Link className="eyebrow" href="/compare">All comparisons</Link>
             <h1 className="display-xl">
               A NotebookLM you <em>own.</em>
             </h1>
             <p className="lede">
-              NotebookLM is a great cloud notebook. Uoink is the local, open-source alternative: it saves your videos, podcasts, and articles to your own disk and hands them to Claude, Cursor, or any MCP agent — no account, no cloud.
+              NotebookLM is a great cloud notebook. Uoink is the local, open-source alternative: it saves your videos, podcasts, and articles to your own disk and hands them to Claude, Cursor, or any MCP agent; no account, no cloud.
             </p>
             <div className="ctas">
               <a className="btn primary large" href={RELEASE_URL}>

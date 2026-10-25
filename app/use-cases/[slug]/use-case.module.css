@@ -1,0 +1,10 @@
+.page .intro { padding: 48px 0 32px; }
+.page h1 { margin: 24px 0; font-size: clamp(36px, 6vw, 64px); text-wrap: balance; }
+.page h2 { font-size: 26px; line-height: 1.2; margin-bottom: 20px; }
+.page h3 { font-size: 18px; margin: 24px 0 12px; }
+.page p { line-height: 1.7; margin: 16px 0; }
+.page section { padding: 32px 0; border-top: 1px solid var(--line, #D9BBA6); }
+.page .prompt { margin: 20px 0; padding: 8px 0 8px 20px; border-left: 3px solid #C2410C; line-height: 1.7; }
+.page .code { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; line-height: 1.7; }
+.page .note { font-size: 14px; }
+.page .install { padding-bottom: 64px; }

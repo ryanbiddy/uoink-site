@@ -41,7 +41,7 @@ export function FamilyStrip() {
     function settle(animate = true) {
       cancelAnimationFrame(frame);
       const { origin, target } = points(), destination = caught ? target : origin;
-      if (!animate || reduced.matches) { place(destination); return; }
+      if (!animate || reduced.matches || document.documentElement.dataset.motionPaused === "true") { place(destination); return; }
       const from = { ...position }, began = performance.now(), duration = caught ? 340 : 375;
       function tick(now: number) {
         const t = Math.min(1, (now - began) / duration);
@@ -96,6 +96,7 @@ export function FamilyStrip() {
     handle.addEventListener("keydown", key);
     button.addEventListener("click", click);
     reduced.addEventListener("change", motionChange);
+    document.addEventListener("uoink-motion-change", motionChange);
     settle(false);
     return () => {
       cancelAnimationFrame(frame);
@@ -108,6 +109,7 @@ export function FamilyStrip() {
       handle.removeEventListener("keydown", key);
       button.removeEventListener("click", click);
       reduced.removeEventListener("change", motionChange);
+      document.removeEventListener("uoink-motion-change", motionChange);
     };
   }, []);
 

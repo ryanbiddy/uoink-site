@@ -1,11 +1,125 @@
 {
-  "savedSource": {
-    "placeholder": true,
-    "note": "Neutral placeholder: this repo is public, so no uncleared footage or guest names. Replace this entry when Ryan clears the hero footage.",
-    "thumbnail": "/assets/family/source.jpg",
-    "thumbnailAlt": "Placeholder thumbnail",
-    "title": "Saved video",
-    "timestamp": "02:25:56.800",
-    "status": "Source saved"
-  }
+  "blockedMediaSha256": [
+    "b612e3eecaade90f2ec88b948b70650c74716c9c3c542dafe11efff45a496234"
+  ],
+  "approvedAssets": [
+    {
+      "path": "public/og-cover.png",
+      "source": "og-cover-uoink.png",
+      "sha256": "d0015dd2d2442f0cab67c1fd4f0c51e5a7075d4ea3d317e27353676ef01f75d1"
+    },
+    {
+      "path": "public/og-image.png",
+      "source": "og-cover-uoink.png",
+      "sha256": "d0015dd2d2442f0cab67c1fd4f0c51e5a7075d4ea3d317e27353676ef01f75d1"
+    },
+    {
+      "path": "public/assets/og-image.png",
+      "source": "og-cover-uoink.png",
+      "sha256": "d0015dd2d2442f0cab67c1fd4f0c51e5a7075d4ea3d317e27353676ef01f75d1"
+    }
+  ],
+  "legacyAssets": [
+    {
+      "path": "docs/launch/screens/developers-1440x900-full.png",
+      "sha256": "3787d3bd598de77e125fc675f100e2dacbc3fb258cc6fd2fcbca75e06401dbe0"
+    },
+    {
+      "path": "docs/launch/screens/developers-390x844-full.png",
+      "sha256": "0727bb357d5c3dda2ead4fe1815276cbcef6fa23ffaa13123e3f017ca1cefa0e"
+    },
+    {
+      "path": "docs/launch/screens/home-1440x900-full.png",
+      "sha256": "f41d75a944e74353b837328251673f214f27c7c50b7bf6fb2c48efb94c018908"
+    },
+    {
+      "path": "docs/launch/screens/home-390x844-full.png",
+      "sha256": "fd50d160a3239d9b9255379471337e9547e64402c6134413e3a2bb3c3e101015"
+    },
+    {
+      "path": "docs/launch/screens/install-1440x900-full.png",
+      "sha256": "c18d702a2f53fee2504a24940032b6cecd01495bc0839bdd55cc69516e5cfa69"
+    },
+    {
+      "path": "docs/launch/screens/install-390x844-full.png",
+      "sha256": "83d168f633d18f625f5accce2ac3a00cd46709acbd8e5628ba6311d2bd74f11c"
+    },
+    {
+      "path": "public/product/generate-flow-poster.jpg",
+      "sha256": "49ff1d2490d8e0d9a4e8bcbefc5875357b987708f064cc3963b26d9af5c9ddfc"
+    },
+    {
+      "path": "public/product/generate-result.webp",
+      "sha256": "f0f0c50853cdfdea579b16870a9143f51fd6bbb81521415468040596da2972c4"
+    },
+    {
+      "path": "public/product/hero-library.webp",
+      "sha256": "aa461d5aab1e9aa0ff3fc79d5c7e1379f8e7cab47936a2d34575133d02fb18a1"
+    },
+    {
+      "path": "public/product/hooks-explainer.webp",
+      "sha256": "1f9c506e3bc692f34feae827678022ab3c05d8d4118eff9dce5707140d585a6c"
+    },
+    {
+      "path": "public/product/library-search.webp",
+      "sha256": "cc17769d02f37ebe1a1e4235b14044ebf668d37320ca37a80049772ca428131b"
+    },
+    {
+      "path": "public/product/topics-overview.webp",
+      "sha256": "3823c5370a8d848a8a5a7bdc1fe0f136e70eef1d53f3a13ad1a3a159f5859dc3"
+    },
+    {
+      "path": "public/product/writing-studio.webp",
+      "sha256": "10cbf2564081ab867696c9d5c2b0bf4ab2580f193e2673115b85318e2c881cc7"
+    },
+    {
+      "path": "public/screenshots/features/smart-screenshot-picker.png",
+      "sha256": "266fbbe3be1ff7dc6699727000f68e191a88cb6171f404a80342701b3e95a583"
+    },
+    {
+      "path": "public/screenshots/features/youtube-video-capture-clean.png",
+      "sha256": "d744adef2147234bb893b3ae451a8b27eeb657c0d4c605db10b5e367bfacf41d"
+    },
+    {
+      "path": "public/screenshots/features/youtube-video-capture.png",
+      "sha256": "d744adef2147234bb893b3ae451a8b27eeb657c0d4c605db10b5e367bfacf41d"
+    },
+    {
+      "path": "public/screenshots/memory-search/library-linkbacks.png",
+      "sha256": "b228758754757ba6981192f2c666a38ccaf314d0e645752340d66d875b8e1f99"
+    },
+    {
+      "path": "public/screenshots/memory-search/library-populated-computer-use.png",
+      "sha256": "266fbbe3be1ff7dc6699727000f68e191a88cb6171f404a80342701b3e95a583"
+    },
+    {
+      "path": "public/product/generate-flow.mp4",
+      "sha256": "321baf3db9f8727253c4f5e208d99e8fd4150e9ea6423090913961d3a30e2f7c"
+    },
+    {
+      "path": "public/product/generate-flow.webm",
+      "sha256": "b1b9e2dcd8b7dd171c7f05f0ad39296a5f8ef43bde5d1e89fa78a3ccb0a4fa08"
+    }
+  ],
+  "pendingReshootSha256": [
+    "3787d3bd598de77e125fc675f100e2dacbc3fb258cc6fd2fcbca75e06401dbe0",
+    "0727bb357d5c3dda2ead4fe1815276cbcef6fa23ffaa13123e3f017ca1cefa0e",
+    "f41d75a944e74353b837328251673f214f27c7c50b7bf6fb2c48efb94c018908",
+    "fd50d160a3239d9b9255379471337e9547e64402c6134413e3a2bb3c3e101015",
+    "c18d702a2f53fee2504a24940032b6cecd01495bc0839bdd55cc69516e5cfa69",
+    "83d168f633d18f625f5accce2ac3a00cd46709acbd8e5628ba6311d2bd74f11c",
+    "49ff1d2490d8e0d9a4e8bcbefc5875357b987708f064cc3963b26d9af5c9ddfc",
+    "f0f0c50853cdfdea579b16870a9143f51fd6bbb81521415468040596da2972c4",
+    "aa461d5aab1e9aa0ff3fc79d5c7e1379f8e7cab47936a2d34575133d02fb18a1",
+    "1f9c506e3bc692f34feae827678022ab3c05d8d4118eff9dce5707140d585a6c",
+    "cc17769d02f37ebe1a1e4235b14044ebf668d37320ca37a80049772ca428131b",
+    "3823c5370a8d848a8a5a7bdc1fe0f136e70eef1d53f3a13ad1a3a159f5859dc3",
+    "10cbf2564081ab867696c9d5c2b0bf4ab2580f193e2673115b85318e2c881cc7",
+    "266fbbe3be1ff7dc6699727000f68e191a88cb6171f404a80342701b3e95a583",
+    "d744adef2147234bb893b3ae451a8b27eeb657c0d4c605db10b5e367bfacf41d",
+    "b228758754757ba6981192f2c666a38ccaf314d0e645752340d66d875b8e1f99",
+    "321baf3db9f8727253c4f5e208d99e8fd4150e9ea6423090913961d3a30e2f7c",
+    "b1b9e2dcd8b7dd171c7f05f0ad39296a5f8ef43bde5d1e89fa78a3ccb0a4fa08"
+  ],
+  "pendingReshootNote": "Live legacy product shots that show third-party sources. Re-shoot with a cleared demo library, then delete this list."
 }

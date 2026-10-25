@@ -10,7 +10,7 @@ A local library of the YouTube videos, podcasts and articles you study, saved on
 - Get writing help in your voice with Voice DNA and Writing Studio.
 
 ## Set it up with an agent (Windows 10/11)
-Windows 10/11 only. No Mac build scheduled. Uoink v3.11.0 is free and MIT-licensed; the unsigned Windows installer is about 390 MB. No admin rights needed.
+Windows 10/11 only. Mac (Apple Silicon, macOS 15 or later): preview coming soon. Uoink v3.11.0 is free and MIT-licensed; the unsigned Windows installer is about 390 MB. No admin rights needed.
 [Agent installation steps](https://github.com/ryanbiddy/uoink/blob/main/llms-install.md): download, verify SHA-256, install, and connect.
 ### An agent can run
 1. Download [Uoink-Setup-3.11.0.exe](https://github.com/ryanbiddy/uoink/releases/download/v3.11.0/Uoink-Setup-3.11.0.exe) to `$env:TEMP\Uoink-Setup-3.11.0.exe`.

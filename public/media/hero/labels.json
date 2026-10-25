@@ -1,0 +1,135 @@
+{
+  "sources": {
+    "lesson": {
+      "label": "Lesson",
+      "publisher": "Y Combinator",
+      "who": "Boris Cherny, creator of Claude Code (Anthropic), YC Startup School 2026",
+      "title": "Boris Cherny: We Cut 80% of Claude Code's Prompt",
+      "date": "Jul 27 2026",
+      "length": "35:51",
+      "url": "https://www.youtube.com/watch?v=qyPCVqFUyDo",
+      "receipts": {
+        "prompt": {
+          "point": "Less prompting, more checking",
+          "time": "20:13",
+          "quote": "the skill nowadays is less about prompt engineering",
+          "link": "https://www.youtube.com/watch?v=qyPCVqFUyDo&t=1213s"
+        },
+        "verify": {
+          "point": "Give it a way to check its work",
+          "time": "22:43",
+          "quote": "give it a way to verify the output of its work",
+          "link": "https://www.youtube.com/watch?v=qyPCVqFUyDo&t=1363s"
+        },
+        "goal": {
+          "point": "Goal plus check, run until done",
+          "time": "21:48",
+          "quote": "don't stop until you're done.",
+          "link": "https://www.youtube.com/watch?v=qyPCVqFUyDo&t=1308s"
+        },
+        "job": {
+          "point": "A loop is one repeating job on a timer",
+          "time": "27:59",
+          "quote": "For loops and routines, it's one task that is repetitive",
+          "link": "https://www.youtube.com/watch?v=qyPCVqFUyDo&t=1679s"
+        }
+      }
+    },
+    "podcast": {
+      "label": "Podcast",
+      "publisher": "How I AI",
+      "who": "Claire Vo, How I AI (Lenny's Podcast Network)",
+      "title": "How to write AI agent loops in Claude Code and Codex",
+      "date": "Jun 17 2026",
+      "length": "29:07",
+      "url": "https://www.youtube.com/watch?v=JoXbk2fm7jM",
+      "receipts": {
+        "schedule": {
+          "time": "03:50",
+          "quote": "You can set a schedule, like every 30 minutes, every hour,",
+          "link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=230s"
+        },
+        "hooks": {
+          "time": "04:35",
+          "quote": "So you can prompt an agent based on an internal life cycle,",
+          "link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=275s"
+        },
+        "goal": {
+          "time": "05:32",
+          "quote": "A goal is a type of loop that sets an outcome",
+          "link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=332s"
+        },
+        "job": {
+          "time": "09:36",
+          "quote": "You are designing a job. And so, just imagine that you're onboarding an employee.",
+          "link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=576s"
+        },
+        "criteria": {
+          "time": "27:11",
+          "quote": "you have to be very precise about evaluation and success criteria.",
+          "link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=1631s"
+        },
+        "loop": {
+          "time": "01:46",
+          "quote": "this one tweet spun off tons of content about what is a loop,",
+          "link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=106s"
+        }
+      }
+    },
+    "x": {
+      "label": "X video",
+      "publisher": "Matt Van Horn (@mvanhorn), indie developer",
+      "who": "Matt Van Horn (@mvanhorn), indie developer",
+      "title": "The 15 agent loops people are actually running",
+      "date": "Jun 20 2026",
+      "length": "1:40",
+      "url": "https://x.com/mvanhorn/status/2068438900193042695",
+      "summary": "15 real agent loops, with commands you can copy.",
+      "note": "Matt Van Horn (@mvanhorn)"
+    }
+  },
+  "example": {
+    "label": "Example",
+    "topic": "Loop engineering",
+    "threadLabel": "Example thread",
+    "notesLabel": "Caption excerpt",
+    "runtime": "66",
+    "runtimeUnit": "min",
+    "runtimeExtra": "38 sec",
+    "runtimeNote": "35:51 + 29:07 + 1:40",
+    "disclosure": "Illustrative workflow using real sources. Lesson and podcast excerpts match machine captions. X video summary is a paraphrase; no transcript is quoted.",
+    "handoffLabel": "Example saved videos",
+    "savedTitle": "Boris Cherny: We Cut 80% of Claude Code's Prompt",
+    "savedStatus": "Saved lesson",
+    "savedTimestamp": "22:43",
+    "tweetLabel": "Tweet",
+    "threadFormatLabel": "Thread",
+    "blogLabel": "Blog",
+    "sourcesNote": "Based on the saved lesson and podcast. Follow a receipt to the source."
+  },
+  "drafts": {
+    "job": "Write it as one clear job.",
+    "goal": "Give the loop a way to check its work.",
+    "learn": "Run it on a schedule.",
+    "lessonIntro": "Give the agent a goal and a way to check its work.",
+    "podcastIntro": "Define the job, the schedule and the success criteria.",
+    "podcastOutro": "A goal loop stops when the outcome is validated or the agent is blocked.",
+    "agreementGoal": "Give the loop a way to check its work.",
+    "agreementSchedule": "Run it on a schedule.",
+    "agreementImprove": "Write it as one clear job.",
+    "answerGoal": "Give the agent an outcome and a way to check its work.",
+    "answerCheck": "For recurring work, set a schedule.",
+    "tweet": "Give the loop a way to check its work. Run it on a schedule. Write it as one clear job.",
+    "blogTitle": "Give the loop a way to check its work.",
+    "blogIntro": "Set an outcome the agent can verify.",
+    "blogBody": "Write one clear job and set a schedule for it.",
+    "answerLabel": "Example answer from the saved sources.",
+    "minuteNote": "Verbatim machine captions. Open the source at this minute.",
+    "threeWeeks": "Three weeks ago",
+    "twoWeeks": "Two weeks ago",
+    "oneWeek": "One week ago",
+    "shelfTime": "Three weeks later. The same shelf.",
+    "readTime": "Read it in three minutes.",
+    "transcriptStatus": "Caption excerpts saved"
+  }
+}

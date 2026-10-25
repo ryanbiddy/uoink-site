@@ -1,0 +1,87 @@
+{
+  "R_job": {
+    "timestamp": "00:09:36",
+    "verbatim": "You are designing a job. And so, just imagine that you're onboarding an employee.",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=576s"
+  },
+  "R_cadence": {
+    "timestamp": "00:09:55",
+    "verbatim": "Every Friday, EA, I would like you to review my calendar,",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=595s"
+  },
+  "R_output": {
+    "timestamp": "00:10:06",
+    "verbatim": "and send me a Slack to get this done.",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=606s"
+  },
+  "R_goal_sets": {
+    "timestamp": "00:05:32",
+    "verbatim": "A goal is a type of loop that sets an outcome",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=332s"
+  },
+  "R_goal_def": {
+    "timestamp": "00:05:35",
+    "verbatim": "runs an agent against that outcome until the outcome can be measured and validated",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=335s"
+  },
+  "R_blocked": {
+    "timestamp": "00:05:40",
+    "verbatim": "or the agent is blocked.",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=340s"
+  },
+  "R_eval_criteria": {
+    "timestamp": "00:27:11",
+    "verbatim": "you have to be very precise about evaluation and success criteria.",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=1631s"
+  },
+  "R_loop_def": {
+    "timestamp": "00:09:13",
+    "verbatim": "A loop is a way to autonomously kick off an agent with a prompt",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=553s"
+  },
+  "R_schedule": {
+    "timestamp": "00:03:50",
+    "verbatim": "You can set a schedule, like every 30 minutes, every hour,",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=230s"
+  },
+  "R_hooks": {
+    "timestamp": "00:04:35",
+    "verbatim": "So you can prompt an agent based on an internal life cycle,",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=275s"
+  },
+  "R_cant_exit": {
+    "timestamp": "00:08:52",
+    "verbatim": "it can't exit the loop until it's hit that goal.",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=532s"
+  },
+  "R_keep_going": {
+    "timestamp": "00:08:45",
+    "verbatim": "a way to keep that prompt going until the job is done.",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=525s"
+  },
+  "R_job_done": {
+    "timestamp": "00:09:25",
+    "verbatim": "it could be done because the job's done.",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=565s"
+  },
+  "R_monitor": {
+    "timestamp": "00:26:31",
+    "verbatim": "make sure you're monitoring it for both cost and efficiency of the setup.",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=1591s"
+  },
+  "R_alert": {
+    "timestamp": "00:16:06",
+    "verbatim": "Otherwise, send a Slack in the product channel to the team",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=966s"
+  },
+  "R_tweet": {
+    "timestamp": "00:01:46",
+    "verbatim": "this one tweet spun off tons of content about what is a loop,",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=106s"
+  },
+  "R_addy": {
+    "timestamp": "00:06:08",
+    "verbatim": "I like this article by Addy Osmani about loop engineering.",
+    "deep_link": "https://www.youtube.com/watch?v=JoXbk2fm7jM&t=368s"
+  }
+}

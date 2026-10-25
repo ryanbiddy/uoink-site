@@ -1,0 +1,45 @@
+{
+  "facts": {
+    "opening": "Let your AI search the library and cite timestamps.",
+    "youtube": "Capture YouTube videos with transcripts, frames, and comments.",
+    "podcasts": "Save X posts and videos, podcasts, articles, and Reddit threads.",
+    "storage": "Keep everything on your disk as Markdown + JSON, with a local search index.",
+    "search": "search no longer requires every word. search_library, search_uoinks, and search_clips take optional match (\"forgiving\" by default, \"strict\" to require every word) and mode (\"auto\" by default, \"keyword\", \"semantic\", \"hybrid\"); find_mentions takes match. Auto uses hybrid when semantic search is ready, otherwise keyword; each response says which mode ran. Quote a passage only when passage_verified is true.",
+    "browser": "ChatGPT and claude.ai: copy and paste only; Uoink does not connect to the ChatGPT app over MCP.",
+    "windows": "Windows 10/11 only."
+  },
+  "flow": [
+    {
+      "name": "search_clips",
+      "arguments": {
+        "query": "YOUR_TOPIC"
+      }
+    },
+    {
+      "name": "get_evidence_card",
+      "arguments": {
+        "video_id": "VIDEO_ID_FROM_SEARCH"
+      }
+    }
+  ],
+  "pages": [
+    {
+      "slug": "cite-youtube-timestamps-in-claude",
+      "title": "Cite YouTube timestamps in Claude",
+      "sourceFact": "Capture YouTube videos with transcripts, frames, and comments.",
+      "description": "Cite YouTube timestamps in Claude with Uoink. Let your AI search the library and cite timestamps.",
+      "setup": "Save a YouTube video, then connect Claude Desktop or Claude Code to Uoink.",
+      "prompt": "Find passages about YOUR_TOPIC in my saved YouTube videos. Get an evidence card for the source I choose and cite its timestamps.",
+      "route": "/use-cases/cite-youtube-timestamps-in-claude"
+    },
+    {
+      "slug": "search-podcasts-with-ai",
+      "title": "Search podcasts with AI",
+      "sourceFact": "Save X posts and videos, podcasts, articles, and Reddit threads.",
+      "description": "Search saved podcasts with Uoink and your AI. Let your AI search the library and cite timestamps.",
+      "setup": "Save a podcast, then connect your AI to Uoink.",
+      "prompt": "Search my saved podcasts for YOUR_TOPIC. Get an evidence card for the source I choose. Quote a passage only when passage_verified is true.",
+      "route": "/use-cases/search-podcasts-with-ai"
+    }
+  ]
+}

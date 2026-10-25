@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import { PageShell } from "../components/PageShell";
 import { pages } from "../content/pages";
+import { releases, withoutEmDashes } from "../content/seo-pages";
 
-const page = pages.changelog;
+const index = `<nav aria-label="Releases"><ul>${releases.map(release => `<li><a href="${release.route}">Uoink ${release.version}</a>${release.date ? `: <time datetime="${release.date}">${release.date}</time>` : ": release date not recorded"}</li>`).join("")}</ul></nav><p><a href="/">Uoink home</a> / <a href="/facts">Uoink facts</a></p>`;
+const page = {
+  ...pages.changelog,
+  html: withoutEmDashes(pages.changelog.html).replace(/(<p class="standfirst">[\s\S]*?<\/p>)/, `$1${index}`),
+};
 
 export const metadata: Metadata = {
   title: page.title,

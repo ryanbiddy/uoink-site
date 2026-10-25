@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node scripts/postbuild-static-cleanup.mjs",
+    "media": "node scripts/hero-media.cjs",
+    "preview": "node scripts/preview.cjs",
+    "predev": "node scripts/generate-use-cases.cjs",
+    "prebuild": "node scripts/generate-use-cases.cjs",
+    "build": "next build && node scripts/postbuild-static-cleanup.mjs && node scripts/check-seo-pages.cjs && node scripts/check-use-cases.cjs && node scripts/check-mcp-tool-pages.cjs --static && node scripts/check-compare.cjs --static && node scripts/check-field-notes.cjs --static && node scripts/check-site-routes.cjs",
     "start": "next start",
     "lint": "next lint"
   },
@@ -18,8 +22,9 @@
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "typescript": "^5.6.0",
+    "ajv": "^8.20.0",
     "eslint": "^9.0.0",
-    "eslint-config-next": "^15.0.0"
+    "eslint-config-next": "^15.0.0",
+    "typescript": "^5.6.0"
   }
 }
