@@ -32,10 +32,7 @@ const server = http.createServer((req,res) => {
     assert.equal((await page.goto(origin+route)).status(),200);
     await page.evaluate(() => document.fonts.ready);
     assert.equal(await page.locator('h1').count(),1);
-    const banner=page.getByLabel('Draft notice');
-    assert(await banner.isVisible());
-    assert.equal(await banner.innerText(),'Draft: two lines in this post become true after Ryan saves the three links in Uoink and edits the post.');
-    assert((await banner.boundingBox()).y < (await page.locator('h1').boundingBox()).y);
+    assert.equal(await page.getByLabel('Draft notice').count(),0);
     const body=await page.locator('.article-body').innerText();
     assert(!body.includes('Editor note'));
     assert(!(await page.locator('body').innerText()).includes('\u2014'));
@@ -72,7 +69,7 @@ const server = http.createServer((req,res) => {
       } catch(e) {results.push({url,ok:false,error:e.message});}
     }));
     fs.writeFileSync(path.join(shots,'field-notes-check.json'),JSON.stringify({internal,receipts:results},null,2));
-    console.log(`PASS: route, one h1, supplied JSON-LD, draft banner, index, sitemap, scene 4, ${internal} internal links, 390 px overflow, browser errors, screenshot.`);
+    console.log(`PASS: route, one h1, supplied JSON-LD, no draft notice, index, sitemap, scene 4, ${internal} internal links, 390 px overflow, browser errors, screenshot.`);
     console.log(JSON.stringify(results,null,2));
     assert(results.every(r=>r.ok),'Some external receipt links could not be verified; see field-notes-check.json');
   } finally {await browser.close();server.close();}

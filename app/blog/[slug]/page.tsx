@@ -60,12 +60,6 @@ export default async function ArticlePage({ params }: Props) {
         <section className="hero blog-article-hero">
           <div className="container">
             <div className="doc">
-              {article.slug === "loop-engineering" && (
-                <aside className="callout article-draft" aria-label="Draft notice">
-                  {/* > **Editor note, delete before publishing.** Two lines this section is meant to carry are not true yet. (1) "We saved all three sources with Uoink": as of Oct 24, none of the three is in the Uoink library, and the captions came from a direct caption download. Save the three links with Uoink, then add that line. (2) "A person wrote this post from the receipts": Claude drafted it. Add that line only after a person has written or rewritten it, and name them. */}
-                  <p>Draft: two lines in this post become true after Ryan saves the three links in Uoink and edits the post.</p>
-                </aside>
-              )}
               <p className="crumb">
                 <Link href="/blog">Field notes</Link> / {article.tags[0]}
               </p>
