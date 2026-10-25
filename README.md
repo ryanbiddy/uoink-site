@@ -26,21 +26,27 @@ The site uses `output: "export"` for static deployment.
 `content/release.json` supplies the product version and verified MCP counts to the site and both release-content scripts. Static discovery cards and crawler text must match it; `check-launch-content.cjs` checks those copies.
 
 ```bash
-python scripts/sync-mcp-from-release.py E:/AI/projects/uoink/checkouts/Yoink-release-3.11
+python scripts/sync-mcp-from-release.py E:/AI/projects/uoink/checkouts/Yoink-release-3.11.1 --ref v3.11.1
 node scripts/check-launch-content.cjs
 ```
 
 The sync script reads committed files with `git show`, parses Python ASTs without importing product code, and checks stdio names against `.mcpb/manifest.json`. It defaults to the product ref in `content/release.json`; `--ref <git-ref>` selects another ref. It updates the counts in content/release.json and writes the site's tool catalog and manifest.
 
-For 3.11.0, regenerate the catalog from the release `v3.11.0` tag (the default `mcpSourceRef`). The tool list is unchanged at 91 tools over stdio and 91 in the HTTP registry; the search tools gain optional `match` and `mode` parameters. Both transports advertise flattened tool schemas; the server still checks the exact schema. The public changelog keeps 3.11.0, 3.10.0, 3.9.3, 3.9.2, 3.9.1, and 3.9.0 separate. Earlier dates are preserved; no 3.9.0 publication date is asserted.
+For 3.11.1, regenerate the catalog from the release `v3.11.1` tag (the default `mcpSourceRef`). Tool descriptions changed; the inventory remains 91 tools over stdio and 91 in the HTTP registry, with 35 in core mode. Both transports advertise flattened tool schemas; the server still checks the exact schema. The public changelog keeps 3.11.1 and earlier releases separate. Earlier dates are preserved; no 3.9.0 publication date is asserted.
 
-The tool inventory line in `public/llms-full.txt` names the release commit. `check-launch-content.cjs` checks it against the manifest source commit, so update that line if the tag points at a different commit than `3b5d61a0943306b2bd9ef490805963a045204328`.
+This Windows release fixes 22 helper write paths that could lose successful saves and lock the library. Caption-less X videos can use local Whisper when a model has already been downloaded in Settings; videos with no audio say "No transcript:" and why. Article extraction keeps structure and links and labels paywalls and login walls as failures. X posts keep quote posts, media descriptors, expanded links, real counts and completeness disclosures. A per-user scheduled task restarts a crashed helper; Quit stays quit until the next login or a manual start. The bare helper address opens the dashboard.
+
+Mac (Apple Silicon, macOS 15 or later): preview coming soon.
+
+The tool inventory line in `public/llms-full.txt` names release commit `e306d77af2407bb84c1ba3ca110853c4f00a7d00`. `check-launch-content.cjs` checks it against the generated manifest's source commit. The Windows installer is 390,110,203 bytes; the release checksums are in `public/llms-full.txt`.
 
 ## Connect a local Uoink install
 
-Claude Desktop and Cursor retain their earlier MCP testing status. For 3.11.0, the installed build was tested in an isolated profile: Claude Code 2.1.308 listed all 91 tools and called one, and Codex CLI 0.153.4 called two tools. In 3.10.0 testing, Claude Code also ran with the skill and CLI only, and the plugin loaded its skill and started MCP, but its tool calls were not run end to end. Gemini CLI, pi, and the remaining connection recipes are not yet tested. Stdio works without the Uoink helper running. Start Uoink from the Start menu for the dashboard, browser button, and monitored-playlist polling.
+For 3.11.1, Agent Install 27 passed 11/11 isolated-install checks, including stdio inventories of 91 full / 35 core / 91 modern tools, Claude Code 2.1.310 (haiku) connecting with 91 tools and calling `get_schema_version`, helper writes surviving a restart, and `GET /` redirecting to `/dashboard`. The full receipt scope is listed on the agent setup and changelog pages. Codex CLI was not re-tested in receipt 27.
 
-For Claude Desktop, download and open [uoink-3.11.0.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.11.0/uoink-3.11.0.mcpb). Enter the full path to your Uoink folder when asked; Desktop does not expand `%LOCALAPPDATA%`. Reinstall the bundle and restart Desktop after updating.
+Earlier 3.11.0 testing: Claude Code 2.1.308 listed all 91 tools and called one, and Codex CLI 0.153.4 called two tools. In 3.10.0 testing, Claude Code also ran with the skill and CLI only, and the plugin loaded its skill and started MCP, but its tool calls were not run end to end. Claude Desktop and Cursor retain their earlier MCP testing status. Gemini CLI, pi, and the remaining connection recipes are not yet tested. Stdio works without the Uoink helper running. Start Uoink from the Start menu for the dashboard, browser button, and monitored-playlist polling.
+
+For Claude Desktop, download and open [uoink-3.11.1.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.11.1/uoink-3.11.1.mcpb). Enter the full path to your Uoink folder when asked; Desktop does not expand `%LOCALAPPDATA%`. Reinstall the bundle and restart Desktop after updating.
 
 For Claude Code, run this in PowerShell. The expanded paths are absolute:
 
