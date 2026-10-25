@@ -2,7 +2,9 @@
 
 Ryan, put your clips in this folder with the exact names below. Replace a file to swap its video, then rebuild the site. No code changes are needed. If a clip is missing, its space says “Your video here.”
 
-This repo is public. Add only clips you own or have cleared for public use. For now, this folder contains only this README, `labels.json` and `.gitkeep`.
+This repo is public. Add only clips you own or have cleared for public use. The three named slots and their matching `.jpg` covers are cleared: "Cleared by Ryan for public use on uoink.app, Oct 24 2026."
+
+All three slots are filled with cleared clips: the lesson at 22:42 to 22:48, the podcast at 05:32 to 05:38 and the X video at 0:29.5 to 0:33.5.
 
 | File name | Where it appears | Shape | Good length |
 | --- | --- | --- | --- |
@@ -10,7 +12,7 @@ This repo is public. Add only clips you own or have cleared for public use. For 
 | `source-podcast.mp4` | Second video in that section | Wide, 16:9, or square, 1:1 | 4–8 seconds |
 | `source-x-video.mp4` | Third video in that section | Wide, 16:9, or square, 1:1 | 4–8 seconds |
 
-The three sources are final, but the video slots remain empty until footage is supplied. Empty slots use the wide shape. Filled videos keep their own shape. All three are silent previews; sound is not needed.
+The three sources are final. Empty slots use the wide shape. Filled videos keep their own shape. All three are silent previews; sound is not needed.
 
 Keep each loop under about **600 KB**, and all three together under **1.5 MB**. Short clips are easier to keep small.
 

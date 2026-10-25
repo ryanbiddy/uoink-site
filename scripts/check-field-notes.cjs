@@ -1,3 +1,4 @@
+if (process.argv.includes('--static')) { require('./check-seo-static.cjs').check('field-notes'); process.exit(0); }
 const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
@@ -55,7 +56,9 @@ const server = http.createServer((req,res) => {
     await page.screenshot({path:path.join(shots,'field-notes-390-light.png'),fullPage:true});
     await page.screenshot({path:path.join(shots,'field-notes-390-viewport.png')});
     assert((await (await page.request.get(origin+'/blog')).text()).includes(route));
-    assert((await (await page.request.get(origin+'/sitemap.xml')).text()).includes(`${route}</loc><lastmod>2026-10-24</lastmod>`));
+    const evidence=JSON.parse(fs.readFileSync(path.join(root,'_scratch/shots-hero/sitemap-dates.json'),'utf8')).find(item=>item.route===route);
+    assert(evidence && evidence.files.includes('content/blog/loop-engineering.md'));
+    assert((await (await page.request.get(origin+'/sitemap.xml')).text()).includes(`${route}</loc><lastmod>${evidence.lastmod}</lastmod>`));
     await page.goto(origin);
     assert.equal(await page.locator('[data-scene-link="4"]').getAttribute('href'),route);
     assert.equal(errors.length,0,errors.join('\n'));

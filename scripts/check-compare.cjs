@@ -1,4 +1,5 @@
 ﻿// Run after npm run build. Uses the same local Chrome setup as the family checks.
+if (process.argv.includes('--static')) { require('./check-seo-static.cjs').check('compare'); process.exit(0); }
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');

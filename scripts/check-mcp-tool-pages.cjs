@@ -1,5 +1,6 @@
 // Requires Python jsonschema for request validation.
 // Run after npm run build. Uses the same local browser dependency as the family-kit check.
+if (process.argv.includes('--static')) { require('./check-seo-static.cjs').check('mcp'); process.exit(0); }
 const fs = require('node:fs');
 const path = require('node:path');
 const http = require('node:http');

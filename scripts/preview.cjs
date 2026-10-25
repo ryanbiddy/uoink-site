@@ -22,4 +22,6 @@ http.createServer((req,res) => {
     res.writeHead(206,{'Content-Range':`bytes ${start}-${end}/${size}`,'Content-Length':end-start+1});
     fs.createReadStream(file,{start,end}).pipe(res);
   } else { res.setHeader('Content-Length',size); fs.createReadStream(file).pipe(res); }
-}).listen(3000,'127.0.0.1',()=>console.log('Preview: http://localhost:3000'));
+}).listen(Number(process.env.PORT || 3000),'127.0.0.1',function () {
+  console.log(`Preview: http://127.0.0.1:${this.address().port}`);
+});

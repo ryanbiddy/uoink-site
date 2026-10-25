@@ -21,5 +21,5 @@
 .mcp-tool-inputs dd { margin: 0; }
 .mcp-tool-page pre { max-width: 100%; white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--mono); font-size: 13px; line-height: 1.6; background: var(--sunk); border: 1px solid var(--line); border-radius: 10px; padding: 16px; margin-block: 16px; }
 .mcp-tool-page summary { cursor: pointer; padding-block: 16px; font-weight: 600; }
-.mcp-tool-page :is(a, summary):focus-visible { outline: 3px solid var(--family-focus); outline-offset: 4px; }
+.mcp-tool-page :is(a, summary):focus-visible { outline: 2px solid var(--family-focus); outline-offset: 2px; }
 .mcp-tool-page .ctas { flex-wrap: wrap; }

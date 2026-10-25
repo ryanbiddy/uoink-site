@@ -242,9 +242,9 @@ export const pages: Record<PageId, SitePage> = {
     id: "home",
     route: "/",
     mode: "mode-dark",
-    title: "Uoink: Local video, podcast, and text corpus for your AI",
+    title: "Uoink | Save YouTube and podcast transcripts for your AI",
     description:
-      "Uoink keeps the videos, podcasts, and articles you study on your own disk, then hands them to your AI as a cited corpus.",
+      "Save YouTube videos, podcasts and articles to your own disk. Your AI searches the library and cites the timestamp. Free and open source, for Windows.",
     keywords: [
       "youtube to AI",
       "local video corpus",
@@ -477,7 +477,7 @@ ${DOC_RULE}
 <section class="section" data-screen-label="features / tune"><div class="container"><div class="section-head"><span class="eyebrow">job 4 / tune the helper</span><h2 class="display-l">Make the defaults fit your <em>machine.</em></h2></div><ul class="fact-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px 56px;list-style:none;padding:0"><li><div><b>BYO Anthropic key</b>Enables Hook Type, Comment Intelligence, and Entity Extraction. Stored in the OS credential vault.</div></li><li><div><b>Clipboard budget</b>Set screenshot caps, compression, and comment limits before pasting into a model.</div></li><li><div><b>Whisper model selector</b>Choose tiny/base/small/medium/large for podcast transcription cost and accuracy tradeoffs.</div></li><li><div><b>Output folder picker</b>Send corpora where your work already lives, including markdown vault workflows.</div></li></ul></div></section>
 <section class="big-strip" data-screen-label="features / comparison"><div class="container"><span class="eyebrow">why not Glasp, NoteGPT, or NotebookLM?</span><h2 class="display-l">Transcript tools give you text. Uoink gives you a <em>local asset.</em></h2><p class="body-l" style="max-width:70ch">Cloud tools summarize, extensions grab transcripts, and generic MCP servers fetch captions. Uoink's wedge is the combination: local corpus, screenshots, comments, hook classification, entity search, and MCP access. The archive compounds because it belongs to you.</p><p class="mt-24"><a class="btn ink" href="/privacy">Check privacy -></a> <a class="btn ghost" href="/agents">Check MCP -></a></p></div></section>`,
   },
-  podcasts: aliasPage("podcasts", "/podcasts", "Podcast details moved to Sources", "Podcasts are now listed on the Uoink sources page.", "/sources#podcasts"),
+  podcasts: aliasPage("podcasts", "/podcasts", "Podcast details moved to Sources", "Podcasts are now listed on the Uoink sources page.", "/sources/podcasts"),
   agents: {
     id: "agents",
     route: "/agents",

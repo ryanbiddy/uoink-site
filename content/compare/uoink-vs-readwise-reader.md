@@ -36,7 +36,7 @@ Both tools now connect to AI assistants over MCP, so that is no longer the divid
 | What it is | A local library for the videos and podcasts you study, that your AI can search and cite | A reading app for "articles, PDFs, EPUBs, email newsletters, RSS feeds, YouTube videos, X threads, and more" [1] |
 | Where the library lives | Markdown and JSON files on your disk, with a local search index | Synced across your devices, and Reader also works offline [1] |
 | Account | None | Readwise account; the MCP connection signs in with it [3] |
-| Platforms | Windows 10/11 today; Mac preview coming soon | iOS, Android, web, Mac and Windows desktop apps, Chrome, Firefox and Safari extensions, e-ink mode [1] |
+| Platforms | Windows 10/11 today. Mac (Apple Silicon, macOS 15 or later): preview coming soon. | iOS, Android, web, Mac and Windows desktop apps, Chrome, Firefox and Safari extensions, e-ink mode [1] |
 | YouTube | Timestamped transcript, screenshots, top comments, channel context and metadata | Watch alongside a time-synced transcript; uses the creator's captions or YouTube's auto-generated ones, with an optional enhanced transcript [4] |
 | Podcasts | Watches RSS and Atom feeds; optional auto-ingest downloads new episodes and transcribes them locally with WhisperX | Share an episode from Spotify, Overcast or Apple Podcasts to save a transcript; built as "a podcast companion, rather than a full podcast player" [5] |
 | X (Twitter) | Post text and X video | Threads saved as one document, with only the original poster's tweets [5] |
