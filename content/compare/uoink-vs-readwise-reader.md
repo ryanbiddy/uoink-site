@@ -2,7 +2,7 @@
 title: "Uoink vs Readwise Reader: a local video library or a reading app"
 slug: "readwise-reader"
 description: "Readwise Reader is a polished reading app on every device. Uoink is a free Windows app that saves videos and podcasts to your disk for AI to cite."
-date: 2026-10-24
+date: 2026-10-25
 ---
 
 # Uoink vs Readwise Reader
@@ -84,5 +84,5 @@ Competitor pages were opened and read on 2026-10-24.
 
 Uoink facts:
 
-- U1. Uoink 3.11.0 summary: https://uoink.app/llms.txt
-- U2. Uoink 3.11.0 full disclosures (updated 2026-10-22): https://uoink.app/llms-full.txt
+- U1. Uoink 3.11.1 summary (updated 2026-10-25): https://uoink.app/llms.txt
+- U2. Uoink 3.11.1 full disclosures (updated 2026-10-25): https://uoink.app/llms-full.txt

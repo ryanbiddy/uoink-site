@@ -1,5 +1,5 @@
-// Generated for Uoink 3.11.0 from ryanbiddy/uoink v3.11.0 on 2026-10-22.
-// Source commit: 756730c704bfc1327a16ea5591ebfb1852918881
+// Generated for Uoink 3.11.1 from ryanbiddy/uoink v3.11.1 on 2026-10-25.
+// Source commit: e306d77af2407bb84c1ba3ca110853c4f00a7d00
 // HTTP: TOOL_REGISTRY; stdio: registry inventory (3.9.2+) or @mcp.tool decorators.
 // Regenerate with: python scripts/sync-mcp-from-release.py <product-checkout> [--ref <git-ref>]
 
@@ -105,367 +105,367 @@ export const mcpStdioToolNames = [
 export const mcpTools = [
   [
     "uoink_video",
-    "Extract a single YouTube video into a Uoink corpus."
+    "Capture one YouTube video into a saved Markdown corpus with screenshots."
   ],
   [
     "uoink_playlist",
-    "Start asynchronous extraction for a YouTube playlist."
+    "Start a background capture job for the videos in a YouTube playlist."
   ],
   [
     "get_job_status",
-    "Return the full status object for an async Uoink job."
+    "Read progress, per-item outcomes and errors for a saved capture or transcription job."
   ],
   [
     "cancel_job",
-    "Cancel an async Uoink job and leave partial outputs on disk."
+    "Request cancellation of a capture or transcription job while keeping partial outputs on disk."
   ],
   [
     "list_recent_uoinks",
-    "List recent saved Uoink corpora."
+    "List the newest saved captures from the local index, with their slugs, titles, folders and capture times."
   ],
   [
     "search_uoinks",
-    "Full-text search across saved Uoink corpora."
+    "Find whole saved items by text, with optional channel and hook filters."
   ],
   [
     "search_clips",
-    "Full-text search over transcript windows from saved uoinks."
+    "Find transcript windows in saved items, with timing, source links and ranked snippets."
   ],
   [
     "get_evidence_card",
-    "Return an evidence card for one saved uoink: title, channel, platform, topic, source URL, a short summary hint, and its most quotable clips spread across the timeline, each with a deep link."
+    "Build a saved item's evidence card with identity, summary hints and clips spread across its timeline."
   ],
   [
     "list_library_work",
-    "List Librarian assignment work for a run: counts by work state and manifest disposition, the run revision, one cursor page of items, and whether staged work is waiting for a subscribed client."
+    "List Librarian assignment counts and one cursor page of work for a run."
   ],
   [
     "claim_library_work",
-    "Lease Librarian work for a client (action=claim returns up to twelve single-item packets, each with one evidence card and an attempt token), or renew, release or cancel the client's own current attempt."
+    "Lease Librarian evidence packets, or renew, release or cancel your current attempts."
   ],
   [
     "submit_library_result",
-    "Submit one Librarian result for one leased work row: an assignment of one to three shelf memberships with quoted evidence, or an explicit unmapped, unsupported or error outcome."
+    "Store a client's shelf-assignment result for one currently leased Librarian item."
   ],
   [
     "apply_reshelving",
-    "Preview the exact reshelving delta for a run (mode=preview, the default), or apply a locally approved, unexpired preview by its delta hash and operation key (mode=apply)."
+    "Create a reshelving preview or apply an approved preview to current labels."
   ],
   [
     "pin_shelf",
-    "Pin, unpin or move one item on a shelf as a user decision that the Librarian may not override."
+    "Record a user's pin, unpin or move decision for one item's shelf membership."
   ],
   [
     "undo_library_apply",
-    "Undo one recorded library apply by replaying its stored inverse as a new, itself reversible, journal operation."
+    "Reverse the latest applicable library apply by replaying its stored inverse as a new journal operation."
   ],
   [
     "list_sources",
-    "List standing sources (podcast RSS feeds, YouTube channels and playlists) with consent state, enrollment, today's UTC start allowance and detection health."
+    "List standing RSS, YouTube channel and playlist sources with consent, enrollment, daily allowance and detection health."
   ],
   [
     "register_source",
-    "Register a standing source for metadata detection only."
+    "Register a standing source for future metadata detection with capture consent off."
   ],
   [
     "source_status",
-    "One source's current summary, one page of observed items with capture and classification state, and every in-flight reservation."
+    "Read one standing source's summary, observed-item page and all in-flight reservations."
   ],
   [
     "set_source_consent",
-    "Turn standing capture on or off for one source."
+    "Enable or disable standing capture for a registered source after local confirmation."
   ],
   [
     "get_uoink_corpus",
-    "Return the full markdown corpus for a saved uoink by slug."
+    "Read a saved item's complete Markdown corpus, citation rows and available source or image pointers by slug."
   ],
   [
     "analyze_comments",
-    "Run Comment Intelligence on an existing uoink and return themes, mentioned products/tools, and disagreements."
+    "Analyze a saved capture's comments with Anthropic and replace its stored comment-intelligence section."
   ],
   [
     "classify_hook",
-    "Classify the hook type for an existing uoink."
+    "Classify a saved capture's opening with Anthropic and replace its stored hook analysis."
   ],
   [
     "get_taxonomy",
-    "Return captured Hook Type taxonomy rows, optionally filtered by channel and hook_type."
+    "Read saved hook-classification rows, optionally restricted to a channel or hook."
   ],
   [
     "get_citation_map",
-    "Return the transcript + screenshot citation map for a saved uoink, each entry with a timestamped YouTube deep link."
+    "Read all stored transcript and screenshot citations for one saved capture."
   ],
   [
     "get_uoink_health",
-    "Return the per-section extraction health score for a saved uoink."
+    "Read the stored per-section extraction health of a saved capture."
   ],
   [
     "find_mentions",
-    "Find every place an entity (person, tool, product, company, or topic) is mentioned across saved uoinks."
+    "Find recorded entity-name mentions across saved items, with stored spans, timing and source links."
   ],
   [
     "analyze_self_channel",
-    "Aggregate the user's own saved videos (those tagged is_self via channel-name recognition) into hook evolution, format evolution, performance trend by month, and a top-performers list."
+    "Summarize the user's saved own-channel videos into hook and format history, monthly performance trends and top performers."
   ],
   [
     "get_schema_version",
-    "Report the data-shape versions Uoink writes + the supported read-range. v2.5 substrate: cross-version aggregators (Channel Decoder, Niche Corpus) check this before assuming v2 fields are present in older rows/sidecars."
+    "Report the local SQL migration, item and sidecar schema versions and supported read ranges."
   ],
   [
     "get_user_role",
-    "Report the user's persisted role (creator | researcher | marketer | mixed) + the dashboard emphasis (primary/secondary chip order + default sort) the helper computes from it."
+    "Read the saved user role and its resolved dashboard sort and filter emphasis."
   ],
   [
     "set_user_role",
-    "Persist the user's role choice. Drives Library default sort + filter-chip emphasis on the dashboard."
+    "Replace the saved user role that controls dashboard sort and filter emphasis."
   ],
   [
     "check_live_status",
-    "Probe a URL to find out if it is a live broadcast without extracting."
+    "Fetch video metadata to determine whether a broadcast is live, upcoming or finished."
   ],
   [
     "add_podcast_feed",
-    "Register an RSS feed URL. Idempotent -- existing URL returns the same row. poll_interval_min default 60, range 15-1440."
+    "Register a podcast RSS feed for ongoing metadata monitoring."
   ],
   [
     "list_podcast_feeds",
-    "List registered RSS feeds newest-first."
+    "List registered podcast feeds newest first, including their saved polling settings."
   ],
   [
     "remove_podcast_feed",
-    "Delete a feed + cascade its episodes."
+    "Stop monitoring a registered podcast feed."
   ],
   [
     "poll_podcast_feed",
-    "Trigger one feed poll (HTTP GET + RSS/Atom parse + upsert episodes)."
+    "Refresh metadata for one registered podcast feed through the source-aware polling path."
   ],
   [
     "list_podcast_episodes",
-    "List episodes. Optional feed_id + status filters (new | queued | downloaded | transcribed | ignored)."
+    "List tracked podcast episodes newest published first, optionally scoped to a feed or lifecycle state."
   ],
   [
     "download_podcast_episode",
-    "Download an episode's MP3 via yt-dlp + ffmpeg."
+    "Download a tracked podcast episode's audio to its canonical local MP3."
   ],
   [
     "get_whisperx_status",
-    "Report whether the WhisperX runtime is importable + the currently-selected model size + the diarization default."
+    "Inspect local WhisperX availability, the selected model and the diarization default."
   ],
   [
     "transcribe_podcast_episode",
-    "Queue WhisperX for a downloaded episode."
+    "Queue local WhisperX transcription for a downloaded podcast episode."
   ],
   [
     "episode_to_corpus",
-    "Publish a completed podcast transcript into the local Uoink corpus."
+    "Publish a completed podcast transcript as a searchable local corpus with source-aware citations."
   ],
   [
     "add_monitored_playlist",
-    "Register a YouTube playlist URL to monitor for auto-uoinks."
+    "Register a YouTube playlist for ongoing metadata monitoring."
   ],
   [
     "list_monitored_playlists",
-    "List registered playlists newest-first."
+    "List registered playlist monitors newest first with saved monitoring settings."
   ],
   [
     "remove_monitored_playlist",
-    "Delete a playlist + cascade its discovery events."
+    "Stop monitoring a registered playlist."
   ],
   [
     "poll_monitored_playlist",
-    "Poll one playlist (yt-dlp --flat-playlist) + diff against last_seen_video_ids + auto-queue new videos via the existing pending_yoinks retry worker."
+    "Refresh observations for a registered playlist through its source-aware polling path."
   ],
   [
     "list_monitored_playlist_events",
-    "List per-discovery events. Optional filters: playlist_id, status (discovered | queued | extracted | failed)."
+    "List recorded playlist-discovery events newest first, optionally filtered by playlist or lifecycle state."
   ],
   [
     "get_user_taste",
-    "Return the consolidated TASTE.md (preferred hooks/formats, avoid list, top performance anchors)."
+    "Read consolidated TASTE.md preferences and performance anchors."
   ],
   [
     "get_user_memory",
-    "Return the user's free-form USER.md notes (Channels I admire, My channel(s), Topics, Workflow notes)."
+    "Read the user's hand-edited USER.md notes about channels, topics and workflow."
   ],
   [
     "update_user_taste",
-    "Set one taste anchor section (preferred_hooks | preferred_formats | avoid) and re-consolidate TASTE.md. `content` is markdown that replaces the section body verbatim -- bullets recommended."
+    "Replace one persisted taste-preference section and regenerate TASTE.md."
   ],
   [
     "get_engagement_signal",
-    "Return the time-decayed value_score for one video plus per-event-type counts and last event timestamp."
+    "Read one saved item's time-decayed local engagement score, event counts and last-event time."
   ],
   [
     "classify_facets",
-    "Persist agent-classified facets + free-form tags for a video."
+    "Store your agent's facet classifications and tags on a saved item."
   ],
   [
     "query_by_facets",
-    "Filter saved yoinks by facet values (format / performance_tier / hook_type / topic / length_bucket / tag)."
+    "List saved items matching all supplied facet and tag filters, newest first."
   ],
   [
     "get_facet_taxonomy",
-    "Enum lists for the v2.5 facet axes (used for filter chips)."
+    "Return supported format, performance-tier, length-bucket and hook label lists."
   ],
   [
     "get_transcript_reliability",
-    "Return stored transcript reliability spans for a saved uoink by YouTube video_id."
+    "Read stored transcript-reliability spans for a saved item."
   ],
   [
     "assemble_workspace",
-    "pull a corpus slice for planning a video."
+    "Select and rank saved examples for planning a video, with audience questions and available taste or own-channel context."
   ],
   [
     "critique_against_corpus",
-    "call WITHOUT `findings` to retrieve the assembled context (corpus slice + audience questions + taste anchors) -- the agent does the LLM analysis on that context."
+    "Prepare workspace grounding for a draft critique, or append your agent's findings to its critique log."
   ],
   [
     "list_workspaces",
-    "list build workspaces newest-first."
+    "List saved video-planning workspaces newest first."
   ],
   [
     "get_workspace",
-    "fetch one workspace + its full critique log (every draft + findings combination the agent has persisted)."
+    "Read one saved video-planning workspace and its full critique log."
   ],
   [
     "extract_claims",
-    "persist agent-extracted claims for a video."
+    "Store checkable claims that your agent extracted from a saved item."
   ],
   [
     "verify_claim",
-    "record evidence for one extracted claim. alignment_signal MUST be one of supports / contradicts / mixed / inconclusive."
+    "Record your agent's evidence and alignment signals for an existing claim."
   ],
   [
     "list_claims",
-    "list extracted claims. Filter by video_id and/or status (extracted | verified | not-attempted)."
+    "List saved checkable claims, optionally filtered by source item or review status."
   ],
   [
     "get_claim",
-    "fetch one claim by id, with stored evidence."
+    "Read one saved claim with its recorded evidence and alignment signals."
   ],
   [
     "generate_script",
-    "two-phase generator. Call WITHOUT `script` payload to retrieve grounding context (workspace metadata + assembled corpus slice + audience questions + optional taste anchors + optional self-channel snapshot)."
+    "Prepare workspace grounding for a video script, or save an agent-written script as a new version."
   ],
   [
     "revise_script",
-    "revise an existing script grounded in critique findings."
+    "Prepare revision context for an existing video script, or save its replacement as a linked new version."
   ],
   [
     "get_shot_list",
-    "derive (and persist) a default shot list from a script's beats + the parent workspace's S1 format facet."
+    "Derive and save a default shot list from a script's beats and its workspace format."
   ],
   [
     "list_scripts",
-    "list scripts newest-first. Optional workspace_id filter scopes to one workspace's history."
+    "List saved video-script versions newest first, optionally within one workspace."
   ],
   [
     "get_script",
-    "fetch one script by id."
+    "Read a saved video-script version, including beats, shot list and source-item citations."
   ],
   [
     "write_tweet",
-    "Two-phase tweet/thread generator. Phase 1 (no `body`) returns grounding (source yoink + creator credit + style anchors + Voice DNA prompt)."
+    "Prepare grounding for a tweet or thread, or save a credited draft in the local Writing Studio."
   ],
   [
     "write_blog",
-    "Two-phase blog generator. Same shape as write_tweet but Phase 2 accepts title, dek, tags, and expects markdown body with a Source section."
+    "Prepare grounding for a blog article, or save a credited Markdown draft in the local Writing Studio."
   ],
   [
     "list_writing_pieces",
-    "List generated pieces newest-first."
+    "List saved tweet, thread and blog drafts newest first, optionally filtered by kind or source item."
   ],
   [
     "get_writing_piece",
-    "Fetch one piece by id."
+    "Read one saved Writing Studio tweet, thread or blog draft."
   ],
   [
     "add_style_anchor",
-    "Add a Substack-style voice anchor (URL or raw pasted text)."
+    "Save a named writing-style reference from pasted text or a URL."
   ],
   [
     "list_style_anchors",
-    "List style anchors + their active flag + the helper's 10-anchor cap."
+    "List saved writing-style references with active flags and the configured ten-anchor cap."
   ],
   [
     "remove_style_anchor",
-    "Delete a style anchor."
+    "Delete a saved writing-style reference."
   ],
   [
     "uoink_url",
-    "Capture any http(s) URL through the helper's universal extractor."
+    "Capture a supported video URL through platform routing, with metadata/transcript fallback for other yt-dlp sites."
   ],
   [
     "uoink_note",
-    "Save a text note as a first-class local corpus item."
+    "Save user-provided text as a local searchable note with title and attribution."
   ],
   [
     "uoink_image",
-    "Save a base64 PNG, JPEG, or WebP as a local image corpus item."
+    "Save supplied PNG, JPEG or WebP bytes as a local image corpus item with optional caption and attribution."
   ],
   [
     "uoink_x",
-    "Capture an X post and the author's earlier chain as a local corpus item."
+    "Capture an X post and its author's earlier chain as a local text corpus item."
   ],
   [
     "uoink_page",
-    "Capture an allowed page as a yoink."
+    "Fetch an allowed webpage as Markdown and save it as a local corpus item."
   ],
   [
     "uoink_reddit_thread",
-    "Fetch a thread via its public .json (no API key, no OAuth), flatten the comment tree with a depth limit and a score threshold, and persist it as a yoink with source_type='reddit_thread'."
+    "Capture a Reddit post and filtered comment tree as a local discussion corpus."
   ],
   [
     "list_allowed_sites",
-    "List the user's allowed hostnames. Default seeds (youtube.com, youtu.be, x.com, twitter.com) are pre-added by migration 0015 and removable like any other entry."
+    "List saved webpage-capture hostname patterns and their active state."
   ],
   [
     "add_allowed_site",
-    "Add a hostname or wildcard pattern (`*.docs.example.com` matches all sub.docs.example.com subdomains)."
+    "Add a hostname pattern to the webpage-capture allowlist."
   ],
   [
     "remove_allowed_site",
-    "Remove a hostname or wildcard pattern from the allowlist."
+    "Remove a hostname pattern from the webpage-capture allowlist."
   ],
   [
     "get_library_activity",
-    "Report deterministic library activity, shelf churn, and source observations."
+    "Report saved-library capture activity, shelf churn and standing-source observations for a time interval."
   ],
   [
     "search_library",
-    "Bounded clip-first search of the saved library (default 5, at most 20 hits) with verified clip or item-text passages when available."
+    "Retrieve a bounded, clip-first selection of saved-library matches with revision-bound card and excerpt URIs."
   ],
   [
     "get_library_item",
-    "Resolve one saved item by video_id or slug (exactly one) and return its default Librarian evidence card unchanged plus canonical card, excerpt and initial corpus-chunk URIs."
+    "Resolve one saved item to its bounded default Librarian card and canonical card, excerpt and initial corpus-chunk URIs."
   ],
   [
     "read_library_resource",
-    "Read one uoink://library/v1/ resource URI (card, excerpt, corpus chunk, shelf page or brief) with the same validation, contents and refusals as resources/read."
+    "Read a bounded saved-library card, excerpt, corpus chunk, shelf page or brief from its uoink URI."
   ],
   [
     "get_playbook_input",
-    "Prepare a bounded, cited research packet from the local library for outlier-posts, transcript-intel, comment-mining, creator-teardown or repurpose-pack."
+    "Prepare cited local evidence and instructions for a client-written research report."
   ],
   [
     "discover_candidates",
-    "Plan or run one ScrapeCreators discovery search with your saved key."
+    "Plan or run a ScrapeCreators search and save uncaptured candidates."
   ],
   [
     "queue_discovered",
-    "Queue 1-10 saved discovery candidates for normal Uoink capture."
+    "Enqueue selected saved discovery candidates for normal capture."
   ],
   [
     "get_library_brief_input",
-    "Prepare bounded input for a client-run daily brief: for a UTC date and a Phase 2 run id, return job_key, input_hash, bound queue/run/projection revisions, capture and event counts, coverage, up to 20 work-status rows and up to 5 default Librarian cards (at most 24,576 bytes)."
+    "Prepare a dated library-status packet for a brief that the client writes."
   ],
   [
     "publish_library_brief",
-    "Local write: persist one client-produced brief for a job prepared by get_library_brief_input."
+    "Save a client-written daily brief as an immutable local artifact."
   ],
   [
     "export_cited_range",
-    "Read-only cited export of one stored transcript range (exact cue-aligned start/end, at most 120 s and 200 cues) or one current excerpt id from a saved item: verbatim stored text, per-cue speaker labels with provenance, overlapping chapters, safe source and seek links, source/media revisions and evidence refs."
+    "Export verbatim stored transcript cues with speaker provenance, overlapping chapters, safe links and evidence references."
   ]
 ] as const;
 

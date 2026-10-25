@@ -47,12 +47,16 @@ uoink note "A useful thought" --title "Research note"</pre>
 </ul>
 <p>Semantic search is optional. A person turns it on in Uoink Settings under <strong>Semantic search</strong> and accepts Google's Gemma terms. Uoink then downloads the EmbeddingGemma model once (about 330 MB) and indexes saved sources on this computer. Until it is ready, use <code>keyword</code> or <code>auto</code>. Quote <code>passage.text</code> only when <code>passage_verified</code> is true; otherwise <code>citation_reason</code> explains why no passage was returned. The tool list is unchanged.</p>
 ${PRODUCT_STATUS.mac.agentSetup}
-<h3>What was tested for 3.11.0</h3>
-<p>Tested with the installed 3.11.0 build in an isolated profile:</p>
+<h3>What was tested for 3.11.1</h3>
+<p>Agent Install 27 passed 11/11 checks with the installed 3.11.1 build in an isolated profile:</p>
 <ul>
-<li>Claude Code 2.1.308 over MCP: all 91 tools listed; a tool called.</li>
-<li>Codex CLI 0.153.4 over MCP: two tools called.</li>
+<li>Isolated installation; <code>/health</code> reported 3.11.1 and migration 32. Stdio listed 91 tools in full mode, 35 in core, and 91 in modern.</li>
+<li>Claude Code 2.1.310 (haiku) connected with 91 tools and called <code>get_schema_version</code>.</li>
+<li>Usage sharing stayed off with no network sends observed in that check; the bundled ffprobe passed the audio probe.</li>
+<li>No startup entries were created by the isolated install. The dashboard passed at 1400 and 1100 pixels wide, and uninstall was clean.</li>
+<li>Helper writes persisted across a restart, and <code>GET /</code> redirected to <code>/dashboard</code>.</li>
 </ul>
+<p>Codex CLI was not re-tested in receipt 27. Earlier 3.11.0 testing: Claude Code 2.1.308 over MCP: all 91 tools listed; a tool called. Codex CLI 0.153.4 over MCP: two tools called.</p>
 <p>From 3.10.0 testing: Claude Code with the Uoink skill and the <code>uoink</code> command only, with no MCP server, loaded the skill and ran <code>uoink note</code> and <code>uoink recent</code>. The Claude Code plugin loads its skill and starts its MCP server; its tool calls were not run end to end because the test install is isolated from a normal one.</p>
 <p>Not yet tested: Gemini CLI and pi (no sign-in on the test machine) and every other recipe in <code>uoink connect</code>. Claude Desktop and Cursor retain their earlier MCP testing status; that does not verify the new recipes.</p>
 <p>ChatGPT and claude.ai use copy and paste only. Uoink does not connect to the ChatGPT app over MCP.</p>`;
