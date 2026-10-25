@@ -14,9 +14,19 @@ export type BlogArticleMeta = {
 
 export type BlogArticle = BlogArticleMeta & {
   body: string;
+  jsonLd?: Record<string, unknown>;
 };
 
 export const blogArticles: BlogArticleMeta[] = [
+  {
+    slug: "loop-engineering",
+    title: "Loop engineering: what Boris Cherny and Claire Vo agree on",
+    dek: "Loop engineering is designing loops that let an AI agent run a job on its own and check its work. Where Boris Cherny and Claire Vo agree, with receipts.",
+    publishedAt: "2026-10-24",
+    readingMinutes: 7,
+    tags: ["loop engineering", "agent-dev", "Claude Code", "Codex"],
+    heroTone: "agent",
+  },
   {
     slug: "9-hook-types-every-creator-should-recognize",
     title: "The 9 Hook Types Every Creator Should Recognize",
@@ -103,7 +113,9 @@ export function getArticleBySlug(slug: string): BlogArticle | undefined {
 
   const bodyPath = path.join(process.cwd(), "content", "blog", `${slug}.md`);
   const body = fs.readFileSync(bodyPath, "utf8");
-  return { ...meta, body };
+  const jsonLdPath = path.join(process.cwd(), "content", "blog", `${slug}.jsonld`);
+  const jsonLd = fs.existsSync(jsonLdPath) ? JSON.parse(fs.readFileSync(jsonLdPath, "utf8")) : undefined;
+  return { ...meta, body, jsonLd };
 }
 
 export function getAllArticles(): BlogArticle[] {

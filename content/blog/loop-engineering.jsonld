@@ -1,0 +1,127 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Loop engineering: what Boris Cherny and Claire Vo agree on",
+  "description": "Loop engineering is designing loops that let an AI agent run a job on its own and check its work. Where Boris Cherny and Claire Vo agree, with receipts.",
+  "datePublished": "2026-10-24",
+  "dateModified": "2026-10-24",
+  "url": "https://uoink.app/blog/loop-engineering",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://uoink.app/blog/loop-engineering"
+  },
+  "image": "https://uoink.app/og-image.png",
+  "inLanguage": "en",
+  "author": {
+    "@type": "Person",
+    "name": "Ryan Biddy",
+    "url": "https://ryanbiddy.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Uoink",
+    "url": "https://uoink.app"
+  },
+  "isPartOf": {
+    "@type": "Blog",
+    "name": "Uoink Field Notes",
+    "url": "https://uoink.app/blog"
+  },
+  "about": {
+    "@type": "DefinedTerm",
+    "name": "Loop engineering",
+    "description": "The practice of designing loops: setups where an AI agent runs a job on its own, on a schedule or toward a goal, with a way to check its own work."
+  },
+  "keywords": "loop engineering, AI agent loops, agent loops, goal loops, scheduled agents, Claude Code, Codex, Boris Cherny, Claire Vo",
+  "mentions": [
+    {
+      "@type": "Person",
+      "name": "Boris Cherny"
+    },
+    {
+      "@type": "Person",
+      "name": "Claire Vo"
+    },
+    {
+      "@type": "Person",
+      "name": "Matt Van Horn",
+      "url": "https://x.com/mvanhorn"
+    },
+    {
+      "@type": "Person",
+      "name": "Andrew Ng"
+    }
+  ],
+  "citation": [
+    {
+      "@type": "VideoObject",
+      "name": "Boris Cherny: We Cut 80% of Claude Code’s Prompt",
+      "url": "https://www.youtube.com/watch?v=qyPCVqFUyDo",
+      "uploadDate": "2026-07-27",
+      "duration": "PT35M51S",
+      "actor": {
+        "@type": "Person",
+        "name": "Boris Cherny"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Y Combinator"
+      }
+    },
+    {
+      "@type": "VideoObject",
+      "name": "How to write AI agent loops in Claude Code and Codex",
+      "url": "https://www.youtube.com/watch?v=JoXbk2fm7jM",
+      "uploadDate": "2026-06-17",
+      "duration": "PT29M7S",
+      "actor": {
+        "@type": "Person",
+        "name": "Claire Vo"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "How I AI"
+      }
+    },
+    {
+      "@type": "SocialMediaPosting",
+      "url": "https://x.com/mvanhorn/status/2068438900193042695",
+      "datePublished": "2026-06-20",
+      "author": {
+        "@type": "Person",
+        "name": "Matt Van Horn",
+        "url": "https://x.com/mvanhorn"
+      }
+    },
+    {
+      "@type": "Article",
+      "name": "What is loop engineering?",
+      "url": "https://www.ibm.com/think/topics/loop-engineering",
+      "datePublished": "2026-07-17",
+      "author": [
+        {
+          "@type": "Person",
+          "name": "Ivan Belcic"
+        },
+        {
+          "@type": "Person",
+          "name": "Cole Stryker"
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "IBM"
+      }
+    },
+    {
+      "@type": "NewsArticle",
+      "name": "Google Brain co-founder Andrew Ng says AI won't replace developers, explains 'loop engineering'",
+      "url": "https://www.storyboard18.com/how-it-works/google-brain-co-founder-andrew-ng-says-ai-wont-replace-developers-explains-loop-engineering-103402.htm",
+      "datePublished": "2026-07-07",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Storyboard18"
+      }
+    }
+  ]
+}
