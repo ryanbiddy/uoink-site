@@ -123,11 +123,11 @@ h1, h2, h3, h4, h5, h6 {
 .wm-line uoink-mark .u-body { fill: currentColor; }
 .wm-line .oink { display: inline-block; }
 
-/* Magnet tips: acid at large sizes (a solid shape, allowed on cream).
-   Small marks switch to the thicker tip; cream tips vanish on a cream
-   ground, so they take ink here. */
+/* Magnet tips: always acid #FFD23F, at every size and on every ground,
+   matching Zing's charge (family rule). Small marks switch to the thicker
+   tip drawing only; the tips sit on the letter body, so they still read. */
 uoink-mark .u-tip-l { fill: var(--acid); }
-uoink-mark .u-tip-s { display: none; fill: var(--ink); }
+uoink-mark .u-tip-s { display: none; fill: var(--acid); }
 uoink-mark[data-size="small"] .u-tip-l { display: none; }
 uoink-mark[data-size="small"] .u-tip-s { display: block; }
 
