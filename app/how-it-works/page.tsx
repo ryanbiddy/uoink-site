@@ -3,6 +3,7 @@ import Link from "next/link";
 import { DocRule } from "../components/Doc";
 import { PageShell } from "../components/PageShell";
 import { RELEASE_URL, SitePage } from "../content/pages";
+import useCases from "../content/use-cases.generated.json";
 
 const page: SitePage = {
   id: "how",
@@ -233,6 +234,14 @@ agent drafts from the cited corpus`}</pre>
         </div>
       </section>
 
+      <section className="section" aria-labelledby="use-cases">
+        <div className="container"><div className="doc">
+          <h2 id="use-cases" className="display-l">Search and cite your sources</h2>
+          <ul className="doc-list">
+            {useCases.pages.map(item => <li key={item.slug}><Link className="arr-link" href={item.route}>{item.title}</Link></li>)}
+          </ul>
+        </div></div>
+      </section>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howTo) }} />
     </PageShell>
   );

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "media": "node scripts/hero-media.cjs",
     "preview": "node scripts/preview.cjs",
-    "build": "next build && node scripts/postbuild-static-cleanup.mjs && node scripts/check-seo-pages.cjs",
+    "predev": "node scripts/generate-use-cases.cjs",
+    "prebuild": "node scripts/generate-use-cases.cjs",
+    "build": "next build && node scripts/postbuild-static-cleanup.mjs && node scripts/check-seo-pages.cjs && node scripts/check-use-cases.cjs",
     "start": "next start",
     "lint": "next lint"
   },
