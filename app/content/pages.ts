@@ -1,3 +1,4 @@
+import { HERO_HTML } from "./hero";
 import { AGENT_SETUP_HTML } from "./agent-setup";
 import { MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT, mcpTools } from "./mcp-tools";
 import { CLAUDE_CODE_COMMAND, MCP_CURSOR_CONFIG, MCP_STDIO_CONFIG } from "./mcp-config";
@@ -129,43 +130,9 @@ const agentsFaq: FaqItem[] = [
   },
 ];
 
-export const pages: Record<PageId, SitePage> = {
-  home: {
-    id: "home",
-    route: "/",
-    mode: "mode-dark",
-    title: "Uoink: Local video, podcast, and text corpus for your AI",
-    description:
-      "Uoink keeps the videos, podcasts, and articles you study on your own disk, then hands them to your AI as a cited corpus.",
-    keywords: [
-      "youtube to AI",
-      "local video corpus",
-      "mcp youtube server",
-      "local knowledge base",
-      "writing studio",
-    ],
-    html: `
-<section class="home-hero" data-screen-label="home / hero">
-  <div class="container">
-    <div class="home-hero-grid">
-      <div class="copy">
-        <span class="eyebrow">uoink.app / ${VERSION}</span>
-        <h1 class="display-xl">Uoink that <em>shit.</em></h1>
-        <p class="lede">A local library for the videos and podcasts you study, that any AI you use can search and cite.</p>
-        <div class="ctas">
-          <a class="btn primary large" href="${DOWNLOAD_URL}">Get Uoink</a>
-          <a class="btn ghost large" href="#live-uoink">See a live uoink</a>
-        </div>
-        <p class="sub-cta">Free / MIT / local library / ${MCP_STDIO_TOOL_COUNT} stdio tools / ${MCP_TOOL_COUNT} HTTP tools / ${PRODUCT_STATUS.mac.visible}</p>
-      </div>
-      <figure class="reader-demo" id="live-uoink">
-        ${readerDemo()}
-        <figcaption>one uoink / readable by Claude, ChatGPT, and agents</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-<section class="section" data-screen-label="home / living library" id="living-library">
+// Text moved off home by REVIEW-HERO-1. Render only on the matching route.
+export const HOME_MOVED_CONTENT: Record<string, string> = {
+  "/changelog": `<section class="section" data-screen-label="changelog / living library" id="living-library">
   <div class="container">
     <div class="doc">
       <div class="doc-head">
@@ -188,18 +155,8 @@ export const pages: Record<PageId, SitePage> = {
       <p class="doc-links"><a class="arr-link" href="${GITHUB_URL}/releases/tag/${VERSION}">${VERSION_NUMBER} release notes</a> <a class="arr-link" href="/changelog">Changelog</a></p>
     </div>
   </div>
-</section>
-<section class="section flush" data-screen-label="home / product shot">
-  <div class="container">
-    <figure class="figure">
-      <div class="figure-label"><span>uoink dashboard</span><span>local corpus</span></div>
-      <img src="/product/hero-library.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Uoink dashboard library showing dozens of saved YouTube videos as searchable source cards with transcripts, hook labels, topic filters, and channel context on the local machine." />
-      <figcaption>Your captures, searchable on your own disk. Hand the transcript and frames to the AI you choose.</figcaption>
-    </figure>
-  </div>
-</section>
-<div class="container"><hr class="doc-rule"/></div>
-<section class="section" data-screen-label="home / corpus anatomy" id="corpus">
+</section>`,
+  "/how-it-works": `<section class="section" data-screen-label="how-it-works / corpus anatomy" id="corpus">
   <div class="container">
     <div class="doc">
       <div class="doc-head">
@@ -214,9 +171,8 @@ export const pages: Record<PageId, SitePage> = {
       </ol>
     </div>
   </div>
-</section>
-<div class="container"><hr class="doc-rule"/></div>
-<section class="section" data-screen-label="home / local first">
+</section>`,
+  "/privacy": `<section class="section" data-screen-label="privacy / local first">
   <div class="container">
     <div class="doc">
       <div class="doc-head">
@@ -227,9 +183,8 @@ export const pages: Record<PageId, SitePage> = {
       <p class="doc-links"><a class="arr-link" href="/privacy">Read privacy -></a></p>
     </div>
   </div>
-</section>
-<div class="container"><hr class="doc-rule"/></div>
-<section class="section" data-screen-label="home / three audiences">
+</section>`,
+  "/creators": `<section class="section" data-screen-label="creators / three audiences">
   <div class="container">
     <div class="doc">
       <div class="doc-head">
@@ -239,32 +194,13 @@ export const pages: Record<PageId, SitePage> = {
       </div>
       <ul class="doc-list linked">
         <li><a class="doc-row" href="/creators"><h3>Creators.</h3><p>Find the moment you need, read the transcript beside the frames, and export a cited range for your next draft.</p><span class="arr-link">See creator workflow -></span></a></li>
-        <li><a class="doc-row" href="/developers"><h3>Developers.</h3><p>Give Claude Desktop or Cursor a local library to search and cite. Start with the stdio config or the Claude Desktop bundle.</p><span class="arr-link">Open developer docs -></span></a></li>
-        <li><a class="doc-row" href="/sources"><h3>Sources.</h3><p>Capture YouTube, X video and post text, podcasts, web articles, and Reddit threads into one local library.</p><span class="arr-link">Browse supported sources -></span></a></li>
+        <li><a class="doc-row" href="/developers"><h3>Developers.</h3><span class="arr-link">Open developer docs -></span></a></li>
+        <li><a class="doc-row" href="/sources"><h3>Sources.</h3><span class="arr-link">Browse supported sources -></span></a></li>
       </ul>
     </div>
   </div>
-</section>
-<div class="container"><hr class="doc-rule"/></div>
-<section class="section" data-screen-label="home / generate demo">
-  <div class="container">
-    <div class="doc">
-      <div class="doc-head">
-        <span class="eyebrow">from source to draft</span>
-        <h2 class="display-l">Pick a source, then <em>generate</em> from it.</h2>
-        <p class="lede">Choose something you saved, aim it at a tweet, thread, or script, and Writing Studio drafts from the corpus with the creator credit attached.</p>
-      </div>
-    </div>
-    <figure class="figure">
-      <div class="figure-label"><span>generate flow</span><span>silent loop</span></div>
-      <video class="motion-only" src="/product/generate-flow.mp4" poster="/product/generate-flow-poster.jpg" width="1280" height="720" muted autoplay loop playsinline preload="none" aria-label="Screen recording of Uoink generating a tweet: a source is picked, the output is set to Tweet, a prompt is typed, and a cited draft appears in the preview panel."></video>
-      <img class="still-only" src="/product/generate-flow-poster.jpg" width="1280" height="800" fetchpriority="low" decoding="async" alt="Uoink Generate view: hook pattern and style options beside the X composer, which holds a drafted tweet with its source credit." />
-      <figcaption>Pick the ThursdAI source, set the output to Tweet, write the prompt, and the cited draft lands in the preview.</figcaption>
-    </figure>
-  </div>
-</section>
-<div class="container"><hr class="doc-rule"/></div>
-<section class="section" data-screen-label="home / model agnostic">
+</section>`,
+  "/mcp": `<section class="section" data-screen-label="mcp / model agnostic">
   <div class="container">
     <div class="doc">
       <div class="exchange">
@@ -280,9 +216,8 @@ get_evidence_card(video_id)</pre>
       <p class="doc-links"><a class="arr-link" href="/developers">Read MCP setup -></a> <a class="arr-link" href="/mcp">Machine-readable MCP manifest -></a></p>
     </div>
   </div>
-</section>
-<div class="container"><hr class="doc-rule"/></div>
-<section class="section" data-screen-label="home / install">
+</section>`,
+  "/install": `<section class="section" data-screen-label="install / install">
   <div class="container">
     <div class="doc">
       <div class="doc-head">
@@ -291,14 +226,37 @@ get_evidence_card(video_id)</pre>
         <p class="lede">Download the helper, install the extension, open a video, and click Uoink. The helper bundles Python, yt-dlp, and ffmpeg so you never install them yourself.</p>
       </div>
       <ul class="doc-list">
-        <li><p class="doc-meta"><b>Windows</b><span>live path</span></p><h3>Download the helper.</h3><p class="doc-ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p><a class="btn primary small" href="${DOWNLOAD_URL}">Download -></a></li>
-        <li><p class="doc-meta"><b>Extension</b><span>pending review</span></p><h3>Install the browser button.</h3><p class="doc-ver">Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested.</p><p>Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at <code>%LOCALAPPDATA%\\Uoink\\extension</code>. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.</p><a class="arr-link" href="/install#extension">Install notes -></a></li>
-        <li><p class="doc-meta"><b>Mac</b><span>${PRODUCT_STATUS.mac.label}</span></p><h3>${PRODUCT_STATUS.mac.heading}</h3><p class="doc-ver">${PRODUCT_STATUS.mac.tech}</p><p>${PRODUCT_STATUS.mac.detail}</p><a class="arr-link" href="/install#mac">${PRODUCT_STATUS.mac.linkLabel}</a></li>
+        <li><p class="doc-meta"><b>Windows</b><span>live path</span></p><p class="doc-ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p><a class="btn primary small" href="${DOWNLOAD_URL}">Download -></a></li>
+        <li><h3>Install the browser button.</h3><a class="arr-link" href="/install#extension">Install notes -></a></li>
+        <li><p class="doc-meta"><b>Mac</b><span>${PRODUCT_STATUS.mac.label}</span></p><a class="arr-link" href="/install#mac">${PRODUCT_STATUS.mac.linkLabel}</a></li>
       </ul>
     </div>
   </div>
-</section>
-<div class="container"><hr class="doc-rule"/></div>
+</section>`,
+  "/developers": `<section class="section"><div class="container"><div class="doc"><ul class="doc-list linked"><li><a class="doc-row" href="/developers"><h3>Developers.</h3><p>Give Claude Desktop or Cursor a local library to search and cite. Start with the stdio config or the Claude Desktop bundle.</p><span class="arr-link">Open developer docs -></span></a></li></ul></div></div></section>`,
+  "/sources": `<section class="section"><div class="container"><div class="doc"><ul class="doc-list linked"><li><a class="doc-row" href="/sources"><h3>Sources.</h3><p>Capture YouTube, X video and post text, podcasts, web articles, and Reddit threads into one local library.</p><span class="arr-link">Browse supported sources -></span></a></li></ul></div></div></section>`,
+};
+
+export const pages: Record<PageId, SitePage> = {
+  home: {
+    id: "home",
+    route: "/",
+    mode: "mode-dark",
+    title: "Uoink: Local video, podcast, and text corpus for your AI",
+    description:
+      "Uoink keeps the videos, podcasts, and articles you study on your own disk, then hands them to your AI as a cited corpus.",
+    keywords: [
+      "youtube to AI",
+      "local video corpus",
+      "mcp youtube server",
+      "local knowledge base",
+      "writing studio",
+    ],
+    html: `
+${HERO_HTML}
+<section class="go-deeper" id="live-uoink" data-home-part="go-deeper"><div class="container"><h2>Go deeper</h2><nav class="go-deeper-grid" aria-label="Go deeper"><a href="/sources">Sources</a><a href="/how-it-works">How it works</a><a href="/features">Features</a><a href="/mcp">MCP</a><a href="/creators">Creators</a><a href="/blog">Field notes</a></nav></div></section>
+<section class="home-proof" data-home-part="proof" aria-label="Uoink facts"><div class="container"><p>Free / MIT / runs on your machine</p><p>Local library / ${MCP_STDIO_TOOL_COUNT} stdio tools / ${MCP_TOOL_COUNT} HTTP tools</p><p>${PRODUCT_STATUS.mac.visible}</p><a class="arr-link" href="/install">Install Uoink -&gt;</a></div></section>
+<section class="home-sibling" data-home-part="sibling" aria-labelledby="sibling-title"><div class="container"><h2 id="sibling-title">Works with Zing</h2><p>Uoink pulls it in. Zing sends it out.</p><a class="arr-link" href="https://myzing.app">Meet Zing -&gt;</a></div></section>
 `,
   },
   install: {
@@ -453,7 +411,7 @@ ${DOC_RULE}
       <p class="body-l">A local helper does the work: download, transcribe, index. Your browser extension and your AI agents talk to it over localhost. Captures are stored locally; AI features, connected clients, exports and synced folders can share copies.</p>
     </div>
     <figure class="figure">
-      <img src="/screenshots/how-it-works/01-dashboard-hero.png" alt="Dashboard Main Screen showing library grid and active tasks" />
+      <img src="/product/hero-library.webp" alt="Dashboard Main Screen showing library grid and active tasks" />
       <figcaption><b>Dashboard Main Screen:</b> Browsing the local library grid and active transcription tasks. Your files stay on your disk.</figcaption>
     </figure>
   </div>
@@ -997,54 +955,6 @@ function featureCards(items: [string, string][]): string {
 
 function docItems(items: [string, string][]): string {
   return items.map(([title, body]) => `<li><h3>${title}</h3><p>${body}</p></li>`).join("");
-}
-
-// The home hero's picture of the Reader: a capture list beside the open
-// transcript. Sample titles are generic and the transcript is bracketed
-// placeholder text, so nothing here quotes or names a real creator.
-// (Data lives inside the function: it runs while `pages` initialises.)
-function readerDemo(): string {
-  const captureList: { title: string; source: string; state: string; step?: number; open?: boolean }[] = [
-    { title: "Talk: building a personal research library", source: "YouTube · 41:08", state: "Done · YouTube captions", open: true },
-    { title: "Episode 42: how we take notes", source: "Podcast · 58:20", state: "Capturing · transcript (3 of 5)", step: 3 },
-    { title: "Why I keep a reading log", source: "Article · example.com", state: "Done · article text" },
-  ];
-  const steps = 5;
-  const transcriptLines: { time: string; text?: string; shot?: boolean }[] = [
-    { time: "00:00", text: "[Transcript paragraph: the speaker opens the talk.]" },
-    { time: "00:52", text: "[Transcript paragraph, word for word from the captions.]" },
-    { time: "03:16", shot: true },
-    { time: "03:40", text: "[Next paragraph of the transcript.]" },
-  ];
-
-  const captures = captureList.map(({ title, source, state, step = 0, open }) => {
-    const segments = Array.from({ length: steps }, (_, index) => {
-      const n = index + 1;
-      return `<i${n < step ? ' class="done"' : n === step ? ' class="active"' : ""}></i>`;
-    }).join("");
-    const strip = step ? `<span class="reader-steps">${segments}</span>` : "";
-    return `<li class="reader-item${open ? " is-open" : ""}"><span class="reader-item-title">${title}</span><span class="reader-item-source">${source}</span><span class="reader-item-state${step ? " is-active" : ""}">${state}</span>${strip}</li>`;
-  }).join("");
-  const transcript = transcriptLines.map(({ time, text, shot }) =>
-    shot
-      ? `<div class="reader-para"><span class="reader-ts">${time}</span><span class="reader-shot"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 16l5-5 4 4 3-3 6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>[Screenshot · ${time}]</span></div>`
-      : `<p class="reader-para"><span class="reader-ts">${time}</span><span>${text}</span></p>`,
-  ).join("");
-  const current = captureList.find((capture) => capture.open) ?? captureList[0];
-
-  return `<div class="reader-app" role="img" aria-label="The Uoink Reader with sample items: a capture list showing one finished capture and one still capturing its transcript, beside the open transcript with timestamp links, an inline screenshot, and a Copy as Markdown button.">
-  <div class="reader-list">
-    <div class="reader-list-head"><span class="reader-list-title"><b>Library</b><span>${captureList.length} captures</span></span><span class="reader-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Search library</span></div>
-    <ul class="reader-items">${captures}</ul>
-  </div>
-  <div class="reader-doc">
-    <div class="reader-doc-head">
-      <div class="reader-doc-bar"><span class="reader-doc-meta">${current.source}</span><span class="reader-copy"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Copy as Markdown</span></div>
-      <span class="reader-doc-title">${current.title}</span>
-    </div>
-    <div class="reader-transcript">${transcript}</div>
-  </div>
-</div>`;
 }
 
 function toolRows(): string {

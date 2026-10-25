@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "media": "node scripts/hero-media.cjs",
+    "preview": "node scripts/preview.cjs",
     "build": "next build && node scripts/postbuild-static-cleanup.mjs",
     "start": "next start",
     "lint": "next lint"

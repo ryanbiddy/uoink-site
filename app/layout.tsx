@@ -34,13 +34,13 @@ export const metadata: Metadata = {
     title: "Uoink | Save YouTube and podcast transcripts for your AI",
     description: "Save YouTube videos, podcasts and articles to your own disk. Your AI searches the library and cites the timestamp. Free and open source, for Windows.",
     url: CANONICAL_URL,
-    images: [{ url: "/og-cover.png", width: 1200, height: 630, alt: "The Uoink dashboard: a populated local corpus of saved videos ready to hand to your AI." }],
+    images: [{ url: "/og-cover.png", width: 1200, height: 630, alt: "Uoink: Save what you watch. Your AI writes from it, with receipts." }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Uoink | Save YouTube and podcast transcripts for your AI",
     description: "Save YouTube videos, podcasts and articles to your own disk. Your AI searches the library and cites the timestamp. Free and open source, for Windows.",
-    images: ["/og-cover.png"],
+    images: [{ url: "/og-cover.png", width: 1200, height: 630, alt: "Uoink: Save what you watch. Your AI writes from it, with receipts." }],
   },
 };
 
