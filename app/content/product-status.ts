@@ -17,7 +17,6 @@ export type MacStatus = {
   available: boolean;
   visible: string; // one-line platform summary: home, install FAQ, MCP page, NotebookLM comparison, crawler text
   heading: string;
-  linkLabel: string; // home page link to /install#mac
   windowsLabel: string; // install hero line under the Windows download
   aboutPlatform: string;
   aboutNote: string;
@@ -33,7 +32,6 @@ export const PRODUCT_STATUS: { mac: MacStatus } = {
     available: true,
     visible: `Windows 10/11, plus a ${MAC_PREVIEW_STATUS}.`,
     heading: "Mac preview.",
-    linkLabel: "Mac preview ->",
     windowsLabel: "Windows 10/11",
     aboutPlatform: "Windows 10/11 and Mac",
     aboutNote: "Mac preview: Apple Silicon, macOS 15 or later",

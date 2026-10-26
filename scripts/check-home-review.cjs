@@ -146,9 +146,10 @@ async function checkMoves(page, out) {
       report.push({block:move.label,route:move.route,checkedBlocks:count});
     }
     const install=targets['/install'];
-    // The Mac heading is PRODUCT_STATUS.mac.heading; the fixture's Mac block matches it.
-    for(const text of ['Mac preview.','Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at']) {
-      const matches=[...install.querySelectorAll('h3,p')].filter(el=>normalize(el.textContent).startsWith(text) && (text.startsWith('Mac ') ? el.tagName==='H3' : true));
+    // Each install entry appears once: the Windows and Mac paths, then the shared
+    // Chrome button notes. The Mac heading is PRODUCT_STATUS.mac.heading.
+    for(const [text,tag] of [['Windows installer.','H3'],['Mac preview.','H3'],['Chrome button.','H3'],['The extension adds capture buttons directly to supported web pages.','P']]) {
+      const matches=[...install.querySelectorAll('h3,p')].filter(el=>el.tagName===tag && normalize(el.textContent).startsWith(text));
       if(matches.length!==1) failures.push(`Duplicate existing install copy: ${text} (${matches.length})`);
     }
     return {failures,report};

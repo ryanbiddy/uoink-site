@@ -217,22 +217,6 @@ get_evidence_card(video_id)</pre>
     </div>
   </div>
 </section>`,
-  "/install": `<section class="section" data-screen-label="install / install">
-  <div class="container">
-    <div class="doc">
-      <div class="doc-head">
-        <span class="eyebrow">install Uoink</span>
-        <h2 class="display-l">One helper. One extension. Then the <em>U button.</em></h2>
-        <p class="lede">Download the helper, install the extension, open a video, and click Uoink. The helper bundles Python, yt-dlp, and ffmpeg so you never install them yourself.</p>
-      </div>
-      <ul class="doc-list">
-        <li><p class="doc-meta"><b>Windows</b><span>live path</span></p><p class="doc-ver">Uoink installer / Windows 10 and 11</p><p>Runs in your tray, writes to your local library, and exposes the local MCP server.</p><a class="btn primary small" href="${DOWNLOAD_URL}">Download -></a></li>
-        <li><h3>Install the browser button.</h3><a class="arr-link" href="/install#extension">Install notes -></a></li>
-        <li><p class="doc-meta"><b>Mac</b></p><a class="arr-link" href="/install#mac">${PRODUCT_STATUS.mac.linkLabel}</a></li>
-      </ul>
-    </div>
-  </div>
-</section>`,
   "/developers": `<section class="section"><div class="container"><div class="doc"><ul class="doc-list linked"><li><a class="doc-row" href="/developers"><h3>Developers.</h3><p>Give Claude Desktop or Cursor a local library to search and cite. Start with the stdio config or the Claude Desktop bundle.</p><span class="arr-link">Open developer docs -></span></a></li></ul></div></div></section>`,
   "/sources": `<section class="section"><div class="container"><div class="doc"><ul class="doc-list linked"><li><a class="doc-row" href="/sources"><h3>Sources.</h3><p>Capture YouTube, X video and post text, podcasts, web articles, and Reddit threads into one local library.</p><span class="arr-link">Browse supported sources -></span></a></li></ul></div></div></section>`,
 };
@@ -275,100 +259,62 @@ export const pages: Record<PageId, SitePage> = {
     html: `
 <section class="hero" data-screen-label="install / hero">
   <div class="container">
-    <div class="hero-grid">
-      <div class="copy">
-        <span class="eyebrow">install</span>
-        <h1 class="display-xl">Install <em>Uoink.</em></h1>
-        <p class="lede">Get the helper running, add the browser button, and click Uoink on any video or Reddit thread. No Python, no command line, no path wrangling.</p>
-        <div class="ctas"><a class="btn primary large with-logo" href="${DOWNLOAD_URL}">${WINDOWS_MARK}Download Windows installer</a><a class="btn ghost large" href="/how-it-works">See how it works</a></div>
-        <p class="footnote">The installer is unsigned. Windows SmartScreen will show a warning. <strong>More info → Run anyway</strong>.</p>
-        <p class="sub-cta">${PRODUCT_STATUS.mac.windowsLabel} / About ${INSTALLER_SIZE} / No admin rights needed</p>${PRODUCT_STATUS.mac.heroLink}
-        <div class="brand-strip" aria-label="Install surfaces">
-          <!-- GitHub logo source: https://github.com/logos; license/usage confirmation: official GitHub mark, unmodified integration callout under GitHub logo guidelines. -->
-          <span class="logo-chip logo-mark"><img src="/assets/brand-logos/github.svg" alt="GitHub" width="22" height="22" loading="lazy" decoding="async" /><span>GitHub Releases</span></span>
-          <span>Chrome (tested)</span>
-          <span class="cws-chip">Chrome Web Store pending</span>
-        </div>
+    <div class="doc">
+      <span class="eyebrow">install</span>
+      <h1 class="display-xl">Install <em>Uoink.</em></h1>
+      <p class="lede">Install the helper, add the Chrome button, then click Uoink on a video. The helper bundles Python, yt-dlp and ffmpeg. No command line needed.</p>
+      <div class="ctas"><a class="btn primary large with-logo" href="${DOWNLOAD_URL}">${WINDOWS_MARK}Download Windows installer</a><a class="btn ghost large" href="/how-it-works">See how it works</a></div>
+      <p class="sub-cta">${PRODUCT_STATUS.mac.windowsLabel} / About ${INSTALLER_SIZE} / No admin rights needed</p>${PRODUCT_STATUS.mac.heroLink}
+      <div class="brand-strip" aria-label="Install surfaces">
+        <!-- GitHub logo source: https://github.com/logos; license/usage confirmation: official GitHub mark, unmodified integration callout under GitHub logo guidelines. -->
+        <span class="logo-chip logo-mark"><img src="/assets/brand-logos/github.svg" alt="GitHub" width="22" height="22" loading="lazy" decoding="async" /><span>GitHub Releases</span></span>
+        <span>Chrome (tested)</span>
+        <span class="cws-chip">Chrome Web Store pending</span>
       </div>
-      <aside class="facts" aria-label="Install steps">
-        <p class="facts-head"><span>install steps</span><span>sideload flow</span></p>
-        <ol class="facts-list">
-          <li><b>1. Run helper installer</b><span>Places local helper under %LOCALAPPDATA%\\Uoink</span></li>
-          <li><b>2. Sideload extension</b><span>Load unpacked folder from the helper directory. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.</span></li>
-          <li><b>3. Start capturing</b><span>YouTube and Reddit threads save directly to disk</span></li>
-        </ol>
-      </aside>
     </div>
   </div>
 </section>
 
-<section class="section" data-screen-label="install / steps">
+<section class="section flush" data-screen-label="install / steps">
   <div class="container">
     <div class="doc">
       <div class="doc-head">
         <span class="eyebrow">setup steps</span>
-        <h2 class="display-l">Three steps to <em>sideload.</em></h2>
-        <p class="lede">Uoink runs entirely on your machine. Follow this sequence to set it up.</p>
+        <h2 class="display-l">One helper. One extension. Then the <em>U button.</em></h2>
+        <p class="lede">Follow the steps for your computer. Both end with the same Chrome button.</p>
       </div>
-      <ol class="doc-list numbered">
-        <li>
-          <span class="num">01</span>
-          <h3>Download the helper.</h3>
-          <p>Run the unsigned Windows installer (about ${INSTALLER_SIZE}). No admin rights needed; it installs to <code>%LOCALAPPDATA%\\Uoink</code>.</p>
-          <p class="footnote">The installer is unsigned. Windows SmartScreen will show a warning. <strong>More info → Run anyway</strong>.</p>
-        </li>
-        <li>
-          <span class="num">02</span>
-          <h3>Load the browser extension.</h3>
-          <p>We're waiting on Web Store approval, so you'll need to load the extension folder manually:</p>
-          <ol class="steps">
-            <li>Open Chrome's extensions page: <code>chrome://extensions</code>.</li>
-            <li>Enable <strong>Developer mode</strong> in the top right.</li>
-            <li>Click <strong>Load unpacked</strong> and select the <code>%LOCALAPPDATA%\\Uoink\\extension</code> directory.</li>
-            <li>Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.</li>
-          </ol>
-        </li>
-        <li>
-          <span class="num">03</span>
-          <h3>Click capture.</h3>
-          <p>Open YouTube or Reddit. Click the Uoink button on any video or thread page to save the corpus directly to your local files.</p>
-        </li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<section class="section flush" data-screen-label="install / platforms">
-  <div class="container">
-    <div class="doc">
       <ul class="doc-list">
         <li id="windows">
-          <p class="doc-meta"><b class="platform-label">${WINDOWS_MARK}Windows</b><span>now</span></p>
-          <h3>Desktop helper.</h3><p>Leave <strong>Add the uoink command to PATH for AI agents</strong> checked to use the command in new terminals. After installing, open a new terminal and run <code>uoink status</code>. See <a href="/developers">agent setup</a> or the <a href="https://github.com/ryanbiddy/uoink/blob/main/llms-install.md">agent installation steps</a>.</p>
-          <p class="doc-ver">Windows 10/11 / release page</p>
-          <p>The helper bundles Python, yt-dlp, ffmpeg, SQLite, the local MCP server, and the uoink command. It runs in user space and exposes the loopback server on port 5179.</p>
-          <a class="btn primary small with-logo" href="${RELEASE_URL}">${WINDOWS_MARK}Open release -></a>
-        </li>
-        <li id="extension">
-          <p class="doc-meta"><b>Extension</b><span>pending review</span></p>
-          <h3>Browser button.</h3>
-          <p class="doc-ver">Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested.</p>
-          <p>The extension adds capture buttons directly to supported web pages. It communicates locally with the helper and skips broad history permissions.</p>
-          <p>Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at <code>%LOCALAPPDATA%\\Uoink\\extension</code>. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.</p>
-          <p>After updating the helper, reload the extension once from your browser’s extensions page. If its ID changes to the pinned <code>bkcapfidedhfcjpmjabeopfbcjcbmdmi</code>, reapply your extension preferences. Your saved captures are unaffected.</p>
-          <p class="footnote">Web Store review pending</p>
+          <p class="doc-meta"><b class="platform-label">${WINDOWS_MARK}Windows</b></p>
+          <h3>Windows installer.</h3>
+          <p class="doc-ver">Windows 10/11 / Uoink-Setup-${VERSION_NUMBER}.exe / about ${INSTALLER_SIZE}</p>
+          <p>The helper installs to <code>%LOCALAPPDATA%\\Uoink</code> and runs in user space. Along with Python, yt-dlp and ffmpeg, it includes SQLite, the local MCP server and the uoink command, and it serves the loopback server on port 5179.</p>
+          <ol class="steps">
+            <li>Download <a href="${DOWNLOAD_URL}">Uoink-Setup-${VERSION_NUMBER}.exe</a>. The <a href="${RELEASE_URL}">release page</a> lists its SHA-256.</li>
+            <li>Run it. The installer is unsigned. Windows SmartScreen will show a warning. Choose <strong>More info → Run anyway</strong>.</li>
+            <li>Load the extension. In Chrome, open <code>chrome://extensions</code>, turn on <strong>Developer mode</strong> and click <strong>Load unpacked</strong>. Select the <code>%LOCALAPPDATA%\\Uoink\\extension</code> folder.</li>
+            <li>Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.</li>
+          </ol>
+          <a class="btn primary small with-logo" href="${DOWNLOAD_URL}">${WINDOWS_MARK}Download for Windows -></a>
         </li>
         <li id="mac">
           <p class="doc-meta"><b class="platform-label">${MAC_MARK}Mac</b></p>
           <h3>${PRODUCT_STATUS.mac.heading}</h3>
           ${PRODUCT_STATUS.mac.installSteps}
         </li>
+        <li id="extension">
+          <p class="doc-meta"><b>Windows and Mac</b></p>
+          <h3>Chrome button.</h3>
+          <p class="doc-ver">Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested.</p>
+          <p>The extension adds capture buttons directly to supported web pages. It communicates locally with the helper and skips broad history permissions. Chrome Web Store approval is pending, so for now you load it from the helper's folder, as in the steps above.</p>
+          <p>After updating the helper, reload the extension once from your browser’s extensions page. If its ID changes to the pinned <code>bkcapfidedhfcjpmjabeopfbcjcbmdmi</code>, reapply your extension preferences. Your saved captures are unaffected.</p>
+        </li>
       </ul>
     </div>
   </div>
 </section>
 ${DOC_RULE}
-<section class="section" data-screen-label="install / post install">
+<section class="section" data-screen-label="install / post install" id="running">
   <div class="container">
     <div class="doc"><div class="doc-head"><span class="eyebrow">post-install</span><h2 class="display-l">What happens when it's <em>running.</em></h2><p class="lede">The helper starts in the background. The extension checks localhost. When both are green, the Uoink button appears on supported pages.</p></div></div>
     <figure class="figure">
@@ -378,10 +324,15 @@ ${DOC_RULE}
     </figure>
     <div class="doc">
       <ol class="doc-list numbered">
-        <li><span class="num">01</span><h3>Tray status.</h3><p>The helper sits in the tray and opens the local dashboard when you need logs, settings, or recent jobs.</p></li>
-        <li><span class="num">02</span><h3>Local files.</h3><p>Captures write to your Uoink folder and into a local SQLite index. Nothing uploads to Uoink because there's no Uoink cloud.</p></li>
-        <li><span class="num">03</span><h3>AI handoff.</h3><p>Paste into Claude or ChatGPT, or skip the clipboard and let your MCP client call Uoink directly.</p></li>
+        <li><span class="num">01</span><h3>Click Uoink.</h3><p>Open a YouTube video and click the Uoink button. Uoink also saves X posts and videos, podcasts, Reddit threads and web articles. <a href="/sources">Sources</a> shows how to capture each one.</p></li>
+        <li><span class="num">02</span><h3>Tray status.</h3><p>The helper sits in the tray and opens the local dashboard when you need logs, settings, or recent jobs.</p></li>
+        <li><span class="num">03</span><h3>Local files.</h3><p>Captures write to your Uoink folder and into a local SQLite index. Nothing uploads to Uoink because there's no Uoink cloud.</p></li>
+        <li><span class="num">04</span><h3>AI handoff.</h3><p>Paste into Claude or ChatGPT, or skip the clipboard and let your MCP client call Uoink directly.</p></li>
       </ol>
+      <div class="callout" id="terminal-check">
+        <h3>Optional: check from a terminal.</h3>
+        <p>You don't need a terminal to install or use Uoink. This check is for AI agents and troubleshooting. On Windows, the installer's <strong>Add the uoink command to PATH for AI agents</strong> option is checked by default. Leave it on, then open a new terminal and run <code>uoink status</code>. On a Mac, the command ships inside the app, and <a href="/developers">agent setup</a> shows how to link it. Agents can follow the <a href="https://github.com/ryanbiddy/uoink/blob/main/llms-install.md">agent installation steps</a>.</p>
+      </div>
     </div>
   </div>
 </section>

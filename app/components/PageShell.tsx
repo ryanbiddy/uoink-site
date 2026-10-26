@@ -95,10 +95,10 @@ function JsonLd({ page }: { page: SitePage }) {
       "@context": "https://schema.org",
       "@type": "HowTo",
       name: "Install Uoink",
-      description: "Install the local helper, install the browser extension, then click Uoink on a video.",
+      description: "Install the local helper on Windows or the Mac preview, load the Chrome extension, then click Uoink on a video.",
       step: [
-        { "@type": "HowToStep", name: "Download the helper", text: "Download the Windows installer from GitHub Releases." },
-        { "@type": "HowToStep", name: "Install the extension", text: "Sideload the extension from %LOCALAPPDATA%\\Uoink\\extension; the Chrome Web Store listing is pending. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible." },
+        { "@type": "HowToStep", name: "Download the helper", text: "Download the Windows installer or the Mac preview disk image from GitHub Releases." },
+        { "@type": "HowToStep", name: "Install the extension", text: "The Chrome Web Store listing is pending, so load the extension unpacked from %LOCALAPPDATA%\\Uoink\\extension on Windows or ~/Library/Application Support/Uoink/extension on a Mac. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible." },
         { "@type": "HowToStep", name: "Click Uoink", text: "Open a supported video page and click the Uoink button." },
       ],
     });

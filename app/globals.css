@@ -1240,6 +1240,9 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
   .nav-links { display: none; }
   .nav-burger { display: inline-flex; }
   .nav-inner { gap: 12px; }
+  /* Once the menu button shows, the row links move into the menu: one way to navigate, not two. */
+  .family-nav-row .family-nav { display: none; }
+  .family-header .family-nav-row { justify-content: flex-end; }
 }
 @media (max-width: 900px) {
   .feature-detail-grid { grid-template-columns: minmax(0, 1fr); }
