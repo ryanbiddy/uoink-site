@@ -127,7 +127,23 @@ for (const fact of ["<h3>On a Mac</h3>", "Apple Silicon with macOS 15 or later",
 assert(!AGENT_SETUP_HTML.includes("What was tested for 3.11.2"), "Agent setup: no 3.11.2 test claims before receipt 28");
 assert(pages.install.html.includes(`<h3>${PRODUCT_STATUS.mac.heading}</h3>`) && pages.install.html.includes(`${PRODUCT_STATUS.mac.windowsLabel} / About`), "install: Mac preview heading and Windows support");
 for (const fact of [PRODUCT_STATUS.mac.heroLink, `href="${MAC_DMG_URL}"`, "Download the Mac preview", "Apple Silicon Macs with macOS 15 or later", "Intel Macs are not supported", "signed with a Developer ID, notarized by Apple and stapled", "No security override is needed", "drag Uoink to the Applications shortcut", "Eject the mounted disk", "⌘⇧G", "<strong>Get the extension</strong> card copies", `<code>${MAC_EXTENSION_PATH}</code>`, `href="${MAC_MCPB_URL}"`, "not the Windows bundle", "Uoink doesn't update itself", "Library mirroring is unavailable", "Script Editor", "Download for Mac"]) assert(pages.install.html.includes(fact), `install Mac: ${fact}`);
-assert(pages.home.html.includes(`${PRODUCT_STATUS.mac.visible}</p>`) && HOME_MOVED_CONTENT['/install'].includes(PRODUCT_STATUS.mac.linkLabel), "home platform fact and relocated install status");
+// The install block that moved off home is folded into /install itself, so no
+// second copy renders under the FAQ. /install has its own Mac entry and hero link.
+assert(pages.home.html.includes(`${PRODUCT_STATUS.mac.visible}</p>`) && !HOME_MOVED_CONTENT['/install'] && pages.install.html.includes('<li id="mac">') && pages.install.html.includes('href="#mac"'), "home platform fact; install page carries the Mac entry");
+// Install page: each step said once, with separate Windows and Mac paths.
+const count = (text, needle) => text.split(needle).length - 1;
+const installHtml = pages.install.html;
+for (const [needle, times] of [["SmartScreen will show a warning", 1], ["<strong>Load unpacked</strong>", 2], ["pin Uoink so the Uoink button stays visible", 2], ["%LOCALAPPDATA%\\Uoink\\extension", 1], ["reload the extension once", 1], [`href="${DOWNLOAD_URL}"`, 3]]) {
+  assert.equal(count(installHtml, needle), times, `install: "${needle}" appears ${times} time(s)`);
+}
+for (const id of ["windows", "mac", "extension"]) assert.equal(count(installHtml, `id="${id}"`), 1, `install: one #${id} entry`);
+// No command line for the normal install; the terminal check is optional and lives in one callout.
+assert(installHtml.includes("No command line needed.") && installHtml.includes("<h3>Optional: check from a terminal.</h3>"), "install: no command line, optional terminal check");
+assert.equal(count(installHtml, "uoink status"), 1, "install: uoink status only in the optional check");
+assert(installHtml.indexOf("uoink status") > installHtml.indexOf("Optional: check from a terminal."), "install: uoink status sits in the optional check");
+// Supported sources match /sources: YouTube, X posts and video, podcasts, Reddit threads, web articles.
+assert(installHtml.includes("X posts and videos, podcasts, Reddit threads and web articles") && !/YouTube (?:and|or) Reddit/.test(installHtml), "install: full source list");
+assert(pages.home.html.includes("<li>YouTube, podcasts, X posts and videos, Reddit threads and web articles</li>"), "home: Save it lists every shipped source");
 // The home hero offers both downloads: this release's Windows installer and the Mac preview DMG.
 for (const [kind, href, label] of [["windows", DOWNLOAD_URL, "Download for Windows"], ["mac", MAC_DMG_URL, "Download for Mac (preview)"]]) {
   assert(new RegExp(`<a\\b[^>]*data-download="${kind}"[^>]*href="${href.replace(/[.?*+^$()[\]{}|\\/]/g, "\\$&")}"[^>]*>[\\s\\S]*?${label.replace(/[()]/g, "\\$&")}</a>`).test(pages.home.html), `home: ${label} links to ${href}`);

@@ -13,7 +13,7 @@ const page: SitePage = {
   mode: "mode-light",
   title: "Uoink Sources: Video, Podcasts, Articles, Threads",
   description:
-    "Browse the source types Uoink captures into a local corpus: YouTube, X video, podcasts, articles, Reddit, and newsletter platforms.",
+    "Browse the source types Uoink captures into a local corpus: YouTube, X posts and video, podcasts, Reddit threads, and web articles.",
   keywords: [
     "uoink sources",
     "youtube podcast article corpus",
