@@ -15,7 +15,8 @@ const facts = {
   storage: extract(/^- (Keep everything on your disk[^\n]+)$/m),
   search: extract(/^- Search modes: ([^\n]+)$/m),
   browser: extract(/^- (ChatGPT and claude\.ai:[^\n]+)$/m),
-  windows: extract(/^(Windows [^.]+\.)/m),
+  // The platform line: Windows support and the Mac preview status.
+  platform: extract(/^(Windows [^.]+\.)/m),
 };
 // These examples are instructions with explicit placeholders, never invented results.
 const flow = [

@@ -1,18 +1,20 @@
-<!-- updated: 2026-10-25 / uoink v3.11.1 -->
-# Uoink 3.11.1: saves that stick and better captures
+<!-- updated: 2026-10-25 / uoink v3.11.2 -->
+# Uoink 3.11.2: Mac preview and steadier saves
 
 > A local library of the YouTube videos, podcasts and articles you study, saved on your Windows PC, that your AI can search and cite with timestamps.
 
 Free, MIT-licensed. No account or Uoink-hosted corpus. Model dependencies can send telemetry. Made by Ryan Biddy (@replayryan), a personal side project.
 
-## What's new in 3.11.1 (Windows)
+## What's new in 3.11.2
 
-- Caption-less X videos can now get a local Whisper transcript. The fallback needs a Whisper model you have already downloaded in Settings. Videos with no audio say "No transcript:" and why.
-- Built-in Readability-style article extraction keeps structure and links. Paywalls and login walls are labeled failures. X posts keep quote posts, media descriptors, expanded links and real counts, and disclose whether the text is complete, truncated or unknown.
-- Fixed 22 helper write paths that could report success, lose saves when the helper closed, and lock the library for other apps. Tags, claims, style anchors, allowed sites, channels, writing drafts, workspaces and the other affected saves now commit.
-- A per-user scheduled task restarts the helper after a crash. Quit stays quit until the next login or a manual start. Opening 127.0.0.1:5179 in a browser opens the dashboard. Tool and listing descriptions were rewritten; the inventory remains 91 tools over stdio and 91 in the HTTP registry, with 35 in core mode.
+- A Mac preview for Apple Silicon on macOS 15 or later. The app and the DMG are signed with a Developer ID, notarized by Apple and stapled, so Uoink opens after macOS's standard "downloaded from the internet" prompt with no security override. Intel Macs are not supported. Setup steps are under "Mac preview" below.
+- A failed index write no longer wedges the helper. Upserts, deletes and the other 22 older write paths roll back their own failures, so one failed write no longer makes every later save fail until a restart. Re-capturing an item saved by an older version refreshes it in place; duplicate folder names are skipped with one warning and listed by `uoink doctor`.
+- An MCP stdio request over 64 KiB is refused with its own request ID, so the client no longer waits forever. Captions longer than the video are cut at the video's end, and YouTube's hard-space and censor markers are cleaned out of transcripts.
+- Extension onboarding knows which OS it is on. The extension no longer requests the unused youtu.be, mobile.twitter.com and localhost:5179 host permissions. The inventory remains 91 tools over stdio and 91 in the HTTP registry, with 35 in core mode. The Windows installer is still unsigned, and the Chrome Web Store listing is not live yet.
 
 ## Earlier releases
+
+Uoink 3.11.1 fixed 22 helper write paths that could report success, lose saves when the helper closed, and lock the library. Caption-less X videos gained a local Whisper fallback that needs a model already downloaded in Settings. Article extraction keeps structure and links, and labels paywalls and login walls as failures. A per-user scheduled task restarts the Windows helper after a crash.
 
 Uoink 3.11.0 made search forgiving: it no longer requires every word. In a test of 30 questions over 693 saved sources, keyword search puts the right source in the top 5 for 24 (the old search: 10). Optional local semantic search, which a person turns on in Settings, reaches 27 of 30, or 28 in hybrid mode. Upgrading from before 3.11.0 rebuilds the local keyword search index once.
 
@@ -26,15 +28,30 @@ Every Uoink tool is available through the standard connection used by Claude Des
 
 ## Install
 
-Windows 10/11 only. Mac (Apple Silicon, macOS 15 or later): preview coming soon. Unsigned Windows installer, about 390 MB; no admin rights needed. If Windows SmartScreen shows a warning, choose More info, then Run anyway. Installs to %LOCALAPPDATA%\Uoink. Sideload the browser extension from the install; Chrome Web Store listing pending. Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested. Open chrome://extensions, enable Developer mode, click Load unpacked, and select %LOCALAPPDATA%\Uoink\extension. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.
+Windows 10/11, plus a Mac preview for Apple Silicon (macOS 15 or later). Unsigned Windows installer, about 390 MB; no admin rights needed. If Windows SmartScreen shows a warning, choose More info, then Run anyway. Installs to %LOCALAPPDATA%\Uoink. Sideload the browser extension from the install; Chrome Web Store listing pending. Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested. Open chrome://extensions, enable Developer mode, click Load unpacked, and select %LOCALAPPDATA%\Uoink\extension. Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.
 
 After updating, reload the extension once. If its ID changes to the pinned bkcapfidedhfcjpmjabeopfbcjcbmdmi, reapply extension preferences. Saved captures are unaffected.
 
 - [Install](https://uoink.app/install): helper and extension instructions.
-- [Latest release](https://github.com/ryanbiddy/uoink/releases/latest): installer and Claude Desktop .mcpb bundle.
-- [Windows installer](https://github.com/ryanbiddy/uoink/releases/download/v3.11.1/Uoink-Setup-3.11.1.exe): Uoink 3.11.1.
-- [3.11.1 release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.11.1): persistent saves, X video transcription fixes, article and post extraction, and helper recovery.
+- [Latest release](https://github.com/ryanbiddy/uoink/releases/latest): installers and Claude Desktop .mcpb bundles.
+- [Windows installer](https://github.com/ryanbiddy/uoink/releases/download/v3.11.2/Uoink-Setup-3.11.2.exe): Uoink 3.11.2.
+- [Mac preview DMG](https://github.com/ryanbiddy/uoink/releases/download/v3.11.2/Uoink-3.11.2-macos-arm64.dmg): Uoink 3.11.2 for Apple Silicon, macOS 15 or later.
+- [3.11.2 release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.11.2): the Mac preview, helper write recovery, and capture fixes.
 - [Changelog](https://uoink.app/changelog): dated release summaries.
+
+## Mac preview
+
+Mac preview: Apple Silicon, macOS 15 or later; Intel Macs are not supported. The app and the DMG are signed with a Developer ID, notarized by Apple and stapled. Uoink opens after macOS's standard "downloaded from the internet" prompt; no security override is needed. If macOS reports an unidentified developer, a damaged app or malware instead, don't open it; report it with the DMG's SHA-256.
+
+1. Download [Uoink-3.11.2-macos-arm64.dmg](https://github.com/ryanbiddy/uoink/releases/download/v3.11.2/Uoink-3.11.2-macos-arm64.dmg) and check it against the SHA-256 listed on the release page.
+2. Open the DMG, drag Uoink to the Applications shortcut, eject the disk, and open Uoink from Applications.
+3. Browser button: open Uoink once so it creates `~/Library/Application Support/Uoink/extension`. In Chrome, open chrome://extensions, enable Developer mode and click Load unpacked. The picker hides `~/Library`, so press ⌘⇧G, paste the path (the dashboard's Get the extension card copies it) and press Return.
+4. The uoink command is `/Applications/Uoink.app/Contents/Helpers/uoink`. The app does not change your shell or PATH. For a user-local command, run `mkdir -p "$HOME/.local/bin"`, `ln -s /Applications/Uoink.app/Contents/Helpers/uoink "$HOME/.local/bin/uoink"` and `export PATH="$HOME/.local/bin:$PATH"`, then `uoink status`.
+5. Connect an AI client with `uoink connect claude-desktop`, `uoink connect cursor`, `uoink connect codex`, `uoink connect claude-code` or `uoink connect vscode --deeplink`. The recipe uses the app's current location and does not edit client files; back up the client's configuration and merge the printed entry. Claude Desktop's extension flow uses [uoink-3.11.2-macos.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.11.2/uoink-3.11.2-macos.mcpb), not the Windows bundle; select the installed Uoink.app in its Uoink app setting. Use the standalone skill and `uoink connect claude-code`; the Claude Code plugin's MCP entry is still for Windows. MCP clients on a Mac are not yet tested.
+
+Not on the Mac yet: Uoink doesn't update itself, so quit Uoink and close MCP clients before replacing the app. Library mirroring is unavailable. Until 3.12, macOS credits Uoink's alerts to Script Editor. The full and core MCP inventories are 91 and 35, as on Windows.
+
+On a Mac, captures (including `_yoink-trash`) are in `~/Desktop/Uoink/`; the library index, settings, helper state, discovery runs, optional usage counts and the extension copy are in `~/Library/Application Support/Uoink/`; the Anthropic and ScrapeCreators keys are in the macOS Keychain; login-startup logs are in `~/Library/Logs/Uoink/`. To uninstall, close AI clients that use Uoink and run `bash /Applications/Uoink.app/Contents/Resources/scripts/mac/uninstall.sh /Applications/Uoink.app --remove`. It removes the app and its login item and keeps your data. To remove the data too, delete `~/Library/Application Support/Uoink/` and `~/Desktop/Uoink/`, and the Uoink entries in Keychain Access.
 
 ## Capture and library
 
@@ -96,12 +113,12 @@ ScrapeCreators receives the typed handle, channel ID or query only after discove
 - [Field notes](https://uoink.app/blog): articles.
 
 ## Set it up with an agent (Windows 10/11)
-Windows 10/11 only. Mac (Apple Silicon, macOS 15 or later): preview coming soon. Uoink v3.11.1 is free and MIT-licensed; the unsigned Windows installer is about 390 MB. No admin rights needed.
+Windows 10/11, plus a Mac preview for Apple Silicon (macOS 15 or later). Uoink v3.11.2 is free and MIT-licensed; the unsigned Windows installer is about 390 MB. No admin rights needed. Mac setup is in the "Mac preview" section above.
 [Agent installation steps](https://github.com/ryanbiddy/uoink/blob/main/llms-install.md): download, verify SHA-256, install, and connect.
 ### An agent can run
-1. Download [Uoink-Setup-3.11.1.exe](https://github.com/ryanbiddy/uoink/releases/download/v3.11.1/Uoink-Setup-3.11.1.exe) to `$env:TEMP\Uoink-Setup-3.11.1.exe`.
-2. Before running it, compare `Get-FileHash -Algorithm SHA256 "$env:TEMP\Uoink-Setup-3.11.1.exe"` with the installer entry in [SHA256SUMS.txt](https://github.com/ryanbiddy/uoink/releases/download/v3.11.1/SHA256SUMS.txt).
-3. Install per user: `Start-Process -Wait -FilePath "$env:TEMP\Uoink-Setup-3.11.1.exe" -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART'`. It installs to `%LOCALAPPDATA%\Uoink` with Add the uoink command to PATH for AI agents checked by default. Installing over the previous release keeps the library and saved captures; upgrading from before 3.11.0 rebuilds the local keyword search index once.
+1. Download [Uoink-Setup-3.11.2.exe](https://github.com/ryanbiddy/uoink/releases/download/v3.11.2/Uoink-Setup-3.11.2.exe) to `$env:TEMP\Uoink-Setup-3.11.2.exe`.
+2. Before running it, compare `Get-FileHash -Algorithm SHA256 "$env:TEMP\Uoink-Setup-3.11.2.exe"` with the installer entry in [SHA256SUMS.txt](https://github.com/ryanbiddy/uoink/releases/download/v3.11.2/SHA256SUMS.txt).
+3. Install per user: `Start-Process -Wait -FilePath "$env:TEMP\Uoink-Setup-3.11.2.exe" -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART'`. It installs to `%LOCALAPPDATA%\Uoink` with Add the uoink command to PATH for AI agents checked by default. Installing over the previous release keeps the library and saved captures; upgrading from before 3.11.0 rebuilds the local keyword search index once.
 4. Open a new terminal, run `uoink status`, then connect a client below. Silent install does not start Uoink; MCP works without it running. For the dashboard, browser button, and monitored-playlist polling, start "Uoink" from the Start menu or run `& "$env:LOCALAPPDATA\Uoink\python\pythonw.exe" "$env:LOCALAPPDATA\Uoink\server.py"` in PowerShell.
 ### The person must do
 - Allow the unsigned installer if Windows asks. For SmartScreen, choose More info, then Run anyway.
@@ -116,12 +133,12 @@ Official MCP registry: io.github.ryanbiddy/uoink
 - Codex: `uoink connect codex` prints tables for `~/.codex/config.toml`. VS Code: `uoink connect vscode` prints config for `.vscode/mcp.json`. The dashboard's Add to Cursor / Add to VS Code buttons open the client's review flow; acceptance of these buttons is not yet tested.
 - Uoink skill for Claude Code, Codex, pi, Hermes Agent, and OpenClaw: `uoink skill path` locates it; `uoink skill install --to <dir>` copies it with references into a uoink subfolder of the parent skills directory. Restart the agent or reload its skills.
 - Claude Code plugin for a default install: `claude plugin marketplace add ryanbiddy/uoink-agent-kit`, then `claude plugin install uoink@uoink`. Restart Claude Code and enable the plugin MCP server when prompted. Custom installs use `uoink connect claude-code` plus the standalone skill; avoid duplicate MCP entries.
-- CLI examples: `uoink search "working memory" --limit 5`, `uoink recent --limit 10`, `uoink note "A useful thought" --title "Research note"`. Agents can search sources, read evidence, capture URLs, save notes, and call registry tools. Local reads work without the helper running; capture and paid tools keep their existing gates. The agent must be able to execute Uoink on the Windows machine holding the library.
+- CLI examples: `uoink search "working memory" --limit 5`, `uoink recent --limit 10`, `uoink note "A useful thought" --title "Research note"`. Agents can search sources, read evidence, capture URLs, save notes, and call registry tools. Local reads work without the helper running; capture and paid tools keep their existing gates. The agent must be able to execute Uoink on the computer holding the library.
 Agent Install 27 passed 11/11 checks with the installed 3.11.1 build in an isolated profile: isolated installation; /health reported 3.11.1 and migration 32; stdio listed 91 full / 35 core / 91 modern tools; Claude Code 2.1.310 (haiku) connected with 91 tools and called get_schema_version; usage sharing stayed off with no network sends observed in that check; bundled ffprobe passed the audio probe; no isolated startup entries; dashboard at 1400 and 1100 pixels wide; clean uninstall; helper writes persisted across a restart; GET / redirected to /dashboard. Codex CLI was not re-tested in receipt 27.
 
 Earlier testing with the installed 3.11.0 build in an isolated profile: Claude Code 2.1.308 over MCP (all 91 tools listed; a tool called) and Codex CLI 0.153.4 over MCP (two tools called). From 3.10.0 testing: Claude Code with the skill and CLI only (skill loaded; uoink note and uoink recent ran). The Claude Code plugin loads its skill and starts its MCP server; its tool calls were not run end to end because the test install is isolated from a normal one. Not yet tested: Gemini CLI and pi (no sign-in on the test machine) and every other uoink connect recipe. Claude Desktop and Cursor retain their earlier MCP testing status.
 
-Claude Desktop: download and open [uoink-3.11.1.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.11.1/uoink-3.11.1.mcpb). Desktop installs it as an extension and asks for your Uoink folder (%LOCALAPPDATA%\Uoink). Enter the full path; Desktop does not expand %LOCALAPPDATA%. After updating, reinstall the bundle and restart Desktop.
+Claude Desktop on Windows: download and open [uoink-3.11.2.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.11.2/uoink-3.11.2.mcpb). Desktop installs it as an extension and asks for your Uoink folder (%LOCALAPPDATA%\Uoink). Enter the full path; Desktop does not expand %LOCALAPPDATA%. After updating, reinstall the bundle and restart Desktop.
 
 Claude Code (verified on Uoink 3.10.0 with 2.1.302, including all tools listed, a note saved, and recent captures read): run this in PowerShell with absolute paths:
 
@@ -163,8 +180,10 @@ The copy includes references. An existing copy needs `--force` to overwrite. Res
 
 ## Release checksums
 
-- Uoink-Setup-3.11.1.exe: 390,110,203 bytes (about 390 MB). SHA-256: `a411f413342f7c0d0a1d75d0ffc445f6fa3fbe525de32233d4e4d3670fb98fd1`.
-- uoink-3.11.1.mcpb: SHA-256: `4db1dd3d18f594bd72da34586da11499b0df7c95e2d9d3135ae3243c98ae07da`.
+- Uoink-Setup-3.11.2.exe: 390,126,021 bytes (about 390 MB). SHA-256: `2819092030d1bfe0c8dba7706f11fba88445aa72fe252b9db9dd17a4973c41f8`.
+- uoink-3.11.2.mcpb: SHA-256: `e31bbb96e033723ab70d8e3fa44fcee5dbdf5207fae5e44190d6f9a984e6847a`.
+- Uoink-3.11.2-macos-arm64.dmg (Mac preview): 579,615,586 bytes. SHA-256: `4cd40562cbaf01002bf2ecca0509888c1e09698a7f79da26f8387327d0d2635d`.
+- uoink-3.11.2-macos.mcpb: SHA-256: `820b27a60fcffaa579553489a99096de90bd313e15321106b842645471f0feb8`.
 
 ## Local HTTP and OpenAPI
 
@@ -177,4 +196,4 @@ Watch RSS/Atom feeds. Per-feed auto-ingest is optional: when enabled, new episod
 
 ## Tool inventory
 
-Source: v3.11.1, commit e306d77af2407bb84c1ba3ca110853c4f00a7d00. The shared TOOL_REGISTRY and default stdio inventory expose 91 tools over stdio and 91 in the HTTP registry, checked against .mcpb/manifest.json. Tool names, descriptions, HTTP registry schemas, and transport labels are in https://uoink.app/mcp/manifest.json. Both HTTP and stdio advertise the same flattened top-level schema variants for client compatibility; handlers still validate the exact registry schema.
+Source: v3.11.2, commit a02f1029e7e027bff3d739a8d7150ba3a15771b7. The shared TOOL_REGISTRY and default stdio inventory expose 91 tools over stdio and 91 in the HTTP registry, checked against .mcpb/manifest.json. Tool names, descriptions, HTTP registry schemas, and transport labels are in https://uoink.app/mcp/manifest.json. Both HTTP and stdio advertise the same flattened top-level schema variants for client compatibility; handlers still validate the exact registry schema.

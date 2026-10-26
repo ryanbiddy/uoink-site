@@ -20,7 +20,7 @@ export default function FactsPage() {
     ["Where data lives", facts.storage],
     ["MCP registry ID", facts.registry],
     ["Supported sources", facts.supported.join(" ")],
-    ["Mac support", facts.unsupported],
+    ["Mac support", facts.mac],
     ["Data and network access", facts.privacy],
   ];
   return (

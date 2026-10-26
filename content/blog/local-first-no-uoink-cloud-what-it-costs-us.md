@@ -12,7 +12,7 @@ Here is what the local-first model costs us, and why we decided to build Uoink t
 
 A standard web application has a simple onboarding flow. You visit a website, click sign up, enter an email, and you are inside the dashboard. 
 
-For Uoink, onboarding is a heavy process. You must download a native executable. On Windows, you run an Inno Setup installer. The installer is unsigned. Windows 10/11 only. Mac (Apple Silicon, macOS 15 or later): preview coming soon.
+For Uoink, onboarding is a heavy process. You must download a native executable. On Windows, you run an Inno Setup installer. The installer is unsigned. On an Apple Silicon Mac (macOS 15 or later), the preview since 3.11.2 is a DMG you drag to Applications.
 
 After installation, the python helper starts. It runs as a local loopback server on `127.0.0.1:5179`. You then install a Chrome extension to talk to this helper. 
 

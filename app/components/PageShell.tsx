@@ -1,4 +1,5 @@
 import { CANONICAL_URL, DOWNLOAD_URL, GITHUB_URL, HOME_MOVED_CONTENT, SitePage, VERSION, X_URL } from "../content/pages";
+import { PRODUCT_STATUS } from "../content/product-status";
 import { applySiteLinks } from "../lib/links";
 import { SiteFooter } from "./SiteFooter";
 import { TopNav } from "./TopNav";
@@ -43,7 +44,7 @@ function JsonLd({ page }: { page: SitePage }) {
       "@type": "SoftwareApplication",
       name: "Uoink",
       applicationCategory: "UtilityApplication",
-      operatingSystem: "Windows 10, Windows 11",
+      operatingSystem: PRODUCT_STATUS.mac.operatingSystem,
       softwareVersion: VERSION.replace("v", ""),
       downloadUrl: DOWNLOAD_URL,
       url: CANONICAL_URL,

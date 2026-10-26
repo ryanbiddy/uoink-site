@@ -6,7 +6,7 @@
     "storage": "Keep everything on your disk as Markdown + JSON, with a local search index.",
     "search": "search no longer requires every word. search_library, search_uoinks, and search_clips take optional match (\"forgiving\" by default, \"strict\" to require every word) and mode (\"auto\" by default, \"keyword\", \"semantic\", \"hybrid\"); find_mentions takes match. Auto uses hybrid when semantic search is ready, otherwise keyword; each response says which mode ran. Quote a passage only when passage_verified is true.",
     "browser": "ChatGPT and claude.ai: copy and paste only; Uoink does not connect to the ChatGPT app over MCP.",
-    "windows": "Windows 10/11 only."
+    "platform": "Windows 10/11, plus a Mac preview for Apple Silicon (macOS 15 or later)."
   },
   "flow": [
     {

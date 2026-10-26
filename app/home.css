@@ -1,0 +1,205 @@
+/* Homepage, product first. The mocks mirror the light 3.11.2 product UI:
+   extension/brand/tokens.css, the dashboard Library row and Reader gutter in
+   assets/dashboard/index.html, and the YouTube Uoink button in
+   extension/content.js. Site tokens (cream, ink, rust, lines) come from
+   globals.css; buttons follow the family kit. */
+:root {
+  --hm-surface: #FFFFFF;           /* product --surface */
+  --hm-sel: #FBE6D6;               /* product --surface-sel */
+  --hm-ok: #15803D;                /* product --ok */
+  --hm-ok-text: #166534;           /* product --ok-bright */
+  --hm-shadow: 0 22px 70px rgba(92, 74, 64, 0.16); /* product --shadow-soft */
+  --hm-yellow: #FFD23F;            /* acid: solid shapes and highlights only */
+  --hm-ease: cubic-bezier(0.16, 1, 0.3, 1); /* product --ease-enter */
+}
+
+/* The home header scrolls away with the page. */
+.site-root:has(.hm-hero) > .site-header { position: relative; }
+
+:where(.hm-hero, .hm-sec, .hm-connect, .home-sibling) p { margin: 0; }
+:where(.hm-hero, .hm-sec, .hm-connect) :is(ol, ul) { list-style: none; margin: 0; padding: 0; }
+
+.hm-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--rust); font-size: 15px; font-weight: 600; text-decoration: none; }
+.hm-link:hover { color: var(--rust-deep); text-decoration: underline; text-underline-offset: 3px; }
+
+/* HERO ---------------------------------------------------------------- */
+.hm-hero { padding: 48px 0 64px; }
+.hm-hero-grid { display: grid; grid-template-columns: minmax(0, 500px) minmax(0, 1fr); gap: 64px; align-items: center; }
+.hm-hero h1 { margin: 0; font-size: 76px; line-height: 0.98; font-weight: 800; letter-spacing: -0.06em; color: var(--ink); text-wrap: balance; }
+.hm-hero-line { margin-top: 22px; max-width: 30em; font-size: 21px; line-height: 1.45; color: var(--ink); text-wrap: pretty; }
+.hm-downloads { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.hm-hero-note { margin-top: 16px; max-width: 34em; font-size: 14px; line-height: 1.5; color: var(--text-2); }
+.hm-hero-note + .hm-hero-note { margin-top: 2px; }
+
+/* The flow: three product windows, one moment (22:43) threaded through. */
+.hm-flow { display: grid; gap: 16px; min-width: 0; }
+.hm-step { min-width: 0; }
+.hm-cap { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 13px; line-height: 18px; font-weight: 700; color: var(--ink); }
+.hm-num { display: grid; place-items: center; flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: var(--cream); font-size: 12px; font-weight: 700; }
+
+.hm-win { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--hm-surface); color: var(--ink); }
+.hm-hero .hm-win { box-shadow: var(--hm-shadow); }
+.hm-win-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 40px; padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 12px; line-height: 16px; }
+.hm-win-title { font-size: 13px; font-weight: 700; }
+.hm-tag { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 999px; background: var(--hm-sel); color: var(--text-2); font-size: 11px; font-weight: 600; white-space: nowrap; }
+.hm-local { display: inline-flex; align-items: center; gap: 6px; color: var(--text-2); white-space: nowrap; }
+.hm-local i { width: 7px; height: 7px; border-radius: 50%; background: var(--hm-ok); }
+
+/* 1. A video with the extension's Uoink button. */
+.hm-watch { display: grid; grid-template-columns: minmax(0, 290px) minmax(0, 1fr); gap: 16px; align-items: center; padding: 12px; }
+.hm-video { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 8px; background: #0A0A0A; }
+.hm-video img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.hm-video::after { content: ""; position: absolute; inset: 55% 0 0; background: linear-gradient(transparent, rgba(0, 0, 0, 0.6)); }
+.hm-bar { position: absolute; z-index: 1; left: 10px; right: 10px; bottom: 30px; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.4); }
+/* 22:43 of 35:51 */
+.hm-bar i { position: absolute; inset: 0 auto 0 0; width: 63.4%; border-radius: 2px; background: var(--rust); }
+.hm-bar i::after { content: ""; position: absolute; right: -5px; top: -4px; width: 11px; height: 11px; border-radius: 50%; background: var(--rust); }
+.hm-video-time { position: absolute; z-index: 1; left: 10px; bottom: 7px; color: #FFFFFF; font-size: 11px; line-height: 16px; font-variant-numeric: tabular-nums; }
+.hm-video-time b, .hm-hero .hm-receipt b { padding: 0 4px; border-radius: 3px; background: var(--hm-yellow); color: var(--ink); }
+.hm-watch-meta { min-width: 0; }
+.hm-watch-title { font-size: 15px; line-height: 1.35; font-weight: 700; text-wrap: pretty; }
+.hm-watch-channel { margin: 4px 0 14px; color: var(--text-2); font-size: 13px; }
+.hm-pill-wrap { position: relative; display: inline-flex; }
+.hm-pill { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 16px; border-radius: 18px; background: var(--rust); color: #FFF4EC; font-size: 14px; font-weight: 600; line-height: 36px; white-space: nowrap; box-shadow: 0 0 0 4px rgba(194, 65, 12, 0.16); }
+.hm-pill-dot { width: 8px; height: 8px; flex: none; border-radius: 50%; background: #00C853; box-shadow: 0 0 6px rgba(0, 200, 83, 0.55); }
+.hm-u { display: block; flex: none; }
+.hm-cursor { position: absolute; left: 64%; top: 52%; pointer-events: none; }
+
+/* 2. A Library row, as the dashboard draws it. */
+.hm-lib-row { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 12px; align-items: start; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+.hm-lib-row:last-child { border-bottom: 0; }
+.hm-thumb { display: grid; place-items: center; width: 96px; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 6px; background: var(--line); }
+.hm-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.hm-kind { color: var(--text-2); font-size: 11px; font-weight: 600; text-transform: lowercase; }
+.hm-row-body { display: grid; gap: 3px; min-width: 0; }
+.hm-row-title { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-size: 15px; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
+.hm-row-source { overflow: hidden; color: var(--text-2); font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.hm-row-state { display: flex; flex-wrap: wrap; align-items: center; column-gap: 5px; margin-top: 2px; color: var(--text-2); font-size: 13px; line-height: 1.4; }
+.hm-done { display: inline-flex; align-items: center; gap: 6px; color: var(--hm-ok-text); font-weight: 600; }
+.hm-done i { width: 8px; height: 8px; border-radius: 50%; background: var(--hm-ok); }
+.hm-library > .hm-reader-row { border-top: 1px solid var(--line); background: #FFFBF7; }
+
+/* Reader rows: the minute in a 44px gutter, then the words. */
+.hm-reader-row { display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 12px; align-items: baseline; padding: 10px 14px 12px; font-size: 15px; line-height: 1.55; }
+.hm-reader-time { justify-self: end; display: inline-flex; align-items: center; justify-content: flex-end; min-width: 44px; min-height: 28px; color: var(--rust); font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; text-decoration: none; }
+.hm-reader-time:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* The cited caption line. In the hero, the same line is solid yellow in the
+   transcript and in the answer; in the sections it is a lighter marker. */
+.hm-win mark { padding: 0 1px; background: linear-gradient(transparent 60%, rgba(255, 210, 63, 0.6) 0); color: inherit; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.hm-hero .hm-win mark { background: var(--hm-yellow); }
+
+/* 3. Your AI answers with a receipt. */
+.hm-ask { width: fit-content; max-width: 88%; margin: 12px 14px 0 auto; padding: 9px 14px; border-radius: 12px 12px 4px 12px; background: var(--hm-sel); font-size: 14px; line-height: 1.45; font-weight: 500; }
+.hm-answer { padding: 10px 14px 14px; font-size: 15px; line-height: 1.55; }
+.hm-receipt { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; margin-top: 8px; padding: 4px 12px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--hm-surface); color: var(--ink); font-size: 13px; line-height: 18px; text-decoration: none; }
+.hm-receipt b { color: var(--rust); font-weight: 700; font-variant-numeric: tabular-nums; }
+.hm-receipt span { color: var(--text-2); }
+.hm-receipt:hover { background: var(--hm-sel); }
+.hm-tool { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; margin: 10px 14px 0; padding: 8px 10px; border: 1px dashed var(--line-strong); border-radius: 8px; color: var(--text-2); font-size: 12px; line-height: 18px; }
+.hm-tool code { padding: 0; border: 0; background: none; color: var(--ink); font-family: var(--mono); font-size: 12px; overflow-wrap: anywhere; }
+.hm-cite { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+
+/* SECTIONS ------------------------------------------------------------ */
+.hm-sec { padding: 64px 0; border-top: 1px solid var(--line); }
+.hm-sec-grid { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 64px; align-items: start; }
+.hm-sec-copy { padding-top: 6px; }
+.hm-sec h2 { margin: 0; color: var(--ink); font-size: 48px; line-height: 1.02; font-weight: 800; letter-spacing: -0.045em; text-wrap: balance; }
+.hm-lead { margin-top: 16px; font-size: 19px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }
+.hm-facts { margin-top: 20px; border-top: 1px solid var(--line); }
+.hm-facts li { padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.4; }
+.hm-sec-copy > .hm-link { margin-top: 10px; }
+.hm-links { display: flex; flex-wrap: wrap; column-gap: 24px; margin-top: 10px; }
+.hm-disclosure { margin-top: 32px; color: var(--text-2); font-size: 12px; line-height: 1.5; }
+
+.hm-search { margin: 12px 14px 0; padding: 9px 12px; border: 1px solid var(--line-strong); border-radius: 10px; color: var(--text-2); font-size: 14px; line-height: 20px; }
+.hm-kinds { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 14px 4px; }
+.hm-kinds span { padding: 3px 12px; border: 1px solid var(--line-strong); border-radius: 999px; font-size: 12px; font-weight: 600; line-height: 18px; }
+.hm-kinds .is-on { border-color: var(--rust); background: var(--rust); color: #FFFFFF; }
+.hm-win-foot { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--line); color: var(--text-2); font-size: 12px; line-height: 16px; }
+
+.hm-modes { display: inline-flex; gap: 2px; margin: 12px 14px 0; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--cream); }
+.hm-mode { padding: 3px 12px; border-radius: 999px; color: var(--text-2); font-size: 12px; font-weight: 600; line-height: 18px; }
+.hm-mode.is-on { background: var(--rust); color: #FFFFFF; }
+.hm-thread { counter-reset: post; padding: 4px 0 6px; }
+.hm-thread > li { counter-increment: post; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.hm-thread > li:last-child { border-bottom: 0; }
+.hm-draft-line { display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 12px; align-items: baseline; margin-bottom: 2px; font-size: 17px; line-height: 1.45; font-weight: 600; letter-spacing: -0.01em; }
+.hm-draft-line::before { content: counter(post) "/3"; justify-self: end; color: var(--text-2); font-size: 12px; font-weight: 600; letter-spacing: 0; }
+.hm-thread .hm-reader-row { padding: 0; color: var(--text-2); font-size: 14px; }
+
+/* CONNECT, GO DEEPER, ZING --------------------------------------------- */
+.hm-connect { padding: 32px 0; border-top: 1px solid var(--line); background: var(--sunk); }
+.hm-connect-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+.hm-connect h2 { margin: 0; font-size: 24px; line-height: 1.2; font-weight: 800; letter-spacing: -0.03em; }
+.hm-clients { display: flex; flex-wrap: wrap; gap: 8px; }
+.hm-clients li { padding: 4px 12px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--hm-surface); font-size: 14px; font-weight: 600; line-height: 22px; }
+.hm-connect p { color: var(--text-2); font-size: 15px; line-height: 1.5; }
+.hm-connect .hm-link { margin-left: auto; }
+
+.go-deeper { padding: 56px 0 40px; border-top: 1px solid var(--line); }
+.go-deeper h2 { margin: 0; font-size: 32px; line-height: 1.1; letter-spacing: -0.035em; }
+.go-deeper-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
+.go-deeper-grid > a { display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 12px 16px; border: 1px solid var(--line-strong); border-radius: 10px; color: var(--ink); font-weight: 700; text-decoration: none; }
+.go-deeper-grid > a::after { content: "\2192"; color: var(--rust); font-weight: 600; }
+.go-deeper-grid > a:hover { background: var(--hm-sel); }
+
+.home-sibling { padding: 0 0 8px; }
+.hm-zing { display: flex; align-items: center; gap: 16px 20px; max-width: 760px; padding: 18px 22px; border-radius: 12px; background: var(--blue); color: var(--cream); }
+.hm-charge { flex: none; width: 18px; height: 18px; background: var(--hm-yellow); }
+.hm-zing h2 { margin: 0; color: var(--cream); font-size: 20px; line-height: 1.2; font-weight: 800; letter-spacing: -0.02em; }
+.hm-zing p { margin-top: 2px; color: #D2DDF7; font-size: 15px; line-height: 1.45; }
+.hm-zing-link { display: inline-flex; align-items: center; min-height: 44px; margin-left: auto; color: var(--cream); font-weight: 700; white-space: nowrap; text-decoration: underline; text-decoration-color: var(--hm-yellow); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.site-root:has(.hm-hero) .home-end { padding: 56px 0 64px; }
+
+/* MOTION: one short entrance, then still. Off under reduced motion. ---- */
+@media (prefers-reduced-motion: no-preference) {
+  .hm-cursor { animation: hm-point 0.7s var(--hm-ease) 0.2s both; }
+  .hm-pill { animation: hm-press 0.32s ease 0.9s both; }
+  .hm-step-save { animation: hm-rise 0.5s var(--hm-ease) 1.1s both; }
+  .hm-step-ask { animation: hm-rise 0.5s var(--hm-ease) 1.7s both; }
+}
+@keyframes hm-point { from { opacity: 0; transform: translate(34px, 26px); } }
+@keyframes hm-press { 50% { transform: scale(0.95); } }
+@keyframes hm-rise { from { opacity: 0; transform: translateY(12px); } }
+
+/* RESPONSIVE ---------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .hm-hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 40px; }
+  .hm-hero h1 { font-size: 64px; }
+  .hm-sec-grid { grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 40px; }
+}
+@media (max-width: 900px) {
+  .hm-hero-grid, .hm-sec-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .hm-hero-copy, .hm-flow, .hm-sec-copy, .hm-sec-grid > .hm-win { max-width: 640px; }
+  .hm-sec { padding: 56px 0; }
+  .hm-sec h2 { font-size: 40px; }
+  .go-deeper-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .hm-hero { padding: 28px 0 44px; }
+  .hm-hero h1 { font-size: 54px; line-height: 1; }
+  .hm-hero-line { margin-top: 16px; font-size: 18px; line-height: 1.5; }
+  .hm-downloads { display: grid; gap: 10px; margin-top: 22px; }
+  .hm-downloads .btn { width: 100%; }
+  .hm-watch { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .hm-watch-channel { margin-bottom: 10px; }
+  .hm-sec { padding: 44px 0; }
+  .hm-sec h2 { font-size: 36px; }
+  .hm-lead { font-size: 17px; }
+  .hm-sec-grid { gap: 24px; }
+  .hm-lib-row { grid-template-columns: 84px minmax(0, 1fr); gap: 10px; padding: 12px; }
+  .hm-thumb { width: 84px; }
+  .hm-reader-row { column-gap: 8px; padding-inline: 12px; font-size: 14px; }
+  .hm-thread > li { padding-inline: 12px; }
+  .hm-draft-line { column-gap: 8px; font-size: 16px; }
+  .hm-connect .hm-link { margin-left: 0; }
+  .hm-zing { flex-wrap: wrap; padding: 16px 18px; }
+  .hm-zing > div { flex: 1 1 200px; }
+  .hm-zing-link { margin-left: 34px; }
+  .go-deeper { padding-top: 44px; }
+  .site-root:has(.hm-hero) .home-end { padding: 44px 0 52px; }
+}
+@media (max-width: 389px) {
+  .hm-hero h1 { font-size: 48px; }
+  .hm-reader-row, .hm-draft-line { grid-template-columns: 40px minmax(0, 1fr); }
+}

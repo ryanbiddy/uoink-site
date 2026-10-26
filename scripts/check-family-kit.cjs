@@ -161,7 +161,9 @@ async function captureYellow(page, file, fullPage = false) {
           assert.equal(m.header, 120, `${stem} ${route}: header`);
           assert(Math.abs(m.cap - 24) < .01, `${stem} ${route}: cap ${m.cap}`);
           assert.equal(m.overflow, 0, `${stem} ${route}: overflow`);
-          assert.equal(m.footer, 1); assert.equal(m.cards, route === "/" ? 1 : 0);
+          // The family saved-source card is not mounted on any page; the home hero
+          // shows the product's own Library row instead (checked in check-home-review).
+          assert.equal(m.footer, 1); assert.equal(m.cards, 0, `${stem} ${route}: no saved-source card`);
           assert.equal(m.footerWordmarks, 1, `${stem} ${route}: exactly one UOINK wordmark in footer area`);
           assert.equal(m.stripWordmarks, 1, `${stem} ${route}: footer wordmark belongs to family strip`);
           assert.equal(m.closingLine, "Take the video. Make it usable.");
@@ -184,7 +186,9 @@ async function captureYellow(page, file, fullPage = false) {
         assert.equal(await cta.evaluate(el => getComputedStyle(el).backgroundColor), width === 390 ? "rgb(194, 65, 12)" : "rgb(155, 45, 14)");
         await page.keyboard.press("Tab"); await cta.focus();
         assert.equal(await cta.evaluate(el => getComputedStyle(el).outlineWidth), "2px");
-        const secondary = page.locator('.receipt-picker .button[aria-pressed="false"]').first();
+        // The home's secondary button: Download for Mac (preview).
+        const secondary = page.locator('.hm-downloads .btn.ghost[data-download="mac"]');
+        assert.equal(await secondary.count(), 1, `${stem}: one secondary hero download`);
         await secondary.hover(); await page.waitForTimeout(200);
         assert.equal(await secondary.evaluate(el => getComputedStyle(el).backgroundColor), width === 390 ? "rgb(255, 244, 236)" : "rgb(234, 217, 204)");
         await page.keyboard.press("Tab"); await secondary.focus();

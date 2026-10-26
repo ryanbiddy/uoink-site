@@ -2,7 +2,7 @@
   "name": "io.github.ryanbiddy/uoink",
   "display_name": "Uoink",
   "description": "Uoink keeps videos, podcasts, and articles on your disk for AI search and citations. Claude Desktop, Claude Code, Cursor, and Codex CLI connect over MCP; ChatGPT and claude.ai use copy and paste.",
-  "version": "3.11.1",
+  "version": "3.11.2",
   "homepage": "https://uoink.app",
   "documentation": "https://uoink.app/developers",
   "repository": {
@@ -16,8 +16,10 @@
   },
   "install": {
     "windows": "https://uoink.app/install",
-    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/download/v3.11.1/uoink-3.11.1.mcpb",
-    "notes": "Unsigned installer, about 390 MB; no admin rights needed. Windows SmartScreen: More info → Run anyway. Then open the .mcpb bundle for one-click Claude Desktop setup, or copy the setup page’s stdio config."
+    "macos": "https://uoink.app/install#mac",
+    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/download/v3.11.2/uoink-3.11.2.mcpb",
+    "mcpb_bundle_macos": "https://github.com/ryanbiddy/uoink/releases/download/v3.11.2/uoink-3.11.2-macos.mcpb",
+    "notes": "Windows: unsigned installer, about 390 MB; no admin rights needed. Windows SmartScreen: More info → Run anyway. Then open the .mcpb bundle for one-click Claude Desktop setup, or copy the setup page’s stdio config. Mac preview (Apple Silicon, macOS 15 or later): a DMG signed with a Developer ID and notarized by Apple; Claude Desktop uses the separate macOS .mcpb, and `uoink connect <client>` prints configs with the installed app's paths."
   },
   "transports": [
     {
@@ -32,7 +34,7 @@
         "Cursor",
         "Codex CLI"
       ],
-      "note": "Every tool is available over stdio without the helper running. Use absolute paths; Claude Desktop does not expand %LOCALAPPDATA%. Cursor can use UOINK_MCP_TOOLSET=core for the previous 35-tool set under its reported 40-tool cap. Cline and Continue were not individually smoke-tested.",
+      "note": "Every tool is available over stdio without the helper running. Use absolute paths; Claude Desktop does not expand %LOCALAPPDATA%. Cursor can use UOINK_MCP_TOOLSET=core for the previous 35-tool set under its reported 40-tool cap. Cline and Continue were not individually smoke-tested. The command and args shown are the Windows paths; on the Mac preview, `uoink connect <client>` prints them for the installed app.",
       "env": {
         "PYTHONIOENCODING": "utf-8",
         "PYTHONUTF8": "1"
@@ -67,5 +69,5 @@
   ],
   "tool_count": 91,
   "stdio_tool_count": 91,
-  "platform": "Windows 10/11 only. Mac (Apple Silicon, macOS 15 or later): preview coming soon."
+  "platform": "Windows 10/11, plus a Mac preview for Apple Silicon (macOS 15 or later)."
 }

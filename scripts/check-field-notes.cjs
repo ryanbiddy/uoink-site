@@ -57,7 +57,7 @@ const server = http.createServer((req,res) => {
     assert(evidence && evidence.files.includes('content/blog/loop-engineering.md'));
     assert((await (await page.request.get(origin+'/sitemap.xml')).text()).includes(`${route}</loc><lastmod>${evidence.lastmod}</lastmod>`));
     await page.goto(origin);
-    assert.equal(await page.locator('[data-scene-link="4"]').getAttribute('href'),route);
+    assert.equal(await page.locator('#write [data-home-link="field-notes"]').getAttribute('href'),route);
     assert.equal(errors.length,0,errors.join('\n'));
     const receipts=[...new Set([...fs.readFileSync('content/blog/loop-engineering.md','utf8').matchAll(/\]\((https?:[^)]+)\)/g)].map(m=>m[1]))];
     const results=[];
@@ -69,7 +69,7 @@ const server = http.createServer((req,res) => {
       } catch(e) {results.push({url,ok:false,error:e.message});}
     }));
     fs.writeFileSync(path.join(shots,'field-notes-check.json'),JSON.stringify({internal,receipts:results},null,2));
-    console.log(`PASS: route, one h1, supplied JSON-LD, no draft notice, index, sitemap, scene 4, ${internal} internal links, 390 px overflow, browser errors, screenshot.`);
+    console.log(`PASS: route, one h1, supplied JSON-LD, no draft notice, index, sitemap, homepage link, ${internal} internal links, 390 px overflow, browser errors, screenshot.`);
     console.log(JSON.stringify(results,null,2));
     assert(results.every(r=>r.ok),'Some external receipt links could not be verified; see field-notes-check.json');
   } finally {await browser.close();server.close();}
