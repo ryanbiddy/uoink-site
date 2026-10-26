@@ -113,8 +113,8 @@ ${readerRow("lesson", "verify")}
 <div class="container hm-sec-grid">
 <div class="hm-sec-copy">
 <h2 id="save-title">Save it.</h2>
-<p class="hm-lead">One click while you watch. Uoink saves the video, podcast or X post with its transcript, into a library on your computer.</p>
-<ul class="hm-facts"><li>YouTube, podcasts, X posts and X videos</li><li>Transcripts with timestamps come with it</li><li>Markdown and JSON on your disk. No account, no Uoink cloud.</li></ul>
+<p class="hm-lead">One click while you watch. Uoink saves the video, podcast or X post into a library on your computer, with its transcript when there is one.</p>
+<ul class="hm-facts"><li>YouTube, podcasts, X posts and X videos</li><li>Captions saved with timestamps; local Whisper can transcribe the rest</li><li>Markdown and JSON on your disk. No account, no Uoink cloud.</li></ul>
 <a class="hm-link" href="/sources">Everything Uoink can save -&gt;</a>
 </div>
 <div class="hm-win hm-library hm-library-full">
@@ -157,7 +157,7 @@ ${winBar("Your AI")}
 <div class="container hm-sec-grid">
 <div class="hm-sec-copy">
 <h2 id="write-title">Write with receipts.</h2>
-<p class="hm-lead">Writing Studio drafts a tweet, a thread or a blog post from what you saved. Every line links to the minute it came from.</p>
+<p class="hm-lead">Writing Studio drafts a tweet, a thread or a blog post from what you saved, and cites the sources it drew on so you can check them.</p>
 <p class="hm-links"><a class="hm-link" href="/features/writing-studio">Writing Studio -&gt;</a><a class="hm-link" data-home-link="field-notes" href="/blog/loop-engineering">Loop engineering field notes -&gt;</a></p>
 </div>
 <div class="hm-win hm-studio">
