@@ -215,6 +215,14 @@ if (sizeKnown) {
   assert.equal(sums.exe[2], String(Math.round(release.installerSizeBytes / 1_000_000)), "llms-full.txt: installer MB");
   if (!isPlaceholder(sums.exe[1])) assert.equal(sums.exe[1], release.installerSizeBytes.toLocaleString("en-US"), "llms-full.txt: installer bytes match content/release.json");
 }
+// 3.11.2 release numbers, from the release's SHA256SUMS.txt.
+assert.equal(release.installerSizeBytes, 390150257);
+for (const fact of [
+  "- Uoink-Setup-3.11.2.exe: 390,150,257 bytes (about 390 MB). SHA-256: `81f7d385f300fc3964c7dd7239566fe7241718e18ef9858b9a84cc6cb841828d`.",
+  "- uoink-3.11.2.mcpb: SHA-256: `0a8973ad50348b8a9e7d17f58436edf5d0a4e9fcd0a46030aeef8e2f8673fb1b`.",
+  "- Uoink-3.11.2-macos-arm64.dmg (Mac preview): 568,289,888 bytes. SHA-256: `e0645c3380f8877bed9f84b1ec1392a96664536010201ba39019b61f9a7d49ab`.",
+  "- uoink-3.11.2-macos.mcpb: SHA-256: `9476ac551bf0b6e3286aced4bda9ed97d91744c2789ad0ad864074623be5ae6f`.",
+]) assert(llmsFull.includes(fact), `llms-full.txt checksums: ${fact}`);
 // The tool inventory line names the commit the manifest was generated from.
 const manifestCommit = manifest.source.match(/@([0-9a-f]{40}):/)[1];
 assert(llmsFull.includes(`Source: ${VERSION}, commit ${manifestCommit}.`), `llms-full.txt: tool inventory commit should be ${manifestCommit}`);
