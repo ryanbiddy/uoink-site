@@ -34,7 +34,7 @@ export default async function Page({ params }: Props) {
         <section aria-labelledby="setup">
           <h2 id="setup">Start with a saved source</h2>
           <p>{page.setup} <Link href="/install">Follow the installation steps.</Link></p>
-          <p>{data.facts.windows} {data.facts.browser}</p>
+          <p>{data.facts.platform} {data.facts.browser}</p>
           <h3>Ask your connected AI</h3>
           <blockquote className={styles.prompt}>{page.prompt}</blockquote>
         </section>

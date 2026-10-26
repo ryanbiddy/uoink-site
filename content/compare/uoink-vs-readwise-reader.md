@@ -1,13 +1,13 @@
 ---
 title: "Uoink vs Readwise Reader: a local video library or a reading app"
 slug: "readwise-reader"
-description: "Readwise Reader is a polished reading app on every device. Uoink is a free Windows app that saves videos and podcasts to your disk for AI to cite."
+description: "Readwise Reader is a polished reading app on every device. Uoink is a free app for Windows, with a Mac preview, that saves videos and podcasts to your disk for AI to cite."
 date: 2026-10-25
 ---
 
 # Uoink vs Readwise Reader
 
-Pick Readwise Reader if you want a polished reading app on your phone, e-reader and desktop, with sync, highlights and text-to-speech. Pick Uoink if you are on Windows and want YouTube videos, podcasts and X posts saved as files on your own disk, where your AI can search and cite them without an account.
+Pick Readwise Reader if you want a polished reading app on your phone, e-reader and desktop, with sync, highlights and text-to-speech. Pick Uoink if you are on Windows or an Apple Silicon Mac (preview) and want YouTube videos, podcasts and X posts saved as files on your own disk, where your AI can search and cite them without an account.
 
 Both tools now connect to AI assistants over MCP, so that is no longer the dividing line. The real difference is what each is built for and where the library lives. Reader is a reading app, and your library syncs through your Readwise account. Uoink is a research library for video and audio, kept on your own disk.
 
@@ -27,7 +27,7 @@ Both tools now connect to AI assistants over MCP, so that is no longer the divid
 - You want your library as plain Markdown and JSON files on your disk, with no account.
 - You want your AI to search the library and cite timestamps through a local MCP server.
 - You want it free and open source (MIT).
-- You use Windows 10 or 11.
+- You use Windows 10 or 11, or an Apple Silicon Mac with macOS 15 or later (preview).
 
 ## Feature comparison
 
@@ -36,7 +36,7 @@ Both tools now connect to AI assistants over MCP, so that is no longer the divid
 | What it is | A local library for the videos and podcasts you study, that your AI can search and cite | A reading app for "articles, PDFs, EPUBs, email newsletters, RSS feeds, YouTube videos, X threads, and more" [1] |
 | Where the library lives | Markdown and JSON files on your disk, with a local search index | Synced across your devices, and Reader also works offline [1] |
 | Account | None | Readwise account; the MCP connection signs in with it [3] |
-| Platforms | Windows 10/11 today. Mac (Apple Silicon, macOS 15 or later): preview coming soon. | iOS, Android, web, Mac and Windows desktop apps, Chrome, Firefox and Safari extensions, e-ink mode [1] |
+| Platforms | Windows 10/11, plus a Mac preview for Apple Silicon (macOS 15 or later) | iOS, Android, web, Mac and Windows desktop apps, Chrome, Firefox and Safari extensions, e-ink mode [1] |
 | YouTube | Timestamped transcript, screenshots, top comments, channel context and metadata | Watch alongside a time-synced transcript; uses the creator's captions or YouTube's auto-generated ones, with an optional enhanced transcript [4] |
 | Podcasts | Watches RSS and Atom feeds; optional auto-ingest downloads new episodes and transcribes them locally with WhisperX | Share an episode from Spotify, Overcast or Apple Podcasts to save a transcript; built as "a podcast companion, rather than a full podcast player" [5] |
 | X (Twitter) | Post text and X video | Threads saved as one document, with only the original poster's tweets [5] |
@@ -60,13 +60,13 @@ Both tools now connect to AI assistants over MCP, so that is no longer the divid
 
 ## Uoink's honest limits
 
-- **Windows 10 and 11 today.** Mac (Apple Silicon, macOS 15 or later): preview coming soon. There are no phone apps.
+- **Windows 10 and 11, plus a Mac preview for Apple Silicon (macOS 15 or later).** Intel Macs are not supported, and there are no phone apps.
 - **No sync.** There is no Uoink cloud, so there is no built-in sync between devices. Reader keeps every device in step.
-- **Rougher install.** The installer is unsigned and about 390 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Chrome is the tested browser.
+- **Rougher install.** The Windows installer is unsigned and about 390 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Chrome is the tested browser.
 - **Not a reading app.** Highlighting, text-to-speech, an e-ink mode and spaced review are not among its features. If reading is the main job, Reader is the better tool.
 - **Fewer formats.** PDFs and EPUBs are not among Uoink's listed sources.
 - **No self-organizing library.** The library does not file or re-shelve itself. The Librarian only proposes changes, and applying them is off by default because its quality gate has not passed.
-- **Agents must run on the same PC.** An agent has to be able to run Uoink on the Windows machine that holds the library. The ChatGPT app does not connect over MCP; use copy and paste.
+- **Agents must run on the same computer.** An agent has to be able to run Uoink on the computer that holds the library. The ChatGPT app does not connect over MCP; use copy and paste.
 - **A side project.** Uoink is a personal side project by one maker, Ryan Biddy.
 
 ## Sources
@@ -84,5 +84,5 @@ Competitor pages were opened and read on 2026-10-24.
 
 Uoink facts:
 
-- U1. Uoink 3.11.1 summary (updated 2026-10-25): https://uoink.app/llms.txt
-- U2. Uoink 3.11.1 full disclosures (updated 2026-10-25): https://uoink.app/llms-full.txt
+- U1. Uoink 3.11.2 summary (updated 2026-10-25): https://uoink.app/llms.txt
+- U2. Uoink 3.11.2 full disclosures (updated 2026-10-25): https://uoink.app/llms-full.txt

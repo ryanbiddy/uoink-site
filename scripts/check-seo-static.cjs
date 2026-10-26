@@ -74,7 +74,7 @@ function check(group) {
       const article = getComparison(slug);
       assert(html.includes(article.html), `${route}: rendered draft and citations match source`);
       assert(text.includes(article.heading) && text.includes(article.opening));
-      assert(text.includes('Mac (Apple Silicon, macOS 15 or later): preview coming soon.'));
+      assert(text.includes('Mac preview for Apple Silicon (macOS 15 or later)') && !/preview coming soon|no Mac build/i.test(text), `${route}: Mac preview status`);
       const allowed = /Windows 10(?:\/11| and 11) only|copy and paste only|The Librarian only proposes changes|with only the original poster's tweets|Reader only(?: costs)?|only for YouTube currently/gi;
       assert(!/\bonly\b/i.test(text.replace(allowed, '')), `${route}: unreviewed exclusivity claim`);
     }

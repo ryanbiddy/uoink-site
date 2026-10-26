@@ -84,8 +84,9 @@ async function checkMoves(page, out) {
       report.push({block:move.label,route:move.route,checkedBlocks:count});
     }
     const install=targets['/install'];
-    for(const text of ['Mac (Apple Silicon, macOS 15 or later): preview coming soon.','Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at']) {
-      const matches=[...install.querySelectorAll('h3,p')].filter(el=>normalize(el.textContent).startsWith(text) && (text.startsWith('Mac (') ? el.tagName==='H3' : true));
+    // The Mac heading is PRODUCT_STATUS.mac.heading; the fixture's Mac block matches it.
+    for(const text of ['Mac preview.','Chrome Web Store approval is pending. Sideload the extension by loading the unpacked folder located at']) {
+      const matches=[...install.querySelectorAll('h3,p')].filter(el=>normalize(el.textContent).startsWith(text) && (text.startsWith('Mac ') ? el.tagName==='H3' : true));
       if(matches.length!==1) failures.push(`Duplicate existing install copy: ${text} (${matches.length})`);
     }
     return {failures,report};

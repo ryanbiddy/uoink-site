@@ -90,7 +90,7 @@ const index = fs.readFileSync(resolveFile('/changelog'), 'utf8');
 for (const release of releases) assert(index.includes(`href="${release.route}"`), `Index missing ${release.route}`);
 assert(index.includes('href="/facts"'), 'Facts must be discoverable from the changelog');
 const factsHtml = decode(fs.readFileSync(resolveFile('/facts'), 'utf8'));
-for (const value of [factsTitle, factsDescription, facts.version, facts.platform, facts.price, facts.license, facts.registry, facts.storage, facts.unsupported, facts.privacy, ...facts.supported]) assert(factsHtml.includes(value), `Facts missing source value: ${value}`);
+for (const value of [factsTitle, factsDescription, facts.version, facts.platform, facts.price, facts.license, facts.registry, facts.storage, facts.mac, facts.privacy, ...facts.supported]) assert(factsHtml.includes(value), `Facts missing source value: ${value}`);
 const evidence = JSON.parse(fs.readFileSync(path.join(shots, 'sitemap-dates.json'), 'utf8'));
 assert(evidence.find(item => item.route === '/facts').files.includes('public/llms.txt'), 'Facts lastmod must include llms.txt');
 for (const release of releases) assert(evidence.find(item => item.route === release.route).files.includes('app/content/pages.ts'), `${release.route}: release source date evidence`);

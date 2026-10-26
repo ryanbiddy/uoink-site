@@ -84,7 +84,7 @@ assert.throws(() => checkOnly('The only local library for your AI.', 'fixture'))
         for (const href of await page.locator('.comparison-citation').evaluateAll(links => links.map(link => link.hash))) {
           assert.equal(await page.locator(href).count(), 1, `${route}: citation target ${href}`);
         }
-        assert(text.includes('Mac (Apple Silicon, macOS 15 or later): preview coming soon.') && !/no Mac build/i.test(text));
+        assert(text.includes('Mac preview for Apple Silicon (macOS 15 or later)') && !/preview coming soon|no Mac build/i.test(text));
         await page.screenshot({ path: path.join(shots, `${route.split('/').at(-1)}-390-light.png`), fullPage: true });
       }
       if (route === '/compare') {

@@ -3,7 +3,7 @@ import { PRODUCT_STATUS } from "./product-status";
 // Shared by the developer setup page and the MCP reference.
 export const AGENT_SETUP_HTML = String.raw`
 <h2>Use Uoink from any AI agent</h2>
-<p>Choose MCP, the Uoink skill, or the <code>uoink</code> command. The agent needs access to the Windows machine holding your library. A skill copied to a remote agent does not give it access to local files.</p>
+<p>Choose MCP, the Uoink skill, or the <code>uoink</code> command. The agent needs access to the computer holding your library. A skill copied to a remote agent does not give it access to local files.</p>
 <p>Install Uoink with <strong>Add the uoink command to PATH for AI agents</strong> checked. Open a new terminal and run <code>uoink status</code>. An agent doing the install can follow the <a href="https://github.com/ryanbiddy/uoink/blob/main/llms-install.md">agent installation steps</a>.</p>
 <h3>1. Connect an MCP client</h3>
 <p>Claude Desktop uses the <code>.mcpb</code> bundle below. For Claude Code, Cursor, Codex, or VS Code, print a setup recipe:</p>
@@ -47,6 +47,7 @@ uoink note "A useful thought" --title "Research note"</pre>
 </ul>
 <p>Semantic search is optional. A person turns it on in Uoink Settings under <strong>Semantic search</strong> and accepts Google's Gemma terms. Uoink then downloads the EmbeddingGemma model once (about 330 MB) and indexes saved sources on this computer. Until it is ready, use <code>keyword</code> or <code>auto</code>. Quote <code>passage.text</code> only when <code>passage_verified</code> is true; otherwise <code>citation_reason</code> explains why no passage was returned. The tool list is unchanged.</p>
 ${PRODUCT_STATUS.mac.agentSetup}
+${/* TODO(receipt 28): add "What was tested for 3.11.2" here when the 3.11.2 receipt lands. Until then no 3.11.2 test claims. */ ""}
 <h3>What was tested for 3.11.1</h3>
 <p>Agent Install 27 passed 11/11 checks with the installed 3.11.1 build in an isolated profile:</p>
 <ul>

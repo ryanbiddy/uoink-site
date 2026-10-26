@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { PageShell } from "../../components/PageShell";
 import { getFeatureLogoKeys, PlatformLogoStrip } from "../../components/PlatformLogoStrip";
 import { CANONICAL_URL, DOWNLOAD_URL, GITHUB_URL, SitePage, VERSION_NUMBER } from "../../content/pages";
+import { PRODUCT_STATUS } from "../../content/product-status";
 import { Feature, featureBySlug, features, getRelatedFeatures } from "../feature-data";
 import { EmbedMode } from "./EmbedMode";
 
@@ -205,7 +206,7 @@ function FeatureJsonLd({ feature }: { feature: Feature }) {
       "@type": "SoftwareApplication",
       name: "Uoink",
       applicationCategory: "UtilityApplication",
-      operatingSystem: "Windows 10, Windows 11",
+      operatingSystem: PRODUCT_STATUS.mac.operatingSystem,
       softwareVersion: VERSION_NUMBER,
       downloadUrl: DOWNLOAD_URL,
       url: CANONICAL_URL,

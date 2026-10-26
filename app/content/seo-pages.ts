@@ -40,8 +40,10 @@ export function parseFacts(source: string) {
     return value;
   };
   const version = take(/^# Uoink v([^\r\n]+)$/m, "version");
-  const platform = take(/^([^\r\n.]+) only\. Mac \(Apple Silicon/m, "platform");
-  const unsupported = take(/only\. (Mac \(Apple Silicon, macOS 15 or later\): preview coming soon\.)/, "unsupported platform");
+  // "Windows 10/11, plus a Mac preview for Apple Silicon (macOS 15 or later). Uoink v… is free and …"
+  const platform = take(/^([^\r\n.]+)\. Uoink v[^\s]+ is \w+ and /m, "platform");
+  // The first line of the Mac setup section: "Mac preview: Apple Silicon, macOS 15 or later; …."
+  const mac = take(/^(Mac preview: [^\r\n.]+\.)/m, "Mac support");
   const price = take(/Uoink v[^\s]+ is (\w+) and /, "price");
   const license = take(/ is \w+ and ([\w.-]+)-licensed;/, "license");
   const storage = take(/^- (Keep everything [^\r\n]+)$/m, "storage");
@@ -51,7 +53,7 @@ export function parseFacts(source: string) {
     take(/^- (Save X [^\r\n]+)$/m, "other sources"),
   ];
   const privacy = take(/^- (Local-first: [^\r\n]+)$/m, "local data and network disclosure");
-  return { version, platform, unsupported, price, license, storage, registry, supported, privacy };
+  return { version, platform, mac, price, license, storage, registry, supported, privacy };
 }
 
 export const releases = parseReleases(pages.changelog.html);
