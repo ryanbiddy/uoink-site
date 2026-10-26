@@ -52,7 +52,7 @@ const release = require("../content/release.json");
         const stem = `${route === "/" ? "home" : route.slice(1)}-${viewport.width}x${viewport.height}`;
         await page.screenshot({ path: path.join(destination, `${stem}.png`), animations: "disabled" });
         await page.screenshot({ path: path.join(destination, `${stem}-full.png`), fullPage: true, animations: "disabled" });
-        if (route === "/") await page.locator("#u-film").screenshot({ path: path.join(destination, `${stem}-hero.png`), animations: "disabled" });
+        if (route === "/") await page.locator("#u-flow").screenshot({ path: path.join(destination, `${stem}-hero.png`), animations: "disabled" });
         if (route === "/changelog") await page.locator("#living-library").screenshot({ path: path.join(destination, `${stem}-living-library.png`), animations: "disabled" });
         if (route === "/developers") await page.locator("#configs").screenshot({ path: path.join(destination, `${stem}-setup.png`), animations: "disabled" });
         const layout = await page.evaluate(() => ({

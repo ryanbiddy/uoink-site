@@ -1,8 +1,8 @@
-import { HERO_HTML } from "./hero";
+import { homeHtml } from "./hero";
 import { AGENT_SETUP_HTML } from "./agent-setup";
 import { MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT, mcpTools } from "./mcp-tools";
 import { CLAUDE_CODE_COMMAND, MCP_CURSOR_CONFIG, MCP_STDIO_CONFIG } from "./mcp-config";
-import { PRODUCT_STATUS } from "./product-status";
+import { MAC_DMG_URL, PRODUCT_STATUS } from "./product-status";
 import release from "../../content/release.json";
 
 export type PageId =
@@ -252,12 +252,16 @@ export const pages: Record<PageId, SitePage> = {
       "local knowledge base",
       "writing studio",
     ],
-    html: `
-${HERO_HTML}
-<section class="go-deeper" id="live-uoink" data-home-part="go-deeper"><div class="container"><h2>Go deeper</h2><nav class="go-deeper-grid" aria-label="Go deeper"><a href="/sources">Sources</a><a href="/how-it-works">How it works</a><a href="/features">Features</a><a href="/mcp">MCP</a><a href="/creators">Creators</a><a href="/blog">Field notes</a></nav></div></section>
-<section class="home-proof" data-home-part="proof" aria-label="Uoink facts"><div class="container"><p>Free / MIT / runs on your machine</p><p>Local library / ${MCP_STDIO_TOOL_COUNT} stdio tools / ${MCP_TOOL_COUNT} HTTP tools</p><p>${PRODUCT_STATUS.mac.visible}</p><a class="arr-link" href="/install">Install Uoink -&gt;</a></div></section>
-<section class="home-sibling" data-home-part="sibling" aria-labelledby="sibling-title"><div class="container"><h2 id="sibling-title">Works with Zing</h2><p>Uoink pulls it in. Zing sends it out.</p><a class="arr-link" href="https://myzing.app">Meet Zing -&gt;</a></div></section>
-`,
+    // Product first: hero with both downloads and the real flow, then Save it,
+    // Find it, Write with receipts, Connect your AI, Go deeper and Zing. See hero.ts.
+    html: homeHtml({
+      windowsUrl: DOWNLOAD_URL,
+      macUrl: MAC_DMG_URL,
+      windowsMark: WINDOWS_MARK,
+      macMark: MAC_MARK,
+      platforms: PRODUCT_STATUS.mac.visible,
+      toolCount: MCP_TOOL_COUNT,
+    }),
   },
   install: {
     id: "install",

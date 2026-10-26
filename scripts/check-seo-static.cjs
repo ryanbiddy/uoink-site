@@ -88,7 +88,8 @@ function check(group) {
     assert(!/"(?:aggregateRating|reviews?)"/.test(JSON.stringify(schemas)));
     assert(evidence.files.includes('content/blog/loop-engineering.md'));
     assert(read('out/blog.html').includes(`href="${route}"`));
-    assert(/<a\b(?=[^>]*data-scene-link="4")(?=[^>]*href="\/blog\/loop-engineering")[^>]*>/.test(read('out/index.html')));
+    // The homepage's worked example links to the post from "Write with receipts".
+    assert(/<a\b(?=[^>]*data-home-link="field-notes")(?=[^>]*href="\/blog\/loop-engineering")[^>]*>/.test(read('out/index.html')), 'Homepage links to the loop engineering field notes');
     console.log('PASS: loop engineering metadata, JSON-LD, no draft notice, source dates and discovery links (static).');
   } else throw new Error(`Unknown SEO group: ${group}`);
 }

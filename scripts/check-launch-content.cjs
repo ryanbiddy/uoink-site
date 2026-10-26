@@ -128,6 +128,10 @@ assert(!AGENT_SETUP_HTML.includes("What was tested for 3.11.2"), "Agent setup: n
 assert(pages.install.html.includes(`<h3>${PRODUCT_STATUS.mac.heading}</h3>`) && pages.install.html.includes(`${PRODUCT_STATUS.mac.windowsLabel} / About`), "install: Mac preview heading and Windows support");
 for (const fact of [PRODUCT_STATUS.mac.heroLink, `href="${MAC_DMG_URL}"`, "Download the Mac preview", "Apple Silicon Macs with macOS 15 or later", "Intel Macs are not supported", "signed with a Developer ID, notarized by Apple and stapled", "No security override is needed", "drag Uoink to the Applications shortcut", "Eject the mounted disk", "⌘⇧G", "<strong>Get the extension</strong> card copies", `<code>${MAC_EXTENSION_PATH}</code>`, `href="${MAC_MCPB_URL}"`, "not the Windows bundle", "Uoink doesn't update itself", "Library mirroring is unavailable", "Script Editor", "Download for Mac"]) assert(pages.install.html.includes(fact), `install Mac: ${fact}`);
 assert(pages.home.html.includes(`${PRODUCT_STATUS.mac.visible}</p>`) && HOME_MOVED_CONTENT['/install'].includes(PRODUCT_STATUS.mac.linkLabel), "home platform fact and relocated install status");
+// The home hero offers both downloads: this release's Windows installer and the Mac preview DMG.
+for (const [kind, href, label] of [["windows", DOWNLOAD_URL, "Download for Windows"], ["mac", MAC_DMG_URL, "Download for Mac (preview)"]]) {
+  assert(new RegExp(`<a\\b[^>]*data-download="${kind}"[^>]*href="${href.replace(/[.?*+^$()[\]{}|\\/]/g, "\\$&")}"[^>]*>[\\s\\S]*?${label.replace(/[()]/g, "\\$&")}</a>`).test(pages.home.html), `home: ${label} links to ${href}`);
+}
 assert(pages.mcp.html.includes(`platform: ${PRODUCT_STATUS.mac.visible}</pre>`) && pages.mcp.html.includes("macos: https://uoink.app/install#mac"), "mcp: Mac preview status and install page");
 assert(pages.about.html.includes(`${PRODUCT_STATUS.mac.aboutPlatform}<small>${PRODUCT_STATUS.mac.aboutNote}</small>`), "about: Mac preview status");
 assert.equal(PRODUCT_STATUS.mac.visible, `Windows 10/11, plus a ${MAC_PREVIEW_STATUS}.`);

@@ -39,7 +39,6 @@ function sourceFiles(route) {
   }
   if (route.startsWith('/blog/') && route !== '/blog/rss.xml') visit(path.join(root, `content${route}.md`));
   if (route.startsWith('/compare/') && route !== '/compare/notebooklm') visit(path.join(root, `content/compare/uoink-vs-${route.split('/').at(-1)}.md`));
-  if (route === '/') visit(path.join(root, 'public/hero-story.js'));
   if (route === '/facts') visit(path.join(root, 'public/llms.txt'));
   return [...found].map(relative);
 }

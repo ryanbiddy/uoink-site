@@ -1,16 +1,18 @@
 # Swap the hero videos
 
-Ryan, put your clips in this folder with the exact names below. Replace a file to swap its video, then rebuild the site. No code changes are needed. If a clip is missing, its space says “Your video here.”
+Ryan, put your clips in this folder with the exact names below. Replace a file to swap its video, then rebuild the site. No code changes are needed.
 
 This repo is public. Add only clips you own or have cleared for public use. The three named slots and their matching `.jpg` covers are cleared: "Cleared by Ryan for public use on uoink.app, Oct 24 2026."
 
 All three slots are filled with cleared clips: the lesson at 22:42 to 22:48, the podcast at 05:32 to 05:38 and the X video at 0:29.5 to 0:33.5.
 
+**Since the product-first homepage (3.11.2), the homepage plays none of these clips.** It uses two covers as thumbnails: `source-lesson.jpg` (the hero video and the Library rows) and `source-x-video.jpg` (the X row). The podcast row shows a plain "podcast" block, as the app does for a save without a thumbnail, because `source-podcast.jpg` catches the host mid-word. The clips stay here for later use. `scripts/check-hero-story.cjs` fails if the homepage shows any other picture or any clip.
+
 | File name | Where it appears | Shape | Good length |
 | --- | --- | --- | --- |
-| `source-lesson.mp4` | First video below the story, in the saved-video section before “Send to Zing” | Wide, 16:9 | 4–8 seconds |
-| `source-podcast.mp4` | Second video in that section | Wide, 16:9, or square, 1:1 | 4–8 seconds |
-| `source-x-video.mp4` | Third video in that section | Wide, 16:9, or square, 1:1 | 4–8 seconds |
+| `source-lesson.mp4` | Not shown on the homepage. Its cover `source-lesson.jpg` is the hero video and Library thumbnail | Wide, 16:9 | 4–8 seconds |
+| `source-podcast.mp4` | Not shown on the homepage | Wide, 16:9, or square, 1:1 | 4–8 seconds |
+| `source-x-video.mp4` | Not shown on the homepage. Its cover `source-x-video.jpg` is the X row thumbnail | Wide, 16:9, or square, 1:1 | 4–8 seconds |
 
 The three sources are final. Empty slots use the wide shape. Filled videos keep their own shape. All three are silent previews; sound is not needed.
 
@@ -44,7 +46,7 @@ Open `labels.json` in a text editor. Under `sources`, each card has its title, d
 
 Keep quotes and links identical to the approved source JSON. Public-safe copies of those records live in `scripts/fixtures/UOINK-SOURCES-FINAL.json` and `scripts/fixtures/receipts.json`. After building, run `node scripts/check-hero-sources.cjs` to check the exported homepage against them. A new source needs a verified record before its labels change.
 
-Under `example`, change the Example labels, saved-video label and runtime counter. Under `drafts`, change the sample writing and story times. Rebuild after saving. A typo in the file stops the build so it cannot silently publish broken labels.
+The homepage reads titles, lengths, quotes, times and links from `sources`, the example note from `example.disclosure`, and the Writing Studio thread from `drafts` (`goal`, `job`, `learn`) plus the lesson's `prompt.point`. The code that places them is `app/content/hero.ts`. Rebuild after saving. A typo in the file stops the build so it cannot silently publish broken labels.
 
 ## Preview or rebuild
 

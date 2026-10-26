@@ -28,18 +28,18 @@ function check(home) {
   }
   for (const [i,key] of ['agreementGoal','agreementSchedule','agreementImprove'].entries()) assert.equal(labels.drafts[key],final.where_they_agree[i].line);
   let count = 0;
-  for (const [,attrs] of html.matchAll(/<a\b([^>]+)>/g)) {
+  for (const [,attrs,body] of html.matchAll(/<a\b([^>]+)>([\s\S]*?)<\/a>/g)) {
     const href = decode(attrs.match(/\bhref="([^"]+)"/)?.[1] || '');
-    const isReceipt = /\bclass="[^"]*\bcitation\b/.test(attrs) || /[?&]t=/.test(href);
+    const isReceipt = /\bclass="[^"]*\b(?:citation|hm-receipt|hm-reader-time)\b/.test(attrs) || /[?&]t=/.test(href);
     if (!isReceipt) continue;
     count++;
-    if (href.startsWith('#')) {
-      assert.equal(href,'#u-scene-1');
-      const key = attrs.match(/data-receipt="([^"]+)"/)?.[1];
-      assert(key, 'Internal receipt must select a card');
-      const card = html.match(new RegExp(`<article[^>]*data-receipt-card="${key}"[\\s\\S]*?</article>`))?.[0];
-      assert(card && [...card.matchAll(/href="([^"]+)"/g)].some(m => byLink.has(decode(m[1]))), `Receipt ${key} resolves to an approved timestamp`);
-    } else assert(byLink.has(href), `Exported receipt URL is not in final sources: ${href}`);
+    // Every receipt opens the source at its minute; none points inside the page.
+    assert(!href.startsWith('#'), `Receipt must link to the source minute: ${href}`);
+    assert(byLink.has(href), `Exported receipt URL is not in final sources: ${href}`);
+    // The minute a receipt shows is the minute it opens.
+    const shown = body.replace(/<[^>]*>/g, ' ').match(/\b(\d{1,2}):(\d\d)\b/);
+    assert(shown, `Receipt shows its minute: ${href}`);
+    assert.equal(`${Number(shown[1]) * 60 + Number(shown[2])}s`, new URL(href).searchParams.get('t'), `Shown minute ${shown[0]} matches ${href}`);
   }
   assert(count > 0, 'Export must contain receipts');
   const quoted = [...html.matchAll(/<(mark|p)\b[^>]*data-source-quote="([^"]+)"[^>]*>([\s\S]*?)<\/\1>/g)];
