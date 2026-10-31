@@ -2,7 +2,7 @@
   "name": "io.github.ryanbiddy/uoink",
   "display_name": "Uoink",
   "description": "Uoink keeps videos, podcasts, and articles on your disk for AI search and citations. Claude Desktop, Claude Code, Cursor, and Codex CLI connect over MCP; ChatGPT and claude.ai use copy and paste.",
-  "version": "3.11.2",
+  "version": "3.12.0",
   "homepage": "https://uoink.app",
   "documentation": "https://uoink.app/developers",
   "repository": {
@@ -17,9 +17,9 @@
   "install": {
     "windows": "https://uoink.app/install",
     "macos": "https://uoink.app/install#mac",
-    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/download/v3.11.2/uoink-3.11.2.mcpb",
-    "mcpb_bundle_macos": "https://github.com/ryanbiddy/uoink/releases/download/v3.11.2/uoink-3.11.2-macos.mcpb",
-    "notes": "Windows: unsigned installer, about 390 MB; no admin rights needed. Windows SmartScreen: More info → Run anyway. Then open the .mcpb bundle for one-click Claude Desktop setup, or copy the setup page’s stdio config. Mac preview (Apple Silicon, macOS 15 or later): a DMG signed with a Developer ID and notarized by Apple; Claude Desktop uses the separate macOS .mcpb, and `uoink connect <client>` prints configs with the installed app's paths."
+    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/download/v3.12.0/uoink-3.12.0.mcpb",
+    "mcpb_bundle_macos": "https://github.com/ryanbiddy/uoink/releases/download/v3.12.0/uoink-3.12.0-macos.mcpb",
+    "notes": "Windows: unsigned installer, about 519 MB; no admin rights needed. Windows SmartScreen: More info → Run anyway. Then open the .mcpb bundle for one-click Claude Desktop setup, or copy the setup page’s stdio config. Mac preview (Apple Silicon, macOS 15 or later): a DMG signed with a Developer ID and notarized by Apple; Claude Desktop uses the separate macOS .mcpb, and `uoink connect <client>` prints configs with the installed app's paths."
   },
   "transports": [
     {
@@ -39,7 +39,7 @@
         "PYTHONIOENCODING": "utf-8",
         "PYTHONUTF8": "1"
       },
-      "testing_note": "3.11.1 Agent Install 27: Claude Code 2.1.310 (haiku) connected with 91 tools and called get_schema_version. Codex CLI was not re-tested in receipt 27. Earlier 3.11.0: Claude Code 2.1.308 listed 91 tools and called one; Codex CLI 0.153.4 called two tools. Claude Desktop and Cursor retain their earlier MCP testing status."
+      "testing_note": "3.12.0 Agent Install 30: Claude Code 2.1.314 (haiku) connected with 91 tools and called get_schema_version. Codex CLI was not re-tested in receipt 30. Earlier 3.11.0: Claude Code 2.1.308 listed 91 tools and called one; Codex CLI 0.153.4 called two tools. Claude Desktop and Cursor retain their earlier MCP testing status."
     },
     {
       "type": "http",
