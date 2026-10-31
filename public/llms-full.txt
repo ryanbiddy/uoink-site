@@ -49,7 +49,7 @@ Mac preview: Apple Silicon, macOS 15 or later; Intel Macs are not supported. The
 2. Open the DMG, drag Uoink to the Applications shortcut, eject the disk, and open Uoink from Applications.
 3. Browser button: open Uoink once so it creates `~/Library/Application Support/Uoink/extension`. In Chrome, open chrome://extensions, enable Developer mode and click Load unpacked. The picker hides `~/Library`, so press ⌘⇧G, paste the path (the dashboard's Get the extension card copies it) and press Return.
 4. The uoink command is `/Applications/Uoink.app/Contents/Helpers/uoink`. The app does not change your shell or PATH. For a user-local command, run `mkdir -p "$HOME/.local/bin"`, `ln -s /Applications/Uoink.app/Contents/Helpers/uoink "$HOME/.local/bin/uoink"` and `export PATH="$HOME/.local/bin:$PATH"`, then `uoink status`.
-5. Connect an AI client with `uoink connect claude-desktop`, `uoink connect cursor`, `uoink connect codex`, `uoink connect claude-code` or `uoink connect vscode --deeplink`. The recipe uses the app's current location and does not edit client files; back up the client's configuration and merge the printed entry. Claude Desktop's extension flow uses [uoink-3.12.0-macos.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.12.0/uoink-3.12.0-macos.mcpb), not the Windows bundle; select the installed Uoink.app in its Uoink app setting. Use the standalone skill and `uoink connect claude-code`; the Claude Code plugin's MCP entry is still for Windows. MCP clients on a Mac are not yet tested.
+5. Connect an AI client with `uoink connect claude-desktop`, `uoink connect cursor`, `uoink connect codex`, `uoink connect claude-code` or `uoink connect vscode --deeplink`. The recipe uses the app's current location and does not edit client files; back up the client's configuration and merge the printed entry. Claude Desktop's extension flow uses [uoink-3.12.0-macos.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.12.0/uoink-3.12.0-macos.mcpb), not the Windows bundle; select the installed Uoink.app in its Uoink app setting. Use the standalone skill and `uoink connect claude-code`; the Claude Code plugin's MCP entry is still for Windows. On a Mac, Claude Code passed MCP acceptance (3.11.2); other clients are untested there.
 
 Not on the Mac yet: Uoink doesn't update itself, so quit Uoink and close MCP clients before replacing the app. Library mirroring is unavailable. macOS still credits Uoink's alerts to Script Editor. The full and core MCP inventories are 91 and 35, as on Windows.
 
@@ -136,7 +136,7 @@ Official MCP registry: io.github.ryanbiddy/uoink
 - Uoink skill for Claude Code, Codex, pi, Hermes Agent, and OpenClaw: `uoink skill path` locates it; `uoink skill install --to <dir>` copies it with references into a uoink subfolder of the parent skills directory. Restart the agent or reload its skills.
 - Claude Code plugin for a default install: `claude plugin marketplace add ryanbiddy/uoink-agent-kit`, then `claude plugin install uoink@uoink`. Restart Claude Code and enable the plugin MCP server when prompted. Custom installs use `uoink connect claude-code` plus the standalone skill; avoid duplicate MCP entries.
 - CLI examples: `uoink search "working memory" --limit 5`, `uoink recent --limit 10`, `uoink note "A useful thought" --title "Research note"`. Agents can search sources, read evidence, capture URLs, save notes, and call registry tools. Local reads work without the helper running; capture and paid tools keep their existing gates. The agent must be able to execute Uoink on the computer holding the library.
-Agent Install 30 tested the installed 3.12.0 build in an isolated profile: __RECEIPT30__
+Agent Install 30 tested the installed 3.12.0 build in an isolated profile: 21/21 PASS. The Whisper base model came with the install: with an empty Hugging Face cache and downloads blocked, a caption-less X video was transcribed locally, and nothing went to huggingface.co. A music-only X video read Done · no speech found. Stdio listed 91 full / 35 core / 91 modern tools, and Claude Code 2.1.314 (haiku) connected with 91 tools and called get_schema_version. YouTube captures saved English captions, a short X clip got its screenshot, and an in-place upgrade over 3.11.2 kept the library byte-identical. Codex CLI was not re-tested.
 
 Agent Install 27 passed 11/11 checks with the installed 3.11.1 build in an isolated profile: isolated installation; /health reported 3.11.1 and migration 32; stdio listed 91 full / 35 core / 91 modern tools; Claude Code 2.1.310 (haiku) connected with 91 tools and called get_schema_version; usage sharing stayed off with no network sends observed in that check; bundled ffprobe passed the audio probe; no isolated startup entries; dashboard at 1400 and 1100 pixels wide; clean uninstall; helper writes persisted across a restart; GET / redirected to /dashboard. Codex CLI was not re-tested in receipt 27.
 
@@ -184,8 +184,8 @@ The copy includes references. An existing copy needs `--force` to overwrite. Res
 
 ## Release checksums
 
-- Uoink-Setup-3.12.0.exe: __EXE_SIZE__ bytes (about 519 MB). SHA-256: `__EXE_SHA__`.
-- uoink-3.12.0.mcpb: SHA-256: `__MCPB_SHA__`.
+- Uoink-Setup-3.12.0.exe: 519,251,286 bytes (about 519 MB). SHA-256: `59efed61221a7f7bddfa3a65d89c8ffc56f5ea6c309034d52f31dfa9b15824fa`.
+- uoink-3.12.0.mcpb: SHA-256: `3708adcebd77e9f583e58649e3fd803f91b3e826affe4400710c9e8494d69c9f`.
 - Uoink-3.12.0-macos-arm64.dmg (Mac preview): __DMG_SIZE__ bytes. SHA-256: `__DMG_SHA__`.
 - uoink-3.12.0-macos.mcpb: SHA-256: `__MACMCPB_SHA__`.
 

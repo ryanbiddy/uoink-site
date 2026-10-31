@@ -38,11 +38,11 @@ For 3.12.0, the catalog was generated before the tag existed, with `--ref releas
 
 The Mac build is still a preview for Apple Silicon on macOS 15 or later: [Uoink-3.12.0-macos-arm64.dmg](https://github.com/ryanbiddy/uoink/releases/download/v3.12.0/Uoink-3.12.0-macos-arm64.dmg), signed with a Developer ID and notarized by Apple, plus a separate Claude Desktop bundle, [uoink-3.12.0-macos.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.12.0/uoink-3.12.0-macos.mcpb). Intel Macs are not supported. `app/content/product-status.ts` holds every Mac string the site renders. The Windows installer is still unsigned, and the Chrome Web Store listing is not live.
 
-The tool inventory line in `public/llms-full.txt` names source commit `5313b7f4ede38382fa4d9e4fcd05b43b5475adc1`. `check-launch-content.cjs` checks it against the generated manifest's source commit. The Windows installer is __EXE_SIZE__ bytes; the release checksums are in `public/llms-full.txt`. Until the release numbers replace the placeholders here, in `public/llms-full.txt` and in the Agent Install 30 summary (`__RECEIPT30__`), and `installerSizeBytes` in `content/release.json` is set, `check-launch-content.cjs` runs every other check and then fails, listing each placeholder.
+The tool inventory line in `public/llms-full.txt` names source commit `5313b7f4ede38382fa4d9e4fcd05b43b5475adc1`. `check-launch-content.cjs` checks it against the generated manifest's source commit. The Windows installer is 519,251,286 bytes; the release checksums are in `public/llms-full.txt`. Until the release numbers replace the placeholders here and in `public/llms-full.txt`, and `installerSizeBytes` in `content/release.json` is set, `check-launch-content.cjs` runs every other check and then fails, listing each placeholder.
 
 ## Connect a local Uoink install
 
-For 3.12.0, Agent Install 30 tested the installed build in an isolated profile: __RECEIPT30__.
+For 3.12.0, Agent Install 30 tested the installed build in an isolated profile: 21/21 PASS. The Whisper base model came with the install: with an empty Hugging Face cache and downloads blocked, a caption-less X video was transcribed locally, and nothing went to huggingface.co. A music-only X video read Done · no speech found. Stdio listed 91 full / 35 core / 91 modern tools, and Claude Code 2.1.314 (haiku) connected with 91 tools and called get_schema_version. YouTube captures saved English captions, a short X clip got its screenshot, and an in-place upgrade over 3.11.2 kept the library byte-identical. Codex CLI was not re-tested.
 
 For 3.11.1, Agent Install 27 passed 11/11 isolated-install checks, including stdio inventories of 91 full / 35 core / 91 modern tools, Claude Code 2.1.310 (haiku) connecting with 91 tools and calling `get_schema_version`, helper writes surviving a restart, and `GET /` redirecting to `/dashboard`. The full receipt scope is listed on the agent setup and changelog pages. Codex CLI was not re-tested in receipt 27.
 
@@ -50,7 +50,7 @@ Earlier 3.11.0 testing: Claude Code 2.1.308 listed all 91 tools and called one, 
 
 For Claude Desktop on Windows, download and open [uoink-3.12.0.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.12.0/uoink-3.12.0.mcpb). Enter the full path to your Uoink folder when asked; Desktop does not expand `%LOCALAPPDATA%`. Reinstall the bundle and restart Desktop after updating.
 
-On the Mac preview, open [uoink-3.12.0-macos.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.12.0/uoink-3.12.0-macos.mcpb) instead and select the installed Uoink.app. For other clients, link `/Applications/Uoink.app/Contents/Helpers/uoink` into a folder on your PATH and run `uoink connect <client>`, which prints a config with the installed app's paths. MCP clients on a Mac are not yet tested.
+On the Mac preview, open [uoink-3.12.0-macos.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.12.0/uoink-3.12.0-macos.mcpb) instead and select the installed Uoink.app. For other clients, link `/Applications/Uoink.app/Contents/Helpers/uoink` into a folder on your PATH and run `uoink connect <client>`, which prints a config with the installed app's paths. On a Mac, Claude Code passed MCP acceptance (3.11.2); other clients are untested there.
 
 For Claude Code, run this in PowerShell. The expanded paths are absolute:
 

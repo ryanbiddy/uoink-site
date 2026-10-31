@@ -39,7 +39,7 @@
         "PYTHONIOENCODING": "utf-8",
         "PYTHONUTF8": "1"
       },
-      "testing_note": "3.11.1 Agent Install 27: Claude Code 2.1.310 (haiku) connected with 91 tools and called get_schema_version. Codex CLI was not re-tested in receipt 27. Earlier 3.11.0: Claude Code 2.1.308 listed 91 tools and called one; Codex CLI 0.153.4 called two tools. Claude Desktop and Cursor retain their earlier MCP testing status."
+      "testing_note": "3.12.0 Agent Install 30: Claude Code 2.1.314 (haiku) connected with 91 tools and called get_schema_version. Codex CLI was not re-tested in receipt 30. Earlier 3.11.0: Claude Code 2.1.308 listed 91 tools and called one; Codex CLI 0.153.4 called two tools. Claude Desktop and Cursor retain their earlier MCP testing status."
     },
     {
       "type": "http",
