@@ -200,4 +200,4 @@ Watch RSS/Atom feeds. Per-feed auto-ingest is optional: when enabled, new episod
 
 ## Tool inventory
 
-Source: v3.12.0, commit 5313b7f4ede38382fa4d9e4fcd05b43b5475adc1. The shared TOOL_REGISTRY and default stdio inventory expose 91 tools over stdio and 91 in the HTTP registry, checked against .mcpb/manifest.json. Tool names, descriptions, HTTP registry schemas, and transport labels are in https://uoink.app/mcp/manifest.json. Both HTTP and stdio advertise the same flattened top-level schema variants for client compatibility; handlers still validate the exact registry schema.
+Source: v3.12.0, commit 318fd0c026cc9fbd330a16622e55f14f8abf4a48. The shared TOOL_REGISTRY and default stdio inventory expose 91 tools over stdio and 91 in the HTTP registry, checked against .mcpb/manifest.json. Tool names, descriptions, HTTP registry schemas, and transport labels are in https://uoink.app/mcp/manifest.json. Both HTTP and stdio advertise the same flattened top-level schema variants for client compatibility; handlers still validate the exact registry schema.
