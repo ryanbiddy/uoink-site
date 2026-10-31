@@ -47,7 +47,8 @@ uoink note "A useful thought" --title "Research note"</pre>
 </ul>
 <p>Semantic search is optional. A person turns it on in Uoink Settings under <strong>Semantic search</strong> and accepts Google's Gemma terms. Uoink then downloads the EmbeddingGemma model once (about 330 MB) and indexes saved sources on this computer. Until it is ready, use <code>keyword</code> or <code>auto</code>. Quote <code>passage.text</code> only when <code>passage_verified</code> is true; otherwise <code>citation_reason</code> explains why no passage was returned. The tool list is unchanged.</p>
 ${PRODUCT_STATUS.mac.agentSetup}
-${/* TODO(receipt 28): add "What was tested for 3.11.2" here when the 3.11.2 receipt lands. Until then no 3.11.2 test claims. */ ""}
+<h3>What was tested for 3.12.0</h3>
+<p>Agent Install 30 tested the installed 3.12.0 build in an isolated profile: __RECEIPT30__</p>
 <h3>What was tested for 3.11.1</h3>
 <p>Agent Install 27 passed 11/11 checks with the installed 3.11.1 build in an isolated profile:</p>
 <ul>
