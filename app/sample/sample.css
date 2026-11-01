@@ -1,0 +1,105 @@
+/* Sample library (/sample). The window mirrors the light product dashboard:
+   a Library list with kind chips and a Reader pane, as the homepage mocks do
+   (home.css). Site tokens come from globals.css; buttons follow the family kit. */
+:root {
+  --sl-surface: #FFFFFF;   /* product --surface */
+  --sl-sel: #FBE6D6;       /* product --surface-sel */
+  --sl-shadow: 0 22px 70px rgba(92, 74, 64, 0.12);
+}
+
+.sl-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+
+/* HERO */
+.sl-hero { padding: 48px 0 32px; }
+.sl-hero h1 { margin: 12px 0 16px; text-wrap: balance; }
+.sl-hero .lede { color: var(--ink); text-wrap: pretty; }
+.sl-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.sl-import { margin: 14px 0 0; max-width: 72ch; color: var(--text-2); font-size: 15px; line-height: 1.5; }
+.sl-import b { color: var(--ink); font-weight: 700; }
+.sl-import a, .sl-credit a, .sl-notes a { color: var(--blue-text); text-decoration: underline; text-underline-offset: 3px; }
+.sl-import a:hover, .sl-credit a:hover { color: var(--rust-deep); }
+
+/* LIBRARY WINDOW */
+.sl-section { padding: 0 0 64px; }
+.sl-credit { margin: 0 0 12px; color: var(--text-2); font-size: 14px; line-height: 1.5; }
+.sl-notes { margin: 16px 0 0; max-width: 80ch; color: var(--text-2); font-size: 13px; line-height: 1.5; }
+
+.sl-win { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--sl-surface); box-shadow: var(--sl-shadow); color: var(--ink); }
+.sl-bar { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 8px 16px; border-bottom: 1px solid var(--line); }
+.sl-bar-title { margin: 0; font-size: 15px; line-height: 1.3; font-weight: 700; letter-spacing: 0; }
+.sl-tag { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: var(--r-pill); background: var(--sl-sel); color: var(--text-2); font-size: 12px; font-weight: 600; }
+.sl-count { margin-left: auto; color: var(--text-2); font-size: 13px; font-variant-numeric: tabular-nums; }
+
+.sl-filters { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+/* Chips are native buttons, so family-kit.css sizes them (48 px, 10 px radius),
+   like the Field notes filters. Only the colours are set here. */
+.site-root .sl-chip { display: inline-flex; gap: 6px; border-color: var(--line-strong); background: var(--sl-surface); color: var(--ink); }
+.site-root .sl-chip:hover { border-color: var(--ink); }
+.sl-chip-count { color: var(--text-2); font-weight: 500; font-variant-numeric: tabular-nums; }
+.site-root .sl-chip[aria-pressed="true"] { border-color: var(--rust); background: var(--rust); color: var(--on-action); }
+.site-root .sl-chip[aria-pressed="true"] .sl-chip-count { color: var(--on-action); }
+
+.sl-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); }
+.sl-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: max-content; align-content: start; gap: 12px; height: min(78vh, 860px); margin: 0; padding: 16px; overflow-y: auto; overscroll-behavior: contain; list-style: none; border-right: 1px solid var(--line); background: var(--cream); }
+.sl-list > li { scroll-margin-top: calc(var(--nav-h) + 12px); display: flex; flex-direction: column; min-width: 0; }
+
+/* A card is a native button too; undo the family-kit button box for it. */
+.site-root .sl-card { display: grid; align-items: start; align-content: start; justify-content: stretch; gap: 10px; flex: 1 0 auto; width: 100%; height: auto; min-height: 0; padding: 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--sl-surface); color: var(--ink); font-size: 16px; font-weight: 400; line-height: 1.5; text-align: left; cursor: pointer; transition: border-color var(--ease), background-color var(--ease); }
+.site-root .sl-card:hover { border-color: var(--line-strong); }
+.site-root .sl-card[aria-pressed="true"] { border-color: var(--rust); background: var(--sl-sel); box-shadow: inset 0 0 0 1px var(--rust); }
+.sl-thumb { position: relative; display: block; overflow: hidden; aspect-ratio: 16 / 9; border-radius: 6px; background: var(--line); }
+.sl-thumb img, .sl-reader-thumb img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+.sl-card-body { display: grid; gap: 3px; min-width: 0; }
+.sl-card-title { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-size: 15px; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
+.sl-card-channel { overflow: hidden; color: var(--text-2); font-size: 13px; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
+.sl-card-state { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin-top: 2px; color: var(--text-2); font-size: 12px; line-height: 1.4; }
+.sl-kind { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: var(--r-pill); background: var(--sl-sel); color: var(--text-2); font-size: 11px; font-weight: 700; text-transform: lowercase; }
+.sl-card[aria-pressed="true"] .sl-kind { background: var(--sl-surface); }
+
+/* READER */
+.sl-pane { height: min(78vh, 860px); overflow-y: auto; overscroll-behavior: contain; }
+.sl-inline { display: none; }
+.sl-reader-card { padding: 20px 22px 24px; }
+.sl-reader-thumb { position: relative; overflow: hidden; aspect-ratio: 16 / 9; border-radius: 8px; background: var(--line); }
+.sl-reader-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: 16px 0 6px; color: var(--text-2); font-size: 13px; line-height: 1.4; }
+.sl-reader-card h3 { margin: 0; font-size: 22px; line-height: 1.25; font-weight: 800; letter-spacing: -0.02em; overflow-wrap: anywhere; text-wrap: pretty; }
+.sl-reader-part { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+.sl-reader-part h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; color: var(--text-2); font-size: 12px; line-height: 1.4; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.sl-why h4::before { content: ""; width: 10px; height: 10px; flex: none; background: var(--acid); }
+.sl-reader-part p { margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty; }
+.sl-cats { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0 0; padding: 0; list-style: none; }
+.sl-cats li { padding: 3px 10px; border: 1px solid var(--line-strong); border-radius: var(--r-pill); color: var(--text-2); font-size: 12px; font-weight: 600; line-height: 18px; }
+.sl-reader-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 14px; }
+.sl-rank { color: var(--text-2); font-size: 13px; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 1100px) {
+  .sl-body { grid-template-columns: minmax(0, 1fr) minmax(0, 380px); }
+  .sl-list { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Phones and narrow tablets: one column; the reader opens under the card. */
+@media (max-width: 899px) {
+  .sl-body { display: block; }
+  .sl-pane { display: none; }
+  .sl-list { height: auto; overflow: visible; border-right: 0; padding: 12px; gap: 10px; }
+  .sl-inline { display: block; margin-top: -1px; border: 1px solid var(--rust); border-top: 0; border-radius: 0 0 10px 10px; background: var(--sl-surface); }
+  .site-root .sl-list > li.is-on .sl-card { border-radius: 10px 10px 0 0; }
+  .site-root .sl-card { grid-template-columns: 112px minmax(0, 1fr); align-items: start; gap: 12px; }
+  .sl-reader-card { padding: 16px; }
+  .sl-reader-thumb { display: none; }
+  .sl-reader-meta { margin-top: 0; }
+  .sl-reader-card h3 { font-size: 19px; }
+}
+@media (max-width: 600px) {
+  .sl-hero { padding: 28px 0 24px; }
+  .sl-cta .btn { width: 100%; white-space: normal; }
+  .sl-section { padding-bottom: 44px; }
+  .sl-bar, .sl-filters { padding-inline: 12px; }
+  .site-root .sl-card { grid-template-columns: 96px minmax(0, 1fr); gap: 10px; padding: 8px; }
+  .sl-card-title { font-size: 14px; }
+  .sl-reader-part p { font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sl-card { transition: none; }
+}
