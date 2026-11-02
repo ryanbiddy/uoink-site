@@ -1,7 +1,7 @@
 <!-- updated: 2026-11-01 / uoink v3.12.1 -->
 # Uoink 3.12.1: phone inbox, uoink mcp and Wikipedia capture
 
-> A local library of the YouTube videos, podcasts and articles you study, saved on your Windows PC, that your AI can search and cite with timestamps.
+> Uoink is a free, open-source local library of the YouTube videos, podcasts, X posts and articles you study, saved on your own computer (Windows, plus a Mac preview), that your AI can search and cite with timestamps.
 
 Free, MIT-licensed. No account or Uoink-hosted corpus. Model dependencies can send telemetry. Made by Ryan Biddy (@replayryan), a personal side project.
 

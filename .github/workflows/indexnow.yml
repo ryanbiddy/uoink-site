@@ -1,0 +1,31 @@
+# After Vercel finishes a production deploy, tell IndexNow (Bing, which feeds
+# ChatGPT search and Copilot) which pages changed. No secrets: the key file in
+# public/ proves ownership. See docs/indexnow.md.
+name: IndexNow ping
+on:
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      all:
+        description: Submit every sitemap URL instead of the newest pages
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  ping:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/indexnow-ping.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Ping IndexNow
+        run: node scripts/indexnow-ping.mjs ${{ inputs.all && '--all' || '' }}

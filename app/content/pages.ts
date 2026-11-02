@@ -228,7 +228,7 @@ export const pages: Record<PageId, SitePage> = {
     mode: "mode-dark",
     title: "Uoink | Save YouTube and podcast transcripts for your AI",
     description:
-      "Save YouTube videos, podcasts and articles to your own disk. Your AI searches the library and cites the timestamp. Free and open source, for Windows.",
+      "Save YouTube videos, podcasts and articles to your own disk. Your AI searches the library and cites the timestamp. Free and open source, for Windows and Mac.",
     keywords: [
       "youtube to AI",
       "local video corpus",

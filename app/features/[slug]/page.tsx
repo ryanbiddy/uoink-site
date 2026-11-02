@@ -4,8 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageShell } from "../../components/PageShell";
 import { getFeatureLogoKeys, PlatformLogoStrip } from "../../components/PlatformLogoStrip";
-import { CANONICAL_URL, DOWNLOAD_URL, GITHUB_URL, SitePage, VERSION_NUMBER } from "../../content/pages";
-import { PRODUCT_STATUS } from "../../content/product-status";
+import { CANONICAL_URL, DOWNLOAD_URL, GITHUB_URL, SitePage } from "../../content/pages";
 import { Feature, featureBySlug, features, getRelatedFeatures } from "../feature-data";
 import { EmbedMode } from "./EmbedMode";
 
@@ -201,19 +200,6 @@ function FeatureVisual({ feature }: { feature: Feature }) {
 function FeatureJsonLd({ feature }: { feature: Feature }) {
   const url = `${CANONICAL_URL}/features/${feature.slug}`;
   const schemas = [
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      name: "Uoink",
-      applicationCategory: "UtilityApplication",
-      operatingSystem: PRODUCT_STATUS.mac.operatingSystem,
-      softwareVersion: VERSION_NUMBER,
-      downloadUrl: DOWNLOAD_URL,
-      url: CANONICAL_URL,
-      license: `${GITHUB_URL}/blob/main/LICENSE`,
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-      featureList: [feature.title, feature.summary, ...feature.mcpTools],
-    },
     {
       "@context": "https://schema.org",
       "@type": "HowTo",

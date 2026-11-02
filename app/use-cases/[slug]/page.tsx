@@ -5,6 +5,7 @@ import { TopNav } from "../../components/TopNav";
 import { SiteFooter } from "../../components/SiteFooter";
 import data from "../../content/use-cases.generated.json";
 import styles from "./use-case.module.css";
+import { breadcrumbs, JsonLd, socialImages } from "../../lib/structured-data";
 
 export const dynamicParams = false;
 export function generateStaticParams() { return data.pages.map(({ slug }) => ({ slug })); }
@@ -16,8 +17,8 @@ async function findPage(params: Props["params"]) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = await findPage(params);
   return { title: page.title, description: page.description, alternates: { canonical: page.route },
-    openGraph: { title: page.title, description: page.description, url: page.route },
-    twitter: { title: page.title, description: page.description } };
+    openGraph: { ...socialImages.openGraph, title: page.title, description: page.description, url: page.route },
+    twitter: { ...socialImages.twitter, title: page.title, description: page.description } };
 }
 export default async function Page({ params }: Props) {
   const page = await findPage(params);
@@ -59,6 +60,7 @@ export default async function Page({ params }: Props) {
           <h2 id="install">Try it with your library</h2>
           <div className="ctas"><Link className="btn primary" href="/install">Install Uoink</Link></div>
         </section>
+        <JsonLd data={breadcrumbs([["How it works", "/how-it-works"], [page.title, page.route]])} />
       </article>
     </main>
     <SiteFooter />

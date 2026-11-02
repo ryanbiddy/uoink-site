@@ -43,25 +43,20 @@ curl -X POST "https://api.indexnow.org/indexnow" \
   }'
 ```
 
-## Optional: fire it automatically from a Vercel deploy hook
+## Automatic ping after each production deploy
 
-Add a Deploy Hook (Vercel → Project → Settings → Git → Deploy Hooks won't call
-out; instead use a post-deploy step). Simplest reliable option is a tiny GitHub
-Action on push to `main`:
+`.github/workflows/indexnow.yml` runs when Vercel reports a successful
+`Production` deployment to GitHub. It runs `scripts/indexnow-ping.mjs`, which
+reads the live sitemap and submits the URLs with the newest `lastmod`. No secret
+is involved.
 
-```yaml
-# .github/workflows/indexnow.yml
-name: IndexNow ping
-on:
-  push:
-    branches: [main]
-jobs:
-  ping:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Ping IndexNow
-        run: |
-          curl -sS "https://api.indexnow.org/indexnow?url=https://uoink.app/&key=9b91f5a5988d705a3f25641817b2f574&keyLocation=https://uoink.app/9b91f5a5988d705a3f25641817b2f574.txt"
+Run it by hand from a checkout:
+
+```bash
+node scripts/indexnow-ping.mjs --dry-run     # list what would be sent
+node scripts/indexnow-ping.mjs               # newest pages
+node scripts/indexnow-ping.mjs --all         # every sitemap URL, e.g. once after setup
 ```
 
-This is optional. The single `curl` above, run by hand after a deploy, is enough.
+Or start the workflow from GitHub: Actions > IndexNow ping > Run workflow
+(tick "all" to submit every URL).

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SeoArticle } from "../../components/SeoArticle";
 import { releases } from "../../content/seo-pages";
+import { breadcrumbs, JsonLd, socialImages } from "../../lib/structured-data";
 
 type Props = { params: Promise<{ version: string }> };
 export const dynamicParams = false;
@@ -18,8 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: release.title,
     description: release.description,
     alternates: { canonical: release.route },
-    openGraph: { title: release.title, description: release.description, url: release.route },
-    twitter: { title: release.title, description: release.description },
+    openGraph: { ...socialImages.openGraph, title: release.title, description: release.description, url: release.route },
+    twitter: { ...socialImages.twitter, title: release.title, description: release.description },
   };
 }
 
@@ -35,6 +36,7 @@ export default async function ReleasePage({ params }: Props) {
       <div dangerouslySetInnerHTML={{ __html: release.html }} />
       {release.context ? <p className="meta">{release.context}</p> : null}
       <div className="ctas"><Link className="btn ghost" href="/changelog">All releases</Link><Link className="btn primary" href="/install">Get Uoink</Link></div>
+      <JsonLd data={breadcrumbs([["Changelog", "/changelog"], [release.title, release.route]])} />
     </SeoArticle>
   );
 }

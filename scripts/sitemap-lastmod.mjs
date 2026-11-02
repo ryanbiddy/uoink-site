@@ -72,7 +72,11 @@ export function lastmod(files) {
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'public/mcp/manifest.json'), 'utf8'));
 const useCases = JSON.parse(fs.readFileSync(path.join(root, 'app/content/use-cases.generated.json'), 'utf8'));
 const prerender = JSON.parse(fs.readFileSync(path.join(root, '.next/prerender-manifest.json'), 'utf8'));
-const exportedRoutes = Object.keys(prerender.routes).filter(route => !route.startsWith('/_'));
+// A sitemap lists canonical pages only. Routes that vercel.json redirects (308s
+// to their new home) and machine-readable JSON endpoints stay out of it.
+const redirected = new Set(JSON.parse(fs.readFileSync(path.join(root, 'vercel.json'), 'utf8')).redirects.map(item => item.source));
+const sitemapRoute = route => !route.startsWith('/_') && !route.startsWith('/api/') && !redirected.has(route);
+const exportedRoutes = Object.keys(prerender.routes).filter(sitemapRoute);
 const toolRoutes = manifest.tools.map(tool => `/mcp/tools/${tool.name}`);
 const useCaseRoutes = useCases.pages.map(page => page.route);
 for (const route of [...seoRoutes, ...toolRoutes, ...useCaseRoutes]) {
