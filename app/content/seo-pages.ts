@@ -53,7 +53,10 @@ export function parseFacts(source: string) {
     take(/^- (Save X [^\r\n]+)$/m, "other sources"),
   ];
   const privacy = take(/^- (Local-first: [^\r\n]+)$/m, "local data and network disclosure");
-  return { version, platform, mac, price, license, storage, registry, supported, privacy };
+  // The llmstxt.org summary blockquote under the title.
+  const summary = take(/^> ([^\r\n]+)$/m, "summary");
+  const chatApps = take(/^- (ChatGPT and claude\.ai: [^\r\n]+)$/m, "chat apps without MCP");
+  return { version, summary, platform, mac, price, license, storage, registry, supported, privacy, chatApps };
 }
 
 export const releases = parseReleases(pages.changelog.html);

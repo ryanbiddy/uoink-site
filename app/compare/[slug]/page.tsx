@@ -5,6 +5,7 @@ import { PageShell } from "../../components/PageShell";
 import type { SitePage } from "../../content/pages";
 import { comparisonSlugs, getComparison } from "../comparison-data";
 import "../compare.css";
+import { socialImages } from "../../lib/structured-data";
 
 export const dynamicParams = false;
 export function generateStaticParams() { return comparisonSlugs.map(slug => ({ slug })); }
@@ -21,8 +22,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const url = `/compare/${article.slug}`;
   return {
     title: article.title, description: article.description, alternates: { canonical: url },
-    openGraph: { title: article.title, description: article.description, url },
-    twitter: { title: article.title, description: article.description },
+    openGraph: { ...socialImages.openGraph, title: article.title, description: article.description, url },
+    twitter: { ...socialImages.twitter, title: article.title, description: article.description },
   };
 }
 
