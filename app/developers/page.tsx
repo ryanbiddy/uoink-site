@@ -76,6 +76,11 @@ export default function Page() {
                 Connect over MCP, install the Uoink skill, or use the uoink command to search and cite your local library. MCP exposes {MCP_STDIO_TOOL_COUNT} tools over stdio and {MCP_TOOL_COUNT} in the HTTP registry.
               </p>
               <p>Official MCP registry: <code>io.github.ryanbiddy/uoink</code>. Clients and directories that read the registry can find Uoink.</p>
+              <p>
+                Also listed on{" "}
+                <a href="https://mcpservers.org/servers/ryanbiddy/uoink">mcpservers.org</a> and{" "}
+                <a href="https://mcpmarket.com/server/uoink">MCP Market</a>.
+              </p>
               <div className="ctas">
                 <a className="btn primary large" href="#configs">
                   Set up your agent
