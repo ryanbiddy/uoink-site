@@ -1,0 +1,317 @@
+/* /get: one screen, Uoink tokens from globals.css (cream ground, ink text,
+   rust actions, Inter, JetBrains Mono for commands). Every rule is scoped to
+   .gp so nothing reaches other pages. */
+
+.gp {
+  --gp-col: 680px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Header: wordmark and GitHub only */
+.gp-head {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: var(--container);
+  padding: 20px 32px;
+  width: 100%;
+}
+.gp-brand { align-items: center; display: inline-flex; min-height: 44px; }
+.gp-gh {
+  align-items: center;
+  color: var(--text-2);
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 8px;
+  min-height: 44px;
+}
+.gp-gh:hover { color: var(--ink); }
+.gp-gh img { opacity: 0.8; }
+
+.gp-main {
+  flex: 1;
+  margin: 0 auto;
+  max-width: calc(var(--gp-col) + 64px);
+  padding: clamp(8px, 3vw, 28px) 32px 48px;
+  text-align: center;
+  width: 100%;
+}
+
+/* Demo: the cleared homepage clip, click to play */
+.gp-demo { margin: 0 auto; max-width: 420px; }
+.gp-frame {
+  aspect-ratio: 16 / 9;
+  background: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: 0 1px 2px rgba(10, 10, 10, 0.06), 0 12px 32px -12px rgba(92, 74, 64, 0.35);
+  overflow: hidden;
+  position: relative;
+}
+.gp-video { display: block; height: 100%; object-fit: cover; width: 100%; }
+.gp .gp-play {
+  align-items: center;
+  background: rgba(10, 10, 10, 0.55);
+  border: 1px solid rgba(255, 244, 236, 0.5);
+  border-radius: 50%;
+  color: #FFF4EC;
+  display: inline-flex;
+  height: 56px;
+  justify-content: center;
+  left: 50%;
+  min-height: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity var(--ease), background-color var(--ease);
+  width: 56px;
+}
+.gp .gp-play[hidden] { display: none; }
+.gp .gp-play:hover { background: var(--rust); border-color: var(--rust); }
+.gp .gp-play:focus-visible { outline: 2px solid #FFD23F; outline-offset: 3px; border-radius: 50%; }
+.gp-pause-icon { display: none; }
+.gp-playing .gp-play-icon { display: none; }
+.gp-playing .gp-pause-icon { display: block; }
+/* While playing, the pause control fades until the frame is hovered or focused */
+.gp-playing .gp-play { opacity: 0; }
+.gp-playing .gp-frame:hover .gp-play,
+.gp-playing .gp-play:focus-visible { opacity: 1; }
+
+.gp-saved {
+  align-items: center;
+  color: var(--text-2);
+  display: flex;
+  font-size: 13px;
+  gap: 10px;
+  justify-content: center;
+  line-height: 1.4;
+  margin: 12px auto 0;
+  text-align: left;
+}
+.gp-saved b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.gp-pill {
+  align-items: center;
+  background: var(--rust);
+  border-radius: 14px;
+  color: #FFF4EC;
+  display: inline-flex;
+  flex: none;
+  font-size: 12px;
+  font-weight: 600;
+  gap: 5px;
+  height: 26px;
+  padding: 0 11px;
+}
+.gp-pill-dot { background: #00C853; border-radius: 50%; display: block; height: 6px; width: 6px; }
+.gp-hint { color: var(--text-2); font-size: 13px; margin: 6px 0 0; }
+.gp-hint[hidden] { display: none; }
+.gp-playing .gp-hint { visibility: hidden; }
+
+/* Headline and one line */
+.gp-title {
+  font-size: clamp(44px, 8.5vw, 92px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  margin: clamp(28px, 4vw, 40px) 0 0;
+}
+.gp-line {
+  color: var(--text-2);
+  font-size: clamp(16px, 1.6vw, 19px);
+  line-height: 1.55;
+  margin: 18px auto 0;
+  max-width: 56ch;
+}
+
+/* Install block */
+.gp-install { margin: clamp(28px, 4vw, 40px) auto 0; text-align: left; }
+.gp-tabs {
+  background: var(--sunk);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  display: flex;
+  gap: 4px;
+  margin: 0 auto 14px;
+  padding: 4px;
+  width: max-content;
+}
+.gp-tabs[hidden] { display: none; }
+.gp .gp-tabs [role="tab"] {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--r-pill);
+  color: var(--text-2);
+  display: inline-flex;
+  font-size: 15px;
+  font-weight: 600;
+  gap: 8px;
+  height: 40px;
+  min-height: 40px;
+  padding: 0 20px;
+}
+.gp .gp-tabs [role="tab"]:hover { color: var(--ink); background: transparent; }
+.gp .gp-tabs [role="tab"][aria-selected="true"] {
+  background: var(--surface);
+  border-color: var(--line);
+  box-shadow: 0 1px 2px rgba(10, 10, 10, 0.06);
+  color: var(--ink);
+}
+.gp-mark { display: inline-flex; }
+.gp-mark .os-logo { height: 15px; width: 15px; }
+
+.gp-panel + .gp-panel { margin-top: 28px; }
+.gp-js .gp-panel + .gp-panel { margin-top: 0; }
+.gp-panel[hidden] { display: none; }
+.gp-os { align-items: center; display: flex; font-size: 17px; gap: 8px; margin: 0 0 10px; }
+.gp-js .gp-os { display: none; }
+
+.gp-rows {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.gp-row {
+  align-items: center;
+  display: grid;
+  gap: 8px 16px;
+  grid-template-columns: 110px minmax(0, 1fr) auto;
+  min-height: 64px;
+  padding: 10px 10px 10px 18px;
+}
+.gp-row + .gp-row { border-top: 1px solid var(--line); }
+.gp-label { color: var(--ink); font-size: 15px; font-weight: 700; }
+.gp-meta { color: var(--text-2); font-size: 14px; }
+.gp .gp-dl { font-size: 14px; gap: 8px; height: 44px; min-height: 44px; padding: 0 18px; }
+
+/* A command with its copy button; the code is selectable on its own without JS */
+.gp-cmd {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  grid-column: 2 / 4;
+  min-width: 0;
+}
+.gp-cmd code {
+  background: var(--sunk);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  color: var(--ink);
+  flex: 1;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  min-width: 0;
+  overflow-x: auto;
+  padding: 10px 12px;
+  user-select: all;
+  white-space: nowrap;
+}
+.gp .gp-copy {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  font-size: 13px;
+  font-weight: 600;
+  gap: 6px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  width: 88px;
+}
+.gp .gp-copy[hidden] { display: none; }
+@media (hover: hover) { .gp .gp-copy:hover { background: var(--sunk); border-color: var(--ink); } }
+.gp .gp-copy.is-copied { border-color: #1B7F3B; color: #1B7F3B; }
+
+.gp-note {
+  color: var(--text-2);
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 10px 4px 0;
+}
+.gp-note b { color: var(--ink); font-weight: 600; }
+.gp-note a, .gp-links a {
+  color: var(--rust);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.gp-note a:hover, .gp-links a:hover { color: var(--rust-deep); }
+
+/* Then connect your AI */
+.gp-next {
+  border-top: 1px solid var(--line);
+  margin: 28px auto 0;
+  padding-top: 20px;
+}
+.gp-next-line {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 15px;
+  font-weight: 600;
+  gap: 8px 12px;
+  justify-content: center;
+  margin: 0;
+}
+.gp-next-line .gp-cmd { flex: 0 1 auto; }
+.gp-next-line .gp-cmd code { flex: 0 1 auto; }
+.gp-links {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  gap: 6px 20px;
+  justify-content: center;
+  margin: 12px 0 0;
+}
+.gp-live {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.gp-foot {
+  color: var(--text-2);
+  font-size: 13px;
+  padding: 24px 16px 32px;
+  text-align: center;
+}
+.gp-foot p { margin: 0; }
+.gp-foot a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gp .gp-play { transition: none; }
+}
+
+/* Phone: 16px gutters, rows stack */
+@media (max-width: 640px) {
+  .gp-head { padding: 12px 16px; }
+  .gp-main { padding: 8px 16px 40px; }
+  .gp-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 12px 10px 12px 14px;
+  }
+  .gp-row .gp-meta { grid-column: 1 / 2; grid-row: 2; font-size: 13px; }
+  .gp-row .gp-dl { grid-column: 2; grid-row: 1 / 3; }
+  .gp-row .gp-cmd { grid-column: 1 / 3; }
+  .gp-saved { flex-direction: column; gap: 6px; text-align: center; }
+  .gp .gp-tabs [role="tab"] { padding: 0 18px; }
+}
