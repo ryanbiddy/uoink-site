@@ -9,11 +9,11 @@ import "./sample.css";
 // The list file, served as is so people can download it.
 const LIST_URL = "/samples/hackertube-top-50.json";
 
-// The secondary line under the main button. List import is being built for
-// Uoink 3.13.0; edit these strings when it ships or if the wording changes.
+// The secondary line under the main button. List import shipped in Uoink
+// 3.13.0 (Sources > Import a list); edit these strings if the wording changes.
 const IMPORT_LINE = {
   label: "Import a list.",
-  text: "Uoink 3.13.0 and later can import a list like this one.",
+  text: "Uoink 3.13.0 and later can import a list like this one: paste a HackerTube link in Sources > Import a list.",
   link: "Download this list",
 };
 
