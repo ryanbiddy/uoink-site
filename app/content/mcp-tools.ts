@@ -1,5 +1,5 @@
-// Generated for Uoink 3.12.1 from ryanbiddy/uoink v3.12.1 on 2026-11-01.
-// Source commit: 4f421170ee59ec1c90e7377a0917db8131c16c21
+// Generated for Uoink 3.13.0 from ryanbiddy/uoink v3.13.0 on 2026-11-03.
+// Source commit: a4ea17a0de76eae681e92dc42a5af3385569f4cf
 // HTTP: TOOL_REGISTRY; stdio: registry inventory (3.9.2+) or @mcp.tool decorators.
 // Regenerate with: python scripts/sync-mcp-from-release.py <product-checkout> [--ref <git-ref>]
 
@@ -97,6 +97,7 @@ export const mcpStdioToolNames = [
   "uoink_x",
   "uoink_page",
   "uoink_reddit_thread",
+  "import_list",
   "list_allowed_sites",
   "add_allowed_site",
   "remove_allowed_site"
@@ -414,6 +415,10 @@ export const mcpTools = [
   [
     "uoink_reddit_thread",
     "Capture a Reddit post and filtered comment tree as a local discussion corpus."
+  ],
+  [
+    "import_list",
+    "Queue every video from a list source for normal capture: a HackerTube playlist, category, area or the whole collection best first (hackertube.org, ODC-By 1.0), a Hacker News thread, a Reddit thread, or a YouTube playlist."
   ],
   [
     "list_allowed_sites",

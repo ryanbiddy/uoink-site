@@ -33,7 +33,7 @@ Servers such as mcp-server-youtube-transcript, mcp-youtube and mcp-youtube-trans
 
 | Feature | Uoink | YouTube transcript MCP servers |
 |---|---|---|
-| What it is | A desktop app with capture, a local library and an MCP server with 91 tools | Small MCP servers built around fetching a video's transcript, with tools such as get_transcript, get_timed_transcript and get_video_info [1][3] |
+| What it is | A desktop app with capture, a local library and an MCP server with 92 tools | Small MCP servers built around fetching a video's transcript, with tools such as get_transcript, get_timed_transcript and get_video_info [1][3] |
 | Install | Unsigned Windows installer, about 519 MB, no admin rights needed; on a Mac, a DMG signed with a Developer ID and notarized by Apple | One MCP config entry run through `npx` or `uvx` [1][3]; mcp-youtube needs yt-dlp installed first [2] |
 | Platforms | Windows 10/11, plus a Mac preview for Apple Silicon (macOS 15 or later) | Wherever their runtime runs: Node.js, uv or yt-dlp [1][2][3] |
 | Where transcripts come from | YouTube captions, with local Whisper transcription when captions are missing | The captions and subtitles YouTube already has; mcp-youtube downloads subtitles with yt-dlp [1][2][3] |
@@ -75,6 +75,6 @@ Competitor pages were opened and read on 2026-11-03.
 
 Uoink facts:
 
-- U1. Uoink 3.12.1 summary (updated 2026-11-01): https://uoink.app/llms.txt
-- U2. Uoink 3.12.1 full disclosures (updated 2026-11-01): https://uoink.app/llms-full.txt
+- U1. Uoink 3.13.0 summary (updated 2026-11-03): https://uoink.app/llms.txt
+- U2. Uoink 3.13.0 full disclosures (updated 2026-11-03): https://uoink.app/llms-full.txt
 - U3. uoink-lite README: https://github.com/ryanbiddy/uoink-lite

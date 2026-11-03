@@ -17,14 +17,14 @@ const manifest = JSON.parse(fs.readFileSync("public/mcp/manifest.json", "utf8"))
 const path = require("node:path");
 function walk(dir) { return fs.readdirSync(dir, {withFileTypes:true}).flatMap(entry => entry.isDirectory() ? walk(path.join(dir, entry.name)) : [path.join(dir, entry.name)]); }
 
-// Release numbers that are not known until the 3.12.1 release is published use
+// Release numbers that are not known until the 3.13.0 release is published use
 // __NAME__ placeholders, and content/release.json carries installerSizeBytes 0.
 // The Agent Install 30 summary is __RECEIPT30__ until that receipt lands.
 // Every other assertion runs first; the check then fails, listing each one.
 const PLACEHOLDER = /__(?:EXE_SIZE|EXE_SHA|MCPB_SHA|DMG_SIZE|DMG_SHA|MAC_MCPB_SHA|MACMCPB_SHA|RECEIPT30)__/g;
 const pending = [];
 const sizeKnown = release.installerSizeBytes > 0;
-if (!sizeKnown) pending.push("content/release.json: installerSizeBytes is 0 (3.12.1 installer size in bytes)");
+if (!sizeKnown) pending.push("content/release.json: installerSizeBytes is 0 (3.13.0 installer size in bytes)");
 // Static copies say "about N MB". Once the size is known they must match release.json.
 const sizeMatches = text => !sizeKnown || text.includes(`about ${INSTALLER_SIZE}`);
 
@@ -68,8 +68,8 @@ for (const file of contentFiles) {
   assert(!/<!-- \/?3\.11:/.test(text), `${file}: leftover 3.11 block marker`);
   assert(!STALE_MAC.test(text), `${file}: stale Mac status`);
 }
-assert.equal(PRODUCT_STATUS.mac.available, true, "3.12.1 keeps the Mac preview");
-assert.equal(release.version, "3.12.1");
+assert.equal(PRODUCT_STATUS.mac.available, true, "3.13.0 keeps the Mac preview");
+assert.equal(release.version, "3.13.0");
 assert.equal(release.mcpSourceRef, `v${release.version}`);
 assert(Number.isInteger(release.installerSizeBytes) && release.installerSizeBytes >= 0, "installerSizeBytes is a byte count");
 assert.equal(INSTALLER_SIZE, `${Math.round(release.installerSizeBytes / 1_000_000)} MB`);
@@ -123,7 +123,7 @@ for (const fact of ["official MCP Python SDK 2.3.0", "Claude Desktop, Claude Cod
 for (const fact of ["no longer needs every word", "<code>match</code>", "<code>mode</code>", "<code>strict</code>", "<code>hybrid</code>", "Exact words", "A person turns it on in Uoink Settings", "Gemma terms", "about 330 MB", "passage_verified", "The tool list is unchanged"]) assert(AGENT_SETUP_HTML.includes(fact), `Agent setup smarter-search: ${fact}`);
 // The Mac preview: facts from the product's docs/mac/INSTALL.md, skills/uoink/SKILL.md and CHANGELOG.md.
 assert(AGENT_SETUP_HTML.includes(PRODUCT_STATUS.mac.agentSetup), "Agent setup: Mac section");
-for (const fact of ["<h3>On a Mac</h3>", "Apple Silicon with macOS 15 or later", "Uoink.app/Contents/Helpers/uoink", "does not change your shell or PATH", 'ln -s /Applications/Uoink.app/Contents/Helpers/uoink "$HOME/.local/bin/uoink"', "uoink connect &lt;client&gt;", "uoink connect claude-code", "does not edit client files", "~/Library/Application Support/Claude/claude_desktop_config.json", "~/.cursor/mcp.json", "~/.codex/config.toml", `href="${MAC_MCPB_URL}"`, "not the Windows <code>.mcpb</code>", "plugin's MCP entry is still for Windows", "Library mirroring is unavailable on Mac", "91 tools, or 35 in core mode", "On a Mac, Claude Code passed MCP acceptance (3.11.2); other clients are untested there"]) assert(AGENT_SETUP_HTML.includes(fact), `Agent setup Mac: ${fact}`);
+for (const fact of ["<h3>On a Mac</h3>", "Apple Silicon with macOS 15 or later", "Uoink.app/Contents/Helpers/uoink", "does not change your shell or PATH", 'ln -s /Applications/Uoink.app/Contents/Helpers/uoink "$HOME/.local/bin/uoink"', "uoink connect &lt;client&gt;", "uoink connect claude-code", "does not edit client files", "~/Library/Application Support/Claude/claude_desktop_config.json", "~/.cursor/mcp.json", "~/.codex/config.toml", `href="${MAC_MCPB_URL}"`, "not the Windows <code>.mcpb</code>", "plugin's MCP entry is still for Windows", "Library mirroring is unavailable on Mac", "92 tools, or 35 in core mode", "On a Mac, Claude Code passed MCP acceptance (3.11.2); other clients are untested there"]) assert(AGENT_SETUP_HTML.includes(fact), `Agent setup Mac: ${fact}`);
 // 3.11.2 has no tested claims (receipt 28 never landed). 3.12.0 cites Agent
 // Install 30 ahead of the labeled 3.11.1 results.
 assert(!AGENT_SETUP_HTML.includes("What was tested for 3.11.2"), "Agent setup: no 3.11.2 test claims");
@@ -174,19 +174,27 @@ assert(pages.privacy.faq.some(item => item.answer.includes("The model is never b
 assert(HOME_MOVED_CONTENT['/changelog'].includes("Local transcription can fill in with the Whisper base model that ships with Uoink") && !HOME_MOVED_CONTENT['/changelog'].includes("already-downloaded"), "changelog Living Library: bundled Whisper model");
 assert(pages.features.html.includes("Base ships with Uoink; other sizes download only when you ask."), "features: Whisper model selector");
 const versions = [...pages.changelog.html.matchAll(/<h2>v(\d+\.\d+\.\d+)/g)].map(match => match[1]);
-assert.deepEqual(versions, ["3.12.1", "3.12.0", "3.11.2", "3.11.1", "3.11.0", "3.10.0", "3.9.3", "3.9.2", "3.9.1", "3.9.0", "3.7.0", "3.6.0", "3.5.0", "3.4.1", "3.4.0"]);
+assert.deepEqual(versions, ["3.13.0", "3.12.1", "3.12.0", "3.11.2", "3.11.1", "3.11.0", "3.10.0", "3.9.3", "3.9.2", "3.9.1", "3.9.0", "3.7.0", "3.6.0", "3.5.0", "3.4.1", "3.4.0"]);
 assert.equal(versions[0], release.version);
 // The patch dates come from the product changelog. Preserve the undated
 // 3.9.0 entry and the five earlier published dates.
-assert.deepEqual([...pages.changelog.html.matchAll(/<time datetime="([^"]+)"/g)].map(match => match[1]), ["2026-11-01", "2026-10-30", "2026-10-25", "2026-10-25", "2026-10-22", "2026-10-19", "2026-10-19", "2026-10-18", "2026-10-18", "2026-07-24", "2026-07-08", "2026-07-08", "2026-07-07", "2026-07-07"]);
+assert.deepEqual([...pages.changelog.html.matchAll(/<time datetime="([^"]+)"/g)].map(match => match[1]), ["2026-11-01", "2026-11-01", "2026-10-30", "2026-10-25", "2026-10-25", "2026-10-22", "2026-10-19", "2026-10-19", "2026-10-18", "2026-10-18", "2026-07-24", "2026-07-08", "2026-07-08", "2026-07-07", "2026-07-07"]);
 const entryList = [...pages.changelog.html.matchAll(/<h2>v(\d+\.\d+\.\d+)([\s\S]*?)(?=<h2>|$)/g)];
 const entries = Object.fromEntries(entryList.map(match => [match[1], match[2]]));
 const newest = entryList[0][2];
 assert(newest.includes('<time datetime="2026-11-01">'), "Newest changelog entry needs its release date");
+// 3.13.0: Import a list, the import_list tool, mid-video card images and silent-update restarts. Facts from the product's CHANGELOG.md [3.13.0] and RELEASE-NOTES-3.13.0.md.
+for (const fact of ["<strong>Import a list.</strong>", "Sources &gt; <strong>Import a list</strong>", "HackerTube playlist, category, area or the whole collection", "a Hacker News thread, a Reddit thread or a YouTube playlist", "“Found 37 videos, 5 already in your library”", "Imports go 50 videos at a time", "<strong>Next 50</strong>", "Videos you already have are skipped", "captures one video at a time", "<code>uoink import-list &lt;url&gt; --preview</code>", "<code>--offset</code>", "new <code>import_list</code> MCP tool", "Andrej Karpathy", "open-index/hacker-news", "ODC-By 1.0", "bundles none of it", "<strong>From lists you imported</strong>", "ranked by your own taste", "<strong>Card image</strong>", "Settings &gt; Library and export", "nothing is downloaded again", "<code>winget upgrade</code>", "starts Uoink again if it was running before", "it stays quit", "empty library before it serves MCP", "92 tools, or 35 with <code>UOINK_MCP_TOOLSET=core</code>", "needs the network when you import", "about 519 MB", "about 716 MB", "Windows installer is still unsigned", "still a preview for Apple Silicon on macOS 15 or later", "reinstall the 3.13.0 bundle"]) assert(newest.includes(fact), `3.13.0: ${fact}`);
+// 3.13.0 cites Agent Install 32, ahead of the update note, and never claims the full silent-installer run.
+assert(newest.includes("<h3>What was tested for 3.13.0</h3>\n<p>Agent Install 32 tested the installed 3.13.0 build in an isolated profile: 26/26 PASS."), "3.13.0: receipt 32");
+assert(newest.includes("The full silent installer over a running copy was not run"), "3.13.0: receipt 32 skipped scope");
+assert(AGENT_SETUP_HTML.indexOf("What was tested for 3.13.0") > -1 && AGENT_SETUP_HTML.indexOf("What was tested for 3.13.0") < AGENT_SETUP_HTML.indexOf("What was tested for 3.12.1"), "Agent setup: receipt 32 ahead of receipt 31");
+{ const full = fs.readFileSync("public/llms-full.txt", "utf8"); assert(full.indexOf("Agent Install 32 tested") > -1 && full.indexOf("Agent Install 32 tested") < full.indexOf("Agent Install 31 tested"), "llms-full.txt: receipt 32 ahead of receipt 31"); }
+assert(entries["3.12.1"].includes('<time datetime="2026-11-01">'), "3.12.1 keeps its release date");
 // 3.12.1: phone inbox, uoink mcp, Wikipedia capture and one button style. Facts from the product's CHANGELOG.md [3.12.1].
-for (const fact of ["<strong>Phone inbox</strong> (Uoink Relay) is off by default", "your own Render account", "iOS Shortcut or an Android share target", "deletes it from the relay", "saved as a note", "7-day expiry", "Settings &gt; Capture &gt; <strong>Phone inbox</strong>", "<code>uoink mcp</code> starts the stdio MCP server", "<code>cmd /c uoink mcp</code>", "<code>UOINK_MCP_TOOLSET</code>", "Wikipedia articles capture instead of failing", "titled with the article name", "<code>og:image</code>", "Buttons share one style", "Newest first now sorts", "Topic keywords match whole words", "None is in its store yet", "91 tools, or 35 with <code>UOINK_MCP_TOOLSET=core</code>", "about 519 MB", "about 711 MB", "Windows installer is still unsigned", "still a preview for Apple Silicon on macOS 15 or later", "reinstall the 3.12.1 bundle"]) assert(newest.includes(fact), `3.12.1: ${fact}`);
-// 3.12.1 cites Agent Install 31, ahead of the update note.
-assert(newest.includes("<h3>What was tested for 3.12.1</h3>\n<p>Agent Install 31 tested the installed 3.12.1 build in an isolated profile: 24/24 PASS."), "3.12.1: receipt 31");
+for (const fact of ["<strong>Phone inbox</strong> (Uoink Relay) is off by default", "your own Render account", "iOS Shortcut or an Android share target", "deletes it from the relay", "saved as a note", "7-day expiry", "Settings &gt; Capture &gt; <strong>Phone inbox</strong>", "<code>uoink mcp</code> starts the stdio MCP server", "<code>cmd /c uoink mcp</code>", "<code>UOINK_MCP_TOOLSET</code>", "Wikipedia articles capture instead of failing", "titled with the article name", "<code>og:image</code>", "Buttons share one style", "Newest first now sorts", "Topic keywords match whole words", "None is in its store yet", "91 tools, or 35 with <code>UOINK_MCP_TOOLSET=core</code>", "about 519 MB", "about 711 MB", "Windows installer is still unsigned", "still a preview for Apple Silicon on macOS 15 or later", "reinstall the 3.12.1 bundle"]) assert(entries["3.12.1"].includes(fact), `3.12.1: ${fact}`);
+// 3.12.1 cites Agent Install 31.
+assert(entries["3.12.1"].includes("<h3>What was tested for 3.12.1</h3>\n<p>Agent Install 31 tested the installed 3.12.1 build in an isolated profile: 24/24 PASS."), "3.12.1: receipt 31");
 assert(AGENT_SETUP_HTML.indexOf("What was tested for 3.12.1") < AGENT_SETUP_HTML.indexOf("What was tested for 3.12.0"), "Agent setup: receipt 31 ahead of receipt 30");
 { const full = fs.readFileSync("public/llms-full.txt", "utf8"); assert(full.indexOf("Agent Install 31 tested") > -1 && full.indexOf("Agent Install 31 tested") < full.indexOf("Agent Install 30 tested"), "llms-full.txt: receipt 31 ahead of receipt 30"); }
 const v3120 = entries["3.12.0"];
@@ -206,7 +214,7 @@ for (const fact of ["Anonymous usage counts are off by default", "Share anonymou
 assert(pages.about.html.includes("none from Uoink unless you opt in"), "about: opt-in usage counts");
 for (const fact of ['uoink search "working memory" --limit 5', "uoink recent --limit 10", 'uoink note "A useful thought" --title "Research note"', "Local reads work without the helper running", "Capture and paid tools keep their existing gates", "Add the uoink command to PATH for AI agents", "uoink status", "Claude Code, Codex, pi, Hermes Agent, and OpenClaw", "uoink skill install --to &lt;dir&gt;", "claude plugin marketplace add ryanbiddy/uoink-agent-kit", "claude plugin install uoink@uoink", "uoink connect --list", "38 clients and integrations", "does not edit client settings", "Add to Cursor", "Add to VS Code", "91 tools by default", "Consent gates are unchanged", "no data or settings changes besides the optional PATH entry", "no new index or migration", "keeps your library and saved captures", "Claude Code 2.1.302 over MCP", "skill and CLI only", "Codex CLI 0.153.4 over MCP", "tool calls were not run end to end", "Not yet tested: Gemini CLI and pi", "every other recipe"]) assert(entries["3.10.0"].includes(fact), `3.10.0: ${fact}`);
 for (const text of ["official MCP registry", "io.github.ryanbiddy/uoink", "Clients and directories that read the registry can find it", "HTTP MCP now uses the same flattened tool schemas as stdio", "HTTP clients no longer drop Uoink", "server still checks the exact schema for every call", "Activity reads are faster", "461 to 286 ms", "10,000 items in local runs", "no data or settings changes", "Installing over 3.9.2 keeps your library and saved captures"]) assert(entries["3.9.3"].includes(text), `3.9.3: ${text}`);
-for (const text of ["Every Uoink tool", "standard stdio connection", "Claude Desktop (.mcpb), Claude Code, and Cursor", `${release.stdioToolCount} tools over stdio and ${release.httpToolCount} in the HTTP registry`, "pages, X posts, Reddit threads, notes, and images", "writing, script, and workspace tools", "Library queue", "UOINK_MCP_TOOLSET=core", "previous 35-tool set", "Consent gates are unchanged", "no data or settings changes", "Installing over 3.9.1 keeps your library and saved captures"]) assert(entries["3.9.2"].includes(text), `3.9.2: ${text}`);
+for (const text of ["Every Uoink tool", "standard stdio connection", "Claude Desktop (.mcpb), Claude Code, and Cursor", "91 tools over stdio and 91 in the HTTP registry", "pages, X posts, Reddit threads, notes, and images", "writing, script, and workspace tools", "Library queue", "UOINK_MCP_TOOLSET=core", "previous 35-tool set", "Consent gates are unchanged", "no data or settings changes", "Installing over 3.9.1 keeps your library and saved captures"]) assert(entries["3.9.2"].includes(text), `3.9.2: ${text}`);
 for (const text of ["canned-phrase warnings", "Voice DNA remains the voice spec", "reliability and test fixes", "no data or settings changes", "Installing over 3.9.0 keeps your library and saved captures"]) assert(entries["3.9.1"].includes(text), `3.9.1: ${text}`);
 for (const text of ["First public release since v3.7.0", "3.8.x work was not published separately", "five steps", "cancellation request is refused once publication has started", "inside yt-dlp and the browser renderer", "_exports", "35 stdio tools and 91 HTTP tools"]) assert(entries["3.9.0"].includes(text), `3.9.0: ${text}`);
 for (const file of ["public/llms.txt", "public/llms-full.txt"]) {
@@ -220,7 +228,7 @@ for (const file of ["public/llms.txt", "public/llms-full.txt"]) {
   assert(!text.includes("Do not claim"), `${file}: internal writer note`);
   for (const fact of ["uoink connect --list", "48 clients and integrations", "10 of them new in 3.11.0", "uoink connect codex", "uoink connect vscode", "uoink skill install --to <dir>", "Hermes Agent", "OpenClaw", "claude plugin marketplace add ryanbiddy/uoink-agent-kit", "claude plugin install uoink@uoink", 'uoink search "working memory" --limit 5', "uoink recent --limit 10", 'uoink note "A useful thought" --title "Research note"', "Add the uoink command to PATH for AI agents checked by default", "rebuilds the local keyword search index once", "Agent Install 27", "11/11", "Claude Code 2.1.310 (haiku)", "get_schema_version", "91 full / 35 core / 91 modern", "Codex CLI was not re-tested in receipt 27", "Agent Install 30", "Uoink never downloads a model during a capture", "installed 3.11.0 build in an isolated profile", "Claude Code 2.1.308 over MCP (all 91 tools listed; a tool called)", "Codex CLI 0.153.4 over MCP (two tools called)", "skill and CLI only", "tool calls were not run end to end", "Not yet tested: Gemini CLI and pi", "https://github.com/ryanbiddy/uoink/blob/main/llms-install.md", `releases/tag/${VERSION}`]) assert(text.includes(fact), `${file}: ${fact}`);
   assert(!text.includes("38 clients"), `${file}: stale client count`);
-  assert(!/v3\.(?:10\.0|11\.[012]|12\.0)\/|Uoink-Setup-3\.(?:10\.0|11\.[012]|12\.0)|uoink-3\.(?:10\.0|11\.[012]|12\.0)|Uoink-3\.(?:10\.0|11\.[012]|12\.0)-macos/.test(text), `${file}: stale download link`);
+  assert(!/v3\.(?:10\.0|11\.[012]|12\.[01])\/|Uoink-Setup-3\.(?:10\.0|11\.[012]|12\.[01])|uoink-3\.(?:10\.0|11\.[012]|12\.[01])|Uoink-3\.(?:10\.0|11\.[012]|12\.[01])-macos/.test(text), `${file}: stale download link`);
   assert(!/Until 3\.12|can use an already-downloaded model|Missing Whisper-model downloads require/.test(text), `${file}: stale Whisper or Mac notifier claim`);
   assert(text.toLowerCase().includes("whisper's base model"), `${file}: the Whisper base model ships with Uoink`);
 }
@@ -237,10 +245,10 @@ assert(HOME_MOVED_CONTENT['/changelog'].includes("Smarter search"), "changelog: 
 assert(pages.privacy.faq.some(item => item.question === "Does semantic search send my library anywhere?"), "privacy: semantic search FAQ");
 const llmsFull = fs.readFileSync("public/llms-full.txt", "utf8");
 const [llmsFullUpdated, llmsFullTitle] = llmsFull.split(/\r?\n/);
-assert(llmsFullUpdated === `<!-- updated: 2026-11-01 / uoink ${VERSION} -->` && llmsFullTitle.startsWith(`# Uoink ${VERSION_NUMBER}: `) && llmsFull.includes(`## What's new in ${VERSION_NUMBER}`), "llms-full.txt: header and what's new");
+assert(llmsFullUpdated === `<!-- updated: 2026-11-03 / uoink ${VERSION} -->` && llmsFullTitle.startsWith(`# Uoink ${VERSION_NUMBER}: `) && llmsFull.includes(`## What's new in ${VERSION_NUMBER}`), "llms-full.txt: header and what's new");
 for (const text of ["captures (including `_yoink-trash`) are in `~/Desktop/Uoink/`", "`~/Library/Logs/Uoink/`", "uninstall.sh /Applications/Uoink.app --remove", "macOS still credits Uoink's alerts to Script Editor"]) assert(llmsFull.includes(text), `llms-full.txt Mac: ${text}`);
 assert(llmsFull.includes("Agent Install 30 tested the installed 3.12.0 build in an isolated profile:") && llmsFull.indexOf("Agent Install 30") < llmsFull.indexOf("Agent Install 27 passed"), "llms-full.txt: receipt 30 ahead of the labeled 3.11.1 receipt");
-// Release checksums: the size and SHA-256 of each 3.12.1 download. Placeholders
+// Release checksums: the size and SHA-256 of each 3.13.0 download. Placeholders
 // are reported below; real values must have the right shape.
 const checksumLines = {
   exe: new RegExp(`^- Uoink-Setup-${VERSION_NUMBER.replaceAll(".", "\\.")}\\.exe: (\\S+) bytes \\(about (\\d+) MB\\)\\. SHA-256: \`(\\S+)\`\\.\\r?$`, "m"),
@@ -259,15 +267,15 @@ if (sizeKnown) {
   assert.equal(sums.exe[2], String(Math.round(release.installerSizeBytes / 1_000_000)), "llms-full.txt: installer MB");
   if (!isPlaceholder(sums.exe[1])) assert.equal(sums.exe[1], release.installerSizeBytes.toLocaleString("en-US"), "llms-full.txt: installer bytes match content/release.json");
 }
-// 3.12.1 release numbers, from the release's SHA256SUMS.txt.
-assert.equal(release.installerSizeBytes, 519291783);
+// 3.13.0 release numbers, from the release's SHA256SUMS.txt.
+assert.equal(release.installerSizeBytes, 519273366);
 for (const fact of [
-  "- Uoink-Setup-3.12.1.exe: 519,291,783 bytes (about 519 MB). SHA-256: `2f258d36d23b5604e1d41e04ffd1bcf297e365dbe17b98d88d58be628632d071`.",
-  "- uoink-3.12.1.mcpb: SHA-256: `e16d6a2021e51094b1c20fbc8c2b7156f391c4f93599603ccec33b67d5540b48`.",
-  "- Uoink-3.12.1-macos-arm64.dmg (Mac preview): 711,443,160 bytes. SHA-256: `5fb2597672c6d8124d153d00d077bb2f1ac053efc5bc9ed2dd8b34fa89cb2a76`.",
-  "- uoink-3.12.1-macos.mcpb: SHA-256: `49ba35aa7462ed32f5f651580b2cef621fa1066fb2d2b049ef2e4797a6083ca3`.",
+  "- Uoink-Setup-3.13.0.exe: 519,273,366 bytes (about 519 MB). SHA-256: `15d31cb0c1e70cecf17a6d710923d16e4f627bc11a27f78bc0fcf75091da789e`.",
+  "- uoink-3.13.0.mcpb: SHA-256: `50a8fd530eec0767ef6ac0a3404b0cc3ef944d0c752658433f29d41ffdce7a18`.",
+  "- Uoink-3.13.0-macos-arm64.dmg (Mac preview): 715,903,915 bytes. SHA-256: `4f9799c7c4c585585613e03e48e230ada198cbb10b70b4f80c3df61fa8e41cbd`.",
+  "- uoink-3.13.0-macos.mcpb: SHA-256: `671334efc7b0a249296d32c946b824a9691ffb5ca1b493654eafd29774b7d7c8`.",
 ]) assert(llmsFull.includes(fact), `llms-full.txt checksums: ${fact}`);
-assert(!/3\.(?:11\.2|12\.0)\.exe:|3\.(?:11\.2|12\.0)-macos-arm64\.dmg \(Mac preview\):/.test(llmsFull), "llms-full.txt checksums: no older release lines");
+assert(!/3\.(?:11\.2|12\.[01])\.exe:|3\.(?:11\.2|12\.[01])-macos-arm64\.dmg \(Mac preview\):/.test(llmsFull), "llms-full.txt checksums: no older release lines");
 // The tool inventory line names the commit the manifest was generated from.
 const manifestCommit = manifest.source.match(/@([0-9a-f]{40}):/)[1];
 assert(llmsFull.includes(`Source: ${VERSION}, commit ${manifestCommit}.`), `llms-full.txt: tool inventory commit should be ${manifestCommit}`);
@@ -278,7 +286,7 @@ for (const file of [...contentFiles, "README.md", ...fs.readdirSync("content/com
     for (const [name] of line.matchAll(PLACEHOLDER)) pending.push(`${file}:${index + 1}: ${name}`);
   });
 }
-const summary = `${VERSION}, ${MCP_TOOL_COUNT} registry schemas, ${MCP_STDIO_TOOL_COUNT} stdio names, discovery cards, config, ${features.length} feature tool lists, Living Library, research, privacy (with Mac storage and uninstall), installer, agent setup, release plus thirteen earlier releases, crawler text, and checksums. Windows 10/11 plus the Mac preview; Mac downloads point at the ${VERSION} DMG and macOS bundle.`;
+const summary = `${VERSION}, ${MCP_TOOL_COUNT} registry schemas, ${MCP_STDIO_TOOL_COUNT} stdio names, discovery cards, config, ${features.length} feature tool lists, Living Library, research, privacy (with Mac storage and uninstall), installer, agent setup, release plus fifteen earlier releases, crawler text, and checksums. Windows 10/11 plus the Mac preview; Mac downloads point at the ${VERSION} DMG and macOS bundle.`;
 if (pending.length) {
   console.error(`PENDING: every other check passed (${summary}) but ${pending.length} release placeholder(s) need real values:\n${pending.map(item => `  - ${item}`).join("\n")}`);
   process.exitCode = 1;

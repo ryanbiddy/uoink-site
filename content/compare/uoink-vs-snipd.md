@@ -40,7 +40,7 @@ These are different kinds of tools, and you could use both. Snipd is where you l
 | Transcripts | Saved as files and added to the searchable library | "Read along and search full episode transcripts with speaker identification." [1] |
 | Highlights | Not a feature | Snips by tapping your headphones, each with audio, transcript and summary [1] |
 | Other sources | YouTube, X posts and video, web articles, Reddit threads | Your own audio files and YouTube videos, on Premium [2][3] |
-| AI assistant access | Local MCP server with 91 tools over stdio, a CLI and an OpenAPI bridge. ChatGPT is copy and paste only. | Chat inside the app ("Chat with episode," Premium) [2] |
+| AI assistant access | Local MCP server with 92 tools over stdio, a CLI and an OpenAPI bridge. ChatGPT is copy and paste only. | Chat inside the app ("Chat with episode," Premium) [2] |
 | Export | The files are already on your disk; cited range export with speaker labels and chapters | Snips to Readwise, Notion, Obsidian, Glasp and more, or Markdown files for Obsidian, Bear and Logseq [2][3] |
 | Price | Free, open source (MIT) | Free plan; Premium listed at $6.99 a month with a one-week free trial [2] |
 
@@ -78,5 +78,5 @@ Competitor pages were opened and read on 2026-11-03.
 
 Uoink facts:
 
-- U1. Uoink 3.12.1 summary (updated 2026-11-01): https://uoink.app/llms.txt
-- U2. Uoink 3.12.1 full disclosures (updated 2026-11-01): https://uoink.app/llms-full.txt
+- U1. Uoink 3.13.0 summary (updated 2026-11-03): https://uoink.app/llms.txt
+- U2. Uoink 3.13.0 full disclosures (updated 2026-11-03): https://uoink.app/llms-full.txt
