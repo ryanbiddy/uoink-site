@@ -1,7 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 
-export const comparisonSlugs = ["readwise-reader", "obsidian-web-clipper"] as const;
+export const comparisonSlugs = ["readwise-reader", "obsidian-web-clipper", "recall", "snipd", "pocket", "youtube-transcript-mcp"] as const;
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+// "seen 2026-10-24" in a source line renders as a readable date, e.g. "seen Oct 24, 2026".
+export const seenDate = (date: string): string => { const [y, m, d] = date.split("-").map(Number); return `${MONTHS[m - 1]} ${d}, ${y}`; };
 
 const escape = (text: string): string => text.replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]!));
 
@@ -13,7 +17,7 @@ function inline(text: string): string {
     .replace(/`([^`]+)`/g, "<code>$1</code>")
     .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
     .replace(/\[(U?\d+)\]/g, '<a class="comparison-citation" href="#source-$1" aria-label="Source $1">[$1]</a>')
-    .replace(/seen 2026-10-24/g, 'seen <time dateTime="2026-10-24">Oct 24, 2026</time>');
+    .replace(/seen (\d{4}-\d{2}-\d{2})/g, (_, date: string) => `seen <time dateTime="${date}">${seenDate(date)}</time>`);
 }
 
 function renderBody(body: string): string {

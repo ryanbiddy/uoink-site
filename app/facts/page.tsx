@@ -16,6 +16,10 @@ const comparisons = [
   ["Uoink vs NotebookLM", "/compare/notebooklm"],
   ["Uoink vs Readwise Reader", "/compare/readwise-reader"],
   ["Uoink vs Obsidian Web Clipper", "/compare/obsidian-web-clipper"],
+  ["Uoink vs Recall", "/compare/recall"],
+  ["Uoink vs Snipd", "/compare/snipd"],
+  ["Uoink as a Pocket alternative", "/compare/pocket"],
+  ["Uoink vs YouTube transcript MCP servers", "/compare/youtube-transcript-mcp"],
 ];
 
 export default function FactsPage() {

@@ -78,7 +78,7 @@ function check(group) {
       const allowed = /Windows 10(?:\/11| and 11) only|copy and paste only|The Librarian only proposes changes|with only the original poster's tweets|Reader only(?: costs)?|only for YouTube currently/gi;
       assert(!/\bonly\b/i.test(text.replace(allowed, '')), `${route}: unreviewed exclusivity claim`);
     }
-    console.log('PASS: comparison index and three pages, metadata, source copy, citations, Mac status and claims (static).');
+    console.log(`PASS: comparison index and ${comparisonSlugs.length + 1} pages, metadata, source copy, citations, Mac status and claims (static).`);
   } else if (group === 'field-notes') {
     const route = '/blog/loop-engineering';
     const { html, raw, evidence } = page(route, '/blog');
