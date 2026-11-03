@@ -22,6 +22,8 @@ const server = http.createServer((req, res) => {
   res.setHeader('Content-Type', mime[path.extname(file)] || 'application/octet-stream');
   fs.createReadStream(file).pipe(res);
 });
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const seenDate = date => { const [y, m, d] = date.split('-').map(Number); return `${MONTHS[m - 1]} ${d}, ${y}`; };
 const normalize = text => text.replace(/\s+/g, ' ').trim();
 // Preserve the drafts' limitations, competitor quotations and plan names, while
 // rejecting every other occurrence, including implied claims without a brand name.
@@ -72,15 +74,17 @@ assert.throws(() => checkOnly('The only local library for your AI.', 'fixture'))
         for (const line of body.split('\n').filter(line => line.trim() && !/^\|[-|]+\|$/.test(line))) {
           const units = line.startsWith('|') ? line.slice(1, -1).split('|') : [line];
           for (const unit of units) {
-            const expected = normalize(unit.replace(/^#{1,2} |^- |^\d+\. /, '').replace(/\*\*|`/g, '').replace(/seen 2026-10-24/g, 'seen Oct 24, 2026'));
+            const expected = normalize(unit.replace(/^#{1,2} |^- |^\d+\. /, '').replace(/\*\*|`/g, '').replace(/seen (\d{4}-\d{2}-\d{2})/g, (_, date) => 'seen ' + seenDate(date)));
             assert(visible.includes(expected), `${route}: missing draft text: ${expected}`);
           }
         }
         for (const url of new Set(body.match(/https:\/\/[^\s)]+/g))) {
           assert(await page.locator(`main a[href="${url}"]`).count(), `${route}: citation ${url}`);
         }
-        const seen = (body.match(/seen 2026-10-24/g) || []).length;
-        assert.equal((text.match(/seen Oct 24, 2026/g) || []).length, seen);
+        for (const date of new Set((body.match(/seen \d{4}-\d{2}-\d{2}/g) || []).map(match => match.slice(5)))) {
+          const seen = body.split(`seen ${date}`).length - 1;
+          assert.equal(text.split(`seen ${seenDate(date)}`).length - 1, seen, `${route}: seen ${date}`);
+        }
         for (const href of await page.locator('.comparison-citation').evaluateAll(links => links.map(link => link.hash))) {
           assert.equal(await page.locator(href).count(), 1, `${route}: citation target ${href}`);
         }

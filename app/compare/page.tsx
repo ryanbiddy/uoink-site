@@ -7,8 +7,8 @@ import "./compare.css";
 
 const page: SitePage = {
   id: "features", route: "/compare", mode: "mode-light",
-  title: "Compare Uoink with Reader, Web Clipper and NotebookLM",
-  description: "Compare Uoink with Readwise Reader, Obsidian Web Clipper and NotebookLM. Read the differences, source citations and Uoink's limits.",
+  title: "Compare Uoink with Recall, Snipd, Reader, NotebookLM and more",
+  description: "Compare Uoink with Readwise Reader, Obsidian Web Clipper, NotebookLM, Recall, Snipd, Pocket and YouTube transcript MCP servers. Read the differences, sources and Uoink's limits.",
   keywords: [], html: "",
 };
 export const metadata: Metadata = { title: page.title, description: page.description, alternates: { canonical: page.route } };
