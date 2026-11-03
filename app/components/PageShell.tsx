@@ -1,5 +1,5 @@
-import { CANONICAL_URL, DOWNLOAD_URL, GITHUB_URL, HOME_MOVED_CONTENT, SitePage, VERSION, X_URL } from "../content/pages";
-import { PRODUCT_STATUS } from "../content/product-status";
+import { CANONICAL_URL, HOME_MOVED_CONTENT, SitePage } from "../content/pages";
+import { breadcrumbs, organization, softwareApplication, website } from "../lib/structured-data";
 import { applySiteLinks } from "../lib/links";
 import { SiteFooter } from "./SiteFooter";
 import { TopNav } from "./TopNav";
@@ -19,54 +19,14 @@ export function PageShell({ page, children }: { page: SitePage; children?: React
   );
 }
 
+const SECTION_NAMES: Record<string, string> = { sources: "Sources", compare: "Compare", features: "Features", mcp: "MCP" };
+
 function JsonLd({ page }: { page: SitePage }) {
   const pageUrl = `${CANONICAL_URL}${page.route === "/" ? "" : page.route}`;
   const schemas: object[] = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "Uoink",
-      url: CANONICAL_URL,
-      logo: `${CANONICAL_URL}/og-image.png`,
-      sameAs: [GITHUB_URL, X_URL],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: "Uoink",
-      url: CANONICAL_URL,
-      description:
-        "Local-first corpus software for creators and AI developers working from videos, podcasts, articles, and threads.",
-      publisher: { "@type": "Organization", name: "Uoink" },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      name: "Uoink",
-      applicationCategory: "UtilityApplication",
-      operatingSystem: PRODUCT_STATUS.mac.operatingSystem,
-      softwareVersion: VERSION.replace("v", ""),
-      downloadUrl: DOWNLOAD_URL,
-      url: CANONICAL_URL,
-      license: "https://github.com/ryanbiddy/uoink/blob/main/LICENSE",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-      description:
-        "Uoink extracts structured local corpora from videos, podcasts, articles, and threads, then hands them to Claude, ChatGPT, Cursor, or a local MCP agent.",
-      featureList: [
-        "Timestamped transcripts",
-        "Screenshots",
-        "Comments",
-        "Channel context",
-        "Podcast transcription",
-        "Article capture",
-        "Thread capture",
-        "Local SQLite search",
-        "Model Context Protocol server",
-        "Hook Type classification",
-        "Comment Intelligence",
-        "Entity Extraction",
-      ],
-    },
+    organization,
+    website,
+    softwareApplication(),
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
@@ -77,6 +37,11 @@ function JsonLd({ page }: { page: SitePage }) {
       isPartOf: { "@type": "WebSite", name: "Uoink", url: CANONICAL_URL },
     },
   ];
+
+  const [section, leaf] = page.route.split("/").filter(Boolean);
+  if (leaf && SECTION_NAMES[section]) {
+    schemas.push(breadcrumbs([[SECTION_NAMES[section], `/${section}`], [page.title.replace(/ \| Uoink$/, ""), page.route]]));
+  }
 
   if (page.faq?.length) {
     schemas.push({

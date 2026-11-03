@@ -5,6 +5,7 @@ import { TopNav } from "../../../components/TopNav";
 import { SiteFooter } from "../../../components/SiteFooter";
 import { displayText, exampleCall, inputDefault, inputType, inputVariants, resolveSchema, toolAnswer, toolDescription, toolManifest, toolPages, toolPath, toolTitle } from "../../../content/mcp-tool-pages";
 import "./tool-page.css";
+import { breadcrumbs, JsonLd, socialImages } from "../../../lib/structured-data";
 
 type Props = { params: Promise<{ tool: string }> };
 export const dynamicParams = false;
@@ -19,8 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: { absolute: title }, description,
     alternates: { canonical: url },
-    openGraph: { title, description, url },
-    twitter: { title, description },
+    openGraph: { ...socialImages.openGraph, title, description, url },
+    twitter: { ...socialImages.twitter, title, description },
   };
 }
 
@@ -84,6 +85,7 @@ export default async function ToolPage({ params }: Props) {
           <p>Uoink {toolManifest.version} tool registry. Synced <time dateTime={toolManifest.generated}>{toolManifest.generated}</time>.</p>
           <p><a href="/mcp/manifest.json">Synced tool manifest</a> / <a href={`https://github.com/ryanbiddy/uoink/blob/${sourceCommit}/uoink_mcp_tools.py`}>Registry at source commit {sourceCommit.slice(0, 7)}</a></p>
         </section>
+        <JsonLd data={breadcrumbs([["MCP tools", "/mcp"], [tool.name, `/mcp/tools/${tool.name}`]])} />
       </article>
     </main>
     <SiteFooter />

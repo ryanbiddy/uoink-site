@@ -33,6 +33,10 @@ for (const call of flow) {
 }
 assert(source.includes('Claude Desktop, Claude Code'), 'Review Claude connection instructions');
 const pages = [
+  { slug: 'youtube-transcript-mcp-server', title: 'A YouTube transcript MCP server for Claude, Cursor and Codex', sourceFact: facts.youtube,
+    description: `Uoink is a YouTube transcript MCP server that runs on your own computer. ${facts.opening}`,
+    setup: 'Save a YouTube video, then run uoink connect claude-code, uoink connect cursor or uoink connect codex and add the printed entry to your client.',
+    prompt: 'Search my saved YouTube videos for YOUR_TOPIC. Get an evidence card for the video I choose and cite its transcript timestamps.' },
   { slug: 'cite-youtube-timestamps-in-claude', title: 'Cite YouTube timestamps in Claude', sourceFact: facts.youtube,
     description: `Cite YouTube timestamps in Claude with Uoink. ${facts.opening}`,
     setup: 'Save a YouTube video, then connect Claude Desktop or Claude Code to Uoink.',

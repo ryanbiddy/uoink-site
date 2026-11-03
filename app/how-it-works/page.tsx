@@ -104,6 +104,8 @@ export default function Page() {
               <img
                 src="/screenshots/memory-search/library-populated-computer-use.png"
                 alt="Uoink dashboard showing a populated local library of source cards"
+                width={1251}
+                height={1365}
                 loading="eager"
               />
               <figcaption>The library is the home base. Source cards stay searchable, citable, and ready for agents.</figcaption>

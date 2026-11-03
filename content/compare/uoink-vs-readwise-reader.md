@@ -2,7 +2,7 @@
 title: "Uoink vs Readwise Reader: a local video library or a reading app"
 slug: "readwise-reader"
 description: "Readwise Reader is a polished reading app on every device. Uoink is a free app for Windows, with a Mac preview, that saves videos and podcasts to your disk for AI to cite."
-date: 2026-11-01
+date: 2026-11-03
 ---
 
 # Uoink vs Readwise Reader
@@ -42,7 +42,7 @@ Both tools now connect to AI assistants over MCP, so that is no longer the divid
 | X (Twitter) | Post text and X video | Threads saved as one document, with only the original poster's tweets [5] |
 | Articles and files | Web articles. PDF and EPUB import are not among its listed sources. | Web articles through the extension; uploads of PDFs, EPUBs, Markdown and OPML files [5] |
 | Reading tools | A Reader view in the dashboard. Highlighting, text-to-speech and spaced review are not among its features. | Highlighting, text-to-speech and Ghostreader AI on the Reader plan; Daily Review with Full Readwise [2] |
-| AI assistant access | Local MCP server with 91 tools over stdio, a CLI and an OpenAPI bridge. ChatGPT is copy and paste only. | Hosted Readwise MCP server for Claude, ChatGPT, Cursor and others, plus a CLI and an API [2][3] |
+| AI assistant access | Local MCP server with 92 tools over stdio, a CLI and an OpenAPI bridge. ChatGPT is copy and paste only. | Hosted Readwise MCP server for Claude, ChatGPT, Cursor and others, plus a CLI and an API [2][3] |
 | Built-in AI | Optional; uses your own Anthropic key | Ghostreader; Global Ghostreader searches your whole library and "answers with citations that link to the source" [6] |
 | Export | The files are already on your disk; cited range export | CSV of documents, OPML of feeds, a ZIP of uploads and full article text, and highlights as Markdown [7] |
 | Price | Free, open source (MIT) | Reader only $7.99/mo billed yearly; Full Readwise $9.99/mo billed yearly; 30-day free trial [2] |
@@ -84,5 +84,5 @@ Competitor pages were opened and read on 2026-10-24.
 
 Uoink facts:
 
-- U1. Uoink 3.12.1 summary (updated 2026-11-01): https://uoink.app/llms.txt
-- U2. Uoink 3.12.1 full disclosures (updated 2026-11-01): https://uoink.app/llms-full.txt
+- U1. Uoink 3.13.0 summary (updated 2026-11-03): https://uoink.app/llms.txt
+- U2. Uoink 3.13.0 full disclosures (updated 2026-11-03): https://uoink.app/llms-full.txt

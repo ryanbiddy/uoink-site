@@ -15,20 +15,22 @@ function resolve(route) {
   if (base !== out && !base.startsWith(out + path.sep)) return undefined;
   return [base, base + '.html', path.join(base, 'index.html')].find(file => fs.existsSync(file) && fs.statSync(file).isFile());
 }
+// Redirected routes (vercel.json) and JSON endpoints are exported but not canonical pages.
+const redirected = new Set(JSON.parse(read(path.join(root, 'vercel.json'))).redirects.map(item => item.source));
 const expected = Object.keys(JSON.parse(read(path.join(root, '.next/prerender-manifest.json'))).routes)
-  .filter(route => !route.startsWith('/_')).sort();
+  .filter(route => !route.startsWith('/_') && !route.startsWith('/api/') && !redirected.has(route)).sort();
 const actual = [...read(path.join(out, 'sitemap.xml')).matchAll(/<loc>(.*?)<\/loc>/g)].map(([, url]) => new URL(url).pathname).sort();
 assert.equal(actual.length, new Set(actual).size, 'Duplicate sitemap route');
-assert.deepEqual(actual, expected, 'Sitemap must match every exported page and RSS route');
+assert.deepEqual(actual, expected, 'Sitemap must match every exported canonical page and RSS route');
 for (const route of actual) assert(resolve(route), `Sitemap target missing: ${route}`);
 const issues = [];
 const home = read(path.join(out, 'index.html'));
 const homeTitle = 'Uoink | Save YouTube and podcast transcripts for your AI';
-const homeDescription = 'Save YouTube videos, podcasts and articles to your own disk. Your AI searches the library and cites the timestamp. Free and open source, for Windows.';
+const homeDescription = 'Save YouTube videos, podcasts and articles to your own disk. Your AI searches the library and cites the timestamp. Free and open source, for Windows and Mac.';
 assert(home.includes(`<title>${homeTitle}</title>`), 'Homepage must preserve the #48 search title');
 for (const name of ['description', 'og:description', 'twitter:description']) assert(home.includes(`${name}" content="${homeDescription}"`), `Homepage ${name}`);
 for (const name of ['og:title', 'twitter:title']) assert(home.includes(`${name}" content="${homeTitle}"`), `Homepage ${name}`);
-assert(read(path.join(root, 'public/llms.txt')).includes('A local library of the YouTube videos, podcasts and articles you study, saved on your Windows PC, that your AI can search and cite with timestamps.'), 'Preserve the #48 llms.txt summary');
+assert(read(path.join(root, 'public/llms.txt')).includes('> Uoink is a free, open-source local library of the YouTube videos, podcasts, X posts and articles you study, saved on your own computer (Windows, plus a Mac preview), that your AI can search and cite with timestamps.'), 'llms.txt summary blockquote (llmstxt.org format)');
 let links = 0;
 for (const file of walk(out).filter(file => file.endsWith('.html'))) {
   const route = '/' + path.relative(out, file).replaceAll('\\', '/').replace(/index\.html$/, '').replace(/\.html$/, '');
