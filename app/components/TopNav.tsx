@@ -12,6 +12,7 @@ const links: [string, string][] = [
   ["/creators", "Creators"],
   ["/developers", "Developers"],
   ["/features", "Features"],
+  ["/sample", "Sample library"],
   ["/blog", "Field notes"],
 ];
 
