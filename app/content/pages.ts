@@ -306,12 +306,12 @@ export const pages: Record<PageId, SitePage> = {
           <p class="doc-meta"><b>Linux (headless)</b></p>
           <h3>For agents in Docker, Codespaces and sandboxes.</h3>
           <p>Install from a checkout. You need Git, Python 3.11 or newer, venv support, ffmpeg and ffprobe. Linux has no tray, splash or dashboard window; the helper serves the dashboard at its local URL.</p>
-          <pre class="code-block">git clone --branch v3.14.0 --depth 1 https://github.com/ryanbiddy/uoink
+          <pre class="code-block">git clone --branch v3.14.1 --depth 1 https://github.com/ryanbiddy/uoink
 sh uoink/scripts/linux/install.sh
 export PATH="$HOME/.local/bin:$PATH"
 uoink mcp</pre>
           <p>The installer stages the pinned Whisper base model. <code>docker/capture.Dockerfile</code> builds a capture image. Keep the library on persistent storage if the sandbox will be discarded. YouTube can block cloud IPs; local Whisper can help only when the audio download works.</p>
-          <p><a class="arr-link" href="https://github.com/ryanbiddy/uoink/blob/v3.14.0/docs/linux.md">Linux requirements, Docker and agent setup -&gt;</a></p>
+          <p><a class="arr-link" href="https://github.com/ryanbiddy/uoink/blob/v3.14.1/docs/linux.md">Linux requirements, Docker and agent setup -&gt;</a></p>
         </li>
         <li id="extension">
           <p class="doc-meta"><b>Windows and Mac</b></p>
@@ -617,8 +617,13 @@ ${DOC_RULE}
       `Read Uoink release notes from 3.4 through ${VERSION_NUMBER}, including Living Library and research playbooks.`,
     keywords: ["uoink changelog", "uoink release notes", "uoink updates", "universal video uoink changelog"],
     html: `
-<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} adds deep research, a transcript tool with clear fallbacks, imports for your saves, source availability checks and headless Linux for agents. Earlier releases are listed below, with dates from the product changelog.</p>
-<h2>${VERSION}: Deep research, saved sources and headless Linux</h2><p class="meta"><time datetime="2026-11-04">2026-11-04</time></p>
+<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} fixes research excerpts from saved videos, cleans up CLI output and corrects report formatting. Earlier releases are listed below, with dates from the product changelog.</p>
+<h2>${VERSION}: Saved-video research and CLI fixes</h2><p class="meta"><time datetime="2026-11-05">2026-11-05</time></p>
+<p>Deep research can return excerpts from videos captured outside a research run again. It repairs those items when first read, after checking their transcript and saved files.</p>
+<p>The <code>--text</code> output for <code>search</code>, <code>recent</code> and <code>research</code> uses <code>m:ss</code> timestamp ranges and normal quotes in titles. Search results include the source and a verified quote; recent saves show the date, kind and source. Research shows a short reason for each candidate; use <code>--explain</code> for the full score breakdown. JSON output is unchanged.</p>
+<p>Research <code>report.md</code> files use Markdown escapes instead of HTML entities. Reports and share text use “1 claim” and “1 source” for single counts. Research MCP tools explain that <code>run_id</code> comes from <code>research_start</code>. Saves import headers use matching source labels and show list titles once in the CLI and dashboard. The Windows installer bundles <code>filelock</code> 4.2.1.</p>
+<p>No new tools: 99 over stdio and 99 in the HTTP registry, with 36 in core mode, 9 in search mode and 7 in research mode. Upgrading from 3.14.0 adds no database migrations and keeps your library and captures. Reload the extension after updating; Claude Desktop users should reinstall the 3.14.1 bundle and restart Desktop. See the <a href="https://github.com/ryanbiddy/uoink/releases/tag/v3.14.1">full release notes</a>.</p>
+<h2>v3.14.0: Deep research, saved sources and headless Linux</h2><p class="meta"><time datetime="2026-11-04">2026-11-04</time></p>
 <p><strong>Deep research.</strong> Ask a question, pick sources and let your agent write the report. Uoink searches your library and, once you allow them, YouTube, Hacker News, HackerTube and podcasts. It captures selected video transcripts within a per-run budget and gives your agent short, cited excerpts. Before saving the report, it checks every quote and timestamp against the saved source. Start in the dashboard's <strong>Research</strong> tab, with <code>uoink research "How do teams test agents?"</code>, or with the <code>deep-research</code> prompt and six <code>research_*</code> tools. Network discovery is off until you enable the sources you want.</p>
 <p><strong>get_transcript.</strong> A YouTube transcript tool that doesn't fail silently: saved copy first, then captions, then the bundled local Whisper model. Every result says where the words came from and explains any fallback. It works as a drop-in for popular YouTube transcript MCP servers.</p>
 <p><strong>Import your saves.</strong> Bring in YouTube Watch Later, X bookmarks and Reddit saved posts. Choose <strong>Import a saves file</strong> or run <code>uoink import &lt;file&gt;</code> with a Google Takeout playlist CSV, Reddit export CSVs or X status links. Existing saves are skipped; new ones get <code>watch later</code>, <code>reddit saved</code> or <code>x bookmarks</code> tags. The Chrome extension's panel can also collect what you scroll past, or use <strong>Auto-scroll</strong>, sending 50 saves at a time. File imports are the tested path; the browser collectors have automated tests but have not yet been tried in a real browser.</p>
