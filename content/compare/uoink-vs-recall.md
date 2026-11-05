@@ -2,7 +2,7 @@
 title: "Uoink vs Recall: full transcripts on your disk or an AI knowledge base in the cloud"
 slug: "recall"
 description: "Recall saves and summarizes videos, podcasts and articles in its cloud, on every device. Uoink keeps full transcripts on your disk, free, for your own AI to search and cite."
-date: 2026-11-03
+date: 2026-11-04
 ---
 
 # Uoink vs Recall
@@ -36,12 +36,12 @@ Both tools now connect to AI assistants over MCP, so that is not the dividing li
 | What it is | A desktop app that captures sources into a local library and serves that library to your AI over MCP | An AI knowledge base: save content, write notes and "chat with your knowledge" [1] |
 | Where the library lives | Markdown and JSON files on your disk, with a local search index | "your knowledge base is stored safely in the cloud" [1] |
 | Account | None | Recall account; free sign-up with no credit card [2] |
-| Platforms | Windows 10/11, plus a Mac preview for Apple Silicon (macOS 15 or later) | Web app; Chrome, Firefox, Edge and Safari extensions; iOS and Android [2] |
+| Platforms | Windows 10/11, a Mac preview for Apple Silicon (macOS 15 or later), and headless Linux for agents | Web app; Chrome, Firefox, Edge and Safari extensions; iOS and Android [2] |
 | What it saves | YouTube, podcast RSS and Atom feeds, X posts and video, web articles, Reddit threads | Articles, YouTube videos, podcasts and PDFs, plus your own notes [2] |
 | YouTube | Timestamped transcript, screenshots, top comments, channel context and metadata | Summaries with timestamps; 10 AI summaries a month on Free, unlimited on Plus [2] |
 | Videos without captions | Transcribed on your computer with the Whisper base model that ships with Uoink | Not covered in the Recall pages we read |
 | Summaries | Your AI writes them from the saved transcript; optional built-in AI features use your own Anthropic key | Built in [2] |
-| AI assistant access | Local MCP server with 92 tools over stdio, a CLI and an OpenAPI bridge. ChatGPT is copy and paste only. | Hosted MCP server with eight tools for Claude, ChatGPT, Cursor, Codex, Perplexity and Gemini CLI. It reads your knowledge base; Recall says write capabilities are "coming soon." [3] API and MCP access are on the Free plan. [2] |
+| AI assistant access | Local MCP server with 99 tools over stdio, a CLI and an OpenAPI bridge. ChatGPT is copy and paste only. | Hosted MCP server with eight tools for Claude, ChatGPT, Cursor, Codex, Perplexity and Gemini CLI. It reads your knowledge base; Recall says write capabilities are "coming soon." [3] API and MCP access are on the Free plan. [2] |
 | Built-in chat | Not a feature; you ask in your own AI client | Chat with your saved knowledge, the web or both (Plus); pick the model on Max [2] |
 | Export | The files are already on your disk; cited range export | "You can export all your data anytime in Markdown format." [1] |
 | Price | Free, open source (MIT) | Free; Plus $10 a month and Max $38 a month, billed yearly [2] |
@@ -80,5 +80,5 @@ Competitor pages were opened and read on 2026-11-03.
 
 Uoink facts:
 
-- U1. Uoink 3.13.0 summary (updated 2026-11-03): https://uoink.app/llms.txt
-- U2. Uoink 3.13.0 full disclosures (updated 2026-11-03): https://uoink.app/llms-full.txt
+- U1. Uoink 3.14.0 summary (updated 2026-11-04): https://uoink.app/llms.txt
+- U2. Uoink 3.14.0 full disclosures (updated 2026-11-04): https://uoink.app/llms-full.txt

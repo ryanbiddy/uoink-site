@@ -43,6 +43,7 @@ export default async function FeaturePage({ params }: Props) {
   const { slug } = await params;
   const feature = featureBySlug.get(slug);
   if (!feature) notFound();
+  const installUrl = feature.slug === "headless-linux" ? "/install#linux" : DOWNLOAD_URL;
 
   const page: SitePage = {
     id: "features",
@@ -68,7 +69,7 @@ export default async function FeaturePage({ params }: Props) {
               <h1 className="display-xl">{feature.title}</h1>
               <p className="lede">{feature.summary}</p>
               <div className="ctas">
-                <a className="btn primary large" href={DOWNLOAD_URL}>
+                <a className="btn primary large" href={installUrl}>
                   Install Uoink
                 </a>
                 <Link className="btn ghost large" href="/features">
@@ -133,7 +134,7 @@ export default async function FeaturePage({ params }: Props) {
                 <h2 className="display-m">Run it on your next source.</h2>
                 <p>{feature.cta}</p>
                 <div className="ctas">
-                  <a className="btn primary large" href={DOWNLOAD_URL}>
+                  <a className="btn primary large" href={installUrl}>
                     Install Uoink
                   </a>
                 </div>
@@ -141,12 +142,12 @@ export default async function FeaturePage({ params }: Props) {
             </div>
 
             <aside className="feature-side">
-              <div className="side-block">
+              {feature.screenshot.src ? <div className="side-block">
                 <span className="eyebrow">product shot</span>
                 <h3>{feature.screenshot.title}</h3>
                 <p>{feature.screenshot.alt}</p>
                 <p>Dashboard embed ready</p>
-              </div>
+              </div> : null}
               <div className="side-block">
                 <span className="eyebrow">related</span>
                 <div className="related-list">
@@ -172,9 +173,8 @@ export default async function FeaturePage({ params }: Props) {
   );
 }
 
-// The real dashboard screen for the feature, labelled with its category,
-// platforms and status. Every feature ships a screenshot; without one the
-// hero is copy alone rather than a stand-in drawing.
+// A real product screenshot, labelled with its category, platforms and status.
+// Features without a screenshot use a text-only hero.
 function FeatureVisual({ feature }: { feature: Feature }) {
   if (!feature.screenshot.src) return null;
 

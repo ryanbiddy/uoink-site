@@ -26,25 +26,29 @@ The site uses `output: "export"` for static deployment.
 `content/release.json` supplies the product version and verified MCP counts to the site and both release-content scripts. Static discovery cards and crawler text must match it; `check-launch-content.cjs` checks those copies.
 
 ```bash
-python scripts/sync-mcp-from-release.py <product-checkout> --ref v3.13.0
+python scripts/sync-mcp-from-release.py <product-checkout> --ref v3.14.0
 node scripts/check-launch-content.cjs
 ```
 
 The sync script reads committed files with `git show`, parses Python ASTs without importing product code, and checks stdio names against `.mcpb/manifest.json`. It defaults to the product ref in `content/release.json`; `--ref <git-ref>` selects another ref. It updates the counts in content/release.json and writes the site's tool catalog and manifest.
 
-For 3.13.0, the catalog was generated with `--ref v3.13.0`, which resolves to the release commit `a4ea17a0de76eae681e92dc42a5af3385569f4cf`. The inventory grows by one from 3.12.1, the new `import_list` tool: 92 tools over stdio and 92 in the HTTP registry, with 35 in core mode. Both transports advertise flattened tool schemas; the server still checks the exact schema. The public changelog keeps 3.13.0 and earlier releases separate. Earlier dates are preserved; no 3.9.0 publication date is asserted.
+For 3.14.0, the catalog was generated with `--ref v3.14.0`, which resolves to release commit `decc19a9e9f25ce14c19bac176c317f3b03556c4`. The source and MCP bundle agree on 99 tools over stdio and 99 in the HTTP registry. Core mode has 36 tools, search mode 9 and research mode 7. Both transports advertise flattened tool schemas; the server still checks the exact schema. Historical changelog entries and acceptance receipts keep their original versions and counts.
 
-3.13.0 adds Import a list (HackerTube lists, Hacker News and Reddit threads, YouTube playlists) in the dashboard, as `uoink import-list` and as the `import_list` MCP tool, a For You panel for imported videos, mid-video card images, and a silent install or upgrade that restarts Uoink if it was running. The installer stays about 519 MB and the DMG is about 716 MB.
+3.14.0 adds deep research with checked quotes and timestamps, `get_transcript` (saved copy, captions, then local Whisper), imports for YouTube Watch Later, X bookmarks and Reddit saves, weekly source availability checks with a Gone from the web filter, and headless Linux for agents in Docker, Codespaces and sandboxes. The Windows installer is about 519 MB; the signed and notarized Mac preview DMG is about 695 MB. See the [release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.14.0), [research guide](https://github.com/ryanbiddy/uoink/blob/v3.14.0/docs/research.md) and [Linux guide](https://github.com/ryanbiddy/uoink/blob/v3.14.0/docs/linux.md).
+
+3.13.0 added Import a list (HackerTube lists, Hacker News and Reddit threads, YouTube playlists) in the dashboard, as `uoink import-list` and as the `import_list` MCP tool, a For You panel for imported videos, mid-video card images, and a silent install or upgrade that restarts Uoink if it was running. The installer stays about 519 MB and the DMG is about 716 MB.
 
 3.12.1 added an optional phone inbox (Uoink Relay), `uoink mcp` to start the stdio MCP server from the PATH command, working Wikipedia capture, page and X video thumbnails, and one button style across the dashboard, popup and setup page. The DMG was about 711 MB.
 
 3.12.0 shipped Whisper's base model (OpenAI Whisper, MIT, in SYSTRAN's faster-whisper conversion) in the Windows installer and the Mac preview DMG, pinned and hash-checked at build, so a video without captions is transcribed locally from the first capture with no model download. A model the user downloaded still takes precedence; other sizes download only when the user asks, and Uoink never downloads a model during a capture. The installer grows from about 390 MB to about 519 MB and the DMG from about 580 MB to about 709 MB. The release also names the problem on needs-attention badges, stops flagging pages, text posts and images for sections they can't have, and adds an Appearance setting. Semantic search's EmbeddingGemma model is still never bundled.
 
-The Mac build is still a preview for Apple Silicon on macOS 15 or later: [Uoink-3.13.0-macos-arm64.dmg](https://github.com/ryanbiddy/uoink/releases/download/v3.13.0/Uoink-3.13.0-macos-arm64.dmg), signed with a Developer ID and notarized by Apple, plus a separate Claude Desktop bundle, [uoink-3.13.0-macos.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.13.0/uoink-3.13.0-macos.mcpb). Intel Macs are not supported. `app/content/product-status.ts` holds every Mac string the site renders. The Windows installer is still unsigned, and the Chrome Web Store listing is not live.
+The Mac build is still a preview for Apple Silicon on macOS 15 or later: [Uoink-3.14.0-macos-arm64.dmg](https://github.com/ryanbiddy/uoink/releases/download/v3.14.0/Uoink-3.14.0-macos-arm64.dmg), signed with a Developer ID and notarized by Apple, plus a separate Claude Desktop bundle, [uoink-3.14.0-macos.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.14.0/uoink-3.14.0-macos.mcpb). Intel Macs are not supported. `app/content/product-status.ts` holds every Mac string the site renders. The Windows installer is still unsigned, and the Chrome Web Store listing is not live.
 
-The tool inventory line in `public/llms-full.txt` names release commit `a4ea17a0de76eae681e92dc42a5af3385569f4cf`. `check-launch-content.cjs` checks it against the generated manifest's source commit. The Windows installer is 519,273,366 bytes; the release checksums are in `public/llms-full.txt`. Until the release numbers replace the placeholders here and in `public/llms-full.txt`, and `installerSizeBytes` in `content/release.json` is set, `check-launch-content.cjs` runs every other check and then fails, listing each placeholder.
+The tool inventory line in `public/llms-full.txt` names release commit `decc19a9e9f25ce14c19bac176c317f3b03556c4`. `check-launch-content.cjs` checks it against the generated manifest's source commit. The Windows installer is 519,322,824 bytes; the release checksums are in `public/llms-full.txt`. Until the release numbers replace the placeholders here and in `public/llms-full.txt`, and `installerSizeBytes` in `content/release.json` is set, `check-launch-content.cjs` runs every other check and then fails, listing each placeholder.
 
 ## Connect a local Uoink install
+
+For 3.14.0, use the `deep-research` prompt and six `research_*` tools, or start with `uoink research "How do teams test agents?"`. Enable network sources in Settings before discovery. File imports are tested; the extension saves collectors have not yet been tried in a real browser. On headless Linux, install with `scripts/linux/install.sh`, then run `uoink mcp`; ffmpeg and ffprobe are required for media capture. YouTube may block cloud IPs even with local transcription available.
 
 For 3.13.0, agent Install 32 tested the installed 3.13.0 build in an isolated profile: 26/26 PASS. Stdio listed 92 full / 35 core / 92 modern tools, and Claude Code 2.1.316 (haiku) connected with 92 tools and called get_schema_version. `uoink import-list --preview` previewed a HackerTube list, paged it with `--offset`, refused a single-video link cleanly and left the library unchanged. The silent restart was checked step by step against the isolated install: a quiet start with no window, splash or toast, and a real Quit that stayed quit. The full silent installer over a running copy was not run, because an isolated install skips that step by design. Receipt 31's checks, including an in-place upgrade over 3.12.1, passed again. Codex CLI was not re-tested, and the Mac build was not part of this receipt.
 
@@ -56,9 +60,9 @@ For 3.11.1, Agent Install 27 passed 11/11 isolated-install checks, including std
 
 Earlier 3.11.0 testing: Claude Code 2.1.308 listed all 91 tools and called one, and Codex CLI 0.153.4 called two tools. In 3.10.0 testing, Claude Code also ran with the skill and CLI only, and the plugin loaded its skill and started MCP, but its tool calls were not run end to end. Claude Desktop and Cursor retain their earlier MCP testing status. Gemini CLI, pi, and the remaining connection recipes are not yet tested. Stdio works without the Uoink helper running. Start Uoink from the Start menu for the dashboard, browser button, and monitored-playlist polling.
 
-For Claude Desktop on Windows, download and open [uoink-3.13.0.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.13.0/uoink-3.13.0.mcpb). Enter the full path to your Uoink folder when asked; Desktop does not expand `%LOCALAPPDATA%`. Reinstall the bundle and restart Desktop after updating.
+For Claude Desktop on Windows, download and open [uoink-3.14.0.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.14.0/uoink-3.14.0.mcpb). Enter the full path to your Uoink folder when asked; Desktop does not expand `%LOCALAPPDATA%`. Reinstall the bundle and restart Desktop after updating.
 
-On the Mac preview, open [uoink-3.13.0-macos.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.13.0/uoink-3.13.0-macos.mcpb) instead and select the installed Uoink.app. For other clients, link `/Applications/Uoink.app/Contents/Helpers/uoink` into a folder on your PATH and run `uoink connect <client>`, which prints a config with the installed app's paths. On a Mac, Claude Code passed MCP acceptance (3.11.2); other clients are untested there.
+On the Mac preview, open [uoink-3.14.0-macos.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.14.0/uoink-3.14.0-macos.mcpb) instead and select the installed Uoink.app. For other clients, link `/Applications/Uoink.app/Contents/Helpers/uoink` into a folder on your PATH and run `uoink connect <client>`, which prints a config with the installed app's paths. On a Mac, Claude Code passed MCP acceptance (3.11.2); other clients are untested there.
 
 For Claude Code, run this in PowerShell. The expanded paths are absolute:
 
@@ -85,7 +89,7 @@ For Cursor and other stdio clients, add this server config. Replace `%LOCALAPPDA
 }
 ```
 
-Cursor is reported to send only the first 40 tools to its agent. Add `"UOINK_MCP_TOOLSET": "core"` to the server `env` to keep the previous 35-tool set and stay under that cap. Omit it for every tool. Consent gates are unchanged.
+Cursor is reported to send only the first 40 tools to its agent. Add `"UOINK_MCP_TOOLSET": "core"` to the server `env` to keep the 36-tool core set and stay under that cap. Omit it for every tool. Consent gates are unchanged.
 
 ChatGPT and claude.ai use copy and paste only. Uoink does not connect to the ChatGPT app over MCP.
 

@@ -1,5 +1,5 @@
-// Generated for Uoink 3.13.0 from ryanbiddy/uoink v3.13.0 on 2026-11-03.
-// Source commit: a4ea17a0de76eae681e92dc42a5af3385569f4cf
+// Generated for Uoink 3.14.0 from ryanbiddy/uoink v3.14.0 on 2026-11-04.
+// Source commit: decc19a9e9f25ce14c19bac176c317f3b03556c4
 // HTTP: TOOL_REGISTRY; stdio: registry inventory (3.9.2+) or @mcp.tool decorators.
 // Regenerate with: python scripts/sync-mcp-from-release.py <product-checkout> [--ref <git-ref>]
 
@@ -44,6 +44,7 @@ export const mcpStdioToolNames = [
   "get_library_brief_input",
   "publish_library_brief",
   "export_cited_range",
+  "get_transcript",
   "list_library_work",
   "claim_library_work",
   "submit_library_result",
@@ -100,7 +101,13 @@ export const mcpStdioToolNames = [
   "import_list",
   "list_allowed_sites",
   "add_allowed_site",
-  "remove_allowed_site"
+  "remove_allowed_site",
+  "research_start",
+  "research_discover",
+  "research_capture",
+  "research_status",
+  "research_evidence",
+  "research_publish"
 ] as const;
 
 export const mcpTools = [
@@ -418,7 +425,7 @@ export const mcpTools = [
   ],
   [
     "import_list",
-    "Queue every video from a list source for normal capture: a HackerTube playlist, category, area or the whole collection best first (hackertube.org, ODC-By 1.0), a Hacker News thread, a Reddit thread, or a YouTube playlist."
+    "Preview or import a list in batches of at most 50, skipping saved items and adding a source tag."
   ],
   [
     "list_allowed_sites",
@@ -471,6 +478,34 @@ export const mcpTools = [
   [
     "export_cited_range",
     "Export verbatim stored transcript cues with speaker provenance, overlapping chapters, safe links and evidence references."
+  ],
+  [
+    "research_start",
+    "Start a local research run for a question, with source and ASR budgets."
+  ],
+  [
+    "research_discover",
+    "Discover and rank sources for a saved research run from the local library and consented YouTube, HN, HackerTube and podcast searches."
+  ],
+  [
+    "research_capture",
+    "Queue selected research candidates by keys or top score order."
+  ],
+  [
+    "research_status",
+    "Read a research run's capture states from the local queue and saved library transcripts."
+  ],
+  [
+    "get_transcript",
+    "Get the transcript of one YouTube video, with honest provenance."
+  ],
+  [
+    "research_evidence",
+    "Find cue-aligned evidence only in a research run's selected ready sources."
+  ],
+  [
+    "research_publish",
+    "Verify research claims against this run's stored excerpts and current transcript revisions, then write a local Markdown report, escaped HTML report and verification ledger."
   ]
 ] as const;
 

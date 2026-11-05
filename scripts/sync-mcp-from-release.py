@@ -49,6 +49,17 @@ def literal(node):
         return value
     return ast.literal_eval(node)
 
+# Research schemas in 3.14.0 reference patterns imported from research.py.
+# Read only those named constants, without importing or executing the module.
+for node in tree.body:
+    if isinstance(node, ast.ImportFrom) and node.module == "research":
+        imported = {alias.name: alias.asname or alias.name for alias in node.names}
+        for definition in ast.parse(source("research.py")).body:
+            if isinstance(definition, ast.Assign) and isinstance(definition.targets[0], ast.Name):
+                name = definition.targets[0].id
+                if name in imported:
+                    constants[imported[name]] = literal(definition.value)
+
 registry = None
 source_tree = ast.parse(source("source_subscriptions.py"))
 for node in [*source_tree.body, *tree.body]:

@@ -2,7 +2,7 @@
 title: "Uoink vs Readwise Reader: a local video library or a reading app"
 slug: "readwise-reader"
 description: "Readwise Reader is a polished reading app on every device. Uoink is a free app for Windows, with a Mac preview, that saves videos and podcasts to your disk for AI to cite."
-date: 2026-11-03
+date: 2026-11-04
 ---
 
 # Uoink vs Readwise Reader
@@ -36,13 +36,13 @@ Both tools now connect to AI assistants over MCP, so that is no longer the divid
 | What it is | A local library for the videos and podcasts you study, that your AI can search and cite | A reading app for "articles, PDFs, EPUBs, email newsletters, RSS feeds, YouTube videos, X threads, and more" [1] |
 | Where the library lives | Markdown and JSON files on your disk, with a local search index | Synced across your devices, and Reader also works offline [1] |
 | Account | None | Readwise account; the MCP connection signs in with it [3] |
-| Platforms | Windows 10/11, plus a Mac preview for Apple Silicon (macOS 15 or later) | iOS, Android, web, Mac and Windows desktop apps, Chrome, Firefox and Safari extensions, e-ink mode [1] |
+| Platforms | Windows 10/11, a Mac preview for Apple Silicon (macOS 15 or later), and headless Linux for agents | iOS, Android, web, Mac and Windows desktop apps, Chrome, Firefox and Safari extensions, e-ink mode [1] |
 | YouTube | Timestamped transcript, screenshots, top comments, channel context and metadata | Watch alongside a time-synced transcript; uses the creator's captions or YouTube's auto-generated ones, with an optional enhanced transcript [4] |
 | Podcasts | Watches RSS and Atom feeds; optional auto-ingest downloads new episodes and transcribes them locally with WhisperX | Share an episode from Spotify, Overcast or Apple Podcasts to save a transcript; built as "a podcast companion, rather than a full podcast player" [5] |
 | X (Twitter) | Post text and X video | Threads saved as one document, with only the original poster's tweets [5] |
 | Articles and files | Web articles. PDF and EPUB import are not among its listed sources. | Web articles through the extension; uploads of PDFs, EPUBs, Markdown and OPML files [5] |
 | Reading tools | A Reader view in the dashboard. Highlighting, text-to-speech and spaced review are not among its features. | Highlighting, text-to-speech and Ghostreader AI on the Reader plan; Daily Review with Full Readwise [2] |
-| AI assistant access | Local MCP server with 92 tools over stdio, a CLI and an OpenAPI bridge. ChatGPT is copy and paste only. | Hosted Readwise MCP server for Claude, ChatGPT, Cursor and others, plus a CLI and an API [2][3] |
+| AI assistant access | Local MCP server with 99 tools over stdio, a CLI and an OpenAPI bridge. ChatGPT is copy and paste only. | Hosted Readwise MCP server for Claude, ChatGPT, Cursor and others, plus a CLI and an API [2][3] |
 | Built-in AI | Optional; uses your own Anthropic key | Ghostreader; Global Ghostreader searches your whole library and "answers with citations that link to the source" [6] |
 | Export | The files are already on your disk; cited range export | CSV of documents, OPML of feeds, a ZIP of uploads and full article text, and highlights as Markdown [7] |
 | Price | Free, open source (MIT) | Reader only $7.99/mo billed yearly; Full Readwise $9.99/mo billed yearly; 30-day free trial [2] |
@@ -84,5 +84,5 @@ Competitor pages were opened and read on 2026-10-24.
 
 Uoink facts:
 
-- U1. Uoink 3.13.0 summary (updated 2026-11-03): https://uoink.app/llms.txt
-- U2. Uoink 3.13.0 full disclosures (updated 2026-11-03): https://uoink.app/llms-full.txt
+- U1. Uoink 3.14.0 summary (updated 2026-11-04): https://uoink.app/llms.txt
+- U2. Uoink 3.14.0 full disclosures (updated 2026-11-04): https://uoink.app/llms-full.txt

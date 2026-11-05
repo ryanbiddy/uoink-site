@@ -115,6 +115,7 @@ ${readerRow("lesson", "verify")}
 <h2 id="save-title">Save it.</h2>
 <p class="hm-lead">One click while you watch. Uoink saves the video, podcast or X post into a library on your computer, with its transcript when there is one.</p>
 <ul class="hm-facts"><li>YouTube, podcasts, X posts and videos, Reddit threads and web articles</li><li>Captions saved with timestamps; local Whisper can transcribe the rest</li><li>Markdown and JSON on your disk. No account, no Uoink cloud.</li></ul>
+<p>Bring in your <a class="hm-link" href="/features/import-saves">YouTube Watch Later, X bookmarks and Reddit saves</a>. Weekly checks flag sources that are <a class="hm-link" href="/features/source-availability">Gone from the web</a>. Your saved copy stays.</p>
 <p class="hm-links"><a class="hm-link" href="/sources">Everything Uoink can save -&gt;</a><a class="hm-link" href="/sample">Browse a sample library -&gt;</a></p>
 </div>
 <div class="hm-win hm-library hm-library-full">
@@ -136,6 +137,7 @@ ${libraryRow(cover("source-x-video", "", 720, 720), label("sources.x.title"), `$
 <div class="hm-sec-copy">
 <h2 id="find-title">Find it.</h2>
 <p class="hm-lead">Ask your AI “Where did I hear that?” It searches your library and answers with the source and the minute, so you can check it.</p>
+<p><a class="hm-link" href="/features/deep-research">Deep research</a> starts with a question. Pick the sources; your agent writes the report. Uoink checks every quote and timestamp against the saved transcripts before saving it.</p>
 <a class="hm-link" href="/features/evidence-panel">How evidence cards work -&gt;</a>
 </div>
 <div class="hm-win hm-chat hm-chat-full">
@@ -178,6 +180,7 @@ ${line(`${label("drafts.job")} ${label("drafts.learn")}`, [["lesson", "job"], ["
 <h2 id="connect-title">Connect your AI</h2>
 <ul class="hm-clients" aria-label="AI clients that connect over MCP"><li>Claude Desktop</li><li>Claude Code</li><li>Cursor</li><li>Codex</li></ul>
 <p>Over MCP, with ${o.toolCount} tools. ChatGPT works by copy and paste.</p>
+<p><a class="hm-link" href="/features/get-transcript"><code>get_transcript</code></a> tries your saved copy, then captions, then local Whisper. Every result says where the words came from. Agents can also run Uoink <a class="hm-link" href="/install#linux">headless on Linux</a> in Docker, Codespaces and sandboxes.</p>
 <a class="hm-link" href="/developers">Set up your AI -&gt;</a>
 </div>
 </section>`;

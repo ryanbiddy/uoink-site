@@ -2,7 +2,7 @@
 title: "Uoink vs Obsidian Web Clipper: a research library or a clipper for your vault"
 slug: "obsidian-web-clipper"
 description: "Obsidian Web Clipper saves pages to your vault from major browsers. Uoink saves videos and podcasts to a local library on Windows or a Mac (preview) that your AI can search and cite."
-date: 2026-11-03
+date: 2026-11-04
 ---
 
 # Uoink vs Obsidian Web Clipper
@@ -44,7 +44,7 @@ Both tools are free, open source under the MIT license, and save Markdown to you
 | Images | YouTube captures include screenshots; images can be captured too | "Images are not automatically downloaded"; clips link to the web copy, and Obsidian has a command to download them [3] |
 | Highlighting | Not a feature | Highlight text, images and blocks; highlights stay visible when you come back to a page [1] |
 | AI on the page | Optional; uses your own Anthropic key | Interpreter runs natural-language prompts through a provider you pick, such as Anthropic, OpenAI, Google Gemini or Ollama [4] |
-| AI assistant access | Local MCP server with 92 tools over stdio, a CLI and an OpenAPI bridge; local keyword search and optional local semantic search | Through the separate Obsidian CLI, "agentic tools" can read, search and write your vault while the Obsidian app is running [11] |
+| AI assistant access | Local MCP server with 99 tools over stdio, a CLI and an OpenAPI bridge; local keyword search and optional local semantic search | Through the separate Obsidian CLI, "agentic tools" can read, search and write your vault while the Obsidian app is running [11] |
 | Price and license | Free, open source (MIT) | Free and open source under the MIT License [1][6] |
 
 ## Privacy and where your data lives
@@ -88,5 +88,5 @@ Competitor pages were opened and read on 2026-10-24.
 
 Uoink facts:
 
-- U1. Uoink 3.13.0 summary (updated 2026-11-03): https://uoink.app/llms.txt
-- U2. Uoink 3.13.0 full disclosures (updated 2026-11-03): https://uoink.app/llms-full.txt
+- U1. Uoink 3.14.0 summary (updated 2026-11-04): https://uoink.app/llms.txt
+- U2. Uoink 3.14.0 full disclosures (updated 2026-11-04): https://uoink.app/llms-full.txt
