@@ -2,7 +2,7 @@
   "name": "io.github.ryanbiddy/uoink",
   "display_name": "Uoink",
   "description": "Uoink keeps videos, podcasts, and articles on your disk for AI search and citations. Claude Desktop, Claude Code, Cursor, and Codex CLI connect over MCP; ChatGPT and claude.ai use copy and paste.",
-  "version": "3.13.0",
+  "version": "3.14.0",
   "homepage": "https://uoink.app",
   "documentation": "https://uoink.app/developers",
   "repository": {
@@ -17,9 +17,10 @@
   "install": {
     "windows": "https://uoink.app/install",
     "macos": "https://uoink.app/install#mac",
-    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/download/v3.13.0/uoink-3.13.0.mcpb",
-    "mcpb_bundle_macos": "https://github.com/ryanbiddy/uoink/releases/download/v3.13.0/uoink-3.13.0-macos.mcpb",
-    "notes": "Windows: unsigned installer, about 519 MB; no admin rights needed. Windows SmartScreen: More info → Run anyway. Then open the .mcpb bundle for one-click Claude Desktop setup, or copy the setup page’s stdio config. Mac preview (Apple Silicon, macOS 15 or later): a DMG signed with a Developer ID and notarized by Apple; Claude Desktop uses the separate macOS .mcpb, and `uoink connect <client>` prints configs with the installed app's paths."
+    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/download/v3.14.0/uoink-3.14.0.mcpb",
+    "mcpb_bundle_macos": "https://github.com/ryanbiddy/uoink/releases/download/v3.14.0/uoink-3.14.0-macos.mcpb",
+    "notes": "Windows: unsigned installer, about 519 MB; no admin rights needed. Windows SmartScreen: More info → Run anyway. Then open the .mcpb bundle for one-click Claude Desktop setup, or copy the setup page’s stdio config. Mac preview (Apple Silicon, macOS 15 or later): a DMG signed with a Developer ID and notarized by Apple; Claude Desktop uses the separate macOS .mcpb, and `uoink connect <client>` prints configs with the installed app's paths. Headless Linux: install from a checkout with scripts/linux/install.sh; host media capture needs ffmpeg and ffprobe. Docker, Codespaces and sandboxes can run uoink mcp.",
+    "linux": "https://uoink.app/install#linux"
   },
   "transports": [
     {
@@ -34,7 +35,7 @@
         "Cursor",
         "Codex CLI"
       ],
-      "note": "Every tool is available over stdio without the helper running. Use absolute paths; Claude Desktop does not expand %LOCALAPPDATA%. Cursor can use UOINK_MCP_TOOLSET=core for the previous 35-tool set under its reported 40-tool cap. Cline and Continue were not individually smoke-tested. The command and args shown are the Windows paths; on the Mac preview, `uoink connect <client>` prints them for the installed app.",
+      "note": "Every tool is available over stdio without the helper running. Use absolute paths; Claude Desktop does not expand %LOCALAPPDATA%. Cursor can use UOINK_MCP_TOOLSET=core for the 36-tool core set under its reported 40-tool cap. Cline and Continue were not individually smoke-tested. The command and args shown are the Windows paths; on the Mac preview, `uoink connect <client>` prints them for the installed app. On Linux, uoink connect <client> prints Linux paths. Search mode has 9 tools; research mode has 7.",
       "env": {
         "PYTHONIOENCODING": "utf-8",
         "PYTHONUTF8": "1"
@@ -67,7 +68,7 @@
     "podcast",
     "corpus"
   ],
-  "tool_count": 92,
-  "stdio_tool_count": 92,
-  "platform": "Windows 10/11, plus a Mac preview for Apple Silicon (macOS 15 or later)."
+  "tool_count": 99,
+  "stdio_tool_count": 99,
+  "platform": "Windows 10/11, a Mac preview for Apple Silicon (macOS 15 or later), and headless Linux for agents."
 }

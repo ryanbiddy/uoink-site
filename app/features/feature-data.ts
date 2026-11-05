@@ -64,6 +64,108 @@ export const featureCategories: { name: FeatureCategory; deck: string }[] = [
 
 export const features: Feature[] = [
   {
+    slug: "deep-research",
+    title: "Deep research",
+    category: "Verification",
+    status: "shipped",
+    summary: "Ask a question. Your agent writes a report; Uoink checks every quote and timestamp against saved sources.",
+    keywords: ["deep research", "verified quotes", "video research", "timestamp citations"],
+    whatItDoes: "Search your library and, once you allow them, YouTube, Hacker News, HackerTube and podcasts. Pick videos to capture within a transcription budget. Uoink gives your agent short, cited excerpts and checks the quotes and timestamps before saving its report. Matching a quote does not prove a claim is true.",
+    gettingStarted: [
+      "Open the Research tab and enter a question, or run uoink research with your question in quotes.",
+      "Enable the network sources you want. Library search is available without network consent.",
+      "Pick sources and choose Capture selected.",
+      "Copy the prompt to your agent, or start with the deep-research MCP prompt.",
+      "Review the report and its source links, then export Markdown or HTML."
+    ],
+    behindScenes: "The six research tools keep the run, excerpts and reports on your disk. Your agent writes the claims. Uoink checks them against the saved excerpts and records accepted, flagged and dropped claims. Research does not yet capture newly discovered podcast episodes or search Reddit; saved podcast transcripts can supply evidence.",
+    mcpTools: ["research_start", "research_discover", "research_capture", "research_status", "research_evidence", "research_publish"],
+    related: ["get-transcript", "evidence-panel", "headless-linux"],
+    cta: "Start with one question in the Research tab.",
+    screenshot: { title: "Research tab", alt: "Choose sources, capture transcripts and review the report's quotes and timestamps." }
+  },
+  {
+    slug: "get-transcript",
+    title: "A transcript tool that explains its fallback",
+    category: "Capture",
+    status: "shipped",
+    summary: "get_transcript tries your saved copy, then YouTube captions, then local Whisper. Every result says where the words came from.",
+    keywords: ["get_transcript", "YouTube transcript MCP", "local Whisper", "captions"],
+    whatItDoes: "Get a YouTube transcript without a silent failure. Uoink reads the saved copy first, tries captions next and uses the bundled Whisper model to transcribe audio locally when YouTube refuses captions. It uses the same tool name, url and lang inputs as popular YouTube transcript MCP servers.",
+    gettingStarted: [
+      "Connect your agent to Uoink over MCP.",
+      "Call get_transcript with a YouTube URL and, optionally, lang.",
+      "Read the source and language fields, plus the reason for any fallback.",
+      "Use include_timestamps for timed text and next_cursor for longer transcripts."
+    ],
+    behindScenes: "The saved-copy path needs no network. Caption requests use your own connection; Whisper runs locally. YouTube can block cloud IPs, and transcription helps only when the audio download works. A fallback explains why it ran instead of hiding the caption failure.",
+    mcpTools: ["get_transcript"],
+    related: ["deep-research", "mcp-server", "headless-linux"],
+    cta: "Ask your connected agent for a YouTube transcript and check its source field.",
+    screenshot: { title: "Transcript provenance", alt: "Results identify a saved transcript, captions, auto-captions or local Whisper, with a reason for any fallback." }
+  },
+  {
+    slug: "import-saves",
+    title: "Import your saves",
+    category: "Capture",
+    status: "shipped",
+    summary: "Bring YouTube Watch Later, X bookmarks and Reddit saves into your local library.",
+    keywords: ["Watch Later import", "X bookmarks", "Reddit saved posts", "import saves"],
+    whatItDoes: "Import a Google Takeout playlist CSV for Watch Later, Reddit export CSVs or a list of X status links. Uoink skips saves already in your library and tags the rest watch later, reddit saved or x bookmarks. The Chrome extension can also collect saves as you scroll, or when you click Auto-scroll.",
+    gettingStarted: [
+      "Export your Watch Later or Reddit saves, or prepare a list of X status links.",
+      "Choose Import a saves file in the dashboard, or run uoink import with the file path.",
+      "Preview a batch and import it. Work through long lists 50 items at a time.",
+      "Find the imported sources by their watch later, reddit saved or x bookmarks tag."
+    ],
+    behindScenes: "The existing import_list MCP tool also accepts files or items. File imports are the tested path in 3.14.0. The extension's Watch Later, X bookmarks and Reddit saved collectors have automated tests but have not yet been tried in a real browser.",
+    mcpTools: ["import_list"],
+    related: ["playlist-mode", "twitter-video", "source-availability"],
+    cta: "Start with a saves file you have already exported.",
+    screenshot: { title: "Import a saves file", alt: "Preview a batch, skip existing saves and add the rest to your library." }
+  },
+  {
+    slug: "source-availability",
+    title: "Gone from the web",
+    category: "Library",
+    status: "shipped",
+    summary: "Know when a saved video, post, podcast or page disappears. Your saved copy stays in Uoink.",
+    keywords: ["source availability", "gone from the web", "saved sources", "offline copies"],
+    whatItDoes: "Uoink checks saved sources once a week from your own machine. A badge, the Gone from the web filter and a monthly notice show what is now only in your library.",
+    gettingStarted: [
+      "Keep using your library; source checks are on by default.",
+      "Use the Gone from the web filter to find sources that have disappeared.",
+      "Open your saved copy as usual.",
+      "Turn checks off in Settings with Check if saved sources go offline."
+    ],
+    behindScenes: "Two matching checks confirm that a source is gone. Requests are paced and back off when a site is busy. Availability is stored separately from saved content. MCP search results include source_status and source_last_checked.",
+    mcpTools: ["search_uoinks", "search_clips"],
+    related: ["import-saves", "local-first", "memory-search"],
+    cta: "Open Gone from the web to see which saved copies you can still read.",
+    screenshot: { title: "Source availability", alt: "Library badges and a filter identify saved sources that are no longer online." }
+  },
+  {
+    slug: "headless-linux",
+    title: "Headless Linux for agents",
+    category: "Distribution",
+    status: "shipped",
+    summary: "Run Uoink's CLI and MCP server in Docker, Codespaces or a Linux sandbox, with no tray or app windows.",
+    keywords: ["headless Linux", "Docker MCP", "Codespaces", "agent sandbox"],
+    whatItDoes: "Install from a source checkout with scripts/linux/install.sh, then run uoink mcp. The installer creates a Python environment and stages the pinned Whisper base model. docker/capture.Dockerfile builds an image for capture and local search.",
+    gettingStarted: [
+      "Follow the Linux steps at /install#linux. A host install needs Git, Python 3.11 or newer, venv support, ffmpeg and ffprobe.",
+      "Clone the release and run sh uoink/scripts/linux/install.sh.",
+      "Add ~/.local/bin to PATH and run uoink status.",
+      "Run uoink connect for your agent's setup recipe, or use uoink mcp for stdio.",
+      "Keep the data folder on persistent storage if the sandbox will be discarded."
+    ],
+    behindScenes: "Linux runs headless, with no tray, splash or dashboard window. The helper still serves a dashboard URL. YouTube can block cloud IPs, so the Whisper fallback helps only if audio can be downloaded. Podcast transcription uses CPU faster-whisper without speaker labels unless the optional WhisperX requirements are installed.",
+    mcpTools: ["get_transcript", "search_library"],
+    related: ["mcp-server", "get-transcript", "deep-research"],
+    cta: "Use the Linux install steps to prepare the machine your agent runs on.",
+    screenshot: { title: "CLI and MCP on Linux", alt: "Install from a checkout or build the capture image for an agent's Linux environment." }
+  },
+  {
     "slug": "in-page-button",
     "title": "In-page Uoink button",
     "category": "Capture",
@@ -1131,7 +1233,7 @@ export const features: Feature[] = [
       "Navigate to features and select MCP.",
       "Click Add New MCP Server.",
       "Paste the Uoink command, args, and env from the stdio config, using absolute paths.",
-      "Set UOINK_MCP_TOOLSET=core in the server env to use the previous 35-tool set under Cursor's reported 40-tool cap.",
+      "Set UOINK_MCP_TOOLSET=core in the server env to use the 36-tool core set under Cursor's reported 40-tool cap.",
       "Ask Cursor's chat panel to search your library."
     ],
     "behindScenes": "Cursor runs the bundled Python against uoink_mcp.py as a stdio subprocess. Tools such as search_library and get_library_item let the client search and read saved source material.",

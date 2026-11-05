@@ -157,7 +157,7 @@ export default function Page() {
               <p>Run this in PowerShell. It expands the paths to your local install. Verified with Claude Code 2.1.302, including tool listing, saving a note, and reading recent captures.</p>
               <pre className="code-block">{CLAUDE_CODE_COMMAND}</pre>
               <h3>Cursor and other stdio clients</h3>
-              <p>Cursor is reported to send only the first 40 tools to its agent. Add <code>UOINK_MCP_TOOLSET=core</code> to the server environment to keep the previous 35-tool set and stay under that cap. The Cursor config below includes it. Omit that setting for the full toolset.</p>
+              <p>Cursor is reported to send only the first 40 tools to its agent. Add <code>UOINK_MCP_TOOLSET=core</code> to the server environment to keep the 36-tool core set and stay under that cap. The Cursor config below includes it. Omit that setting for the full toolset.</p>
               <p>For manual setup, use the README JSON below. Claude Desktop does not expand <code>%LOCALAPPDATA%</code>: replace it in both paths with your full app-data directory, or copy the generated config from the extension’s Settings page. Restart the client after saving.</p>
               <p>Cline and Continue are standard-stdio compatibility paths; they were not individually smoke-tested. ChatGPT and claude.ai use copy and paste. Uoink does not connect to the ChatGPT app over MCP.</p>
               {configs.map((config) => (

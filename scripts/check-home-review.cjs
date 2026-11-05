@@ -103,7 +103,7 @@ async function checkStructure(page) {
   assert.deepEqual(structure.duplicateHeadings, [], 'No duplicate headings');
   assert.equal(structure.oldStory, false, 'No chapter story, scroll bars or motion toggle');
   assert.equal(structure.media, 0, 'The homepage plays no video');
-  assert.deepEqual(structure.connect, ['/developers'], 'Connect your AI links to /developers');
+  assert.deepEqual(structure.connect, ['/features/get-transcript', '/install#linux', '/developers'], 'Connect your AI links to transcript, Linux and client setup');
   assert.deepEqual(structure.clients, ['Claude Desktop', 'Claude Code', 'Cursor', 'Codex']);
   assert.deepEqual(structure.zing, ['sibling'], 'Zing is one card near the footer');
   const limit = structure.viewport.width >= 1000 ? MAX_HEIGHT.desktop : MAX_HEIGHT.phone;

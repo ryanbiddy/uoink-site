@@ -106,6 +106,8 @@ function exampleValue(input: Schema, root: Schema, name: string): unknown {
   if (schema.pattern === "^src_[a-f0-9]{64}$") return `src_${"0".repeat(64)}`;
   if (schema.pattern === "^[a-f0-9]{64}$") return "0".repeat(64);
   if (schema.pattern === "^[A-Za-z0-9_-]{43,128}$") return "REPLACE_WITH_REAL_TOKEN_".padEnd(43, "_");
+  if (schema.pattern === "^rr_[0-9]{14}_[0-9a-f]{8}$") return "rr_20261104000000_00000000";
+  if (schema.pattern?.startsWith("^(?:yt:")) return "yt:XXXXXXXXXXX";
   return `YOUR_${name.toUpperCase()}`.padEnd(schema.minLength || 0, "_").slice(0, schema.maxLength);
 }
 

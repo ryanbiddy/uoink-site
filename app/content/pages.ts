@@ -253,7 +253,7 @@ export const pages: Record<PageId, SitePage> = {
     mode: "mode-dark",
     title: "Download Uoink: Local Helper and Browser Extension Install",
     description:
-      "Install Uoink on Windows or the Mac preview, add the browser extension, and start extracting local video and text corpora for Claude, ChatGPT, and MCP.",
+      "Install Uoink on Windows, the Mac preview or headless Linux. Save transcripts locally and connect your AI over MCP.",
     keywords: ["install uoink", "uoink download windows", "uoink download mac", "uoink chrome extension", "yt-dlp Chrome extension", "reddit context for AI"],
     faq: installFaq,
     html: `
@@ -262,7 +262,7 @@ export const pages: Record<PageId, SitePage> = {
     <div class="doc">
       <span class="eyebrow">install</span>
       <h1 class="display-xl">Install <em>Uoink.</em></h1>
-      <p class="lede">Install the helper, add the Chrome button, then click Uoink on a video. The helper bundles Python, yt-dlp and ffmpeg. No command line needed.</p>
+      <p class="lede">Install the helper, add the Chrome button, then click Uoink on a video. The Windows and Mac helper bundles Python, yt-dlp and ffmpeg. No command line needed. For agents on Linux, use the <a href="#linux">headless install</a>.</p>
       <div class="ctas"><a class="btn primary large with-logo" href="${DOWNLOAD_URL}">${WINDOWS_MARK}Download Windows installer</a><a class="btn ghost large" href="/how-it-works">See how it works</a></div>
       <p class="sub-cta">${PRODUCT_STATUS.mac.windowsLabel} / About ${INSTALLER_SIZE} / No admin rights needed</p>${PRODUCT_STATUS.mac.heroLink}
       <div class="brand-strip" aria-label="Install surfaces">
@@ -281,7 +281,7 @@ export const pages: Record<PageId, SitePage> = {
       <div class="doc-head">
         <span class="eyebrow">setup steps</span>
         <h2 class="display-l">One helper. One extension. Then the <em>U button.</em></h2>
-        <p class="lede">Follow the steps for your computer. Both end with the same Chrome button.</p>
+        <p class="lede">Windows and Mac include the Chrome button. Linux runs headless for agents.</p>
       </div>
       <ul class="doc-list">
         <li id="windows">
@@ -301,6 +301,17 @@ export const pages: Record<PageId, SitePage> = {
           <p class="doc-meta"><b class="platform-label">${MAC_MARK}Mac</b></p>
           <h3>${PRODUCT_STATUS.mac.heading}</h3>
           ${PRODUCT_STATUS.mac.installSteps}
+        </li>
+        <li id="linux">
+          <p class="doc-meta"><b>Linux (headless)</b></p>
+          <h3>For agents in Docker, Codespaces and sandboxes.</h3>
+          <p>Install from a checkout. You need Git, Python 3.11 or newer, venv support, ffmpeg and ffprobe. Linux has no tray, splash or dashboard window; the helper serves the dashboard at its local URL.</p>
+          <pre class="code-block">git clone --branch v3.14.0 --depth 1 https://github.com/ryanbiddy/uoink
+sh uoink/scripts/linux/install.sh
+export PATH="$HOME/.local/bin:$PATH"
+uoink mcp</pre>
+          <p>The installer stages the pinned Whisper base model. <code>docker/capture.Dockerfile</code> builds a capture image. Keep the library on persistent storage if the sandbox will be discarded. YouTube can block cloud IPs; local Whisper can help only when the audio download works.</p>
+          <p><a class="arr-link" href="https://github.com/ryanbiddy/uoink/blob/v3.14.0/docs/linux.md">Linux requirements, Docker and agent setup -&gt;</a></p>
         </li>
         <li id="extension">
           <p class="doc-meta"><b>Windows and Mac</b></p>
@@ -413,6 +424,8 @@ ${DOC_RULE}
     html: `
 <section class="hero" data-screen-label="features / hero"><div class="container"><div class="section-head"><span class="eyebrow">feature inventory</span><h1 class="display-xl">Everything Uoink <em>does.</em></h1><p class="lede">Extraction is the on-ramp. The real product is the local corpus that grows every time you capture something worth studying.</p><div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Install Uoink</a><a class="btn ghost large" href="/changelog">See roadmap</a></div></div></div></section>
 <section class="section" data-screen-label="features / capture"><div class="container"><div class="section-head"><span class="eyebrow">job 1 / capture</span><h2 class="display-l">Get content out of video and <em>audio.</em></h2><p class="lede">Capture from the browser, from a playlist, from a URL, or from a feed. The interface changes; the corpus shape stays stable.</p></div><div class="hook-grid">${featureCards([
+["Import your saves","Bring in YouTube Watch Later, X bookmarks and Reddit saves from files or the Chrome panel. File imports are the tested path."],
+["get_transcript","Saved copy, then YouTube captions, then local Whisper. Every result says where the words came from."],
 ["In-page Uoink button","Button under supported video pages with helper status and fast capture."],
 ["Right-click capture","Context menu for links, thumbnails, and video pages."],
 ["Playlist mode","Queue up to 10 videos at a time with partial-failure tolerance."],
@@ -421,6 +434,9 @@ ${DOC_RULE}
 ["Mobile queue bridge","Save to a playlist on mobile; let the desktop helper catch up later."]
 ])}</div></div></section>
 <section class="section" data-screen-label="features / organize"><div class="container"><div class="section-head"><span class="eyebrow">job 2 / organize</span><h2 class="display-l">Turn captures into a <em>library.</em></h2><p class="lede">Every capture compounds: searchable, tagged, and citable from one local index that keeps getting denser.</p></div><div class="hook-grid">${featureCards([
+["Gone from the web","Weekly checks show which saved sources have disappeared. Your copy stays in Uoink."],
+["Deep research","Pick sources for a question. Your agent writes a report; Uoink checks quotes and timestamps against saved transcripts."],
+["Headless Linux","Run the CLI and MCP server in Docker, Codespaces and Linux sandboxes."],
 ["SQLite FTS5 search","Search transcripts, titles, comments, metadata, and corpus text locally."],
 ["Local files","Structured Markdown and a JSON sidecar on your own disk."],
 ["Memory dashboard","Browse recent captures, job states, thumbnails, health, and actions."],
@@ -509,7 +525,7 @@ platform: ${PRODUCT_STATUS.mac.visible}</pre>
       <p>Run this in PowerShell to use absolute paths. Verified with Claude Code 2.1.302:</p>
       <pre class="code-block">${escapeHtml(CLAUDE_CODE_COMMAND)}</pre>
       <h3>Cursor</h3>
-      <p>Cursor is reported to send only the first 40 tools to its agent. Set <code>UOINK_MCP_TOOLSET=core</code> in the server environment to keep the previous 35-tool set and stay under that cap:</p>
+      <p>Cursor is reported to send only the first 40 tools to its agent. Set <code>UOINK_MCP_TOOLSET=core</code> in the server environment to keep the 36-tool core set and stay under that cap:</p>
       <pre class="code-block">${escapeHtml(MCP_CURSOR_CONFIG)}</pre>
       <h3>Other stdio clients and manual Claude Desktop config</h3>
       <pre class="code-block">${escapeHtml(MCP_STDIO_CONFIG)}</pre>
@@ -601,8 +617,17 @@ ${DOC_RULE}
       `Read Uoink release notes from 3.4 through ${VERSION_NUMBER}, including Living Library and research playbooks.`,
     keywords: ["uoink changelog", "uoink release notes", "uoink updates", "universal video uoink changelog"],
     html: `
-<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} imports whole lists of videos (HackerTube, Hacker News and Reddit threads, YouTube playlists), shows a mid-video screenshot on video cards, and restarts Uoink after a silent update. Earlier releases are listed below, with dates from the product changelog.</p>
-<h2>${VERSION}: Import a list, mid-video card images and silent-update restarts</h2><p class="meta"><time datetime="2026-11-01">2026-11-01</time></p>
+<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} adds deep research, a transcript tool with clear fallbacks, imports for your saves, source availability checks and headless Linux for agents. Earlier releases are listed below, with dates from the product changelog.</p>
+<h2>${VERSION}: Deep research, saved sources and headless Linux</h2><p class="meta"><time datetime="2026-11-04">2026-11-04</time></p>
+<p><strong>Deep research.</strong> Ask a question, pick sources and let your agent write the report. Uoink searches your library and, once you allow them, YouTube, Hacker News, HackerTube and podcasts. It captures selected video transcripts within a per-run budget and gives your agent short, cited excerpts. Before saving the report, it checks every quote and timestamp against the saved source. Start in the dashboard's <strong>Research</strong> tab, with <code>uoink research "How do teams test agents?"</code>, or with the <code>deep-research</code> prompt and six <code>research_*</code> tools. Network discovery is off until you enable the sources you want.</p>
+<p><strong>get_transcript.</strong> A YouTube transcript tool that doesn't fail silently: saved copy first, then captions, then the bundled local Whisper model. Every result says where the words came from and explains any fallback. It works as a drop-in for popular YouTube transcript MCP servers.</p>
+<p><strong>Import your saves.</strong> Bring in YouTube Watch Later, X bookmarks and Reddit saved posts. Choose <strong>Import a saves file</strong> or run <code>uoink import &lt;file&gt;</code> with a Google Takeout playlist CSV, Reddit export CSVs or X status links. Existing saves are skipped; new ones get <code>watch later</code>, <code>reddit saved</code> or <code>x bookmarks</code> tags. The Chrome extension's panel can also collect what you scroll past, or use <strong>Auto-scroll</strong>, sending 50 saves at a time. File imports are the tested path; the browser collectors have automated tests but have not yet been tried in a real browser.</p>
+<p><strong>Gone from the web.</strong> Weekly checks from your own machine flag saved videos, posts, podcasts and pages that disappear. Your copy stays in Uoink. A badge, filter and monthly notice show what's gone. Turn checks off with <strong>Check if saved sources go offline</strong> in Settings.</p>
+<p><strong>Linux (headless).</strong> Install from a checkout with <code>scripts/linux/install.sh</code>, then run <code>uoink mcp</code> in Docker, Codespaces or a cloud sandbox. <code>docker/capture.Dockerfile</code> builds a capture image. Linux has no tray, splash or dashboard window; the helper serves a dashboard URL. A host install needs ffmpeg and ffprobe. See the <a href="/install#linux">Linux install steps</a>.</p>
+<p>The MCP inventory is 99 tools: 36 in core mode, 9 in search mode and 7 in research mode (the six research tools plus <code>uoink_url</code>). Use <code>uoink connect &lt;client&gt; --toolset search</code> for a smaller client config. The Windows installer is 519,322,824 bytes (about 519 MB) and is unsigned. The Mac preview DMG is about 695 MB, Developer ID signed and notarized by Apple.</p>
+<p>The installer bundles Pillow 13.0.0, and MCP results mark saved third-party text as untrusted. Updating no longer shows “Uoink could not register crash recovery”. The upgrade keeps your library and captures; migration <code>0033_source_availability.sql</code> stores availability separately. Reload the extension for the saves panel. Claude Desktop users should reinstall the 3.14.0 bundle and restart Desktop.</p>
+<p><strong>Known limits.</strong> YouTube can block cloud IPs; Whisper helps only when audio can be downloaded. Research does not yet capture newly discovered podcast episodes or search Reddit. Saved podcast transcripts still count as evidence. Linux podcast transcription uses CPU faster-whisper without speaker labels unless the optional WhisperX requirements are installed. See the <a href="https://github.com/ryanbiddy/uoink/blob/v3.14.0/docs/research.md">research guide</a> and <a href="https://github.com/ryanbiddy/uoink/releases/tag/v3.14.0">full release notes</a>.</p>
+<h2>v3.13.0: Import a list, mid-video card images and silent-update restarts</h2><p class="meta"><time datetime="2026-11-01">2026-11-01</time></p>
 <p><strong>Import a list.</strong> Paste a list link in Sources &gt; <strong>Import a list</strong> and Uoink queues every video in it for a normal capture, with transcripts. It reads a HackerTube playlist, category, area or the whole collection, a Hacker News thread, a Reddit thread or a YouTube playlist. You see a preview first (“Found 37 videos, 5 already in your library”), then one Import button. Imports go 50 videos at a time, and <strong>Next 50</strong> works through long lists. Videos you already have are skipped, and the rest join the download queue, which captures one video at a time. Each import keeps where it came from as a tag, and HackerTube's note on why Hacker News likes a video shows in the reader.</p>
 <p>From the command line, run <code>uoink import-list &lt;url&gt; --preview</code>, then run it again without <code>--preview</code> to queue the batch; <code>--limit</code> and <code>--offset</code> page through big lists. Agents get the new <code>import_list</code> MCP tool.</p>
 <p>HackerTube (<a href="https://hackertube.org">hackertube.org</a>) is by Andrej Karpathy. Its data is built on the open-index/hacker-news dataset (Hacker News data by Y Combinator) and is licensed ODC-By 1.0. Uoink fetches it when you import and bundles none of it, and every imported HackerTube item keeps the credit line.</p>
@@ -906,7 +931,7 @@ claude plugin install uoink@uoink</pre>
       <p>Run this in PowerShell to use absolute paths. Verified with Claude Code 2.1.302:</p>
       <pre class="code-block">${escapeHtml(CLAUDE_CODE_COMMAND)}</pre>
       <h3>Cursor</h3>
-      <p>Cursor is reported to send only the first 40 tools to its agent. Set <code>UOINK_MCP_TOOLSET=core</code> in the server environment to keep the previous 35-tool set and stay under that cap:</p>
+      <p>Cursor is reported to send only the first 40 tools to its agent. Set <code>UOINK_MCP_TOOLSET=core</code> in the server environment to keep the 36-tool core set and stay under that cap:</p>
       <pre class="code-block">${escapeHtml(MCP_CURSOR_CONFIG)}</pre>
       <h3>Other stdio clients and manual Claude Desktop config</h3>
       <pre class="code-block">${escapeHtml(MCP_STDIO_CONFIG)}</pre>
