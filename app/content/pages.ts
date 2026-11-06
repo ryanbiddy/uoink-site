@@ -306,12 +306,12 @@ export const pages: Record<PageId, SitePage> = {
           <p class="doc-meta"><b>Linux (headless)</b></p>
           <h3>For agents in Docker, Codespaces and sandboxes.</h3>
           <p>Install from a checkout. You need Git, Python 3.11 or newer, venv support, ffmpeg and ffprobe. Linux has no tray, splash or dashboard window; the helper serves the dashboard at its local URL.</p>
-          <pre class="code-block">git clone --branch v3.14.1 --depth 1 https://github.com/ryanbiddy/uoink
+          <pre class="code-block">git clone --branch v3.15.0 --depth 1 https://github.com/ryanbiddy/uoink
 sh uoink/scripts/linux/install.sh
 export PATH="$HOME/.local/bin:$PATH"
 uoink mcp</pre>
           <p>The installer stages the pinned Whisper base model. <code>docker/capture.Dockerfile</code> builds a capture image. Keep the library on persistent storage if the sandbox will be discarded. YouTube can block cloud IPs; local Whisper can help only when the audio download works.</p>
-          <p><a class="arr-link" href="https://github.com/ryanbiddy/uoink/blob/v3.14.1/docs/linux.md">Linux requirements, Docker and agent setup -&gt;</a></p>
+          <p><a class="arr-link" href="https://github.com/ryanbiddy/uoink/blob/v3.15.0/docs/linux.md">Linux requirements, Docker and agent setup -&gt;</a></p>
         </li>
         <li id="extension">
           <p class="doc-meta"><b>Windows and Mac</b></p>
@@ -617,8 +617,15 @@ ${DOC_RULE}
       `Read Uoink release notes from 3.4 through ${VERSION_NUMBER}, including Living Library and research playbooks.`,
     keywords: ["uoink changelog", "uoink release notes", "uoink updates", "universal video uoink changelog"],
     html: `
-<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} fixes research excerpts from saved videos, cleans up CLI output and corrects report formatting. Earlier releases are listed below, with dates from the product changelog.</p>
-<h2>${VERSION}: Saved-video research and CLI fixes</h2><p class="meta"><time datetime="2026-11-05">2026-11-05</time></p>
+<section class="section" data-screen-label="changelog / main"><div class="container"><article class="article"><div class="meta"><span>changelog</span><span>newest first</span></div><h1>Uoink <em>release notes.</em></h1><p class="standfirst">${VERSION_NUMBER} polishes search, the reader, capture status, research sources and podcasts. Earlier releases are listed below, with dates from the product changelog.</p>
+<h2>${VERSION}: Search, reader and podcast polish</h2><p class="meta"><time datetime="2026-11-06">2026-11-06</time></p>
+<p><strong>Search finds the moment.</strong> Library search matches all your words by default and sorts by relevance while you type. Each result shows the line that matched with its timestamp; click it to open the item at that point in the transcript. Choose <strong>Any words</strong> for broader results.</p>
+<p><strong>A cleaner reader.</strong> Black frames (a video fading in) are no longer used as screenshots in the reader or the Generate picker, and screenshots and transcript lines appear in time order. <strong>Copy as Markdown</strong> puts the transcript first, leaves out empty sections and uses full file links.</p>
+<p><strong>Plain capture status.</strong> Captures say “Getting transcript” or “Saving screenshots”, then “Ready”. A failed capture leads with the plain reason, such as “This video is private or unavailable in your region”; the raw downloader message is under <strong>Details</strong>.</p>
+<p><strong>Podcasts and research sources.</strong> Each podcast episode gets one Activity row, and the sidebar count matches Activity. Episodes use the feed’s title instead of “Untitled podcast”, including episodes you already saved; your saved files are not rewritten. Uoink doesn’t read a feed until you allow it or press <strong>Check now</strong>. In research, each source has one control: <strong>Use saved</strong> for items in your library, <strong>Capture new</strong> for the rest. On the Sources page the paste box comes first, and web pages ask for site permission inline.</p>
+<p>Smaller fixes: the sidebar footer says “Running on this PC” (or Mac); on a Mac, Uoink finds Claude Desktop in <code>/Applications</code> before its first launch; <strong>Write from this</strong> and <strong>Generate</strong> say “Connect Claude first” until a writing agent is set up; For You no longer pairs items only because both are uncategorized; Insights shows readable dates.</p>
+<p>No new tools: 99 over stdio and 99 in the HTTP registry, with 36 in core mode, 9 in search mode and 7 in research mode. Upgrading from 3.14.1 adds no database migrations and keeps your library and captures. Reload the extension after updating; Claude Desktop users should reinstall the 3.15.0 bundle and restart Desktop. See the <a href="https://github.com/ryanbiddy/uoink/releases/tag/v3.15.0">full release notes</a>.</p>
+<h2>v3.14.1: Saved-video research and CLI fixes</h2><p class="meta"><time datetime="2026-11-05">2026-11-05</time></p>
 <p>Deep research can return excerpts from videos captured outside a research run again. It repairs those items when first read, after checking their transcript and saved files.</p>
 <p>The <code>--text</code> output for <code>search</code>, <code>recent</code> and <code>research</code> uses <code>m:ss</code> timestamp ranges and normal quotes in titles. Search results include the source and a verified quote; recent saves show the date, kind and source. Research shows a short reason for each candidate; use <code>--explain</code> for the full score breakdown. JSON output is unchanged.</p>
 <p>Research <code>report.md</code> files use Markdown escapes instead of HTML entities. Reports and share text use “1 claim” and “1 source” for single counts. Research MCP tools explain that <code>run_id</code> comes from <code>research_start</code>. Saves import headers use matching source labels and show list titles once in the CLI and dashboard. The Windows installer bundles <code>filelock</code> 4.2.1.</p>
