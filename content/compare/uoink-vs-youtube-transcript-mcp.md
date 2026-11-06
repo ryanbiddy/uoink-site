@@ -75,6 +75,6 @@ Competitor pages were opened and read on 2026-11-03.
 
 Uoink facts:
 
-- U1. Uoink 3.14.1 summary (updated 2026-11-05): https://uoink.app/llms.txt
-- U2. Uoink 3.14.1 full disclosures (updated 2026-11-05): https://uoink.app/llms-full.txt
+- U1. Uoink 3.15.0 summary (updated 2026-11-06): https://uoink.app/llms.txt
+- U2. Uoink 3.15.0 full disclosures (updated 2026-11-06): https://uoink.app/llms-full.txt
 - U3. uoink-lite README: https://github.com/ryanbiddy/uoink-lite
