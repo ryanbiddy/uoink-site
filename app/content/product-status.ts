@@ -48,7 +48,7 @@ export const PRODUCT_STATUS: { mac: MacStatus } = {
           </ol>
           <p>If macOS reports an unidentified developer, a damaged app or malware instead, don't open it. Report it with the DMG's SHA-256.</p>
           <p>For Claude Desktop, open <a href="${MAC_MCPB_URL}">${MAC_MCPB_NAME}</a> from the same release, not the Windows bundle, and select the installed Uoink.app in its Uoink app setting. For other AI clients, run <code>uoink connect &lt;client&gt;</code>; see <a href="/developers">agent setup</a>.</p>
-          <p>Not on the Mac yet: Uoink doesn't update itself, so quit Uoink and close MCP clients before replacing the app with a new version. Library mirroring is unavailable. macOS still credits Uoink's alerts to Script Editor.</p>
+          <p>To update from 3.15.1 on, press <strong>Download update</strong> in Settings, Updates; Uoink checks the DMG against the release's SHA256SUMS.txt and opens it for you to drag in. Quit Uoink and close MCP clients before replacing the app. 3.15.1 itself installs the usual way. Library mirroring is unavailable. macOS still credits Uoink's alerts to Script Editor.</p>
           <a class="btn primary small" href="${MAC_DMG_URL}">Download for Mac -></a>`,
     agentSetup: `<h3>On a Mac</h3>
 <p>The Mac preview runs on Apple Silicon with macOS 15 or later. The <code>uoink</code> command ships inside the app at <code>Uoink.app/Contents/Helpers/uoink</code>, and the app does not change your shell or PATH. To run it from a terminal, link it into a folder on your PATH:</p>
