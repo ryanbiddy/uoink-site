@@ -291,13 +291,13 @@ if (sizeKnown) {
   assert.equal(sums.exe[2], String(Math.round(release.installerSizeBytes / 1_000_000)), "llms-full.txt: installer MB");
   if (!isPlaceholder(sums.exe[1])) assert.equal(sums.exe[1], release.installerSizeBytes.toLocaleString("en-US"), "llms-full.txt: installer bytes match content/release.json");
 }
-// 3.16.0 release numbers. Size known; hashes and the DMG/bundle sizes are placeholders until the release is cut.
+// 3.16.0 release numbers, from the published SHA256SUMS.txt.
 assert.equal(release.installerSizeBytes, 519455821);
 for (const fact of [
-  "- Uoink-Setup-3.16.0.exe: 519,455,821 bytes (about 519 MB). SHA-256: `__EXE_SHA__`.",
-  "- uoink-3.16.0.mcpb: __MCPB_SIZE__ bytes. SHA-256: `__MCPB_SHA__`.",
-  "- Uoink-3.16.0-macos-arm64.dmg (Mac preview): DMG_BYTES_TBD bytes. SHA-256: `__DMG_SHA__`.",
-  "- uoink-3.16.0-macos.mcpb: __MACMCPB_SIZE__ bytes. SHA-256: `__MAC_MCPB_SHA__`.",
+  "- Uoink-Setup-3.16.0.exe: 519,455,821 bytes (about 519 MB). SHA-256: `77c0b9533a7548c6735f1cd34c1f90f87d2113dda7b7a6779ee96cb17cb317a6`.",
+  "- uoink-3.16.0.mcpb: 119,679 bytes. SHA-256: `ee0d47f05632c8820bc0e618040eab9ab4784bc3576f6a226c27ff47786927f5`.",
+  "- Uoink-3.16.0-macos-arm64.dmg (Mac preview): 706,306,450 bytes. SHA-256: `be8a3b9b59108289228d788165ef6aab754431c0b5b34fc7d7547bc650284799`.",
+  "- uoink-3.16.0-macos.mcpb: 116,241 bytes. SHA-256: `438d485e1ee3a76557e0877024e782abba72f9b246bdbc9a278f1f8e779335c4`.",
 ]) assert(llmsFull.includes(fact), `llms-full.txt checksums: ${fact}`);
 assert(!/3\.(?:11\.2|12\.[01]|13\.0|14\.[01]|15\.[01])\.exe:|3\.(?:11\.2|12\.[01]|13\.0|14\.[01]|15\.[01])-macos-arm64\.dmg \(Mac preview\):/.test(llmsFull), "llms-full.txt checksums: no older release lines");
 // The tool inventory line names the commit the manifest was generated from.

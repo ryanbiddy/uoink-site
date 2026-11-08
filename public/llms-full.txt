@@ -209,10 +209,10 @@ The copy includes references. An existing copy needs `--force` to overwrite. Res
 
 ## Release checksums
 
-- Uoink-Setup-3.16.0.exe: 519,455,821 bytes (about 519 MB). SHA-256: `__EXE_SHA__`.
-- uoink-3.16.0.mcpb: __MCPB_SIZE__ bytes. SHA-256: `__MCPB_SHA__`.
-- Uoink-3.16.0-macos-arm64.dmg (Mac preview): DMG_BYTES_TBD bytes. SHA-256: `__DMG_SHA__`.
-- uoink-3.16.0-macos.mcpb: __MACMCPB_SIZE__ bytes. SHA-256: `__MAC_MCPB_SHA__`.
+- Uoink-Setup-3.16.0.exe: 519,455,821 bytes (about 519 MB). SHA-256: `77c0b9533a7548c6735f1cd34c1f90f87d2113dda7b7a6779ee96cb17cb317a6`.
+- uoink-3.16.0.mcpb: 119,679 bytes. SHA-256: `ee0d47f05632c8820bc0e618040eab9ab4784bc3576f6a226c27ff47786927f5`.
+- Uoink-3.16.0-macos-arm64.dmg (Mac preview): 706,306,450 bytes. SHA-256: `be8a3b9b59108289228d788165ef6aab754431c0b5b34fc7d7547bc650284799`.
+- uoink-3.16.0-macos.mcpb: 116,241 bytes. SHA-256: `438d485e1ee3a76557e0877024e782abba72f9b246bdbc9a278f1f8e779335c4`.
 
 ## Local HTTP and OpenAPI
 
