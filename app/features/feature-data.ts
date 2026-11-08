@@ -98,7 +98,7 @@ export const features: Feature[] = [
       "Read the source and language fields, plus the reason for any fallback.",
       "Use include_timestamps for timed text and next_cursor for longer transcripts."
     ],
-    behindScenes: "The saved-copy path needs no network. Caption requests use your own connection; Whisper runs locally. YouTube can block cloud IPs, and transcription helps only when the audio download works. A fallback explains why it ran instead of hiding the caption failure. When YouTube asks for a bot check, the capture still finishes with local Whisper and says so. Uoink never signs in to YouTube or uses browser cookies.",
+    behindScenes: "The saved-copy path needs no network. Caption requests use your own connection; Whisper runs locally. YouTube can block cloud IPs, and transcription helps only when the audio download works. A fallback explains why it ran instead of hiding the caption failure. When YouTube's bot check blocks captions, the capture still finishes with local Whisper and says so. Uoink never signs in to YouTube or uses browser cookies.",
     mcpTools: ["get_transcript"],
     related: ["deep-research", "mcp-server", "headless-linux"],
     cta: "Ask your connected agent for a YouTube transcript and check its source field.",

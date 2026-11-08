@@ -38,7 +38,7 @@ const faq: FaqItem[] = [
   {
     question: "Can Uoink capture private or age-gated videos?",
     answer:
-      "No. Uoink never signs in to YouTube and never uses browser cookies, so it can only capture videos YouTube shows to anyone. When YouTube asks for a bot check, the capture still finishes with local Whisper, and the Library note and Activity row say so. After three bot checks in 15 minutes, Uoink stops asking YouTube for captions for 30 minutes and transcribes locally.",
+      "No. Uoink never signs in to YouTube and never uses browser cookies, so it can only capture videos YouTube shows to anyone. When YouTube's bot check blocks captions, the capture still finishes with local Whisper, and the Library note and Activity row say so. After three bot checks in 15 minutes, Uoink stops asking YouTube for captions for 30 minutes and transcribes locally.",
   },
   {
     question: "Is it free?",

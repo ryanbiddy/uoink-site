@@ -40,7 +40,7 @@ const sources: {
     capture: "Button, right-click, playlist queue, and Shorts.",
     corpus: "Transcript, frames, comments, metadata, channel context.",
     output: "Creator research, hook study, lecture notes, agent citations.",
-    limits: "Uoink never signs in to YouTube or uses browser cookies, so private and age-gated videos can't be captured. When YouTube asks for a bot check, the capture still finishes with local Whisper and says so.",
+    limits: "Uoink never signs in to YouTube or uses browser cookies, so private and age-gated videos can't be captured. When YouTube's bot check blocks captions, the capture still finishes with local Whisper and says so.",
     logos: ["youtube"],
     href: "/sources/youtube",
   },
