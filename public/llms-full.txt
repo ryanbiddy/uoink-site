@@ -1,32 +1,30 @@
-<!-- updated: 2026-11-07 / uoink v3.15.1 -->
-# Uoink 3.15.1: update notices and podcast feed checks
+<!-- updated: 2026-11-08 / uoink v3.16.0 -->
+# Uoink 3.16.0: Make a Short with Zing
 
 > Uoink is a free, open-source local library of the YouTube videos, podcasts, X posts and articles you study, saved on your own computer (Windows, plus a Mac preview), that your AI can search and cite with timestamps.
 
 Free, MIT-licensed. No account or Uoink-hosted corpus. Model dependencies can send telemetry. Made by Ryan Biddy (@replayryan), a personal side project.
 
-## What's new in 3.15.1
+## What's new in 3.16.0
 
-- Update notices. In Settings, Updates, **Check for new versions once a day** is off by default; **Check now** works either way. When a newer version is out, a banner says so, and the Windows tray and Mac menu bar show "Update available". The check asks `api.github.com` for the latest release tag and sends nothing else. The tray and menu bar never contact GitHub themselves.
-- **Update now** (Windows) and **Download update** (Mac) download the new installer from the GitHub release, check it against the release's `SHA256SUMS.txt`, and only then run it (Windows) or open the DMG (Mac). Nothing downloads unless you press the button. 3.15.1 is the first release with the button, so it installs the usual way. Linux, source checkouts and isolated test installs link to the release page instead.
-- Podcast feed cards on Sources and feed rows in Settings have **Check now**. It skips the hourly wait once the feed has gone 2 minutes unchecked, and still respects backoff and a check already running.
-- Whisper gets a short hint from the show and episode titles (or the channel and video titles), so niche names come out spelled right more often.
-- Claude Code stays connected after a big capture. A tool reply over the 64 KiB reply frame used to be replaced with "Inbound request exceeds protocol limits", which left the session unusable. Replies are now trimmed to fit, with a note pointing to the full record. `uoink_x` returns the post text, author, counts and one best MP4 per video; the full evidence stays in the sidecar.
-- The search box says whether it is using keyword or meaning search. Failed captures only show under a search they match. Highlights match whole words.
-- Back-catalog podcast episodes show as podcasts with the feed's artwork, cached locally once per feed; the dashboard still loads no remote images. After you allow a feed, its card shows the first check instead of stopping at "0 enrolled".
-- Research: any candidate already in your library shows **Use saved**. Reports say "1 channel cited".
-- Smaller fixes: Insights leads with its numbers; For You waits for 10 library items before naming a gap; the "Uoink anything" paste box is first on Sources; X thumbnails no longer fail with 403 and X captures stop logging a failed channel lookup; Copy as Markdown leaves out unknown fields instead of printing dashes; `uoink --text` no longer crashes on a Windows console that can't print ♪.
-- No new tools: 99 over stdio and 99 in the HTTP registry; 36 in core mode, 9 in search mode and 7 in research mode. Upgrading from 3.15.0 adds no database migrations and keeps your library and captures. Reload the extension after updating; reinstall the 3.15.1 .mcpb and restart Claude Desktop.
+- **Make a Short with Zing.** When [Zing](https://myzing.app) is installed, the reader has a button that hands the open item to Zing and opens Zing's review page. Nothing shows if Zing is not installed. Zing needs the item's video. If Uoink kept the media (short videos only), Zing uses it. If not, Zing downloads the video only after you click **Download** for that item, and shows progress while it does. Nothing downloads on its own. Uoink talks to Zing only on your machine, through the local helper; the one thing that leaves it is the download you approve, which Zing fetches from the video's own site.
+- **Suite capture, `uoink.capture/1`.** A sibling local app such as Zing can save one link into your library. It uses the helper token and never recaptures a link that is already saved. It still asks for the page allowlist and the podcast consent first.
+- **YouTube bot check, named.** When YouTube asks to confirm you are not a bot, the capture still finishes with local Whisper. The Library note and Activity row now say so, the saved capture records `captions_skipped_reason`, and `server.log` names the category instead of a generic error.
+- **A pause after repeated bot checks.** After three bot checks in 15 minutes, Uoink stops asking YouTube for captions for 30 minutes and transcribes locally. The dashboard shows a notice you can dismiss, and `/health` reports `youtube_bot_check`. Uoink never adds browser cookies on its own.
+- **Updating.** If you are on 3.15.1, press **Update now** (Windows) or **Download update** (Mac) in Settings, Updates. The download is checked against the release's `SHA256SUMS.txt` and only happens when you press the button. Older versions install the usual way.
+- No new tools: 99 over stdio and 99 in the HTTP registry; 36 in core mode, 9 in search mode and 7 in research mode. Upgrading from 3.15.1 adds no database migrations and keeps your library and captures. Reload the extension after updating; reinstall the 3.16.0 .mcpb and restart Claude Desktop.
 
-Known limits: YouTube can block cloud IPs; Whisper helps only if the audio download works. Research does not yet capture newly discovered podcast episodes or search Reddit. Saved podcast transcripts still count as evidence. Linux podcast transcription uses CPU faster-whisper without speaker labels unless the optional WhisperX requirements are installed. Matching a quote does not prove a claim is true.
+Known limits: YouTube can block cloud IPs; Whisper helps only if the audio download works. Make a Short with Zing needs Zing installed. Research does not yet capture newly discovered podcast episodes or search Reddit. Saved podcast transcripts still count as evidence. Linux podcast transcription uses CPU faster-whisper without speaker labels unless the optional WhisperX requirements are installed. Matching a quote does not prove a claim is true.
 
-Guides: [Research](https://github.com/ryanbiddy/uoink/blob/v3.15.1/docs/research.md) and [Linux](https://github.com/ryanbiddy/uoink/blob/v3.15.1/docs/linux.md).
+Guides: [Research](https://github.com/ryanbiddy/uoink/blob/v3.16.0/docs/research.md) and [Linux](https://github.com/ryanbiddy/uoink/blob/v3.16.0/docs/linux.md).
 
 ## Earlier releases
 
+Uoink 3.15.1 added an opt-in daily check for new versions, Update now (Windows) and Download update (Mac), checked against the release's `SHA256SUMS.txt` and only when you press the button, Check now on podcast feeds, Whisper title hints, and a fix that keeps Claude Code connected after a large capture reply, with no new tools or migrations.
+
 Uoink 3.15.0 polished search (all words by default, with the matching line and timestamp), the reader, capture status and failure messages, research sources and podcast names, with no new tools or migrations.
 
-Uoink 3.14.0 added deep research with checked quotes and timestamps, `get_transcript` with saved-copy, caption and local Whisper fallbacks, YouTube Watch Later, X bookmark and Reddit saves imports, Gone from the web checks, and headless Linux. Network discovery is off until you enable each source. File imports are tested; the browser collectors have not yet been tried in a real browser. 3.14.1 fixed research excerpts from videos saved outside a research run, CLI text output and report formatting. The inventory is unchanged in 3.14.1, 3.15.0 and 3.15.1.
+Uoink 3.14.0 added deep research with checked quotes and timestamps, `get_transcript` with saved-copy, caption and local Whisper fallbacks, YouTube Watch Later, X bookmark and Reddit saves imports, Gone from the web checks, and headless Linux. Network discovery is off until you enable each source. File imports are tested; the browser collectors have not yet been tried in a real browser. 3.14.1 fixed research excerpts from videos saved outside a research run, CLI text output and report formatting. The inventory is unchanged in 3.14.1, 3.15.0, 3.15.1 and 3.16.0.
 
 Uoink 3.13.0 added Import a list and the `import_list` tool, the From lists you imported panel, mid-video card images and silent-update restarts. It had 92 tools, with 35 in core mode.
 
@@ -56,20 +54,20 @@ After updating, reload the extension once. If its ID changes to the pinned bkcap
 
 - [Install](https://uoink.app/install): helper and extension instructions.
 - [Latest release](https://github.com/ryanbiddy/uoink/releases/latest): installers and Claude Desktop .mcpb bundles.
-- [Windows installer](https://github.com/ryanbiddy/uoink/releases/download/v3.15.1/Uoink-Setup-3.15.1.exe): Uoink 3.15.1.
-- [Mac preview DMG](https://github.com/ryanbiddy/uoink/releases/download/v3.15.1/Uoink-3.15.1-macos-arm64.dmg): Uoink 3.15.1 for Apple Silicon, macOS 15 or later.
-- [3.15.1 release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.15.1): update notices, Update now, podcast feed Check now, Whisper title hints and the Claude Code large-reply fix.
+- [Windows installer](https://github.com/ryanbiddy/uoink/releases/download/v3.16.0/Uoink-Setup-3.16.0.exe): Uoink 3.16.0.
+- [Mac preview DMG](https://github.com/ryanbiddy/uoink/releases/download/v3.16.0/Uoink-3.16.0-macos-arm64.dmg): Uoink 3.16.0 for Apple Silicon, macOS 15 or later.
+- [3.16.0 release notes](https://github.com/ryanbiddy/uoink/releases/tag/v3.16.0): Make a Short with Zing, suite capture, the YouTube bot-check note and the 30-minute caption pause.
 - [Changelog](https://uoink.app/changelog): dated release summaries.
 
 ## Mac preview
 
 Mac preview: Apple Silicon, macOS 15 or later; Intel Macs are not supported. The app and the DMG are signed with a Developer ID, notarized by Apple and stapled. Uoink opens after macOS's standard "downloaded from the internet" prompt; no security override is needed. If macOS reports an unidentified developer, a damaged app or malware instead, don't open it; report it with the DMG's SHA-256.
 
-1. Download [Uoink-3.15.1-macos-arm64.dmg](https://github.com/ryanbiddy/uoink/releases/download/v3.15.1/Uoink-3.15.1-macos-arm64.dmg) and check it against the SHA-256 listed on the release page.
+1. Download [Uoink-3.16.0-macos-arm64.dmg](https://github.com/ryanbiddy/uoink/releases/download/v3.16.0/Uoink-3.16.0-macos-arm64.dmg) and check it against the SHA-256 listed on the release page.
 2. Open the DMG, drag Uoink to the Applications shortcut, eject the disk, and open Uoink from Applications.
 3. Browser button: open Uoink once so it creates `~/Library/Application Support/Uoink/extension`. In Chrome, open chrome://extensions, enable Developer mode and click Load unpacked. The picker hides `~/Library`, so press ⌘⇧G, paste the path (the dashboard's Get the extension card copies it) and press Return.
 4. The uoink command is `/Applications/Uoink.app/Contents/Helpers/uoink`. The app does not change your shell or PATH. For a user-local command, run `mkdir -p "$HOME/.local/bin"`, `ln -s /Applications/Uoink.app/Contents/Helpers/uoink "$HOME/.local/bin/uoink"` and `export PATH="$HOME/.local/bin:$PATH"`, then `uoink status`.
-5. Connect an AI client with `uoink connect claude-desktop`, `uoink connect cursor`, `uoink connect codex`, `uoink connect claude-code` or `uoink connect vscode --deeplink`. The recipe uses the app's current location and does not edit client files; back up the client's configuration and merge the printed entry. Claude Desktop's extension flow uses [uoink-3.15.1-macos.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.15.1/uoink-3.15.1-macos.mcpb), not the Windows bundle; select the installed Uoink.app in its Uoink app setting. Use the standalone skill and `uoink connect claude-code`; the Claude Code plugin's MCP entry is still for Windows. On a Mac, Claude Code passed MCP acceptance (3.11.2); other clients are untested there.
+5. Connect an AI client with `uoink connect claude-desktop`, `uoink connect cursor`, `uoink connect codex`, `uoink connect claude-code` or `uoink connect vscode --deeplink`. The recipe uses the app's current location and does not edit client files; back up the client's configuration and merge the printed entry. Claude Desktop's extension flow uses [uoink-3.16.0-macos.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.16.0/uoink-3.16.0-macos.mcpb), not the Windows bundle; select the installed Uoink.app in its Uoink app setting. Use the standalone skill and `uoink connect claude-code`; the Claude Code plugin's MCP entry is still for Windows. On a Mac, Claude Code passed MCP acceptance (3.11.2); other clients are untested there.
 
 Not on the Mac yet: Update with **Download update** in Settings (it checks the DMG against SHA256SUMS.txt and opens it); quit Uoink and close MCP clients before replacing the app. Library mirroring is unavailable. macOS still credits Uoink's alerts to Script Editor. The full and core MCP inventories are 99 and 36, as on Windows.
 
@@ -98,7 +96,7 @@ Semantic search is optional and off by default. A person must turn it on in Uoin
 - [How it works](https://uoink.app/how-it-works): capture to cited corpus.
 
 ## Linux (headless)
-Install from the v3.15.1 checkout with `sh uoink/scripts/linux/install.sh`, then run `uoink mcp`. A host install needs Git, Python 3.11 or newer, venv support, ffmpeg and ffprobe. `docker/capture.Dockerfile` builds the capture image. See [Linux setup](https://github.com/ryanbiddy/uoink/blob/v3.15.1/docs/linux.md).
+Install from the v3.16.0 checkout with `sh uoink/scripts/linux/install.sh`, then run `uoink mcp`. A host install needs Git, Python 3.11 or newer, venv support, ffmpeg and ffprobe. `docker/capture.Dockerfile` builds the capture image. See [Linux setup](https://github.com/ryanbiddy/uoink/blob/v3.16.0/docs/linux.md).
 
 ## AI access
 
@@ -138,12 +136,12 @@ ScrapeCreators receives the typed handle, channel ID or query only after discove
 - [Field notes](https://uoink.app/blog): articles.
 
 ## Set it up with an agent (Windows 10/11)
-Windows 10/11, a Mac preview for Apple Silicon (macOS 15 or later), and headless Linux for agents. Uoink v3.15.1 is free and MIT-licensed; the unsigned Windows installer is about 519 MB. No admin rights needed. Mac setup is in the "Mac preview" section above.
+Windows 10/11, a Mac preview for Apple Silicon (macOS 15 or later), and headless Linux for agents. Uoink v3.16.0 is free and MIT-licensed; the unsigned Windows installer is about 519 MB. No admin rights needed. Mac setup is in the "Mac preview" section above.
 [Agent installation steps](https://github.com/ryanbiddy/uoink/blob/main/llms-install.md): download, verify SHA-256, install, and connect.
 ### An agent can run
-1. Download [Uoink-Setup-3.15.1.exe](https://github.com/ryanbiddy/uoink/releases/download/v3.15.1/Uoink-Setup-3.15.1.exe) to `$env:TEMP\Uoink-Setup-3.15.1.exe`.
-2. Before running it, compare `Get-FileHash -Algorithm SHA256 "$env:TEMP\Uoink-Setup-3.15.1.exe"` with the installer entry in [SHA256SUMS.txt](https://github.com/ryanbiddy/uoink/releases/download/v3.15.1/SHA256SUMS.txt).
-3. Install per user: `Start-Process -Wait -FilePath "$env:TEMP\Uoink-Setup-3.15.1.exe" -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART'`. It installs to `%LOCALAPPDATA%\Uoink` with Add the uoink command to PATH for AI agents checked by default. Installing over the previous release keeps the library and saved captures; upgrading from before 3.11.0 rebuilds the local keyword search index once.
+1. Download [Uoink-Setup-3.16.0.exe](https://github.com/ryanbiddy/uoink/releases/download/v3.16.0/Uoink-Setup-3.16.0.exe) to `$env:TEMP\Uoink-Setup-3.16.0.exe`.
+2. Before running it, compare `Get-FileHash -Algorithm SHA256 "$env:TEMP\Uoink-Setup-3.16.0.exe"` with the installer entry in [SHA256SUMS.txt](https://github.com/ryanbiddy/uoink/releases/download/v3.16.0/SHA256SUMS.txt).
+3. Install per user: `Start-Process -Wait -FilePath "$env:TEMP\Uoink-Setup-3.16.0.exe" -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART'`. It installs to `%LOCALAPPDATA%\Uoink` with Add the uoink command to PATH for AI agents checked by default. Installing over the previous release keeps the library and saved captures; upgrading from before 3.11.0 rebuilds the local keyword search index once.
 4. Open a new terminal, run `uoink status`, then connect a client below. A silent install starts Uoink in the background, and a silent upgrade restarts it only if it was running; MCP works without it running. If it is not running, for the dashboard, browser button, and monitored-playlist polling, start "Uoink" from the Start menu or run `& "$env:LOCALAPPDATA\Uoink\python\pythonw.exe" "$env:LOCALAPPDATA\Uoink\server.py"` in PowerShell.
 ### The person must do
 - Allow the unsigned installer if Windows asks. For SmartScreen, choose More info, then Run anyway.
@@ -169,7 +167,7 @@ Agent Install 27 passed 11/11 checks with the installed 3.11.1 build in an isola
 
 Earlier testing with the installed 3.11.0 build in an isolated profile: Claude Code 2.1.308 over MCP (all 91 tools listed; a tool called) and Codex CLI 0.153.4 over MCP (two tools called). From 3.10.0 testing: Claude Code with the skill and CLI only (skill loaded; uoink note and uoink recent ran). The Claude Code plugin loads its skill and starts its MCP server; its tool calls were not run end to end because the test install is isolated from a normal one. Not yet tested: Gemini CLI and pi (no sign-in on the test machine) and every other uoink connect recipe. Claude Desktop and Cursor retain their earlier MCP testing status.
 
-Claude Desktop on Windows: download and open [uoink-3.15.1.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.15.1/uoink-3.15.1.mcpb). Desktop installs it as an extension and asks for your Uoink folder (%LOCALAPPDATA%\Uoink). Enter the full path; Desktop does not expand %LOCALAPPDATA%. After updating, reinstall the bundle and restart Desktop.
+Claude Desktop on Windows: download and open [uoink-3.16.0.mcpb](https://github.com/ryanbiddy/uoink/releases/download/v3.16.0/uoink-3.16.0.mcpb). Desktop installs it as an extension and asks for your Uoink folder (%LOCALAPPDATA%\Uoink). Enter the full path; Desktop does not expand %LOCALAPPDATA%. After updating, reinstall the bundle and restart Desktop.
 
 Claude Code (verified on Uoink 3.10.0 with 2.1.302, including all tools listed, a note saved, and recent captures read): run this in PowerShell with absolute paths:
 
@@ -211,10 +209,10 @@ The copy includes references. An existing copy needs `--force` to overwrite. Res
 
 ## Release checksums
 
-- Uoink-Setup-3.15.1.exe: 519,421,506 bytes (about 519 MB). SHA-256: `73f081c1d76c259c00da6a2bb3619d477ccfdbebcae25919d607d104f32e3854`.
-- uoink-3.15.1.mcpb: 119,442 bytes. SHA-256: `2c7c282a438a17a10eed38f697c7b7fd3933545c0107dc8dce73f66fd3ddbadb`.
-- Uoink-3.15.1-macos-arm64.dmg (Mac preview): 709,347,498 bytes. SHA-256: `ff41d69cdf99a15ec4f2115db8b535438363a7811d9a9974a06a31108ab62c79`.
-- uoink-3.15.1-macos.mcpb: 116,007 bytes. SHA-256: `006ccba07284177195acdae16a9ebde2bcfa7d1cfbb16b69f1d3f8e00e05be7d`.
+- Uoink-Setup-3.16.0.exe: 519,455,821 bytes (about 519 MB). SHA-256: `__EXE_SHA__`.
+- uoink-3.16.0.mcpb: __MCPB_SIZE__ bytes. SHA-256: `__MCPB_SHA__`.
+- Uoink-3.16.0-macos-arm64.dmg (Mac preview): DMG_BYTES_TBD bytes. SHA-256: `__DMG_SHA__`.
+- uoink-3.16.0-macos.mcpb: __MACMCPB_SIZE__ bytes. SHA-256: `__MAC_MCPB_SHA__`.
 
 ## Local HTTP and OpenAPI
 
@@ -227,4 +225,4 @@ Watch RSS/Atom feeds. Per-feed auto-ingest is optional: when enabled, new episod
 
 ## Tool inventory
 
-Source: v3.15.1, commit 4c45eccb28ee839c49a0150b981ab5dbd5b45fa7. The shared TOOL_REGISTRY and default stdio inventory expose 99 tools over stdio and 99 in the HTTP registry, checked against .mcpb/manifest.json. Tool names, descriptions, HTTP registry schemas, and transport labels are in https://uoink.app/mcp/manifest.json. Both HTTP and stdio advertise the same flattened top-level schema variants for client compatibility; handlers still validate the exact registry schema.
+Source: v3.16.0, commit e0c82bb64fbe9e5c1c318a9da84856225f0043a2. The shared TOOL_REGISTRY and default stdio inventory expose 99 tools over stdio and 99 in the HTTP registry, checked against .mcpb/manifest.json. Tool names, descriptions, HTTP registry schemas, and transport labels are in https://uoink.app/mcp/manifest.json. Both HTTP and stdio advertise the same flattened top-level schema variants for client compatibility; handlers still validate the exact registry schema.
