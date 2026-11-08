@@ -17,14 +17,14 @@ const manifest = JSON.parse(fs.readFileSync("public/mcp/manifest.json", "utf8"))
 const path = require("node:path");
 function walk(dir) { return fs.readdirSync(dir, {withFileTypes:true}).flatMap(entry => entry.isDirectory() ? walk(path.join(dir, entry.name)) : [path.join(dir, entry.name)]); }
 
-// Release numbers that are not known until the 3.15.1 release is published use
-// __NAME__ placeholders, and content/release.json carries installerSizeBytes 0.
+// Release numbers that are not known until the 3.16.0 release is published use
+// __NAME__ placeholders (the Mac DMG size is DMG_BYTES_TBD and DMG_MB_TBD).
 // The Agent Install 30 summary is __RECEIPT30__ until that receipt lands.
 // Every other assertion runs first; the check then fails, listing each one.
-const PLACEHOLDER = /__(?:EXE_SIZE|EXE_SHA|MCPB_SHA|DMG_SIZE|DMG_SHA|MAC_MCPB_SHA|MACMCPB_SHA|RECEIPT30)__/g;
+const PLACEHOLDER = /__(?:EXE_SIZE|EXE_SHA|MCPB_SHA|DMG_SIZE|DMG_SHA|MAC_MCPB_SHA|MACMCPB_SHA|MCPB_SIZE|MACMCPB_SIZE|RECEIPT30)__|DMG_BYTES_TBD|DMG_MB_TBD/g;
 const pending = [];
 const sizeKnown = release.installerSizeBytes > 0;
-if (!sizeKnown) pending.push("content/release.json: installerSizeBytes is 0 (3.15.1 installer size in bytes)");
+if (!sizeKnown) pending.push("content/release.json: installerSizeBytes is 0 (3.16.0 installer size in bytes)");
 // Static copies say "about N MB". Once the size is known they must match release.json.
 const sizeMatches = text => !sizeKnown || text.includes(`about ${INSTALLER_SIZE}`);
 
@@ -68,8 +68,8 @@ for (const file of contentFiles) {
   assert(!/<!-- \/?3\.11:/.test(text), `${file}: leftover 3.11 block marker`);
   assert(!STALE_MAC.test(text), `${file}: stale Mac status`);
 }
-assert.equal(PRODUCT_STATUS.mac.available, true, "3.15.1 keeps the Mac preview");
-assert.equal(release.version, "3.15.1");
+assert.equal(PRODUCT_STATUS.mac.available, true, "3.16.0 keeps the Mac preview");
+assert.equal(release.version, "3.16.0");
 assert.equal(release.mcpSourceRef, `v${release.version}`);
 assert(Number.isInteger(release.installerSizeBytes) && release.installerSizeBytes >= 0, "installerSizeBytes is a byte count");
 assert.equal(INSTALLER_SIZE, `${Math.round(release.installerSizeBytes / 1_000_000)} MB`);
@@ -174,32 +174,35 @@ assert(pages.privacy.faq.some(item => item.answer.includes("The model is never b
 assert(HOME_MOVED_CONTENT['/changelog'].includes("Local transcription can fill in with the Whisper base model that ships with Uoink") && !HOME_MOVED_CONTENT['/changelog'].includes("already-downloaded"), "changelog Living Library: bundled Whisper model");
 assert(pages.features.html.includes("Base ships with Uoink; other sizes download only when you ask."), "features: Whisper model selector");
 const versions = [...pages.changelog.html.matchAll(/<h2>v(\d+\.\d+\.\d+)/g)].map(match => match[1]);
-assert.deepEqual(versions, ["3.15.1", "3.15.0", "3.14.1", "3.14.0", "3.13.0", "3.12.1", "3.12.0", "3.11.2", "3.11.1", "3.11.0", "3.10.0", "3.9.3", "3.9.2", "3.9.1", "3.9.0", "3.7.0", "3.6.0", "3.5.0", "3.4.1", "3.4.0"]);
+assert.deepEqual(versions, ["3.16.0", "3.15.1", "3.15.0", "3.14.1", "3.14.0", "3.13.0", "3.12.1", "3.12.0", "3.11.2", "3.11.1", "3.11.0", "3.10.0", "3.9.3", "3.9.2", "3.9.1", "3.9.0", "3.7.0", "3.6.0", "3.5.0", "3.4.1", "3.4.0"]);
 assert.equal(versions[0], release.version);
 // The patch dates come from the product changelog. Preserve the undated
 // 3.9.0 entry and the five earlier published dates.
-assert.deepEqual([...pages.changelog.html.matchAll(/<time datetime="([^"]+)"/g)].map(match => match[1]), ["2026-11-07", "2026-11-06", "2026-11-05", "2026-11-04", "2026-11-01", "2026-11-01", "2026-10-30", "2026-10-25", "2026-10-25", "2026-10-22", "2026-10-19", "2026-10-19", "2026-10-18", "2026-10-18", "2026-07-24", "2026-07-08", "2026-07-08", "2026-07-07", "2026-07-07"]);
+assert.deepEqual([...pages.changelog.html.matchAll(/<time datetime="([^"]+)"/g)].map(match => match[1]), ["2026-11-08", "2026-11-07", "2026-11-06", "2026-11-05", "2026-11-04", "2026-11-01", "2026-11-01", "2026-10-30", "2026-10-25", "2026-10-25", "2026-10-22", "2026-10-19", "2026-10-19", "2026-10-18", "2026-10-18", "2026-07-24", "2026-07-08", "2026-07-08", "2026-07-07", "2026-07-07"]);
 const entryList = [...pages.changelog.html.matchAll(/<h2>v(\d+\.\d+\.\d+)([\s\S]*?)(?=<h2>|$)/g)];
 const entries = Object.fromEntries(entryList.map(match => [match[1], match[2]]));
 const newest = entryList[0][2];
-assert(newest.includes('<time datetime="2026-11-07">'), "Newest changelog entry needs its release date");
-// 3.15.1 facts from the tagged release notes; older entries stay independently checked.
+assert(newest.includes('<time datetime="2026-11-08">'), "Newest changelog entry needs its release date");
+assert(entries["3.15.1"].includes('<time datetime="2026-11-07">'), "3.15.1 keeps its release date");
+// 3.16.0 facts from the release notes and changelog; older entries stay independently checked.
 assert.equal(release.stdioToolCount, 99);
 assert.equal(release.httpToolCount, 99);
-assert(manifest.source.includes("@4c45eccb28ee839c49a0150b981ab5dbd5b45fa7:"), "3.15.1 source commit");
-for (const fact of ["Check for new versions once a day", "off by default", "Check now", "Update available", "api.github.com", "sends nothing else", "Update now", "SHA256SUMS.txt", "Download update", "Nothing downloads unless you press the button", "first with the button", "install 3.15.1 the usual way", "2 minutes", "Whisper also gets a short hint", "Inbound request exceeds protocol limits", "64 KiB", "uoink_x", "one best MP4 per video", "keyword or meaning search", "Use saved", "1 channel cited", "0 enrolled", "Copy as Markdown leaves out unknown fields", "No new tools: 99 over stdio and 99 in the HTTP registry", "36 in core mode, 9 in search mode and 7 in research mode", "Upgrading from 3.15.0 adds no database migrations", "keeps your library and captures", "Reload the extension", "reinstall the 3.15.1 bundle", "restart Desktop", "releases/tag/v3.15.1"]) assert(newest.includes(fact), `3.15.1: ${fact}`);
+assert(manifest.source.includes("@e0c82bb64fbe9e5c1c318a9da84856225f0043a2:"), "3.16.0 source commit");
+for (const fact of ["Make a Short with Zing", "Zing", "Nothing shows if Zing is not installed", "Uoink keeps media for short videos only", "only after you click <strong>Download</strong> for that item", "shows progress", "Nothing downloads on its own", "only on your machine, through the local helper", "which Zing fetches from the video’s own site", "uoink.capture/1", "never recaptures a link that is already saved", "page allowlist and the podcast consent", "captions_skipped_reason", "three bot checks in 15 minutes", "30 minutes", "youtube_bot_check", "never adds browser cookies", "Update now", "Download update", "SHA256SUMS.txt", "only happens when you press the button", "No new tools: 99 over stdio and 99 in the HTTP registry", "36 in core mode, 9 in search mode and 7 in research mode", "Upgrading from 3.15.1 adds no database migrations", "keeps your library and captures", "Reload the extension", "reinstall the 3.16.0 bundle", "restart Desktop", "releases/tag/v3.16.0"]) assert(newest.includes(fact), `3.16.0: ${fact}`);
+assert(newest.includes('href="https://myzing.app"'), "3.16.0 links Zing");
+for (const fact of ["Check for new versions once a day", "off by default", "Check now", "Update available", "api.github.com", "sends nothing else", "Update now", "SHA256SUMS.txt", "Download update", "Nothing downloads unless you press the button", "first with the button", "install 3.15.1 the usual way", "2 minutes", "Whisper also gets a short hint", "Inbound request exceeds protocol limits", "64 KiB", "uoink_x", "one best MP4 per video", "keyword or meaning search", "Use saved", "1 channel cited", "0 enrolled", "Copy as Markdown leaves out unknown fields", "No new tools: 99 over stdio and 99 in the HTTP registry", "36 in core mode, 9 in search mode and 7 in research mode", "Upgrading from 3.15.0 adds no database migrations", "keeps your library and captures", "Reload the extension", "reinstall the 3.15.1 bundle", "restart Desktop", "releases/tag/v3.15.1"]) assert(entries["3.15.1"].includes(fact), `3.15.1: ${fact}`);
 for (const fact of ["Library search matches all your words by default", "sorts by relevance while you type", "the line that matched with its timestamp", "Any words", "Black frames", "time order", "Copy as Markdown", "Getting transcript", "Saving screenshots", "private or unavailable in your region", "Details", "one Activity row", "Use saved", "Capture new", "paste box comes first", "feed’s title", "Untitled podcast", "Check now", "Running on this PC", "Connect Claude first", "No new tools: 99 over stdio and 99 in the HTTP registry", "36 in core mode, 9 in search mode and 7 in research mode", "Upgrading from 3.14.1 adds no database migrations", "keeps your library and captures", "Reload the extension", "reinstall the 3.15.0 bundle", "restart Desktop", "releases/tag/v3.15.0"]) assert(entries["3.15.0"].includes(fact), `3.15.0: ${fact}`);
 assert(entries["3.15.0"].includes('<time datetime="2026-11-06">'), "3.15.0 keeps its release date");
 for (const fact of ["videos captured outside a research run", "after checking their transcript and saved files", "--text", "search", "recent", "research", "m:ss", "normal quotes", "source and a verified quote", "date, kind and source", "--explain", "full score breakdown", "JSON output is unchanged", "report.md", "Markdown escapes instead of HTML entities", "1 claim", "1 source", "run_id", "research_start", "matching source labels", "list titles once", "filelock", "4.2.1", "No new tools: 99 over stdio and 99 in the HTTP registry", "36 in core mode, 9 in search mode and 7 in research mode", "Upgrading from 3.14.0 adds no database migrations", "keeps your library and captures", "Reload the extension", "reinstall the 3.14.1 bundle", "restart Desktop", "releases/tag/v3.14.1"]) assert(entries["3.14.1"].includes(fact), `3.14.1: ${fact}`);
 assert(entries["3.14.1"].includes('<time datetime="2026-11-05">'), "3.14.1 keeps its release date");
 assert(entries["3.14.0"].includes('<time datetime="2026-11-04">'), "3.14.0 keeps its release date");
-assert(AGENT_SETUP_HTML.includes("<h3>New in 3.14.0</h3>") && !AGENT_SETUP_HTML.includes("New in 3.15.0") && !AGENT_SETUP_HTML.includes("New in 3.15.1"), "Agent setup keeps the 3.14.0 feature history");
+assert(AGENT_SETUP_HTML.includes("<h3>New in 3.14.0</h3>") && !AGENT_SETUP_HTML.includes("New in 3.15.0") && !AGENT_SETUP_HTML.includes("New in 3.15.1") && !AGENT_SETUP_HTML.includes("New in 3.16.0"), "Agent setup keeps the 3.14.0 feature history");
 for (const name of ["get_transcript", "research_start", "research_discover", "research_capture", "research_status", "research_evidence", "research_publish"]) assert(mcpStdioToolNames.includes(name), `3.14.0 tool: ${name}`);
 for (const fact of ["Deep research", "quote and timestamp", "Network discovery is off", "get_transcript", "saved copy first, then captions", "local Whisper", "Import your saves", "YouTube Watch Later", "X bookmarks", "Reddit saved posts", "Import a saves file", "have not yet been tried in a real browser", "Gone from the web", "Check if saved sources go offline", "Linux (headless)", "Docker, Codespaces", "scripts/linux/install.sh", "docker/capture.Dockerfile", "ffmpeg and ffprobe", "99 tools", "36 in core mode, 9 in search mode and 7 in research mode", "519,322,824 bytes", "unsigned", "Developer ID signed and notarized", "0033_source_availability.sql", "reinstall the 3.14.0 bundle", "does not yet capture newly discovered podcast episodes or search Reddit"]) assert(entries["3.14.0"].includes(fact), `3.14.0: ${fact}`);
 for (const fact of ["Deep research", "get_transcript", "YouTube Watch Later", "X bookmarks", "Reddit saves", "Gone from the web", "Linux"]) assert(pages.home.html.includes(fact), `home 3.14.0: ${fact}`);
 for (const slug of ["deep-research", "get-transcript", "import-saves", "source-availability", "headless-linux"]) assert(features.some(feature => feature.slug === slug && feature.status === "shipped"), `3.14.0 feature: ${slug}`);
 for (const fact of ["UOINK_MCP_TOOLSET=search", "UOINK_MCP_TOOLSET=research", "Full mode has 99 tools", "36", "9", "7 total", "On Linux (headless)"]) assert(AGENT_SETUP_HTML.includes(fact), `agent setup 3.14.0: ${fact}`);
-for (const fact of ['id="linux"', "v3.15.1 --depth 1", "scripts/linux/install.sh", "ffmpeg and ffprobe", "YouTube can block cloud IPs"]) assert(pages.install.html.includes(fact), `Linux install: ${fact}`);
+for (const fact of ['id="linux"', "v3.16.0 --depth 1", "scripts/linux/install.sh", "ffmpeg and ffprobe", "YouTube can block cloud IPs"]) assert(pages.install.html.includes(fact), `Linux install: ${fact}`);
 assert(fs.readFileSync("app/sample/page.tsx", "utf8").includes("Uoink 3.13.0 and later can import a list"), "sample: list import shipped in 3.13.0");
 assert(entries["3.13.0"].includes('<time datetime="2026-11-01">'), "3.13.0 keeps its release date");
 // 3.13.0: Import a list, the import_list tool, mid-video card images and silent-update restarts. Facts from the product's CHANGELOG.md [3.13.0] and RELEASE-NOTES-3.13.0.md.
@@ -264,10 +267,10 @@ assert(HOME_MOVED_CONTENT['/changelog'].includes("Smarter search"), "changelog: 
 assert(pages.privacy.faq.some(item => item.question === "Does semantic search send my library anywhere?"), "privacy: semantic search FAQ");
 const llmsFull = fs.readFileSync("public/llms-full.txt", "utf8");
 const [llmsFullUpdated, llmsFullTitle] = llmsFull.split(/\r?\n/);
-assert(llmsFullUpdated === `<!-- updated: 2026-11-07 / uoink ${VERSION} -->` && llmsFullTitle.startsWith(`# Uoink ${VERSION_NUMBER}: `) && llmsFull.includes(`## What's new in ${VERSION_NUMBER}`), "llms-full.txt: header and what's new");
+assert(llmsFullUpdated === `<!-- updated: 2026-11-08 / uoink ${VERSION} -->` && llmsFullTitle.startsWith(`# Uoink ${VERSION_NUMBER}: `) && llmsFull.includes(`## What's new in ${VERSION_NUMBER}`), "llms-full.txt: header and what's new");
 for (const text of ["captures (including `_yoink-trash`) are in `~/Desktop/Uoink/`", "`~/Library/Logs/Uoink/`", "uninstall.sh /Applications/Uoink.app --remove", "macOS still credits Uoink's alerts to Script Editor"]) assert(llmsFull.includes(text), `llms-full.txt Mac: ${text}`);
 assert(llmsFull.includes("Agent Install 30 tested the installed 3.12.0 build in an isolated profile:") && llmsFull.indexOf("Agent Install 30") < llmsFull.indexOf("Agent Install 27 passed"), "llms-full.txt: receipt 30 ahead of the labeled 3.11.1 receipt");
-// Release checksums: the size and SHA-256 of each 3.15.1 download. Placeholders
+// Release checksums: the size and SHA-256 of each 3.16.0 download. Placeholders
 // are reported below; real values must have the right shape.
 const checksumLines = {
   exe: new RegExp(`^- Uoink-Setup-${VERSION_NUMBER.replaceAll(".", "\\.")}\\.exe: (\\S+) bytes \\(about (\\d+) MB\\)\\. SHA-256: \`(\\S+)\`\\.\\r?$`, "m"),
@@ -277,7 +280,7 @@ const checksumLines = {
 };
 const sums = Object.fromEntries(Object.entries(checksumLines).map(([key, pattern]) => [key, llmsFull.match(pattern)]));
 for (const [key, match] of Object.entries(sums)) assert(match, `llms-full.txt checksums: ${key} line`);
-const isPlaceholder = value => /^__[A-Z_]+__$/.test(value);
+const isPlaceholder = value => /^(?:__[A-Z_]+__|DMG_BYTES_TBD)$/.test(value);
 const checkValue = (value, shape, label) => { if (isPlaceholder(value)) return; assert(shape.test(value), `llms-full.txt checksums: ${label} ${value}`); };
 checkValue(sums.exe[1], /^\d{1,3}(?:,\d{3})+$/, "installer bytes");
 checkValue(sums.dmg[1], /^\d{1,3}(?:,\d{3})+$/, "DMG bytes");
@@ -288,15 +291,15 @@ if (sizeKnown) {
   assert.equal(sums.exe[2], String(Math.round(release.installerSizeBytes / 1_000_000)), "llms-full.txt: installer MB");
   if (!isPlaceholder(sums.exe[1])) assert.equal(sums.exe[1], release.installerSizeBytes.toLocaleString("en-US"), "llms-full.txt: installer bytes match content/release.json");
 }
-// 3.15.1 release numbers, from the tagged release notes.
-assert.equal(release.installerSizeBytes, 519421506);
+// 3.16.0 release numbers, from the published SHA256SUMS.txt.
+assert.equal(release.installerSizeBytes, 519455821);
 for (const fact of [
-  "- Uoink-Setup-3.15.1.exe: 519,421,506 bytes (about 519 MB). SHA-256: `73f081c1d76c259c00da6a2bb3619d477ccfdbebcae25919d607d104f32e3854`.",
-  "- uoink-3.15.1.mcpb: 119,442 bytes. SHA-256: `2c7c282a438a17a10eed38f697c7b7fd3933545c0107dc8dce73f66fd3ddbadb`.",
-  "- Uoink-3.15.1-macos-arm64.dmg (Mac preview): 709,347,498 bytes. SHA-256: `ff41d69cdf99a15ec4f2115db8b535438363a7811d9a9974a06a31108ab62c79`.",
-  "- uoink-3.15.1-macos.mcpb: 116,007 bytes. SHA-256: `006ccba07284177195acdae16a9ebde2bcfa7d1cfbb16b69f1d3f8e00e05be7d`.",
+  "- Uoink-Setup-3.16.0.exe: 519,455,821 bytes (about 519 MB). SHA-256: `77c0b9533a7548c6735f1cd34c1f90f87d2113dda7b7a6779ee96cb17cb317a6`.",
+  "- uoink-3.16.0.mcpb: 119,679 bytes. SHA-256: `ee0d47f05632c8820bc0e618040eab9ab4784bc3576f6a226c27ff47786927f5`.",
+  "- Uoink-3.16.0-macos-arm64.dmg (Mac preview): 706,306,450 bytes. SHA-256: `be8a3b9b59108289228d788165ef6aab754431c0b5b34fc7d7547bc650284799`.",
+  "- uoink-3.16.0-macos.mcpb: 116,241 bytes. SHA-256: `438d485e1ee3a76557e0877024e782abba72f9b246bdbc9a278f1f8e779335c4`.",
 ]) assert(llmsFull.includes(fact), `llms-full.txt checksums: ${fact}`);
-assert(!/3\.(?:11\.2|12\.[01]|13\.0|14\.[01]|15\.0)\.exe:|3\.(?:11\.2|12\.[01]|13\.0|14\.[01]|15\.0)-macos-arm64\.dmg \(Mac preview\):/.test(llmsFull), "llms-full.txt checksums: no older release lines");
+assert(!/3\.(?:11\.2|12\.[01]|13\.0|14\.[01]|15\.[01])\.exe:|3\.(?:11\.2|12\.[01]|13\.0|14\.[01]|15\.[01])-macos-arm64\.dmg \(Mac preview\):/.test(llmsFull), "llms-full.txt checksums: no older release lines");
 // The tool inventory line names the commit the manifest was generated from.
 const manifestCommit = manifest.source.match(/@([0-9a-f]{40}):/)[1];
 assert(llmsFull.includes(`Source: ${VERSION}, commit ${manifestCommit}.`), `llms-full.txt: tool inventory commit should be ${manifestCommit}`);
