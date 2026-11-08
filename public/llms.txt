@@ -12,7 +12,7 @@ New in 3.16.0: Make a Short with Zing (shows only when Zing is installed; uses k
 - Save X posts and videos, podcasts, articles, and Reddit threads.
 - Keep everything on your disk as Markdown + JSON, with a local search index.
 - Let your AI search the library and cite timestamps.
-- Run five local research playbooks on your saved sources.
+- Run six local research playbooks on your saved sources, including thesis check.
 - Get writing help in your voice with Voice DNA and Writing Studio.
 
 ## Set it up with an agent (Windows 10/11)
@@ -86,6 +86,7 @@ Replace %LOCALAPPDATA% in both JSON paths with your full app-data directory; res
 - Anonymous usage counts are off by default. If turned on in Settings, the helper sends one daily report of counts (tool calls, AI apps by a fixed name list, captures by source, searches) with a random install ID; never content, URLs, titles, paths or search text.
 - Model dependencies can send telemetry. Model downloads, thumbnails, and release checks can also contact outside services; this website uses Vercel Web Analytics.
 - Uoink never signs in to YouTube or uses browser cookies, so private and age-gated videos can't be captured. On a YouTube bot check the capture still finishes with local Whisper and says so; after three bot checks in 15 minutes, captions pause for 30 minutes.
+- On Windows the installer includes Deno, which yt-dlp uses to read YouTube's player. Deno runs that code with no file or network access, its update check is off, and its cache stays in the Uoink data folder. Uoink's yt-dlp ignores any personal yt-dlp config file, so it never picks up browser cookies from one.
 - Make a Short with Zing runs the local `zing` program only when you click the button. Zing reads kept media through the local helper; it downloads only after you click Download for that item, from the video's own site, which Uoink names first. Sibling-app capture (`uoink.capture/1`) needs the helper token and uses the same page allowlist and podcast consent.
 Full disclosures: [llms-full.txt](https://uoink.app/llms-full.txt) and [Privacy](https://uoink.app/privacy).
 
