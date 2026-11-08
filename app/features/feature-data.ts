@@ -85,6 +85,26 @@ export const features: Feature[] = [
     screenshot: { title: "Research tab", alt: "Choose sources, capture transcripts and review the report's quotes and timestamps." }
   },
   {
+    slug: "thesis-check",
+    title: "Thesis check",
+    category: "Verification",
+    status: "shipped",
+    summary: "Give it a claim and some saved sources. Your AI tests the claim against them and cites every point.",
+    keywords: ["thesis check", "research playbook", "cited evidence", "get_playbook_input"],
+    whatItDoes: "Write a claim, such as \"Small agencies will pay for a local transcript library\", and pick the saved captures to test it against: up to ten videos, a topic, or one creator, optionally limited to a date range. Uoink prepares a cited packet from those sources: the clips that match the claim, the opening of each source and the top comments. Your AI writes the assumptions the sources share, the evidence for and against, the strongest counterargument the sources make, and what your library does not cover. Every point carries a citation, and clip citations carry the timestamp. It never fills a gap from general knowledge; where the library has nothing, it says \"not in your library\".",
+    gettingStarted: [
+      "Connect your AI client over MCP, then use the thesis-check prompt or call get_playbook_input with the thesis-check playbook. You can also start it from the Generate research list.",
+      "Enter the thesis (up to 500 characters).",
+      "Choose the sources: video IDs (up to 10), a topic, or a creator. Optionally add a since date.",
+      "Read the write-up. Each assumption, quote and counterargument points to a saved source, and clips carry their timestamp."
+    ],
+    behindScenes: "Uoink builds the packet on your computer and makes no model call; your own AI client does the writing. Clips marked relevant matched the claim's text. Opening clips are context, not support. Comments are single voices, so the write-up counts distinct comments and does not call them a trend. A library holds what you chose to save, not a fair sample, and the write-up says so when the evidence leans one way.",
+    mcpTools: ["get_playbook_input"],
+    related: ["deep-research", "get-transcript", "local-first"],
+    cta: "Pick one claim you are unsure about and test it against a handful of saved videos.",
+    screenshot: { title: "Thesis check", alt: "A thesis check write-up listing shared assumptions, evidence for and against, and gaps, with a citation on each point." }
+  },
+  {
     slug: "get-transcript",
     title: "A transcript tool that explains its fallback",
     category: "Capture",
