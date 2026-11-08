@@ -220,6 +220,24 @@ export default function Page() {
 
       <DocRule />
 
+      <section className="section" data-screen-label="creators / shorts">
+        <div className="container">
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">shorts</span>
+              <h2 className="display-l">
+                Cut a Short from what you <em>saved.</em>
+              </h2>
+              <p className="body-l">
+                When <a href="https://myzing.app">Zing</a> is installed, the reader has a <strong>Make a Short with Zing</strong> button. It hands the open item to Zing and opens Zing&apos;s review page. Zing uses the video Uoink kept, or downloads it only after you click Download for that item.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <DocRule />
+
       <section className="section" data-screen-label="creators / privacy">
         <div className="container">
           <div className="doc">

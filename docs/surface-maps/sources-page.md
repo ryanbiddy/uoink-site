@@ -10,7 +10,7 @@ The sources page provides a unified inventory of every media and text source typ
 ### 2.1 YouTube
 - **Details**: Captures auto-generated or manual transcripts, descriptions, comments, and frame screenshots (integrated via local clipboard helper).
 - **Format**: Local Markdown and JSON metadata sidecars.
-- **Limitations**: Age-gated or private videos require browser cookie path configuration. HD downloads are subject to YouTube stream rate throttling.
+- **Limitations**: Uoink never signs in to YouTube or uses browser cookies, so private and age-gated videos cannot be captured. On a YouTube bot check the capture still finishes with local Whisper and says so; after three bot checks in 15 minutes, captions pause for 30 minutes. HD downloads are subject to YouTube stream rate throttling.
 
 ### 2.2 Podcasts
 - **Details**: Captures public RSS podcast audio files and runs local Whisper/WhisperX transcription with speaker diarization.

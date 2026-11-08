@@ -226,6 +226,35 @@ get_evidence_card({ video_id })`}</pre>
 
       <DocRule />
 
+      <section className="section" data-screen-label="developers / suite contracts" id="suite">
+        <div className="container">
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">for sibling apps</span>
+              <h2 className="display-l">
+                Suite <em>contracts.</em>
+              </h2>
+              <p className="body-l">
+                Uoink lists what it offers sibling apps at <code>/.well-known/suite-service.json</code>. One entry is <code>uoink.capture/1</code>, which lets a local app save one link into the library.
+              </p>
+            </div>
+            <div className="docs-main">
+              <p>
+                Send <code>POST /api/suite/v1/capture</code> with <code>{`{"url": "...", "source_hint": optional}`}</code> and the <code>X-Uoink-Token</code> header. It answers on loopback only. A missing or wrong token gets 403.
+              </p>
+              <p>
+                The response has <code>status</code> of <code>saved</code> or <code>exists</code> (200) or <code>queued</code> (202), with <code>item_id</code>, <code>job_id</code> and <code>item_uri</code>. While queued, <code>item_id</code> and <code>item_uri</code> are null. Poll <code>GET /api/suite/v1/capture/&lt;job_id&gt;</code> for <code>queued</code>, <code>saved</code> or <code>error</code> with a <code>message</code>. A link already in the library returns <code>exists</code> and is never recaptured. The page allowlist and podcast consent still apply.
+              </p>
+              <p>
+                Errors come back as <code>{`{"ok": false, "error": code, "message"}`}</code>: <code>bad_request</code> 400, <code>unsupported_url</code> 400, <code>consent_required</code> 409 (site not on the page allowlist, or a podcast feed), <code>media_unavailable</code> 501, <code>busy</code> 429, <code>not_found</code> 404, <code>capture_failed</code> 502.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <DocRule />
+
       <section className="section" data-screen-label="developers / tool catalog">
         <div className="container">
           <div className="doc">

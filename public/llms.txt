@@ -73,6 +73,10 @@ Replace %LOCALAPPDATA% in both JSON paths with your full app-data directory; res
 - Library and sources: queue work, subscriptions, and source consent. Librarian applying is off by default; its quality gate has not passed.
 [Tool manifest and schemas](https://uoink.app/mcp/manifest.json).
 
+## Sibling apps (suite contracts)
+- `/.well-known/suite-service.json` lists them. `POST /api/suite/v1/capture` with `{url, source_hint?}` and `X-Uoink-Token` returns `status` `saved`, `queued` or `exists` with `item_id`, `job_id` and `item_uri`; poll `GET /api/suite/v1/capture/<job_id>`.
+- Errors: `bad_request`, `unsupported_url`, `consent_required`, `media_unavailable`, `busy`, `not_found`, `capture_failed`. A saved link is never recaptured.
+
 ## Privacy in brief
 - Local-first: captures and indexes stay on disk; capture requests contact source sites.
 - No account or Uoink-hosted corpus.
@@ -81,6 +85,8 @@ Replace %LOCALAPPDATA% in both JSON paths with your full app-data directory; res
 - Discovery run files are purged daily when older than 90 days.
 - Anonymous usage counts are off by default. If turned on in Settings, the helper sends one daily report of counts (tool calls, AI apps by a fixed name list, captures by source, searches) with a random install ID; never content, URLs, titles, paths or search text.
 - Model dependencies can send telemetry. Model downloads, thumbnails, and release checks can also contact outside services; this website uses Vercel Web Analytics.
+- Uoink never signs in to YouTube or uses browser cookies, so private and age-gated videos can't be captured. On a YouTube bot check the capture still finishes with local Whisper and says so; after three bot checks in 15 minutes, captions pause for 30 minutes.
+- Make a Short with Zing runs the local `zing` program only when you click the button. Zing reads kept media through the local helper; it downloads only after you click Download for that item, from the video's own site, which Uoink names first. Sibling-app capture (`uoink.capture/1`) needs the helper token and uses the same page allowlist and podcast consent.
 Full disclosures: [llms-full.txt](https://uoink.app/llms-full.txt) and [Privacy](https://uoink.app/privacy).
 
 ## Links

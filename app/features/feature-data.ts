@@ -98,7 +98,7 @@ export const features: Feature[] = [
       "Read the source and language fields, plus the reason for any fallback.",
       "Use include_timestamps for timed text and next_cursor for longer transcripts."
     ],
-    behindScenes: "The saved-copy path needs no network. Caption requests use your own connection; Whisper runs locally. YouTube can block cloud IPs, and transcription helps only when the audio download works. A fallback explains why it ran instead of hiding the caption failure.",
+    behindScenes: "The saved-copy path needs no network. Caption requests use your own connection; Whisper runs locally. YouTube can block cloud IPs, and transcription helps only when the audio download works. A fallback explains why it ran instead of hiding the caption failure. When YouTube's bot check blocks captions, the capture still finishes with local Whisper and says so. Uoink never signs in to YouTube or uses browser cookies.",
     mcpTools: ["get_transcript"],
     related: ["deep-research", "mcp-server", "headless-linux"],
     cta: "Ask your connected agent for a YouTube transcript and check its source field.",
@@ -143,6 +143,26 @@ export const features: Feature[] = [
     related: ["import-saves", "local-first", "memory-search"],
     cta: "Open Gone from the web to see which saved copies you can still read.",
     screenshot: { title: "Source availability", alt: "Library badges and a filter identify saved sources that are no longer online." }
+  },
+  {
+    slug: "make-a-short-with-zing",
+    title: "Make a Short with Zing",
+    category: "Workspace",
+    status: "shipped",
+    summary: "When Zing is installed, a reader button hands the open item to Zing and opens Zing's review page.",
+    keywords: ["Make a Short with Zing", "Zing", "YouTube Shorts", "uoink.capture"],
+    whatItDoes: "When Zing is installed, the reader has a Make a Short with Zing button. It hands the open item to Zing and opens Zing's review page. Nothing shows if Zing is not installed. Zing needs the item's video. If Uoink kept the media (short videos only), Zing uses it. If not, Zing downloads the video only after you click Download for that item, and the reader shows progress.",
+    gettingStarted: [
+      "Install Zing from myzing.app. Uoink looks for the zing program on your computer.",
+      "Open an item in the Uoink reader and click Make a Short with Zing.",
+      "If Uoink did not keep the video, the reader names the site it comes from. Click Download to let Zing fetch it, or Cancel.",
+      "Review the project in Zing's review page."
+    ],
+    behindScenes: "Uoink runs the local zing program only when you click the button and passes it the helper's local URL and token in its environment; the token is never logged. Zing reads kept media through the local helper. Uoink itself makes no outbound request. The button is not an MCP tool. Separately, a local app such as Zing can save one link into your library with uoink.capture/1, which uses the same page allowlist and podcast consent.",
+    mcpTools: [],
+    related: ["writing-studio", "get-transcript", "local-first"],
+    cta: "Open an item in the reader and look for the Zing button.",
+    screenshot: { title: "Make a Short with Zing", alt: "The Uoink reader with a Make a Short with Zing button, shown when Zing is installed." }
   },
   {
     slug: "headless-linux",
