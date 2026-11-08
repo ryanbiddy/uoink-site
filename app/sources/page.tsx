@@ -32,6 +32,7 @@ const sources: {
   output: string;
   logos: PlatformLogoKey[];
   href?: string;
+  limits?: string;
 }[] = [
   {
     title: "YouTube",
@@ -39,6 +40,7 @@ const sources: {
     capture: "Button, right-click, playlist queue, and Shorts.",
     corpus: "Transcript, frames, comments, metadata, channel context.",
     output: "Creator research, hook study, lecture notes, agent citations.",
+    limits: "Uoink never signs in to YouTube or uses browser cookies, so private and age-gated videos can't be captured. When YouTube asks for a bot check, the capture still finishes with local Whisper and says so.",
     logos: ["youtube"],
     href: "/sources/youtube",
   },
@@ -158,6 +160,11 @@ export default function Page() {
                     <p>
                       <b>Best for:</b> {source.output}
                     </p>
+                    {source.limits ? (
+                      <p>
+                        <b>Limits:</b> {source.limits}
+                      </p>
+                    ) : null}
                     <span className="arr-link">{source.href ? "Open source page ->" : "Tracked on roadmap ->"}</span>
                   </>
                 );

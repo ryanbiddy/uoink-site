@@ -36,6 +36,11 @@ const faq: FaqItem[] = [
       "Yes. Paste a playlist URL and Uoink queues the videos, extracts them asynchronously with live progress, and writes a combined corpus plus per-video files.",
   },
   {
+    question: "Can Uoink capture private or age-gated videos?",
+    answer:
+      "No. Uoink never signs in to YouTube and never uses browser cookies, so it can only capture videos YouTube shows to anyone. When YouTube asks for a bot check, the capture still finishes with local Whisper, and the Library note and Activity row say so. After three bot checks in 15 minutes, Uoink stops asking YouTube for captions for 30 minutes and transcribes locally.",
+  },
+  {
     question: "Is it free?",
     answer:
       "Yes. Uoink is free and open source (MIT). Core YouTube capture needs no API key. Optional AI features (Comment Intelligence, hook classification) use your own Anthropic key and are off by default.",

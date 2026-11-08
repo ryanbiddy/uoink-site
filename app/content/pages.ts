@@ -873,7 +873,7 @@ claude plugin install uoink@uoink</pre>
         </div>
         <p style="font-size:14px;color:var(--parchment);margin-bottom:12px"><strong>What it captures:</strong> Video transcripts (both manual and auto-generated), descriptions, comments, and video frames (via the clipboard screenshot utility).</p>
         <p style="font-size:14px;color:var(--parchment-dim);margin-bottom:12px"><strong>How it lands:</strong> Saves directly to your local library as clean Markdown text files with timestamps and optional JSON sidecars.</p>
-        <p style="font-size:13px;color:var(--vermillion)"><strong>Limitations:</strong> Private or age-gated videos require configuring your local browser cookie path. HD video downloads are throttled by YouTube's rate limits.</p>
+        <p style="font-size:13px;color:var(--vermillion)"><strong>Limitations:</strong> Uoink never signs in to YouTube or uses browser cookies, so private and age-gated videos can't be captured. When YouTube asks for a bot check, the capture still finishes with local Whisper and says so. After three bot checks in 15 minutes, Uoink pauses YouTube captions for 30 minutes. HD video downloads are throttled by YouTube's rate limits.</p>
       </article>
 
       <article class="card" id="podcasts" style="border:1px solid var(--ink-dim);padding:24px;border-radius:6px;background:rgba(255,255,255,0.02)">
