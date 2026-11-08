@@ -187,7 +187,7 @@ ${line(`${label("drafts.job")} ${label("drafts.learn")}`, [["lesson", "job"], ["
 
   const deeper = `<section class="go-deeper" id="live-uoink" data-home-part="go-deeper" aria-labelledby="deeper-title"><div class="container"><h2 id="deeper-title">Go deeper</h2><nav class="go-deeper-grid" aria-label="Go deeper"><a href="/sources">Sources</a><a href="/how-it-works">How it works</a><a href="/features">Features</a><a href="/mcp">MCP</a><a href="/creators">Creators</a><a href="/blog">Field notes</a></nav></div></section>`;
 
-  const zing = `<section class="home-sibling" data-home-part="sibling" aria-labelledby="sibling-title"><div class="container"><div class="hm-zing"><span class="hm-charge" aria-hidden="true"></span><div><h2 id="sibling-title">Works with Zing</h2><p>Want the video version? Zing it.</p></div><a class="hm-zing-link" href="https://myzing.app">Meet Zing -&gt;</a></div></div></section>`;
+  const zing = `<section class="home-sibling" data-home-part="sibling" aria-labelledby="sibling-title"><div class="container"><div class="hm-zing"><span class="hm-charge" aria-hidden="true"></span><div><h2 id="sibling-title">Works with Zing</h2><p>Want the video version? Zing it. When Zing is installed, the reader’s <strong>Make a Short with Zing</strong> button hands the item to it.</p></div><a class="hm-zing-link" href="https://myzing.app">Meet Zing -&gt;</a></div></div></section>`;
 
   return [hero, save, find, write, connect, deeper, zing].join("\n");
 }
