@@ -79,7 +79,7 @@ YouTube: timestamped transcript, screenshots, top comments, channel context, met
 
 3.9.0 introduced the previously unpublished Living Library work: clip search and evidence cards; standing capture for YouTube channels, YouTube playlists, and podcast RSS; MCP library search, item reads, resource templates and prompts; cited range export with speaker labels, chapters and provenance; and chapter navigation where chapters exist. Podcast transcripts enter the searchable corpus and interrupted jobs resume after restart. Feed audio stays off until Auto-ingest is enabled. Captures show toast notifications that can be muted and are suppressed during fullscreen use. Entity extraction is opt-in and off by default; the usage meter shows real Anthropic usage; the recall hook is hardened against prompt injection.
 
-The redesigned dashboard has Library search-or-paste, Reader, Activity with a five-step capture strip, and one Settings page that saves individual preferences automatically. The extension popup and setup provide capture and connection controls. Caption rate limits no longer fail an entire YouTube capture: local transcription can fill in with the Whisper base model that ships with Uoink, or the missing transcript stays labeled. Requests are paced and yt-dlp is newer. Waiting, failures and cancellation remain distinct; cancellation is refused once publication starts.
+The redesigned dashboard has Library search-or-paste, Reader, Activity with a five-step capture strip, and one Settings page that saves individual preferences automatically. The extension popup and setup provide capture and connection controls. Caption rate limits no longer fail an entire YouTube capture: local transcription can fill in with the Whisper base model that ships with Uoink, or the missing transcript stays labeled. Requests are paced and yt-dlp is newer. Waiting, failures and cancellation remain distinct; cancellation is refused once publication starts. Uoink never signs in to YouTube and never uses browser cookies, so private and age-gated videos can't be captured. When YouTube asks for a bot check, the capture still finishes with local Whisper and says so, and after three bot checks in 15 minutes Uoink pauses YouTube captions for 30 minutes.
 
 Five local research playbooks cover outlier posts, transcript intelligence, comment mining, creator teardowns and repurposing over the user's own library. MCP agents can request cited packets without model or network calls. Optional ScrapeCreators discovery is off by default, uses the user's own key, and defaults to a 25-credit daily cap. Paid calls require credit confirmation and a dashboard intent or separately enabled agent discovery.
 
@@ -117,6 +117,12 @@ X text capture defaults to true. Setting x_text_capture_enabled to false in loca
 Removing the saved Anthropic key attempts to delete the current credential, but a legacy Yoink credential or older plaintext settings entry can remain, and deletion failures can go unreported. Check Windows Credential Manager and the active profile settings; local removal does not revoke the key at Anthropic. Disconnect agents in their clients to end access.
 
 Extension setup and previews can load remote thumbnails. After copying a completed capture, the extension opens claude.ai/new without pasting or submitting the content, even with AI off; there is no setting to disable the tab. The Whisper base model ships with Uoink, and Uoink never downloads a model during a capture. Downloading a Whisper model that is not on the computer (another size) requires a per-request approval flag that a connected agent can set without a Uoink prompt. Optional speaker labeling downloads pyannote/speaker-diarization-community-1 from Hugging Face when needed and can send your Hugging Face token to huggingface.co. Supporting transcription and alignment models can also download from Hugging Face or PyTorch hosts, and language data from NLTK. The pinned pyannote-audio 4.0.7 dependency enables metrics by default, including during voice-activity detection with speaker labeling off. Uoink provides no dashboard switch; PYANNOTE_METRICS_ENABLED=false in the helper environment disables those metrics. Release checks query GitHub when the cache needs refreshing or a caller forces a check, without sending the library or installing an update.
+
+Uoink never signs in to YouTube and never uses browser cookies.
+
+Make a Short with Zing: Uoink runs the local `zing` program only when you click the button. It passes Zing the helper's local URL and token in the program's environment and never logs the token. Zing reads the item's kept media through the local helper (Uoink keeps media for short videos only). If the media was not kept, nothing downloads until you click Download for that item; then Zing, not Uoink, fetches the video from its own site, which Uoink names first. Uoink makes no outbound request for this. Zing is a separate app: https://myzing.app.
+
+Suite capture: a local app that holds the helper token can save one link with `uoink.capture/1`. It uses the same capture tools, page allowlist and podcast consent as `uoink capture`, adds no new token and no new way to reach the network, and never recaptures a saved link. Nothing new leaves the machine.
 
 Optional semantic search downloads the EmbeddingGemma model from Hugging Face once, only after a person turns it on in Settings and accepts Google's Gemma terms. Searches and saved text stay on the computer.
 
@@ -218,6 +224,12 @@ The copy includes references. An existing copy needs `--force` to overwrite. Res
 
 HTTP JSON-RPC: http://127.0.0.1:5179/mcp/v1. Include X-Uoink-Token, read from %LOCALAPPDATA%\Uoink\token.txt.
 OpenAPI 3.1 spec: http://127.0.0.1:5179/openapi/v1/spec.json.
+
+## Sibling apps (suite contracts)
+
+Uoink lists what it offers sibling apps at /.well-known/suite-service.json. `uoink.capture/1` lets a local app save one link: `POST /api/suite/v1/capture` with `{"url": "...", "source_hint": optional}` and the X-Uoink-Token header, loopback only. `status` is `saved` or `exists` (HTTP 200) or `queued` (202), with `item_id`, `job_id` and `item_uri`; while queued, `item_id` and `item_uri` are null. Poll `GET /api/suite/v1/capture/<job_id>` for `queued`, `saved` or `error` with a `message`. A link already in the library returns `exists` and is never recaptured. The page allowlist and podcast consent still apply.
+
+Errors are `{"ok": false, "error": code, "message"}`: `bad_request` 400, `unsupported_url` 400, `consent_required` 409 (site not on the page allowlist, or a podcast feed), `media_unavailable` 501, `busy` 429, `not_found` 404, `capture_failed` 502. Only one video capture started this way runs at a time.
 
 ## Podcast standing capture
 
