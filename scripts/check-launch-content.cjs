@@ -294,10 +294,10 @@ if (sizeKnown) {
   if (!isPlaceholder(sums.exe[1])) assert.equal(sums.exe[1], release.installerSizeBytes.toLocaleString("en-US"), "llms-full.txt: installer bytes match content/release.json");
 }
 // 3.16.1 release numbers. Size is a placeholder from the build in progress; hashes and the DMG/bundle sizes are placeholders until the release is cut.
-assert.equal(release.installerSizeBytes, 548674288);
+assert.equal(release.installerSizeBytes, 548676533);
 for (const fact of [
-  "- Uoink-Setup-3.16.1.exe: 548,674,288 bytes (about 549 MB). SHA-256: `__EXE_SHA__`.",
-  "- uoink-3.16.1.mcpb: __MCPB_SIZE__ bytes. SHA-256: `__MCPB_SHA__`.",
+  "- Uoink-Setup-3.16.1.exe: 548,676,533 bytes (about 549 MB). SHA-256: `200845b6bab9f069c897352d4f4ce6a9be75edcd043f0b23584f6623495f0297`.",
+  "- uoink-3.16.1.mcpb: 119,763 bytes. SHA-256: `7a5a5b76d84a825aa24dc8e04d32acb801f1237b098b7e4ddd8d120ee9e4edc7`.",
   "- Uoink-3.16.1-macos-arm64.dmg (Mac preview): DMG_BYTES_TBD bytes. SHA-256: `__DMG_SHA__`.",
   "- uoink-3.16.1-macos.mcpb: __MACMCPB_SIZE__ bytes. SHA-256: `__MAC_MCPB_SHA__`.",
 ]) assert(llmsFull.includes(fact), `llms-full.txt checksums: ${fact}`);
