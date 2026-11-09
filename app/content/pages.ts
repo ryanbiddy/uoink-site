@@ -66,29 +66,6 @@ export const MAC_MARK =
 // Hairline between reading-column sections; the TSX pages use <DocRule />.
 const DOC_RULE = '<div class="container"><hr class="doc-rule"/></div>';
 
-const installFaq: FaqItem[] = [
-  {
-    question: "What operating systems are supported by Uoink?",
-    answer:
-      `${PRODUCT_STATUS.mac.visible}`,
-  },
-  {
-    question: "Does the helper require administrator permissions?",
-    answer:
-      "No. The helper runs in user space. On Windows it installs under %LOCALAPPDATA% and starts from the current-user startup entry.",
-  },
-  {
-    question: "What browsers support the extension?",
-    answer:
-      "The extension is Manifest V3 and is built and tested for Chrome. Other Chromium browsers such as Edge and Brave may work but are not tested. Since Chrome Web Store approval is pending, sideload the extension manually from the folder Uoink places on your machine.",
-  },
-  {
-    question: "Why does Uoink need a desktop helper?",
-    answer:
-      "The browser extension can't run yt-dlp, ffmpeg, Whisper, SQLite indexing, or the local MCP server by itself. The helper does that work locally so your corpus never has to pass through a Uoink cloud.",
-  },
-];
-
 const privacyFaq: FaqItem[] = [
   {
     question: "Is my data sent to Uoink servers?",
@@ -256,102 +233,10 @@ export const pages: Record<PageId, SitePage> = {
     description:
       "Install Uoink on Windows, the Mac preview or headless Linux. Save transcripts locally and connect your AI over MCP.",
     keywords: ["install uoink", "uoink download windows", "uoink download mac", "uoink chrome extension", "yt-dlp Chrome extension", "reddit context for AI"],
-    faq: installFaq,
-    html: `
-<section class="hero" data-screen-label="install / hero">
-  <div class="container">
-    <div class="doc">
-      <span class="eyebrow">install</span>
-      <h1 class="display-xl">Install <em>Uoink.</em></h1>
-      <p class="lede">Install the helper, add the Chrome button, then click Uoink on a video. The Windows and Mac helper bundles Python, yt-dlp and ffmpeg. No command line needed. For agents on Linux, use the <a href="#linux">headless install</a>.</p>
-      <div class="ctas"><a class="btn primary large with-logo" href="${DOWNLOAD_URL}">${WINDOWS_MARK}Download Windows installer</a><a class="btn ghost large" href="/how-it-works">See how it works</a></div>
-      <p class="sub-cta">${PRODUCT_STATUS.mac.windowsLabel} / About ${INSTALLER_SIZE} / No admin rights needed</p>${PRODUCT_STATUS.mac.heroLink}
-      <div class="brand-strip" aria-label="Install surfaces">
-        <!-- GitHub logo source: https://github.com/logos; license/usage confirmation: official GitHub mark, unmodified integration callout under GitHub logo guidelines. -->
-        <span class="logo-chip logo-mark"><img src="/assets/brand-logos/github.svg" alt="GitHub" width="22" height="22" loading="lazy" decoding="async" /><span>GitHub Releases</span></span>
-        <span>Chrome (tested)</span>
-        <span class="cws-chip">Chrome Web Store pending</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section flush" data-screen-label="install / steps">
-  <div class="container">
-    <div class="doc">
-      <div class="doc-head">
-        <span class="eyebrow">setup steps</span>
-        <h2 class="display-l">One helper. One extension. Then the <em>U button.</em></h2>
-        <p class="lede">Windows and Mac include the Chrome button. Linux runs headless for agents.</p>
-      </div>
-      <ul class="doc-list">
-        <li id="windows">
-          <p class="doc-meta"><b class="platform-label">${WINDOWS_MARK}Windows</b></p>
-          <h3>Windows installer.</h3>
-          <p class="doc-ver">Windows 10/11 / Uoink-Setup-${VERSION_NUMBER}.exe / about ${INSTALLER_SIZE}</p>
-          <p>The helper installs to <code>%LOCALAPPDATA%\\Uoink</code> and runs in user space. Along with Python, yt-dlp and ffmpeg, it includes SQLite, the local MCP server and the uoink command, and it serves the loopback server on port 5179.</p>
-          <ol class="steps">
-            <li>Download <a href="${DOWNLOAD_URL}">Uoink-Setup-${VERSION_NUMBER}.exe</a>. The <a href="${RELEASE_URL}">release page</a> lists its SHA-256.</li>
-            <li>Run it. The installer is unsigned. Windows SmartScreen will show a warning. Choose <strong>More info → Run anyway</strong>.</li>
-            <li>Load the extension. In Chrome, open <code>chrome://extensions</code>, turn on <strong>Developer mode</strong> and click <strong>Load unpacked</strong>. Select the <code>%LOCALAPPDATA%\\Uoink\\extension</code> folder.</li>
-            <li>Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.</li>
-          </ol>
-          <a class="btn primary small with-logo" href="${DOWNLOAD_URL}">${WINDOWS_MARK}Download for Windows -></a>
-        </li>
-        <li id="mac">
-          <p class="doc-meta"><b class="platform-label">${MAC_MARK}Mac</b></p>
-          <h3>${PRODUCT_STATUS.mac.heading}</h3>
-          ${PRODUCT_STATUS.mac.installSteps}
-        </li>
-        <li id="linux">
-          <p class="doc-meta"><b>Linux (headless)</b></p>
-          <h3>For agents in Docker, Codespaces and sandboxes.</h3>
-          <p>Install from a checkout. You need Git, Python 3.11 or newer, venv support, ffmpeg and ffprobe. Linux has no tray, splash or dashboard window; the helper serves the dashboard at its local URL.</p>
-          <pre class="code-block">git clone --branch v3.16.2 --depth 1 https://github.com/ryanbiddy/uoink
-sh uoink/scripts/linux/install.sh
-export PATH="$HOME/.local/bin:$PATH"
-uoink mcp</pre>
-          <p>The installer stages the pinned Whisper base model. <code>docker/capture.Dockerfile</code> builds a capture image. Keep the library on persistent storage if the sandbox will be discarded. YouTube can block cloud IPs; local Whisper can help only when the audio download works.</p>
-          <p><a class="arr-link" href="https://github.com/ryanbiddy/uoink/blob/v3.16.2/docs/linux.md">Linux requirements, Docker and agent setup -&gt;</a></p>
-        </li>
-        <li id="extension">
-          <p class="doc-meta"><b>Windows and Mac</b></p>
-          <h3>Chrome button.</h3>
-          <p class="doc-ver">Chrome (tested); other Chromium browsers such as Edge and Brave may work but are not tested.</p>
-          <p>The extension adds capture buttons directly to supported web pages. It communicates locally with the helper and skips broad history permissions. Chrome Web Store approval is pending, so for now you load it from the helper's folder, as in the steps above.</p>
-          <p>After updating the helper, reload the extension once from your browser’s extensions page. If its ID changes to the pinned <code>bkcapfidedhfcjpmjabeopfbcjcbmdmi</code>, reapply your extension preferences. Your saved captures are unaffected.</p>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-${DOC_RULE}
-<section class="section" data-screen-label="install / post install" id="running">
-  <div class="container">
-    <div class="doc"><div class="doc-head"><span class="eyebrow">post-install</span><h2 class="display-l">What happens when it's <em>running.</em></h2><p class="lede">The helper starts in the background. The extension checks localhost. When both are green, the Uoink button appears on supported pages.</p></div></div>
-    <figure class="figure">
-      <div class="figure-label"><span>dashboard</span><span>after install</span></div>
-      <img src="/product/hero-library.webp" width="1440" height="900" loading="lazy" decoding="async" alt="The Uoink dashboard running locally after install: a populated library of captured videos with search, channel and topic filters, and per-source hook labels." />
-      <figcaption>The local dashboard once the helper is running: your captures, searchable and filterable on your own machine.</figcaption>
-    </figure>
-    <div class="doc">
-      <ol class="doc-list numbered">
-        <li><span class="num">01</span><h3>Click Uoink.</h3><p>Open a YouTube video and click the Uoink button. Uoink also saves X posts and videos, podcasts, Reddit threads and web articles. <a href="/sources">Sources</a> shows how to capture each one.</p></li>
-        <li><span class="num">02</span><h3>Tray status.</h3><p>The helper sits in the tray and opens the local dashboard when you need logs, settings, or recent jobs.</p></li>
-        <li><span class="num">03</span><h3>Local files.</h3><p>Captures write to your Uoink folder and into a local SQLite index. Nothing uploads to Uoink because there's no Uoink cloud.</p></li>
-        <li><span class="num">04</span><h3>AI handoff.</h3><p>Paste into Claude or ChatGPT, or skip the clipboard and let your MCP client call Uoink directly.</p></li>
-      </ol>
-      <div class="callout" id="terminal-check">
-        <h3>Optional: check from a terminal.</h3>
-        <p>You don't need a terminal to install or use Uoink. This check is for AI agents and troubleshooting. On Windows, the installer's <strong>Add the uoink command to PATH for AI agents</strong> option is checked by default. Leave it on, then open a new terminal and run <code>uoink status</code>. On a Mac, the command ships inside the app, and <a href="/developers">agent setup</a> shows how to link it. Agents can follow the <a href="https://github.com/ryanbiddy/uoink/blob/main/llms-install.md">agent installation steps</a>.</p>
-      </div>
-    </div>
-  </div>
-</section>
-${DOC_RULE}
-<section class="section" data-screen-label="install / faq">
-  <div class="container"><div class="doc"><div class="doc-head"><span class="eyebrow">troubleshooting</span><h2 class="display-l">The boring questions that <em>matter.</em></h2></div>${renderFaq(installFaq)}</div></div>
-</section>`,
+    // The page is a real component in app/install/page.tsx (PageShell supplies the
+    // nav, footer and HowTo JSON-LD). Its facts are asserted against the built
+    // out/install.html by scripts/check-launch-content.cjs.
+    html: "",
   },
   how: {
     id: "how",

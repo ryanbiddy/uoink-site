@@ -15,6 +15,12 @@ const { AGENT_SETUP_HTML } = require("../app/content/agent-setup.ts");
 const { PRODUCT_STATUS, MAC_PREVIEW_STATUS, MAC_DMG_NAME, MAC_DMG_URL, MAC_MCPB_NAME, MAC_MCPB_URL, MAC_EXTENSION_PATH } = require("../app/content/product-status.ts");
 const manifest = JSON.parse(fs.readFileSync("public/mcp/manifest.json", "utf8"));
 const path = require("node:path");
+// /install is a real page component (app/install/page.tsx), not an HTML string in pages.ts, so its
+// facts are asserted against the exported page: scripts and JSON-LD removed, entities decoded.
+const installPageFile = ["out/install.html", "out/install/index.html"].find(file => fs.existsSync(file));
+assert(installPageFile, "install: run `npm run build` first; out/install.html is missing");
+const decodeEntities = text => text.replace(/&(?:amp|quot|apos|lt|gt|#x27|#39);/g, value => ({ "&amp;": "&", "&quot;": '"', "&apos;": "'", "&lt;": "<", "&gt;": ">", "&#x27;": "'", "&#39;": "'" }[value]));
+const installPageHtml = decodeEntities(fs.readFileSync(installPageFile, "utf8").replace(/<script[\s\S]*?<\/script>/g, ""));
 function walk(dir) { return fs.readdirSync(dir, {withFileTypes:true}).flatMap(entry => entry.isDirectory() ? walk(path.join(dir, entry.name)) : [path.join(dir, entry.name)]); }
 
 // Release numbers that are not known until the 3.16.2 release is published use
@@ -76,7 +82,7 @@ assert.equal(INSTALLER_SIZE, `${Math.round(release.installerSizeBytes / 1_000_00
 assert.equal(VERSION, `v${release.version}`);
 assert.equal(VERSION_NUMBER, release.version);
 assert.equal(DOWNLOAD_URL, `https://github.com/ryanbiddy/uoink/releases/download/${VERSION}/Uoink-Setup-${release.version}.exe`);
-assert(pages.install.html.includes(`href="${DOWNLOAD_URL}"`));
+assert(installPageHtml.includes(`href="${DOWNLOAD_URL}"`));
 assert.equal(MCP_TOOL_COUNT, release.httpToolCount);
 assert.equal(MCP_STDIO_TOOL_COUNT, release.stdioToolCount);
 assert.equal(mcpTools.length, release.httpToolCount);
@@ -129,23 +135,23 @@ for (const fact of ["<h3>On a Mac</h3>", "Apple Silicon with macOS 15 or later",
 assert(!AGENT_SETUP_HTML.includes("What was tested for 3.11.2"), "Agent setup: no 3.11.2 test claims");
 assert(AGENT_SETUP_HTML.includes("<h3>What was tested for 3.12.0</h3>\n<p>Agent Install 30 tested the installed 3.12.0 build in an isolated profile:"), "Agent setup: 3.12.0 receipt 30");
 assert(AGENT_SETUP_HTML.indexOf("What was tested for 3.12.0") < AGENT_SETUP_HTML.indexOf("What was tested for 3.11.1"), "Agent setup: newest receipt first");
-assert(pages.install.html.includes(`<h3>${PRODUCT_STATUS.mac.heading}</h3>`) && pages.install.html.includes(`${PRODUCT_STATUS.mac.windowsLabel} / About`), "install: Mac preview heading and Windows support");
-for (const fact of [PRODUCT_STATUS.mac.heroLink, `href="${MAC_DMG_URL}"`, "Download the Mac preview", "Apple Silicon Macs with macOS 15 or later", "Intel Macs are not supported", "signed with a Developer ID, notarized by Apple and stapled", "No security override is needed", "drag Uoink to the Applications shortcut", "Eject the mounted disk", "⌘⇧G", "<strong>Get the extension</strong> card copies", `<code>${MAC_EXTENSION_PATH}</code>`, `href="${MAC_MCPB_URL}"`, "not the Windows bundle", "<strong>Download update</strong> in Settings, Updates checks each new DMG", "Library mirroring is unavailable", "macOS still credits Uoink's alerts to Script Editor", "Download for Mac"]) assert(pages.install.html.includes(fact), `install Mac: ${fact}`);
-assert(!/Until 3\.12/.test(pages.install.html), "install Mac: 3.12 shipped without its own notifier");
+assert(installPageHtml.includes("<h3>Mac</h3>") && installPageHtml.includes(">Preview</span>") && installPageHtml.includes(`${PRODUCT_STATUS.mac.windowsLabel} · about ${INSTALLER_SIZE}`), "install: Mac preview card and Windows support");
+for (const fact of [`href="${MAC_DMG_URL}"`, "Apple Silicon Macs with macOS 15 or later", "Intel Macs are not supported", "signed with a Developer ID, notarized by Apple and stapled", "No security override is needed", "drag Uoink to the Applications shortcut", "Eject the mounted disk", "⌘⇧G", "<strong>Get the extension</strong> card copies", `<code>${MAC_EXTENSION_PATH}</code>`, `href="${MAC_MCPB_URL}"`, "not the Windows bundle", "<strong>Download update</strong> (Mac) in Settings, Updates checks each new download", "Library mirroring is unavailable", "macOS still credits Uoink's alerts to Script Editor", "Download for Mac"]) assert(installPageHtml.includes(fact), `install Mac: ${fact}`);
+assert(!/Until 3\.12/.test(installPageHtml), "install Mac: 3.12 shipped without its own notifier");
 // The install block that moved off home is folded into /install itself, so no
 // second copy renders under the FAQ. /install has its own Mac entry and hero link.
-assert(pages.home.html.includes(`${PRODUCT_STATUS.mac.visible}</p>`) && !HOME_MOVED_CONTENT['/install'] && pages.install.html.includes('<li id="mac">') && pages.install.html.includes('href="#mac"'), "home platform fact; install page carries the Mac entry");
+assert(pages.home.html.includes(`${PRODUCT_STATUS.mac.visible}</p>`) && !HOME_MOVED_CONTENT['/install'] && installPageHtml.includes('id="mac"') && installPageHtml.includes(`href="${MAC_DMG_URL}"`), "home platform fact; install page carries the Mac entry");
 // Install page: each step said once, with separate Windows and Mac paths.
 const count = (text, needle) => text.split(needle).length - 1;
-const installHtml = pages.install.html;
+const installHtml = installPageHtml;
 for (const [needle, times] of [["SmartScreen will show a warning", 1], ["<strong>Load unpacked</strong>", 2], ["pin Uoink so the Uoink button stays visible", 2], ["%LOCALAPPDATA%\\Uoink\\extension", 1], ["reload the extension once", 1], [`href="${DOWNLOAD_URL}"`, 3]]) {
   assert.equal(count(installHtml, needle), times, `install: "${needle}" appears ${times} time(s)`);
 }
 for (const id of ["windows", "mac", "extension"]) assert.equal(count(installHtml, `id="${id}"`), 1, `install: one #${id} entry`);
 // No command line for the normal install; the terminal check is optional and lives in one callout.
-assert(installHtml.includes("No command line needed.") && installHtml.includes("<h3>Optional: check from a terminal.</h3>"), "install: no command line, optional terminal check");
+assert(installHtml.includes("No command line needed.") && installHtml.includes("Optional: check from a terminal</summary>"), "install: no command line, optional terminal check");
 assert.equal(count(installHtml, "uoink status"), 1, "install: uoink status only in the optional check");
-assert(installHtml.indexOf("uoink status") > installHtml.indexOf("Optional: check from a terminal."), "install: uoink status sits in the optional check");
+assert(installHtml.indexOf("uoink status") > installHtml.indexOf("Optional: check from a terminal"), "install: uoink status sits in the optional check");
 // Supported sources match /sources: YouTube, X posts and video, podcasts, Reddit threads, web articles.
 assert(installHtml.includes("X posts and videos, podcasts, Reddit threads and web articles") && !/YouTube (?:and|or) Reddit/.test(installHtml), "install: full source list");
 assert(pages.home.html.includes("<li>YouTube, podcasts, X posts and videos, Reddit threads and web articles</li>"), "home: Save it lists every shipped source");
@@ -163,7 +169,7 @@ for (const feature of features) {
   for (const name of feature.mcpTools) assert(mcpTools.some(([tool]) => tool === name), `${feature.slug}: unknown tool ${name}`);
 }
 for (const text of ["Living Library and research", "Clip search + evidence cards", "Standing capture", "Library reach over MCP", "Cited range export", "Chapter navigation", "Five research playbooks", "ScrapeCreators", "25-credit daily cap", "Caption rate limits", "five-step strip"]) assert(HOME_MOVED_CONTENT['/changelog'].includes(text), `Relocated to changelog: ${text}`);
-for (const text of ["unsigned", "SmartScreen will show a warning", "More info → Run anyway", INSTALLER_SIZE, "No admin rights needed", "reload the extension once", "bkcapfidedhfcjpmjabeopfbcjcbmdmi", "reapply your extension preferences", "saved captures are unaffected"]) assert(pages.install.html.includes(text), text);
+for (const text of ["unsigned", "SmartScreen will show a warning", "More info → Run anyway", INSTALLER_SIZE, "No admin rights needed", "reload the extension once", "bkcapfidedhfcjpmjabeopfbcjcbmdmi", "reapply your extension preferences", "saved captures are unaffected"]) assert(installPageHtml.includes(text), text);
 for (const text of ["Connected agents can start paid Anthropic calls", "even when automatic analysis is off", "ScrapeCreators", "credit confirmation", "separately enabled agent discovery", "typed handle, channel ID, or query", "request identity", "normalized candidates", "credit accounting", "partial and failed runs", "daily purge", "older than 90 days", "up to 30 days old"]) assert(pages.privacy.html.includes(text), text);
 // Mac storage and uninstall, as in the product's docs/privacy-policy.md at the release commit.
 for (const text of ["On a Mac (the Apple Silicon preview, from 3.11.2)", "<code>_yoink-trash</code> folder, in <code>~/Desktop/Uoink/</code>", "the library index, settings, helper state, discovery runs, optional usage counts and the extension copy in <code>~/Library/Application Support/Uoink/</code>", "the Anthropic and ScrapeCreators keys in the macOS Keychain, under the same service and usernames as on Windows", "login-startup logs in <code>~/Library/Logs/Uoink/</code>", "<h3>Uninstall on a Mac</h3>", "Close AI clients that use Uoink", "<code>bash /Applications/Uoink.app/Contents/Resources/scripts/mac/uninstall.sh /Applications/Uoink.app --remove</code>", "It removes the app and its login item and keeps your data", "the <code>Uoink</code> entries in Keychain Access"]) assert(pages.privacy.html.includes(text), `privacy Mac: ${text}`);
@@ -207,7 +213,7 @@ for (const fact of ["Deep research", "quote and timestamp", "Network discovery i
 for (const fact of ["Deep research", "get_transcript", "YouTube Watch Later", "X bookmarks", "Reddit saves", "Gone from the web", "Linux"]) assert(pages.home.html.includes(fact), `home 3.14.0: ${fact}`);
 for (const slug of ["deep-research", "get-transcript", "import-saves", "source-availability", "headless-linux"]) assert(features.some(feature => feature.slug === slug && feature.status === "shipped"), `3.14.0 feature: ${slug}`);
 for (const fact of ["UOINK_MCP_TOOLSET=search", "UOINK_MCP_TOOLSET=research", "Full mode has 99 tools", "36", "9", "7 total", "On Linux (headless)"]) assert(AGENT_SETUP_HTML.includes(fact), `agent setup 3.14.0: ${fact}`);
-for (const fact of ['id="linux"', "v3.16.2 --depth 1", "scripts/linux/install.sh", "ffmpeg and ffprobe", "YouTube can block cloud IPs"]) assert(pages.install.html.includes(fact), `Linux install: ${fact}`);
+for (const fact of ['id="linux"', "v3.16.2 --depth 1", "scripts/linux/install.sh", "ffmpeg and ffprobe", "YouTube can block cloud IPs"]) assert(installPageHtml.includes(fact), `Linux install: ${fact}`);
 assert(fs.readFileSync("app/sample/page.tsx", "utf8").includes("Uoink 3.13.0 and later can import a list"), "sample: list import shipped in 3.13.0");
 assert(entries["3.13.0"].includes('<time datetime="2026-11-01">'), "3.13.0 keeps its release date");
 // 3.13.0: Import a list, the import_list tool, mid-video card images and silent-update restarts. Facts from the product's CHANGELOG.md [3.13.0] and RELEASE-NOTES-3.13.0.md.
