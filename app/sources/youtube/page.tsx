@@ -43,7 +43,7 @@ const faq: FaqItem[] = [
   {
     question: "Do I need to install anything for YouTube's player checks?",
     answer:
-      "Not on Windows. The installer includes Deno so yt-dlp can solve YouTube's player challenges. On a Mac or Linux, yt-dlp uses Deno 2.3 or newer if it is on your PATH.",
+      "Not on Windows or a Mac. The Windows installer and the Mac app include Deno so yt-dlp can solve YouTube's player challenges. On Linux, yt-dlp uses Deno 2.3 or newer if it is on your PATH.",
   },
   {
     question: "Is it free?",

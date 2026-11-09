@@ -1,10 +1,10 @@
 {
   "schema_version": "3.2",
-  "version": "3.16.1",
+  "version": "3.16.2",
   "name": "Uoink MCP Tool Manifest",
   "description": "Local MCP tool inventory with exact registry schemas and supported transports. Both stdio and HTTP advertise flattened top-level schema variants for client compatibility; the server validates the exact registry schemas.",
-  "source": "ryanbiddy/uoink@02b5c60bfa0fe2a914ed92ff30ee162ba75c9996:uoink_mcp_tools.py",
-  "generated": "2026-11-08",
+  "source": "ryanbiddy/uoink@719abab6db50551602fc3e84cdbd00a201aefef8:uoink_mcp_tools.py",
+  "generated": "2026-11-09",
   "tool_count": 99,
   "stdio_tool_count": 99,
   "tools": [
