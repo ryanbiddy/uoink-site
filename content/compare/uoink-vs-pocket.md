@@ -60,7 +60,7 @@ Pocket kept your saves in an online account. When Mozilla closed it, users could
 - **Not a reading app.** Uoink has a Reader view in its dashboard, but highlighting, text-to-speech and an e-reader mode are not among its features.
 - **No Pocket importer.** Uoink does not list one. An agent connected to Uoink can capture URLs, so it can work through a list of links you kept.
 - **No sync.** There is no Uoink cloud, so there is no built-in sync between devices.
-- **Rougher install.** The Windows installer is unsigned and about 519 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Chrome is the tested browser.
+- **Rougher install.** The Windows installer is unsigned and about 549 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Chrome is the tested browser.
 - **Some articles fail.** Uoink labels paywalls and login walls as failed captures.
 - **A side project.** Uoink is a personal side project by one maker, Ryan Biddy.
 
@@ -75,5 +75,5 @@ Competitor pages were opened and read on 2026-11-03.
 
 Uoink facts:
 
-- U1. Uoink 3.16.0 summary (updated 2026-11-08): https://uoink.app/llms.txt
-- U2. Uoink 3.16.0 full disclosures (updated 2026-11-08): https://uoink.app/llms-full.txt
+- U1. Uoink 3.16.1 summary (updated 2026-11-08): https://uoink.app/llms.txt
+- U2. Uoink 3.16.1 full disclosures (updated 2026-11-08): https://uoink.app/llms-full.txt

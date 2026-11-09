@@ -18,7 +18,7 @@ Servers such as mcp-server-youtube-transcript, mcp-youtube and mcp-youtube-trans
 - You need one transcript for one question and do not need it again.
 - You want ad and sponsor filtering by chapter markers (mcp-server-youtube-transcript), or automatic paging through long transcripts and proxy support for rate limits (mcp-youtube-transcript). [1][3]
 - You want video analysis of what is shown on screen through TwelveLabs, with your own key (mcp-server-youtube-transcript). [1]
-- You would rather not install a desktop app of about 519 MB.
+- You would rather not install a desktop app of about 549 MB.
 
 ## Pick Uoink if
 
@@ -34,7 +34,7 @@ Servers such as mcp-server-youtube-transcript, mcp-youtube and mcp-youtube-trans
 | Feature | Uoink | YouTube transcript MCP servers |
 |---|---|---|
 | What it is | A desktop app with capture, a local library and an MCP server with 99 tools | Small MCP servers built around fetching a video's transcript, with tools such as get_transcript, get_timed_transcript and get_video_info [1][3] |
-| Install | Unsigned Windows installer, about 519 MB, no admin rights needed; on a Mac, a DMG signed with a Developer ID and notarized by Apple | One MCP config entry run through `npx` or `uvx` [1][3]; mcp-youtube needs yt-dlp installed first [2] |
+| Install | Unsigned Windows installer, about 549 MB, no admin rights needed; on a Mac, a DMG signed with a Developer ID and notarized by Apple | One MCP config entry run through `npx` or `uvx` [1][3]; mcp-youtube needs yt-dlp installed first [2] |
 | Platforms | Windows 10/11, a Mac preview for Apple Silicon (macOS 15 or later), and headless Linux for agents | Wherever their runtime runs: Node.js, uv or yt-dlp [1][2][3] |
 | Where transcripts come from | get_transcript tries the saved copy, then YouTube captions, then local Whisper; every result names its source and explains any fallback | The captions and subtitles YouTube already has; mcp-youtube downloads subtitles with yt-dlp [1][2][3] |
 | Memory | Every capture saved as Markdown plus a JSON sidecar and indexed in one library | Not described in their READMEs |
@@ -59,7 +59,7 @@ Add it to Claude Code with `claude mcp add uoink-lite -- uvx --from git+https://
 ## Uoink's honest limits
 
 - **Windows 10 and 11, plus a Mac preview for Apple Silicon (macOS 15 or later).** Intel Macs and Linux are not supported. The transcript servers run wherever their runtime does.
-- **A heavier install.** The Windows installer is unsigned and about 519 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). A transcript server is one line of config.
+- **A heavier install.** The Windows installer is unsigned and about 549 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). A transcript server is one line of config.
 - **More than you may need.** If you ask about one video and move on, a transcript server or uoink-lite does that with less to set up.
 - **Agents must run on the same computer.** An agent has to be able to run Uoink on the computer that holds the library. The ChatGPT app does not connect over MCP; use copy and paste.
 - **No self-organizing library.** The library does not file or re-shelve itself. The Librarian only proposes changes, and applying them is off by default because its quality gate has not passed.
@@ -75,6 +75,6 @@ Competitor pages were opened and read on 2026-11-03.
 
 Uoink facts:
 
-- U1. Uoink 3.16.0 summary (updated 2026-11-08): https://uoink.app/llms.txt
-- U2. Uoink 3.16.0 full disclosures (updated 2026-11-08): https://uoink.app/llms-full.txt
+- U1. Uoink 3.16.1 summary (updated 2026-11-08): https://uoink.app/llms.txt
+- U2. Uoink 3.16.1 full disclosures (updated 2026-11-08): https://uoink.app/llms-full.txt
 - U3. uoink-lite README: https://github.com/ryanbiddy/uoink-lite
