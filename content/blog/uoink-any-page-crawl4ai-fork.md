@@ -1,5 +1,7 @@
 # Uoink Any Page: Our Crawl4AI Fork
 
+> **Correction, 2026-11-09:** Uoink does not run a fork of Crawl4AI, and much of this post describes a design that never shipped. Page capture uses Uoink's built-in article extractor, which reads the fetched HTML on your machine with no screenshot and no JavaScript. If you install Crawl4AI yourself, Uoink can use it as a second try for pages the built-in extractor can't read. Neither installer includes it. The code sample, the Playwright wait and the timeout described below are not Uoink's code. Uoink can't capture pages behind a sign-in, and the default allowlist holds only YouTube and X. You add every other site yourself.
+
 Most web scraping tools are designed for large-scale cloud jobs. They require proxy rotation, complex selector configurations, and heavy cloud infrastructure. 
 
 For a local-first application like Uoink, these tools are too heavy. We needed a fast way to scrape clean content from technical blogs, docs, and news sites directly from the browser. 

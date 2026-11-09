@@ -2,7 +2,7 @@
   "name": "io.github.ryanbiddy/uoink",
   "display_name": "Uoink",
   "description": "Uoink keeps videos, podcasts, and articles on your disk for AI search and citations. Claude Desktop, Claude Code, Cursor, and Codex CLI connect over MCP; ChatGPT and claude.ai use copy and paste.",
-  "version": "3.16.1",
+  "version": "3.16.2",
   "homepage": "https://uoink.app",
   "documentation": "https://uoink.app/developers",
   "repository": {
@@ -17,8 +17,8 @@
   "install": {
     "windows": "https://uoink.app/install",
     "macos": "https://uoink.app/install#mac",
-    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/download/v3.16.1/uoink-3.16.1.mcpb",
-    "mcpb_bundle_macos": "https://github.com/ryanbiddy/uoink/releases/download/v3.16.1/uoink-3.16.1-macos.mcpb",
+    "mcpb_bundle": "https://github.com/ryanbiddy/uoink/releases/download/v3.16.2/uoink-3.16.2.mcpb",
+    "mcpb_bundle_macos": "https://github.com/ryanbiddy/uoink/releases/download/v3.16.2/uoink-3.16.2-macos.mcpb",
     "notes": "Windows: unsigned installer, about 549 MB; no admin rights needed. Windows SmartScreen: More info → Run anyway. Then open the .mcpb bundle for one-click Claude Desktop setup, or copy the setup page’s stdio config. Mac preview (Apple Silicon, macOS 15 or later): a DMG signed with a Developer ID and notarized by Apple; Claude Desktop uses the separate macOS .mcpb, and `uoink connect <client>` prints configs with the installed app's paths. Headless Linux: install from a checkout with scripts/linux/install.sh; host media capture needs ffmpeg and ffprobe. Docker, Codespaces and sandboxes can run uoink mcp.",
     "linux": "https://uoink.app/install#linux"
   },
