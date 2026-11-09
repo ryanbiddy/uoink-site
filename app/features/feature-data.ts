@@ -377,7 +377,7 @@ export const features: Feature[] = [
       "extract",
       "markdown",
       "metadata",
-      "crawl4ai"
+      "article extractor"
     ],
     "whatItDoes": "Capture a web article into the same local library as your videos and podcasts. Saved text can be searched and handed to your AI as source material.",
     "gettingStarted": [
@@ -387,7 +387,7 @@ export const features: Feature[] = [
       "Approve the allowlist prompt if this is a new domain.",
       "Check your library for the clean markdown document."
     ],
-    "behindScenes": "The HTTP registry tool uoink_page captures an allowed page, using local Crawl4AI when available and a static HTML fallback otherwise.",
+    "behindScenes": "The HTTP registry tool uoink_page captures an allowed page with Uoink's built-in article extractor, which reads the fetched HTML on your machine, keeps the article's structure and records which extractor was used. If you have installed Crawl4AI yourself, Uoink can use it as an optional second try for pages the built-in extractor cannot read; neither installer includes it. A basic static HTML read is the last fallback.",
     "mcpTools": [
       "uoink_page",
       "list_allowed_sites",

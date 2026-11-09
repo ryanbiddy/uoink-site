@@ -14,7 +14,7 @@ Before you write, you need reference data. You want to gather the best explanati
 
 Use Uoink to build your folder of resources. If you are writing a script on database replication, find three high-quality videos on YouTube. Click the rust U button on each watch page to uoink them. 
 
-If there is a detailed technical blog post on the topic, right-click the page. Select "Uoink page" to extract the content using the Crawl4AI parser. 
+If there is a detailed technical blog post on the topic, right-click the page. Select "Uoink page" to extract the content using Uoink's page extractor. 
 
 Uoink saves these files on disk as clean markdown files. It indexes the transcripts and metadata in your local SQLite index. You now have a solid foundation of source texts.
 

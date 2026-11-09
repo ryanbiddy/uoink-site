@@ -1,5 +1,7 @@
 # Uoink Any Page: Our Crawl4AI Fork
 
+> **Correction, 2026-11-09:** Uoink does not run a fork of Crawl4AI. Page capture uses Uoink's built-in extractor. It uses Crawl4AI only if you install it yourself, and neither installer includes it.
+
 Most web scraping tools are designed for large-scale cloud jobs. They require proxy rotation, complex selector configurations, and heavy cloud infrastructure. 
 
 For a local-first application like Uoink, these tools are too heavy. We needed a fast way to scrape clean content from technical blogs, docs, and news sites directly from the browser. 
