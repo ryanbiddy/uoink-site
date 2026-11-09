@@ -62,7 +62,7 @@ Both tools now connect to AI assistants over MCP, so that is not the dividing li
 - **Windows 10 and 11, plus a Mac preview for Apple Silicon (macOS 15 or later).** Intel Macs are not supported, and there are no phone apps. Recall runs on iOS, Android, the web and four browsers.
 - **No summaries out of the box.** Uoink keeps the transcript; your AI writes the summary when you ask. Recall writes summaries for you.
 - **No sync.** There is no Uoink cloud, so there is no built-in sync between devices.
-- **Rougher install.** The Windows installer is unsigned and about 519 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Chrome is the tested browser.
+- **Rougher install.** The Windows installer is unsigned and about 549 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Chrome is the tested browser.
 - **Fewer formats.** PDFs and EPUBs are not among Uoink's listed sources. Recall saves PDFs.
 - **No knowledge graph or spaced review.** Recall links related items and quizzes you on them; Uoink does neither.
 - **No self-organizing library.** The library does not file or re-shelve itself. The Librarian only proposes changes, and applying them is off by default because its quality gate has not passed.
@@ -80,5 +80,5 @@ Competitor pages were opened and read on 2026-11-03.
 
 Uoink facts:
 
-- U1. Uoink 3.16.0 summary (updated 2026-11-08): https://uoink.app/llms.txt
-- U2. Uoink 3.16.0 full disclosures (updated 2026-11-08): https://uoink.app/llms-full.txt
+- U1. Uoink 3.16.1 summary (updated 2026-11-08): https://uoink.app/llms.txt
+- U2. Uoink 3.16.1 full disclosures (updated 2026-11-08): https://uoink.app/llms-full.txt

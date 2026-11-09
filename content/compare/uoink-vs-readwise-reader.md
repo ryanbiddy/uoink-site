@@ -62,7 +62,7 @@ Both tools now connect to AI assistants over MCP, so that is no longer the divid
 
 - **Windows 10 and 11, plus a Mac preview for Apple Silicon (macOS 15 or later).** Intel Macs are not supported, and there are no phone apps.
 - **No sync.** There is no Uoink cloud, so there is no built-in sync between devices. Reader keeps every device in step.
-- **Rougher install.** The Windows installer is unsigned and about 519 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Chrome is the tested browser.
+- **Rougher install.** The Windows installer is unsigned and about 549 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Chrome is the tested browser.
 - **Not a reading app.** Highlighting, text-to-speech, an e-ink mode and spaced review are not among its features. If reading is the main job, Reader is the better tool.
 - **Fewer formats.** PDFs and EPUBs are not among Uoink's listed sources.
 - **No self-organizing library.** The library does not file or re-shelve itself. The Librarian only proposes changes, and applying them is off by default because its quality gate has not passed.
@@ -84,5 +84,5 @@ Competitor pages were opened and read on 2026-10-24.
 
 Uoink facts:
 
-- U1. Uoink 3.16.0 summary (updated 2026-11-08): https://uoink.app/llms.txt
-- U2. Uoink 3.16.0 full disclosures (updated 2026-11-08): https://uoink.app/llms-full.txt
+- U1. Uoink 3.16.1 summary (updated 2026-11-08): https://uoink.app/llms.txt
+- U2. Uoink 3.16.1 full disclosures (updated 2026-11-08): https://uoink.app/llms-full.txt

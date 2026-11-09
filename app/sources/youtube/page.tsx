@@ -41,6 +41,11 @@ const faq: FaqItem[] = [
       "No. Uoink never signs in to YouTube and never uses browser cookies, so it can only capture videos YouTube shows to anyone. When YouTube's bot check blocks captions, the capture still finishes with local Whisper, and the Library note and Activity row say so. After three bot checks in 15 minutes, Uoink stops asking YouTube for captions for 30 minutes and transcribes locally.",
   },
   {
+    question: "Do I need to install anything for YouTube's player checks?",
+    answer:
+      "Not on Windows. The installer includes Deno so yt-dlp can solve YouTube's player challenges. On a Mac or Linux, yt-dlp uses Deno 2.3 or newer if it is on your PATH.",
+  },
+  {
     question: "Is it free?",
     answer:
       "Yes. Uoink is free and open source (MIT). Core YouTube capture needs no API key. Optional AI features (Comment Intelligence, hook classification) use your own Anthropic key and are off by default.",

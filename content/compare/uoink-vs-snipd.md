@@ -61,7 +61,7 @@ These are different kinds of tools, and you could use both. Snipd is where you l
 - **Not a player.** You listen somewhere else. Uoink has no headphone snips, no playback queue and no smart downloads.
 - **Podcasts come in through feeds.** You add a show by its RSS or Atom feed. Episode audio stays off until you turn on auto-ingest for that feed.
 - **Transcription takes your computer's time.** Episodes are transcribed locally instead of on a server, so a long backlog takes a while.
-- **Rougher install.** The Windows installer is unsigned and about 519 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending.
+- **Rougher install.** The Windows installer is unsigned and about 549 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending.
 - **Agents must run on the same computer.** An agent has to be able to run Uoink on the computer that holds the library. The ChatGPT app does not connect over MCP; use copy and paste.
 - **A side project.** Uoink is a personal side project by one maker, Ryan Biddy.
 
@@ -78,5 +78,5 @@ Competitor pages were opened and read on 2026-11-03.
 
 Uoink facts:
 
-- U1. Uoink 3.16.0 summary (updated 2026-11-08): https://uoink.app/llms.txt
-- U2. Uoink 3.16.0 full disclosures (updated 2026-11-08): https://uoink.app/llms-full.txt
+- U1. Uoink 3.16.1 summary (updated 2026-11-08): https://uoink.app/llms.txt
+- U2. Uoink 3.16.1 full disclosures (updated 2026-11-08): https://uoink.app/llms-full.txt
