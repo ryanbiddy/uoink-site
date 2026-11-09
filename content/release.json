@@ -2,6 +2,7 @@
   "version": "3.16.2",
   "mcpSourceRef": "v3.16.2",
   "installerSizeBytes": 548622064,
+  "macDmgSizeBytes": 735192482,
   "stdioToolCount": 99,
   "httpToolCount": 99
 }

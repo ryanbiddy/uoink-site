@@ -12,7 +12,7 @@ const { mcpTools, mcpStdioToolNames, MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT } = re
 const { CLAUDE_CODE_COMMAND, MCP_CURSOR_CONFIG, MCP_STDIO_CONFIG } = require("../app/content/mcp-config.ts");
 const { features } = require("../app/features/feature-data.ts");
 const { AGENT_SETUP_HTML } = require("../app/content/agent-setup.ts");
-const { PRODUCT_STATUS, MAC_PREVIEW_STATUS, MAC_DMG_NAME, MAC_DMG_URL, MAC_MCPB_NAME, MAC_MCPB_URL, MAC_EXTENSION_PATH } = require("../app/content/product-status.ts");
+const { MAC_DMG_SIZE, PRODUCT_STATUS,MAC_PREVIEW_STATUS, MAC_DMG_NAME, MAC_DMG_URL, MAC_MCPB_NAME, MAC_MCPB_URL, MAC_EXTENSION_PATH } = require("../app/content/product-status.ts");
 const manifest = JSON.parse(fs.readFileSync("public/mcp/manifest.json", "utf8"));
 const path = require("node:path");
 // /install is a real page component (app/install/page.tsx), not an HTML string in pages.ts, so its
@@ -304,6 +304,14 @@ if (sizeKnown) {
 }
 // 3.16.2 release numbers. Size is a placeholder from the build in progress; hashes and the DMG/bundle sizes are placeholders until the release is cut.
 assert.equal(release.installerSizeBytes, 548622064);
+// The Mac DMG byte count in content/release.json is the single source for the "about N MB" on /install.
+{
+  const dmgLine = fs.readFileSync("public/llms-full.txt", "utf8").split(/\r?\n/).find(line => line.startsWith(`- Uoink-${release.version}-macos-arm64.dmg (Mac preview):`));
+  assert(dmgLine, "llms-full.txt: DMG checksum line");
+  assert.equal(Number(dmgLine.match(/:\s*([\d,]+) bytes/)[1].replace(/,/g, "")), release.macDmgSizeBytes, "llms-full.txt: DMG bytes match content/release.json macDmgSizeBytes");
+  assert.equal(MAC_DMG_SIZE, `${Math.round(release.macDmgSizeBytes / 1_000_000)} MB`);
+  assert(installPageHtml.includes(`about ${MAC_DMG_SIZE}`), "install: Mac card and hero show the DMG size");
+}
 for (const fact of [
   "- Uoink-Setup-3.16.2.exe: 548,622,064 bytes (about 549 MB). SHA-256: `895e0379e6c9d97d8e1eec5fa8d823b7afb8b54b5b3afc52aad6b4dd702d5a1e`.",
   "- uoink-3.16.2.mcpb: 119,763 bytes. SHA-256: `944da127e8324948bd9e8ad5d57a59c7bf54df40c3e8a900e1c3f6101c886d04`.",

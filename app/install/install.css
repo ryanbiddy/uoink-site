@@ -47,6 +47,7 @@
 .ip .ip-cta { min-height: 52px; padding: 14px 32px; }
 .ip-cta-mark { display: inline-flex; }
 .ip-cta-mark .os-logo { height: 1.2em; width: 1.2em; }
+.ip-seg { white-space: nowrap; }
 .ip-meta {
   text-wrap: balance;
   color: var(--text-2);
@@ -122,7 +123,7 @@
 
 /* PLATFORM CARDS */
 .ip-cards {
-  align-items: start;
+  align-items: stretch;
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -177,6 +178,13 @@
 .ip .ip-cmd { font-size: 12px; overflow-wrap: anywhere; padding: 12px 14px; white-space: pre-wrap; }
 .ip .btn { white-space: normal; text-align: center; }
 .ip .btn.with-logo .ip-mark .os-logo { height: 1.1em; width: 1.1em; }
+
+.ip-mini { margin: 0; }
+.ip-mini summary { color: var(--rust); cursor: pointer; font-size: 14px; font-weight: 600; list-style: none; }
+.ip-mini summary::-webkit-details-marker { display: none; }
+.ip-mini summary::before { content: "+ "; }
+.ip-mini[open] summary::before { content: "\2212 "; }
+.ip-mini p { color: var(--text-2); font-size: 14px; line-height: 1.55; margin: 8px 0 0; }
 
 /* STEPS */
 .ip-steps {

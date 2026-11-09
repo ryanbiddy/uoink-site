@@ -12,7 +12,7 @@ import {
   WINDOWS_MARK,
   pages,
 } from "../content/pages";
-import { MAC_DMG_NAME, MAC_DMG_URL, MAC_EXTENSION_PATH, MAC_MCPB_URL, PRODUCT_STATUS } from "../content/product-status";
+import { MAC_DMG_NAME, MAC_DMG_SIZE, MAC_DMG_URL, MAC_EXTENSION_PATH, MAC_MCPB_URL, PRODUCT_STATUS } from "../content/product-status";
 import { InstallHero, type HeroOption } from "./InstallHero";
 import "./install.css";
 
@@ -42,18 +42,18 @@ const heroOptions: Record<"windows" | "mac" | "linux", HeroOption> = {
     label: "Download for Windows",
     href: DOWNLOAD_URL,
     markHtml: WINDOWS_MARK,
-    meta: `${VERSION} · ${PRODUCT_STATUS.mac.windowsLabel} · about ${INSTALLER_SIZE} · No admin rights`,
+    meta: [VERSION, PRODUCT_STATUS.mac.windowsLabel, `about ${INSTALLER_SIZE}`, "No admin rights"],
   },
   mac: {
     label: "Download for Mac",
     href: MAC_DMG_URL,
     markHtml: MAC_MARK,
-    meta: `${VERSION} · Apple Silicon · macOS 15 or later · Signed and notarized · Preview`,
+    meta: [VERSION, "Apple Silicon", "macOS 15 or later", `about ${MAC_DMG_SIZE}`, "Signed and notarized", "Preview"],
   },
   linux: {
     label: "Set up on Linux",
     href: "#linux",
-    meta: `${VERSION} · Headless, for agents and sandboxes`,
+    meta: [VERSION, "Headless", "For agents and sandboxes"],
   },
 };
 
@@ -123,7 +123,7 @@ export default function Page() {
                 <Mark html={WINDOWS_MARK} />
                 <h3>Windows</h3>
               </header>
-              <p className="ip-card-meta">{PRODUCT_STATUS.mac.windowsLabel} · about {INSTALLER_SIZE}</p>
+              <p className="ip-card-meta">{`${PRODUCT_STATUS.mac.windowsLabel} · about ${INSTALLER_SIZE}`}</p>
               <p className="ip-card-status">Unsigned installer. SmartScreen asks first.</p>
               <div className="ip-card-actions">
                 <a className="btn primary with-logo" href={DOWNLOAD_URL}>{DOWNLOAD_ICON}Download for Windows</a>
@@ -138,7 +138,7 @@ export default function Page() {
                 <span className="ip-badge">Preview</span>
               </header>
               <p className="ip-card-meta">Apple Silicon · macOS 15 or later</p>
-              <p className="ip-card-status">Signed and notarized disk image. Intel Macs are not supported.</p>
+              <p className="ip-card-status">{`Signed and notarized disk image, about ${MAC_DMG_SIZE}. Intel Macs are not supported.`}</p>
               <div className="ip-card-actions">
                 <a className="btn primary with-logo" href={MAC_DMG_URL}>{DOWNLOAD_ICON}Download for Mac</a>
                 <a className="ip-sha" href={RELEASE_URL}>SHA-256</a>
@@ -155,9 +155,11 @@ export default function Page() {
 sh uoink/scripts/linux/install.sh
 export PATH="$HOME/.local/bin:$PATH"
 uoink mcp`}</pre>
-              <p className="ip-card-status">
-                You need Git, Python 3.11 or newer, venv support, ffmpeg and ffprobe. Linux has no tray, splash or dashboard window; the helper serves the dashboard at its local URL. The installer stages the pinned Whisper base model. YouTube can block cloud IPs.
-              </p>
+              <p className="ip-card-status">Needs Git, Python 3.11 or newer, ffmpeg and ffprobe.</p>
+              <details className="ip-mini">
+                <summary>More about Linux</summary>
+                <p>You need Git, Python 3.11 or newer, venv support, ffmpeg and ffprobe. Linux has no tray, splash or dashboard window; the helper serves the dashboard at its local URL. The installer stages the pinned Whisper base model. YouTube can block cloud IPs.</p>
+              </details>
               <div className="ip-card-actions">
                 <a className="btn ghost" href={LINUX_DOCS_URL}>Linux guide</a>
               </div>
@@ -275,7 +277,20 @@ uoink mcp`}</pre>
           </div>
         </section>
 
-        {/* 5. Updates and trust */}
+        {/* 5. Questions */}
+        <section className="ip-section" id="questions" data-screen-label="install / questions" aria-labelledby="ip-faq-title">
+          <h2 id="ip-faq-title" className="ip-h2">Questions</h2>
+          <div className="ip-disclosures">
+            {(page.faq ?? []).map((item) => (
+              <details className="ip-details" key={item.question}>
+                <summary>{item.question}</summary>
+                <div className="ip-details-body"><p>{item.answer}</p></div>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {/* 6. Updates and trust */}
         <section className="ip-section ip-trust" id="trust" data-screen-label="install / trust" aria-label="Updates and trust">
           <div className="ip-trust-row">
             <div>

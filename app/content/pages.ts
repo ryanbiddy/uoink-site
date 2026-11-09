@@ -66,6 +66,29 @@ export const MAC_MARK =
 // Hairline between reading-column sections; the TSX pages use <DocRule />.
 const DOC_RULE = '<div class="container"><hr class="doc-rule"/></div>';
 
+const installFaq: FaqItem[] = [
+  {
+    question: "What operating systems are supported by Uoink?",
+    answer:
+      `${PRODUCT_STATUS.mac.visible}`,
+  },
+  {
+    question: "Does the helper require administrator permissions?",
+    answer:
+      "No. The helper runs in user space. On Windows it installs under %LOCALAPPDATA% and starts from the current-user startup entry.",
+  },
+  {
+    question: "What browsers support the extension?",
+    answer:
+      "The extension is Manifest V3 and is built and tested for Chrome. Other Chromium browsers such as Edge and Brave may work but are not tested. Since Chrome Web Store approval is pending, sideload the extension manually from the folder Uoink places on your machine.",
+  },
+  {
+    question: "Why does Uoink need a desktop helper?",
+    answer:
+      "The browser extension can't run yt-dlp, ffmpeg, Whisper, SQLite indexing, or the local MCP server by itself. The helper does that work locally so your corpus never has to pass through a Uoink cloud.",
+  },
+];
+
 const privacyFaq: FaqItem[] = [
   {
     question: "Is my data sent to Uoink servers?",
@@ -236,6 +259,7 @@ export const pages: Record<PageId, SitePage> = {
     // The page is a real component in app/install/page.tsx (PageShell supplies the
     // nav, footer and HowTo JSON-LD). Its facts are asserted against the built
     // out/install.html by scripts/check-launch-content.cjs.
+    faq: installFaq,
     html: "",
   },
   how: {

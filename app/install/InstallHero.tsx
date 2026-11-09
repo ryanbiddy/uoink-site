@@ -12,7 +12,7 @@ type Os = "windows" | "mac" | "linux";
 export type HeroOption = {
   label: string;
   href: string;
-  meta: string;
+  meta: string[]; // segments; lines break only between them
   markHtml?: string;
 };
 
@@ -42,7 +42,14 @@ export function InstallHero({ options }: { options: Record<Os, HeroOption> }) {
         {current.markHtml ? <span className="ip-cta-mark" dangerouslySetInnerHTML={{ __html: current.markHtml }} /> : null}
         {current.label}
       </a>
-      <p className="ip-meta" aria-live="polite">{current.meta}</p>
+      <p className="ip-meta" aria-live="polite">
+        {current.meta.map((segment, i) => (
+          <span key={segment}>
+            {i > 0 ? " · " : null}
+            <span className="ip-seg">{segment}</span>
+          </span>
+        ))}
+      </p>
     </div>
   );
 }
