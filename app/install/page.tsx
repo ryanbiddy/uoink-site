@@ -178,7 +178,7 @@ uoink mcp`}</pre>
                 <span className="ip-art-bar"><i /></span>
               </div>
               <h3>Install the app</h3>
-              <p>Run the installer, or open the disk image and drag Uoink to Applications. The helper bundles Python, yt-dlp and ffmpeg and does the work on your computer.</p>
+              <p>On Windows, run the installer and press Install. On a Mac, open the disk image and drag Uoink onto Applications. The helper bundles Python, yt-dlp and ffmpeg and does the work on your computer.</p>
             </li>
             <li className="ip-step">
               <div className="ip-art" aria-hidden="true">
@@ -205,6 +205,7 @@ uoink mcp`}</pre>
                 <ol>
                   <li>Download <a href={DOWNLOAD_URL}>Uoink-Setup-{VERSION_NUMBER}.exe</a>. The <a href={RELEASE_URL}>release page</a> lists its SHA-256.</li>
                   <li>Run it. The installer is unsigned. Windows SmartScreen will show a warning. Choose <strong>More info → Run anyway</strong>.</li>
+                  <li>Setup opens on one screen. Press <strong>Install</strong>. To pick the install folder, the desktop shortcut or the PATH option for AI agents, tick <strong>Choose the install folder and shortcuts</strong> first.</li>
                   <li>Load the extension. In Chrome, open <code>chrome://extensions</code>, turn on <strong>Developer mode</strong> and click <strong>Load unpacked</strong>. Select the <code>%LOCALAPPDATA%\Uoink\extension</code> folder.</li>
                   <li>Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.</li>
                 </ol>
@@ -217,8 +218,8 @@ uoink mcp`}</pre>
                 <p>The Mac build runs on Apple Silicon Macs with macOS 15 or later. Intel Macs are not supported. The app and the DMG are signed with a Developer ID, notarized by Apple and stapled, so macOS asks only its standard question about apps downloaded from the internet. No security override is needed.</p>
                 <ol>
                   <li>Download <a href={MAC_DMG_URL}>{MAC_DMG_NAME}</a>. The release page lists its SHA-256.</li>
-                  <li>Open the DMG and drag Uoink to the Applications shortcut.</li>
-                  <li>Eject the mounted disk, then open Uoink from Applications and confirm the &quot;downloaded from the internet&quot; prompt.</li>
+                  <li>Open the DMG. A window shows Uoink, an arrow and Applications. Drag Uoink onto Applications.</li>
+                  <li>Eject the disk, then open Uoink from Applications and confirm the &quot;downloaded from the internet&quot; prompt.</li>
                   <li>Load the extension. Open Uoink once so it creates the extension folder. In Chrome, open <code>chrome://extensions</code>, turn on <strong>Developer mode</strong> and click <strong>Load unpacked</strong>. The picker hides <code>~/Library</code>, so press ⌘⇧G, paste the path that the dashboard&apos;s <strong>Get the extension</strong> card copies (<code>{MAC_EXTENSION_PATH}</code>) and press Return.</li>
                   <li>Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.</li>
                 </ol>

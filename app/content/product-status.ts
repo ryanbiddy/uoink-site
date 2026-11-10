@@ -42,8 +42,8 @@ export const PRODUCT_STATUS: { mac: MacStatus } = {
           <p>The Mac build runs on Apple Silicon Macs with macOS 15 or later. Intel Macs are not supported. The app and the DMG are signed with a Developer ID, notarized by Apple and stapled, so macOS asks only its standard question about apps downloaded from the internet. No security override is needed.</p>
           <ol class="steps">
             <li>Download <a href="${MAC_DMG_URL}">${MAC_DMG_NAME}</a>. The release page lists its SHA-256.</li>
-            <li>Open the DMG and drag Uoink to the Applications shortcut.</li>
-            <li>Eject the mounted disk, then open Uoink from Applications and confirm the "downloaded from the internet" prompt.</li>
+            <li>Open the DMG, drag Uoink onto Applications, then eject the disk.</li>
+            <li>Open Uoink from Applications and confirm the "downloaded from the internet" prompt.</li>
             <li>Load the extension. Open Uoink once so it creates the extension folder. In Chrome, open <code>chrome://extensions</code>, turn on <strong>Developer mode</strong> and click <strong>Load unpacked</strong>. The picker hides <code>~/Library</code>, so press ⌘⇧G, paste the path that the dashboard's <strong>Get the extension</strong> card copies (<code>${MAC_EXTENSION_PATH}</code>) and press Return.</li>
             <li>Click the puzzle-piece Extensions icon in the toolbar and pin Uoink so the Uoink button stays visible.</li>
           </ol>
