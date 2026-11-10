@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { PageShell } from "./components/PageShell";
-import { RELEASE_URL, SitePage } from "./content/pages";
+import { SitePage } from "./content/pages";
 
 const page: SitePage = {
   id: "home",
@@ -28,9 +28,9 @@ export default function NotFound() {
               <Link className="btn ghost large" href="/blog">
                 Field notes
               </Link>
-              <a className="btn ghost large" href={RELEASE_URL}>
-                Latest release
-              </a>
+              <Link className="btn ghost large" href="/install">
+                Install Uoink
+              </Link>
             </div>
           </div>
           <aside className="facts" aria-label="Missing page diagnostic">

@@ -10,8 +10,8 @@ const moves = require('./fixtures/home-content-moves.json').map(move => ({...mov
 const HOME_PARTS = ['header', 'first-screen', 'save', 'find', 'write', 'connect', 'go-deeper', 'sibling', 'closing', 'footer'];
 const SECTION_TITLES = ['Save it.', 'Find it.', 'Write with receipts.'];
 const DOWNLOADS = {
-  windows: `https://github.com/ryanbiddy/uoink/releases/download/v${release.version}/Uoink-Setup-${release.version}.exe`,
-  mac: `https://github.com/ryanbiddy/uoink/releases/download/v${release.version}/Uoink-${release.version}-macos-arm64.dmg`,
+  windows: `https://usage.uoink.app/get/windows?v=${release.version}`,
+  mac: `https://usage.uoink.app/get/mac?v=${release.version}`,
 };
 // The old 7-chapter story ran about 12,000 px at 1440 and 11,000 px at 390.
 const MAX_HEIGHT = { desktop: 5000, phone: 7000 };
@@ -84,7 +84,8 @@ async function checkStructure(page) {
   assert.equal(structure.headers,1); assert.equal(structure.heroes,1);
   assert.deepEqual(structure.h1, ['Uoink that shit.'], 'One h1: the headline');
   // Hero: two downloads, Windows and the Mac preview DMG, both above the fold.
-  assert.deepEqual(structure.downloads.map(d => [d.kind, d.href, d.label]), [['windows', DOWNLOADS.windows, 'Download for Windows'], ['mac', DOWNLOADS.mac, 'Download for Mac (preview)']]);
+  // DownloadAttribution adds from=home (and any campaign tags) in the browser; the base tracked URL must carry this release's version.
+  assert.deepEqual(structure.downloads.map(d => [d.kind, d.href.replace(/&from=home$/, ''), d.label]), [['windows', DOWNLOADS.windows, 'Download for Windows'], ['mac', DOWNLOADS.mac, 'Download for Mac (preview)']]);
   for (const d of structure.downloads) {
     assert(d.height >= 44 && d.width >= 44, `${d.kind} download is a 44 px target`);
     assert(d.bottom <= structure.viewport.height, `${d.kind} download is above the fold at ${structure.viewport.width} px`);

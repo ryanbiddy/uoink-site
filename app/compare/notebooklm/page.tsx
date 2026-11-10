@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocRule, FaqList } from "../../components/Doc";
 import { PageShell } from "../../components/PageShell";
-import { RELEASE_URL, SitePage, FaqItem } from "../../content/pages";
+import { SitePage, FaqItem } from "../../content/pages";
 import { PRODUCT_STATUS } from "../../content/product-status";
 
 const faq: FaqItem[] = [
@@ -98,9 +98,9 @@ export default function Page() {
               NotebookLM is a great cloud notebook. Uoink is the local, open-source alternative: it saves your videos, podcasts, and articles to your own disk and hands them to Claude, Cursor, or any MCP agent; no account, no cloud.
             </p>
             <div className="ctas">
-              <a className="btn primary large" href={RELEASE_URL}>
+              <Link className="btn primary large" href="/install">
                 Get Uoink
-              </a>
+              </Link>
               <Link className="btn ghost large" href="/sources/youtube">
                 YouTube capture
               </Link>

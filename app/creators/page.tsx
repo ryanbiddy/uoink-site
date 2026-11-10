@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocRule } from "../components/Doc";
 import { PageShell } from "../components/PageShell";
-import { RELEASE_URL, SitePage } from "../content/pages";
+import { SitePage } from "../content/pages";
 
 const page: SitePage = {
   id: "creators",
@@ -54,9 +54,9 @@ export default function Page() {
                 Uoink keeps the videos, podcasts, and articles you study on disk, then gives Writing Studio source material it can cite and shape into posts.
               </p>
               <div className="ctas">
-                <a className="btn primary large" href={RELEASE_URL}>
+                <Link className="btn primary large" href="/install">
                   Get Uoink
-                </a>
+                </Link>
                 <Link className="btn ghost large" href="/how-it-works">
                   Watch the loop
                 </Link>

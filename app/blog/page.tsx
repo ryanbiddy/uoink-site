@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocRule } from "../components/Doc";
 import { PageShell } from "../components/PageShell";
-import { CANONICAL_URL, RELEASE_URL, SitePage } from "../content/pages";
+import { CANONICAL_URL, SitePage } from "../content/pages";
 import { BlogIndexClient } from "./BlogIndexClient";
 import { blogArticles, blogTags } from "./blog-data";
 
@@ -27,7 +27,7 @@ const page: SitePage = {
       <span class="eyebrow">field notes</span>
       <h1 class="display-xl">The working notes behind Uoink.</h1>
       <p class="lede">Hooks, corpus workflows, agent memory, local-first tradeoffs, and the product decisions underneath the launch.</p>
-      <div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Install Uoink</a><a class="btn ghost large" href="/blog/rss.xml">RSS feed</a></div>
+      <div class="ctas"><a class="btn primary large" href="/install">Install Uoink</a><a class="btn ghost large" href="/blog/rss.xml">RSS feed</a></div>
       <aside class="callout" aria-label="Blog publishing model">
         <span class="eyebrow">agent-readable</span>
         <p>Every article ships with canonical metadata, schema, RSS, and clean text for crawlers. Humans get the readable version. Agents get the same facts without guessing.</p>

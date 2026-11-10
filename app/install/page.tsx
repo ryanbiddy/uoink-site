@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "../components/PageShell";
 import {
-  DOWNLOAD_URL,
+  WINDOWS_GET_URL,
+  WINDOWS_MCPB_GET_URL,
   GITHUB_URL,
   INSTALLER_SIZE,
   MAC_MARK,
@@ -12,7 +13,7 @@ import {
   WINDOWS_MARK,
   pages,
 } from "../content/pages";
-import { MAC_DMG_NAME, MAC_DMG_SIZE, MAC_DMG_URL, MAC_EXTENSION_PATH, MAC_MCPB_URL, PRODUCT_STATUS } from "../content/product-status";
+import { MAC_DMG_NAME, MAC_DMG_SIZE, MAC_DMG_GET_URL, MAC_EXTENSION_PATH, MAC_MCPB_GET_URL, PRODUCT_STATUS } from "../content/product-status";
 import { InstallHero, type HeroOption } from "./InstallHero";
 import "./install.css";
 
@@ -33,20 +34,19 @@ export const metadata: Metadata = {
 };
 
 const WINDOWS_MCPB_NAME = `uoink-${VERSION_NUMBER}.mcpb`;
-const WINDOWS_MCPB_URL = `${GITHUB_URL}/releases/download/${VERSION}/${WINDOWS_MCPB_NAME}`;
 const LINUX_DOCS_URL = `${GITHUB_URL}/blob/${VERSION}/docs/linux.md`;
 const AGENT_INSTALL_URL = `${GITHUB_URL}/blob/main/llms-install.md`;
 
 const heroOptions: Record<"windows" | "mac" | "linux", HeroOption> = {
   windows: {
     label: "Download for Windows",
-    href: DOWNLOAD_URL,
+    href: WINDOWS_GET_URL,
     markHtml: WINDOWS_MARK,
     meta: [VERSION, PRODUCT_STATUS.mac.windowsLabel, `about ${INSTALLER_SIZE}`, "No admin rights"],
   },
   mac: {
     label: "Download for Mac",
-    href: MAC_DMG_URL,
+    href: MAC_DMG_GET_URL,
     markHtml: MAC_MARK,
     meta: [VERSION, "Apple Silicon", "macOS 15 or later", `about ${MAC_DMG_SIZE}`, "Signed and notarized", "Preview"],
   },
@@ -126,7 +126,7 @@ export default function Page() {
               <p className="ip-card-meta">{`${PRODUCT_STATUS.mac.windowsLabel} · about ${INSTALLER_SIZE}`}</p>
               <p className="ip-card-status">Unsigned installer. SmartScreen asks first.</p>
               <div className="ip-card-actions">
-                <a className="btn primary with-logo" href={DOWNLOAD_URL}>{DOWNLOAD_ICON}Download for Windows</a>
+                <a className="btn primary with-logo" href={WINDOWS_GET_URL}>{DOWNLOAD_ICON}Download for Windows</a>
                 <a className="ip-sha" href={RELEASE_URL}>SHA-256</a>
               </div>
             </article>
@@ -140,7 +140,7 @@ export default function Page() {
               <p className="ip-card-meta">Apple Silicon · macOS 15 or later</p>
               <p className="ip-card-status">{`Signed and notarized disk image, about ${MAC_DMG_SIZE}. Intel Macs are not supported.`}</p>
               <div className="ip-card-actions">
-                <a className="btn primary with-logo" href={MAC_DMG_URL}>{DOWNLOAD_ICON}Download for Mac</a>
+                <a className="btn primary with-logo" href={MAC_DMG_GET_URL}>{DOWNLOAD_ICON}Download for Mac</a>
                 <a className="ip-sha" href={RELEASE_URL}>SHA-256</a>
               </div>
             </article>
@@ -203,7 +203,7 @@ uoink mcp`}</pre>
               <div className="ip-details-body">
                 <p>The helper installs to <code>%LOCALAPPDATA%\Uoink</code> and runs in user space. No admin rights needed. Along with Python, yt-dlp and ffmpeg, it includes SQLite, the local MCP server and the uoink command.</p>
                 <ol>
-                  <li>Download <a href={DOWNLOAD_URL}>Uoink-Setup-{VERSION_NUMBER}.exe</a>. The <a href={RELEASE_URL}>release page</a> lists its SHA-256.</li>
+                  <li>Download <a href={WINDOWS_GET_URL}>Uoink-Setup-{VERSION_NUMBER}.exe</a>. The <a href={RELEASE_URL}>release page</a> lists its SHA-256.</li>
                   <li>Run it. The installer is unsigned. Windows SmartScreen will show a warning. Choose <strong>More info → Run anyway</strong>.</li>
                   <li>Setup opens on one screen. Press <strong>Install</strong>. To pick the install folder, the desktop shortcut or the PATH option for AI agents, tick <strong>Choose the install folder and shortcuts</strong> first.</li>
                   <li>Load the extension. In Chrome, open <code>chrome://extensions</code>, turn on <strong>Developer mode</strong> and click <strong>Load unpacked</strong>. Select the <code>%LOCALAPPDATA%\Uoink\extension</code> folder.</li>
@@ -217,7 +217,7 @@ uoink mcp`}</pre>
               <div className="ip-details-body">
                 <p>The Mac build runs on Apple Silicon Macs with macOS 15 or later. Intel Macs are not supported. The app and the DMG are signed with a Developer ID, notarized by Apple and stapled, so macOS asks only its standard question about apps downloaded from the internet. No security override is needed.</p>
                 <ol>
-                  <li>Download <a href={MAC_DMG_URL}>{MAC_DMG_NAME}</a>. The release page lists its SHA-256.</li>
+                  <li>Download <a href={MAC_DMG_GET_URL}>{MAC_DMG_NAME}</a>. The release page lists its SHA-256.</li>
                   <li>Open the DMG. A window shows Uoink, an arrow and Applications. Drag Uoink onto Applications.</li>
                   <li>Eject the disk, then open Uoink from Applications and confirm the &quot;downloaded from the internet&quot; prompt.</li>
                   <li>Load the extension. Open Uoink once so it creates the extension folder. In Chrome, open <code>chrome://extensions</code>, turn on <strong>Developer mode</strong> and click <strong>Load unpacked</strong>. The picker hides <code>~/Library</code>, so press ⌘⇧G, paste the path that the dashboard&apos;s <strong>Get the extension</strong> card copies (<code>{MAC_EXTENSION_PATH}</code>) and press Return.</li>
@@ -259,8 +259,8 @@ uoink mcp`}</pre>
               </header>
               <p className="ip-card-meta">Open the .mcpb bundle for your computer.</p>
               <div className="ip-card-actions">
-                <a className="btn ghost small with-logo" href={WINDOWS_MCPB_URL}><Mark html={WINDOWS_MARK} />Windows bundle</a>
-                <a className="btn ghost small with-logo" href={MAC_MCPB_URL}><Mark html={MAC_MARK} />Mac bundle</a>
+                <a className="btn ghost small with-logo" href={WINDOWS_MCPB_GET_URL}><Mark html={WINDOWS_MARK} />Windows bundle</a>
+                <a className="btn ghost small with-logo" href={MAC_MCPB_GET_URL}><Mark html={MAC_MARK} />Mac bundle</a>
               </div>
               <p className="ip-card-status">On a Mac, use the Mac bundle, not the Windows bundle, and select the installed Uoink.app in its Uoink app setting.</p>
             </article>

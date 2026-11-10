@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PageShell } from "../components/PageShell";
 import { PlatformLogoStrip } from "../components/PlatformLogoStrip";
 import type { PlatformLogoKey } from "../components/PlatformLogoStrip";
-import { RELEASE_URL, SitePage } from "../content/pages";
+import { SitePage } from "../content/pages";
 
 type SourceStatus = "shipped" | "in flight" | "planned";
 
@@ -128,9 +128,9 @@ export default function Page() {
               Same source card. Same citations.
             </p>
             <div className="ctas">
-              <a className="btn primary large" href={RELEASE_URL}>
+              <Link className="btn primary large" href="/install">
                 Get Uoink
-              </a>
+              </Link>
               <Link className="btn ghost large" href="/how-it-works">
                 See the loop
               </Link>

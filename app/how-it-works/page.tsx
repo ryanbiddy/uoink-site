@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocRule } from "../components/Doc";
 import { PageShell } from "../components/PageShell";
-import { RELEASE_URL, SitePage } from "../content/pages";
+import { SitePage } from "../content/pages";
 import useCases from "../content/use-cases.generated.json";
 
 const page: SitePage = {
@@ -87,9 +87,9 @@ export default function Page() {
                 Uoink turns raw sources into a local corpus your AI can use. One source card travels from capture to library to Writing Studio to your agent.
               </p>
               <div className="ctas">
-                <a className="btn primary large" href={RELEASE_URL}>
+                <Link className="btn primary large" href="/install">
                   Get Uoink
-                </a>
+                </Link>
                 <Link className="btn ghost large" href="/sources">
                   See sources
                 </Link>

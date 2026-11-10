@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocRule } from "../components/Doc";
 import { PageShell } from "../components/PageShell";
-import { GITHUB_URL, VERSION, VERSION_NUMBER, SitePage } from "../content/pages";
+import { GITHUB_URL, VERSION, VERSION_NUMBER, WINDOWS_MCPB_GET_URL, SitePage } from "../content/pages";
 import { CLAUDE_CODE_COMMAND, MCP_CURSOR_CONFIG, MCP_STDIO_CONFIG } from "../content/mcp-config";
 import { mcpStdioToolNames, mcpTools, MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT } from "../content/mcp-tools";
 
@@ -152,7 +152,7 @@ export default function Page() {
             </div>
             <div className="docs-main">
               <h3>One-click Claude Desktop setup</h3>
-              <p>Download and open <a href={`${GITHUB_URL}/releases/download/${VERSION}/uoink-${VERSION_NUMBER}.mcpb`}>uoink-{VERSION_NUMBER}.mcpb</a>. Claude Desktop installs it as an extension and asks for the Uoink folder. Enter the full path to <code>%LOCALAPPDATA%\Uoink</code>; Desktop does not expand that variable. After updating, reinstall the bundle and restart Desktop.</p>
+              <p>Download and open <a href={WINDOWS_MCPB_GET_URL}>uoink-{VERSION_NUMBER}.mcpb</a>. Claude Desktop installs it as an extension and asks for the Uoink folder. Enter the full path to <code>%LOCALAPPDATA%\Uoink</code>; Desktop does not expand that variable. After updating, reinstall the bundle and restart Desktop.</p>
               <h3>Claude Code</h3>
               <p>Run this in PowerShell. It expands the paths to your local install. Verified with Claude Code 2.1.302, including tool listing, saving a note, and reading recent captures.</p>
               <pre className="code-block">{CLAUDE_CODE_COMMAND}</pre>

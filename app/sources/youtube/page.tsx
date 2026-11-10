@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocRule, FaqList } from "../../components/Doc";
 import { PageShell } from "../../components/PageShell";
-import { GITHUB_URL, RELEASE_URL, SitePage, FaqItem } from "../../content/pages";
+import { GITHUB_URL, SitePage, FaqItem } from "../../content/pages";
 
 const faq: FaqItem[] = [
   {
@@ -100,9 +100,9 @@ export default function Page() {
                 Save any YouTube video to your own disk as a timestamped transcript, screenshots, and comments, then chat with it in Claude, ChatGPT, or your agent. One click. Local-first. Free.
               </p>
               <div className="ctas">
-                <a className="btn primary large" href={RELEASE_URL}>
+                <Link className="btn primary large" href="/install">
                   Get Uoink
-                </a>
+                </Link>
                 <Link className="btn ghost large" href="/sources">
                   All sources
                 </Link>

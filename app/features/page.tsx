@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "../components/PageShell";
 import { getFeatureLogoKeys, PlatformLogoStrip } from "../components/PlatformLogoStrip";
-import { CANONICAL_URL, RELEASE_URL, SitePage, pages } from "../content/pages";
+import { CANONICAL_URL, SitePage, pages } from "../content/pages";
 import { featureCategories, features, featuresByCategory } from "./feature-data";
 
 const page: SitePage = {
@@ -25,7 +25,7 @@ const page: SitePage = {
       <span class="eyebrow">feature inventory</span>
       <h1 class="display-xl">Everything Uoink does.</h1>
       <p class="lede">Capture the source, build the library, assemble workspaces, verify claims, then hand the evidence to Claude, ChatGPT, Cursor, or an MCP agent.</p>
-      <div class="ctas"><a class="btn primary large" href="${RELEASE_URL}">Install Uoink</a><a class="btn ghost large" href="/api/features-manifest">Manifest JSON</a></div>
+      <div class="ctas"><a class="btn primary large" href="/install">Install Uoink</a><a class="btn ghost large" href="/api/features-manifest">Manifest JSON</a></div>
     </div>
     <figure class="figure">
       <div class="figure-label"><span>topics</span><span>local library</span></div>
