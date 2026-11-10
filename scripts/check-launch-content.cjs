@@ -308,7 +308,7 @@ if (sizeKnown) {
   if (!isPlaceholder(sums.exe[1])) assert.equal(sums.exe[1], release.installerSizeBytes.toLocaleString("en-US"), "llms-full.txt: installer bytes match content/release.json");
 }
 // 3.16.3 release numbers. Size is a placeholder from the build in progress; hashes and the DMG/bundle sizes are placeholders until the release is cut.
-assert.equal(release.installerSizeBytes, 548622064);
+assert.equal(release.installerSizeBytes, 549031529);
 // The Mac DMG byte count in content/release.json is the single source for the "about N MB" on /install.
 {
   const dmgLine = fs.readFileSync("public/llms-full.txt", "utf8").split(/\r?\n/).find(line => line.startsWith(`- Uoink-${release.version}-macos-arm64.dmg (Mac preview):`));
@@ -320,10 +320,10 @@ assert.equal(release.installerSizeBytes, 548622064);
   assert(installPageHtml.includes(`about ${MAC_DMG_SIZE}`), "install: Mac card and hero show the DMG size");
 }
 for (const fact of [
-  "- Uoink-Setup-3.16.3.exe: 548,622,064 bytes (about 549 MB). SHA-256: `__EXE_SHA__`.",
-  "- uoink-3.16.3.mcpb: __MCPB_SIZE__ bytes. SHA-256: `__MCPB_SHA__`.",
-  "- Uoink-3.16.3-macos-arm64.dmg (Mac preview): DMG_BYTES_TBD bytes. SHA-256: `__DMG_SHA__`.",
-  "- uoink-3.16.3-macos.mcpb: __MACMCPB_SIZE__ bytes. SHA-256: `__MAC_MCPB_SHA__`.",
+  "- Uoink-Setup-3.16.3.exe: 549,031,529 bytes (about 549 MB). SHA-256: `9ad7efabbca4d80375fe50e9c9aba04dd686e14c36f04e139b227cb28358d533`.",
+  "- uoink-3.16.3.mcpb: 119,830 bytes. SHA-256: `6ab1769c192ba48e0c264bdc0764efb246a5c5f78b50df0c6afc8088da48dfa8`.",
+  "- Uoink-3.16.3-macos-arm64.dmg (Mac preview): 513,312,753 bytes. SHA-256: `338acaece74728f680368a40caa2d12f279066d3dbdcf958e94377bf243ddfe2`.",
+  "- uoink-3.16.3-macos.mcpb: 116,301 bytes. SHA-256: `cbb6cc0d991727e495bbcddc383cdacbb2bb2514c9050ff3e7afc380f5e5c025`.",
 ]) assert(llmsFull.includes(fact), `llms-full.txt checksums: ${fact}`);
 assert(!/3\.(?:11\.2|12\.[01]|13\.0|14\.[01]|15\.[01]|16\.[0-2])\.exe:|3\.(?:11\.2|12\.[01]|13\.0|14\.[01]|15\.[01]|16\.[0-2])-macos-arm64\.dmg \(Mac preview\):/.test(llmsFull), "llms-full.txt checksums: no older release lines");
 // The tool inventory line names the commit the manifest was generated from.

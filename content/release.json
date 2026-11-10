@@ -1,8 +1,8 @@
 {
   "version": "3.16.3",
-  "mcpSourceRef": "080e9c3ec888a065cbad170c9dbcf8af517d8321",
-  "installerSizeBytes": 548622064,
-  "macDmgSizeBytes": 735192482,
+  "mcpSourceRef": "v3.16.3",
+  "installerSizeBytes": 549031529,
+  "macDmgSizeBytes": 513312753,
   "stdioToolCount": 99,
   "httpToolCount": 99
 }
