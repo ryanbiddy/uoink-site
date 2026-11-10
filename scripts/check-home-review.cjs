@@ -146,9 +146,9 @@ async function checkMoves(page, out) {
       report.push({block:move.label,route:move.route,checkedBlocks:count});
     }
     const install=targets['/install'];
-    // Each install entry appears once: the Windows and Mac paths, then the shared
-    // Chrome button notes. The Mac heading is PRODUCT_STATUS.mac.heading.
-    for(const [text,tag] of [['Windows installer.','H3'],['Mac preview.','H3'],['Chrome button.','H3'],['The extension adds capture buttons directly to supported web pages.','P']]) {
+    // Each install entry appears once: the Windows and Mac platform cards, then the shared
+    // Chrome button notes in the setup disclosures.
+    for(const [text,tag] of [['Windows','H3'],['Mac','H3'],['Linux','H3'],['Chrome is tested.','P']]) {
       const matches=[...install.querySelectorAll('h3,p')].filter(el=>el.tagName===tag && normalize(el.textContent).startsWith(text));
       if(matches.length!==1) failures.push(`Duplicate existing install copy: ${text} (${matches.length})`);
     }

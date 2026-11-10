@@ -6,6 +6,7 @@ import release from "../../content/release.json";
 // stapled. Intel Macs are not supported. Facts come from the product's
 // docs/mac/INSTALL.md, docs/privacy-policy.md and CHANGELOG.md.
 const RELEASE_DOWNLOADS = `https://github.com/ryanbiddy/uoink/releases/download/v${release.version}`;
+export const MAC_DMG_SIZE = `${Math.round(release.macDmgSizeBytes / 1_000_000)} MB`;
 export const MAC_DMG_NAME = `Uoink-${release.version}-macos-arm64.dmg`;
 export const MAC_DMG_URL = `${RELEASE_DOWNLOADS}/${MAC_DMG_NAME}`;
 export const MAC_MCPB_NAME = `uoink-${release.version}-macos.mcpb`;
