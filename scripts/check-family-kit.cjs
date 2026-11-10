@@ -123,7 +123,7 @@ async function captureYellow(page, file, fullPage = false) {
                 return {size:s.fontSize, weight:s.fontWeight, tracking:s.letterSpacing, casing:s.textTransform, font:s.fontFamily};
               }),
               textWordmarks: [...document.querySelectorAll('.family-wordmark, .wm-line, .wm, .oink, .brand-link')].filter(el => el.textContent.trim() || el.querySelector('text')).map(el => el.outerHTML),
-              focus: [...document.querySelectorAll('a[href],button,input,select,textarea,summary,[tabindex],[contenteditable="true"]')].filter(el => visible(el) && !el.disabled && !el.closest('[inert]')).map(el => {
+              focus: [...document.querySelectorAll('a[href],button,input,select,textarea,summary,[tabindex],[contenteditable="true"]')].filter(el => visible(el) && !el.disabled && !el.closest('[inert]') && !el.closest('details:not([open]) > :not(summary)')).map(el => {
                 el.focus({preventScroll:true});
                 const s = getComputedStyle(el);
                 return {label:el.getAttribute('aria-label') || el.textContent.trim().slice(0,50), width:s.outlineWidth, offset:s.outlineOffset, color:s.outlineColor, style:s.outlineStyle};
@@ -138,8 +138,9 @@ async function captureYellow(page, file, fullPage = false) {
               stripWordmarks: document.querySelectorAll('.family-footer .family-wordmark[data-brand="u"]').length,
               closingLine: document.querySelector('[data-final-cta]')?.textContent.trim(),
               cards: document.querySelectorAll(".saved-source").length,
-              // Receipt passage jumps are inline citation controls in WEB-4.
-              buttons: [...document.querySelectorAll("button:not(.receipt-jump), .btn, .nav-cta, .button")].filter(visible).map(el => {
+              // Receipt passage jumps are inline citation controls in WEB-4. The /sample
+              // library cards and filter chips are content controls, not family action buttons.
+              buttons: [...document.querySelectorAll("button:not(.receipt-jump):not(.sl-card):not(.sl-chip), .btn, .nav-cta, .button")].filter(visible).map(el => {
                 const s = getComputedStyle(el);
                 return { text: el.textContent.trim(), height: el.getBoundingClientRect().height, radius: s.borderRadius, padding: s.padding, size: s.fontSize, weight: s.fontWeight, line: s.lineHeight };
               }),
@@ -158,7 +159,7 @@ async function captureYellow(page, file, fullPage = false) {
           }
           assert(Math.abs(m.gap-.8)<.001, `${stem} ${route}: family gap`);
           assert.equal(m.dot,"rgb(92, 74, 64)");
-          assert.equal(m.header, 120, `${stem} ${route}: header`);
+          assert.equal(m.header, width > 1000 ? 120 : 72, `${stem} ${route}: header`);
           assert(Math.abs(m.cap - 24) < .01, `${stem} ${route}: cap ${m.cap}`);
           assert.equal(m.overflow, 0, `${stem} ${route}: overflow`);
           // The family saved-source card is not mounted on any page; the home hero
@@ -282,7 +283,7 @@ async function captureYellow(page, file, fullPage = false) {
         await page.goto(`${origin}/__family-marks`, { waitUntil: "networkidle" });
         await captureYellow(page, `marks-${stem}.png`, true);
         results.push({ width, colorScheme, routes: measurements.length, buttons: measurements.reduce((n, m) => n + m.buttons.length, 0), movement, tap: "pass", drag: "pass", keyboard: "pass", reducedMotion: "pass", measurements });
-        console.log(`PASS ${stem}: ${measurements.length} routes, header 120, cap 24, buttons 48/10, tap ${movement.toFixed(2)}px; drag, keyboard, reduced motion.`);
+        console.log(`PASS ${stem}: ${measurements.length} routes, header ${width > 1000 ? 120 : 72}, cap 24, buttons 48/10, tap ${movement.toFixed(2)}px; drag, keyboard, reduced motion.`);
       } finally { await context.close(); }
     }
     assert.deepEqual(errors, []);

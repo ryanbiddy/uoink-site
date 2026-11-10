@@ -76,6 +76,14 @@
 .family-credit { font-size: 11px; line-height: 18px; border-top: 1px solid #48413D; padding-top: 18px; }
 .family-footer .maker-credit { font-size: 10px; line-height: 15px; color: #B8ADA6; margin-top: 7px; }
 .maker-credit a { text-decoration: none; }
+/* Phones and tablets: the row links live in the menu, so the header is one
+   72px row with the menu button beside Get Uoink. Desktop keeps 72 + 48. */
+@media (max-width: 1000px) {
+  .family-header { height: 72px; }
+  .family-header > .container { display: flex; align-items: center; gap: 8px; height: 72px; }
+  .family-header .site-header-top { flex: 1 1 auto; min-width: 0; }
+  .family-header .family-nav-row { flex: none; height: 72px; }
+}
 @media (max-width: 389px) {
   .family-wordmarks { transform: scale(.93); transform-origin: left center; }
   .family-header > .container { padding-inline: 16px; }
