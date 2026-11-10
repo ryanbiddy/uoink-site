@@ -44,7 +44,8 @@
   max-width: 46ch;
 }
 .ip-action { margin: 28px auto 0; max-width: var(--ip-col); }
-.ip .ip-cta { min-height: 52px; padding: 14px 32px; }
+/* Family button size (48px, 12px 16px); the hero CTA only gets extra width. */
+.ip .ip-cta { min-width: 248px; }
 .ip-cta-mark { display: inline-flex; }
 .ip-cta-mark .os-logo { height: 1.2em; width: 1.2em; }
 .ip-seg { white-space: nowrap; }
