@@ -100,7 +100,8 @@ const samples = new Set(['search_clips', 'get_schema_version', 'claim_library_wo
       for (const section of ['Inputs', 'Outputs and behavior', 'Example call', 'Clients']) assert(data.text.includes(section));
       assert(!data.text.includes('\u2014'), `${route}: em dash`);
       assert.equal(data.overflow, 0, `${route}: mobile overflow`);
-      assert.equal(data.headerHeight, 120, `${route}: family header`);
+      // The viewport is 390 px; since #80 the family header is 72 px at or below 1000 px.
+      assert.equal(data.headerHeight, 72, `${route}: family header`);
       assert(data.footer, `${route}: family footer`);
       for (const button of data.buttons) assert.deepEqual(button, { height: 48, radius: '10px' });
       const evidence = dateEvidence.find(row => row.route === route);
