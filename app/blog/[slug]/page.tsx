@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DocRule } from "../../components/Doc";
 import { PageShell } from "../../components/PageShell";
-import { CANONICAL_URL, RELEASE_URL, SitePage } from "../../content/pages";
+import { CANONICAL_URL, SitePage } from "../../content/pages";
 import { BlogArticle, blogArticles, getAdjacentArticles, getArticleBySlug, getArticleUrl } from "../blog-data";
 import { markdownToHtml } from "../markdown";
 
@@ -91,7 +91,7 @@ export default async function ArticlePage({ params }: Props) {
               </div>
               <div className="rail-block">
                 <span className="eyebrow">try it</span>
-                <a href={RELEASE_URL}>Install Uoink</a>
+                <Link href="/install">Install Uoink</Link>
                 <Link href="/features">Feature index</Link>
               </div>
             </aside>

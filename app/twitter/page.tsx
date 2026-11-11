@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { DocRule } from "../components/Doc";
 import { PageShell } from "../components/PageShell";
-import { CANONICAL_URL, RELEASE_URL, SitePage } from "../content/pages";
+import { CANONICAL_URL, SitePage } from "../content/pages";
 
 const page: SitePage = {
   id: "twitter",
@@ -52,9 +52,9 @@ export default function TwitterPage() {
               Right-click a Twitter video, capture the source locally, then use Uoink to draft a credited thread grounded in what the creator actually said.
             </p>
             <div className="ctas">
-              <a className="btn primary large" href={RELEASE_URL}>
+              <Link className="btn primary large" href="/install">
                 Install Uoink
-              </a>
+              </Link>
               <Link className="btn ghost large" href="/features/twitter-video">
                 Open feature page
               </Link>

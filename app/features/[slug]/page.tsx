@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageShell } from "../../components/PageShell";
 import { getFeatureLogoKeys, PlatformLogoStrip } from "../../components/PlatformLogoStrip";
-import { CANONICAL_URL, DOWNLOAD_URL, GITHUB_URL, SitePage } from "../../content/pages";
+import { CANONICAL_URL, GITHUB_URL, SitePage } from "../../content/pages";
 import { Feature, featureBySlug, features, getRelatedFeatures } from "../feature-data";
 import { EmbedMode } from "./EmbedMode";
 
@@ -43,7 +43,7 @@ export default async function FeaturePage({ params }: Props) {
   const { slug } = await params;
   const feature = featureBySlug.get(slug);
   if (!feature) notFound();
-  const installUrl = feature.slug === "headless-linux" ? "/install#linux" : DOWNLOAD_URL;
+  const installUrl = feature.slug === "headless-linux" ? "/install#linux" : "/install";
 
   const page: SitePage = {
     id: "features",

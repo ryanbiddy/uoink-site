@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
+import { DownloadAttribution } from "./components/DownloadAttribution";
 import { VercelAnalytics } from "./components/VercelAnalytics";
 import { CANONICAL_URL } from "./content/pages";
 import "./globals.css";
@@ -71,6 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <VercelAnalytics />
+        <DownloadAttribution />
         <Script src="/uoink-mark.js" strategy="afterInteractive" />
       </body>
     </html>

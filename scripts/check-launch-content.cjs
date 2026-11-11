@@ -7,12 +7,12 @@ require.extensions[".ts"] = (module, file) => module._compile(ts.transpileModule
 }).outputText, file);
 
 const release = require("../content/release.json");
-const { pages, HOME_MOVED_CONTENT, VERSION, VERSION_NUMBER, DOWNLOAD_URL, INSTALLER_SIZE } = require("../app/content/pages.ts");
+const { pages, HOME_MOVED_CONTENT, VERSION, VERSION_NUMBER, DOWNLOAD_URL, INSTALLER_SIZE, GET_BASE, WINDOWS_GET_URL, WINDOWS_MCPB_GET_URL } = require("../app/content/pages.ts");
 const { mcpTools, mcpStdioToolNames, MCP_TOOL_COUNT, MCP_STDIO_TOOL_COUNT } = require("../app/content/mcp-tools.ts");
 const { CLAUDE_CODE_COMMAND, MCP_CURSOR_CONFIG, MCP_STDIO_CONFIG } = require("../app/content/mcp-config.ts");
 const { features } = require("../app/features/feature-data.ts");
 const { AGENT_SETUP_HTML } = require("../app/content/agent-setup.ts");
-const { MAC_DMG_SIZE, PRODUCT_STATUS,MAC_PREVIEW_STATUS, MAC_DMG_NAME, MAC_DMG_URL, MAC_MCPB_NAME, MAC_MCPB_URL, MAC_EXTENSION_PATH } = require("../app/content/product-status.ts");
+const { MAC_DMG_SIZE, PRODUCT_STATUS,MAC_PREVIEW_STATUS, MAC_DMG_NAME, MAC_DMG_URL, MAC_DMG_GET_URL, MAC_MCPB_NAME, MAC_MCPB_URL, MAC_MCPB_GET_URL, MAC_EXTENSION_PATH } = require("../app/content/product-status.ts");
 const manifest = JSON.parse(fs.readFileSync("public/mcp/manifest.json", "utf8"));
 const path = require("node:path");
 // /install is a real page component (app/install/page.tsx), not an HTML string in pages.ts, so its
@@ -36,7 +36,7 @@ const sizeMatches = text => !sizeKnown || text.includes(`about ${INSTALLER_SIZE}
 
 // The Mac preview ships from 3.11.2. A Mac download must be this release's DMG
 // or its macOS Claude Desktop bundle; file names in prose are fine.
-const MAC_DOWNLOADS = [MAC_DMG_URL, MAC_MCPB_URL];
+const MAC_DOWNLOADS = [MAC_DMG_URL, MAC_MCPB_URL, MAC_DMG_GET_URL, MAC_MCPB_GET_URL];
 function checkMacDownloads(text, file) {
   for (const [, url] of text.matchAll(/["'(=]((?:https?:)?\/[^"'()\s<>\\]*\.(?:dmg|pkg))(?=[\\"'\s?#<)]|$)/gi)) {
     assert.equal(url, MAC_DMG_URL, `${file}: Mac installer URL ${url}`);
@@ -50,10 +50,10 @@ function checkMacDownloads(text, file) {
 }
 // Guard the guard: reject other installer files, other versions and download
 // calls to action, even when a download endpoint has no file extension.
-for (const unsafe of ['<a href="/build.dmg">Preview</a>', '<a href="/build.pkg">Preview</a>', '<a href="/download">Download for Mac</a>', '<a href="/mac-preview.zip">Get preview</a>', '<a href="https://github.com/ryanbiddy/uoink/releases/download/v3.11.1/Uoink-3.11.1-macos-arm64.dmg">Download for Mac</a>', '<a href="https://github.com/ryanbiddy/uoink/releases/download/v3.11.2/Uoink-3.11.2-macos-arm64.dmg">Download for Mac</a>']) {
+for (const unsafe of ['<a href="/build.dmg">Preview</a>', '<a href="/build.pkg">Preview</a>', '<a href="/download">Download for Mac</a>', '<a href="/mac-preview.zip">Get preview</a>', '<a href="https://github.com/ryanbiddy/uoink/releases/download/v3.11.1/Uoink-3.11.1-macos-arm64.dmg">Download for Mac</a>', '<a href="https://github.com/ryanbiddy/uoink/releases/download/v3.11.2/Uoink-3.11.2-macos-arm64.dmg">Download for Mac</a>', '<a href="https://usage.uoink.app/get/mac?v=3.11.2">Download for Mac</a>', '<a href="https://usage.uoink.app/get/mac">Download for Mac</a>']) {
   assert.throws(() => checkMacDownloads(unsafe, "regression fixture"));
 }
-for (const safe of [`<a href="${MAC_DMG_URL}">Download for Mac</a>`, `<a href="${MAC_MCPB_URL}">${MAC_MCPB_NAME}</a>`, `[${MAC_DMG_NAME}](${MAC_DMG_URL})`, `<code>${MAC_DMG_NAME}</code>`]) {
+for (const safe of [`<a href="${MAC_DMG_URL}">Download for Mac</a>`, `<a href="${MAC_DMG_GET_URL}">Download for Mac</a>`, `<a href="${MAC_MCPB_GET_URL}">${MAC_MCPB_NAME}</a>`, `<a href="${MAC_MCPB_URL}">${MAC_MCPB_NAME}</a>`, `[${MAC_DMG_NAME}](${MAC_DMG_URL})`, `<code>${MAC_DMG_NAME}</code>`]) {
   assert.doesNotThrow(() => checkMacDownloads(safe, "regression fixture"));
 }
 const STALE_MAC = /No Mac build scheduled|no scheduled Mac build|no Mac installer or scheduled Mac release|preview coming soon/i;
@@ -83,7 +83,7 @@ assert.equal(INSTALLER_SIZE, `${Math.round(release.installerSizeBytes / 1_000_00
 assert.equal(VERSION, `v${release.version}`);
 assert.equal(VERSION_NUMBER, release.version);
 assert.equal(DOWNLOAD_URL, `https://github.com/ryanbiddy/uoink/releases/download/${VERSION}/Uoink-Setup-${release.version}.exe`);
-assert(installPageHtml.includes(`href="${DOWNLOAD_URL}"`));
+assert(installPageHtml.includes(`href="${WINDOWS_GET_URL}"`));
 assert.equal(MCP_TOOL_COUNT, release.httpToolCount);
 assert.equal(MCP_STDIO_TOOL_COUNT, release.stdioToolCount);
 assert.equal(mcpTools.length, release.httpToolCount);
@@ -130,22 +130,22 @@ for (const fact of ["official MCP Python SDK 2.3.0", "Claude Desktop, Claude Cod
 for (const fact of ["no longer needs every word", "<code>match</code>", "<code>mode</code>", "<code>strict</code>", "<code>hybrid</code>", "Exact words", "A person turns it on in Uoink Settings", "Gemma terms", "about 330 MB", "passage_verified", "The tool list is unchanged"]) assert(AGENT_SETUP_HTML.includes(fact), `Agent setup smarter-search: ${fact}`);
 // The Mac preview: facts from the product's docs/mac/INSTALL.md, skills/uoink/SKILL.md and CHANGELOG.md.
 assert(AGENT_SETUP_HTML.includes(PRODUCT_STATUS.mac.agentSetup), "Agent setup: Mac section");
-for (const fact of ["<h3>On a Mac</h3>", "Apple Silicon with macOS 15 or later", "Uoink.app/Contents/Helpers/uoink", "does not change your shell or PATH", 'ln -s /Applications/Uoink.app/Contents/Helpers/uoink "$HOME/.local/bin/uoink"', "uoink connect &lt;client&gt;", "uoink connect claude-code", "does not edit client files", "~/Library/Application Support/Claude/claude_desktop_config.json", "~/.cursor/mcp.json", "~/.codex/config.toml", `href="${MAC_MCPB_URL}"`, "not the Windows <code>.mcpb</code>", "plugin's MCP entry is still for Windows", "Library mirroring is unavailable on Mac", "99 tools, or 36 in core mode, 9 in search mode and 7 in research mode", "On a Mac, Claude Code passed MCP acceptance (3.11.2); other clients are untested there"]) assert(AGENT_SETUP_HTML.includes(fact), `Agent setup Mac: ${fact}`);
+for (const fact of ["<h3>On a Mac</h3>", "Apple Silicon with macOS 15 or later", "Uoink.app/Contents/Helpers/uoink", "does not change your shell or PATH", 'ln -s /Applications/Uoink.app/Contents/Helpers/uoink "$HOME/.local/bin/uoink"', "uoink connect &lt;client&gt;", "uoink connect claude-code", "does not edit client files", "~/Library/Application Support/Claude/claude_desktop_config.json", "~/.cursor/mcp.json", "~/.codex/config.toml", `href="${MAC_MCPB_GET_URL}"`, "not the Windows <code>.mcpb</code>", "plugin's MCP entry is still for Windows", "Library mirroring is unavailable on Mac", "99 tools, or 36 in core mode, 9 in search mode and 7 in research mode", "On a Mac, Claude Code passed MCP acceptance (3.11.2); other clients are untested there"]) assert(AGENT_SETUP_HTML.includes(fact), `Agent setup Mac: ${fact}`);
 // 3.11.2 has no tested claims (receipt 28 never landed). 3.12.0 cites Agent
 // Install 30 ahead of the labeled 3.11.1 results.
 assert(!AGENT_SETUP_HTML.includes("What was tested for 3.11.2"), "Agent setup: no 3.11.2 test claims");
 assert(AGENT_SETUP_HTML.includes("<h3>What was tested for 3.12.0</h3>\n<p>Agent Install 30 tested the installed 3.12.0 build in an isolated profile:"), "Agent setup: 3.12.0 receipt 30");
 assert(AGENT_SETUP_HTML.indexOf("What was tested for 3.12.0") < AGENT_SETUP_HTML.indexOf("What was tested for 3.11.1"), "Agent setup: newest receipt first");
 assert(installPageHtml.includes("<h3>Mac</h3>") && installPageHtml.includes(">Preview</span>") && installPageHtml.includes(`${PRODUCT_STATUS.mac.windowsLabel} · about ${INSTALLER_SIZE}`), "install: Mac preview card and Windows support");
-for (const fact of [`href="${MAC_DMG_URL}"`, "Apple Silicon Macs with macOS 15 or later", "Intel Macs are not supported", "signed with a Developer ID, notarized by Apple and stapled", "No security override is needed", "A window shows Uoink, an arrow and Applications", "Drag Uoink onto Applications", "Eject the disk", "Choose the install folder and shortcuts", "More info → Run anyway", "⌘⇧G", "<strong>Get the extension</strong> card copies", `<code>${MAC_EXTENSION_PATH}</code>`, `href="${MAC_MCPB_URL}"`, "not the Windows bundle", "<strong>Download update</strong> (Mac) in Settings, Updates checks each new download", "Library mirroring is unavailable", "macOS still credits Uoink's alerts to Script Editor", "Download for Mac"]) assert(installPageHtml.includes(fact), `install Mac: ${fact}`);
+for (const fact of [`href="${MAC_DMG_GET_URL}"`, "Apple Silicon Macs with macOS 15 or later", "Intel Macs are not supported", "signed with a Developer ID, notarized by Apple and stapled", "No security override is needed", "A window shows Uoink, an arrow and Applications", "Drag Uoink onto Applications", "Eject the disk", "Choose the install folder and shortcuts", "More info → Run anyway", "⌘⇧G", "<strong>Get the extension</strong> card copies", `<code>${MAC_EXTENSION_PATH}</code>`, `href="${MAC_MCPB_GET_URL}"`, "not the Windows bundle", "<strong>Download update</strong> (Mac) in Settings, Updates checks each new download", "Library mirroring is unavailable", "macOS still credits Uoink's alerts to Script Editor", "Download for Mac"]) assert(installPageHtml.includes(fact), `install Mac: ${fact}`);
 assert(!/Until 3\.12/.test(installPageHtml), "install Mac: 3.12 shipped without its own notifier");
 // The install block that moved off home is folded into /install itself, so no
 // second copy renders under the FAQ. /install has its own Mac entry and hero link.
-assert(pages.home.html.includes(`${PRODUCT_STATUS.mac.visible}</p>`) && !HOME_MOVED_CONTENT['/install'] && installPageHtml.includes('id="mac"') && installPageHtml.includes(`href="${MAC_DMG_URL}"`), "home platform fact; install page carries the Mac entry");
+assert(pages.home.html.includes(`${PRODUCT_STATUS.mac.visible}</p>`) && !HOME_MOVED_CONTENT['/install'] && installPageHtml.includes('id="mac"') && installPageHtml.includes(`href="${MAC_DMG_GET_URL}"`), "home platform fact; install page carries the Mac entry");
 // Install page: each step said once, with separate Windows and Mac paths.
 const count = (text, needle) => text.split(needle).length - 1;
 const installHtml = installPageHtml;
-for (const [needle, times] of [["SmartScreen will show a warning", 1], ["<strong>Load unpacked</strong>", 2], ["pin Uoink so the Uoink button stays visible", 2], ["%LOCALAPPDATA%\\Uoink\\extension", 1], ["reload the extension once", 1], [`href="${DOWNLOAD_URL}"`, 3]]) {
+for (const [needle, times] of [["SmartScreen will show a warning", 1], ["<strong>Load unpacked</strong>", 2], ["pin Uoink so the Uoink button stays visible", 2], ["%LOCALAPPDATA%\\Uoink\\extension", 1], ["reload the extension once", 1], [`href="${WINDOWS_GET_URL}"`, 3]]) {
   assert.equal(count(installHtml, needle), times, `install: "${needle}" appears ${times} time(s)`);
 }
 for (const id of ["windows", "mac", "extension"]) assert.equal(count(installHtml, `id="${id}"`), 1, `install: one #${id} entry`);
@@ -157,7 +157,7 @@ assert(installHtml.indexOf("uoink status") > installHtml.indexOf("Optional: chec
 assert(installHtml.includes("X posts and videos, podcasts, Reddit threads and web articles") && !/YouTube (?:and|or) Reddit/.test(installHtml), "install: full source list");
 assert(pages.home.html.includes("<li>YouTube, podcasts, X posts and videos, Reddit threads and web articles</li>"), "home: Save it lists every shipped source");
 // The home hero offers both downloads: this release's Windows installer and the Mac preview DMG.
-for (const [kind, href, label] of [["windows", DOWNLOAD_URL, "Download for Windows"], ["mac", MAC_DMG_URL, "Download for Mac (preview)"]]) {
+for (const [kind, href, label] of [["windows", WINDOWS_GET_URL, "Download for Windows"], ["mac", MAC_DMG_GET_URL, "Download for Mac (preview)"]]) {
   assert(new RegExp(`<a\\b[^>]*data-download="${kind}"[^>]*href="${href.replace(/[.?*+^$()[\]{}|\\/]/g, "\\$&")}"[^>]*>[\\s\\S]*?${label.replace(/[()]/g, "\\$&")}</a>`).test(pages.home.html), `home: ${label} links to ${href}`);
 }
 assert(pages.mcp.html.includes(`platform: ${PRODUCT_STATUS.mac.visible}</pre>`) && pages.mcp.html.includes("macos: https://uoink.app/install#mac"), "mcp: Mac preview status and install page");
@@ -241,7 +241,7 @@ assert(v3120.includes('<time datetime="2026-10-30">'), "3.12.0 keeps its release
 for (const fact of ["Every download now ships Whisper's base transcription model", "with no download step", "OpenAI Whisper's base model (MIT) in SYSTRAN's faster-whisper conversion", "pinned to one Hugging Face revision and SHA-256 checked", "A model you downloaded yourself still takes precedence", "(tiny, small, medium and large) still download only when you ask", "Uoink never downloads a model during a capture", "Podcast transcription uses the same copy", "<code>No transcript</code>", "<code>Comments failed</code>", "<strong>Re-uoink</strong>", "refreshes the item in place", "X and Reddit posts with a video keep their transcript and screenshot checks", "with no re-capture", "A row reads <strong>Done</strong> only when nothing is outstanding", "<strong>Saved</strong>", "<strong>Done · no speech found</strong>", "<strong>Allow &lt;site&gt;</strong>", "<strong>Appearance</strong>", "Match Windows (Match system on a Mac), Light or Dark", "Esc closes the reader", "Back returns to the same place in the Library", "Screenshots are taken at the times their labels say", "Short clips now get a screenshot", "fetched fresh on every load", "<code>./uoink status</code>", "91 tools, or 35 with <code>UOINK_MCP_TOOLSET=core</code>", "about 519 MB (390 MB in 3.11.2)", "about 709 MB (580 MB)", "Windows installer is still unsigned", "still a preview for Apple Silicon on macOS 15 or later", "<h3>What was tested for 3.12.0</h3>", "Agent Install 30 tested the installed 3.12.0 build in an isolated profile", "reinstall the 3.12.0 bundle"]) assert(v3120.includes(fact), `3.12.0: ${fact}`);
 assert(!/already[- ]downloaded/.test(v3120), "3.12.0: the base model needs no download");
 assert(entries["3.11.2"].includes(PRODUCT_STATUS.mac.changelog), "3.11.2: Mac preview paragraphs");
-for (const fact of ["Mac preview for Apple Silicon on macOS 15 or later", `href="${MAC_DMG_URL}"`, `href="${MAC_MCPB_URL}"`, "signed with a Developer ID and notarized by Apple", "no security override", "Intel Macs are not supported", 'href="/install#mac"', "⌘⇧G", "<strong>Get the extension</strong>", "Uoink doesn't update itself", "library mirroring is unavailable", "Script Editor", "A failed index write no longer wedges the helper", "the other 22 older write paths now roll back their own failures", "<code>uoink doctor</code>", "64 KiB", "its own request ID", "<code>helper-output.log</code>", "no longer say Windows-only things on a Mac", "youtu.be, mobile.twitter.com and localhost:5179", "91 tools, or 35 with <code>UOINK_MCP_TOOLSET=core</code>", "Windows installer is still unsigned", "Chrome Web Store listing is not live yet", "reinstall the 3.11.2 bundle"]) assert(entries["3.11.2"].includes(fact), `3.11.2: ${fact}`);
+for (const fact of ["Mac preview for Apple Silicon on macOS 15 or later", `href="${MAC_DMG_GET_URL}"`, `href="${MAC_MCPB_GET_URL}"`, "signed with a Developer ID and notarized by Apple", "no security override", "Intel Macs are not supported", 'href="/install#mac"', "⌘⇧G", "<strong>Get the extension</strong>", "Uoink doesn't update itself", "library mirroring is unavailable", "Script Editor", "A failed index write no longer wedges the helper", "the other 22 older write paths now roll back their own failures", "<code>uoink doctor</code>", "64 KiB", "its own request ID", "<code>helper-output.log</code>", "no longer say Windows-only things on a Mac", "youtu.be, mobile.twitter.com and localhost:5179", "91 tools, or 35 with <code>UOINK_MCP_TOOLSET=core</code>", "Windows installer is still unsigned", "Chrome Web Store listing is not live yet", "reinstall the 3.11.2 bundle"]) assert(entries["3.11.2"].includes(fact), `3.11.2: ${fact}`);
 // 3.11.2 has no test results; receipt 28 never landed.
 assert(!/What was tested for 3\.11\.2|Agent Install 28/.test(entries["3.11.2"]), "3.11.2: no test claims");
 assert(entries["3.11.1"].includes('The Mac preview followed in <a href="/changelog/3-11-2">3.11.2</a>'), "3.11.1: Mac preview pointer");
@@ -337,6 +337,44 @@ for (const file of [...contentFiles, "README.md", ...fs.readdirSync("content/com
   });
 }
 const summary = `${VERSION}, ${MCP_TOOL_COUNT} registry schemas, ${MCP_STDIO_TOOL_COUNT} stdio names, discovery cards, config, ${features.length} feature tool lists, Living Library, research, privacy (with Mac storage and uninstall), installer, agent setup, release plus nineteen earlier releases, crawler text, and checksums. Windows 10/11, the Mac preview and headless Linux; Mac downloads point at the ${VERSION} DMG and macOS bundle.`;
+// Tracked download links (usage.uoink.app/get): people click these, so every one must carry this release's version.
+// Machine-readable places keep the direct GitHub file so agents and crawlers get the real asset.
+assert.equal(GET_BASE, "https://usage.uoink.app/get");
+assert.equal(WINDOWS_GET_URL, `${GET_BASE}/windows?v=${release.version}`);
+assert.equal(WINDOWS_MCPB_GET_URL, `${GET_BASE}/mcpb?v=${release.version}`);
+assert.equal(MAC_DMG_GET_URL, `${GET_BASE}/mac?v=${release.version}`);
+assert.equal(MAC_MCPB_GET_URL, `${GET_BASE}/mcpb-mac?v=${release.version}`);
+{
+  const TRACKED = /https:\/\/usage\.uoink\.app\/get\/([a-z-]+)\?([^"'<>\s\\]*)/g;
+  let tracked = 0;
+  for (const file of walk("out").filter(file => /\.(?:html|txt)$/.test(file))) {
+    const text = fs.readFileSync(file, "utf8").replaceAll("&amp;", "&");
+    for (const [, platform, query] of text.matchAll(TRACKED)) {
+      tracked += 1;
+      assert(["windows", "mac", "mcpb", "mcpb-mac"].includes(platform), `${file}: unknown tracked platform ${platform}`);
+      assert.equal(new URLSearchParams(query).get("v"), release.version, `${file}: tracked link ${platform} needs v=${release.version}`);
+    }
+    for (const [anchor] of text.matchAll(/<a[^>]*>/gi)) {
+      assert(!/href=["']https:\/\/github\.com\/ryanbiddy\/uoink\/releases\/download\//i.test(anchor), `${file}: human download anchor links straight to GitHub: ${anchor.slice(0, 160)}`);
+    }
+  }
+  assert(tracked >= 20, `tracked download links exist across the export (${tracked})`);
+  const direct = {
+    "public/.well-known/mcp.json": [MAC_MCPB_URL, `releases/download/${VERSION}/uoink-${release.version}.mcpb`],
+    "public/.well-known/mcp/server-card.json": [MAC_MCPB_URL, `releases/download/${VERSION}/uoink-${release.version}.mcpb`],
+    "public/llms.txt": [DOWNLOAD_URL, MAC_DMG_URL, MAC_MCPB_URL],
+    "public/llms-full.txt": [DOWNLOAD_URL, MAC_DMG_URL, MAC_MCPB_URL],
+  };
+  for (const [file, needles] of Object.entries(direct)) {
+    const text = fs.readFileSync(file, "utf8");
+    for (const needle of needles) assert(text.includes(needle), `${file}: keeps the direct GitHub file ${needle}`);
+    assert(!text.includes("usage.uoink.app/get"), `${file}: machine-readable file must not use the tracked link`);
+  }
+  assert(fs.readFileSync("app/lib/structured-data.tsx", "utf8").includes("downloadUrl: [DOWNLOAD_URL, MAC_DMG_URL]"), "JSON-LD downloadUrl keeps the direct GitHub files");
+  for (const file of walk("out").filter(file => /\.(?:html)$/.test(file))) {
+    for (const [, json] of fs.readFileSync(file, "utf8").matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) assert(!json.includes("usage.uoink.app/get"), `${file}: JSON-LD stays on the direct GitHub file`);
+  }
+}
 if (pending.length) {
   console.error(`PENDING: every other check passed (${summary}) but ${pending.length} release placeholder(s) need real values:\n${pending.map(item => `  - ${item}`).join("\n")}`);
   process.exitCode = 1;

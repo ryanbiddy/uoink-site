@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import labels from "../../public/media/hero/labels.json";
 import { FamilyWordmark } from "../components/FamilyWordmark";
-import { DOWNLOAD_URL, GITHUB_URL, INSTALLER_SIZE, MAC_MARK, RELEASE_URL, VERSION, WINDOWS_MARK } from "../content/pages";
-import { MAC_DMG_URL, MAC_MCPB_URL, PRODUCT_STATUS } from "../content/product-status";
+import { GITHUB_URL, INSTALLER_SIZE, MAC_MARK, RELEASE_URL, VERSION, WINDOWS_GET_URL, WINDOWS_MARK } from "../content/pages";
+import { MAC_DMG_GET_URL, MAC_MCPB_GET_URL, PRODUCT_STATUS } from "../content/product-status";
 import "./get.css";
 
 // /get: the one page to send people to. One screen: a short demo, the headline,
@@ -152,7 +152,7 @@ export default function Page() {
               <div className="gp-row">
                 <span className="gp-label">Installer</span>
                 <span className="gp-meta">{PRODUCT_STATUS.mac.windowsLabel} · about {INSTALLER_SIZE} · {VERSION}</span>
-                <a className="btn primary gp-dl" href={DOWNLOAD_URL}>
+                <a className="btn primary gp-dl" href={WINDOWS_GET_URL}>
                   <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   Download
                 </a>
@@ -170,7 +170,7 @@ export default function Page() {
               <div className="gp-row">
                 <span className="gp-label">Disk image</span>
                 <span className="gp-meta">{PRODUCT_STATUS.mac.aboutNote} · {VERSION}</span>
-                <a className="btn primary gp-dl" href={MAC_DMG_URL}>
+                <a className="btn primary gp-dl" href={MAC_DMG_GET_URL}>
                   <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   Download
                 </a>
@@ -182,7 +182,7 @@ export default function Page() {
             </div>
             <p className="gp-note">
               Intel Macs are not supported. Signed and notarized by Apple.{" "}
-              <a href={MAC_MCPB_URL}>Claude Desktop bundle</a> · <Link href="/install#mac">Step by step</Link>
+              <a href={MAC_MCPB_GET_URL}>Claude Desktop bundle</a> · <Link href="/install#mac">Step by step</Link>
             </p>
           </div>
         </section>

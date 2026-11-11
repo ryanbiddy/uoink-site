@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocRule, FaqList } from "../../components/Doc";
 import { PageShell } from "../../components/PageShell";
-import { GITHUB_URL, RELEASE_URL, SitePage } from "../../content/pages";
+import { GITHUB_URL, SitePage } from "../../content/pages";
 
 const page: SitePage = {
   id: "podcasts",
@@ -57,9 +57,9 @@ export default function Page() {
                 Add an RSS feed, transcribe episodes locally, and file speaker-aware transcripts beside your video corpus.
               </p>
               <div className="ctas">
-                <a className="btn primary large" href={RELEASE_URL}>
+                <Link className="btn primary large" href="/install">
                   Get Uoink
-                </a>
+                </Link>
                 <Link className="btn ghost large" href="/sources">
                   All sources
                 </Link>
