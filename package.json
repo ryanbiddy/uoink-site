@@ -8,7 +8,7 @@
     "preview": "node scripts/preview.cjs",
     "predev": "node scripts/generate-use-cases.cjs",
     "prebuild": "node scripts/generate-use-cases.cjs",
-    "build": "next build && node scripts/postbuild-static-cleanup.mjs && node scripts/check-seo-pages.cjs && node scripts/check-use-cases.cjs && node scripts/check-mcp-tool-pages.cjs --static && node scripts/check-compare.cjs --static && node scripts/check-field-notes.cjs --static && node scripts/check-site-routes.cjs",
+    "build": "next build && node scripts/postbuild-static-cleanup.mjs && node scripts/check-seo-pages.cjs && node scripts/check-use-cases.cjs && node scripts/check-mcp-tool-pages.cjs --static && node scripts/check-compare.cjs --static && node scripts/check-field-notes.cjs --static && node scripts/check-site-routes.cjs && node scripts/check-flags.cjs --static",
     "start": "next start",
     "lint": "next lint"
   },

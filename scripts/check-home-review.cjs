@@ -205,7 +205,7 @@ if (require.main === module) (async () => {
   try {
     browser = await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe', headless:true});
     for (const width of [390, 1440]) for (const colorScheme of ['light', 'dark']) {
-      const context = await browser.newContext({viewport:{width,height:844}, deviceScaleFactor:1, isMobile:width===390, hasTouch:width===390, colorScheme, serviceWorkers:'block'});
+      const context = await browser.newContext({viewport:{width,height:844}, deviceScaleFactor:1, isMobile:width===390, hasTouch:false /* touch phones get the "runs on your computer" block, not downloads (app/phone.css); this check covers the narrow download layout */, colorScheme, serviceWorkers:'block'});
       try {
         await context.route('**/*', route => new URL(route.request().url()).origin === origin ? route.continue() : route.abort());
         const page = await context.newPage();

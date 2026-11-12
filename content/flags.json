@@ -1,0 +1,14 @@
+{
+  "_comment": "Switches the owner flips after publishing. All default to off. See scripts/check-flags.cjs for the rules.",
+  "addToChrome": {
+    "enabled": false,
+    "url": ""
+  },
+  "npx": {
+    "enabled": false,
+    "command": "npx uoink"
+  },
+  "phoneInbox": {
+    "enabled": false
+  }
+}

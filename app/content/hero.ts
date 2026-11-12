@@ -1,4 +1,5 @@
 import labels from "../../public/media/hero/labels.json";
+import { phoneBlockHtml } from "./phone";
 
 // The homepage, product first: a hero that shows the real flow in one glance
 // (click Uoink on a video, the save lands in your library with its transcript,
@@ -71,10 +72,11 @@ export function homeHtml(o: HomeLinks): string {
 <div class="hm-hero-copy">
 <h1 id="u-headline">Uoink that shit.</h1>
 <p class="hm-hero-line">Save YouTube videos, podcasts and X posts with their transcripts, on your own computer. Your AI searches them and cites the minute.</p>
-<div class="hm-downloads">
+<div class="hm-downloads desktop-only">
 <a class="btn primary with-logo" data-download="windows" href="${o.windowsUrl}">${o.windowsMark}Download for Windows</a>
 <a class="btn ghost with-logo" data-download="mac" href="${o.macUrl}">${o.macMark}Download for Mac (preview)</a>
 </div>
+${phoneBlockHtml()}
 <p class="hm-hero-note">Free and open source (MIT). ${o.platforms}</p>
 <p class="hm-hero-note"><a class="hm-link" href="/install">Install steps and the Chrome button -&gt;</a></p>
 </div>
