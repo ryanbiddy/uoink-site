@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import labels from "../../public/media/hero/labels.json";
 import { FamilyWordmark } from "../components/FamilyWordmark";
+import { PhoneBlock } from "../components/PhoneBlock";
+import { CHROME_STORE_URL, NPX_COMMAND } from "../content/phone";
 import { GITHUB_URL, INSTALLER_SIZE, MAC_MARK, RELEASE_URL, VERSION, WINDOWS_GET_URL, WINDOWS_MARK } from "../content/pages";
 import { MAC_DMG_GET_URL, MAC_MCPB_GET_URL, PRODUCT_STATUS } from "../content/product-status";
 import "./get.css";
@@ -136,7 +138,9 @@ export default function Page() {
           their transcripts, then search and cite them from Claude, Cursor or Codex over MCP.
         </p>
 
-        <section className="gp-install" aria-label="Download Uoink">
+        <PhoneBlock />
+
+        <section className="gp-install desktop-only" aria-label="Download Uoink">
           <div className="gp-tabs" role="tablist" aria-label="Choose your computer" hidden>
             <button type="button" role="tab" id="gp-tab-windows" data-os="windows" aria-controls="windows" aria-selected="true">
               <Mark html={WINDOWS_MARK} />Windows
@@ -187,7 +191,20 @@ export default function Page() {
           </div>
         </section>
 
-        <div className="gp-next">
+        <div className="gp-next desktop-only">
+          {/* Hidden by content/flags.json until the owner turns them on. */}
+          {CHROME_STORE_URL ? (
+            <p className="gp-next-line" data-flag-chrome>
+              <span>Chrome, Edge, Brave, Arc, Opera or Vivaldi:</span>
+              <a className="btn ghost small" href={CHROME_STORE_URL}>Add to Chrome</a>
+            </p>
+          ) : null}
+          {NPX_COMMAND ? (
+            <p className="gp-next-line" data-flag-npx>
+              <span>Install from your terminal:</span>
+              <Command command={NPX_COMMAND} label="npx command" />
+            </p>
+          ) : null}
           <p className="gp-next-line">
             <span>Then connect your AI:</span>
             <Command command={CONNECT_COMMAND} label="connect command" />

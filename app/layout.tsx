@@ -2,10 +2,13 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
 import { DownloadAttribution } from "./components/DownloadAttribution";
+import { PhoneGate } from "./components/PhoneGate";
 import { VercelAnalytics } from "./components/VercelAnalytics";
 import { CANONICAL_URL } from "./content/pages";
+import { PHONE_CLASS_SCRIPT } from "./content/phone";
 import "./globals.css";
 import "./family-kit.css";
+import "./phone.css";
 
 const inter = localFont({ src: [
   { path: "./fonts/inter.woff", weight: "100 900", style: "normal" },
@@ -52,8 +55,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${bungee.variable} ${mono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${bungee.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: PHONE_CLASS_SCRIPT }} />
         {/*
           Google Search Console site verification (HTML-tag method).
           HOW TO USE:
@@ -73,6 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <VercelAnalytics />
         <DownloadAttribution />
+        <PhoneGate />
         <Script src="/uoink-mark.js" strategy="afterInteractive" />
       </body>
     </html>

@@ -336,3 +336,9 @@
   .ip-card { padding: 18px; }
   .ip-card-actions .btn { width: 100%; }
 }
+
+/* Phone inbox explainer (flagged in content/flags.json) */
+.ip-inbox-steps { counter-reset: inbox; display: grid; gap: 12px; list-style: none; margin: 20px auto; max-width: var(--ip-col); padding: 0; }
+.ip-inbox-steps li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); color: var(--text-2); counter-increment: inbox; line-height: 1.5; padding: 14px 16px 14px 52px; position: relative; }
+.ip-inbox-steps li::before { align-items: center; background: var(--rust-tint); border-radius: 50%; color: var(--rust); content: counter(inbox); display: flex; font-weight: 700; height: 26px; justify-content: center; left: 16px; position: absolute; top: 14px; width: 26px; }
+.ip-inbox-steps strong { color: var(--ink); }

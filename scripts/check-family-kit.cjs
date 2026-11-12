@@ -190,10 +190,16 @@ async function captureYellow(page, file, fullPage = false) {
         // The home's secondary button: Download for Mac (preview).
         const secondary = page.locator('.hm-downloads .btn.ghost[data-download="mac"]');
         assert.equal(await secondary.count(), 1, `${stem}: one secondary hero download`);
+        if (width === 390) {
+          // Touch phones get the "Uoink runs on your computer" block, not download buttons (app/phone.css).
+          assert.equal(await secondary.isVisible(), false, `${stem}: no download button on a touch phone`);
+          assert.equal(await page.locator(".hm-hero-copy [data-phone-block]").isVisible(), true, `${stem}: phone block shows`);
+        } else {
         await secondary.hover(); await page.waitForTimeout(200);
-        assert.equal(await secondary.evaluate(el => getComputedStyle(el).backgroundColor), width === 390 ? "rgb(255, 244, 236)" : "rgb(234, 217, 204)");
+        assert.equal(await secondary.evaluate(el => getComputedStyle(el).backgroundColor), "rgb(234, 217, 204)");
         await page.keyboard.press("Tab"); await secondary.focus();
         assert.equal(await secondary.evaluate(el => getComputedStyle(el).outlineWidth), "2px");
+        }
         await page.locator(".family-footer").scrollIntoViewIfNeeded();
         await page.waitForTimeout(100);
         const handle = page.locator(".charge-handle");

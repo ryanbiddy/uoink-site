@@ -1,0 +1,64 @@
+/* Phones and tablets can't run the Uoink installer. On a touch device (primary input
+   is touch, no hover) or when the UA says phone/tablet (html.is-phone, set in the
+   <head> before paint), the installer links go away and the "Uoink runs on your
+   computer" block shows instead. Desktop is untouched. The media query works without
+   JavaScript, so a phone never gets a tappable installer link, even before JS runs. */
+
+.phone-block { display: none; }
+
+/* Buttons that start a download or open the release page: gone on phones. */
+@media (hover: none) and (pointer: coarse) {
+  .phone-block { display: block; }
+  .desktop-only,
+  a.btn[href^="https://usage.uoink.app/get/"],
+  a.btn[href*="/releases/download"],
+  a.btn[href$="/releases/latest"],
+  .ip-sha { display: none !important; }
+  /* Installer links inside a sentence keep their words but stop being links. */
+  a[href^="https://usage.uoink.app/get/"],
+  a[href*="/releases/download"],
+  a[href$="/releases/latest"] {
+    color: inherit;
+    cursor: default;
+    pointer-events: none;
+    text-decoration: none;
+  }
+}
+
+html.is-phone .phone-block { display: block; }
+html.is-phone .desktop-only,
+html.is-phone a.btn[href^="https://usage.uoink.app/get/"],
+html.is-phone a.btn[href*="/releases/download"],
+html.is-phone a.btn[href$="/releases/latest"],
+html.is-phone .ip-sha { display: none !important; }
+html.is-phone a[href^="https://usage.uoink.app/get/"],
+html.is-phone a[href*="/releases/download"],
+html.is-phone a[href$="/releases/latest"] {
+  color: inherit;
+  cursor: default;
+  pointer-events: none;
+  text-decoration: none;
+}
+
+.phone-block {
+  background: var(--surface, #fff);
+  border: 1px solid var(--line-strong, #d9bba6);
+  border-radius: var(--r-lg, 16px);
+  box-sizing: border-box;
+  margin: 24px auto 0;
+  max-width: 480px;
+  padding: 20px 20px 18px;
+  text-align: left;
+  width: 100%;
+}
+.phone-block-title { color: var(--ink, #0a0a0a); font-size: 20px; line-height: 1.25; margin: 0 0 8px; }
+.phone-block-line,
+.phone-block-inbox { color: var(--text-2, #5c4a40); font-size: 15px; line-height: 1.5; margin: 0 0 10px; }
+.phone-block-inbox a { color: var(--rust, #c2410c); font-weight: 600; }
+.phone-block-actions { display: grid; gap: 10px; margin-top: 14px; }
+.phone-block-actions .btn { justify-content: center; min-height: 48px; width: 100%; }
+.phone-block-status { color: var(--text-2, #5c4a40); font-size: 14px; line-height: 1.4; margin: 10px 0 0; min-height: 1.4em; }
+
+/* Flagged extras (Add to Chrome, npx). Rendered only when their flag is on. */
+.flag-row { align-items: center; color: var(--text-2, #5c4a40); display: flex; flex-wrap: wrap; font-size: 14px; gap: 8px 12px; justify-content: center; line-height: 1.5; margin: 14px 0 0; }
+.flag-row code { background: var(--surface, #fff); border: 1px solid var(--line, #ebd5c5); border-radius: 8px; color: var(--ink, #0a0a0a); font-family: var(--font-mono, monospace); font-size: 13px; padding: 3px 8px; }

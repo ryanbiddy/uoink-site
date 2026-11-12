@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "../components/PageShell";
+import { PhoneBlock } from "../components/PhoneBlock";
+import { CHROME_STORE_URL, NPX_COMMAND, PHONE_INBOX_ENABLED } from "../content/phone";
 import {
   WINDOWS_GET_URL,
   WINDOWS_MCPB_GET_URL,
@@ -88,12 +90,28 @@ export default function Page() {
           <p className="ip-lede">
             Save videos, podcasts and posts to a library on your computer. Your AI searches it and cites the minute.
           </p>
-          <InstallHero options={heroOptions} />
-          <p className="ip-other">
+          <div className="desktop-only">
+            <InstallHero options={heroOptions} />
+          </div>
+          <PhoneBlock />
+          <p className="ip-other desktop-only">
             <a href="#platforms">Other platforms</a>
             <span aria-hidden="true">·</span>
             <a href={RELEASE_URL}>GitHub release</a>
           </p>
+          {/* Hidden by content/flags.json until the owner turns them on. */}
+          {CHROME_STORE_URL ? (
+            <p className="flag-row desktop-only" data-flag-chrome>
+              <a className="btn ghost" href={CHROME_STORE_URL}>Add to Chrome</a>
+              <span>Edge, Brave, Arc, Opera and Vivaldi install from the Chrome Web Store too.</span>
+            </p>
+          ) : null}
+          {NPX_COMMAND ? (
+            <p className="flag-row desktop-only" data-flag-npx>
+              <span>Install from your terminal:</span>
+              <code>{NPX_COMMAND}</code>
+            </p>
+          ) : null}
 
           <figure className="ip-shot">
             <div className="ip-window">
@@ -114,7 +132,7 @@ export default function Page() {
         </section>
 
         {/* 2. Platforms */}
-        <section className="ip-section" id="platforms" data-screen-label="install / platforms" aria-labelledby="ip-platforms-title">
+        <section className="ip-section desktop-only" id="platforms" data-screen-label="install / platforms" aria-labelledby="ip-platforms-title">
           <h2 id="ip-platforms-title" className="ip-h2">Pick your computer</h2>
           <p className="ip-sub">{PRODUCT_STATUS.mac.visible}</p>
           <div className="ip-cards">
@@ -198,7 +216,7 @@ uoink mcp`}</pre>
           </ol>
 
           <div className="ip-disclosures">
-            <details className="ip-details" id="windows-steps">
+            <details className="ip-details desktop-only" id="windows-steps">
               <summary><Mark html={WINDOWS_MARK} />Windows steps</summary>
               <div className="ip-details-body">
                 <p>The helper installs to <code>%LOCALAPPDATA%\Uoink</code> and runs in user space. No admin rights needed. Along with Python, yt-dlp and ffmpeg, it includes SQLite, the local MCP server and the uoink command.</p>
@@ -212,7 +230,7 @@ uoink mcp`}</pre>
               </div>
             </details>
 
-            <details className="ip-details" id="mac-steps">
+            <details className="ip-details desktop-only" id="mac-steps">
               <summary><Mark html={MAC_MARK} />Mac steps</summary>
               <div className="ip-details-body">
                 <p>The Mac build runs on Apple Silicon Macs with macOS 15 or later. Intel Macs are not supported. The app and the DMG are signed with a Developer ID, notarized by Apple and stapled, so macOS asks only its standard question about apps downloaded from the internet. No security override is needed.</p>
@@ -252,7 +270,7 @@ uoink mcp`}</pre>
           <h2 id="ip-connect-title" className="ip-h2">Connect your AI</h2>
           <p className="ip-sub">Your AI can search and cite your library over MCP. It reads the library on your computer.</p>
           <div className="ip-cards ip-cards-two">
-            <article className="ip-card">
+            <article className="ip-card desktop-only">
               <header className="ip-card-head">
                 <img src="/assets/brand-logos/claude.svg" width={24} height={24} alt="" />
                 <h3>Claude Desktop</h3>
@@ -277,6 +295,20 @@ uoink mcp`}</pre>
             </article>
           </div>
         </section>
+
+        {/* 4b. Phone inbox explainer. Hidden by content/flags.json (phoneInbox) until 3.17.0 ships. */}
+        {PHONE_INBOX_ENABLED ? (
+          <section className="ip-section" id="phone-inbox" data-screen-label="install / phone inbox" aria-labelledby="ip-inbox-title">
+            <h2 id="ip-inbox-title" className="ip-h2">Send links from your phone</h2>
+            <p className="ip-sub">Share a link from your phone and it lands in your Uoink library on your computer.</p>
+            <ol className="ip-inbox-steps">
+              <li><strong>Make your relay.</strong> The inbox runs on your own free Render relay. Uoink walks you through making it.</li>
+              <li><strong>Connect it in Settings.</strong> Pick the relay in Uoink&apos;s Settings so your computer knows where to look.</li>
+              <li><strong>Scan the QR code with your phone.</strong> That adds Uoink to your phone&apos;s share sheet.</li>
+            </ol>
+            <p className="ip-sub">The relay holds only links. It deletes each one after your computer picks it up, or after 7 days. No Uoink cloud is involved.</p>
+          </section>
+        ) : null}
 
         {/* 5. Questions */}
         <section className="ip-section" id="questions" data-screen-label="install / questions" aria-labelledby="ip-faq-title">

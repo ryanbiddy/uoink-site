@@ -82,7 +82,7 @@ const results=[];
  try {
   async function context(width,colorScheme,reducedMotion='no-preference',extra={}) {
    const profile=fs.mkdtempSync(path.join(shots,'chrome-profile-'));
-   const ctx=await chromium.launchPersistentContext(profile,{executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true,viewport:{width,height:844},deviceScaleFactor:1,isMobile:width===390,hasTouch:width===390,colorScheme,reducedMotion,serviceWorkers:'block',args:['--disable-background-networking','--disable-component-update','--no-first-run'],...extra});
+   const ctx=await chromium.launchPersistentContext(profile,{executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true,viewport:{width,height:844},deviceScaleFactor:1,isMobile:width===390,hasTouch:false/* touch phones get the phone block, not downloads (app/phone.css) */,colorScheme,reducedMotion,serviceWorkers:'block',args:['--disable-background-networking','--disable-component-update','--no-first-run'],...extra});
    contexts.push(ctx);
    await ctx.route('**/*',route=>new URL(route.request().url()).origin===origin?route.continue():route.abort());
    return ctx;
@@ -98,7 +98,7 @@ const results=[];
   for (const key of ['lesson','podcast','x']) assert(saveText.includes(labels.sources[key].title), `Library shows the saved ${key}: ${labels.sources[key].title}`);
   assert((await staticPage.locator('#u-flow').textContent()).includes(labels.sources.lesson.length), 'Hero video shows the lesson length');
   assert((await staticPage.locator('[data-home-part="write"] .hm-disclosure').textContent()).includes(labels.example.disclosure), 'Example disclosure');
-  const receipts = await staticPage.locator('main a[href*="t="]').evaluateAll(links => links.map(a => ({label: a.getAttribute('aria-label'), target: a.target, rel: a.rel, visible: a.getBoundingClientRect().height > 0})));
+  const receipts = await staticPage.locator('main a[href*="t="]:not([data-phone-mail])').evaluateAll(links => links.map(a => ({label: a.getAttribute('aria-label'), target: a.target, rel: a.rel, visible: a.getBoundingClientRect().height > 0})));
   assert(receipts.length >= 8, `Receipts on the page: ${receipts.length}`);
   for (const r of receipts) {
     assert(/^Open (YC talk|How I AI) at \d\d:\d\d$/.test(r.label), `Receipt name: ${r.label}`);
