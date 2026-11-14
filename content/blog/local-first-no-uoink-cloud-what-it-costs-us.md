@@ -54,7 +54,7 @@ One of the biggest design advantages of a local-first tool is offline capability
 
 If you are on an airplane or working in a remote area without internet access, you can still read saved files and search the local index. The SQLite index runs without a network request to run a text search.
 
-New captures, subscription polling, model downloads, dependency telemetry, remote thumbnails, release checks and AI calls use the internet. The extension also opens a Claude tab after copying a completed capture; it does not paste or submit the content.
+New captures, subscription polling, model downloads, dependency telemetry, remote thumbnails, release checks and AI calls use the internet. Since 3.17.0, saving no longer opens a Claude tab. The extension opens Claude or ChatGPT only when you ask it to, and it never pastes or submits the content.
 
 This design means your productivity is never tied to our servers. If our company closes down or our site goes offline, your local copy of Uoink continues to work. You are never locked out of your research library.
 

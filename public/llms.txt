@@ -9,6 +9,7 @@ New in 3.17.0: saving no longer opens a Claude tab or overwrites the clipboard. 
 - Deep research checks quotes and timestamps before saving your agent's report.
 - Import YouTube Watch Later, X bookmarks and Reddit saves.
 - Gone from the web shows which saved sources have disappeared.
+- Rediscover brings back old saves on the Library, and Idea starters group saves that share a topic. Both run on your computer with no AI calls.
 - Run headless on Linux for agents in Docker, Codespaces and sandboxes.
 - Save X posts and videos, podcasts, articles, and Reddit threads.
 - Keep everything on your disk as Markdown + JSON, with a local search index.
@@ -84,6 +85,7 @@ Replace %LOCALAPPDATA% in both JSON paths with your full app-data directory; res
 - Optional AI calls use your own key. Allowed agents can start paid calls even when automatic analysis is off.
 - ScrapeCreators discovery is off by default, uses your own key, and defaults to a 25-credit daily cap; paid calls need credit confirmation and consent.
 - Discovery run files are purged daily when older than 90 days.
+- Podcast suggestions and the phone inbox are off by default. Suggestions send a few topic words (never titles, links or transcripts) to Apple's podcast search about once a day. The phone inbox holds a link on your own relay until Uoink picks it up or 7 days pass.
 - Anonymous usage counts are off by default. If turned on in Settings, the helper sends one daily report of counts (tool calls, AI apps by a fixed name list, captures by source, searches) with a random install ID; never content, URLs, titles, paths or search text.
 - Model dependencies can send telemetry. Model downloads, thumbnails, and release checks can also contact outside services; this website uses Vercel Web Analytics.
 - Uoink never signs in to YouTube or uses browser cookies, so private and age-gated videos can't be captured. On a YouTube bot check the capture still finishes with local Whisper and says so; after three bot checks in 15 minutes, captions pause for 30 minutes.

@@ -8,7 +8,7 @@ const faq: FaqItem[] = [
   {
     question: "How do I give Claude or ChatGPT a YouTube transcript?",
     answer:
-      "Click the Uoink button under the video (or right-click the link). Uoink puts a paste-ready corpus on your clipboard: the full timestamped transcript plus a few screenshots. Paste it into Claude or ChatGPT and ask your question. No copy-pasting the transcript by hand, no browser extension gymnastics.",
+      "Click the Uoink button under the video (or right-click the link). Uoink saves a paste-ready corpus to your library: the full timestamped transcript plus a few screenshots. Click Copy for Claude or Copy for ChatGPT in the notification, and Uoink copies it and opens that chat. Paste it in and ask your question. To do that after every save, change After a save in the toolbar popup. No copy-pasting the transcript by hand, no browser extension gymnastics.",
   },
   {
     question: "Can Claude actually watch or read a YouTube video?",

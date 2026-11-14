@@ -31,6 +31,11 @@ const faq = [
     answer:
       "Feed polling, audio download, transcription, and corpus writing run from your machine.",
   },
+  {
+    question: "Can Uoink suggest podcast episodes?",
+    answer:
+      "Yes, if you turn on Suggest podcasts in Settings. It's off by default. The For You tab then shows episodes that match what you save, each with the reason. Uoink sends a few topic words to Apple's podcast search about once a day, never titles, links or transcripts. With fewer than 5 saves it sends nothing. Save pulls in just that episode and its transcript without following the show.",
+  },
 ];
 
 export const metadata: Metadata = {
