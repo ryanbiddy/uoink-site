@@ -812,8 +812,8 @@ export const features: Feature[] = [
     "slug": "resurface-for-you",
     "title": "Resurface for you",
     "category": "Library",
-    "status": "planned",
-    "summary": "Discover forgotten insights in your video library with personalized local resurfacing cards.",
+    "status": "shipped",
+    "summary": "Resurfacing shipped in 3.17.0 as the Rediscover shelf on the Library.",
     "keywords": [
       "uoink feature",
       "resurface for you",
@@ -823,29 +823,24 @@ export const features: Feature[] = [
       "library",
       "personalized"
     ],
-    "whatItDoes": "Rediscover forgotten insights in your library. The For You tab displays past captures based on your research habits. It surfaces videos that you saved but have not opened recently, helping you find links between older files and current writing projects. The selection logic runs on your computer without tracking your reading habits.",
+    "whatItDoes": "Resurfacing is the Rediscover shelf above the Library list. Each day it brings back up to four saves: one from about a week ago, one from about a month ago, one saved on this day in an earlier year, or one you never opened. To know what you never opened, Uoink notes when you last opened each item. That record stays in your local index and never leaves your computer.",
     "gettingStarted": [
-      "Open the Uoink dashboard and click the For You tab.",
-      "Browse the daily selection of resurfaced video cards.",
-      "Review the summary of key concepts on each card.",
-      "Click Open corpus to view the markdown file.",
-      "Tap the shuffle icon to generate a new list."
+      "Open the Library in the dashboard.",
+      "Look at the Rediscover shelf above the list.",
+      "Open a save to read it again.",
+      "Turn Rediscover and Idea starters off with one switch in Settings."
     ],
-    "behindScenes": "The helper executes a local query that examines file modification dates, search frequencies, and open counts in the SQLite database. It selects a mix of older, highly-rated captures and recent unread files. The dashboard renders these selections locally, protecting your research logs from being sent to external analytics tools.",
-    "mcpTools": [
-      "list_recent_uoinks",
-      "search_uoinks"
-    ],
+    "behindScenes": "The shelf uses your save dates and the last-opened dates in your local index (migration 0034). It picks fresh each day, with no network and no AI calls.",
+    "mcpTools": [],
     "related": [
-      "engagement-memory",
-      "taste-anchors",
+      "rediscover",
+      "idea-starters",
       "memory-search"
     ],
-    "cta": "Open the For You tab to bring older research back into your workflow.",
+    "cta": "Open the Library and see what Rediscover brings back today.",
     "screenshot": {
-      "title": "Dashboard showing the For You tab view",
-      "alt": "Dashboard showing the For You tab view",
-      "src": "/screenshots/resurface-for-you/hero-1280x800.png",
+      "title": "Rediscover",
+      "alt": "The Rediscover shelf above the Library list shows up to four saves."
     }
   },
   {

@@ -306,8 +306,8 @@ uoink mcp`}</pre>
               <li><strong>Connect it.</strong> Paste the relay&apos;s address and pull token into Uoink. It says Connected, or Not connected and why.</li>
               <li><strong>Scan the QR code with your phone.</strong> It opens a page on your own relay. Paste links there, add Uoink to the Android share sheet, or follow the one-time iPhone Shortcut steps.</li>
             </ol>
-            <p className="ip-sub">Uoink draws the QR code on your computer, with no outside QR service. The key in it sits after the # in the link, so it never reaches a server log.</p>
-            <p className="ip-sub">The relay holds only a link and an optional note. It deletes each one after your computer picks it up, or after 7 days. No Uoink cloud is involved.</p>
+            <p className="ip-sub">Uoink draws the QR code on your computer, with no outside QR service. The key in it sits after the # in the link, so opening it never puts the key in a server log.</p>
+            <p className="ip-sub">The relay holds each link with an optional note, an ID and the time it arrived. It deletes each one after your computer picks it up, or after 7 days. No Uoink cloud is involved.</p>
             <p className="ip-sub">Made your relay before 3.17.0? Open it in Render and choose Manual Deploy to get the phone page. Your existing Shortcut keeps working either way.</p>
           </section>
         ) : null}
