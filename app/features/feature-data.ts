@@ -171,7 +171,7 @@ export const features: Feature[] = [
     status: "shipped",
     summary: "A shelf on the Library brings back up to four of your saves each day.",
     keywords: ["rediscover", "resurface old saves", "on this day", "saved items"],
-    whatItDoes: "A Rediscover shelf sits above the Library list. Each day it picks up to four saves: one from about a week ago, one from about a month ago, one saved on this day in an earlier year, or one you never opened. Uoink picks them on your computer, with no network and no AI calls.",
+    whatItDoes: "A Rediscover shelf sits above the Library list. Once you have 5 or more saves, it picks up to four each day, such as one from about a week ago, one from about a month ago, one saved on this day in an earlier year, or one you never opened. Uoink picks them on your computer, with no network and no AI calls.",
     gettingStarted: [
       "Open the Library in the dashboard.",
       "Look at the Rediscover shelf above the list.",
@@ -823,7 +823,7 @@ export const features: Feature[] = [
       "library",
       "personalized"
     ],
-    "whatItDoes": "Resurfacing is the Rediscover shelf above the Library list. Each day it brings back up to four saves: one from about a week ago, one from about a month ago, one saved on this day in an earlier year, or one you never opened. To know what you never opened, Uoink notes when you last opened each item. That record stays in your local index and never leaves your computer.",
+    "whatItDoes": "Resurfacing is the Rediscover shelf above the Library list. Once you have 5 or more saves, it brings back up to four each day, such as one from about a week ago, one from about a month ago, one saved on this day in an earlier year, or one you never opened. To know what you never opened, Uoink notes when you last opened each item. That record stays in your local index and never leaves your computer.",
     "gettingStarted": [
       "Open the Library in the dashboard.",
       "Look at the Rediscover shelf above the list.",
