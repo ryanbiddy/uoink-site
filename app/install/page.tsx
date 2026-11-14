@@ -296,17 +296,19 @@ uoink mcp`}</pre>
           </div>
         </section>
 
-        {/* 4b. Phone inbox explainer. Hidden by content/flags.json (phoneInbox) until 3.17.0 ships. */}
+        {/* 4b. Phone inbox explainer. Shown while content/flags.json (phoneInbox) is on. */}
         {PHONE_INBOX_ENABLED ? (
           <section className="ip-section" id="phone-inbox" data-screen-label="install / phone inbox" aria-labelledby="ip-inbox-title">
             <h2 id="ip-inbox-title" className="ip-h2">Send links from your phone</h2>
             <p className="ip-sub">Share a link from your phone and it lands in your Uoink library on your computer.</p>
             <ol className="ip-inbox-steps">
-              <li><strong>Make your relay.</strong> The inbox runs on your own free Render relay. Uoink walks you through making it.</li>
-              <li><strong>Connect it in Settings.</strong> Pick the relay in Uoink&apos;s Settings so your computer knows where to look.</li>
-              <li><strong>Scan the QR code with your phone.</strong> That adds Uoink to your phone&apos;s share sheet.</li>
+              <li><strong>Make your relay.</strong> In Uoink, open Settings &gt; Capture &gt; Phone inbox and press Deploy to Render. The relay runs on your own free Render account.</li>
+              <li><strong>Connect it.</strong> Paste the relay&apos;s address and pull token into Uoink. It says Connected, or Not connected and why.</li>
+              <li><strong>Scan the QR code with your phone.</strong> It opens a page on your own relay. Paste links there, add Uoink to the Android share sheet, or follow the one-time iPhone Shortcut steps.</li>
             </ol>
-            <p className="ip-sub">The relay holds only links. It deletes each one after your computer picks it up, or after 7 days. No Uoink cloud is involved.</p>
+            <p className="ip-sub">Uoink draws the QR code on your computer, with no outside QR service. The key in it sits after the # in the link, so opening it never puts the key in a server log.</p>
+            <p className="ip-sub">The relay holds each link with an optional note, an ID and the time it arrived. It deletes each one after your computer picks it up, or after 7 days. No Uoink cloud is involved.</p>
+            <p className="ip-sub">Made your relay before 3.17.0? Open it in Render and choose Manual Deploy to get the phone page. Your existing Shortcut keeps working either way.</p>
           </section>
         ) : null}
 

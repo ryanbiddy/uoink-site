@@ -9,6 +9,6 @@
     "command": "npx uoink"
   },
   "phoneInbox": {
-    "enabled": false
+    "enabled": true
   }
 }

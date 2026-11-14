@@ -39,7 +39,7 @@ Pocket kept your saves in an online account. When Mozilla closed it, users could
 | Podcasts | Follow RSS and Atom feeds; per-feed auto-ingest downloads new episodes and transcribes them locally |
 | Search | Local keyword search, with optional local semantic search |
 | AI access | Local MCP server with 99 tools over stdio, a CLI and an OpenAPI bridge. ChatGPT is copy and paste only. |
-| Saving from your phone | No phone app. An optional phone inbox (Uoink Relay), off by default, takes links shared from an iOS Shortcut or an Android share target through a small relay you deploy to your own Render account. |
+| Saving from your phone | No phone app. An optional phone inbox (Uoink Relay), off by default, takes links through a small relay you deploy to your own Render account. Setup ends with a QR code that opens a phone page on your relay, where you paste links, add Uoink to the Android share sheet or set up a one-time iPhone Shortcut. |
 | Platforms | Windows 10/11, a Mac preview for Apple Silicon (macOS 15 or later), and headless Linux for agents |
 | Price | Free, open source (MIT) |
 
@@ -75,5 +75,5 @@ Competitor pages were opened and read on 2026-11-03.
 
 Uoink facts:
 
-- U1. Uoink 3.16.3 summary (updated 2026-11-10): https://uoink.app/llms.txt
-- U2. Uoink 3.16.3 full disclosures (updated 2026-11-10): https://uoink.app/llms-full.txt
+- U1. Uoink 3.17.0 summary (updated 2026-11-12): https://uoink.app/llms.txt
+- U2. Uoink 3.17.0 full disclosures (updated 2026-11-12): https://uoink.app/llms-full.txt

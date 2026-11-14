@@ -165,6 +165,26 @@ export const features: Feature[] = [
     screenshot: { title: "Source availability", alt: "Library badges and a filter identify saved sources that are no longer online." }
   },
   {
+    slug: "rediscover",
+    title: "Rediscover",
+    category: "Library",
+    status: "shipped",
+    summary: "A shelf on the Library brings back up to four of your saves each day.",
+    keywords: ["rediscover", "resurface old saves", "on this day", "saved items"],
+    whatItDoes: "A Rediscover shelf sits above the Library list. Once you have 5 or more saves, it picks up to four each day, such as one from about a week ago, one from about a month ago, one saved on this day in an earlier year, or one you never opened. Uoink picks them on your computer, with no network and no AI calls.",
+    gettingStarted: [
+      "Open the Library in the dashboard.",
+      "Look at the Rediscover shelf above the list.",
+      "Open a save to read it again.",
+      "Collapse the shelf, or turn Rediscover and Idea starters off with one switch in Settings."
+    ],
+    behindScenes: "Uoink notes when you last opened each item, in your local index (migration 0034). The shelf uses those dates and your save dates, and it picks fresh each day. Each shelf stays collapsed per browser if you collapse it.",
+    mcpTools: [],
+    related: ["idea-starters", "memory-search", "source-availability"],
+    cta: "Open the Library and see what Rediscover brings back today.",
+    screenshot: { title: "Rediscover", alt: "The Rediscover shelf above the Library list shows up to four saves." }
+  },
+  {
     slug: "make-a-short-with-zing",
     title: "Make a Short with Zing",
     category: "Workspace",
@@ -183,6 +203,26 @@ export const features: Feature[] = [
     related: ["writing-studio", "get-transcript", "local-first"],
     cta: "Open an item in the reader and look for the Zing button.",
     screenshot: { title: "Make a Short with Zing", alt: "The Uoink reader with a Make a Short with Zing button, shown when Zing is installed." }
+  },
+  {
+    slug: "idea-starters",
+    title: "Idea starters",
+    category: "Workspace",
+    status: "shipped",
+    summary: "Up to three writing ideas built from saves that share a topic.",
+    keywords: ["idea starters", "writing ideas", "saves on one topic", "write from saves"],
+    whatItDoes: "Idea starters group saves that share a topic, like “You saved 3 things about onboarding. Compare what they say.” The Library shows up to three. Each one has Write from these and Copy prompt. Uoink builds them on your computer, with no network and no AI calls.",
+    gettingStarted: [
+      "Save a few things on the same topic.",
+      "Open the Library and look for Idea starters.",
+      "Pick Write from these, or Copy prompt to take the idea to your AI.",
+      "Turn Rediscover and Idea starters off with one switch in Settings."
+    ],
+    behindScenes: "Uoink groups saves that share a topic in your local library. Building the starters makes no network or AI calls.",
+    mcpTools: [],
+    related: ["rediscover", "writing-studio", "memory-search"],
+    cta: "Save a few things on one topic, then check the Library for an Idea starter.",
+    screenshot: { title: "Idea starters", alt: "Idea starters on the Library group saves that share a topic." }
   },
   {
     slug: "headless-linux",
@@ -226,7 +266,7 @@ export const features: Feature[] = [
       "Locate the rust-colored U button next to the Save actions.",
       "Click the button to start the capture job.",
       "Wait for the green success checkmark to show in the action row.",
-      "The markdown corpus is now on your clipboard and stored locally."
+      "The capture is in your library. To paste it into a chat, click Copy for Claude or Copy for ChatGPT in the notification."
     ],
     "behindScenes": "The browser extension runs a content script that waits for the video player container to render. It injects a native HTML button styled to match the page theme. Clicking the button posts a payload to the loopback server running on your machine. The helper downloads the audio stream, runs the transcription process, and saves the file directly to your local library without sending your data to external servers.",
     "mcpTools": [
@@ -301,7 +341,7 @@ export const features: Feature[] = [
       "extraction",
       "customizable"
     ],
-    "whatItDoes": "Trigger video capture without reaching for your mouse. Pressing the keyboard shortcut sends the URL of the active browser tab to the local helper instantly. The helper starts the extraction, formats the markdown document, and places it onto your clipboard in the background. You can customize the keyboard combination to match your existing window management settings.",
+    "whatItDoes": "Trigger video capture without reaching for your mouse. Pressing the keyboard shortcut sends the URL of the active browser tab to the local helper instantly. The helper starts the extraction, formats the markdown document, and saves it to your library in the background. You can customize the keyboard combination to match your existing window management settings.",
     "gettingStarted": [
       "Open Chrome's extension keyboard settings.",
       "Bind Uoink to your preferred keys.",
@@ -772,8 +812,8 @@ export const features: Feature[] = [
     "slug": "resurface-for-you",
     "title": "Resurface for you",
     "category": "Library",
-    "status": "planned",
-    "summary": "Discover forgotten insights in your video library with personalized local resurfacing cards.",
+    "status": "shipped",
+    "summary": "Resurfacing shipped in 3.17.0 as the Rediscover shelf on the Library.",
     "keywords": [
       "uoink feature",
       "resurface for you",
@@ -783,29 +823,24 @@ export const features: Feature[] = [
       "library",
       "personalized"
     ],
-    "whatItDoes": "Rediscover forgotten insights in your library. The For You tab displays past captures based on your research habits. It surfaces videos that you saved but have not opened recently, helping you find links between older files and current writing projects. The selection logic runs on your computer without tracking your reading habits.",
+    "whatItDoes": "Resurfacing is the Rediscover shelf above the Library list. Once you have 5 or more saves, it brings back up to four each day, such as one from about a week ago, one from about a month ago, one saved on this day in an earlier year, or one you never opened. To know what you never opened, Uoink notes when you last opened each item. That record stays in your local index and never leaves your computer.",
     "gettingStarted": [
-      "Open the Uoink dashboard and click the For You tab.",
-      "Browse the daily selection of resurfaced video cards.",
-      "Review the summary of key concepts on each card.",
-      "Click Open corpus to view the markdown file.",
-      "Tap the shuffle icon to generate a new list."
+      "Open the Library in the dashboard.",
+      "Look at the Rediscover shelf above the list.",
+      "Open a save to read it again.",
+      "Turn Rediscover and Idea starters off with one switch in Settings."
     ],
-    "behindScenes": "The helper executes a local query that examines file modification dates, search frequencies, and open counts in the SQLite database. It selects a mix of older, highly-rated captures and recent unread files. The dashboard renders these selections locally, protecting your research logs from being sent to external analytics tools.",
-    "mcpTools": [
-      "list_recent_uoinks",
-      "search_uoinks"
-    ],
+    "behindScenes": "The shelf uses your save dates and the last-opened dates in your local index (migration 0034). It picks fresh each day, with no network and no AI calls.",
+    "mcpTools": [],
     "related": [
-      "engagement-memory",
-      "taste-anchors",
+      "rediscover",
+      "idea-starters",
       "memory-search"
     ],
-    "cta": "Open the For You tab to bring older research back into your workflow.",
+    "cta": "Open the Library and see what Rediscover brings back today.",
     "screenshot": {
-      "title": "Dashboard showing the For You tab view",
-      "alt": "Dashboard showing the For You tab view",
-      "src": "/screenshots/resurface-for-you/hero-1280x800.png",
+      "title": "Rediscover",
+      "alt": "The Rediscover shelf above the Library list shows up to four saves."
     }
   },
   {
