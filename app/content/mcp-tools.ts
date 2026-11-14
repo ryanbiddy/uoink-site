@@ -1,5 +1,5 @@
-// Generated for Uoink 3.17.0 from ryanbiddy/uoink b756598d6acf4347b0dc24ccf15e162fa87b5e3f on 2026-11-14.
-// Source commit: b756598d6acf4347b0dc24ccf15e162fa87b5e3f
+// Generated for Uoink 3.17.0 from ryanbiddy/uoink v3.17.0 on 2026-11-14.
+// Source commit: e115c9bf69e9efe4b33256db6d626430eb3b9e7e
 // HTTP: TOOL_REGISTRY; stdio: registry inventory (3.9.2+) or @mcp.tool decorators.
 // Regenerate with: python scripts/sync-mcp-from-release.py <product-checkout> [--ref <git-ref>]
 
