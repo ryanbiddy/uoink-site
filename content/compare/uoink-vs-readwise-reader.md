@@ -49,7 +49,7 @@ Both tools now connect to AI assistants over MCP, so that is no longer the divid
 
 ## Privacy and where your data lives
 
-**Uoink.** Captures and indexes stay on your disk. There is no account and no Uoink-hosted copy of your library. Capturing a source contacts that source's site, and X text capture can use FxTwitter. Optional AI features, and connected agents you allow to use them, can send relevant library text to Anthropic with your own key. Anonymous usage counts are off by default; if you turn them on, Uoink sends daily counts and never content, URLs, titles or search text. Some things still reach the network: model downloads from Hugging Face, release checks with GitHub, and telemetry from one model dependency (pyannote-audio), which you can turn off with an environment variable. Exports and synced mirror folders make extra copies that sync software can upload. The full list is in Uoink's disclosures. [U1][U2]
+**Uoink.** Captures and indexes stay on your disk. There is no account and no Uoink-hosted copy of your library. Capturing a source contacts that source's site. FxTwitter, for the full text of long X posts, is off by default. Optional AI features, and connected agents you allow to use them, can send relevant library text to Anthropic with your own key. Anonymous usage counts are off by default; if you turn them on, Uoink sends daily counts and never content, URLs, titles or search text. Some things still reach the network: model downloads from Hugging Face, release checks with GitHub, and telemetry from one model dependency (pyannote-audio), which you can turn off with an environment variable. Exports and synced mirror folders make extra copies that sync software can upload. The full list is in Uoink's disclosures. [U1][U2]
 
 **Readwise Reader.** Your library syncs across your devices, and Reader works offline. [1] AI assistants reach it through Readwise's hosted MCP server at mcp2.readwise.io after you sign in with your Readwise account. [3] Readwise's privacy policy says its "business model has never been to sell data and it never will," that it collects "the content you save," and that you can export your data at any time. It also says data may go to service providers for hosting, analytics and similar work, in "the United States and other jurisdictions." [8]
 
@@ -62,10 +62,10 @@ Both tools now connect to AI assistants over MCP, so that is no longer the divid
 
 - **Windows 10 and 11, plus a Mac preview for Apple Silicon (macOS 15 or later).** Intel Macs are not supported, and there are no phone apps.
 - **No sync.** There is no Uoink cloud, so there is no built-in sync between devices. Reader keeps every device in step.
-- **Rougher install.** The Windows installer is unsigned and about 549 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Chrome is the tested browser.
+- **Rougher install.** The Windows installer is unsigned and about 578 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Chrome is the tested browser.
 - **Not a reading app.** Highlighting, text-to-speech, an e-ink mode and spaced review are not among its features. If reading is the main job, Reader is the better tool.
 - **Fewer formats.** PDFs and EPUBs are not among Uoink's listed sources.
-- **No self-organizing library.** The library does not file or re-shelve itself. The Librarian only proposes changes, and applying them is off by default because its quality gate has not passed.
+- **Reshelving waits for you.** Uoink picks a shelf for each new save, and Tidy Uncategorized suggests moves you approve. The Librarian only proposes changes, and applying them is off by default because its quality gate has not passed.
 - **Agents must run on the same computer.** An agent has to be able to run Uoink on the computer that holds the library. The ChatGPT app does not connect over MCP; use copy and paste.
 - **A side project.** Uoink is a personal side project by one maker, Ryan Biddy.
 
@@ -84,5 +84,5 @@ Competitor pages were opened and read on 2026-10-24.
 
 Uoink facts:
 
-- U1. Uoink 3.17.0 summary (updated 2026-11-12): https://uoink.app/llms.txt
-- U2. Uoink 3.17.0 full disclosures (updated 2026-11-12): https://uoink.app/llms-full.txt
+- U1. Uoink 3.18.0 summary (updated 2026-11-22): https://uoink.app/llms.txt
+- U2. Uoink 3.18.0 full disclosures (updated 2026-11-22): https://uoink.app/llms-full.txt

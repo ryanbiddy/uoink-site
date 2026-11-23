@@ -24,7 +24,12 @@ const faq = [
   {
     question: "Does local Whisper need a GPU?",
     answer:
-      "CPU transcription works. Larger models take longer. Dedicated GPUs can speed it up when available.",
+      "CPU transcription works. Larger models take longer. Dedicated GPUs can speed it up when available. Transcription runs in its own process, which frees its memory after two idle minutes, and podcasts use faster-whisper unless you turn on speaker labels.",
+  },
+  {
+    question: "Can I save a show's back catalog?",
+    answer:
+      "Yes. In Sources, choose Save a whole show and paste the podcast's RSS feed. You see up to 5,000 episodes, how many are new, and the time and disk space before you start. Episodes are transcribed on your computer one at a time, behind your own saves, and keep their audio by default. Settings shows how much disk the audio uses and can clean up audio for episodes that have a finished transcript.",
   },
   {
     question: "Are podcast feeds uploaded to Uoink?",

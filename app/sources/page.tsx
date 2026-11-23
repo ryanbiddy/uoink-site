@@ -37,7 +37,7 @@ const sources: {
   {
     title: "YouTube",
     status: "shipped",
-    capture: "Button, right-click, playlist queue, and Shorts.",
+    capture: "Button, right-click, playlist queue, Shorts, and Save a whole show for a channel or playlist.",
     corpus: "Transcript, frames, comments, metadata, channel context.",
     output: "Creator research, hook study, lecture notes, agent citations.",
     limits: "Uoink never signs in to YouTube or uses browser cookies, so private and age-gated videos can't be captured. When YouTube's bot check blocks captions, the capture still finishes with local Whisper and says so.",
@@ -45,10 +45,10 @@ const sources: {
     href: "/sources/youtube",
   },
   {
-    title: "X video",
+    title: "X posts and video",
     status: "shipped",
-    capture: "Right-click video posts and capture the source with creator credit.",
-    corpus: "Transcript, post URL, author handle, media metadata, local citation.",
+    capture: "Right-click video posts, save long posts from the open tab, and save X Articles with Uoink this article.",
+    corpus: "Transcript, full post text, quoted posts, post URL, author handle, media metadata, local citation.",
     output: "Credited threads, clip research, launch swipe files.",
     logos: ["x"],
     href: "/twitter",
@@ -56,7 +56,7 @@ const sources: {
   {
     title: "Podcasts",
     status: "shipped",
-    capture: "Add an RSS feed or episode URL and transcribe with local Whisper.",
+    capture: "Add an RSS feed or episode URL and transcribe with local Whisper, or save a show's back catalog.",
     corpus: "Speaker labels, transcript, episode metadata, show context, entities.",
     output: "Interview notes, claim trails, guest research, agent search.",
     logos: ["apple-podcasts", "spotify"],
@@ -73,7 +73,7 @@ const sources: {
   {
     title: "Web Articles & Pages",
     status: "shipped",
-    capture: "Universal page extraction strips navigation, headers, ads, and trackers.",
+    capture: "Universal page extraction strips navigation, headers, ads, and trackers. Uoink this page saves the page in your tab, even behind a sign-in.",
     corpus: "Clean body markdown text, author details, metadata, outbound links.",
     output: "Writing anchors, source-backed essays, style study.",
     logos: ["web"],

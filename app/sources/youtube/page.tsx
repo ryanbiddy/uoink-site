@@ -28,12 +28,17 @@ const faq: FaqItem[] = [
   {
     question: "Where do the saved videos go?",
     answer:
-      "To your own disk as structured Markdown and a JSON sidecar, indexed in one local library. No account, no Uoink cloud. The library does not organize or re-shelve itself.",
+      "To your own disk as structured Markdown and a JSON sidecar, indexed in one local library. No account, no Uoink cloud. Each new save lands on a shelf, picked on your computer, and you can move it.",
   },
   {
     question: "Can I save a whole playlist at once?",
     answer:
-      "Yes. Paste a playlist URL and Uoink queues the videos, extracts them asynchronously with live progress, and writes a combined corpus plus per-video files.",
+      "Yes. Paste a playlist URL and Uoink queues the videos, extracts them asynchronously with live progress, and writes a combined corpus plus per-video files. For a whole channel or a long playlist, choose Save a whole show in Sources. You see up to 5,000 videos, how many are new, and the time and disk space before you start. Those runs save captions and skip video, screenshots and comments, and you can opt into local transcription for videos without captions.",
+  },
+  {
+    question: "Some of my saves say “No captions available”. Can Uoink fix them?",
+    answer:
+      "Yes. Open Settings > Library and export > Transcribe saves that have no words. Uoink shows which videos it can use from disk, which it can download again and which sources are gone, then transcribes them on your computer, longest or newest first. New captures go first, you can pause, and the repair picks up after a restart. A video that's gone from YouTube can be transcribed only if its media is still on disk.",
   },
   {
     question: "Can Uoink capture private or age-gated videos?",

@@ -48,7 +48,7 @@ Both tools now connect to AI assistants over MCP, so that is not the dividing li
 
 ## Privacy and where your data lives
 
-**Uoink.** Captures and indexes stay on your disk. There is no account and no Uoink-hosted copy of your library. Capturing a source contacts that source's site, and X text capture can use FxTwitter. Optional AI features, and connected agents you allow to use them, can send relevant library text to Anthropic with your own key. Anonymous usage counts are off by default; if you turn them on, Uoink sends daily counts and never content, URLs, titles or search text. Some things still reach the network: model downloads from Hugging Face, release checks with GitHub, and telemetry from one model dependency (pyannote-audio), which you can turn off with an environment variable. Exports and synced mirror folders make extra copies that sync software can upload. The full list is in Uoink's disclosures. [U1][U2]
+**Uoink.** Captures and indexes stay on your disk. There is no account and no Uoink-hosted copy of your library. Capturing a source contacts that source's site. FxTwitter, for the full text of long X posts, is off by default. Optional AI features, and connected agents you allow to use them, can send relevant library text to Anthropic with your own key. Anonymous usage counts are off by default; if you turn them on, Uoink sends daily counts and never content, URLs, titles or search text. Some things still reach the network: model downloads from Hugging Face, release checks with GitHub, and telemetry from one model dependency (pyannote-audio), which you can turn off with an environment variable. Exports and synced mirror folders make extra copies that sync software can upload. The full list is in Uoink's disclosures. [U1][U2]
 
 **Recall.** Recall says augmented browsing "is local first" while "your knowledge base is stored safely in the cloud," and that you can export everything as Markdown at any time. [1] AI assistants reach it through Recall's hosted MCP server, signing in through the browser or with an API key. [3] Recall's privacy policy says: "We do not use your data for advertising, profiling, training any AI models or any purpose beyond serving you," and that it does not sell data. [4]
 
@@ -62,10 +62,10 @@ Both tools now connect to AI assistants over MCP, so that is not the dividing li
 - **Windows 10 and 11, plus a Mac preview for Apple Silicon (macOS 15 or later).** Intel Macs are not supported, and there are no phone apps. Recall runs on iOS, Android, the web and four browsers.
 - **No summaries out of the box.** Uoink keeps the transcript; your AI writes the summary when you ask. Recall writes summaries for you.
 - **No sync.** There is no Uoink cloud, so there is no built-in sync between devices.
-- **Rougher install.** The Windows installer is unsigned and about 549 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Chrome is the tested browser.
+- **Rougher install.** The Windows installer is unsigned and about 578 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Chrome is the tested browser.
 - **Fewer formats.** PDFs and EPUBs are not among Uoink's listed sources. Recall saves PDFs.
 - **No knowledge graph or spaced review.** Recall links related items and quizzes you on them; Uoink does neither.
-- **No self-organizing library.** The library does not file or re-shelve itself. The Librarian only proposes changes, and applying them is off by default because its quality gate has not passed.
+- **Reshelving waits for you.** Uoink picks a shelf for each new save, and Tidy Uncategorized suggests moves you approve. The Librarian only proposes changes, and applying them is off by default because its quality gate has not passed.
 - **Agents must run on the same computer.** An agent has to be able to run Uoink on the computer that holds the library. The ChatGPT app does not connect over MCP; use copy and paste.
 - **A side project.** Uoink is a personal side project by one maker, Ryan Biddy.
 
@@ -80,5 +80,5 @@ Competitor pages were opened and read on 2026-11-03.
 
 Uoink facts:
 
-- U1. Uoink 3.17.0 summary (updated 2026-11-12): https://uoink.app/llms.txt
-- U2. Uoink 3.17.0 full disclosures (updated 2026-11-12): https://uoink.app/llms-full.txt
+- U1. Uoink 3.18.0 summary (updated 2026-11-22): https://uoink.app/llms.txt
+- U2. Uoink 3.18.0 full disclosures (updated 2026-11-22): https://uoink.app/llms-full.txt
