@@ -225,13 +225,93 @@ export const features: Feature[] = [
     screenshot: { title: "Idea starters", alt: "Idea starters on the Library group saves that share a topic." }
   },
   {
+    slug: "finish-old-saves",
+    title: "Finish old saves",
+    category: "Library",
+    status: "shipped",
+    summary: "Transcribe saves that ended with no words, and finish captures that stopped partway.",
+    keywords: ["finish old saves", "transcript backfill", "no captions available", "transcribe old videos"],
+    whatItDoes: "Saved a video that shows “No captions available” where its transcript should be? Settings > Library and export > Transcribe saves that have no words shows which videos Uoink can use from disk, which it can download again and which sources are gone. Start with the longest or newest and keep saving other things. New captures go first. You can pause, and the repair picks up after a restart. Library health also lists captures that stopped partway. Finish reuses the video, captions, thumbnail and screenshots already on your computer.",
+    gettingStarted: [
+      "Open Settings > Library and export.",
+      "Choose Transcribe saves that have no words and check the counts.",
+      "Pick longest or newest first, then press Start.",
+      "Pause any time. The repair picks up after a restart."
+    ],
+    behindScenes: "When a site refuses requests, the repair waits 5, 20, then 60 minutes, and longer after a bot check. New words show up in keyword and meaning search, the corpus Markdown and get_transcript without rebuilding the index. From a terminal, run uoink backfill status, start, pause or resume, with --order longest or newest. A missing source can't be transcribed unless its media is still on disk.",
+    mcpTools: [],
+    related: ["get-transcript", "source-availability", "transcription-models"],
+    cta: "Open Settings > Library and export to see how many saves have no words.",
+    screenshot: { title: "Transcribe saves that have no words", alt: "Settings lists saves with no words, split by what Uoink can transcribe from disk or download again." }
+  },
+  {
+    slug: "save-a-whole-show",
+    title: "Save a whole show",
+    category: "Capture",
+    status: "shipped",
+    summary: "Paste a YouTube channel, a playlist or a podcast feed and save its back catalog.",
+    keywords: ["save a whole show", "youtube channel back catalog", "podcast back catalog", "bulk transcripts"],
+    whatItDoes: "In Sources, choose Save a whole show and paste a YouTube channel, a playlist, a podcast RSS feed or a list of links. Before you press Start, you see up to 5,000 episodes, how many are new, and the time and disk space it will take. YouTube runs save captions and skip video, screenshots and comments, and you can opt into local transcription for videos without captions. Podcast episodes are transcribed on your computer and keep their audio by default.",
+    gettingStarted: [
+      "Open Sources in the dashboard and choose Save a whole show.",
+      "Paste a channel, a playlist, a feed or a list of links.",
+      "Check the episode count, the time and the disk space, then press Start.",
+      "Pause, resume or cancel the run, and retry failed episodes by reason."
+    ],
+    behindScenes: "A run queues one episode at a time behind your own saves and skips episodes you already have. When YouTube asks Uoink to wait, the run shows when it can try again. Progress survives a restart. Local transcription needs an audio track Uoink can download.",
+    mcpTools: [],
+    related: ["playlist-mode", "podcast-feeds", "finish-old-saves"],
+    cta: "Pick one show you follow and preview its back catalog in Sources.",
+    screenshot: { title: "Save a whole show", alt: "Sources previews a show's episodes with the time and disk space before a run starts." }
+  },
+  {
+    slug: "shelves",
+    title: "Shelves that fill themselves",
+    category: "Library",
+    status: "shipped",
+    summary: "New saves land on a shelf, picked on your computer. Tidy Uncategorized suggests the rest.",
+    keywords: ["library shelves", "tidy uncategorized", "auto organize saves", "bookmark folders"],
+    whatItDoes: "Uoink picks a shelf for each new save from its text, quotes, author, transcript, source and the shelves you already use. Short videos with little text go to Clips. When there isn't enough to go on, a save waits in Uncategorized. Imported X bookmark folders and YouTube playlists become shelves. Tidy Uncategorized groups suggested moves by shelf and gives a reason for each. Pick a whole group or single saves, or leave them where they are. A shelf you pick stays put through a recapture, a late transcript or an index rebuild.",
+    gettingStarted: [
+      "Save as usual. New saves land on a shelf.",
+      "Open Tidy Uncategorized to see suggested moves and the reason for each.",
+      "Choose a group or single saves, or use Select to move library items together.",
+      "Undo a move if you change your mind. Undo still works after a reload."
+    ],
+    behindScenes: "Shelving compares meaning with the bundled potion-base-8M word vectors (about 30 MB, MIT), on your computer in milliseconds and without a GPU. It prefers EmbeddingGemma vectors when semantic search has them ready. Uoink records a shelf you pick in the save's files. From a terminal, use uoink shelves tidy, apply, move and undo, or uoink capture --shelf NAME.",
+    mcpTools: [],
+    related: ["faceted-classification", "import-saves", "memory-search"],
+    cta: "Open Tidy Uncategorized and see where Uoink would put the rest.",
+    screenshot: { title: "Tidy Uncategorized", alt: "Suggested moves grouped by shelf, each with a reason, and an Undo button." }
+  },
+  {
+    slug: "transcription-models",
+    title: "Choose how to transcribe",
+    category: "Capture",
+    status: "shipped",
+    summary: "Pick Balanced, English quick or English best, and redo a transcript with another model.",
+    keywords: ["local transcription model", "whisper english model", "re-transcribe", "offline transcription"],
+    whatItDoes: "In Capture settings, English, quick (336 MB) and English, best (1.5 GB) join Balanced, the offline model that ships with Uoink. The chooser lists each model's languages, download size, quality and a speed estimate for your computer, and recommends an English model. To redo a transcript, open the item and choose Re-transcribe with. The old transcript stays if the new job fails.",
+    gettingStarted: [
+      "Open Settings > Capture and find the transcription model chooser.",
+      "Compare the models by size and estimated speed.",
+      "Download an English model, or keep Balanced for offline use.",
+      "Open a saved item and choose Re-transcribe with to try another model."
+    ],
+    behindScenes: "Transcription runs in its own processes, which free their memory after two idle minutes. Two busy jobs can hold two models. The English models download from Hugging Face only when you ask, resume after a stop and check each file against a pinned size and hash. From a terminal, use uoink models list, download, delete or use.",
+    mcpTools: ["get_transcript", "transcribe_podcast_episode"],
+    related: ["get-transcript", "finish-old-saves", "local-first"],
+    cta: "Open Capture settings and compare the transcription models.",
+    screenshot: { title: "Transcription models", alt: "Capture settings list each transcription model with its size, languages and speed estimate." }
+  },
+  {
     slug: "headless-linux",
     title: "Headless Linux for agents",
     category: "Distribution",
     status: "shipped",
     summary: "Run Uoink's CLI and MCP server in Docker, Codespaces or a Linux sandbox, with no tray or app windows.",
     keywords: ["headless Linux", "Docker MCP", "Codespaces", "agent sandbox"],
-    whatItDoes: "Install from a source checkout with scripts/linux/install.sh, then run uoink mcp. The installer creates a Python environment and stages the pinned Whisper base model. docker/capture.Dockerfile builds an image for capture and local search.",
+    whatItDoes: "Install from a source checkout with scripts/linux/install.sh, then run uoink mcp. The installer creates a Python environment and stages the pinned Whisper base model and the shelf model. docker/capture.Dockerfile builds an image for capture and local search.",
     gettingStarted: [
       "Follow the Linux steps at /install#linux. A host install needs Git, Python 3.11 or newer, venv support, ffmpeg and ffprobe.",
       "Clone the release and run sh uoink/scripts/linux/install.sh.",
@@ -419,7 +499,7 @@ export const features: Feature[] = [
       "metadata",
       "article extractor"
     ],
-    "whatItDoes": "Capture a web article into the same local library as your videos and podcasts. Saved text can be searched and handed to your AI as source material.",
+    "whatItDoes": "Capture a web article into the same local library as your videos and podcasts. Saved text can be searched and handed to your AI as source material. On a page that needs a sign-in or runs on JavaScript, Uoink this page reads the clean text you see in your own tab and sends it to Uoink on your computer. When a pasted link lands on a sign-in, a paywall preview or a robot check, the row says why nothing was saved and offers Open page.",
     "gettingStarted": [
       "Open an article or documentation page in your browser.",
       "Right-click the page background.",
@@ -427,7 +507,7 @@ export const features: Feature[] = [
       "Approve the allowlist prompt if this is a new domain.",
       "Check your library for the clean markdown document."
     ],
-    "behindScenes": "The HTTP registry tool uoink_page captures an allowed page with Uoink's built-in article extractor, which reads the fetched HTML on your machine, keeps the article's structure and records which extractor was used. If you have installed Crawl4AI yourself, Uoink can use it as an optional second try for pages the built-in extractor cannot read; neither installer includes it. A basic static HTML read is the last fallback.",
+    "behindScenes": "The HTTP registry tool uoink_page captures an allowed page with Uoink's built-in article extractor, which reads the fetched HTML on your machine, keeps the article's structure and records which extractor was used. If you have installed Crawl4AI yourself, Uoink can use it as an optional second try for pages the built-in extractor cannot read; neither installer includes it. A basic static HTML read is the last fallback. When you click Uoink this page in the browser, the extension first reads your tab with Defuddle 0.19.6 (MIT), bundled with the extension, and sends the text, title, author and date to the local helper. It skips browser, store, extension, file and PDF tabs, and falls back to fetching the link if the page changes or can't be read.",
     "mcpTools": [
       "uoink_page",
       "list_allowed_sites",
@@ -450,7 +530,7 @@ export const features: Feature[] = [
     "title": "X video transcripts",
     "category": "Capture",
     "status": "shipped",
-    "summary": "Capture X video and post text into your local library.",
+    "summary": "Capture X video, long posts and X Articles into your local library.",
     "keywords": [
       "uoink feature",
       "twitter video",
@@ -460,7 +540,7 @@ export const features: Feature[] = [
       "creator",
       "citations"
     ],
-    "whatItDoes": "Extract text and metadata from videos posted on X. Right-click any tweet containing a video to send the media URL to your local helper. The helper downloads the audio stream, runs local transcription, and writes the structured markdown file. Every output includes a citation that links back to the original author and tweet so you can credit creators.",
+    "whatItDoes": "Extract text and metadata from videos posted on X. Right-click any tweet containing a video to send the media URL to your local helper. The helper downloads the audio stream, runs local transcription, and writes the structured markdown file. Every output includes a citation that links back to the original author and tweet so you can credit creators. Save a long post from its open tab and the extension expands “Show more”, keeping quoted posts and full links. Uoink this article saves an X Article with its headings, lists, quotes, links, code and images. For pasted links, Get full long posts and Articles through FxTwitter is an opt-in switch in Capture settings, off by default.",
     "gettingStarted": [
       "Find a tweet containing a video on X.",
       "Right-click the video player or the link.",
@@ -468,7 +548,7 @@ export const features: Feature[] = [
       "Wait for the notification that transcription completed.",
       "Open the markdown file to read the transcript and the author citation."
     ],
-    "behindScenes": "The helper uses yt-dlp to download the audio track from the X post. It sends the audio stream to the transcription module to generate the timestamped text. The helper queries the public post metadata to retrieve the creator's handle and post URL. It formats the citation into the header of the markdown file, ensuring compliance with creator credit rules.",
+    "behindScenes": "The helper uses yt-dlp to download the audio track from the X post. It sends the audio stream to the transcription module to generate the timestamped text. The helper queries the public post metadata to retrieve the creator's handle and post URL. It formats the citation into the header of the markdown file, ensuring compliance with creator credit rules. With the FxTwitter switch on, Fix cut-off X posts in Library and export repairs older saves one post at a time, about every 3.5 seconds. FxTwitter sees the post ID and your internet address. A missing post keeps its original text.",
     "mcpTools": [
       "uoink_page",
       "write_tweet"
@@ -700,6 +780,7 @@ export const features: Feature[] = [
     "whatItDoes": [
       "Find saved items through library search. Clip search goes inside videos to return timestamped, deep-linked excerpts, and evidence cards collect material your AI can quote and cite.",
       "Search no longer needs every word: it skips common words and ranks sources with every word and exact titles first. Choose Exact words when you need every word to match. Optional semantic search finds passages with similar meaning; turn it on in Settings, and it downloads its model once (about 330 MB) and runs on your computer.",
+      "Saves keep the original publish date apart from the day you saved them, so published_from and published_to on the helper's /memory/search route find a source by when it came out.",
     ].join(" "),
     "gettingStarted": [
       "Open the Uoink desktop dashboard.",
@@ -745,7 +826,7 @@ export const features: Feature[] = [
       "automatically",
       "generated"
     ],
-    "whatItDoes": "Filter saved sources using facets and tags assigned by you or your agent. The library does not organize, file, or re-shelve itself. The Librarian only proposes; applying is off by default and its quality gate has not passed.",
+    "whatItDoes": "Filter saved sources using facets and tags assigned by you or your agent. New saves also land on a shelf, picked on your computer (see Shelves that fill themselves). The Librarian only proposes; applying is off by default and its quality gate has not passed.",
     "gettingStarted": [
       "Capture a source into your local library.",
       "Search the library for the source you need.",
@@ -758,6 +839,7 @@ export const features: Feature[] = [
       "get_facet_taxonomy"
     ],
     "related": [
+      "shelves",
       "memory-search",
       "your-channel",
       "taste-anchors"

@@ -176,7 +176,7 @@ uoink mcp`}</pre>
               <p className="ip-card-status">Needs Git, Python 3.11 or newer, ffmpeg and ffprobe.</p>
               <details className="ip-mini">
                 <summary>More about Linux</summary>
-                <p>You need Git, Python 3.11 or newer, venv support, ffmpeg and ffprobe. Linux has no tray, splash or dashboard window; the helper serves the dashboard at its local URL. The installer stages the pinned Whisper base model. YouTube can block cloud IPs.</p>
+                <p>You need Git, Python 3.11 or newer, venv support, ffmpeg and ffprobe. Linux has no tray, splash or dashboard window; the helper serves the dashboard at its local URL. The installer stages the pinned Whisper base model and the shelf model (about 30 MB) unless you pass <code>--no-model</code>. YouTube can block cloud IPs.</p>
               </details>
               <div className="ip-card-actions">
                 <a className="btn ghost" href={LINUX_DOCS_URL}>Linux guide</a>

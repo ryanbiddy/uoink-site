@@ -108,6 +108,25 @@ export default function TwitterPage() {
 
       <DocRule />
 
+      <section className="section" data-screen-label="twitter / long posts">
+        <div className="container">
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">long posts and articles</span>
+              <h2 className="display-m">Keep the whole post.</h2>
+              <p className="body-l">
+                X&apos;s public endpoint cuts long posts short and leaves out Article bodies. Save a long post from its open tab and the extension expands &ldquo;Show more&rdquo;, keeping quoted posts and full links. On an X Article, click <strong>Uoink this article</strong> to save its headings, lists, quotes, links, code and images.
+              </p>
+              <p className="body-l">
+                For pasted links, <strong>Get full long posts and Articles through FxTwitter</strong> in Capture settings is off by default. When it&apos;s on, FxTwitter, a free community service, sees the post&apos;s ID and your IP address. <strong>Fix cut-off X posts</strong> in Library and export then repairs older saves, one post at a time. Read more on the <Link href="/privacy">privacy page</Link>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <DocRule />
+
       <section className="section" data-screen-label="twitter / agent examples">
         <div className="container">
           <div className="doc">

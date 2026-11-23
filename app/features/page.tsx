@@ -30,7 +30,7 @@ const page: SitePage = {
     <figure class="figure">
       <div class="figure-label"><span>topics</span><span>local library</span></div>
       <img src="/product/topics-overview.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Uoink topics view: the local library grouped into topic chips with live counts such as AI and ML, Social Media Research, and Job Hunt, each filtering the captured sources." />
-      <figcaption>Browse the sources saved in your local library. The library does not organize or re-shelve itself.</figcaption>
+      <figcaption>Browse the sources saved in your local library. New saves land on a shelf, and you can move them.</figcaption>
     </figure>
   </div>
 </section>`,

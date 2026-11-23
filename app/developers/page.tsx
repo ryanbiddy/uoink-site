@@ -255,6 +255,35 @@ get_evidence_card({ video_id })`}</pre>
 
       <DocRule />
 
+      <section className="section" data-screen-label="developers / timed cues" id="cues">
+        <div className="container">
+          <div className="doc">
+            <div className="doc-head">
+              <span className="eyebrow">for clip tools</span>
+              <h2 className="display-l">
+                Timed cues and <em>publish dates.</em>
+              </h2>
+              <p className="body-l">
+                Since 3.18, <code>uoink.cues.read</code> v1 gives a local clip tool every transcript cue for one save, with where its timings came from, the original publish date, the duration and the source link.
+              </p>
+            </div>
+            <div className="docs-main">
+              <p>
+                <code>GET /api/cues/v1/items/&lt;id&gt;</code> returns cues as start, end and text in seconds, with word timings where available. Narrow it with <code>start</code> and <code>end</code>, page with <code>limit</code> and <code>offset</code>, and pass <code>include_words=0</code> when cue timings are enough. <code>GET /api/cues/v1/items</code> lists saves by words, show and publish date. Both need the <code>X-Uoink-Token</code> header and appear in the helper&apos;s OpenAPI document. From a terminal, run <code>uoink cues &lt;id&gt;</code>.
+              </p>
+              <p>
+                Saves now keep the original publish date apart from the day you saved them. Pass <code>published_from</code> and <code>published_to</code> to <code>/memory/search</code> to search by publish date. Library rows include <code>published_at</code>. No MCP tools were added, and corpus read v1 is unchanged.
+              </p>
+              <p>
+                New terminal commands: <code>uoink backfill status|start|pause|resume</code> for saves with no words, <code>uoink shelves tidy|apply|move|undo</code> and <code>uoink capture --shelf NAME</code> for shelves, <code>uoink models list|download|delete|use</code> for transcription models, and <code>uoink --text get &lt;id&gt;</code> to print a save, its shelf and any transcript. See <a href={`${GITHUB_URL}/blob/v3.18.0/docs/integrations/timed-cues.md`}>the timed cues guide</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <DocRule />
+
       <section className="section" data-screen-label="developers / tool catalog">
         <div className="container">
           <div className="doc">

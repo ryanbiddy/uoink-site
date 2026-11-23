@@ -37,7 +37,7 @@ Both tools are free, open source under the MIT license, and save Markdown to you
 | Where saves live | Markdown plus a JSON sidecar on your disk, indexed in one local library | "stored locally in your Obsidian vault" as "durable Markdown files" [1] |
 | What else you need | Windows 10/11, or an Apple Silicon Mac with macOS 15 or later for the preview | The Obsidian app. Web Clipper hands each clip to it through the Obsidian URI and the clipboard. [5] Obsidian runs on Windows, macOS, Linux, iOS and Android. [9] |
 | Browsers | Chrome (tested). Other Chromium browsers such as Edge and Brave may work but are not tested. | Chrome, Brave, Arc, Orion and other Chromium browsers; Firefox and Firefox Mobile; Safari on macOS, iOS and iPadOS; Edge [2] |
-| Install | Unsigned Windows installer, about 549 MB, no admin rights needed; on a Mac, a DMG signed with a Developer ID and notarized by Apple. The browser button is sideloaded in Chrome's Developer mode | From each browser's official extension directory [2] |
+| Install | Unsigned Windows installer, about 578 MB, no admin rights needed; on a Mac, a DMG signed with a Developer ID and notarized by Apple. The browser button is sideloaded in Chrome's Developer mode | From each browser's official extension directory [2] |
 | How you capture | YouTube button, right-click, Alt+U, or your AI agent; standing capture for YouTube channels, playlists and podcast feeds | Toolbar icon, hotkeys or the right-click menu, then "Add to Obsidian" [3] |
 | Web pages | Web articles and Reddit threads | The main article content by default, or your selection or highlights; templates and rules per site [1][3] |
 | YouTube | Timestamped transcript, screenshots, top comments, channel context and metadata | A `{{transcript}}` template variable, "only for YouTube currently" when added in 1.2.0 (March 2026) [7]; an interactive transcript view since 1.4.0 [8] |
@@ -49,7 +49,7 @@ Both tools are free, open source under the MIT license, and save Markdown to you
 
 ## Privacy and where your data lives
 
-**Uoink.** Captures and indexes stay on your disk. There is no account and no Uoink-hosted copy of your library. Capturing a source contacts that source's site, and X text capture can use FxTwitter. Optional AI features, and connected agents you allow to use them, can send relevant library text to Anthropic with your own key. Anonymous usage counts are off by default; if you turn them on, Uoink sends daily counts and never content, URLs, titles or search text. Some things still reach the network: model downloads from Hugging Face, release checks with GitHub, and telemetry from one model dependency (pyannote-audio), which you can turn off with an environment variable. Exports and synced mirror folders make extra copies that sync software can upload. [U1][U2]
+**Uoink.** Captures and indexes stay on your disk. There is no account and no Uoink-hosted copy of your library. Capturing a source contacts that source's site. FxTwitter, for the full text of long X posts, is off by default. Optional AI features, and connected agents you allow to use them, can send relevant library text to Anthropic with your own key. Anonymous usage counts are off by default; if you turn them on, Uoink sends daily counts and never content, URLs, titles or search text. Some things still reach the network: model downloads from Hugging Face, release checks with GitHub, and telemetry from one model dependency (pyannote-audio), which you can turn off with an environment variable. Exports and synced mirror folders make extra copies that sync software can upload. [U1][U2]
 
 **Obsidian Web Clipper.** Web Clipper "saves content locally to your Obsidian vault," and Obsidian says: "Your data is not collected, and we do not gather any usage metrics." The code is open source. [2] If you use Interpreter with a cloud model, "Interpreter requests are sent directly to the provider you choose," under that provider's terms; Obsidian says it "does not gather or store any data about your requests." Ollama keeps the model on your device. [4] Obsidian itself stores notes on your device; its optional Sync service uses AES-256 end-to-end encryption. [10][12]
 
@@ -61,11 +61,11 @@ Both tools are free, open source under the MIT license, and save Markdown to you
 ## Uoink's honest limits
 
 - **Windows 10 and 11, plus a Mac preview for Apple Silicon (macOS 15 or later).** Intel Macs are not supported, and there is no mobile app. Web Clipper works in Safari on iPhone and iPad and in Firefox Mobile.
-- **Harder install.** The Windows installer is unsigned and about 549 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Web Clipper installs from official stores.
+- **Harder install.** The Windows installer is unsigned and about 578 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Web Clipper installs from official stores.
 - **One tested browser.** Chrome is tested. Other Chromium browsers such as Edge and Brave may work but are not tested. No Firefox or Safari extension is listed.
 - **Not a note-taking tool.** Highlighting is not among its features. If you live in Obsidian, Web Clipper fits that habit better.
 - **Less control over page formatting.** Web Clipper's templates, variables and site rules give finer control over how a web page is saved.
-- **No self-organizing library.** The library does not file or re-shelve itself. The Librarian only proposes changes, and applying them is off by default because its quality gate has not passed.
+- **Reshelving waits for you.** Uoink picks a shelf for each new save, and Tidy Uncategorized suggests moves you approve. The Librarian only proposes changes, and applying them is off by default because its quality gate has not passed.
 - **Agents must run on the same computer.** An agent has to be able to run Uoink on the computer that holds the library. The ChatGPT app does not connect over MCP; use copy and paste.
 - **A side project.** Uoink is a personal side project by one maker, Ryan Biddy.
 
@@ -88,5 +88,5 @@ Competitor pages were opened and read on 2026-10-24.
 
 Uoink facts:
 
-- U1. Uoink 3.17.0 summary (updated 2026-11-12): https://uoink.app/llms.txt
-- U2. Uoink 3.17.0 full disclosures (updated 2026-11-12): https://uoink.app/llms-full.txt
+- U1. Uoink 3.18.0 summary (updated 2026-11-22): https://uoink.app/llms.txt
+- U2. Uoink 3.18.0 full disclosures (updated 2026-11-22): https://uoink.app/llms-full.txt

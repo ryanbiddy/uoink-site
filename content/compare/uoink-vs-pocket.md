@@ -33,8 +33,8 @@ Pocket kept your saves in an online account. When Mozilla closed it, users could
 |---|---|
 | Save a link | YouTube button, right-click, Alt+U, or your AI agent |
 | Where saves live | Markdown plus a JSON sidecar on your disk, in one local library |
-| Articles | Web articles and Reddit threads; paywalls and login walls are labeled as failed captures |
-| Videos | Timestamped YouTube transcript, screenshots, top comments, channel context and metadata; X video and post text |
+| Articles | Web articles and Reddit threads; Uoink this page saves the page in your tab, even behind a sign-in |
+| Videos | Timestamped YouTube transcript, screenshots, top comments, channel context and metadata; X video, long posts and X Articles |
 | Videos without captions | Transcribed on your computer with the Whisper base model that ships with Uoink |
 | Podcasts | Follow RSS and Atom feeds; per-feed auto-ingest downloads new episodes and transcribes them locally |
 | Search | Local keyword search, with optional local semantic search |
@@ -45,7 +45,7 @@ Pocket kept your saves in an online account. When Mozilla closed it, users could
 
 ## Privacy and where your data lives
 
-**Uoink.** Captures and indexes stay on your disk. There is no account and no Uoink-hosted copy of your library. Capturing a source contacts that source's site, and X text capture can use FxTwitter. The optional phone inbox keeps a link and an optional note on your own relay for up to 7 days, and Uoink deletes each one from the relay after capturing it. Optional AI features, and connected agents you allow to use them, can send relevant library text to Anthropic with your own key. Anonymous usage counts are off by default; if you turn them on, Uoink sends daily counts and never content, URLs, titles or search text. Some things still reach the network: model downloads from Hugging Face, release checks with GitHub, and telemetry from one model dependency (pyannote-audio), which you can turn off with an environment variable. The full list is in Uoink's disclosures. [U1][U2]
+**Uoink.** Captures and indexes stay on your disk. There is no account and no Uoink-hosted copy of your library. Capturing a source contacts that source's site. FxTwitter, for the full text of long X posts, is off by default. The optional phone inbox keeps a link and an optional note on your own relay for up to 7 days, and Uoink deletes each one from the relay after capturing it. Optional AI features, and connected agents you allow to use them, can send relevant library text to Anthropic with your own key. Anonymous usage counts are off by default; if you turn them on, Uoink sends daily counts and never content, URLs, titles or search text. Some things still reach the network: model downloads from Hugging Face, release checks with GitHub, and telemetry from one model dependency (pyannote-audio), which you can turn off with an environment variable. The full list is in Uoink's disclosures. [U1][U2]
 
 **Pocket.** Pocket is closed. Mozilla said users could export saves until October 8, 2025, after which their data would be permanently deleted. [1]
 
@@ -60,8 +60,8 @@ Pocket kept your saves in an online account. When Mozilla closed it, users could
 - **Not a reading app.** Uoink has a Reader view in its dashboard, but highlighting, text-to-speech and an e-reader mode are not among its features.
 - **No Pocket importer.** Uoink does not list one. An agent connected to Uoink can capture URLs, so it can work through a list of links you kept.
 - **No sync.** There is no Uoink cloud, so there is no built-in sync between devices.
-- **Rougher install.** The Windows installer is unsigned and about 549 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Chrome is the tested browser.
-- **Some articles fail.** Uoink labels paywalls and login walls as failed captures.
+- **Rougher install.** The Windows installer is unsigned and about 578 MB, so Windows SmartScreen may warn you (choose More info, then Run anyway). The browser button is sideloaded through Chrome's Developer mode because the Chrome Web Store listing is pending. Chrome is the tested browser.
+- **Some pasted links fail.** A pasted link that lands on a sign-in, a paywall preview or a robot check isn't saved. The row says why and offers Open page, so you can sign in and save it from your tab.
 - **A side project.** Uoink is a personal side project by one maker, Ryan Biddy.
 
 ## Sources
@@ -75,5 +75,5 @@ Competitor pages were opened and read on 2026-11-03.
 
 Uoink facts:
 
-- U1. Uoink 3.17.0 summary (updated 2026-11-12): https://uoink.app/llms.txt
-- U2. Uoink 3.17.0 full disclosures (updated 2026-11-12): https://uoink.app/llms-full.txt
+- U1. Uoink 3.18.0 summary (updated 2026-11-22): https://uoink.app/llms.txt
+- U2. Uoink 3.18.0 full disclosures (updated 2026-11-22): https://uoink.app/llms-full.txt

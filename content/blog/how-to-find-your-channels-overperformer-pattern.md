@@ -58,7 +58,7 @@ Compare patterns in your own saved sources. A view-count difference alone does n
 
 ## Step 4: Map the Topic Folders
 
-Uoink saves Markdown and a JSON sidecar on your disk. The library does not organize or re-shelve itself; the Librarian only proposes, and applying is off by default.
+Uoink saves Markdown and a JSON sidecar on your disk. Since 3.18.0, each new save lands on a shelf picked on your computer; the Librarian only proposes, and applying is off by default.
 
 Search your library for a topic and inspect the matching sources. Keep your comparison tied to the underlying videos.
 
