@@ -61,7 +61,7 @@ const page: SitePage = {
   id: "sources",
   route: "/sources/youtube",
   mode: "mode-dark",
-  title: "YouTube Transcript for AI: Save Videos to a Local Corpus",
+  title: "YouTube Transcripts for AI: Save and Search Videos",
   description:
     "Save any YouTube video to your own disk as a timestamped transcript, screenshots, and comments, then chat with it in Claude or ChatGPT. Free, local-first.",
   keywords: [

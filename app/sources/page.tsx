@@ -150,7 +150,7 @@ export default function Page() {
                       <PlatformLogoStrip logos={source.logos} compact />
                       <span className={`feature-status ${statusClass(source.status)}`}>{source.status}</span>
                     </span>
-                    <h3>{source.title}</h3>
+                    <h2>{source.title}</h2>
                     <p>
                       <b>Capture:</b> {source.capture}
                     </p>

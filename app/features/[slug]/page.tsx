@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const feature = featureBySlug.get(slug);
   if (!feature) return {};
 
-  const title = `${feature.title}: Uoink feature`;
-  const description = feature.summary;
+  const title = feature.metaTitle ?? `${feature.title}: Uoink feature`;
+  const description = feature.description ?? feature.summary;
 
   return {
     title,

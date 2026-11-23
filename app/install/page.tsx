@@ -338,6 +338,7 @@ uoink mcp`}</pre>
             </div>
             <div>
               <h3>Release notes</h3>
+              <p>Share the download link at <Link href="/get">uoink.app/get</Link>.</p>
               <p><Link href="/changelog">Changelog</Link> · <a href={`${GITHUB_URL}/releases`}>GitHub releases</a> · <a href={GITHUB_URL}>Source</a></p>
             </div>
           </div>

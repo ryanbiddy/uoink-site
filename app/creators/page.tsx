@@ -8,7 +8,7 @@ const page: SitePage = {
   id: "creators",
   route: "/creators",
   mode: "mode-dark",
-  title: "Uoink for Creators: Source-Backed Posts, Scripts, Threads",
+  title: "Creator Tools for Source-Backed Posts and Scripts",
   description:
     "Use Uoink to capture sources, study hooks, write from a local corpus, and publish creator-credit drafts in your own voice.",
   keywords: [

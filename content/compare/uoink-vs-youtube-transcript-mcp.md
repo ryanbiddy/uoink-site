@@ -1,7 +1,7 @@
 ---
-title: "Uoink vs YouTube transcript MCP servers: a library that remembers or a one-time fetch"
+title: "YouTube Transcript MCP Servers vs Uoink"
 slug: "youtube-transcript-mcp"
-description: "YouTube transcript MCP servers fetch a video's captions with one config line. Uoink keeps every transcript in a local library, uses Whisper when captions are missing, and cites timestamps."
+description: "YouTube transcript MCP servers fetch captions on demand. Uoink keeps transcripts on disk for later searches and uses Whisper when captions are missing."
 date: 2026-11-04
 ---
 

@@ -44,7 +44,7 @@ const page: SitePage = {
   mode: "mode-light",
   title: "Uoink vs NotebookLM: Local, Video-Native, MCP",
   description:
-    "A local, open-source NotebookLM alternative. Uoink saves YouTube videos and podcasts to your own disk and hands them to Claude, Cursor, or any MCP agent. Honest comparison.",
+    "Compare NotebookLM with Uoink, an open-source alternative that saves videos and podcasts on disk for Claude, Cursor or another MCP agent to search.",
   keywords: [
     "notebooklm alternative",
     "local notebooklm",

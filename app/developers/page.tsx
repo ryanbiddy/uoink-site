@@ -203,11 +203,11 @@ get_evidence_card({ video_id })`}</pre>
             </div>
             <img
               src="/product/library-search.webp"
-              width={1440}
-              height={900}
+              width="1280"
+              height="800"
               loading="lazy"
               decoding="async"
-              alt="Uoink dashboard search: a query for nvidia narrows the local library to matching source cards, showing the full-text SQLite index that agents query through the MCP tools."
+              alt="A Library search for “orbit” finds five saves across videos and web pages. The sidebar lists “Moon and tides” and “Photosynthesis”."
             />
             <figcaption>What <code>search_uoinks</code> reaches: a local SQLite full-text index over every transcript, comment, and title on disk.</figcaption>
           </figure>
