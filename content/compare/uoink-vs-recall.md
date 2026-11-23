@@ -1,7 +1,7 @@
 ---
-title: "Uoink vs Recall: full transcripts on your disk or an AI knowledge base in the cloud"
+title: "Recall vs Uoink for Summaries and Transcripts"
 slug: "recall"
-description: "Recall saves and summarizes videos, podcasts and articles in its cloud, on every device. Uoink keeps full transcripts on your disk, free, for your own AI to search and cite."
+description: "Recall summarizes videos, podcasts and articles in the cloud. Uoink keeps full transcripts on your computer for your AI to search and cite."
 date: 2026-11-04
 ---
 

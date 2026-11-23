@@ -10,7 +10,7 @@ const page: SitePage = {
   id: "blog",
   route: "/blog",
   mode: "mode-light",
-  title: "Uoink Field Notes: YouTube Research, Agents, Local Corpus Workflows",
+  title: "YouTube Research and AI Agents: Field Notes",
   description:
     "Launch essays and how-to guides on YouTube hook types, local-first research, MCP agents, Writing Studio, and universal page capture.",
   keywords: [

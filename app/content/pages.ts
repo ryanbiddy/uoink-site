@@ -258,7 +258,7 @@ export const pages: Record<PageId, SitePage> = {
     id: "install",
     route: "/install",
     mode: "mode-dark",
-    title: "Download Uoink: Local Helper and Browser Extension Install",
+    title: "Download Uoink: Windows, Mac preview and Linux",
     description:
       "Install Uoink on Windows, the Mac preview or headless Linux. Save transcripts locally and connect your AI over MCP.",
     keywords: ["install uoink", "uoink download windows", "uoink download mac", "uoink chrome extension", "yt-dlp Chrome extension", "reddit context for AI"],

@@ -90,7 +90,7 @@ export function markdownToHtml(markdown: string) {
     if (heading) {
       flushParagraph();
       flushList();
-      const level = Math.min(heading[1].length + 1, 4);
+      const level = heading[1].length;
       const text = heading[2];
       html.push(`<h${level} id="${slugify(text)}">${inlineMarkdown(text)}</h${level}>`);
       continue;

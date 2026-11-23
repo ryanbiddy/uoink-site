@@ -24,6 +24,8 @@ export type Feature = {
   category: FeatureCategory;
   status: FeatureStatus;
   summary: string;
+  description?: string;
+  metaTitle?: string;
   keywords: string[];
   whatItDoes: string;
   gettingStarted: string[];
@@ -106,6 +108,7 @@ export const features: Feature[] = [
   },
   {
     slug: "get-transcript",
+    metaTitle: "YouTube Transcript Tool with Local Whisper Fallback",
     title: "A transcript tool that explains its fallback",
     category: "Capture",
     status: "shipped",
@@ -170,6 +173,7 @@ export const features: Feature[] = [
     category: "Library",
     status: "shipped",
     summary: "A shelf on the Library brings back up to four of your saves each day.",
+    description: "Once your library has five saves, Rediscover brings back up to four each day. You might see a video from last month or a save you never opened.",
     keywords: ["rediscover", "resurface old saves", "on this day", "saved items"],
     whatItDoes: "A Rediscover shelf sits above the Library list. Once you have 5 or more saves, it picks up to four each day, such as one from about a week ago, one from about a month ago, one saved on this day in an earlier year, or one you never opened. Uoink picks them on your computer, with no network and no AI calls.",
     gettingStarted: [
@@ -210,6 +214,7 @@ export const features: Feature[] = [
     category: "Workspace",
     status: "shipped",
     summary: "Up to three writing ideas built from saves that share a topic.",
+    description: "Uoink groups saves on the same topic and suggests up to three writing ideas. Pick one to start a draft or copy the prompt for your AI.",
     keywords: ["idea starters", "writing ideas", "saves on one topic", "write from saves"],
     whatItDoes: "Idea starters group saves that share a topic, like “You saved 3 things about onboarding. Compare what they say.” The Library shows up to three. Each one has Write from these and Copy prompt. Uoink builds them on your computer, with no network and no AI calls.",
     gettingStarted: [
@@ -331,6 +336,7 @@ export const features: Feature[] = [
     "category": "Capture",
     "status": "shipped",
     "summary": "Capture YouTube transcripts and frames directly from your browser.",
+    "description": "Click the Uoink button under a YouTube video to save its transcript, comments and frames. You can see the capture status without leaving the tab.",
     "keywords": [
       "uoink feature",
       "in page button",
@@ -371,6 +377,7 @@ export const features: Feature[] = [
     "category": "Capture",
     "status": "shipped",
     "summary": "Capture YouTube and X videos directly from link context menus.",
+    "description": "Right-click a YouTube or X video link to save its transcript, comments and frames in the background. You can keep reading without opening the video.",
     "keywords": [
       "uoink feature",
       "right click any link",
@@ -412,6 +419,7 @@ export const features: Feature[] = [
     "category": "Capture",
     "status": "shipped",
     "summary": "Capture from the keyboard with Alt+U.",
+    "description": "Press Alt+U to send the active tab to Uoink. The helper saves the capture to your local library in the background while you keep browsing.",
     "keywords": [
       "uoink feature",
       "keyboard shortcut",
@@ -490,6 +498,7 @@ export const features: Feature[] = [
     "category": "Capture",
     "status": "shipped",
     "summary": "Save web articles as Markdown and a JSON sidecar on your disk.",
+    "description": "Save a web article as Markdown with a JSON file on your disk. For pages that need a sign-in or JavaScript, Uoink can read the text in your open tab.",
     "keywords": [
       "uoink feature",
       "universal page uoink",
@@ -531,6 +540,7 @@ export const features: Feature[] = [
     "category": "Capture",
     "status": "shipped",
     "summary": "Capture X video, long posts and X Articles into your local library.",
+    "description": "Save X videos, long posts and X Articles in your local library. Uoink transcribes video on your computer and links back to the original post.",
     "keywords": [
       "uoink feature",
       "twitter video",
@@ -692,6 +702,7 @@ export const features: Feature[] = [
     "category": "Capture",
     "status": "in flight",
     "summary": "Extract clean markdown texts and metadata from Substack newsletters.",
+    "description": "Substack support is in development. The plan is to save newsletter text and links as Markdown on your disk, without the menus and subscription prompts.",
     "keywords": [
       "uoink feature",
       "substack",
@@ -768,6 +779,7 @@ export const features: Feature[] = [
     "category": "Library",
     "status": "shipped",
     "summary": "Search and read sources saved in your local library.",
+    "description": "Search your local library for a topic, speaker or phrase. Open a matching save or use clip search to find the exact moment in a video.",
     "keywords": [
       "uoink feature",
       "memory search",
@@ -896,6 +908,7 @@ export const features: Feature[] = [
     "category": "Library",
     "status": "shipped",
     "summary": "Resurfacing shipped in 3.17.0 as the Rediscover shelf on the Library.",
+    "description": "Uoink 3.17.0 added Rediscover to the Library. It uses your local history to bring back older saves, including items you haven't opened.",
     "keywords": [
       "uoink feature",
       "resurface for you",

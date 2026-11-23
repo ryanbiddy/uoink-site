@@ -1,7 +1,7 @@
 ---
-title: "Pocket alternative: Uoink saves videos, podcasts and articles for your AI"
+title: "Pocket Alternative for Videos, Podcasts and Articles"
 slug: "pocket"
-description: "Mozilla shut Pocket down in July 2025. Uoink is a free save-for-later app for Windows and Mac (preview) that keeps full text and transcripts on your disk for your AI to search."
+description: "Pocket closed in July 2025. Uoink is a free alternative for saving articles, videos and podcasts on your computer, where your AI can search them."
 date: 2026-11-04
 ---
 

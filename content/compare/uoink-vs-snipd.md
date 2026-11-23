@@ -1,7 +1,7 @@
 ---
-title: "Uoink vs Snipd: a podcast library on your disk or an AI podcast player"
+title: "Snipd vs Uoink for Podcast Transcripts"
 slug: "snipd"
-description: "Snipd is an AI podcast player for iPhone and Android with snips, transcripts and chat. Uoink saves podcast transcripts with your YouTube, X and Reddit sources on your disk for your AI."
+description: "Snipd lets you save clips as you listen on your phone. Uoink keeps podcast transcripts on disk alongside YouTube videos, X posts and Reddit threads."
 date: 2026-11-04
 ---
 

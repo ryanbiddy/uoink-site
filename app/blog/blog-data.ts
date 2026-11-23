@@ -5,6 +5,7 @@ import { CANONICAL_URL } from "../content/pages";
 export type BlogArticleMeta = {
   slug: string;
   title: string;
+  metaTitle?: string;
   dek: string;
   publishedAt: string;
   readingMinutes: number;
@@ -20,6 +21,7 @@ export type BlogArticle = BlogArticleMeta & {
 export const blogArticles: BlogArticleMeta[] = [
   {
     slug: "loop-engineering",
+    metaTitle: "Loop Engineering with Boris Cherny and Claire Vo",
     title: "Loop engineering: what Boris Cherny and Claire Vo agree on",
     dek: "Loop engineering is designing loops that let an AI agent run a job on its own and check its work. Where Boris Cherny and Claire Vo agree, with receipts.",
     publishedAt: "2026-10-24",

@@ -1,7 +1,7 @@
 ---
-title: "Uoink vs Obsidian Web Clipper: a research library or a clipper for your vault"
+title: "Obsidian Web Clipper vs Uoink for Research"
 slug: "obsidian-web-clipper"
-description: "Obsidian Web Clipper saves pages to your vault from major browsers. Uoink saves videos and podcasts to a local library on Windows or a Mac (preview) that your AI can search and cite."
+description: "Obsidian Web Clipper saves web pages to your vault. Uoink keeps video and podcast transcripts on your computer for your AI to search and cite."
 date: 2026-11-04
 ---
 

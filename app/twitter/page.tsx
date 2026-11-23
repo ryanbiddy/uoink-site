@@ -9,7 +9,7 @@ const page: SitePage = {
   id: "twitter",
   route: "/twitter",
   mode: "mode-light",
-  title: "Uoink for Twitter Video: Save X Video Context to Your AI Corpus",
+  title: "Twitter Video Transcripts: Save X Videos for AI",
   description:
     "Capture X and Twitter videos into Uoink, keep creator credit attached, and turn what you learned into grounded drafts.",
   keywords: [

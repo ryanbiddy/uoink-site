@@ -9,7 +9,7 @@ const page: SitePage = {
   id: "how",
   route: "/how-it-works",
   mode: "mode-dark",
-  title: "How Uoink Works: Capture, Corpus, Writing, Distribution",
+  title: "How Uoink Works: Capture, Search and Write",
   description:
     "See the five-step Uoink loop: capture sources, build a local library, assemble a workspace, write from evidence, and distribute with credit.",
   keywords: [

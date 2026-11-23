@@ -37,7 +37,16 @@ export function toolAnswer(tool: Tool) {
   return answer[0].toUpperCase() + answer.slice(1);
 }
 export const toolTitle = (tool: Tool) => `${tool.name} MCP tool | Uoink`;
+const descriptions: Record<string, string> = {
+  list_workspaces: "List saved video-planning workspaces from newest to oldest. Use a workspace ID to open its details, assemble examples or generate a script.",
+  remove_monitored_playlist: "Stop monitoring a playlist you registered in Uoink. Find its ID with list_monitored_playlists. Your saved captures stay in the library.",
+  remove_podcast_feed: "Stop monitoring a registered podcast feed by ID. Uoink archives a source-linked feed and deletes a legacy unlinked feed. Published captures stay in your library.",
+  remove_style_anchor: "Delete a saved writing-style reference by ID. Use list_style_anchors to find it first. Previously saved writing pieces stay in your library.",
+  research_publish: "Check this run's claims against its stored excerpts and current transcript revisions, then write the report as Markdown and HTML with a local ledger.",
+};
+
 export const toolDescription = (tool: Tool) => {
+  if (descriptions[tool.name]) return descriptions[tool.name];
   const text = `${tool.name}: ${toolAnswer(tool)}`;
   return text.length <= 170 ? text : `${text.slice(0, 166).replace(/\s+\S*$/, "")}...`;
 };

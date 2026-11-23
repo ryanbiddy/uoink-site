@@ -25,7 +25,7 @@
   "pages": [
     {
       "slug": "youtube-transcript-mcp-server",
-      "title": "A YouTube transcript MCP server for Claude, Cursor and Codex",
+      "title": "YouTube Transcript MCP for Claude, Cursor and Codex",
       "sourceFact": "Capture YouTube videos with transcripts, frames, and comments.",
       "description": "Uoink is a YouTube transcript MCP server that runs on your own computer. Let your AI search the library and cite timestamps.",
       "setup": "Save a YouTube video, then run uoink connect claude-code, uoink connect cursor or uoink connect codex and add the printed entry to your client.",

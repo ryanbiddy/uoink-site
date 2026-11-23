@@ -20,13 +20,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = getArticleBySlug(slug);
   if (!article) return {};
 
+  const title = article.metaTitle ?? article.title;
   return {
-    title: article.title,
+    title,
     description: article.dek,
     keywords: article.tags,
     alternates: { canonical: `/blog/${article.slug}` },
     openGraph: {
-      title: article.title,
+      title,
       description: article.dek,
       url: `/blog/${article.slug}`,
       type: "article",
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       tags: article.tags,
       images: [{ url: "/og-image.png", width: 1200, height: 630, alt: `${article.title} by Uoink` }],
     },
-    twitter: { title: article.title, description: article.dek, images: ["/og-image.png"] },
+    twitter: { title, description: article.dek, images: ["/og-image.png"] },
   };
 }
 

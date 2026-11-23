@@ -981,7 +981,8 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
 }
 .article h1 { font-size: clamp(34px, 5.2vw, 52px); letter-spacing: -0.03em; line-height: 1.05; margin: 0 0 20px; }
 .article .standfirst { color: var(--text-2); font-size: 20px; font-style: normal; line-height: 1.5; margin: 0 0 32px; max-width: 56ch; }
-.article h2 { font-size: 28px; letter-spacing: -0.022em; line-height: 1.15; margin: 48px 0 14px; }
+.article h2:where(:not(.release-subheading)) { font-size: 28px; letter-spacing: -0.022em; line-height: 1.15; margin: 48px 0 14px; }
+.article .release-subheading,
 .article h3 { font-size: 21px; letter-spacing: -0.015em; margin: 32px 0 10px; }
 .article p { font-size: 17px; line-height: 1.7; margin: 0 0 16px; }
 .article blockquote {
@@ -1162,9 +1163,11 @@ a.doc-row:hover .arr-link { color: var(--rust-deep); text-decoration: underline;
 .rail-block .eyebrow { margin-bottom: 4px; }
 .rail-block a { align-items: center; color: var(--rust); display: inline-flex; font-size: 15px; font-weight: 600; min-height: 32px; }
 .rail-block a:hover { color: var(--rust-deep); text-decoration: underline; text-underline-offset: 3px; }
+.article-body h2,
 .article-body h3,
 .article-body h4 { letter-spacing: -0.02em; line-height: 1.15; margin: 32px 0 12px; }
-.article-body h3 { font-size: 23px; }
+.article-body h2 { font-size: 23px; }
+.article-body h3,
 .article-body h4 { font-size: 19px; }
 .article-body a { color: var(--rust); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .article-body a:hover { color: var(--rust-deep); }
